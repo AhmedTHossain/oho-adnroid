@@ -30,6 +30,7 @@ public class OnboardingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.Theme_OHO);
         setContentView(R.layout.activity_onboarding);
 
         layoutOnboardingIndicator = findViewById(R.id.layout_indicators);
@@ -122,6 +123,6 @@ public class OnboardingActivity extends AppCompatActivity {
         onboardingItemList.add(itemMatching);
         onboardingItemList.add(itemMeeting);
 
-        onboardingAdapter = new OnboardingAdapter(onboardingItemList);
+        onboardingAdapter = new OnboardingAdapter(onboardingItemList,getApplicationContext());
     }
 }
