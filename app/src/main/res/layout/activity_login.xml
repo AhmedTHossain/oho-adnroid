@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,13 +7,113 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".views.LoginActivity">
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/_20ssp"
-        android:text="Login Activity"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/image_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Oho!"
+            android:textSize="@dimen/_80ssp"
+            android:textColor="@color/indicatioractive"
+            android:fontFamily="@font/lovina_october_five_regular"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:id="@+id/text_slogan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dine in with your perfect date!"
+            android:textSize="@dimen/_20ssp"
+            android:fontFamily="@font/sf_pro_rounded_regular"
+            android:layout_gravity="center"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            app:cardCornerRadius="@dimen/_50sdp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_5sdp"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:src="@drawable/google_logo"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:text="Sign in with Google"
+                    android:textSize="@dimen/_15ssp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/sf_pro_rounded_regular"/>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:text="By signing in you're agreeing to the"
+            android:layout_gravity="center"
+            android:textSize="@dimen/_15ssp"
+            android:fontFamily="@font/sf_pro_rounded_regular"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Terms"
+                android:layout_gravity="center"
+                android:textSize="@dimen/_15ssp"
+                android:textStyle="bold"
+                android:textColor="@color/indicatioractive"
+                android:fontFamily="@font/sf_pro_rounded_regular"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:text="&amp;"
+                android:layout_gravity="center"
+                android:textSize="@dimen/_15ssp"
+                android:fontFamily="@font/sf_pro_rounded_regular"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:text="Privacy Policy"
+                android:layout_gravity="center"
+                android:textSize="@dimen/_15ssp"
+                android:textStyle="bold"
+                android:textColor="@color/indicatioractive"
+                android:fontFamily="@font/sf_pro_rounded_regular"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="of Oho Inc."
+            android:layout_gravity="center"
+            android:textSize="@dimen/_15ssp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:fontFamily="@font/sf_pro_rounded_regular"/>
+    </LinearLayout>
+
+</RelativeLayout>

@@ -10,6 +10,8 @@ import com.oho.oho.network.APIService;
 import com.oho.oho.network.RetrofitInstance;
 import com.oho.oho.responses.VerifyEmailResponse;
 
+import java.util.Objects;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,15 +30,15 @@ public class LoginViewModel extends ViewModel {
         return verifyEmailResponse;
     }
 
-    public void verifyEmailAPICall(){
+    public void verifyEmailAPICall(String email){
         APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
-        Call<VerifyEmailResponse> call = apiService.verifyEmail("arafatbhossain@gmail.com");
+        Call<VerifyEmailResponse> call = apiService.verifyEmail(email);
 
         call.enqueue(new Callback<VerifyEmailResponse>() {
             @Override
             public void onResponse(@NonNull Call<VerifyEmailResponse> call, @NonNull Response<VerifyEmailResponse> response) {
 
-                if (response.body().getMessage().equals("email exists"))
+                if (Objects.requireNonNull(response.body()).getMessage().equals("email exists"))
                     verifyEmailResponse.postValue(response.body());
                 else
                     verifyEmailResponse.postValue(null);

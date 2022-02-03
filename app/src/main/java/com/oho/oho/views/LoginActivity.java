@@ -41,6 +41,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        viewModel.verifyEmailAPICall();
+//        viewModel.verifyEmailAPICall("tanzeerhossain@gmail.com");
     }
 }
