@@ -1,13 +1,19 @@
 package com.oho.oho.viewmodels;
 
+import android.app.Application;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.google.firebase.auth.AuthCredential;
+import com.oho.oho.models.Profile;
 import com.oho.oho.network.APIService;
 import com.oho.oho.network.RetrofitInstance;
+import com.oho.oho.repositories.LoginRepository;
 import com.oho.oho.responses.VerifyEmailResponse;
 
 import java.util.Objects;
@@ -16,38 +22,22 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginViewModel extends ViewModel {
+public class LoginViewModel extends AndroidViewModel {
 
-    private MutableLiveData<VerifyEmailResponse> verifyEmailResponse;
+    private LoginRepository loginRepository;
+    public LiveData<String> authenticatedUserLiveData;
+    public LiveData<Profile> userProfileData;
 
-    private static final String TAG = "LoginViewModel";
-
-    public LoginViewModel() {
-        verifyEmailResponse = new  MutableLiveData<>();
+    public LoginViewModel(Application application) {
+        super(application);
+        loginRepository = new LoginRepository();
     }
 
-    public MutableLiveData<VerifyEmailResponse> getVerifyEmailResponseObserver(){
-        return verifyEmailResponse;
+    public void signInWithGoogle(AuthCredential googleAuthCredential) {
+        authenticatedUserLiveData = loginRepository.firebaseSignInWithGoogle(googleAuthCredential);
     }
 
-    public void verifyEmailAPICall(String email){
-        APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
-        Call<VerifyEmailResponse> call = apiService.verifyEmail(email);
-
-        call.enqueue(new Callback<VerifyEmailResponse>() {
-            @Override
-            public void onResponse(@NonNull Call<VerifyEmailResponse> call, @NonNull Response<VerifyEmailResponse> response) {
-
-                if (Objects.requireNonNull(response.body()).getMessage().equals("email exists"))
-                    verifyEmailResponse.postValue(response.body());
-                else
-                    verifyEmailResponse.postValue(null);
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<VerifyEmailResponse> call, @NonNull Throwable t) {
-                verifyEmailResponse.postValue(null);
-            }
-        });
+    public void checkIfUserExists(String authenticatedUserEmail){
+        userProfileData = loginRepository.checkIfUserEmailExists(authenticatedUserEmail);
     }
 }

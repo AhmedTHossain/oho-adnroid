@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "591144327190",
+    "firebase_url": "https://oho-e9f2c.firebaseio.com",
+    "project_id": "oho-e9f2c",
+    "storage_bucket": "oho-e9f2c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:591144327190:android:638be82ef861abced7bd37",
+        "android_client_info": {
+          "package_name": "com.oho.oho"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "591144327190-9apncf61panka5hkibob2vap5ta725vc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.oho.oho",
+            "certificate_hash": "8cdfa696521280b7baaefa5aa30f1109bf07b597"
+          }
+        },
+        {
+          "client_id": "591144327190-o9aso6sa62g5mddr96sfv7ngdd9ak7e8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.oho.oho",
+            "certificate_hash": "2604922d0f83d7c28f7f3ca38b909c83583b16f8"
+          }
+        },
+        {
+          "client_id": "591144327190-vbper9kloh8ke376gommtd9fb6kf0d0j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOVT4OBYOK-f2YLBzHEJODEzmTf_Jemuo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "591144327190-vbper9kloh8ke376gommtd9fb6kf0d0j.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "591144327190-uu3g34pvkiltr3r3gkvet76q812v2qj4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.thucphan.Oho"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

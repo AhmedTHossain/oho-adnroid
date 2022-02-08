@@ -27,11 +27,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Dine in with your perfect date!"
-            android:textSize="@dimen/_20ssp"
+            android:textSize="@dimen/_18ssp"
+            android:textColor="@color/indicatioractive"
             android:fontFamily="@font/sf_pro_rounded_regular"
             android:layout_gravity="center"/>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/button_signin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_20sdp"
@@ -47,7 +49,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_5sdp"
-                android:gravity="center">
+                android:gravity="center"
+                android:background="@color/white">
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="@dimen/_50sdp"
@@ -57,6 +60,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:text="Sign in with Google"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/_15ssp"
                     android:textStyle="bold"
                     android:fontFamily="@font/sf_pro_rounded_regular"/>
@@ -64,11 +68,19 @@
 
         </androidx.cardview.widget.CardView>
 
+        <ProgressBar
+            android:id="@+id/login_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_50sdp"
             android:text="By signing in you're agreeing to the"
+            android:textColor="@color/black"
             android:layout_gravity="center"
             android:textSize="@dimen/_15ssp"
             android:fontFamily="@font/sf_pro_rounded_regular"/>
@@ -112,6 +124,7 @@
             android:text="of Oho Inc."
             android:layout_gravity="center"
             android:textSize="@dimen/_15ssp"
+            android:textColor="@color/black"
             android:layout_marginStart="@dimen/_5sdp"
             android:fontFamily="@font/sf_pro_rounded_regular"/>
     </LinearLayout>
