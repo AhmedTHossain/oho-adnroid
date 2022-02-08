@@ -7,6 +7,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -23,9 +24,11 @@ import java.util.List;
 
 public class OnboardingActivity extends AppCompatActivity {
 
+    private static final String TAG = "OnboardingActivity";
     private OnboardingAdapter onboardingAdapter;
     private LinearLayout layoutOnboardingIndicator;
     private MaterialButton buttonOnboardingAction;
+    private String onBoardingUserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,9 @@ public class OnboardingActivity extends AppCompatActivity {
 
         layoutOnboardingIndicator = findViewById(R.id.layout_indicators);
         buttonOnboardingAction    = findViewById(R.id.button_action);
+
+        onBoardingUserName = getIntent().getStringExtra("name");
+        Log.d(TAG,"name of google logged in user = "+onBoardingUserName);
 
         setOnboardingItem();
 

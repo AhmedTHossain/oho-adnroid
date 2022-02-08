@@ -91,10 +91,12 @@ public class LoginActivity extends AppCompatActivity {
     private void signInWithGoogleAuthCredential(AuthCredential googleAuthCredential) {
         loginViewModel.signInWithGoogle(googleAuthCredential);
         loginViewModel.authenticatedUserLiveData.observe(this, authenticatedUser -> {
-            loginViewModel.checkIfUserExists(authenticatedUser);
+            loginViewModel.checkIfUserExists(authenticatedUser.getEmail());
             loginViewModel.userProfileData.observe(this, userProfile -> {
                 if (userProfile == null) {
-                    startActivity(new Intent(this, OnboardingActivity.class));
+                    Intent intent = new Intent(this, OnboardingActivity.class);
+                    intent.putExtra("name",authenticatedUser.getDisplayName());
+                    startActivity(intent);
                     finish();
                 }else {
                     startActivity(new Intent(this, MainActivity.class));

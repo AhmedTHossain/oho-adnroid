@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.FirebaseUser;
 import com.oho.oho.models.Profile;
 import com.oho.oho.network.APIService;
 import com.oho.oho.network.RetrofitInstance;
@@ -25,7 +26,7 @@ import retrofit2.Response;
 public class LoginViewModel extends AndroidViewModel {
 
     private LoginRepository loginRepository;
-    public LiveData<String> authenticatedUserLiveData;
+    public LiveData<FirebaseUser> authenticatedUserLiveData;
     public LiveData<Profile> userProfileData;
 
     public LoginViewModel(Application application) {

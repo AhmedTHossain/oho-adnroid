@@ -23,16 +23,14 @@ public class LoginRepository {
 
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
-    public MutableLiveData<String> firebaseSignInWithGoogle(AuthCredential googleAuthCredential) {
-        MutableLiveData<String> authenticatedUserMutableLiveData = new MutableLiveData<>();
+    public MutableLiveData<FirebaseUser> firebaseSignInWithGoogle(AuthCredential googleAuthCredential) {
+        MutableLiveData<FirebaseUser> authenticatedUserMutableLiveData = new MutableLiveData<>();
         firebaseAuth.signInWithCredential(googleAuthCredential).addOnCompleteListener(authTask -> {
             if (authTask.isSuccessful()) {
                 boolean isNewUser = authTask.getResult().getAdditionalUserInfo().isNewUser();
                 FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                 if (firebaseUser != null) {
-                    String email = firebaseUser.getEmail();
-
-                    authenticatedUserMutableLiveData.setValue(email);
+                    authenticatedUserMutableLiveData.setValue(firebaseUser);
                 }
             } else {
                 logErrorMessage(Objects.requireNonNull(authTask.getException()).getMessage());
