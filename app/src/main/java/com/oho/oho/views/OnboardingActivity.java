@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,10 +13,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.google.android.material.button.MaterialButton;
-import com.oho.oho.MainActivity;
 import com.oho.oho.R;
 import com.oho.oho.adapters.OnboardingAdapter;
 import com.oho.oho.models.OnboardingItem;
+import com.oho.oho.views.animations.ZoomOutPageTransformer;
+import com.oho.oho.views.registration.RegistrationActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +45,10 @@ public class OnboardingActivity extends AppCompatActivity {
         setOnboardingItem();
 
         ViewPager2 viewPager = findViewById(R.id.viewpager);
+
+        //Setting up Animations
+        viewPager.setPageTransformer(new ZoomOutPageTransformer());
+
         viewPager.setAdapter(onboardingAdapter);
 
         setIndicator();
@@ -64,7 +68,7 @@ public class OnboardingActivity extends AppCompatActivity {
                 if (viewPager.getCurrentItem() + 1 < onboardingAdapter.getItemCount()){
                     viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
                 } else {
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    startActivity(new Intent(getApplicationContext(), RegistrationActivity.class));
                     finish();
                 }
             }

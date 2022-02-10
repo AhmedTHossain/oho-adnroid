@@ -1,0 +1,60 @@
+package com.oho.oho.adapters;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.lifecycle.Lifecycle;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+
+import com.oho.oho.views.registration.CompleteFragment;
+import com.oho.oho.views.registration.DobInputFragment;
+import com.oho.oho.views.registration.EducationInputFragment;
+import com.oho.oho.views.registration.EthnicityInputFragment;
+import com.oho.oho.views.registration.GenderInputFragment;
+import com.oho.oho.views.registration.HeightInputFragment;
+import com.oho.oho.views.registration.IntroFragment;
+import com.oho.oho.views.registration.LocationInputFragment;
+import com.oho.oho.views.registration.PhoneInputFragment;
+import com.oho.oho.views.registration.ProfessionInputFragment;
+import com.oho.oho.views.registration.ReligionInputFragment;
+
+public class RegistrationAdapter extends FragmentStateAdapter {
+    public RegistrationAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
+        super(fragmentManager, lifecycle);
+    }
+
+    @NonNull
+    @Override
+    public Fragment createFragment(int position) {
+        switch (position){
+            case 0:
+                return new IntroFragment();
+            case 1:
+                return new PhoneInputFragment();
+            case 2:
+                return new GenderInputFragment();
+            case 3:
+                return new HeightInputFragment();
+            case 4:
+                return new DobInputFragment();
+            case 5:
+                return new LocationInputFragment();
+            case 6:
+                return new EducationInputFragment();
+            case 7:
+                return new ProfessionInputFragment();
+            case 8:
+                return new EthnicityInputFragment();
+            case 9:
+                return new ReligionInputFragment();
+            default:
+                return new CompleteFragment();
+        }
+    }
+
+    @Override
+    public int getItemCount() {
+        return 11;
+    }
+}

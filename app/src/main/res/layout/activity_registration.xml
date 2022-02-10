@@ -1,18 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".views.RegistrationActivity">
-    <TextView
-        android:layout_width="wrap_content"
+    tools:context=".views.registration.RegistrationActivity">
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewpager_registration"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_indicator_registration"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/_20ssp"
-        android:text="Registration Activity"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        app:tabBackground="@drawable/tab_pager_selector"
+        app:tabGravity="center"
+        app:tabIndicatorHeight="0dp"
+        android:layout_gravity="bottom"
+        android:visibility="gone"/>
+    <include
+        android:id="@+id/button_prev_registration"
+        layout="@layout/fab_previous_page"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_gravity="start|bottom"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="60dp"
+        android:visibility="visible"/>
+    <include
+        android:id="@+id/button_next_registration"
+        layout="@layout/fab_next_page"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="60dp"
+        android:visibility="visible"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/button_start_registration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="60dp"
+        app:cardCornerRadius="@dimen/_50sdp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Let's get started"
+            android:fontFamily="@font/sf_pro_rounded_regular"
+            android:textColor="@color/indicatioractive"
+            android:textAlignment="center"
+            android:textSize="@dimen/_15ssp"
+            android:padding="@dimen/_10sdp"
+            android:background="@drawable/button_background_gradient"/>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/button_complete_registration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="60dp"
+        app:cardCornerRadius="@dimen/_50sdp"
+        android:visibility="gone">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Next"
+            android:fontFamily="@font/sf_pro_rounded_regular"
+            android:textColor="@color/indicatioractive"
+            android:textAlignment="center"
+            android:textSize="@dimen/_15ssp"
+            android:padding="@dimen/_10sdp"
+            android:background="@drawable/button_background_gradient"/>
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>

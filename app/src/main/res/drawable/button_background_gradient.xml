@@ -5,7 +5,7 @@
     <gradient
         android:startColor = "@color/white"
         android:centerColor = "@color/indicatiorInactive"
-        android:endColor = "@color/white"
-        android:angle = "90"
+        android:endColor = "@color/indicatiorInactive"
+        android:angle = "180"
         android:type = "linear" />
 </shape>

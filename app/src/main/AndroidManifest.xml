@@ -13,7 +13,7 @@
         android:theme="@style/Theme.OHO.Launcher"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".views.RegistrationActivity"
+            android:name=".views.registration.RegistrationActivity"
             android:exported="false" />
         <activity
             android:name=".views.LoginActivity"
