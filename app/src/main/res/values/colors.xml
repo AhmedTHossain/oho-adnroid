@@ -10,4 +10,6 @@
 
     <color name="indicatiorInactive">#FDC9B3</color>
     <color name="indicatioractive">#AB3B61</color>
+    <color name="textTitle">#123D6A</color>
+    <color name="indicatiorInactive2">#EEEEEE</color>
 </resources>

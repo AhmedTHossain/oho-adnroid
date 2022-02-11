@@ -11,20 +11,35 @@
         android:id="@+id/viewpager_registration"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_indicator_registration"
-        android:layout_width="match_parent"
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:tabBackground="@drawable/tab_pager_selector"
-        app:tabGravity="center"
-        app:tabIndicatorHeight="0dp"
-        android:layout_gravity="bottom"
-        android:visibility="gone"/>
+        app:cardCornerRadius="@dimen/_25sdp"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="75dp">
+        <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+            android:id="@+id/dots_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:dotsColor="@color/indicatiorInactive2"
+            app:dotsCornerRadius="8dp"
+            app:dotsSize="@dimen/_8sdp"
+            app:dotsSpacing="1dp"
+            app:dotsWidthFactor="2.5"
+            app:selectedDotColor="@color/indicatioractive"
+            app:progressMode="false"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_10sdp"/>
+    </androidx.cardview.widget.CardView>
+
     <include
         android:id="@+id/button_prev_registration"
         layout="@layout/fab_previous_page"
-        android:layout_width="@dimen/_50sdp"
-        android:layout_height="@dimen/_50sdp"
+        android:layout_width="@dimen/_45sdp"
+        android:layout_height="@dimen/_45sdp"
         android:layout_gravity="start|bottom"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="60dp"
@@ -32,8 +47,8 @@
     <include
         android:id="@+id/button_next_registration"
         layout="@layout/fab_next_page"
-        android:layout_width="@dimen/_50sdp"
-        android:layout_height="@dimen/_50sdp"
+        android:layout_width="@dimen/_45sdp"
+        android:layout_height="@dimen/_45sdp"
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="60dp"
@@ -47,7 +62,8 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="60dp"
-        app:cardCornerRadius="@dimen/_50sdp">
+        app:cardCornerRadius="@dimen/_50sdp"
+        android:visibility="gone">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

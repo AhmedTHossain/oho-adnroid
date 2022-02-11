@@ -10,6 +10,8 @@
         <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/drawable/onboarding_indicator_active_two.xml" value="0.1" />
         <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/drawable/onboarding_indicator_inactive.xml" value="0.1" />
         <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/drawable/onboarding_indicator_inactive_two.xml" value="0.1" />
+        <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/drawable/registration_indicator_selected.xml" value="0.18" />
+        <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/drawable/registration_indicator_unselected.xml" value="0.18" />
         <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/drawable/splash_image.xml" value="0.1" />
         <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/drawable/tab_pager_selector.xml" value="0.179" />
         <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/layout/activity_login.xml" value="0.152" />

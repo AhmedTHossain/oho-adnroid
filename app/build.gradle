@@ -68,4 +68,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:21.0.1'
     // Google Play services
     implementation 'com.google.android.gms:play-services-auth:20.1.0'
+    //Material dots indicator
+    implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:4.1.2'
 }

@@ -68,7 +68,9 @@ public class OnboardingActivity extends AppCompatActivity {
                 if (viewPager.getCurrentItem() + 1 < onboardingAdapter.getItemCount()){
                     viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
                 } else {
-                    startActivity(new Intent(getApplicationContext(), RegistrationActivity.class));
+                    Intent intent = new Intent(getApplicationContext(), RegistrationActivity.class);
+                    intent.putExtra("name",onBoardingUserName);
+                    startActivity(intent);
                     finish();
                 }
             }

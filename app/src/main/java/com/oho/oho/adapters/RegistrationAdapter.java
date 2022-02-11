@@ -20,8 +20,10 @@ import com.oho.oho.views.registration.ProfessionInputFragment;
 import com.oho.oho.views.registration.ReligionInputFragment;
 
 public class RegistrationAdapter extends FragmentStateAdapter {
-    public RegistrationAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
+    private String onBoardingUserName;
+    public RegistrationAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle, String onBoardingUserName) {
         super(fragmentManager, lifecycle);
+        this.onBoardingUserName = onBoardingUserName;
     }
 
     @NonNull
@@ -29,7 +31,7 @@ public class RegistrationAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position){
             case 0:
-                return new IntroFragment();
+                return new IntroFragment(onBoardingUserName);
             case 1:
                 return new PhoneInputFragment();
             case 2:
