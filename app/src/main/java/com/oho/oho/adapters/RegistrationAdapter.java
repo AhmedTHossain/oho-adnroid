@@ -8,16 +8,20 @@ import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.oho.oho.views.registration.CompleteFragment;
+import com.oho.oho.views.registration.CuisinePreferenceInputFragment;
 import com.oho.oho.views.registration.DobInputFragment;
 import com.oho.oho.views.registration.EducationInputFragment;
 import com.oho.oho.views.registration.EthnicityInputFragment;
+import com.oho.oho.views.registration.FinishFragment;
 import com.oho.oho.views.registration.GenderInputFragment;
+import com.oho.oho.views.registration.GenderPreferenceInputFragment;
 import com.oho.oho.views.registration.HeightInputFragment;
 import com.oho.oho.views.registration.IntroFragment;
 import com.oho.oho.views.registration.LocationInputFragment;
 import com.oho.oho.views.registration.PhoneInputFragment;
 import com.oho.oho.views.registration.ProfessionInputFragment;
 import com.oho.oho.views.registration.ReligionInputFragment;
+import com.oho.oho.views.registration.VaccineInputFragment;
 
 public class RegistrationAdapter extends FragmentStateAdapter {
     private String onBoardingUserName;
@@ -50,13 +54,21 @@ public class RegistrationAdapter extends FragmentStateAdapter {
                 return new EthnicityInputFragment();
             case 9:
                 return new ReligionInputFragment();
-            default:
+            case 10:
+                return new VaccineInputFragment();
+            case 11:
                 return new CompleteFragment();
+            case 12:
+                return new GenderPreferenceInputFragment();
+            case 13:
+                return new CuisinePreferenceInputFragment();
+            default:
+                return new FinishFragment();
         }
     }
 
     @Override
     public int getItemCount() {
-        return 11;
+        return 15;
     }
 }

@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_background"
-    tools:context=".views.registration.EducationInputFragment">
+    android:background="@color/white"
+    tools:context=".views.registration.CuisinePreferenceInputFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="What is your educational background?"
+            android:text="What types of cuisine do you like?"
             android:textSize="@dimen/_35ssp"
             android:textColor="@color/textTitle"
             android:textStyle="bold"
@@ -25,11 +25,6 @@
             android:fontFamily="@font/sf_pro_rounded_regular" />
         <include
             layout="@layout/layout_recyclerview"
-            android:id="@+id/recyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/_40sdp"
-            android:layout_marginEnd="@dimen/_40sdp"/>
+            android:id="@+id/recyclerview" />
     </LinearLayout>
-
 </FrameLayout>

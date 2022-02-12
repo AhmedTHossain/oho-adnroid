@@ -14,23 +14,27 @@
         <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/drawable/registration_indicator_unselected.xml" value="0.18" />
         <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/drawable/splash_image.xml" value="0.1" />
         <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/drawable/tab_pager_selector.xml" value="0.179" />
-        <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/layout/activity_login.xml" value="0.152" />
+        <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/layout/activity_login.xml" value="0.536" />
         <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/layout/activity_main.xml" value="0.14375" />
         <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/layout/activity_onboarding.xml" value="0.1" />
-        <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/layout/activity_registration.xml" value="0.176" />
+        <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/layout/activity_registration.xml" value="0.27884615384615385" />
         <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/layout/fab_next_page.xml" value="0.13980333475844378" />
         <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/layout/fab_previous_page.xml" value="0.264" />
         <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/layout/fragment_complete.xml" value="0.20521590423257802" />
+        <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/layout/fragment_cuisine_preference_input.xml" value="0.17528858486532706" />
         <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/layout/fragment_dob_input.xml" value="0.20521590423257802" />
         <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/layout/fragment_education_input.xml" value="0.20521590423257802" />
         <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/layout/fragment_ethnicity_input.xml" value="0.20521590423257802" />
+        <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/layout/fragment_finish.xml" value="0.17528858486532706" />
         <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/layout/fragment_gender_input.xml" value="0.20521590423257802" />
+        <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/layout/fragment_gender_preference_input.xml" value="0.264" />
         <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/layout/fragment_height_input.xml" value="0.20521590423257802" />
         <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/layout/fragment_intro.xml" value="0.144" />
         <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/layout/fragment_location_input.xml" value="0.20521590423257802" />
         <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/layout/fragment_phone_input.xml" value="0.2" />
         <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/layout/fragment_profession_input.xml" value="0.20521590423257802" />
         <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/layout/fragment_religion_input.xml" value="0.20521590423257802" />
+        <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/layout/fragment_vaccine_input.xml" value="0.17528858486532706" />
         <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/layout/item_conatiner_boarding_one.xml" value="0.1" />
         <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/layout/layout_recyclerview.xml" value="0.10089781958101753" />
         <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/layout/row_input_registration.xml" value="0.2" />

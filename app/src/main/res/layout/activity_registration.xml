@@ -16,15 +16,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/_25sdp"
-        android:layout_gravity="bottom|center"
-        android:layout_marginBottom="55dp">
+        android:layout_gravity="top|center">
         <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
             android:id="@+id/dots_indicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:dotsColor="@color/indicatiorInactive2"
             app:dotsCornerRadius="8dp"
-            app:dotsSize="@dimen/_8sdp"
+            app:dotsSize="@dimen/_5sdp"
             app:dotsSpacing="1dp"
             app:dotsWidthFactor="2.5"
             app:selectedDotColor="@color/indicatioractive"
@@ -90,6 +89,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Next"
+            android:fontFamily="@font/sf_pro_rounded_regular"
+            android:textColor="@color/indicatioractive"
+            android:textAlignment="center"
+            android:textSize="@dimen/_15ssp"
+            android:padding="@dimen/_10sdp"
+            android:background="@drawable/button_background_gradient"/>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/button_complete_profile_registration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="40dp"
+        app:cardCornerRadius="@dimen/_50sdp"
+        android:visibility="gone">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Complete profile"
             android:fontFamily="@font/sf_pro_rounded_regular"
             android:textColor="@color/indicatioractive"
             android:textAlignment="center"

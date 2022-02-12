@@ -18,7 +18,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private ViewPager2 viewPager2;
     private RegistrationAdapter adapter;
-    private CardView buttonNext, buttonPrevious, buttonStart, buttonComplete;
+    private CardView buttonNext, buttonPrevious, buttonStart, buttonComplete, buttonCompleteProfile;
     private DotsIndicator dotsIndicator;
 
     private String onBoardingUserName;
@@ -35,6 +35,7 @@ public class RegistrationActivity extends AppCompatActivity {
         buttonPrevious = findViewById(R.id.button_prev_registration);
         buttonStart = findViewById(R.id.button_start_registration);
         buttonComplete = findViewById(R.id.button_complete_registration);
+        buttonCompleteProfile = findViewById(R.id.button_complete_profile_registration);
         dotsIndicator = findViewById(R.id.dots_indicator);
         //Setting up Animations
         viewPager2.setPageTransformer(new ZoomOutPageTransformer());
@@ -84,18 +85,28 @@ public class RegistrationActivity extends AppCompatActivity {
                     dotsIndicator.setVisibility(View.GONE);
                     buttonStart.setVisibility(View.VISIBLE);
                     buttonComplete.setVisibility(View.GONE);
+                    buttonCompleteProfile.setVisibility(View.GONE);
                     buttonNext.setVisibility(View.GONE);
                     buttonPrevious.setVisibility(View.GONE);
-                } else if (position == 10){
+                } else if (position == 11){
                     dotsIndicator.setVisibility(View.GONE);
                     buttonStart.setVisibility(View.GONE);
                     buttonComplete.setVisibility(View.VISIBLE);
+                    buttonCompleteProfile.setVisibility(View.GONE);
                     buttonNext.setVisibility(View.GONE);
                     buttonPrevious.setVisibility(View.GONE);
+                } else if (position == 14){
+                    dotsIndicator.setVisibility(View.VISIBLE);
+                    buttonStart.setVisibility(View.GONE);
+                    buttonComplete.setVisibility(View.GONE);
+                    buttonCompleteProfile.setVisibility(View.VISIBLE);
+                    buttonNext.setVisibility(View.VISIBLE);
+                    buttonPrevious.setVisibility(View.VISIBLE);
                 } else {
                     dotsIndicator.setVisibility(View.VISIBLE);
                     buttonStart.setVisibility(View.GONE);
                     buttonComplete.setVisibility(View.GONE);
+                    buttonCompleteProfile.setVisibility(View.GONE);
                     buttonNext.setVisibility(View.VISIBLE);
                     buttonPrevious.setVisibility(View.VISIBLE);
                 }
