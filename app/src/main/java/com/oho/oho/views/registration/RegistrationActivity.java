@@ -2,14 +2,19 @@ package com.oho.oho.views.registration;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.oho.oho.R;
 import com.oho.oho.adapters.RegistrationAdapter;
+import com.oho.oho.models.Profile;
+import com.oho.oho.viewmodels.LoginViewModel;
+import com.oho.oho.viewmodels.RegistrationViewModel;
 import com.oho.oho.views.animations.ZoomOutPageTransformer;
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator;
@@ -22,11 +27,15 @@ public class RegistrationActivity extends AppCompatActivity {
     private DotsIndicator dotsIndicator;
 
     private String onBoardingUserName;
+    private RegistrationViewModel registrationViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
+        initAuthViewModel();
+
         onBoardingUserName = getIntent().getStringExtra("name");
 
         viewPager2 = findViewById(R.id.viewpager_registration);
@@ -77,6 +86,20 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
 
+        buttonComplete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewPager2.setCurrentItem(viewPager2.getCurrentItem()+1);
+            }
+        });
+
+        buttonCompleteProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startRegistration();
+            }
+        });
+
         viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
 
             @Override
@@ -96,12 +119,12 @@ public class RegistrationActivity extends AppCompatActivity {
                     buttonNext.setVisibility(View.GONE);
                     buttonPrevious.setVisibility(View.GONE);
                 } else if (position == 14){
-                    dotsIndicator.setVisibility(View.VISIBLE);
+                    dotsIndicator.setVisibility(View.GONE);
                     buttonStart.setVisibility(View.GONE);
                     buttonComplete.setVisibility(View.GONE);
                     buttonCompleteProfile.setVisibility(View.VISIBLE);
-                    buttonNext.setVisibility(View.VISIBLE);
-                    buttonPrevious.setVisibility(View.VISIBLE);
+                    buttonNext.setVisibility(View.GONE);
+                    buttonPrevious.setVisibility(View.GONE);
                 } else {
                     dotsIndicator.setVisibility(View.VISIBLE);
                     buttonStart.setVisibility(View.GONE);
@@ -111,6 +134,20 @@ public class RegistrationActivity extends AppCompatActivity {
                     buttonPrevious.setVisibility(View.VISIBLE);
                 }
             }
+        });
+    }
+    private void initAuthViewModel() {
+        registrationViewModel = new ViewModelProvider(this).get(RegistrationViewModel.class);
+    }
+    private void startRegistration(){
+        Profile profile = new Profile();
+        profile.setName("John Doe");
+        profile.setGender("M");
+        profile.setEmail("oh@gmail.com");
+        profile.setPhone(123567);
+        registrationViewModel.registerUser(profile);
+        registrationViewModel.registeredUserProfileData.observe(this,userProfile -> {
+            Toast.makeText(RegistrationActivity.this, "registration successfull with profile = "+userProfile, Toast.LENGTH_SHORT).show();
         });
     }
 }
