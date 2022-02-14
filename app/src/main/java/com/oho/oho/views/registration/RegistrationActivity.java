@@ -1,6 +1,7 @@
 package com.oho.oho.views.registration;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -26,8 +27,9 @@ public class RegistrationActivity extends AppCompatActivity {
     private CardView buttonNext, buttonPrevious, buttonStart, buttonComplete, buttonCompleteProfile;
     private DotsIndicator dotsIndicator;
 
-    private String onBoardingUserName;
+    private String onBoardingUserName, onBoardingUserEmail;
     private RegistrationViewModel registrationViewModel;
+    private Profile profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public class RegistrationActivity extends AppCompatActivity {
         initAuthViewModel();
 
         onBoardingUserName = getIntent().getStringExtra("name");
+        onBoardingUserEmail = getIntent().getStringExtra("email");
 
         viewPager2 = findViewById(R.id.viewpager_registration);
 
@@ -140,11 +143,17 @@ public class RegistrationActivity extends AppCompatActivity {
         registrationViewModel = new ViewModelProvider(this).get(RegistrationViewModel.class);
     }
     private void startRegistration(){
+        registrationViewModel.getProfileData().observe(this, profile -> {
+            this.profile = profile;
+            Log.d("RegisterActivity","phone final = "+profile.getPhone());
+        });
+
+
         Profile profile = new Profile();
-        profile.setName("John Doe");
+        profile.setName(onBoardingUserName);
         profile.setGender("M");
-        profile.setEmail("oh@gmail.com");
-        profile.setPhone(123567);
+        profile.setEmail(onBoardingUserEmail);
+        profile.setPhone(123456);
         registrationViewModel.registerUser(profile);
         registrationViewModel.registeredUserProfileData.observe(this,userProfile -> {
             Toast.makeText(RegistrationActivity.this, "registration successfull with profile = "+userProfile, Toast.LENGTH_SHORT).show();

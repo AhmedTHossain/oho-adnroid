@@ -6,4 +6,48 @@
     <string name="inch">%2d in</string>
     <string name="day">%02d</string>
     <string name="year">%2d</string>
+    <string-array name="education_list">
+        <item>No Degree</item>
+        <item>High School Diploma</item>
+        <item>Undergrad</item>
+        <item>Masters</item>
+        <item>PhD</item>
+    </string-array>
+    <string-array name="ethnicity_list">
+        <item>White</item>
+        <item>Asian</item>
+        <item>African</item>
+        <item>American</item>
+        <item>Black</item>
+        <item>Hispanic</item>
+        <item>Latinx</item>
+        <item>Pacific Islander</item>
+        <item>American Indian</item>
+        <item>Others</item>
+    </string-array>
+    <string-array name="religion_list">
+        <item>Christian</item>
+        <item>Catholic</item>
+        <item>Jewish</item>
+        <item>Muslim</item>
+        <item>Hindu</item>
+        <item>Sikh</item>
+        <item>Agnostic</item>
+        <item>Buddhist</item>
+        <item>Spiritual/Not Religious</item>
+        <item>Others</item>
+    </string-array>
+    <string-array name="cuisine_list">
+        <item>Italian</item>
+        <item>Japanese</item>
+        <item>Indian</item>
+        <item>Mediterranean</item>
+        <item>Korean</item>
+        <item>American</item>
+        <item>Vegeterian</item>
+        <item>Vietnamese</item>
+        <item>Chinese</item>
+        <item>Open to all</item>
+        <item>Others</item>
+    </string-array>
 </resources>

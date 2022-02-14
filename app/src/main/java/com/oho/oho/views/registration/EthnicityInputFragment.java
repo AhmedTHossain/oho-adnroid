@@ -26,7 +26,8 @@ public class EthnicityInputFragment extends Fragment {
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerview);
 
-        String [] data = {"South Aisan", "East Asian", "African American", "Black", "Latinx", "Pacific Islander", "American Indian", "Hispanic", "White", "Others"};
+//        String [] data = {"South Aisan", "East Asian", "African American", "Black", "Latinx", "Pacific Islander", "American Indian", "Hispanic", "White", "Others"};
+        String [] data = getResources().getStringArray(R.array.ethnicity_list);
         RegistrationInputFieldAdapter adapter = new RegistrationInputFieldAdapter(data);
 
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));

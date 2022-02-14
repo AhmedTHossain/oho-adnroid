@@ -96,6 +96,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (userProfile == null) {
                     Intent intent = new Intent(this, OnboardingActivity.class);
                     intent.putExtra("name",authenticatedUser.getDisplayName());
+                    intent.putExtra("email",authenticatedUser.getEmail());
                     startActivity(intent);
                     finish();
                 }else {

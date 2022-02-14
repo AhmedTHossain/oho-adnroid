@@ -26,7 +26,8 @@ public class EducationInputFragment extends Fragment {
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerview);
 
-        String [] data = {"Some college", "Associate’s Degree", "Bachelor’s Degree", "Graduate Degree", "Professional Degree", "No Degree"};
+//        String [] data = {"Some college", "Associate’s Degree", "Bachelor’s Degree", "Graduate Degree", "Professional Degree", "No Degree"};
+        String [] data = getResources().getStringArray(R.array.education_list);
         RegistrationInputFieldAdapter adapter = new RegistrationInputFieldAdapter(data);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

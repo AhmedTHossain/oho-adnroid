@@ -20,6 +20,7 @@ import retrofit2.Response;
 public class RegistrationRepository {
 
     public MutableLiveData<Profile> registerNewUser(Profile userRegistrationFormData){
+        Log.d("RegistrationRepository","phone number in repository = " + userRegistrationFormData.getPhone());
         MutableLiveData<Profile> registeredUserProfile = new MutableLiveData<>();
         APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
         Call<Profile> call = apiService.createUser(userRegistrationFormData);

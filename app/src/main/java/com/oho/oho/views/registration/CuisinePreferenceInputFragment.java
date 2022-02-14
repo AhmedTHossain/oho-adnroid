@@ -26,7 +26,8 @@ public class CuisinePreferenceInputFragment extends Fragment {
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerview);
 
-        String [] data = {"Vegan", "Vegetarian", "Italian", "American", "Chinese", "Japanese", "Vietnamese", "Mediterranean", "Healthy", "Pescatarian", "Others"};
+//        String [] data = {"Vegan", "Vegetarian", "Italian", "American", "Chinese", "Japanese", "Vietnamese", "Mediterranean", "Healthy", "Pescatarian", "Others"};
+        String [] data = getResources().getStringArray(R.array.cuisine_list);
         RegistrationInputFieldAdapter adapter = new RegistrationInputFieldAdapter(data);
 
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));

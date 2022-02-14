@@ -26,7 +26,8 @@ public class ReligionInputFragment extends Fragment {
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerview);
 
-        String [] data = {"Christian", "Catholic", "Muslim", "Jewish", "Hindu", "Spiritual/Not Religious", "Athiest", "Sikh", "Others"};
+//        String [] data = {"Christian", "Catholic", "Muslim", "Jewish", "Hindu", "Spiritual/Not Religious", "Athiest", "Sikh", "Others"};
+        String [] data = getResources().getStringArray(R.array.religion_list);
         RegistrationInputFieldAdapter adapter = new RegistrationInputFieldAdapter(data);
 
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
