@@ -64,26 +64,6 @@
                 android:paddingBottom="@dimen/_10sdp" />
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
-            android:id="@+id/button_both"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_40sdp"
-            android:layout_marginEnd="@dimen/_40sdp"
-            android:layout_marginBottom="@dimen/_20sdp"
-            app:cardCornerRadius="@dimen/_50sdp">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Both"
-                android:fontFamily="@font/sf_pro_rounded_regular"
-                android:textColor="@color/indicatioractive"
-                android:textAlignment="center"
-                android:textSize="@dimen/_15ssp"
-                android:paddingTop="@dimen/_10sdp"
-                android:paddingBottom="@dimen/_10sdp"
-                />
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
             android:id="@+id/button_other"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -94,7 +74,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Other"
+                android:text="Open to all"
                 android:fontFamily="@font/sf_pro_rounded_regular"
                 android:textColor="@color/indicatioractive"
                 android:textAlignment="center"
