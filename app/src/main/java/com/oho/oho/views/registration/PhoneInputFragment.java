@@ -9,10 +9,12 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.oho.oho.R;
 import com.oho.oho.models.Profile;
@@ -69,7 +71,9 @@ public class PhoneInputFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        profileData.setPhone(Integer.valueOf(phoneText.getText().toString()));
-        viewModel.saveRegistrationFormData(profileData);
+        if (!TextUtils.isEmpty(phoneText.getText())) {
+            profileData.setPhone(Integer.valueOf(phoneText.getText().toString()));
+            viewModel.saveRegistrationFormData(profileData);
+        }
     }
 }

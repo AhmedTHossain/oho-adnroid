@@ -31,8 +31,11 @@
             android:layout_marginStart="@dimen/_40sdp"
             android:layout_marginEnd="@dimen/_40sdp"
             android:layout_marginBottom="@dimen/_20sdp"
-            app:cardCornerRadius="@dimen/_50sdp">
+            app:cardCornerRadius="@dimen/_50sdp"
+            android:clickable="true"
+            android:focusable="true">
             <TextView
+                android:id="@+id/text_female"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Female"
@@ -50,8 +53,11 @@
             android:layout_marginStart="@dimen/_40sdp"
             android:layout_marginEnd="@dimen/_40sdp"
             android:layout_marginBottom="@dimen/_20sdp"
-            app:cardCornerRadius="@dimen/_50sdp">
+            app:cardCornerRadius="@dimen/_50sdp"
+            android:clickable="true"
+            android:focusable="true">
             <TextView
+                android:id="@+id/text_male"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Male"
@@ -69,8 +75,11 @@
             android:layout_marginStart="@dimen/_40sdp"
             android:layout_marginEnd="@dimen/_40sdp"
             android:layout_marginBottom="60dp"
-            app:cardCornerRadius="@dimen/_50sdp">
+            app:cardCornerRadius="@dimen/_50sdp"
+            android:clickable="true"
+            android:focusable="true">
             <TextView
+                android:id="@+id/text_other"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Other"
