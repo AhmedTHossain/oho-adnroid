@@ -143,7 +143,7 @@ public class RegistrationActivity extends AppCompatActivity {
         registrationViewModel = new ViewModelProvider(this).get(RegistrationViewModel.class);
     }
     private void startRegistration(){
-        registrationViewModel.getProfileData().observe(this, profile -> {
+        registrationViewModel.getRegistrationFormData().observe(this, profile -> {
             this.profile = profile;
             Log.d("RegisterActivity","phone final = "+profile.getPhone());
         });

@@ -15,7 +15,8 @@ public class RegistrationViewModel extends AndroidViewModel {
     private RegistrationRepository registrationRepository;
     public LiveData<Profile> registeredUserProfileData;
 
-    private final MutableLiveData<Profile> userProfileData = new MutableLiveData<>();
+    //this object is going to store user's inputs during the registration process
+    private MutableLiveData<Profile> registrationFormData = new MutableLiveData<>();
 
     public RegistrationViewModel(@NonNull Application application) {
         super(application);
@@ -26,11 +27,11 @@ public class RegistrationViewModel extends AndroidViewModel {
         registeredUserProfileData = registrationRepository.registerNewUser(profile);
     }
 
-    public void saveProfileData(Profile profile) {
-        userProfileData.setValue(profile);
+    public void saveRegistrationFormData(Profile profile) {
+        registrationFormData.setValue(profile);
     }
 
-    public LiveData<Profile> getProfileData() {
-        return userProfileData;
+    public LiveData<Profile> getRegistrationFormData() {
+        return registrationFormData;
     }
 }
