@@ -145,7 +145,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private void startRegistration(){
         registrationViewModel.getRegistrationFormData().observe(this, profile -> {
             this.profile = profile;
-            Log.d("RegisterActivity","phone final = "+profile.getPhone() + " gender final = "+profile.getGender() + " budget final = "+profile.getBudgetRange());
+            Log.d("RegisterActivity","phone final = "+profile.getPhone() + " gender final = "+profile.getGender() + " budget final = "+profile.getBudgetRange() + " interested in = "+profile.getPreferredGender() + " education = "+profile.getEducation());
         });
 
 

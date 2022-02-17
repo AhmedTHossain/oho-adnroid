@@ -1,21 +1,30 @@
 package com.oho.oho.adapters;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.oho.oho.R;
+import com.oho.oho.views.listeners.OnInputSelectListener;
 
 public class RegistrationInputFieldAdapter extends RecyclerView.Adapter<RegistrationInputFieldAdapter.InputHolder> {
 
     private String[] localDataSet;
+    private static OnInputSelectListener onInputSelectListener;
 
-    public RegistrationInputFieldAdapter(String[] dataSet) {
+    static int selectedItemPos = -1;
+    static boolean multiSelectEnabled;
+
+    public RegistrationInputFieldAdapter(String[] dataSet, OnInputSelectListener onInputSelectListener, boolean multiSelectEnabled) {
         localDataSet = dataSet;
+        this.onInputSelectListener = onInputSelectListener;
+        RegistrationInputFieldAdapter.multiSelectEnabled = multiSelectEnabled;
     }
 
     @NonNull
@@ -47,6 +56,35 @@ public class RegistrationInputFieldAdapter extends RecyclerView.Adapter<Registra
             // Define click listener for the ViewHolder's View
 
             textView = (TextView) itemView.findViewById(R.id.text_input);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!multiSelectEnabled) {
+                        if (selectedItemPos == -1) {
+                            textView.setBackgroundResource(R.drawable.input_selected_background);
+                            textView.setTextColor(Color.parseColor("#FFFFFF"));
+                            selectedItemPos = getAdapterPosition();
+                            onInputSelectListener.onInputSelect(textView.getText().toString());
+                        } else if (selectedItemPos == getAdapterPosition()) {
+                            textView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                            textView.setTextColor(Color.parseColor("#AB3B61"));
+                            selectedItemPos = -1;
+                        } else {
+                            Toast.makeText(v.getContext(), "Can only select one option!", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        if (textView.getTag().equals("notselected")){
+                            textView.setBackgroundResource(R.drawable.input_selected_background);
+                            textView.setTextColor(Color.parseColor("#FFFFFF"));
+                            textView.setTag("selected");
+                        } else {
+                            textView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                            textView.setTextColor(Color.parseColor("#AB3B61"));
+                            textView.setTag("notselected");
+                        }
+                    }
+                }
+            });
         }
         public TextView getTextView() {
             return textView;

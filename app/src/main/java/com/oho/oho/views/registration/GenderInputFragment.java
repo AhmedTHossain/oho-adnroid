@@ -84,9 +84,9 @@ public class GenderInputFragment extends Fragment implements View.OnClickListene
             if(genderInput.equals("")){
                 buttonMaleText.setBackgroundResource(R.drawable.input_selected_background);
                 buttonMaleText.setTextColor(getResources().getColor(R.color.white, requireActivity().getTheme()));
-                genderInput = "M";
+                genderInput = "Male";
             } else {
-                if (genderInput.equals("M")){
+                if (genderInput.equals("Male")){
                     buttonMaleText.setBackgroundResource(R.color.white);
                     buttonMaleText.setTextColor(getResources().getColor(R.color.indicatioractive, requireActivity().getTheme()));
                     genderInput = "";
@@ -99,9 +99,9 @@ public class GenderInputFragment extends Fragment implements View.OnClickListene
             if(genderInput.equals("")){
                 buttonFemaleText.setBackgroundResource(R.drawable.input_selected_background);
                 buttonFemaleText.setTextColor(getResources().getColor(R.color.white, requireActivity().getTheme()));
-                genderInput = "F";
+                genderInput = "Female";
             } else {
-                if (genderInput.equals("F")){
+                if (genderInput.equals("Female")){
                     buttonFemaleText.setBackgroundResource(R.color.white);
                     buttonFemaleText.setTextColor(getResources().getColor(R.color.indicatioractive, requireActivity().getTheme()));
                     genderInput = "";
@@ -114,9 +114,9 @@ public class GenderInputFragment extends Fragment implements View.OnClickListene
             if(genderInput.equals("")){
                 buttonOtherText.setBackgroundResource(R.drawable.input_selected_background);
                 buttonOtherText.setTextColor(getResources().getColor(R.color.white, requireActivity().getTheme()));
-                genderInput = "O";
+                genderInput = "Other";
             } else {
-                if (genderInput.equals("O")){
+                if (genderInput.equals("Other")){
                     buttonOtherText.setBackgroundResource(R.color.white);
                     buttonOtherText.setTextColor(getResources().getColor(R.color.indicatioractive, requireActivity().getTheme()));
                     genderInput = "";

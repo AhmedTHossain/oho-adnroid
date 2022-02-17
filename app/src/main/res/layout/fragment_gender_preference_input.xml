@@ -66,7 +66,7 @@
                 android:paddingBottom="@dimen/_10sdp" />
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
-            android:id="@+id/button_other"
+            android:id="@+id/button_open_to_all"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_40sdp"

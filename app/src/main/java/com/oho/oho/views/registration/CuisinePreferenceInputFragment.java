@@ -12,8 +12,9 @@ import android.view.ViewGroup;
 
 import com.oho.oho.R;
 import com.oho.oho.adapters.RegistrationInputFieldAdapter;
+import com.oho.oho.views.listeners.OnInputSelectListener;
 
-public class CuisinePreferenceInputFragment extends Fragment {
+public class CuisinePreferenceInputFragment extends Fragment implements OnInputSelectListener {
 
     public CuisinePreferenceInputFragment() {
         // Required empty public constructor
@@ -28,12 +29,17 @@ public class CuisinePreferenceInputFragment extends Fragment {
 
 //        String [] data = {"Vegan", "Vegetarian", "Italian", "American", "Chinese", "Japanese", "Vietnamese", "Mediterranean", "Healthy", "Pescatarian", "Others"};
         String [] data = getResources().getStringArray(R.array.cuisine_list);
-        RegistrationInputFieldAdapter adapter = new RegistrationInputFieldAdapter(data);
+        RegistrationInputFieldAdapter adapter = new RegistrationInputFieldAdapter(data, this, true);
 
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
         recyclerView.setAdapter(adapter);
 
         // Inflate the layout for this fragment
         return view;
+    }
+
+    @Override
+    public void onInputSelect(String input) {
+
     }
 }

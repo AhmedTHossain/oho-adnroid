@@ -2,7 +2,11 @@ package com.oho.oho.views.registration;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,8 +16,15 @@ import android.view.ViewGroup;
 
 import com.oho.oho.R;
 import com.oho.oho.adapters.RegistrationInputFieldAdapter;
+import com.oho.oho.models.Profile;
+import com.oho.oho.viewmodels.RegistrationViewModel;
+import com.oho.oho.views.listeners.OnInputSelectListener;
 
-public class EducationInputFragment extends Fragment {
+public class EducationInputFragment extends Fragment implements OnInputSelectListener {
+
+    private RegistrationViewModel viewModel;
+    private Profile profileData = new Profile();
+    private String educationInput="";
 
     public EducationInputFragment() {
         // Required empty public constructor
@@ -28,12 +39,38 @@ public class EducationInputFragment extends Fragment {
 
 //        String [] data = {"Some college", "Associate’s Degree", "Bachelor’s Degree", "Graduate Degree", "Professional Degree", "No Degree"};
         String [] data = getResources().getStringArray(R.array.education_list);
-        RegistrationInputFieldAdapter adapter = new RegistrationInputFieldAdapter(data);
+        RegistrationInputFieldAdapter adapter = new RegistrationInputFieldAdapter(data, this, false);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 
         // Inflate the layout for this fragment
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        viewModel = new ViewModelProvider(requireActivity()).get(RegistrationViewModel.class);
+        viewModel.getRegistrationFormData().observe(getViewLifecycleOwner(), new Observer<Profile>() {
+            @Override
+            public void onChanged(Profile profile) {
+                profileData = profile;
+            }
+        });
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (!educationInput.equals("")) {
+            profileData.setEducation(educationInput);
+            viewModel.saveRegistrationFormData(profileData);
+        }
+    }
+
+    @Override
+    public void onInputSelect(String input) {
+        educationInput = input;
     }
 }
