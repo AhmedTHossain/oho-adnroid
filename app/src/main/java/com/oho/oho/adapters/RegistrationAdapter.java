@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.oho.oho.views.registration.BudgetInputFragment;
 import com.oho.oho.views.registration.CompleteFragment;
 import com.oho.oho.views.registration.CuisinePreferenceInputFragment;
 import com.oho.oho.views.registration.DobInputFragment;
@@ -57,10 +58,12 @@ public class RegistrationAdapter extends FragmentStateAdapter {
             case 10:
                 return new VaccineInputFragment();
             case 11:
-                return new CompleteFragment();
+                return new BudgetInputFragment();
             case 12:
-                return new GenderPreferenceInputFragment();
+                return new CompleteFragment();
             case 13:
+                return new GenderPreferenceInputFragment();
+            case 14:
                 return new CuisinePreferenceInputFragment();
             default:
                 return new FinishFragment();
@@ -69,6 +72,6 @@ public class RegistrationAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 15;
+        return 16;
     }
 }

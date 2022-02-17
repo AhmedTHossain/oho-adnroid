@@ -114,14 +114,14 @@ public class RegistrationActivity extends AppCompatActivity {
                     buttonCompleteProfile.setVisibility(View.GONE);
                     buttonNext.setVisibility(View.GONE);
                     buttonPrevious.setVisibility(View.GONE);
-                } else if (position == 11){
+                } else if (position == 12){
                     dotsIndicator.setVisibility(View.GONE);
                     buttonStart.setVisibility(View.GONE);
                     buttonComplete.setVisibility(View.VISIBLE);
                     buttonCompleteProfile.setVisibility(View.GONE);
                     buttonNext.setVisibility(View.GONE);
                     buttonPrevious.setVisibility(View.GONE);
-                } else if (position == 14){
+                } else if (position == 15){
                     dotsIndicator.setVisibility(View.GONE);
                     buttonStart.setVisibility(View.GONE);
                     buttonComplete.setVisibility(View.GONE);

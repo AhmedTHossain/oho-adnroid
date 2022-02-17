@@ -19,7 +19,16 @@ public class HeightInputFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_height_input, container, false);
+
+
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_height_input, container, false);
+        return view;
+    }
+
+    //function to convert height input to centimeters
+    private double convertHeightToCm(int ftInput, int inInput){
+        return ((ftInput * 12) + inInput) * 2.54;
     }
 }
