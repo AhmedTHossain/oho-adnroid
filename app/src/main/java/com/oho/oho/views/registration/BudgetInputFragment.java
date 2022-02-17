@@ -2,8 +2,12 @@ package com.oho.oho.views.registration;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +16,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.oho.oho.R;
+import com.oho.oho.models.Profile;
+import com.oho.oho.viewmodels.RegistrationViewModel;
 
 public class BudgetInputFragment extends Fragment implements View.OnClickListener{
 
     private CardView buttonOneDollar, buttonTwoDollar, buttonThreeDollar;
     private TextView buttonOneDollarText, buttonTwoDollarText, buttonThreeDollarText;
     private String budgetInput = "";
+    private RegistrationViewModel viewModel;
+    private Profile profileData = new Profile();
 
     public BudgetInputFragment() {
         // Required empty public constructor
@@ -45,14 +53,35 @@ public class BudgetInputFragment extends Fragment implements View.OnClickListene
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        viewModel = new ViewModelProvider(requireActivity()).get(RegistrationViewModel.class);
+        viewModel.getRegistrationFormData().observe(getViewLifecycleOwner(), new Observer<Profile>() {
+            @Override
+            public void onChanged(Profile profile) {
+                profileData = profile;
+            }
+        });
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (!budgetInput.equals("")) {
+            profileData.setBudgetRange(budgetInput);
+            viewModel.saveRegistrationFormData(profileData);
+        }
+    }
+
+    @Override
     public void onClick(View v) {
         if(v.getId() == R.id.button_one_dollar){
             if(budgetInput.equals("")){
                 buttonOneDollarText.setBackgroundResource(R.drawable.input_selected_background);
                 buttonOneDollarText.setTextColor(getResources().getColor(R.color.white, requireActivity().getTheme()));
-                budgetInput = "M";
+                budgetInput = "$";
             } else {
-                if (budgetInput.equals("M")){
+                if (budgetInput.equals("$")){
                     buttonOneDollarText.setBackgroundResource(R.color.white);
                     buttonOneDollarText.setTextColor(getResources().getColor(R.color.indicatioractive, requireActivity().getTheme()));
                     budgetInput = "";
@@ -65,9 +94,9 @@ public class BudgetInputFragment extends Fragment implements View.OnClickListene
             if(budgetInput.equals("")){
                 buttonTwoDollarText.setBackgroundResource(R.drawable.input_selected_background);
                 buttonTwoDollarText.setTextColor(getResources().getColor(R.color.white, requireActivity().getTheme()));
-                budgetInput = "F";
+                budgetInput = "$$";
             } else {
-                if (budgetInput.equals("F")){
+                if (budgetInput.equals("$$")){
                     buttonTwoDollarText.setBackgroundResource(R.color.white);
                     buttonTwoDollarText.setTextColor(getResources().getColor(R.color.indicatioractive, requireActivity().getTheme()));
                     budgetInput = "";
@@ -80,9 +109,9 @@ public class BudgetInputFragment extends Fragment implements View.OnClickListene
             if(budgetInput.equals("")){
                 buttonThreeDollarText.setBackgroundResource(R.drawable.input_selected_background);
                 buttonThreeDollarText.setTextColor(getResources().getColor(R.color.white, requireActivity().getTheme()));
-                budgetInput = "O";
+                budgetInput = "$$$";
             } else {
-                if (budgetInput.equals("O")){
+                if (budgetInput.equals("$$$")){
                     buttonThreeDollarText.setBackgroundResource(R.color.white);
                     buttonThreeDollarText.setTextColor(getResources().getColor(R.color.indicatioractive, requireActivity().getTheme()));
                     budgetInput = "";
