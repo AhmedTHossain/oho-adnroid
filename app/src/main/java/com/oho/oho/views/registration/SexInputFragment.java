@@ -23,16 +23,16 @@ import com.oho.oho.viewmodels.RegistrationViewModel;
 
 import java.util.Objects;
 
-public class GenderInputFragment extends Fragment implements View.OnClickListener{
+public class SexInputFragment extends Fragment implements View.OnClickListener{
 
     private CardView buttonMale, buttonFemale, buttonOther;
     private TextView buttonMaleText, buttonFemaleText, buttonOtherText;
     private RegistrationViewModel viewModel;
     private Profile profileData = new Profile();
 
-    private String genderInput = "";
+    private String sexInput = "";
 
-    public GenderInputFragment() {
+    public SexInputFragment() {
         // Required empty public constructor
     }
 
@@ -65,9 +65,9 @@ public class GenderInputFragment extends Fragment implements View.OnClickListene
             @Override
             public void onChanged(Profile profile) {
                 profileData = profile;
-//                genderInput = profileData.getGender();
-                if (profileData.getGender() != null) {
-                    switch (profileData.getGender()) {
+//                sexInput = profileData.getSex()();
+                if (profileData.getSex() != null) {
+                    switch (profileData.getSex()) {
                         case "Male":
                             buttonMaleText.setBackgroundResource(R.drawable.input_selected_background);
                             buttonMaleText.setTextColor(getResources().getColor(R.color.white, requireActivity().getTheme()));
@@ -89,8 +89,8 @@ public class GenderInputFragment extends Fragment implements View.OnClickListene
     @Override
     public void onPause() {
         super.onPause();
-        if (!genderInput.equals("")) {
-            profileData.setGender(genderInput);
+        if (!sexInput.equals("")) {
+            profileData.setSex(sexInput);
             viewModel.saveRegistrationFormData(profileData);
         }
     }
@@ -98,45 +98,45 @@ public class GenderInputFragment extends Fragment implements View.OnClickListene
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.button_male){
-            if(genderInput.equals("")){
+            if(sexInput.equals("")){
                 buttonMaleText.setBackgroundResource(R.drawable.input_selected_background);
                 buttonMaleText.setTextColor(getResources().getColor(R.color.white, requireActivity().getTheme()));
-                genderInput = "Male";
+                sexInput = "Male";
             } else {
-                if (genderInput.equals("Male")){
+                if (sexInput.equals("Male")){
                     buttonMaleText.setBackgroundResource(R.color.white);
                     buttonMaleText.setTextColor(getResources().getColor(R.color.indicatioractive, requireActivity().getTheme()));
-                    genderInput = "";
+                    sexInput = "";
                 }else
                     Toast.makeText(getContext(), "Can only select one option!", Toast.LENGTH_SHORT).show();
 
             }
         }
         if(v.getId() == R.id.button_female){
-            if(genderInput.equals("")){
+            if(sexInput.equals("")){
                 buttonFemaleText.setBackgroundResource(R.drawable.input_selected_background);
                 buttonFemaleText.setTextColor(getResources().getColor(R.color.white, requireActivity().getTheme()));
-                genderInput = "Female";
+                sexInput = "Female";
             } else {
-                if (genderInput.equals("Female")){
+                if (sexInput.equals("Female")){
                     buttonFemaleText.setBackgroundResource(R.color.white);
                     buttonFemaleText.setTextColor(getResources().getColor(R.color.indicatioractive, requireActivity().getTheme()));
-                    genderInput = "";
+                    sexInput = "";
                 }else
                     Toast.makeText(getContext(), "Can only select one option!", Toast.LENGTH_SHORT).show();
 
             }
         }
         if(v.getId() == R.id.button_other){
-            if(genderInput.equals("")){
+            if(sexInput.equals("")){
                 buttonOtherText.setBackgroundResource(R.drawable.input_selected_background);
                 buttonOtherText.setTextColor(getResources().getColor(R.color.white, requireActivity().getTheme()));
-                genderInput = "Other";
+                sexInput = "Other";
             } else {
-                if (genderInput.equals("Other")){
+                if (sexInput.equals("Other")){
                     buttonOtherText.setBackgroundResource(R.color.white);
                     buttonOtherText.setTextColor(getResources().getColor(R.color.indicatioractive, requireActivity().getTheme()));
-                    genderInput = "";
+                    sexInput = "";
                 } else
                     Toast.makeText(getContext(), "Can only select one option!", Toast.LENGTH_SHORT).show();
             }

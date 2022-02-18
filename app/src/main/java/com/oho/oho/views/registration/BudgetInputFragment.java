@@ -60,9 +60,9 @@ public class BudgetInputFragment extends Fragment implements View.OnClickListene
             @Override
             public void onChanged(Profile profile) {
                 profileData = profile;
-//                budgetInput = profile.getBudgetRange();
-                if (profile.getBudgetRange() != null){
-                    switch (profile.getBudgetRange()){
+//                budgetInput = profile.getBudget()();
+                if (profile.getBudget() != null){
+                    switch (profile.getBudget()){
                         case "$":
                             buttonOneDollarText.setBackgroundResource(R.drawable.input_selected_background);
                             buttonOneDollarText.setTextColor(getResources().getColor(R.color.white, requireActivity().getTheme()));
@@ -85,7 +85,7 @@ public class BudgetInputFragment extends Fragment implements View.OnClickListene
     public void onPause() {
         super.onPause();
         if (!budgetInput.equals("")) {
-            profileData.setBudgetRange(budgetInput);
+            profileData.setBudget(budgetInput);
             viewModel.saveRegistrationFormData(profileData);
         }
     }

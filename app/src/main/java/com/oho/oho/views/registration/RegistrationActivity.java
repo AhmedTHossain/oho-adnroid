@@ -145,15 +145,15 @@ public class RegistrationActivity extends AppCompatActivity {
     private void startRegistration(){
         registrationViewModel.getRegistrationFormData().observe(this, profile -> {
             this.profile = profile;
-            Log.d("RegisterActivity","phone final = "+profile.getPhone() + " gender final = "+profile.getGender() + " budget final = "+profile.getBudgetRange() + " interested in = "+profile.getPreferredGender() + " education = "+profile.getEducation());
+            Log.d("RegisterActivity","phone final = "+profile.getPhone() + " gender final = "+profile.getSex() + " budget final = "+profile.getBudget() + " interested in = "+profile.getInterested_in() + " education = "+profile.getEducation());
         });
 
 
         Profile profile = new Profile();
         profile.setName(onBoardingUserName);
-        profile.setGender("M");
+        profile.setSex("M");
         profile.setEmail(onBoardingUserEmail);
-        profile.setPhone(123456);
+        profile.setPhone("123456");
         registrationViewModel.registerUser(profile);
         registrationViewModel.registeredUserProfileData.observe(this,userProfile -> {
             Toast.makeText(RegistrationActivity.this, "registration successfull with profile = "+userProfile, Toast.LENGTH_SHORT).show();

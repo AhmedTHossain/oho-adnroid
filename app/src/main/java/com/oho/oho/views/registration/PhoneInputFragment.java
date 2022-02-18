@@ -72,7 +72,7 @@ public class PhoneInputFragment extends Fragment {
     public void onPause() {
         super.onPause();
         if (!TextUtils.isEmpty(phoneText.getText())) {
-            profileData.setPhone(Integer.valueOf(phoneText.getText().toString()));
+            profileData.setPhone(phoneText.getText().toString());
             viewModel.saveRegistrationFormData(profileData);
         }
     }

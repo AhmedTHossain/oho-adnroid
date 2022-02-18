@@ -4,15 +4,15 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Profile {
-    @SerializedName("active_hour")
+    @SerializedName("age")
     @Expose
-    private String activeHour;
+    private Integer age;
     @SerializedName("bio")
     @Expose
     private String bio;
-    @SerializedName("budget_range")
+    @SerializedName("budget")
     @Expose
-    private String budgetRange;
+    private String budget;
     @SerializedName("city")
     @Expose
     private String city;
@@ -25,24 +25,21 @@ public class Profile {
     @SerializedName("email")
     @Expose
     private String email;
-    @SerializedName("gender")
+    @SerializedName("height")
     @Expose
-    private String gender;
-    @SerializedName("height_ft_max")
-    @Expose
-    private Integer heightFtMax;
-    @SerializedName("height_ft_min")
-    @Expose
-    private Integer heightFtMin;
-    @SerializedName("height_inch_max")
-    @Expose
-    private Integer heightInchMax;
-    @SerializedName("height_inch_min")
-    @Expose
-    private Integer heightInchMin;
+    private Integer height;
     @SerializedName("id")
     @Expose
     private Integer id;
+    @SerializedName("interested_in")
+    @Expose
+    private String interested_in;
+    @SerializedName("lat")
+    @Expose
+    private Double lat;
+    @SerializedName("lon")
+    @Expose
+    private Double lon;
     @SerializedName("name")
     @Expose
     private String name;
@@ -51,35 +48,29 @@ public class Profile {
     private String occupation;
     @SerializedName("phone")
     @Expose
-    private Integer phone;
-    @SerializedName("preferred_education")
+    private String phone;
+    @SerializedName("race")
     @Expose
-    private String preferredEducation;
-    @SerializedName("preferred_gender")
+    private String race;
+    @SerializedName("religion")
     @Expose
-    private String preferredGender;
-    @SerializedName("preferred_location")
+    private String religion;
+    @SerializedName("sex")
     @Expose
-    private String preferredLocation;
-    @SerializedName("preferred_race")
-    @Expose
-    private String preferredRace;
-    @SerializedName("preferred_religion")
-    @Expose
-    private String preferredReligion;
-    @SerializedName("proximity_range")
-    @Expose
-    private String proximityRange;
+    private String sex;
     @SerializedName("state")
     @Expose
     private String state;
+    @SerializedName("vaccinated")
+    @Expose
+    private Boolean vaccinated;
 
-    public String getActiveHour() {
-        return activeHour;
+    public Integer getAge() {
+        return age;
     }
 
-    public void setActiveHour(String activeHour) {
-        this.activeHour = activeHour;
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
     public String getBio() {
@@ -90,12 +81,12 @@ public class Profile {
         this.bio = bio;
     }
 
-    public String getBudgetRange() {
-        return budgetRange;
+    public String getBudget() {
+        return budget;
     }
 
-    public void setBudgetRange(String budgetRange) {
-        this.budgetRange = budgetRange;
+    public void setBudget(String budget) {
+        this.budget = budget;
     }
 
     public String getCity() {
@@ -130,44 +121,12 @@ public class Profile {
         this.email = email;
     }
 
-    public String getGender() {
-        return gender;
+    public Integer getHeight() {
+        return height;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public Integer getHeightFtMax() {
-        return heightFtMax;
-    }
-
-    public void setHeightFtMax(Integer heightFtMax) {
-        this.heightFtMax = heightFtMax;
-    }
-
-    public Integer getHeightFtMin() {
-        return heightFtMin;
-    }
-
-    public void setHeightFtMin(Integer heightFtMin) {
-        this.heightFtMin = heightFtMin;
-    }
-
-    public Integer getHeightInchMax() {
-        return heightInchMax;
-    }
-
-    public void setHeightInchMax(Integer heightInchMax) {
-        this.heightInchMax = heightInchMax;
-    }
-
-    public Integer getHeightInchMin() {
-        return heightInchMin;
-    }
-
-    public void setHeightInchMin(Integer heightInchMin) {
-        this.heightInchMin = heightInchMin;
+    public void setHeight(Integer height) {
+        this.height = height;
     }
 
     public Integer getId() {
@@ -176,6 +135,30 @@ public class Profile {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getInterested_in() {
+        return interested_in;
+    }
+
+    public void setInterested_in(String interested_in) {
+        this.interested_in = interested_in;
+    }
+
+    public Double getLat() {
+        return lat;
+    }
+
+    public void setLat(Double lat) {
+        this.lat = lat;
+    }
+
+    public Double getLon() {
+        return lon;
+    }
+
+    public void setLon(Double lon) {
+        this.lon = lon;
     }
 
     public String getName() {
@@ -194,60 +177,36 @@ public class Profile {
         this.occupation = occupation;
     }
 
-    public Integer getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Integer phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public String getPreferredEducation() {
-        return preferredEducation;
+    public String getRace() {
+        return race;
     }
 
-    public void setPreferredEducation(String preferredEducation) {
-        this.preferredEducation = preferredEducation;
+    public void setRace(String race) {
+        this.race = race;
     }
 
-    public String getPreferredGender() {
-        return preferredGender;
+    public String getReligion() {
+        return religion;
     }
 
-    public void setPreferredGender(String preferredGender) {
-        this.preferredGender = preferredGender;
+    public void setReligion(String religion) {
+        this.religion = religion;
     }
 
-    public String getPreferredLocation() {
-        return preferredLocation;
+    public String getSex() {
+        return sex;
     }
 
-    public void setPreferredLocation(String preferredLocation) {
-        this.preferredLocation = preferredLocation;
-    }
-
-    public String getPreferredRace() {
-        return preferredRace;
-    }
-
-    public void setPreferredRace(String preferredRace) {
-        this.preferredRace = preferredRace;
-    }
-
-    public String getPreferredReligion() {
-        return preferredReligion;
-    }
-
-    public void setPreferredReligion(String preferredReligion) {
-        this.preferredReligion = preferredReligion;
-    }
-
-    public String getProximityRange() {
-        return proximityRange;
-    }
-
-    public void setProximityRange(String proximityRange) {
-        this.proximityRange = proximityRange;
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
     public String getState() {
@@ -256,5 +215,13 @@ public class Profile {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public Boolean getVaccinated() {
+        return vaccinated;
+    }
+
+    public void setVaccinated(Boolean vaccinated) {
+        this.vaccinated = vaccinated;
     }
 }

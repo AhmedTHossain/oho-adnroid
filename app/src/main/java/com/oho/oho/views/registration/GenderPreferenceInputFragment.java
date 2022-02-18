@@ -61,8 +61,8 @@ public class GenderPreferenceInputFragment extends Fragment implements View.OnCl
             @Override
             public void onChanged(Profile profile) {
                 profileData = profile;
-                if (profileData.getPreferredGender() != null) {
-                    switch (profileData.getPreferredGender()) {
+                if (profileData.getInterested_in() != null) {
+                    switch (profileData.getInterested_in()) {
                         case "Male":
                             buttonMaleText.setBackgroundResource(R.drawable.input_selected_background);
                             buttonMaleText.setTextColor(getResources().getColor(R.color.white, requireActivity().getTheme()));
@@ -85,7 +85,7 @@ public class GenderPreferenceInputFragment extends Fragment implements View.OnCl
     public void onPause() {
         super.onPause();
         if (!genderInput.equals("")) {
-            profileData.setPreferredGender(genderInput);
+            profileData.setInterested_in(genderInput);
             viewModel.saveRegistrationFormData(profileData);
         }
     }

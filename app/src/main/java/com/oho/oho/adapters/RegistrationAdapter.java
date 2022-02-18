@@ -3,7 +3,6 @@ package com.oho.oho.adapters;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
@@ -14,7 +13,7 @@ import com.oho.oho.views.registration.DobInputFragment;
 import com.oho.oho.views.registration.EducationInputFragment;
 import com.oho.oho.views.registration.EthnicityInputFragment;
 import com.oho.oho.views.registration.FinishFragment;
-import com.oho.oho.views.registration.GenderInputFragment;
+import com.oho.oho.views.registration.SexInputFragment;
 import com.oho.oho.views.registration.GenderPreferenceInputFragment;
 import com.oho.oho.views.registration.HeightInputFragment;
 import com.oho.oho.views.registration.IntroFragment;
@@ -40,7 +39,7 @@ public class RegistrationAdapter extends FragmentStateAdapter {
             case 1:
                 return new PhoneInputFragment();
             case 2:
-                return new GenderInputFragment();
+                return new SexInputFragment();
             case 3:
                 return new HeightInputFragment();
             case 4:
