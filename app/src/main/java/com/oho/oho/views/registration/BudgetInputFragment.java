@@ -60,6 +60,23 @@ public class BudgetInputFragment extends Fragment implements View.OnClickListene
             @Override
             public void onChanged(Profile profile) {
                 profileData = profile;
+//                budgetInput = profile.getBudgetRange();
+                if (profile.getBudgetRange() != null){
+                    switch (profile.getBudgetRange()){
+                        case "$":
+                            buttonOneDollarText.setBackgroundResource(R.drawable.input_selected_background);
+                            buttonOneDollarText.setTextColor(getResources().getColor(R.color.white, requireActivity().getTheme()));
+                            break;
+                        case "$$":
+                            buttonTwoDollarText.setBackgroundResource(R.drawable.input_selected_background);
+                            buttonTwoDollarText.setTextColor(getResources().getColor(R.color.white, requireActivity().getTheme()));
+                            break;
+                        case "$$$":
+                            buttonThreeDollarText.setBackgroundResource(R.drawable.input_selected_background);
+                            buttonThreeDollarText.setTextColor(getResources().getColor(R.color.white, requireActivity().getTheme()));
+                            break;
+                    }
+                }
             }
         });
     }

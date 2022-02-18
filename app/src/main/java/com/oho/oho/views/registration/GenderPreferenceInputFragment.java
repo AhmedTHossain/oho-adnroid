@@ -61,6 +61,22 @@ public class GenderPreferenceInputFragment extends Fragment implements View.OnCl
             @Override
             public void onChanged(Profile profile) {
                 profileData = profile;
+                if (profileData.getPreferredGender() != null) {
+                    switch (profileData.getPreferredGender()) {
+                        case "Male":
+                            buttonMaleText.setBackgroundResource(R.drawable.input_selected_background);
+                            buttonMaleText.setTextColor(getResources().getColor(R.color.white, requireActivity().getTheme()));
+                            break;
+                        case "Female":
+                            buttonFemaleText.setBackgroundResource(R.drawable.input_selected_background);
+                            buttonFemaleText.setTextColor(getResources().getColor(R.color.white, requireActivity().getTheme()));
+                            break;
+                        case "Open to all":
+                            buttonOpenToAllText.setBackgroundResource(R.drawable.input_selected_background);
+                            buttonOpenToAllText.setTextColor(getResources().getColor(R.color.white, requireActivity().getTheme()));
+                            break;
+                    }
+                }
             }
         });
     }
