@@ -65,6 +65,23 @@ public class GenderInputFragment extends Fragment implements View.OnClickListene
             @Override
             public void onChanged(Profile profile) {
                 profileData = profile;
+                genderInput = profileData.getGender();
+                if (genderInput != null) {
+                    switch (genderInput) {
+                        case "Male":
+                            buttonMaleText.setBackgroundResource(R.drawable.input_selected_background);
+                            buttonMaleText.setTextColor(getResources().getColor(R.color.white, requireActivity().getTheme()));
+                            break;
+                        case "Female":
+                            buttonFemaleText.setBackgroundResource(R.drawable.input_selected_background);
+                            buttonFemaleText.setTextColor(getResources().getColor(R.color.white, requireActivity().getTheme()));
+                            break;
+                        case "Other":
+                            buttonOtherText.setBackgroundResource(R.drawable.input_selected_background);
+                            buttonOtherText.setTextColor(getResources().getColor(R.color.white, requireActivity().getTheme()));
+                            break;
+                    }
+                }
             }
         });
     }
