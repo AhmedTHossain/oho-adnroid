@@ -58,13 +58,16 @@ public class VaccineInputFragment extends Fragment implements View.OnClickListen
             @Override
             public void onChanged(Profile profile) {
                 profileData = profile;
-                if (profileData.getVaccinated() != null) {
-                    if (profileData.getVaccinated()) {
-                        buttonYesText.setBackgroundResource(R.drawable.input_selected_background);
-                        buttonYesText.setTextColor(getResources().getColor(R.color.white, requireActivity().getTheme()));
-                    } else if (!(profileData.getVaccinated())) {
-                        buttonNoText.setBackgroundResource(R.drawable.input_selected_background);
-                        buttonNoText.setTextColor(getResources().getColor(R.color.white, requireActivity().getTheme()));
+                if (profileData.getVaccinated() != null){
+                    switch (profileData.getVaccinated()){
+                        case "Yes":
+                            buttonYesText.setBackgroundResource(R.drawable.input_selected_background);
+                            buttonYesText.setTextColor(getResources().getColor(R.color.white, requireActivity().getTheme()));
+                            break;
+                        case "No":
+                            buttonNoText.setBackgroundResource(R.drawable.input_selected_background);
+                            buttonNoText.setTextColor(getResources().getColor(R.color.white, requireActivity().getTheme()));
+                            break;
                     }
                 }
             }
@@ -75,12 +78,10 @@ public class VaccineInputFragment extends Fragment implements View.OnClickListen
     @Override
     public void onPause() {
         super.onPause();
-
-        if (vaccineInput.equals("Yes"))
-            profileData.setVaccinated(true);
-        else
-            profileData.setVaccinated(false);
-        viewModel.saveRegistrationFormData(profileData);
+        if (!vaccineInput.equals("")) {
+            profileData.setVaccinated(vaccineInput);
+            viewModel.saveRegistrationFormData(profileData);
+        }
     }
 
     @Override

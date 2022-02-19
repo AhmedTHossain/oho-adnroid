@@ -27,7 +27,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Enter location"
+            android:text="Your location"
             android:textStyle="bold"
             android:textSize="@dimen/_15ssp"
             android:textColor="@color/textSubTitle"
@@ -38,18 +38,18 @@
             android:layout_height="wrap_content"
             app:cardCornerRadius="@dimen/_50sdp"
             android:layout_marginBottom="@dimen/_10sdp">
-            <EditText
+            <TextView
+                android:id="@+id/text_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="San Francisco, CA"
                 android:textSize="@dimen/_15ssp"
                 android:fontFamily="@font/sf_pro_rounded_regular"
                 android:paddingTop="@dimen/_10sdp"
                 android:paddingBottom="@dimen/_10sdp"
                 android:paddingStart="@dimen/_10sdp"
                 android:background="@null"
-                android:drawableStart="@drawable/ic_location_24"
-                android:drawablePadding="@dimen/_5sdp"/>
+                android:drawablePadding="@dimen/_5sdp"
+                app:drawableStartCompat="@drawable/ic_location_24" />
         </androidx.cardview.widget.CardView>
     </LinearLayout>
 

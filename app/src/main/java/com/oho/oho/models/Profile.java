@@ -63,7 +63,7 @@ public class Profile {
     private String state;
     @SerializedName("vaccinated")
     @Expose
-    private Boolean vaccinated;
+    private String vaccinated;
 
     public Integer getAge() {
         return age;
@@ -217,11 +217,11 @@ public class Profile {
         this.state = state;
     }
 
-    public Boolean getVaccinated() {
+    public String getVaccinated() {
         return vaccinated;
     }
 
-    public void setVaccinated(Boolean vaccinated) {
+    public void setVaccinated(String vaccinated) {
         this.vaccinated = vaccinated;
     }
 }

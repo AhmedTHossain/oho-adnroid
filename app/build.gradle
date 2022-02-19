@@ -74,4 +74,6 @@ dependencies {
     implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:4.1.2'
     //Number picker
     implementation 'io.github.ShawnLin013:number-picker:2.4.13'
+
+    implementation 'com.google.android.gms:play-services-location:19.0.1'
 }
