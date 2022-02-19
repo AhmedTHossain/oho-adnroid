@@ -59,6 +59,7 @@ public class VaccineInputFragment extends Fragment implements View.OnClickListen
             public void onChanged(Profile profile) {
                 profileData = profile;
                 if (profileData.getVaccinated() != null){
+                    vaccineInput = profileData.getVaccinated();
                     switch (profileData.getVaccinated()){
                         case "Yes":
                             buttonYesText.setBackgroundResource(R.drawable.input_selected_background);

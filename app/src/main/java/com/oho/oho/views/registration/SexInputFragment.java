@@ -67,6 +67,7 @@ public class SexInputFragment extends Fragment implements View.OnClickListener{
                 profileData = profile;
 //                sexInput = profileData.getSex()();
                 if (profileData.getSex() != null) {
+                    sexInput = profileData.getSex();
                     switch (profileData.getSex()) {
                         case "Male":
                             buttonMaleText.setBackgroundResource(R.drawable.input_selected_background);

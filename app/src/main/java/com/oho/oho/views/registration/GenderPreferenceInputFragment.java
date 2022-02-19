@@ -62,6 +62,7 @@ public class GenderPreferenceInputFragment extends Fragment implements View.OnCl
             public void onChanged(Profile profile) {
                 profileData = profile;
                 if (profileData.getInterested_in() != null) {
+                    genderInput = profileData.getInterested_in();
                     switch (profileData.getInterested_in()) {
                         case "Male":
                             buttonMaleText.setBackgroundResource(R.drawable.input_selected_background);

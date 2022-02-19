@@ -62,6 +62,7 @@ public class BudgetInputFragment extends Fragment implements View.OnClickListene
                 profileData = profile;
 //                budgetInput = profile.getBudget()();
                 if (profile.getBudget() != null){
+                    budgetInput = profileData.getBudget();
                     switch (profile.getBudget()){
                         case "$":
                             buttonOneDollarText.setBackgroundResource(R.drawable.input_selected_background);
