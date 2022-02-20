@@ -39,9 +39,11 @@
             app:cardCornerRadius="@dimen/_50sdp"
             android:layout_marginBottom="@dimen/_10sdp">
             <EditText
+                android:id="@+id/text_profession"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Software Engineer"
+                android:inputType="text"
                 android:textSize="@dimen/_15ssp"
                 android:fontFamily="@font/sf_pro_rounded_regular"
                 android:paddingStart="@dimen/_20sdp"
