@@ -34,6 +34,7 @@ public class RegistrationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.Theme_OHO);
         setContentView(R.layout.activity_registration);
 
         initAuthViewModel();
@@ -145,7 +146,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private void startRegistration(){
         registrationViewModel.getRegistrationFormData().observe(this, profile -> {
             this.profile = profile;
-            Log.d("RegisterActivity","phone final = "+profile.getPhone() + " gender final = "+profile.getSex() + " budget final = "+profile.getBudget() + " interested in = "+profile.getInterested_in() + " education = "+profile.getEducation() + " vaccinated = " + profile.getVaccinated());
+            Log.d("RegisterActivity","phone final = "+profile.getPhone() + " gender final = "+profile.getSex() + " height final = "+profile.getHeight() + " budget final = "+profile.getBudget() + " interested in = "+profile.getInterested_in() + " education = "+profile.getEducation() + " vaccinated = " + profile.getVaccinated());
         });
 
 

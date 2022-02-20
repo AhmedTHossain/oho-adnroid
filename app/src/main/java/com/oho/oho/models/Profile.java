@@ -27,7 +27,7 @@ public class Profile {
     private String email;
     @SerializedName("height")
     @Expose
-    private Integer height;
+    private Double height;
     @SerializedName("id")
     @Expose
     private Integer id;
@@ -121,11 +121,11 @@ public class Profile {
         this.email = email;
     }
 
-    public Integer getHeight() {
+    public Double getHeight() {
         return height;
     }
 
-    public void setHeight(Integer height) {
+    public void setHeight(Double height) {
         this.height = height;
     }
 

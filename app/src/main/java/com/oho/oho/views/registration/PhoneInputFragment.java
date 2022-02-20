@@ -52,21 +52,12 @@ public class PhoneInputFragment extends Fragment {
             @Override
             public void onChanged(Profile profile) {
                 profileData = profile;
+                if (profileData.getPhone() != null){
+                    phoneText.setText(profileData.getPhone());
+                }
             }
         });
     }
-
-//    @Override
-//    public void onAttach(@NonNull Context context) {
-//        super.onAttach(context);
-//        viewModel = new ViewModelProvider(requireActivity()).get(RegistrationViewModel.class);
-//        viewModel.getRegistrationFormData().observe(getViewLifecycleOwner(), new Observer<Profile>() {
-//            @Override
-//            public void onChanged(Profile profile) {
-//                profileData = profile;
-//            }
-//        });
-//    }
 
     @Override
     public void onPause() {
