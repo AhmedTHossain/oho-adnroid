@@ -22,9 +22,9 @@ public class IntroFragment extends Fragment {
 
         TextView welcomeText = view.findViewById(R.id.text_welcome);
 
-        String onBoardingUserFirstName = onBoardingUserName.split(" ")[0];
-        String welcomeMessage = "Hi "+ onBoardingUserFirstName +", welcome to...";
-        welcomeText.setText(welcomeMessage);
+//        String onBoardingUserFirstName = onBoardingUserName.split(" ")[0];
+//        String welcomeMessage = "Hi "+ onBoardingUserFirstName +", welcome to...";
+//        welcomeText.setText(welcomeMessage);
 
         // Inflate the layout for this fragment
         return view;

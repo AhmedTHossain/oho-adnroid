@@ -1,6 +1,7 @@
 package com.oho.oho.adapters;
 
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,14 +19,17 @@ import java.util.ArrayList;
 
 public class RegistrationInputFieldAdapter extends RecyclerView.Adapter<RegistrationInputFieldAdapter.InputHolder> {
 
-    private ArrayList<RegistrationInput> localDataSet;
+    private ArrayList<RegistrationInput> localDataSet = new ArrayList<>();
     private static OnInputSelectListener onInputSelectListener;
 
     static int selectedItemPos = -1;
     static boolean multiSelectEnabled;
 
     public RegistrationInputFieldAdapter(ArrayList<RegistrationInput> dataSet, OnInputSelectListener onInputSelectListener, boolean multiSelectEnabled) {
-        localDataSet = dataSet;
+
+        localDataSet.addAll(dataSet);
+        Log.d("RegistrationInputFieldAdapter","education = "+localDataSet.size());
+
         this.onInputSelectListener = onInputSelectListener;
         RegistrationInputFieldAdapter.multiSelectEnabled = multiSelectEnabled;
     }

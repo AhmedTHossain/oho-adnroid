@@ -39,6 +39,7 @@ public class EthnicityInputFragment extends Fragment implements OnInputSelectLis
         for (String s: data){
             RegistrationInput input = new RegistrationInput();
             input.setInput(s);
+            ethnicityArrayList.add(input);
         }
 
         RegistrationInputFieldAdapter adapter = new RegistrationInputFieldAdapter(ethnicityArrayList, this, true);

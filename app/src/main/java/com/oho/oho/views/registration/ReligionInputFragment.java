@@ -39,6 +39,7 @@ public class ReligionInputFragment extends Fragment implements OnInputSelectList
         for (String s: data){
             RegistrationInput input = new RegistrationInput();
             input.setInput(s);
+            religionArrayList.add(input);
         }
 
         RegistrationInputFieldAdapter adapter = new RegistrationInputFieldAdapter(religionArrayList, this, false);

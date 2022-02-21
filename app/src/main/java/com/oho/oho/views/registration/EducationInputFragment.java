@@ -50,6 +50,7 @@ public class EducationInputFragment extends Fragment implements OnInputSelectLis
         for (String s: data){
             RegistrationInput input = new RegistrationInput();
             input.setInput(s);
+            educationArrayList.add(input);
         }
 
         RegistrationInputFieldAdapter adapter = new RegistrationInputFieldAdapter(educationArrayList, this, false);
