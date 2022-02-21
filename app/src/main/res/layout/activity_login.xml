@@ -103,6 +103,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:text="&amp;"
+                android:textColor="@color/black"
                 android:layout_gravity="center"
                 android:textSize="@dimen/_15ssp"
                 android:fontFamily="@font/sf_pro_rounded_regular"/>

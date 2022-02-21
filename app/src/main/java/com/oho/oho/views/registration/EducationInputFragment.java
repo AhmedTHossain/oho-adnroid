@@ -30,6 +30,7 @@ public class EducationInputFragment extends Fragment implements OnInputSelectLis
     private String educationInput="";
 
     private ArrayList<RegistrationInput> educationArrayList;
+    RegistrationInputFieldAdapter adapter;
 
     public EducationInputFragment() {
         // Required empty public constructor
@@ -53,7 +54,7 @@ public class EducationInputFragment extends Fragment implements OnInputSelectLis
             educationArrayList.add(input);
         }
 
-        RegistrationInputFieldAdapter adapter = new RegistrationInputFieldAdapter(educationArrayList, this, false);
+        adapter = new RegistrationInputFieldAdapter(educationArrayList, this, false);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
@@ -70,6 +71,13 @@ public class EducationInputFragment extends Fragment implements OnInputSelectLis
             @Override
             public void onChanged(Profile profile) {
                 profileData = profile;
+                String education = profile.getEducation();
+                for (RegistrationInput registrationInput: educationArrayList){
+                    if (registrationInput.getInput().equals(education)){
+                        registrationInput.setSelected(true);
+                        adapter.notifyDataSetChanged();
+                    }
+                }
             }
         });
     }

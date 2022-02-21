@@ -49,6 +49,11 @@ public class RegistrationInputFieldAdapter extends RecyclerView.Adapter<Registra
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         holder.getTextView().setText(localDataSet.get(position).getInput());
+        if (localDataSet.get(position).isSelected()){
+            holder.getTextView().setBackgroundResource(R.drawable.input_selected_background);
+            holder.getTextView().setTextColor(Color.parseColor("#FFFFFF"));
+            selectedItemPos = position;
+        }
     }
 
     @Override
