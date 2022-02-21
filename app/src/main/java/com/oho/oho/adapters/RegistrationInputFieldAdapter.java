@@ -1,5 +1,6 @@
 package com.oho.oho.adapters;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -45,7 +46,7 @@ public class RegistrationInputFieldAdapter extends RecyclerView.Adapter<Registra
     }
 
     @Override
-    public void onBindViewHolder(@NonNull InputHolder holder, int position) {
+    public void onBindViewHolder(@NonNull InputHolder holder, @SuppressLint("RecyclerView") int position) {
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         holder.getTextView().setText(localDataSet.get(position).getInput());
@@ -81,6 +82,7 @@ public class RegistrationInputFieldAdapter extends RecyclerView.Adapter<Registra
                             textView.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             textView.setTextColor(Color.parseColor("#AB3B61"));
                             selectedItemPos = -1;
+                            onInputSelectListener.onInputSelect("");
                         } else {
                             Toast.makeText(v.getContext(), "Can only select one option!", Toast.LENGTH_SHORT).show();
                         }
@@ -89,6 +91,7 @@ public class RegistrationInputFieldAdapter extends RecyclerView.Adapter<Registra
                             textView.setBackgroundResource(R.drawable.input_selected_background);
                             textView.setTextColor(Color.parseColor("#FFFFFF"));
                             textView.setTag("selected");
+                            onInputSelectListener.onInputSelect(textView.getText().toString());
                         } else {
                             textView.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             textView.setTextColor(Color.parseColor("#AB3B61"));

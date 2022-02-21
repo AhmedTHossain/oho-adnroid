@@ -39,6 +39,7 @@ public class CuisinePreferenceInputFragment extends Fragment implements OnInputS
         for (String s: data){
             RegistrationInput input = new RegistrationInput();
             input.setInput(s);
+            cuisineArrayList.add(input);
         }
 
         RegistrationInputFieldAdapter adapter = new RegistrationInputFieldAdapter(cuisineArrayList, this, true);

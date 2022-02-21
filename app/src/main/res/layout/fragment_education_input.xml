@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/login_background"
     tools:context=".views.registration.EducationInputFragment">
 
@@ -23,13 +24,133 @@
             android:textAlignment="center"
             android:layout_marginBottom="@dimen/_25sdp"
             android:fontFamily="@font/sf_pro_rounded_regular" />
-        <include
-            layout="@layout/layout_recyclerview"
-            android:id="@+id/recyclerview"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/_40sdp"
-            android:layout_marginEnd="@dimen/_40sdp"/>
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="@dimen/_50sdp"
+                android:layout_marginEnd="@dimen/_50sdp">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="@dimen/_50sdp"
+                    android:layout_marginBottom="@dimen/_20sdp">
+                    <TextView
+                        android:id="@+id/text_no_degree"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="No Degree"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/_15ssp"
+                        android:textColor="@color/indicatioractive"
+                        android:fontFamily="@font/sf_pro_rounded_medium"
+                        android:paddingTop="@dimen/_10sdp"
+                        android:paddingBottom="@dimen/_10sdp"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:layout_gravity="center"
+                        android:tag="notselected"
+                        android:clickable="true"
+                        android:focusable="true"/>
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="@dimen/_50sdp"
+                    android:layout_marginBottom="@dimen/_20sdp">
+                    <TextView
+                        android:id="@+id/text_high_school_diploma"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="High School Diploma"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/_15ssp"
+                        android:textColor="@color/indicatioractive"
+                        android:fontFamily="@font/sf_pro_rounded_medium"
+                        android:paddingTop="@dimen/_10sdp"
+                        android:paddingBottom="@dimen/_10sdp"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:layout_gravity="center"
+                        android:tag="notselected"
+                        android:clickable="true"
+                        android:focusable="true"/>
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="@dimen/_50sdp"
+                    android:layout_marginBottom="@dimen/_20sdp">
+                    <TextView
+                        android:id="@+id/text_undergrad"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Undergrad"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/_15ssp"
+                        android:textColor="@color/indicatioractive"
+                        android:fontFamily="@font/sf_pro_rounded_medium"
+                        android:paddingTop="@dimen/_10sdp"
+                        android:paddingBottom="@dimen/_10sdp"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:layout_gravity="center"
+                        android:tag="notselected"
+                        android:clickable="true"
+                        android:focusable="true"/>
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="@dimen/_50sdp"
+                    android:layout_marginBottom="@dimen/_20sdp">
+                    <TextView
+                        android:id="@+id/text_masters"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Masters"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/_15ssp"
+                        android:textColor="@color/indicatioractive"
+                        android:fontFamily="@font/sf_pro_rounded_medium"
+                        android:paddingTop="@dimen/_10sdp"
+                        android:paddingBottom="@dimen/_10sdp"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:layout_gravity="center"
+                        android:tag="notselected"
+                        android:clickable="true"
+                        android:focusable="true"/>
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="@dimen/_50sdp"
+                    android:layout_marginBottom="@dimen/_20sdp">
+                    <TextView
+                        android:id="@+id/text_phd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="PhD"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/_15ssp"
+                        android:textColor="@color/indicatioractive"
+                        android:fontFamily="@font/sf_pro_rounded_medium"
+                        android:paddingTop="@dimen/_10sdp"
+                        android:paddingBottom="@dimen/_10sdp"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:layout_gravity="center"
+                        android:tag="notselected"
+                        android:clickable="true"
+                        android:focusable="true"/>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+        </ScrollView>
     </LinearLayout>
 
 </FrameLayout>
