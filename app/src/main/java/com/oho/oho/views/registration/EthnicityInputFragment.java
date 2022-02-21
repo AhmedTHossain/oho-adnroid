@@ -12,9 +12,14 @@ import android.view.ViewGroup;
 
 import com.oho.oho.R;
 import com.oho.oho.adapters.RegistrationInputFieldAdapter;
+import com.oho.oho.models.RegistrationInput;
 import com.oho.oho.views.listeners.OnInputSelectListener;
 
+import java.util.ArrayList;
+
 public class EthnicityInputFragment extends Fragment implements OnInputSelectListener {
+
+    private ArrayList<RegistrationInput> ethnicityArrayList;
 
     public EthnicityInputFragment() {
         // Required empty public constructor
@@ -29,7 +34,14 @@ public class EthnicityInputFragment extends Fragment implements OnInputSelectLis
 
 //        String [] data = {"South Aisan", "East Asian", "African American", "Black", "Latinx", "Pacific Islander", "American Indian", "Hispanic", "White", "Others"};
         String [] data = getResources().getStringArray(R.array.ethnicity_list);
-        RegistrationInputFieldAdapter adapter = new RegistrationInputFieldAdapter(data, this, true);
+
+        ethnicityArrayList = new ArrayList<>();
+        for (String s: data){
+            RegistrationInput input = new RegistrationInput();
+            input.setInput(s);
+        }
+
+        RegistrationInputFieldAdapter adapter = new RegistrationInputFieldAdapter(ethnicityArrayList, this, true);
 
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
         recyclerView.setAdapter(adapter);

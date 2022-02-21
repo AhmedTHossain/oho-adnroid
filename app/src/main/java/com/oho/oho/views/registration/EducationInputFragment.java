@@ -17,14 +17,19 @@ import android.view.ViewGroup;
 import com.oho.oho.R;
 import com.oho.oho.adapters.RegistrationInputFieldAdapter;
 import com.oho.oho.models.Profile;
+import com.oho.oho.models.RegistrationInput;
 import com.oho.oho.viewmodels.RegistrationViewModel;
 import com.oho.oho.views.listeners.OnInputSelectListener;
+
+import java.util.ArrayList;
 
 public class EducationInputFragment extends Fragment implements OnInputSelectListener {
 
     private RegistrationViewModel viewModel;
     private Profile profileData = new Profile();
     private String educationInput="";
+
+    private ArrayList<RegistrationInput> educationArrayList;
 
     public EducationInputFragment() {
         // Required empty public constructor
@@ -39,7 +44,15 @@ public class EducationInputFragment extends Fragment implements OnInputSelectLis
 
 //        String [] data = {"Some college", "Associate’s Degree", "Bachelor’s Degree", "Graduate Degree", "Professional Degree", "No Degree"};
         String [] data = getResources().getStringArray(R.array.education_list);
-        RegistrationInputFieldAdapter adapter = new RegistrationInputFieldAdapter(data, this, false);
+
+        educationArrayList = new ArrayList<>();
+
+        for (String s: data){
+            RegistrationInput input = new RegistrationInput();
+            input.setInput(s);
+        }
+
+        RegistrationInputFieldAdapter adapter = new RegistrationInputFieldAdapter(educationArrayList, this, false);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);

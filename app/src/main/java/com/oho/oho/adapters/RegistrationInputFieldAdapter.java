@@ -11,17 +11,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.oho.oho.R;
+import com.oho.oho.models.RegistrationInput;
 import com.oho.oho.views.listeners.OnInputSelectListener;
+
+import java.util.ArrayList;
 
 public class RegistrationInputFieldAdapter extends RecyclerView.Adapter<RegistrationInputFieldAdapter.InputHolder> {
 
-    private String[] localDataSet;
+    private ArrayList<RegistrationInput> localDataSet;
     private static OnInputSelectListener onInputSelectListener;
 
     static int selectedItemPos = -1;
     static boolean multiSelectEnabled;
 
-    public RegistrationInputFieldAdapter(String[] dataSet, OnInputSelectListener onInputSelectListener, boolean multiSelectEnabled) {
+    public RegistrationInputFieldAdapter(ArrayList<RegistrationInput> dataSet, OnInputSelectListener onInputSelectListener, boolean multiSelectEnabled) {
         localDataSet = dataSet;
         this.onInputSelectListener = onInputSelectListener;
         RegistrationInputFieldAdapter.multiSelectEnabled = multiSelectEnabled;
@@ -41,12 +44,12 @@ public class RegistrationInputFieldAdapter extends RecyclerView.Adapter<Registra
     public void onBindViewHolder(@NonNull InputHolder holder, int position) {
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        holder.getTextView().setText(localDataSet[position]);
+        holder.getTextView().setText(localDataSet.get(position).getInput());
     }
 
     @Override
     public int getItemCount() {
-        return localDataSet.length;
+        return localDataSet.size();
     }
 
     public static class InputHolder extends RecyclerView.ViewHolder{

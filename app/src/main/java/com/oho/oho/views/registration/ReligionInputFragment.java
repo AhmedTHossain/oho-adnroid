@@ -12,9 +12,14 @@ import android.view.ViewGroup;
 
 import com.oho.oho.R;
 import com.oho.oho.adapters.RegistrationInputFieldAdapter;
+import com.oho.oho.models.RegistrationInput;
 import com.oho.oho.views.listeners.OnInputSelectListener;
 
+import java.util.ArrayList;
+
 public class ReligionInputFragment extends Fragment implements OnInputSelectListener {
+
+    private ArrayList<RegistrationInput> religionArrayList;
 
     public ReligionInputFragment() {
         // Required empty public constructor
@@ -29,7 +34,14 @@ public class ReligionInputFragment extends Fragment implements OnInputSelectList
 
 //        String [] data = {"Christian", "Catholic", "Muslim", "Jewish", "Hindu", "Spiritual/Not Religious", "Athiest", "Sikh", "Others"};
         String [] data = getResources().getStringArray(R.array.religion_list);
-        RegistrationInputFieldAdapter adapter = new RegistrationInputFieldAdapter(data, this, false);
+
+        religionArrayList = new ArrayList<>();
+        for (String s: data){
+            RegistrationInput input = new RegistrationInput();
+            input.setInput(s);
+        }
+
+        RegistrationInputFieldAdapter adapter = new RegistrationInputFieldAdapter(religionArrayList, this, false);
 
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
         recyclerView.setAdapter(adapter);

@@ -3,10 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1315" />
         <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/drawable/background_gradient.xml" value="0.121" />
         <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/drawable/button_background_gradient.xml" value="0.192" />
         <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/drawable/ic_arrow_back.xml" value="0.179" />
         <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/drawable/ic_arrow_forward.xml" value="0.179" />
+        <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1315" />
         <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/drawable/input_selected_background.xml" value="0.192" />
         <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/drawable/onboarding_indicator_active.xml" value="0.1" />
         <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/drawable/onboarding_indicator_active_two.xml" value="0.1" />
@@ -43,6 +45,8 @@
         <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/layout/item_conatiner_boarding_one.xml" value="0.1" />
         <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/layout/layout_recyclerview.xml" value="0.10089781958101753" />
         <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/layout/row_input_registration.xml" value="0.2" />
+        <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.178" />
+        <entry key="..\:/Users/ASUS/Desktop/OHO/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1315" />
       </map>
     </option>
   </component>
