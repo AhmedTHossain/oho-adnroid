@@ -13,11 +13,12 @@ import android.view.ViewGroup;
 import com.oho.oho.R;
 import com.oho.oho.adapters.RegistrationInputFieldAdapter;
 import com.oho.oho.models.RegistrationInput;
+import com.oho.oho.views.listeners.OnInputDeselectListener;
 import com.oho.oho.views.listeners.OnInputSelectListener;
 
 import java.util.ArrayList;
 
-public class CuisinePreferenceInputFragment extends Fragment implements OnInputSelectListener {
+public class CuisinePreferenceInputFragment extends Fragment implements OnInputSelectListener, OnInputDeselectListener {
 
     private ArrayList<RegistrationInput> cuisineArrayList;
 
@@ -42,7 +43,7 @@ public class CuisinePreferenceInputFragment extends Fragment implements OnInputS
             cuisineArrayList.add(input);
         }
 
-        RegistrationInputFieldAdapter adapter = new RegistrationInputFieldAdapter(cuisineArrayList, this, true);
+        RegistrationInputFieldAdapter adapter = new RegistrationInputFieldAdapter(cuisineArrayList, this, this, true);
 
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
         recyclerView.setAdapter(adapter);
@@ -53,6 +54,11 @@ public class CuisinePreferenceInputFragment extends Fragment implements OnInputS
 
     @Override
     public void onInputSelect(String input) {
+
+    }
+
+    @Override
+    public void onInputDeselect(String input) {
 
     }
 }

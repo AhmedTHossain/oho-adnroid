@@ -13,11 +13,12 @@ import android.view.ViewGroup;
 import com.oho.oho.R;
 import com.oho.oho.adapters.RegistrationInputFieldAdapter;
 import com.oho.oho.models.RegistrationInput;
+import com.oho.oho.views.listeners.OnInputDeselectListener;
 import com.oho.oho.views.listeners.OnInputSelectListener;
 
 import java.util.ArrayList;
 
-public class ReligionInputFragment extends Fragment implements OnInputSelectListener {
+public class ReligionInputFragment extends Fragment implements OnInputSelectListener, OnInputDeselectListener {
 
     private ArrayList<RegistrationInput> religionArrayList;
 
@@ -42,7 +43,7 @@ public class ReligionInputFragment extends Fragment implements OnInputSelectList
             religionArrayList.add(input);
         }
 
-        RegistrationInputFieldAdapter adapter = new RegistrationInputFieldAdapter(religionArrayList, this, false);
+        RegistrationInputFieldAdapter adapter = new RegistrationInputFieldAdapter(religionArrayList, this, this, false);
 
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
         recyclerView.setAdapter(adapter);
@@ -53,6 +54,11 @@ public class ReligionInputFragment extends Fragment implements OnInputSelectList
 
     @Override
     public void onInputSelect(String input) {
+
+    }
+
+    @Override
+    public void onInputDeselect(String input) {
 
     }
 }
