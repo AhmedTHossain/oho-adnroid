@@ -156,7 +156,8 @@ public class RegistrationActivity extends AppCompatActivity {
                             " interested in = "+profile.getInterested_in() +
                             " occupation = "+profile.getOccupation() +
                             " ethnicity = "+profile.getRace() +
-                            " vaccinated = " + profile.getVaccinated());
+                            " vaccinated = " + profile.getVaccinated() +
+                            " cuisine = " + profile.getCuisine());
         });
 
 

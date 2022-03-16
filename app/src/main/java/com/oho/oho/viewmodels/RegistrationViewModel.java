@@ -21,8 +21,11 @@ public class RegistrationViewModel extends AndroidViewModel {
     //this object is going to store user's inputs during the registration process
     private MutableLiveData<Profile> registrationFormData = new MutableLiveData<>();
 
-    //this object is going to store user's ethinicty input during the registration process and will populate the recyclerview
+    //this object is going to store user's ethnicity input during the registration process and will populate the recyclerview
     private MutableLiveData<ArrayList<RegistrationInput>> ethnicityFormData = new MutableLiveData<>();
+
+    //this object is going to store user's cuisine input during the registration process and will populate the recyclerview
+    private MutableLiveData<ArrayList<RegistrationInput>> cuisineFormData = new MutableLiveData<>();
 
     public RegistrationViewModel(@NonNull Application application) {
         super(application);
@@ -45,7 +48,15 @@ public class RegistrationViewModel extends AndroidViewModel {
         ethnicityFormData.setValue(ethnicityList);
     }
 
+    public void setCuisineList(ArrayList<RegistrationInput> cuisineList){
+        cuisineFormData.setValue(cuisineList);
+    }
+
     public LiveData<ArrayList<RegistrationInput>> getEthnicityList(){
         return ethnicityFormData;
+    }
+
+    public LiveData<ArrayList<RegistrationInput>> getCuisineList(){
+        return cuisineFormData;
     }
 }

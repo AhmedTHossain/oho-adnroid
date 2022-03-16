@@ -29,7 +29,9 @@ public class EthnicityInputFragment extends Fragment implements OnInputSelectLis
 
     private RegistrationViewModel viewModel;
     private Profile profileData = new Profile();
+
     private ArrayList<RegistrationInput> ethnicityArrayList = new ArrayList<>();
+
     RegistrationInputFieldAdapter adapter;
     private String ethnicityInput="";
 
@@ -105,11 +107,10 @@ public class EthnicityInputFragment extends Fragment implements OnInputSelectLis
     public void onInputDeselect(String input) {
         Log.d("EIF","onInputDeselect called with input = "+input);
 
-            for (RegistrationInput input1: ethnicityArrayList){
-                if (input1.getInput().equals(input))
-                    input1.setSelected(false);
-            }
-
+        for (RegistrationInput input1: ethnicityArrayList){
+            if (input1.getInput().equals(input))
+                input1.setSelected(false);
+        }
     }
 
     public void setInitialList(boolean firstTimeLoad){

@@ -16,6 +16,9 @@ public class Profile {
     @SerializedName("city")
     @Expose
     private String city;
+    @SerializedName("cuisine")
+    @Expose
+    private String cuisine;
     @SerializedName("dob")
     @Expose
     private String dob;
@@ -223,5 +226,13 @@ public class Profile {
 
     public void setVaccinated(String vaccinated) {
         this.vaccinated = vaccinated;
+    }
+
+    public String getCuisine() {
+        return cuisine;
+    }
+
+    public void setCuisine(String cuisine) {
+        this.cuisine = cuisine;
     }
 }
