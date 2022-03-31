@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +64,7 @@ public class PhoneInputFragment extends Fragment {
     public void onPause() {
         super.onPause();
         if (!TextUtils.isEmpty(phoneText.getText())) {
+            Log.d("PhoneInput","phone number on pause = "+phoneText.getText());
             profileData.setPhone(phoneText.getText().toString());
             viewModel.saveRegistrationFormData(profileData);
         }

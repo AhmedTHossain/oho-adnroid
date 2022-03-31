@@ -55,6 +55,15 @@ public class CuisinePreferenceInputFragment extends Fragment implements OnInputS
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(requireActivity()).get(RegistrationViewModel.class);
+        viewModel.getRegistrationFormData().observe(getViewLifecycleOwner(), new Observer<Profile>() {
+            @Override
+            public void onChanged(Profile profile) {
+                profileData = profile;
+//                if (profileData.getPhone() != null){
+//                    phoneText.setText(profileData.getPhone());
+//                }
+            }
+        });
         viewModel.getCuisineList().observe(getViewLifecycleOwner(), new Observer<ArrayList<RegistrationInput>>() {
             @Override
             public void onChanged(ArrayList<RegistrationInput> registrationInputs) {
