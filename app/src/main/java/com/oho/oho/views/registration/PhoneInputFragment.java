@@ -64,9 +64,9 @@ public class PhoneInputFragment extends Fragment {
     public void onPause() {
         super.onPause();
         if (!TextUtils.isEmpty(phoneText.getText())) {
-            Log.d("PhoneInput","phone number on pause = "+phoneText.getText());
             profileData.setPhone(phoneText.getText().toString());
             viewModel.saveRegistrationFormData(profileData);
+            Log.d("PhoneInput","onPause phone = "+profileData.getPhone());
         }
     }
 }

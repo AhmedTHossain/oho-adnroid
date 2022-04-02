@@ -24,6 +24,7 @@
             android:paddingStart="@dimen/_10sdp"
             android:paddingEnd="@dimen/_10sdp"
             android:layout_gravity="center"
-            android:tag="notselected"/>
+            android:tag="notselected"
+            android:background="@color/white"/>
     </androidx.cardview.widget.CardView>
 </LinearLayout>

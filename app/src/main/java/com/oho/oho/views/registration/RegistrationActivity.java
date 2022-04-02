@@ -52,6 +52,7 @@ public class RegistrationActivity extends AppCompatActivity {
         dotsIndicator = findViewById(R.id.dots_indicator);
         //Setting up Animations
         viewPager2.setPageTransformer(new ZoomOutPageTransformer());
+
         //Set button alpha to zero
         buttonStart.setAlpha(0f);
         buttonComplete.setAlpha(0f);
@@ -157,7 +158,8 @@ public class RegistrationActivity extends AppCompatActivity {
                             " occupation = "+profile.getOccupation() +
                             " ethnicity = "+profile.getRace() +
                             " vaccinated = " + profile.getVaccinated() +
-                            " cuisine = " + profile.getCuisine());
+                            " cuisine = " + profile.getCuisine() +
+                            " religion = " + profile.getReligion());
         });
 
 

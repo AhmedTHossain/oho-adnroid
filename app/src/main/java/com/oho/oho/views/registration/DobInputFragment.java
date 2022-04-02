@@ -102,6 +102,7 @@ public class DobInputFragment extends Fragment {
         } else {
             profileData.setDob(dobInput);
             viewModel.saveRegistrationFormData(profileData);
+            Log.d("HeightInputFragment","onPause date of birth = " + profileData.getDob());
         }
     }
 }

@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -93,6 +94,7 @@ public class SexInputFragment extends Fragment implements View.OnClickListener{
         if (!sexInput.equals("")) {
             profileData.setSex(sexInput);
             viewModel.saveRegistrationFormData(profileData);
+            Log.d("CIF","onPause sex = "+profileData.getSex());
         }
     }
 

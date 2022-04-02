@@ -85,6 +85,7 @@ public class HeightInputFragment extends Fragment {
         }else {
             profileData.setHeight(heightInput);
             viewModel.saveRegistrationFormData(profileData);
+            Log.d("HeightInputFragment","onPause height = " + profileData.getHeight());
         }
     }
 

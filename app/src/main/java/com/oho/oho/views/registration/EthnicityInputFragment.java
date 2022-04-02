@@ -124,7 +124,7 @@ public class EthnicityInputFragment extends Fragment implements OnInputSelectLis
                 ethnicityArrayList.add(input);
             }
         }
-        adapter = new RegistrationInputFieldAdapter(ethnicityArrayList, this, this, true);
+        adapter = new RegistrationInputFieldAdapter(requireContext(), ethnicityArrayList, this, this, true);
 
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
         recyclerView.setAdapter(adapter);

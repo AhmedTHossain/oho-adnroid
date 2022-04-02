@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +49,7 @@ public class ProfessionInputFragment extends Fragment {
             @Override
             public void onChanged(Profile profile) {
                 profileData = profile;
-                if (profileData.getPhone() != null){
+                if (profileData.getOccupation() != null){
                     professionText.setText(profileData.getOccupation());
                 }
             }
@@ -61,6 +62,7 @@ public class ProfessionInputFragment extends Fragment {
         if (!TextUtils.isEmpty(professionText.getText())) {
             profileData.setOccupation(professionText.getText().toString());
             viewModel.saveRegistrationFormData(profileData);
+            Log.d("PhoneInput","onPause occupation = "+profileData.getOccupation());
         }
     }
 }

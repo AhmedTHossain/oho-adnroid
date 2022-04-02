@@ -128,7 +128,7 @@ public class CuisinePreferenceInputFragment extends Fragment implements OnInputS
                 cuisineArrayList.add(input);
             }
         }
-        adapter = new RegistrationInputFieldAdapter(cuisineArrayList, this, this, true);
+        adapter = new RegistrationInputFieldAdapter(requireContext(), cuisineArrayList, this, this, true);
 
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
         recyclerView.setAdapter(adapter);

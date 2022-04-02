@@ -1,6 +1,7 @@
 package com.oho.oho.adapters;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,22 +23,24 @@ import java.util.ArrayList;
 
 public class RegistrationInputFieldAdapter extends RecyclerView.Adapter<RegistrationInputFieldAdapter.InputHolder> {
 
-    private ArrayList<RegistrationInput> localDataSet;
+    private static ArrayList<RegistrationInput> localDataSet;
     private static OnInputSelectListener onInputSelectListener;
     private static OnInputDeselectListener onInputDeselectListener;
+    private static Context context;
 
     static int selectedItemPos = -1;
-    static boolean multiSelectEnabled;
+    boolean multiSelectEnabled;
+    static String singleInputSelected = "";
 
-    public RegistrationInputFieldAdapter(ArrayList<RegistrationInput> dataSet, OnInputSelectListener onInputSelectListener, OnInputDeselectListener onInputDeselectListener, boolean multiSelectEnabled) {
-
+    public RegistrationInputFieldAdapter(Context context, ArrayList<RegistrationInput> dataSet, OnInputSelectListener onInputSelectListener, OnInputDeselectListener onInputDeselectListener, boolean multiSelectEnabled) {
+        RegistrationInputFieldAdapter.context = context;
         localDataSet = dataSet;
         Log.d("RegistrationInputFieldAdapter","education = "+localDataSet.size());
 
         RegistrationInputFieldAdapter.onInputSelectListener = onInputSelectListener;
         RegistrationInputFieldAdapter.onInputDeselectListener = onInputDeselectListener;
 
-        RegistrationInputFieldAdapter.multiSelectEnabled = multiSelectEnabled;
+        this.multiSelectEnabled = multiSelectEnabled;
     }
 
     @NonNull
@@ -69,7 +72,7 @@ public class RegistrationInputFieldAdapter extends RecyclerView.Adapter<Registra
         return localDataSet.size();
     }
 
-    public static class InputHolder extends RecyclerView.ViewHolder{
+    public class InputHolder extends RecyclerView.ViewHolder{
         private final TextView textView;
         public InputHolder(@NonNull View itemView) {
             super(itemView);
@@ -79,16 +82,42 @@ public class RegistrationInputFieldAdapter extends RecyclerView.Adapter<Registra
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (textView.getTag().equals("notselected")){
-                        textView.setBackgroundResource(R.drawable.input_selected_background);
-                        textView.setTextColor(Color.parseColor("#FFFFFF"));
-                        textView.setTag("selected");
-                        onInputSelectListener.onInputSelect(textView.getText().toString());
-                    } else {
-                        textView.setBackgroundColor(Color.parseColor("#FFFFFF"));
-                        textView.setTextColor(Color.parseColor("#AB3B61"));
-                        textView.setTag("notselected");
-                        onInputDeselectListener.onInputDeselect(textView.getText().toString());
+                    if (multiSelectEnabled) {
+                        Log.d("RIFA","single input selected = "+singleInputSelected);
+                        if (textView.getTag().equals("notselected")) {
+                            textView.setBackgroundResource(R.drawable.input_selected_background);
+                            textView.setTextColor(Color.parseColor("#FFFFFF"));
+                            textView.setTag("selected");
+                            onInputSelectListener.onInputSelect(textView.getText().toString());
+                        } else {
+                            textView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                            textView.setTextColor(Color.parseColor("#AB3B61"));
+                            textView.setTag("notselected");
+                            onInputDeselectListener.onInputDeselect(textView.getText().toString());
+                        }
+                    }
+                    else {
+//                        Log.d("RIFA","single input selected = "+singleInputSelected);
+                        if (singleInputSelected.equals("")){
+                            textView.setBackgroundResource(R.drawable.input_selected_background);
+                            textView.setTextColor(Color.parseColor("#FFFFFF"));
+                            textView.setTag("selected");
+
+                            singleInputSelected = textView.getText().toString();
+                            onInputSelectListener.onInputSelect(singleInputSelected);
+                        }
+                        else {
+                            if (textView.getText().equals(singleInputSelected)){
+                                textView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                                textView.setTextColor(Color.parseColor("#AB3B61"));
+                                textView.setTag("notselected");
+
+                                singleInputSelected = "";
+                                onInputDeselectListener.onInputDeselect(textView.getText().toString());
+                            }
+                            else
+                                Toast.makeText(context, "Cannot select multiple religion!", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
             });

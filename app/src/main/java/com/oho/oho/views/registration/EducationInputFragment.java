@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -101,6 +102,7 @@ public class EducationInputFragment extends Fragment implements View.OnClickList
         if (!educationInput.equals("")) {
             profileData.setEducation(educationInput);
             viewModel.saveRegistrationFormData(profileData);
+            Log.d("PhoneInput","onPause education = "+profileData.getEducation());
         } else {
             profileData.setEducation("");
             viewModel.saveRegistrationFormData(profileData);
