@@ -16,7 +16,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/_25sdp"
-        android:layout_gravity="top|center">
+        android:layout_gravity="top|center"
+        app:cardBackgroundColor="@color/white">
         <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
             android:id="@+id/dots_indicator"
             android:layout_width="wrap_content"

@@ -17,7 +17,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Who do you identify as?"
+            android:text="Who do you \n identify as?"
             android:textSize="@dimen/_35ssp"
             android:textColor="@color/textTitle"
             android:textStyle="bold"
@@ -39,10 +39,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Female"
+                android:background="@color/white"
                 android:fontFamily="@font/sf_pro_rounded_regular"
                 android:textColor="@color/indicatioractive"
                 android:textAlignment="center"
-                android:textSize="@dimen/_15ssp"
+                android:textSize="@dimen/_16ssp"
                 android:paddingTop="@dimen/_10sdp"
                 android:paddingBottom="@dimen/_10sdp"/>
         </androidx.cardview.widget.CardView>
@@ -61,10 +62,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Male"
+                android:background="@color/white"
                 android:fontFamily="@font/sf_pro_rounded_regular"
                 android:textColor="@color/indicatioractive"
                 android:textAlignment="center"
-                android:textSize="@dimen/_15ssp"
+                android:textSize="@dimen/_16ssp"
                 android:paddingTop="@dimen/_10sdp"
                 android:paddingBottom="@dimen/_10sdp" />
         </androidx.cardview.widget.CardView>
@@ -83,10 +85,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Other"
+                android:background="@color/white"
                 android:fontFamily="@font/sf_pro_rounded_regular"
                 android:textColor="@color/indicatioractive"
                 android:textAlignment="center"
-                android:textSize="@dimen/_15ssp"
+                android:textSize="@dimen/_16ssp"
                 android:paddingTop="@dimen/_10sdp"
                 android:paddingBottom="@dimen/_10sdp" />
         </androidx.cardview.widget.CardView>

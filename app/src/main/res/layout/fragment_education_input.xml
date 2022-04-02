@@ -11,18 +11,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_40sdp"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="What is your educational background?"
+            android:text="What is your \n educational background?"
             android:textSize="@dimen/_35ssp"
             android:textColor="@color/textTitle"
             android:textStyle="bold"
             android:textAlignment="center"
-            android:layout_marginBottom="@dimen/_25sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+             android:layout_marginStart="@dimen/_40sdp"
+                android:layout_marginEnd="@dimen/_40sdp"
+            android:fontFamily="@font/sf_pro_rounded_regular" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Can select one education"
+            android:textStyle="bold"
+            android:textSize="@dimen/_16ssp"
+            android:textAlignment="center"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:textColor="@color/textSubTitle"
             android:fontFamily="@font/sf_pro_rounded_regular" />
         <ScrollView
             android:layout_width="match_parent"
@@ -30,21 +42,23 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginStart="@dimen/_50sdp"
-                android:layout_marginEnd="@dimen/_50sdp">
+                android:orientation="vertical">
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="@dimen/_50sdp"
-                    android:layout_marginBottom="@dimen/_20sdp">
+                    app:cardCornerRadius="@dimen/_40sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_40sdp"
+                    android:layout_marginEnd="@dimen/_40sdp">
                     <TextView
                         android:id="@+id/text_no_degree"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="No Degree"
                         android:textAlignment="center"
-                        android:textSize="@dimen/_15ssp"
+                        android:textSize="@dimen/_16ssp"
+                        android:background="@color/white"
                         android:textColor="@color/indicatioractive"
                         android:fontFamily="@font/sf_pro_rounded_medium"
                         android:paddingTop="@dimen/_10sdp"
@@ -59,15 +73,18 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="@dimen/_50sdp"
-                    android:layout_marginBottom="@dimen/_20sdp">
+                    app:cardCornerRadius="@dimen/_40sdp"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_40sdp"
+                    android:layout_marginEnd="@dimen/_40sdp">
                     <TextView
                         android:id="@+id/text_high_school_diploma"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="High School Diploma"
                         android:textAlignment="center"
-                        android:textSize="@dimen/_15ssp"
+                        android:textSize="@dimen/_16ssp"
+                        android:background="@color/white"
                         android:textColor="@color/indicatioractive"
                         android:fontFamily="@font/sf_pro_rounded_medium"
                         android:paddingTop="@dimen/_10sdp"
@@ -82,15 +99,18 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="@dimen/_50sdp"
-                    android:layout_marginBottom="@dimen/_20sdp">
+                    app:cardCornerRadius="@dimen/_40sdp"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_40sdp"
+                    android:layout_marginEnd="@dimen/_40sdp">
                     <TextView
                         android:id="@+id/text_undergrad"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Undergrad"
                         android:textAlignment="center"
-                        android:textSize="@dimen/_15ssp"
+                        android:textSize="@dimen/_16ssp"
+                        android:background="@color/white"
                         android:textColor="@color/indicatioractive"
                         android:fontFamily="@font/sf_pro_rounded_medium"
                         android:paddingTop="@dimen/_10sdp"
@@ -105,15 +125,18 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="@dimen/_50sdp"
-                    android:layout_marginBottom="@dimen/_20sdp">
+                    app:cardCornerRadius="@dimen/_40sdp"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_40sdp"
+                    android:layout_marginEnd="@dimen/_40sdp">
                     <TextView
                         android:id="@+id/text_masters"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Masters"
                         android:textAlignment="center"
-                        android:textSize="@dimen/_15ssp"
+                        android:textSize="@dimen/_16ssp"
+                        android:background="@color/white"
                         android:textColor="@color/indicatioractive"
                         android:fontFamily="@font/sf_pro_rounded_medium"
                         android:paddingTop="@dimen/_10sdp"
@@ -128,15 +151,18 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="@dimen/_50sdp"
-                    android:layout_marginBottom="@dimen/_20sdp">
+                    app:cardCornerRadius="@dimen/_40sdp"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_40sdp"
+                    android:layout_marginEnd="@dimen/_40sdp">
                     <TextView
                         android:id="@+id/text_phd"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="PhD"
                         android:textAlignment="center"
-                        android:textSize="@dimen/_15ssp"
+                        android:textSize="@dimen/_16ssp"
+                        android:background="@color/white"
                         android:textColor="@color/indicatioractive"
                         android:fontFamily="@font/sf_pro_rounded_medium"
                         android:paddingTop="@dimen/_10sdp"

@@ -17,7 +17,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="What is your date of birth?"
+            android:text="What is your \n date of birth?"
             android:textSize="@dimen/_35ssp"
             android:textColor="@color/textTitle"
             android:textStyle="bold"

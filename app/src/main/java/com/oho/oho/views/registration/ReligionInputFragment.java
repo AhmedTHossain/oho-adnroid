@@ -25,14 +25,11 @@ import com.oho.oho.views.listeners.OnInputSelectListener;
 
 import java.util.ArrayList;
 
-public class ReligionInputFragment extends Fragment implements OnInputSelectListener, OnInputDeselectListener {
+public class ReligionInputFragment extends Fragment{
 
     private RegistrationViewModel viewModel;
     private Profile profileData = new Profile();
-    private ArrayList<RegistrationInput> religionArrayList = new ArrayList<>();
     private String religionInput;
-    private RecyclerView recyclerView;
-    private RegistrationInputFieldAdapter adapter;
 
     public ReligionInputFragment() {
         // Required empty public constructor
@@ -42,9 +39,6 @@ public class ReligionInputFragment extends Fragment implements OnInputSelectList
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_religion_input, container, false);
-
-        recyclerView = view.findViewById(R.id.recyclerview);
-        setInitialList(true);
 
         // Inflate the layout for this fragment
         return view;
@@ -58,21 +52,7 @@ public class ReligionInputFragment extends Fragment implements OnInputSelectList
             @Override
             public void onChanged(Profile profile) {
                 profileData = profile;
-            }
-        });
-        viewModel.getReligionList().observe(getViewLifecycleOwner(), new Observer<ArrayList<RegistrationInput>>() {
-            @Override
-            public void onChanged(ArrayList<RegistrationInput> registrationInputs) {
-                if (registrationInputs.size() != 0){
-                    religionArrayList = registrationInputs;
-                    setInitialList(false);
-                    viewModel.getRegistrationFormData().observe(getViewLifecycleOwner(), new Observer<Profile>() {
-                        @Override
-                        public void onChanged(Profile profile) {
-                            religionInput = profile.getReligion();
-                        }
-                    });
-                }
+                religionInput = profile.getReligion();
             }
         });
     }
@@ -85,46 +65,5 @@ public class ReligionInputFragment extends Fragment implements OnInputSelectList
 
         profileData.setReligion(profileData.getReligion());
         viewModel.saveRegistrationFormData(profileData);
-//
-        viewModel.setReligionList(religionArrayList);
-    }
-
-    @Override
-    public void onInputSelect(String input) {
-
-        religionInput = input;
-
-        for (RegistrationInput religion: religionArrayList)
-            if (religion.getInput().equals(religionInput))
-                profileData.setReligion(religionInput);
-
-        Log.d("EIF","onInputSelect called with input = "+religionInput);
-    }
-
-    @Override
-    public void onInputDeselect(String input) {
-        Log.d("EIF","onInputDeSelect called with input = "+input);
-        religionInput = null;
-
-        for (RegistrationInput religion: religionArrayList)
-            if (religion.getInput().equals(religionInput))
-                religion.setSelected(false);
-    }
-
-    public void setInitialList(boolean firstTimeLoad){
-
-        if (firstTimeLoad) {
-            String[] data = getResources().getStringArray(R.array.religion_list);
-
-            for (String s : data) {
-                RegistrationInput input = new RegistrationInput();
-                input.setInput(s);
-                religionArrayList.add(input);
-            }
-        }
-        adapter = new RegistrationInputFieldAdapter(requireContext(), religionArrayList, this, this, false);
-
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
-        recyclerView.setAdapter(adapter);
     }
 }

@@ -31,12 +31,15 @@
             android:textStyle="bold"
             android:textSize="@dimen/_15ssp"
             android:textColor="@color/textSubTitle"
-            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_15sdp"
             android:fontFamily="@font/sf_pro_rounded_regular" />
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="@dimen/_50sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:backgroundTint="@color/white"
             android:layout_marginBottom="@dimen/_10sdp">
             <EditText
                 android:id="@+id/text_profession"
@@ -44,9 +47,11 @@
                 android:layout_height="wrap_content"
                 android:hint="Software Engineer"
                 android:inputType="text"
-                android:textSize="@dimen/_15ssp"
+                android:textSize="@dimen/_16ssp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/textTertiary"
                 android:fontFamily="@font/sf_pro_rounded_regular"
-                android:paddingStart="@dimen/_20sdp"
+                android:paddingStart="@dimen/_15sdp"
                 android:paddingTop="@dimen/_10sdp"
                 android:paddingBottom="@dimen/_10sdp"
                 android:background="@null"/>

@@ -1,29 +1,292 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/login_background"
+    android:orientation="vertical"
     tools:context=".views.registration.ReligionInputFragment">
-    <LinearLayout
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:text="What is your \n religion?"
+        android:textSize="@dimen/_35ssp"
+        android:textColor="@color/textTitle"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:layout_marginBottom="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_50sdp"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_10sdp">
-        <TextView
+        android:fontFamily="@font/sf_pro_rounded_regular" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Can select one religion"
+        android:textStyle="bold"
+        android:textSize="@dimen/_16ssp"
+        android:textAlignment="center"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:textColor="@color/textSubTitle"
+        android:fontFamily="@font/sf_pro_rounded_regular" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="What is your religion?"
-            android:textSize="@dimen/_35ssp"
-            android:textColor="@color/textTitle"
-            android:textStyle="bold"
-            android:textAlignment="center"
-            android:layout_marginBottom="@dimen/_25sdp"
-            android:fontFamily="@font/sf_pro_rounded_regular" />
-        <include
-            layout="@layout/layout_recyclerview"
-            android:id="@+id/recyclerview" />
-    </LinearLayout>
-</FrameLayout>
+            android:orientation="vertical"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_10sdp">
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/button_christian"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="@dimen/_50sdp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_margin="@dimen/_5sdp">
+                    <TextView
+                        android:id="@+id/text_christian"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Christian"
+                        android:background="@color/white"
+                        android:fontFamily="@font/sf_pro_rounded_regular"
+                        android:textColor="@color/indicatioractive"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/_16ssp"
+                        android:paddingTop="@dimen/_10sdp"
+                        android:paddingBottom="@dimen/_10sdp" />
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/button_catholic"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="@dimen/_50sdp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_margin="@dimen/_5sdp">
+                    <TextView
+                        android:id="@+id/text_catholic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Catholic"
+                        android:background="@color/white"
+                        android:fontFamily="@font/sf_pro_rounded_regular"
+                        android:textColor="@color/indicatioractive"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/_16ssp"
+                        android:paddingTop="@dimen/_10sdp"
+                        android:paddingBottom="@dimen/_10sdp" />
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_10sdp">
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/button_jewish"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="@dimen/_50sdp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_margin="@dimen/_5sdp">
+                    <TextView
+                        android:id="@+id/text_jewish"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Jewish"
+                        android:background="@color/white"
+                        android:fontFamily="@font/sf_pro_rounded_regular"
+                        android:textColor="@color/indicatioractive"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/_16ssp"
+                        android:paddingTop="@dimen/_10sdp"
+                        android:paddingBottom="@dimen/_10sdp" />
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/button_muslim"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="@dimen/_50sdp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_margin="@dimen/_5sdp">
+                    <TextView
+                        android:id="@+id/text_muslim"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Muslim"
+                        android:background="@color/white"
+                        android:fontFamily="@font/sf_pro_rounded_regular"
+                        android:textColor="@color/indicatioractive"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/_16ssp"
+                        android:paddingTop="@dimen/_10sdp"
+                        android:paddingBottom="@dimen/_10sdp" />
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_10sdp">
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/button_hindu"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="@dimen/_50sdp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_margin="@dimen/_5sdp">
+                    <TextView
+                        android:id="@+id/text_hindu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Hindu"
+                        android:background="@color/white"
+                        android:fontFamily="@font/sf_pro_rounded_regular"
+                        android:textColor="@color/indicatioractive"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/_16ssp"
+                        android:paddingTop="@dimen/_10sdp"
+                        android:paddingBottom="@dimen/_10sdp" />
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/button_sikh"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="@dimen/_50sdp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_margin="@dimen/_5sdp">
+                    <TextView
+                        android:id="@+id/text_sikh"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Sikh"
+                        android:background="@color/white"
+                        android:fontFamily="@font/sf_pro_rounded_regular"
+                        android:textColor="@color/indicatioractive"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/_16ssp"
+                        android:paddingTop="@dimen/_10sdp"
+                        android:paddingBottom="@dimen/_10sdp" />
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_10sdp">
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/button_agnostic"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="@dimen/_50sdp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_margin="@dimen/_5sdp">
+                    <TextView
+                        android:id="@+id/text_agnostic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Agnostic"
+                        android:background="@color/white"
+                        android:fontFamily="@font/sf_pro_rounded_regular"
+                        android:textColor="@color/indicatioractive"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/_16ssp"
+                        android:paddingTop="@dimen/_10sdp"
+                        android:paddingBottom="@dimen/_10sdp" />
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/button_buddhist"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="@dimen/_50sdp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_margin="@dimen/_5sdp">
+                    <TextView
+                        android:id="@+id/text_buddhist"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Buddhist"
+                        android:background="@color/white"
+                        android:fontFamily="@font/sf_pro_rounded_regular"
+                        android:textColor="@color/indicatioractive"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/_16ssp"
+                        android:paddingTop="@dimen/_10sdp"
+                        android:paddingBottom="@dimen/_10sdp" />
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_10sdp">
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/button_spiritual"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="@dimen/_50sdp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_margin="@dimen/_5sdp">
+                    <TextView
+                        android:id="@+id/text_spiritual"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Spiritual/Not Religious"
+                        android:background="@color/white"
+                        android:fontFamily="@font/sf_pro_rounded_regular"
+                        android:textColor="@color/indicatioractive"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/_16ssp"
+                        android:paddingTop="@dimen/_10sdp"
+                        android:paddingBottom="@dimen/_10sdp" />
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/button_others"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="@dimen/_50sdp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_margin="@dimen/_5sdp">
+                    <TextView
+                        android:id="@+id/text_others"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Others"
+                        android:background="@color/white"
+                        android:fontFamily="@font/sf_pro_rounded_regular"
+                        android:textColor="@color/indicatioractive"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/_16ssp"
+                        android:paddingTop="@dimen/_10sdp"
+                        android:paddingBottom="@dimen/_10sdp" />
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
