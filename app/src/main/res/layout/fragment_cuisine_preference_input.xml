@@ -126,7 +126,7 @@
                         android:id="@+id/text_mediterranean"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Mediterranenan"
+                        android:text="Mediterranean"
                         android:background="@color/white"
                         android:fontFamily="@font/sf_pro_rounded_regular"
                         android:textColor="@color/indicatioractive"

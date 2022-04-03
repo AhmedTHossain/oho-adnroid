@@ -98,7 +98,7 @@ public class EthnicityInputFragment extends Fragment implements View.OnClickList
                 ethnicityInput = profile.getRace();
 
                 if (ethnicityInput != null)
-                    setSelecetedInput(ethnicityInput);
+                    setSelectedInput(ethnicityInput);
 
                 Log.d("EIF","onViewCreated ethnicity = "+ethnicityInput);
             }
@@ -171,7 +171,7 @@ public class EthnicityInputFragment extends Fragment implements View.OnClickList
         }
     }
 
-    private void setSelecetedInput(String ethnicityInput) {
+    private void setSelectedInput(String ethnicityInput) {
         String [] arr = ethnicityInput.split(",");
         for (String ethnicity: arr){
             if (ethnicity.equals(buttonEastAsianText.getText().toString())){
