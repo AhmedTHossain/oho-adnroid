@@ -272,7 +272,7 @@
                     android:focusable="true"
                     android:layout_margin="@dimen/_5sdp">
                     <TextView
-                        android:id="@+id/text_male"
+                        android:id="@+id/text_others"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Others"
