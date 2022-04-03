@@ -28,12 +28,14 @@ import com.oho.oho.views.listeners.OnInputSelectListener;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class EthnicityInputFragment extends Fragment implements View.OnClickListener{
 
     private RegistrationViewModel viewModel;
     private Profile profileData = new Profile();
-    private String ethnicityInput="";
+    private String ethnicityInput = "";
     private ArrayList<String> ethnicityInputArrayList = new ArrayList<>();
 
     private CardView buttonSouthAsian, buttonEastAsian, buttonAfricanAmerican, buttonBlack, buttonLatinx, buttonPacificIslander, buttonAmericanIndian, buttonHispanic, buttonWhite, buttonOthers;
@@ -94,6 +96,11 @@ public class EthnicityInputFragment extends Fragment implements View.OnClickList
             public void onChanged(Profile profile) {
                 profileData = profile;
                 ethnicityInput = profile.getRace();
+
+                if (ethnicityInput != null)
+                    setSelecetedInput(ethnicityInput);
+
+                Log.d("EIF","onViewCreated ethnicity = "+ethnicityInput);
             }
         });
     }
@@ -102,9 +109,12 @@ public class EthnicityInputFragment extends Fragment implements View.OnClickList
     public void onPause() {
         super.onPause();
 
-        if(ethnicityInputArrayList.size() > 0){
-            ethnicityInput = String.join(",",ethnicityInputArrayList);
-        }
+        Set<String> set = new HashSet<>(ethnicityInputArrayList);
+        ethnicityInputArrayList.clear();
+        ethnicityInputArrayList.addAll(set);
+
+        ethnicityInput = "";
+        ethnicityInput = String.join(",",ethnicityInputArrayList);
 
         Log.d("EIF","onPause ethnicity = "+ethnicityInput);
 
@@ -158,6 +168,42 @@ public class EthnicityInputFragment extends Fragment implements View.OnClickList
                 deSelectButton(button_text, buttonTextView);
             else
                 selectButton(button_text, buttonTextView);
+        }
+    }
+
+    private void setSelecetedInput(String ethnicityInput) {
+        String [] arr = ethnicityInput.split(",");
+        for (String ethnicity: arr){
+            if (ethnicity.equals(buttonEastAsianText.getText().toString())){
+                selectButton(buttonEastAsianText.getText().toString(),buttonEastAsianText);
+            }
+            if (ethnicity.equals(buttonSouthAsianText.getText().toString())){
+                selectButton(buttonSouthAsianText.getText().toString(),buttonSouthAsianText);
+            }
+            if (ethnicity.equals(buttonAfricanAmericanText.getText().toString())){
+                selectButton(buttonAfricanAmericanText.getText().toString(),buttonAfricanAmericanText);
+            }
+            if (ethnicity.equals(buttonBlackText.getText().toString())){
+                selectButton(buttonBlackText.getText().toString(),buttonBlackText);
+            }
+            if (ethnicity.equals(buttonLatinxText.getText().toString())){
+                selectButton(buttonLatinxText.getText().toString(),buttonLatinxText);
+            }
+            if (ethnicity.equals(buttonPacificIslanderText.getText().toString())){
+                selectButton(buttonPacificIslanderText.getText().toString(),buttonPacificIslanderText);
+            }
+            if (ethnicity.equals(buttonAmericanIndianText.getText().toString())){
+                selectButton(buttonAmericanIndianText.getText().toString(),buttonAmericanIndianText);
+            }
+            if (ethnicity.equals(buttonHispanicText.getText().toString())){
+                selectButton(buttonHispanicText.getText().toString(),buttonHispanicText);
+            }
+            if (ethnicity.equals(buttonWhiteText.getText().toString())){
+                selectButton(buttonWhiteText.getText().toString(),buttonWhiteText);
+            }
+            if (ethnicity.equals(buttonOthersText.getText().toString())){
+                selectButton(buttonOthersText.getText().toString(),buttonOthersText);
+            }
         }
     }
 }
