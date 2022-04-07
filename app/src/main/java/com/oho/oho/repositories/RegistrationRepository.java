@@ -20,14 +20,16 @@ import retrofit2.Response;
 public class RegistrationRepository {
 
     public MutableLiveData<Profile> registerNewUser(Profile userRegistrationFormData){
-        Log.d("RegistrationRepository","phone number in repository = " + userRegistrationFormData.getPhone());
+        Log.d("RegistrationRepository","email in repository = " + userRegistrationFormData.getEmail());
+        Log.d("RegistrationRepository","name in repository = " + userRegistrationFormData.getName());
+
         MutableLiveData<Profile> registeredUserProfile = new MutableLiveData<>();
         APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
         Call<Profile> call = apiService.createUser(userRegistrationFormData);
         call.enqueue(new Callback<Profile>() {
             @Override
             public void onResponse(@NonNull Call<Profile> call, @NonNull Response<Profile> response) {
-                registeredUserProfile.setValue(response.body());
+//                registeredUserProfile.setValue(response.body());
                 Log.d("RegistrationRepository","response body = "+response.body());
                 Log.d("RegistrationRepository","response body = "+response.code());
             }

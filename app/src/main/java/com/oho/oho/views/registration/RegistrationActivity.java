@@ -148,29 +148,28 @@ public class RegistrationActivity extends AppCompatActivity {
         registrationViewModel.getRegistrationFormData().observe(this, profile -> {
             this.profile = profile;
             Log.d("RegisterActivity",
-                    "phone final = "+profile.getPhone() +
-                            " gender final = "+profile.getSex() +
-                            " height final = "+profile.getHeight() +
-                            " dob final = "+profile.getDob() +
-                            " education final = "+profile.getEducation() +
-                            " budget final = "+profile.getBudget() +
-                            " interested in = "+profile.getInterested_in() +
-                            " occupation = "+profile.getOccupation() +
-                            " ethnicity = "+profile.getRace() +
-                            " vaccinated = " + profile.getVaccinated() +
-                            " cuisine = " + profile.getCuisine() +
-                            " religion = " + profile.getReligion());
+                    "phone final = "+profile.getPhone() + "\n" +
+                            " gender final = "+profile.getSex() + "\n" +
+                            " height final = "+profile.getHeight() + "\n" +
+                            " dob final = "+profile.getDob() + "\n" +
+                            " education final = "+profile.getEducation() + "\n" +
+                            " budget final = "+profile.getBudget() + "\n" +
+                            " interested in = "+profile.getInterested_in() + "\n" +
+                            " occupation = "+profile.getOccupation() + "\n" +
+                            " ethnicity = "+profile.getRace() +"\n" +
+                            " vaccinated = " + profile.getVaccinated() + "\n" +
+                            " cuisine = " + profile.getCuisine() + "\n" +
+                            " religion = " + profile.getReligion()) ;
         });
 
-
-        Profile profile = new Profile();
         profile.setName(onBoardingUserName);
-        profile.setSex("M");
         profile.setEmail(onBoardingUserEmail);
-        profile.setPhone("123456");
+
+        Log.d("RegistrationActivity","email from registration activity = "+onBoardingUserEmail);
+
         registrationViewModel.registerUser(profile);
         registrationViewModel.registeredUserProfileData.observe(this,userProfile -> {
-            Toast.makeText(RegistrationActivity.this, "registration successfull with profile = "+userProfile, Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegistrationActivity.this, "registration successful with profile of = "+userProfile.getName(), Toast.LENGTH_SHORT).show();
         });
     }
 }

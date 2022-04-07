@@ -29,6 +29,7 @@ public class OnboardingActivity extends AppCompatActivity {
     private LinearLayout layoutOnboardingIndicator;
     private MaterialButton buttonOnboardingAction;
     private String onBoardingUserName;
+    private String onBoardingUserEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,8 @@ public class OnboardingActivity extends AppCompatActivity {
         buttonOnboardingAction    = findViewById(R.id.button_action);
 
         onBoardingUserName = getIntent().getStringExtra("name");
+        onBoardingUserEmail = getIntent().getStringExtra("email");
+
         Log.d(TAG,"name of google logged in user = "+onBoardingUserName);
 
         setOnboardingItem();
@@ -70,6 +73,7 @@ public class OnboardingActivity extends AppCompatActivity {
                 } else {
                     Intent intent = new Intent(getApplicationContext(), RegistrationActivity.class);
                     intent.putExtra("name",onBoardingUserName);
+                    intent.putExtra("email",onBoardingUserEmail);
                     startActivity(intent);
                     finish();
                 }

@@ -2,6 +2,7 @@ package com.oho.oho.views;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -97,6 +98,7 @@ public class LoginActivity extends AppCompatActivity {
                     Intent intent = new Intent(this, OnboardingActivity.class);
                     intent.putExtra("name",authenticatedUser.getDisplayName());
                     intent.putExtra("email",authenticatedUser.getEmail());
+                    Log.d("LoginActivity","email from login activity = "+authenticatedUser.getEmail());
                     startActivity(intent);
                     finish();
                 }else {
