@@ -164,6 +164,10 @@ public class RegistrationActivity extends AppCompatActivity {
 
         profile.setName(onBoardingUserName);
         profile.setEmail(onBoardingUserEmail);
+        //Hard coded city name for now
+        profile.setCity("Dhaka");
+        profile.setState("BD");
+        profile.setBio("Lorem Ipsum");
 
         Log.d("RegistrationActivity","email from registration activity = "+onBoardingUserEmail);
 
