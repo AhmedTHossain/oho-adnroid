@@ -15,9 +15,13 @@
         android:theme="@style/Theme.OHO.Launcher"
         android:usesCleartextTraffic="true">
 
+<!--        <meta-data-->
+<!--            android:name="com.google.android.API_KEY"-->
+<!--            android:value="AIzaSyCZRJm_Xt287To1N4_ly2ExTZP8HyQskUk"/>-->
+
         <meta-data
-            android:name="com.google.android.API_KEY"
-            android:value="AIzaSyCZRJm_Xt287To1N4_ly2ExTZP8HyQskUk"/>
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyCZRJm_Xt287To1N4_ly2ExTZP8HyQskUk" />
         <activity
             android:name=".views.registration.RegistrationActivity"
             android:exported="false" />

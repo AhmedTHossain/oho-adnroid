@@ -22,6 +22,9 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.oho.oho.R;
@@ -32,12 +35,13 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-public class LocationInputFragment extends Fragment {
+public class LocationInputFragment extends Fragment implements OnMapReadyCallback {
     private RegistrationViewModel viewModel;
     private Profile profileData = new Profile();
 
     private TextView textLocation;
     private CardView useLocationButton;
+    private MapView mapView;
 
     private String city, state = "";
 
@@ -56,6 +60,10 @@ public class LocationInputFragment extends Fragment {
 
         textLocation = view.findViewById(R.id.text_location);
         useLocationButton = view.findViewById(R.id.button_get_location);
+        mapView = view.findViewById(R.id.map_view);
+
+        mapView.getMapAsync(this);
+        mapView.onCreate(savedInstanceState);
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext());
 
@@ -100,6 +108,48 @@ public class LocationInputFragment extends Fragment {
             viewModel.saveRegistrationFormData(profileData);
         }
     }
+
+    @Override
+    public void onMapReady(@NonNull GoogleMap googleMap) {
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mapView.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mapView.onStop();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mapView.onDestroy();
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mapView.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
+
 
     public void getCurrentLocation() {
         fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {

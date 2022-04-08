@@ -54,12 +54,13 @@
         </androidx.cardview.widget.CardView>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_100sdp">
 
             <com.google.android.gms.maps.MapView
                 android:id="@+id/map_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/button_get_location"
