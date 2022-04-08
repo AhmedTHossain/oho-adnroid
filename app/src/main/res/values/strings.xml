@@ -8,6 +8,7 @@
     <string name="year">%2d</string>
     <string name="select_your_prompt_question">Select your prompt question.</string>
     <string name="caption_for_the_photo">Caption for the photo</string>
+    <string name="please_fill_in_about_yourself">Please fill in about yourself</string>
     <string-array name="education_list">
         <item>No Degree</item>
         <item>High School Diploma</item>
