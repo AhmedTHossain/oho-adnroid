@@ -6,6 +6,7 @@
     <string name="inch">%2d in</string>
     <string name="day">%02d</string>
     <string name="year">%2d</string>
+    <string name="select_your_prompt_question">Select your prompt question.</string>
     <string-array name="education_list">
         <item>No Degree</item>
         <item>High School Diploma</item>
