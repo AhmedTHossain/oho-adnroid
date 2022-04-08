@@ -22,9 +22,13 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.oho.oho.R;
@@ -43,7 +47,10 @@ public class LocationInputFragment extends Fragment implements OnMapReadyCallbac
     private CardView useLocationButton;
     private MapView mapView;
 
-    private String city, state = "";
+    private GoogleMap googleMap;
+
+    private String city, state;
+    private double lat, lon;
 
     private static final int REQUEST_CODE_LOCATION_PERMISSION = 1;
 
@@ -92,6 +99,10 @@ public class LocationInputFragment extends Fragment implements OnMapReadyCallbac
             public void onChanged(Profile profile) {
                 profileData = profile;
                 if (profileData.getCity() != null && profileData.getState() != null){
+                    city = profileData.getCity();
+                    state = profileData.getState();
+                    lat = profile.getLat();
+                    lon = profile.getLon();
                     String locationText = city + ", " + state;
                     textLocation.setText(locationText);
                 }
@@ -105,13 +116,15 @@ public class LocationInputFragment extends Fragment implements OnMapReadyCallbac
         if (!TextUtils.isEmpty(textLocation.getText())){
             profileData.setCity(city);
             profileData.setState(state);
+            profileData.setLat(lat);
+            profileData.setLon(lon);
             viewModel.saveRegistrationFormData(profileData);
         }
     }
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
-
+        this.googleMap = googleMap;
     }
 
     @Override
@@ -157,6 +170,10 @@ public class LocationInputFragment extends Fragment implements OnMapReadyCallbac
             public void onComplete(@NonNull Task<Location> task) {
                 Location location = task.getResult();
                 if (location != null) {
+
+                    lat = location.getLatitude();
+                    lon = location.getLongitude();
+
                     try {
                         Geocoder geocoder = new Geocoder(requireContext(), Locale.getDefault());
                         List<Address> addresses = geocoder.getFromLocation(
@@ -168,6 +185,19 @@ public class LocationInputFragment extends Fragment implements OnMapReadyCallbac
 
                         String locationText = city + ", " + state;
                         textLocation.setText(locationText);
+
+                        LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
+
+                        MarkerOptions markerOptions = new MarkerOptions();
+                        markerOptions.title("My location");
+                        markerOptions.position(latLng);
+
+
+                        googleMap.addMarker(markerOptions);
+                        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng,15);
+                        googleMap.animateCamera(cameraUpdate);
+
+                        useLocationButton.setVisibility(View.GONE);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

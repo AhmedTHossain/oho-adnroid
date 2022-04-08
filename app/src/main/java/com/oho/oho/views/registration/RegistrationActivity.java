@@ -161,15 +161,15 @@ public class RegistrationActivity extends AppCompatActivity {
                             " cuisine = " + profile.getCuisine() + "\n" +
                             " religion = " + profile.getReligion() + "\n" +
                             " city = " + profile.getCity() + "\n" +
-                            " state = " + profile.getState()) ;
+                            " state = " + profile.getState() + "\n" +
+                            " lat = " + profile.getLat() + "\n" +
+                            " lon = " + profile.getLon()) ;
         });
 
         profile.setName(onBoardingUserName);
         profile.setEmail(onBoardingUserEmail);
         //Hard coded city name for now
-        profile.setCity("Dhaka");
-        profile.setState("BD");
-        profile.setBio("Lorem Ipsum");
+        profile.setBio("Please fill in about yourself");
 
         Log.d("RegistrationActivity","email from registration activity = "+onBoardingUserEmail);
 
