@@ -4,47 +4,53 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@android:color/transparent">
+
     <androidx.cardview.widget.CardView
         android:layout_width="@dimen/_30sdp"
         android:layout_height="@dimen/_30sdp"
-        app:cardCornerRadius="@dimen/_100sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:layout_alignEnd="@id/card_prompt_question">
+        android:layout_alignStart="@id/card_prompt_question"
+        android:layout_marginStart="@dimen/_10sdp"
+        app:cardCornerRadius="@dimen/_100sdp">
+
         <ImageView
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_20sdp"
-            android:src="@drawable/ic_delete"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:src="@drawable/ic_delete" />
     </androidx.cardview.widget.CardView>
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_prompt_question"
+        style="@style/CustomCardViewStyle1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/CustomCardViewStyle"
-        android:layout_alignEnd="@id/card_image_caption"
+        android:layout_alignStart="@id/card_image_caption"
         android:layout_marginTop="@dimen/_10sdp">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/_10sdp"
-            android:paddingBottom="@dimen/_10sdp"
-            android:paddingStart="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_20sdp"
-            android:layout_gravity="center">
-            <ImageView
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_40sdp"
-                android:src="@drawable/ic_add"
-                android:layout_gravity="center"
-                android:layout_marginEnd="@dimen/_10sdp"/>
+            android:layout_gravity="center"
+            android:paddingStart="@dimen/_20sdp"
+            android:paddingTop="@dimen/_20sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_20sdp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/sf_pro_rounded_regular"
                 android:text="@string/select_your_prompt_question"
                 android:textColor="#373737"
-                android:textSize="@dimen/_14ssp"
+                android:textSize="@dimen/_14ssp" />
+
+            <ImageView
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
                 android:layout_gravity="center"
-                android:fontFamily="@font/sf_pro_rounded_regular"/>
+                android:layout_marginStart="@dimen/_10sdp"
+                android:src="@drawable/ic_add" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
     <View
@@ -69,8 +75,8 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="@dimen/_100sdp"
                 android:layout_height="@dimen/_100sdp"
-                android:layout_gravity="center"
                 app:cardCornerRadius="@dimen/_500sdp"
+                android:layout_gravity="center"
                 android:layout_marginEnd="@dimen/_10sdp">
                 <ImageView
                     android:layout_width="@dimen/_50sdp"
