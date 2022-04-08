@@ -43,7 +43,7 @@
                 android:fontFamily="@font/sf_pro_rounded_regular"
                 android:text="@string/select_your_prompt_question"
                 android:textColor="#373737"
-                android:textSize="@dimen/_14ssp" />
+                android:textSize="@dimen/_16ssp" />
 
             <ImageView
                 android:layout_width="@dimen/_40sdp"
@@ -62,10 +62,12 @@
         android:background="#F2D9D9" />
     <androidx.cardview.widget.CardView
         android:id="@+id/card_image_caption"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/view_vertical_line"
         app:cardCornerRadius="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
         android:layout_centerHorizontal="true">
         <LinearLayout
             android:layout_width="wrap_content"
@@ -87,8 +89,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/_14ssp"
-                android:text="Caption for the photo"
+                android:textSize="@dimen/_16ssp"
+                android:text="@string/caption_for_the_photo"
                 android:layout_gravity="center"
                 android:textColor="#B0ADAD"
                 android:fontFamily="@font/sf_pro_rounded_regular"/>

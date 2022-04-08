@@ -41,23 +41,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/select_your_prompt_question"
-                android:textColor="#373737"
-                android:textSize="@dimen/_14ssp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16ssp"
                 android:layout_gravity="center"
                 android:fontFamily="@font/sf_pro_rounded_regular"/>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
+
     <View
         android:id="@+id/view_vertical_line"
-        android:layout_below="@id/card_prompt_question"
-        android:layout_width="@dimen/_3sdp"
+        android:layout_width="@dimen/_5sdp"
         android:layout_height="@dimen/_20sdp"
+        android:layout_below="@id/card_prompt_question"
         android:layout_centerHorizontal="true"
-        android:background="#F2D9D9" />
+        android:background="@color/white" />
     <androidx.cardview.widget.CardView
         android:id="@+id/card_image_caption"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_20sdp"
         android:layout_below="@id/view_vertical_line"
         app:cardCornerRadius="@dimen/_10sdp"
         android:layout_centerHorizontal="true">
@@ -81,8 +84,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/_14ssp"
-                android:text="Caption for the photo"
+                android:textSize="@dimen/_16ssp"
+                android:text="@string/caption_for_the_photo"
                 android:layout_gravity="center"
                 android:textColor="#B0ADAD"
                 android:fontFamily="@font/sf_pro_rounded_regular"/>
