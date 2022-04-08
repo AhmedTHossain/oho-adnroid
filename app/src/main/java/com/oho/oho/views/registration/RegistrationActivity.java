@@ -159,7 +159,9 @@ public class RegistrationActivity extends AppCompatActivity {
                             " ethnicity = "+profile.getRace() +"\n" +
                             " vaccinated = " + profile.getVaccinated() + "\n" +
                             " cuisine = " + profile.getCuisine() + "\n" +
-                            " religion = " + profile.getReligion()) ;
+                            " religion = " + profile.getReligion() + "\n" +
+                            " city = " + profile.getCity() + "\n" +
+                            " state = " + profile.getState()) ;
         });
 
         profile.setName(onBoardingUserName);

@@ -76,4 +76,6 @@ dependencies {
     implementation 'io.github.ShawnLin013:number-picker:2.4.13'
 
     implementation 'com.google.android.gms:play-services-location:19.0.1'
+
+    implementation 'com.google.android.gms:play-services-maps:18.0.2'
 }
