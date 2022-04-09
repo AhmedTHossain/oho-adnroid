@@ -1,12 +1,15 @@
 package com.oho.oho.views;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -31,6 +34,8 @@ import com.oho.oho.models.Profile;
 import com.oho.oho.viewmodels.CompleteProfileViewModel;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CompleteProfileActivity extends AppCompatActivity implements View.OnClickListener {
@@ -42,7 +47,7 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
     private TextView nameAgeText, locationText, professionText, genderText, heightText, religionText, vaccinatedText, raceText, textButtonSave;
     private EditText editTextBio;
     private CardView buttonPickImage, buttonPickFirstImage, buttonPickSecondImage, buttonPickThirdImage;
-    private CircleImageView profileImageVIew;
+    private CircleImageView profileImageVIew, firstImageView, secondImageView, thirdImageView;
 
     private String imageFor = "";
 
@@ -78,6 +83,9 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
         editTextBio           = findViewById(R.id.edit_text_bio);
         textButtonSave        = findViewById(R.id.button_text_save_profile);
         profileImageVIew      = findViewById(R.id.profile_image_view);
+        firstImageView        = findViewById(R.id.first_image_view);
+        secondImageView       = findViewById(R.id.second_image_view);
+        thirdImageView        = findViewById(R.id.third_image_view);
 
         nameAgeText.setText(userProfile.getName());
 
@@ -112,7 +120,12 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
 
                             if (data != null) {
                                 Uri uri = data.getData();
-                                Log.d("CompleteProfileActivity","gallery photo data = "+uri);
+
+                                String filePath = getRealPathFromURI(uri);
+                                Log.d("CompleteProfileActivity","gallery photo file path = "+filePath);
+
+                                File file = new File(filePath);
+
                                 switch (imageFor){
                                     case "profile":
                                         Glide.with(getApplicationContext())
@@ -121,6 +134,30 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
 
                                         buttonPickImage.setVisibility(View.GONE);
                                         profileImageVIew.setVisibility(View.VISIBLE);
+                                        break;
+                                    case "first":
+                                        Glide.with(getApplicationContext())
+                                                .load(uri)
+                                                .into(firstImageView);
+
+                                        buttonPickFirstImage.setVisibility(View.GONE);
+                                        firstImageView.setVisibility(View.VISIBLE);
+                                        break;
+                                    case "second":
+                                        Glide.with(getApplicationContext())
+                                                .load(uri)
+                                                .into(secondImageView);
+
+                                        buttonPickSecondImage.setVisibility(View.GONE);
+                                        secondImageView.setVisibility(View.VISIBLE);
+                                        break;
+                                    case "third":
+                                        Glide.with(getApplicationContext())
+                                                .load(uri)
+                                                .into(thirdImageView);
+
+                                        buttonPickThirdImage.setVisibility(View.GONE);
+                                        thirdImageView.setVisibility(View.VISIBLE);
                                         break;
                                 }
                             }
@@ -168,11 +205,10 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
                 title = "Pick third photo";
                 break;
             default:
-                imageFor = imageName;
                 title = "Pick a profile photo";
                 break;
-
         }
+        imageFor = imageName;
         titleText.setText(title);
 
         buttonGallery.setOnClickListener(new View.OnClickListener() {
@@ -196,5 +232,20 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
         intent.setAction(Intent.ACTION_PICK);
 
         galleryPickResultLauncher.launch(intent);
+    }
+
+    public String getRealPathFromURI(Uri contentUri) {
+
+        // can post image
+        String [] proj={MediaStore.Images.Media.DATA};
+        Cursor cursor = managedQuery( contentUri,
+                proj, // Which columns to return
+                null,       // WHERE clause; which rows to return (all rows)
+                null,       // WHERE clause selection arguments (none)
+                null); // Order-by clause (ascending by name)
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+
+        return cursor.getString(column_index);
     }
 }

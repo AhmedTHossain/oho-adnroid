@@ -21,4 +21,7 @@ public interface APIService {
 
     @PUT("users/update")
     Call<Profile> updateUser(@Body Profile profile);
+
+//    @POST("upload/upload_profile_picture")
+
 }

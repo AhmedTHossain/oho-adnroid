@@ -355,6 +355,15 @@
                             android:src="@drawable/ic_add" />
                     </androidx.cardview.widget.CardView>
 
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/first_image_view"
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="@dimen/_100sdp"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:src="@drawable/ic_add"
+                        android:visibility="gone"/>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -463,6 +472,15 @@
                             android:src="@drawable/ic_add" />
                     </androidx.cardview.widget.CardView>
 
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/second_image_view"
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="@dimen/_100sdp"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:src="@drawable/ic_add"
+                        android:visibility="gone"/>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -570,6 +588,15 @@
                             android:layout_gravity="center"
                             android:src="@drawable/ic_add" />
                     </androidx.cardview.widget.CardView>
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/third_image_view"
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="@dimen/_100sdp"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:src="@drawable/ic_add"
+                        android:visibility="gone"/>
 
                     <TextView
                         android:layout_width="wrap_content"
