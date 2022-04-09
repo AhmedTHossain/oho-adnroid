@@ -19,8 +19,9 @@ import com.oho.oho.models.Profile;
 
 public class CompleteProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private Profile userProfile;
     private static final int PICKER_REQUEST_CODE = 1;
-    private TextView nameAgeText, locationText, professionText, genderText, heightText, religionText, vaccinatedText, raceText;
+    private TextView nameAgeText, locationText, professionText, genderText, heightText, religionText, vaccinatedText, raceText, textButtonSave;
     private EditText editTextBio;
     private CardView buttonPickImage, buttonPickFirstImage, buttonPickSecondImage, buttonPickThirdImage;
 
@@ -33,7 +34,7 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
         SharedPreferences mPrefs = getSharedPreferences("pref", Context.MODE_PRIVATE);
         Gson gson = new Gson();
         String profile = mPrefs.getString("profile","");
-        Profile userProfile = gson.fromJson(profile, Profile.class);
+        userProfile = gson.fromJson(profile, Profile.class);
 
         Log.d("CompleteProfileActivity","user profile id in complete profile activity = "+userProfile.getId());
 
@@ -49,6 +50,8 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
         buttonPickFirstImage  = findViewById(R.id.button_pick_first_image);
         buttonPickSecondImage = findViewById(R.id.button_pick_second_image);
         buttonPickThirdImage  = findViewById(R.id.button_third_profile_image);
+        editTextBio           = findViewById(R.id.edit_text_bio);
+        textButtonSave        = findViewById(R.id.button_text_save_profile);
 
         nameAgeText.setText(userProfile.getName());
 
@@ -70,21 +73,21 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
         buttonPickFirstImage.setOnClickListener(this);
         buttonPickSecondImage.setOnClickListener(this);
         buttonPickThirdImage.setOnClickListener(this);
+        textButtonSave.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.button_pick_profile_image ){
+        if (v.getId() == R.id.button_pick_profile_image )
             showBottomSheetDialog("profile");
-        }
-        if (v.getId() == R.id.button_pick_first_image ){
+        if (v.getId() == R.id.button_pick_first_image )
             showBottomSheetDialog("first");
-        }
-        if (v.getId() == R.id.button_pick_second_image ){
+        if (v.getId() == R.id.button_pick_second_image )
             showBottomSheetDialog("second");
-        }
-        if (v.getId() == R.id.button_third_profile_image ){
+        if (v.getId() == R.id.button_third_profile_image )
             showBottomSheetDialog("third");
+        if (v.getId() == R.id.button_text_save_profile){
+
         }
     }
 
