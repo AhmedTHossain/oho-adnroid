@@ -17,9 +17,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/_10sdp"
             android:background="@color/white"
-            android:orientation="vertical"
-            android:layout_marginBottom="@dimen/_10sdp">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -78,6 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -125,21 +126,30 @@
                     android:layout_marginEnd="@dimen/_20sdp">
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
                         android:orientation="vertical"
+                        android:paddingStart="@dimen/_10sdp"
                         android:paddingTop="@dimen/_5sdp"
+                        android:paddingEnd="@dimen/_10sdp"
                         android:paddingBottom="@dimen/_5sdp">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
 
+                            <ImageView
+                                android:layout_width="@dimen/_5sdp"
+                                android:layout_height="@dimen/_5sdp"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:src="@drawable/ic_dot" />
+
                             <TextView
                                 android:id="@+id/text_gender"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_10sdp"
                                 android:fontFamily="@font/sf_pro_rounded_regular"
                                 android:text="Male"
                                 android:textColor="@color/black"
@@ -149,14 +159,14 @@
                                 android:layout_width="@dimen/_5sdp"
                                 android:layout_height="@dimen/_5sdp"
                                 android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_5sdp"
+                                android:layout_marginStart="@dimen/_10sdp"
                                 android:src="@drawable/ic_dot" />
 
                             <TextView
                                 android:id="@+id/text_height"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/_5sdp"
+                                android:layout_marginStart="@dimen/_10sdp"
                                 android:fontFamily="@font/sf_pro_rounded_regular"
                                 android:text="178 cm"
                                 android:textColor="@color/black"
@@ -178,6 +188,28 @@
                                 android:text="Agnostic"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_14ssp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_width="@dimen/_5sdp"
+                                android:layout_height="@dimen/_5sdp"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:src="@drawable/ic_dot" />
+
+                            <TextView
+                                android:id="@+id/text_race"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:fontFamily="@font/sf_pro_rounded_regular"
+                                android:text="South Asian"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp" />
 
                             <ImageView
                                 android:layout_width="@dimen/_5sdp"
@@ -190,21 +222,13 @@
                                 android:id="@+id/text_vaccinated"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/_5sdp"
+                                android:layout_marginStart="@dimen/_10sdp"
                                 android:fontFamily="@font/sf_pro_rounded_regular"
                                 android:text="Vaccinated"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_14ssp" />
                         </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/text_race"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/sf_pro_rounded_regular"
-                            android:text="South Asian"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_14ssp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -293,8 +317,8 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginEnd="@dimen/_20sdp"
-                app:cardCornerRadius="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_10sdp">
+                android:layout_marginBottom="@dimen/_10sdp"
+                app:cardCornerRadius="@dimen/_10sdp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -303,11 +327,14 @@
                     android:padding="@dimen/_25sdp">
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/button_pick_first_image"
                         android:layout_width="@dimen/_100sdp"
                         android:layout_height="@dimen/_100sdp"
                         android:layout_gravity="center"
                         android:layout_marginEnd="@dimen/_10sdp"
-                        app:cardCornerRadius="@dimen/_500sdp">
+                        app:cardCornerRadius="@dimen/_500sdp"
+                        android:clickable="true"
+                        android:focusable="true">
 
                         <ImageView
                             android:layout_width="@dimen/_50sdp"
@@ -398,8 +425,8 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginEnd="@dimen/_20sdp"
-                app:cardCornerRadius="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_10sdp">
+                android:layout_marginBottom="@dimen/_10sdp"
+                app:cardCornerRadius="@dimen/_10sdp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -408,11 +435,14 @@
                     android:padding="@dimen/_25sdp">
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/button_pick_second_image"
                         android:layout_width="@dimen/_100sdp"
                         android:layout_height="@dimen/_100sdp"
                         android:layout_gravity="center"
                         android:layout_marginEnd="@dimen/_10sdp"
-                        app:cardCornerRadius="@dimen/_500sdp">
+                        app:cardCornerRadius="@dimen/_500sdp"
+                        android:clickable="true"
+                        android:focusable="true">
 
                         <ImageView
                             android:layout_width="@dimen/_50sdp"
@@ -503,8 +533,8 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginEnd="@dimen/_20sdp"
-                app:cardCornerRadius="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_20sdp">
+                android:layout_marginBottom="@dimen/_20sdp"
+                app:cardCornerRadius="@dimen/_10sdp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -513,11 +543,14 @@
                     android:padding="@dimen/_25sdp">
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/button_third_profile_image"
                         android:layout_width="@dimen/_100sdp"
                         android:layout_height="@dimen/_100sdp"
                         android:layout_gravity="center"
                         android:layout_marginEnd="@dimen/_10sdp"
-                        app:cardCornerRadius="@dimen/_500sdp">
+                        app:cardCornerRadius="@dimen/_500sdp"
+                        android:clickable="true"
+                        android:focusable="true">
 
                         <ImageView
                             android:layout_width="@dimen/_50sdp"

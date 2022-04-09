@@ -52,7 +52,7 @@
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/drawable/button_background_gradient_dark.xml" value="0.2" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/drawable/button_background_gradient_light.xml" value="0.211" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/drawable/ic_dot.xml" value="0.174" />
-        <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/activity_complete_profile.xml" value="0.11200000000000002" />
+        <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/activity_complete_profile.xml" value="0.1628403630539242" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/activity_onboarding.xml" value="0.1" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/activity_registration.xml" value="0.13055555555555556" />
@@ -74,6 +74,7 @@
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/fragment_profession_input.xml" value="0.264" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/fragment_religion_input.xml" value="0.16799999999999998" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/fragment_vaccine_input.xml" value="0.10989583333333333" />
+        <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/imagepicker_bottom_sheet_dialog.xml" value="0.264" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/item_conatiner_boarding_one.xml" value="0.10989583333333333" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/layout_recyclerview.xml" value="0.15416666666666667" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/row_edit_profile_intro.xml" value="0.176" />
