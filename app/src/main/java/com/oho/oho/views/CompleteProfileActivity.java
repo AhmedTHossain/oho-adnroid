@@ -1,6 +1,7 @@
 package com.oho.oho.views;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -26,6 +27,7 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
     private CompleteProfileViewModel completeProfileViewModel;
     private Profile userProfile;
     private static final int PICKER_REQUEST_CODE = 1;
+    private static final int SELECT_PICTURE = 200;
     private TextView nameAgeText, locationText, professionText, genderText, heightText, religionText, vaccinatedText, raceText, textButtonSave;
     private EditText editTextBio;
     private CardView buttonPickImage, buttonPickFirstImage, buttonPickSecondImage, buttonPickThirdImage;
@@ -128,10 +130,25 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
         }
         titleText.setText(title);
 
+        buttonGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectFromGallery();
+            }
+        });
+
         bottomSheetDialog.show();
     }
 
     private void initViewModel(){
         completeProfileViewModel = new ViewModelProvider(this).get(CompleteProfileViewModel.class);
+    }
+
+    private void selectFromGallery(){
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_PICK);
+
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
     }
 }
