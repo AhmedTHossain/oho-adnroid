@@ -1,8 +1,11 @@
 package com.oho.oho.views;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.ExifInterface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -12,15 +15,23 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
 import com.oho.oho.R;
 import com.oho.oho.models.Profile;
 import com.oho.oho.viewmodels.CompleteProfileViewModel;
+import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CompleteProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -31,6 +42,11 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
     private TextView nameAgeText, locationText, professionText, genderText, heightText, religionText, vaccinatedText, raceText, textButtonSave;
     private EditText editTextBio;
     private CardView buttonPickImage, buttonPickFirstImage, buttonPickSecondImage, buttonPickThirdImage;
+    private CircleImageView profileImageVIew;
+
+    private String imageFor = "";
+
+    private ActivityResultLauncher<Intent> galleryPickResultLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +77,7 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
         buttonPickThirdImage  = findViewById(R.id.button_third_profile_image);
         editTextBio           = findViewById(R.id.edit_text_bio);
         textButtonSave        = findViewById(R.id.button_text_save_profile);
+        profileImageVIew      = findViewById(R.id.profile_image_view);
 
         nameAgeText.setText(userProfile.getName());
 
@@ -83,6 +100,33 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
         buttonPickSecondImage.setOnClickListener(this);
         buttonPickThirdImage.setOnClickListener(this);
         textButtonSave.setOnClickListener(this);
+
+        galleryPickResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if (result.getResultCode() == Activity.RESULT_OK) {
+                            // There are no request codes
+                            Intent data = result.getData();
+
+                            if (data != null) {
+                                Uri uri = data.getData();
+                                Log.d("CompleteProfileActivity","gallery photo data = "+uri);
+                                switch (imageFor){
+                                    case "profile":
+                                        Glide.with(getApplicationContext())
+                                                .load(uri)
+                                                .into(profileImageVIew);
+
+                                        buttonPickImage.setVisibility(View.GONE);
+                                        profileImageVIew.setVisibility(View.VISIBLE);
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                });
     }
 
     @Override
@@ -124,6 +168,7 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
                 title = "Pick third photo";
                 break;
             default:
+                imageFor = imageName;
                 title = "Pick a profile photo";
                 break;
 
@@ -134,6 +179,7 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
             @Override
             public void onClick(View v) {
                 selectFromGallery();
+                bottomSheetDialog.dismiss();
             }
         });
 
@@ -149,6 +195,6 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_PICK);
 
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
+        galleryPickResultLauncher.launch(intent);
     }
 }
