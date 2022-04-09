@@ -370,7 +370,8 @@
                         android:layout_gravity="center"
                         android:fontFamily="@font/sf_pro_rounded_regular"
                         android:hint="@string/caption_for_the_photo"
-                        android:textColor="#B0ADAD"
+                        android:textColor="@color/black"
+                        android:textColorHint="#B0ADAD"
                         android:textSize="@dimen/_16ssp"
                         android:background="@null"/>
                 </LinearLayout>
@@ -488,7 +489,8 @@
                         android:layout_gravity="center"
                         android:fontFamily="@font/sf_pro_rounded_regular"
                         android:hint="@string/caption_for_the_photo"
-                        android:textColor="#B0ADAD"
+                        android:textColor="@color/black"
+                        android:textColorHint="#B0ADAD"
                         android:textSize="@dimen/_16ssp"
                         android:background="@null"/>
                 </LinearLayout>
@@ -606,7 +608,8 @@
                         android:layout_gravity="center"
                         android:fontFamily="@font/sf_pro_rounded_regular"
                         android:hint="@string/caption_for_the_photo"
-                        android:textColor="#B0ADAD"
+                        android:textColor="@color/black"
+                        android:textColorHint="#B0ADAD"
                         android:textSize="@dimen/_16ssp"
                         android:background="@null"/>
                 </LinearLayout>
