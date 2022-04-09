@@ -12,7 +12,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:text="Your Profile"
             android:textColor="@color/black"
             android:fontFamily="@font/sf_pro_rounded_medium"
@@ -21,16 +21,16 @@
             android:layout_gravity="start"
             android:layout_marginStart="@dimen/_20sdp"/>
         <TextView
+            android:id="@+id/button_text_save_profile"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Cancel"
+            android:text="Save"
             android:textColor="@color/black"
             android:fontFamily="@font/sf_pro_rounded_regular"
             android:textSize="@dimen/_18ssp"
             android:layout_gravity="center"
-            android:gravity="end"
-            android:layout_marginEnd="@dimen/_20sdp"/>
+            android:gravity="center" />
     </LinearLayout>
     <View
         android:layout_width="match_parent"
@@ -61,6 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
+                android:id="@+id/text_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="John Doe"
@@ -75,6 +76,7 @@
 <!--                android:layout_marginStart="@dimen/_10sdp"/>-->
         </LinearLayout>
         <TextView
+            android:id="@+id/text_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/_14ssp"
@@ -82,6 +84,7 @@
             android:fontFamily="@font/sf_pro_rounded_regular"
             android:text="Sunnyvale, CA"/>
         <TextView
+            android:id="@+id/text_profession"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/_14ssp"
@@ -168,13 +171,15 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
         <EditText
+            android:id="@+id/edit_text_bio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/please_fill_in_about_yourself"
             android:textSize="@dimen/_14ssp"
-            android:background="null"
+            android:background="@null"
             android:fontFamily="@font/sf_pro_rounded_regular"
             android:layout_marginTop="@dimen/_10sdp"
-            android:inputType="text"/>
+            android:inputType="text"
+            android:layout_marginEnd="@dimen/_20sdp"/>
     </LinearLayout>
 </LinearLayout>

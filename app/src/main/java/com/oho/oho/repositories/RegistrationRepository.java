@@ -29,7 +29,7 @@ public class RegistrationRepository {
         call.enqueue(new Callback<Profile>() {
             @Override
             public void onResponse(@NonNull Call<Profile> call, @NonNull Response<Profile> response) {
-//                registeredUserProfile.setValue(response.body());
+                registeredUserProfile.setValue(response.body());
                 Log.d("RegistrationRepository","response body = "+response.body());
                 Log.d("RegistrationRepository","response body = "+response.code());
             }

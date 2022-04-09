@@ -1,5 +1,6 @@
 package com.oho.oho.views.registration;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,11 +12,13 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.gson.Gson;
 import com.oho.oho.R;
 import com.oho.oho.adapters.RegistrationAdapter;
 import com.oho.oho.models.Profile;
 import com.oho.oho.viewmodels.LoginViewModel;
 import com.oho.oho.viewmodels.RegistrationViewModel;
+import com.oho.oho.views.CompleteProfileActivity;
 import com.oho.oho.views.animations.ZoomOutPageTransformer;
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator;
@@ -175,7 +178,15 @@ public class RegistrationActivity extends AppCompatActivity {
 
         registrationViewModel.registerUser(profile);
         registrationViewModel.registeredUserProfileData.observe(this,userProfile -> {
-            Toast.makeText(RegistrationActivity.this, "registration successful with profile of = "+userProfile.getName(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegistrationActivity.this, "registration successful!", Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(RegistrationActivity.this, CompleteProfileActivity.class);
+
+            Gson gson = new Gson();
+            String profile = gson.toJson(userProfile);
+            intent.putExtra("profile",profile);
+
+            startActivity(intent);
         });
     }
 }
