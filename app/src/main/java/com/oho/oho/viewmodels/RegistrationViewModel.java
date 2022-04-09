@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class RegistrationViewModel extends AndroidViewModel {
 
     private RegistrationRepository registrationRepository;
-    public MutableLiveData<Profile> registeredUserProfileData = new MutableLiveData<>();
+    public LiveData<Profile> registeredUserProfileData;
 
     //this object is going to store user's inputs during the registration process
     private MutableLiveData<Profile> registrationFormData = new MutableLiveData<>();
@@ -36,7 +36,7 @@ public class RegistrationViewModel extends AndroidViewModel {
     }
 
     public void registerUser(Profile profile){
-        registeredUserProfileData.setValue(registrationRepository.registerNewUser(profile).getValue());
+        registeredUserProfileData = registrationRepository.registerNewUser(profile, getApplication().getApplicationContext());
     }
 
     public void saveRegistrationFormData(Profile profile) {

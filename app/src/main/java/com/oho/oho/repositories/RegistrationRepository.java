@@ -2,11 +2,14 @@ package com.oho.oho.repositories;
 
 import static com.oho.oho.utils.HelperClass.logErrorMessage;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
+import com.google.gson.Gson;
 import com.oho.oho.models.Profile;
 import com.oho.oho.network.APIService;
 import com.oho.oho.network.RetrofitInstance;
@@ -19,7 +22,7 @@ import retrofit2.Response;
 
 public class RegistrationRepository {
 
-    public MutableLiveData<Profile> registerNewUser(Profile userRegistrationFormData){
+    public MutableLiveData<Profile> registerNewUser(Profile userRegistrationFormData, Context context){
         Log.d("RegistrationRepository","email in repository = " + userRegistrationFormData.getEmail());
         Log.d("RegistrationRepository","name in repository = " + userRegistrationFormData.getName());
 
@@ -32,6 +35,13 @@ public class RegistrationRepository {
                 registeredUserProfile.setValue(response.body());
                 Log.d("RegistrationRepository","response body = "+response.body());
                 Log.d("RegistrationRepository","response body = "+response.code());
+
+                SharedPreferences mPrefs = context.getSharedPreferences("pref",Context.MODE_PRIVATE);
+                SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                Gson gson = new Gson();
+                String json = gson.toJson(response.body());
+                prefsEditor.putString("profile", json);
+                prefsEditor.apply();
             }
 
             @Override

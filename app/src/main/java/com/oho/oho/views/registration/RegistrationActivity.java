@@ -182,9 +182,9 @@ public class RegistrationActivity extends AppCompatActivity {
 
             Intent intent = new Intent(RegistrationActivity.this, CompleteProfileActivity.class);
 
-            Gson gson = new Gson();
-            String profile = gson.toJson(userProfile);
-            intent.putExtra("profile",profile);
+//            Gson gson = new Gson();
+//            String profile = gson.toJson(userProfile);
+//            intent.putExtra("profile",profile);
 
             startActivity(intent);
         });
