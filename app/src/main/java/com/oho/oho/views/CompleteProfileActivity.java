@@ -3,22 +3,27 @@ package com.oho.oho.views;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
 import com.oho.oho.R;
 import com.oho.oho.models.Profile;
+import com.oho.oho.viewmodels.CompleteProfileViewModel;
 
 public class CompleteProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private CompleteProfileViewModel completeProfileViewModel;
     private Profile userProfile;
     private static final int PICKER_REQUEST_CODE = 1;
     private TextView nameAgeText, locationText, professionText, genderText, heightText, religionText, vaccinatedText, raceText, textButtonSave;
@@ -29,6 +34,8 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complete_profile);
+
+        initViewModel();
 
         //fetching newly registered profile
         SharedPreferences mPrefs = getSharedPreferences("pref", Context.MODE_PRIVATE);
@@ -87,7 +94,11 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
         if (v.getId() == R.id.button_third_profile_image )
             showBottomSheetDialog("third");
         if (v.getId() == R.id.button_text_save_profile){
-
+            if (!TextUtils.isEmpty(editTextBio.getText())) {
+                userProfile.setBio(editTextBio.getText().toString());
+                completeProfileViewModel.updateUser(userProfile);
+            } else
+                Toast.makeText(this, "Enter a bio first!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -118,5 +129,9 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
         titleText.setText(title);
 
         bottomSheetDialog.show();
+    }
+
+    private void initViewModel(){
+        completeProfileViewModel = new ViewModelProvider(this).get(CompleteProfileViewModel.class);
     }
 }
