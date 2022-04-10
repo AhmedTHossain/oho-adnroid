@@ -9,6 +9,7 @@
     <string name="select_your_prompt_question">Select your prompt question.</string>
     <string name="caption_for_the_photo">Caption for the photo</string>
     <string name="please_fill_in_about_yourself">Please fill in about yourself</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</string>
     <string-array name="education_list">
         <item>No Degree</item>
         <item>High School Diploma</item>
@@ -52,5 +53,34 @@
         <item>Chinese</item>
         <item>Open to all</item>
         <item>Others</item>
+    </string-array>
+    <string-array name="prompt_list">
+        <item>The most adventurous thing I did was…</item>
+        <item>In a relationship I am looking for…</item>
+        <item>Ideal Friday Night for me is…</item>
+        <item>Ideal Saturday Night for me is…</item>
+        <item>Ideal Sunday for me is…</item>
+        <item>My proudest achievement is…</item>
+        <item>My ideal date is…</item>
+        <item>In a partner, I am looking for…</item>
+        <item>Recently, I learned…</item>
+        <item>One social cause that I really care about is…</item>
+        <item>One environmental cause that I really care about is…</item>
+        <item>I am a little weird when it comes to…</item>
+        <item>The most attractive thing about me is…</item>
+        <item>One of my life goal is to…</item>
+        <item>Any three people I would invite to a dinner are…</item>
+        <item>If money didn\'t matter, I would be…</item>
+        <item>A surprising fact about me is…</item>
+        <item>Most controversial opinion that I have is…</item>
+        <item>People usually mistake me for…(Bard Pitt/being too loud…)</item>
+        <item>Something that I can endlessly talk about is…</item>
+        <item>I am passionate about…</item>
+        <item>An outdoor activity that I enjoy is…</item>
+        <item>An indoor activity that I enjoy is…</item>
+        <item>Whiskey or Wine…</item>
+        <item>Cats or Dogs</item>
+        <item>Coffee or Tea</item>
+        <item>Indoor or Outdoor</item>
     </string-array>
 </resources>

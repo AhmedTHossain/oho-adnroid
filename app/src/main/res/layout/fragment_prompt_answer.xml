@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".views.prompt.PromptAnswerFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Maximum of 150 characters."
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16ssp"
+        android:fontFamily="@font/sf_pro_rounded_medium"
+        android:layout_gravity="center" />
+
+    <TextView
+        android:id="@+id/text_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Prompt 1"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16ssp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_50sdp"
+        android:fontFamily="@font/sf_pro_rounded_medium" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_150sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp">
+        <EditText
+            android:id="@+id/edittext_answer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="150"
+            android:paddingStart="@dimen/_20sdp"
+            android:paddingEnd="@dimen/_20sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:background="@null"
+            android:textSize="@dimen/_16ssp"
+            android:textColor="@color/black"
+            android:hint="@string/lorem_ipsum"
+            android:textColorHint="#CECECE"
+            android:inputType="text"/>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

@@ -32,6 +32,7 @@ import com.google.gson.Gson;
 import com.oho.oho.R;
 import com.oho.oho.models.Profile;
 import com.oho.oho.viewmodels.CompleteProfileViewModel;
+import com.oho.oho.views.prompt.PromptQuestionActivity;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -46,7 +47,7 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
     private static final int SELECT_PICTURE = 200;
     private TextView nameAgeText, locationText, professionText, genderText, heightText, religionText, vaccinatedText, raceText, textButtonSave;
     private EditText editTextBio;
-    private CardView buttonPickImage, buttonPickFirstImage, buttonPickSecondImage, buttonPickThirdImage;
+    private CardView buttonPickImage, buttonPickFirstImage, buttonPickSecondImage, buttonPickThirdImage, selectButtonPrompt1, selectButtonPrompt2, selectButtonPrompt3;
     private CircleImageView profileImageVIew, firstImageView, secondImageView, thirdImageView;
 
     private String imageFor = "";
@@ -87,6 +88,10 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
         secondImageView       = findViewById(R.id.second_image_view);
         thirdImageView        = findViewById(R.id.third_image_view);
 
+        selectButtonPrompt1   = findViewById(R.id.card_prompt_question_1);
+        selectButtonPrompt2   = findViewById(R.id.card_prompt_question_2);
+        selectButtonPrompt3   = findViewById(R.id.card_prompt_question_3);
+
         nameAgeText.setText(userProfile.getName());
 
         String location = userProfile.getCity() + ", " + userProfile.getState();
@@ -108,6 +113,10 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
         buttonPickSecondImage.setOnClickListener(this);
         buttonPickThirdImage.setOnClickListener(this);
         textButtonSave.setOnClickListener(this);
+
+        selectButtonPrompt1.setOnClickListener(this);
+        selectButtonPrompt2.setOnClickListener(this);
+        selectButtonPrompt3.setOnClickListener(this);
 
         galleryPickResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -183,6 +192,9 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
             } else
                 Toast.makeText(this, "Enter a bio first!", Toast.LENGTH_SHORT).show();
         }
+        if (v.getId() == R.id.card_prompt_question_1){
+            navigateToPromptQuestionActivity();
+        }
     }
 
     private void showBottomSheetDialog(String imageName) {
@@ -247,5 +259,9 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
         cursor.moveToFirst();
 
         return cursor.getString(column_index);
+    }
+
+    public void navigateToPromptQuestionActivity(){
+        startActivity(new Intent(this, PromptQuestionActivity.class));
     }
 }

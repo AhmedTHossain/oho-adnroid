@@ -55,6 +55,7 @@
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/activity_complete_profile.xml" value="0.1628403630539242" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/activity_onboarding.xml" value="0.1" />
+        <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/activity_prompt_question.xml" value="0.1923899102180419" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/activity_registration.xml" value="0.13055555555555556" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/fab_next_page.xml" value="0.10989583333333333" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/fab_previous_page.xml" value="0.10989583333333333" />
@@ -70,8 +71,10 @@
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/fragment_height_input.xml" value="0.13055555555555556" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/fragment_intro.xml" value="0.19479166666666667" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/fragment_location_input.xml" value="0.136" />
-        <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/fragment_phone_input.xml" value="0.536" />
+        <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/fragment_phone_input.xml" value="0.264" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/fragment_profession_input.xml" value="0.264" />
+        <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/fragment_prompt_answer.xml" value="0.15433946130825138" />
+        <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/fragment_prompt_list.xml" value="0.136" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/fragment_religion_input.xml" value="0.16799999999999998" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/fragment_vaccine_input.xml" value="0.10989583333333333" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/imagepicker_bottom_sheet_dialog.xml" value="0.264" />
@@ -81,6 +84,7 @@
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/row_edit_profile_left.xml" value="0.264" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/row_edit_profile_right.xml" value="0.21666666666666667" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/row_input_registration.xml" value="0.16145833333333334" />
+        <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/row_prompt.xml" value="0.10816588285592134" />
       </map>
     </option>
   </component>
