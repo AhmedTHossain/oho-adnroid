@@ -36,6 +36,7 @@ import com.oho.oho.views.prompt.PromptQuestionActivity;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -92,7 +93,8 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
         selectButtonPrompt2   = findViewById(R.id.card_prompt_question_2);
         selectButtonPrompt3   = findViewById(R.id.card_prompt_question_3);
 
-        nameAgeText.setText(userProfile.getName());
+        String nameAgeString = userProfile.getName() + ", " + userProfile.getAge();
+        nameAgeText.setText(nameAgeString);
 
         String location = userProfile.getCity() + ", " + userProfile.getState();
         locationText.setText(location);
@@ -143,6 +145,8 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
 
                                         buttonPickImage.setVisibility(View.GONE);
                                         profileImageVIew.setVisibility(View.VISIBLE);
+
+                                        completeProfileViewModel.uploadProfilePhoto(userProfile.getId(),file);
                                         break;
                                     case "first":
                                         Glide.with(getApplicationContext())

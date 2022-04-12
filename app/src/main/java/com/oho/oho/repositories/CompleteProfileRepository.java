@@ -3,6 +3,7 @@ package com.oho.oho.repositories;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
@@ -11,7 +12,13 @@ import com.google.gson.Gson;
 import com.oho.oho.models.Profile;
 import com.oho.oho.network.APIService;
 import com.oho.oho.network.RetrofitInstance;
+import com.oho.oho.responses.UploadProfilePhotoResponse;
 
+import java.io.File;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -45,5 +52,25 @@ public class CompleteProfileRepository {
             }
         });
         return latestUserProfile;
+    }
+
+    public void updateUserProfilePhoto(int id, File file, Context context){
+        APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
+
+        RequestBody user_id = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(id));
+        MultipartBody.Part filePart = MultipartBody.Part.createFormData("file", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
+
+        Call<UploadProfilePhotoResponse> call = apiService.uploadProfilePhoto(user_id,filePart);
+        call.enqueue(new Callback<UploadProfilePhotoResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<UploadProfilePhotoResponse> call, @NonNull Response<UploadProfilePhotoResponse> response) {
+                Toast.makeText(context, "Profile photo uploaded successfully!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<UploadProfilePhotoResponse> call, @NonNull Throwable t) {
+
+            }
+        });
     }
 }

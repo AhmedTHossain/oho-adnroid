@@ -33,7 +33,7 @@ public class RegistrationRepository {
             @Override
             public void onResponse(@NonNull Call<Profile> call, @NonNull Response<Profile> response) {
                 registeredUserProfile.setValue(response.body());
-                Log.d("RegistrationRepository","response body = "+response.body());
+                Log.d("RegistrationRepository","age in response body = "+response.body().getAge());
                 Log.d("RegistrationRepository","response body = "+response.code());
 
                 SharedPreferences mPrefs = context.getSharedPreferences("pref",Context.MODE_PRIVATE);
