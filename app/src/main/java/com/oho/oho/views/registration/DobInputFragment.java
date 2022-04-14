@@ -129,14 +129,16 @@ public class DobInputFragment extends Fragment {
                 profileData = profile;
                 dobInput = profile.getDob();
 
-                String[] dobArray = dobInput.split("/");
+                if(dobInput != null) {
+                    String[] dobArray = dobInput.split("/");
 
-                dayPicker.setValue(Integer.parseInt(dobArray[1]));
-                yearPicker.setValue(Integer.parseInt(dobArray[dobArray.length-1]));
+                    dayPicker.setValue(Integer.parseInt(dobArray[1]));
+                    yearPicker.setValue(Integer.parseInt(dobArray[dobArray.length - 1]));
 
-                String ageText = profile.getAge() + " years";
-                ageTextView.setText(ageText);
-                ageCard.setVisibility(View.VISIBLE);
+                    String ageText = profile.getAge() + " years";
+                    ageTextView.setText(ageText);
+                    ageCard.setVisibility(View.VISIBLE);
+                }
             }
         });
     }

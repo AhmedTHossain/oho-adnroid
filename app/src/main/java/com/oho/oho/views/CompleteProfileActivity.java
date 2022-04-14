@@ -111,6 +111,7 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
         raceText.setText(userProfile.getRace());
 
         buttonPickImage.setOnClickListener(this);
+        profileImageVIew.setOnClickListener(this);
         buttonPickFirstImage.setOnClickListener(this);
         buttonPickSecondImage.setOnClickListener(this);
         buttonPickThirdImage.setOnClickListener(this);
@@ -181,7 +182,7 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.button_pick_profile_image )
+        if (v.getId() == R.id.button_pick_profile_image || v.getId() == R.id.profile_image_view)
             showBottomSheetDialog("profile");
         if (v.getId() == R.id.button_pick_first_image )
             showBottomSheetDialog("first");
@@ -267,5 +268,11 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
 
     public void navigateToPromptQuestionActivity(){
         startActivity(new Intent(this, PromptQuestionActivity.class));
+    }
+
+    //function to convert height input to centimeters
+    private String convertHeightFromCm(double height){
+        double height_in_inch = height / 2.54;
+        return String.valueOf(height_in_inch);
     }
 }
