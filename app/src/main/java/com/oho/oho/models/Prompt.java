@@ -1,9 +1,9 @@
-package com.oho.oho.responses;
+package com.oho.oho.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class GetPromptListResponse {
+public class Prompt {
     @SerializedName("name")
     @Expose
     private String name;

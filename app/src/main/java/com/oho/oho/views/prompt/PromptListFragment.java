@@ -3,6 +3,7 @@ package com.oho.oho.views.prompt;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,6 +13,8 @@ import android.view.ViewGroup;
 
 import com.oho.oho.R;
 import com.oho.oho.adapters.PromptInputAdapter;
+import com.oho.oho.models.Prompt;
+import com.oho.oho.viewmodels.PromptViewModel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,6 +24,8 @@ public class PromptListFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private PromptInputAdapter adapter;
+    private PromptViewModel promptViewModel;
+    private ArrayList<Prompt> promptArrayList = new ArrayList<>();
 
     public PromptListFragment() {
         // Required empty public constructor
@@ -33,15 +38,23 @@ public class PromptListFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.recyclerview);
 
-        List<String> prompts = Arrays.asList(getResources().getStringArray(R.array.prompt_list));
-        ArrayList<String> promptArrayList = new ArrayList<>(prompts);
+        initPromptViewModel();
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new PromptInputAdapter(getContext(), promptArrayList);
+        promptViewModel.getAllPromptList();
+        promptViewModel.promptList.observe(getViewLifecycleOwner(), prompts -> {
+            promptArrayList.addAll(prompts);
 
-        recyclerView.setAdapter(adapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            adapter = new PromptInputAdapter(getContext(), promptArrayList);
+
+            recyclerView.setAdapter(adapter);
+        });
 
         // Inflate the layout for this fragment
         return view;
+    }
+
+    private void initPromptViewModel(){
+        promptViewModel = new ViewModelProvider(this).get(PromptViewModel.class);
     }
 }

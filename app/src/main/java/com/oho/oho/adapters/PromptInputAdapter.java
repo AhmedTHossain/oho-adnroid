@@ -12,16 +12,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.oho.oho.R;
+import com.oho.oho.models.Prompt;
 
 import java.util.ArrayList;
 
 public class PromptInputAdapter extends RecyclerView.Adapter<PromptInputAdapter.PromptHolder> {
 
     private Context context;
-    private ArrayList<String> promptList;
+    private ArrayList<Prompt> promptList;
     private String promptSelected = "";
 
-    public PromptInputAdapter(Context context, ArrayList<String> promptList) {
+    public PromptInputAdapter(Context context, ArrayList<Prompt> promptList) {
         this.context = context;
         this.promptList = promptList;
     }
@@ -36,7 +37,7 @@ public class PromptInputAdapter extends RecyclerView.Adapter<PromptInputAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull PromptHolder holder, int position) {
-        holder.getTextView().setText(promptList.get(position));
+        holder.getTextView().setText(promptList.get(position).getName());
     }
 
     @Override

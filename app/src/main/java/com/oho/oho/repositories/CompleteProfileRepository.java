@@ -10,11 +10,13 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.google.gson.Gson;
 import com.oho.oho.models.Profile;
+import com.oho.oho.models.Prompt;
 import com.oho.oho.network.APIService;
 import com.oho.oho.network.RetrofitInstance;
 import com.oho.oho.responses.UploadProfilePhotoResponse;
 
 import java.io.File;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;

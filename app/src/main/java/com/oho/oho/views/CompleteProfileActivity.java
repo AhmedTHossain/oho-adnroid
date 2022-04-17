@@ -101,7 +101,7 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
 
         professionText.setText(userProfile.getOccupation());
         genderText.setText(userProfile.getSex());
-        heightText.setText(String.valueOf(userProfile.getHeight()));
+        heightText.setText(String.valueOf(userProfile.getHeight())+" cm");
         religionText.setText(userProfile.getReligion());
 
         if (userProfile.getVaccinated().equals("Yes"))
