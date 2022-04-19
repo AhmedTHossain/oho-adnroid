@@ -47,7 +47,7 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
     private static final int PICKER_REQUEST_CODE = 1;
     private static final int SELECT_PICTURE = 200;
     private TextView nameAgeText, locationText, professionText, genderText, heightText, religionText, vaccinatedText, raceText, textButtonSave;
-    private EditText editTextBio;
+    private EditText editTextBio, editTextFirstImageCaption, editTextSecondImageCaption, editTextThirdImageCaption;
     private CardView buttonPickImage, buttonPickFirstImage, buttonPickSecondImage, buttonPickThirdImage, selectButtonPrompt1, selectButtonPrompt2, selectButtonPrompt3;
     private CircleImageView profileImageVIew, firstImageView, secondImageView, thirdImageView;
 
@@ -88,6 +88,10 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
         firstImageView        = findViewById(R.id.first_image_view);
         secondImageView       = findViewById(R.id.second_image_view);
         thirdImageView        = findViewById(R.id.third_image_view);
+
+        editTextFirstImageCaption  = findViewById(R.id.first_image_caption);
+        editTextSecondImageCaption = findViewById(R.id.second_image_caption);
+        editTextThirdImageCaption  = findViewById(R.id.third_image_caption);
 
         selectButtonPrompt1   = findViewById(R.id.card_prompt_question_1);
         selectButtonPrompt2   = findViewById(R.id.card_prompt_question_2);
@@ -156,6 +160,7 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
 
                                         buttonPickFirstImage.setVisibility(View.GONE);
                                         firstImageView.setVisibility(View.VISIBLE);
+                                        editTextFirstImageCaption.requestFocus();
                                         break;
                                     case "second":
                                         Glide.with(getApplicationContext())
@@ -164,6 +169,7 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
 
                                         buttonPickSecondImage.setVisibility(View.GONE);
                                         secondImageView.setVisibility(View.VISIBLE);
+                                        editTextSecondImageCaption.requestFocus();
                                         break;
                                     case "third":
                                         Glide.with(getApplicationContext())
@@ -172,6 +178,7 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
 
                                         buttonPickThirdImage.setVisibility(View.GONE);
                                         thirdImageView.setVisibility(View.VISIBLE);
+                                        editTextThirdImageCaption.requestFocus();
                                         break;
                                 }
                             }
