@@ -14,6 +14,7 @@ import com.oho.oho.models.Prompt;
 import com.oho.oho.network.APIService;
 import com.oho.oho.network.RetrofitInstance;
 import com.oho.oho.responses.UploadProfilePhotoResponse;
+import com.oho.oho.responses.UploadPromptPhotoResponse;
 
 import java.io.File;
 import java.util.List;
@@ -71,6 +72,26 @@ public class CompleteProfileRepository {
 
             @Override
             public void onFailure(@NonNull Call<UploadProfilePhotoResponse> call, @NonNull Throwable t) {
+
+            }
+        });
+    }
+
+    public void uploadUserPromptPhoto(int id, String captionText, File file, Context context){
+        APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
+        RequestBody user_id = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(id));
+        RequestBody caption = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(captionText));
+        MultipartBody.Part filePart = MultipartBody.Part.createFormData("file", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
+
+        Call<List<UploadPromptPhotoResponse>> call = apiService.uploadPromptPhoto(user_id,caption,filePart);
+        call.enqueue(new Callback<List<UploadPromptPhotoResponse>>() {
+            @Override
+            public void onResponse(Call<List<UploadPromptPhotoResponse>> call, Response<List<UploadPromptPhotoResponse>> response) {
+                Toast.makeText(context, "Photo uploaded successfully!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<List<UploadPromptPhotoResponse>> call, Throwable t) {
 
             }
         });

@@ -34,6 +34,10 @@ public class CompleteProfileViewModel extends AndroidViewModel {
         completeProfileRepository.updateUserProfilePhoto(id,file,getApplication().getApplicationContext());
     }
 
+    public void uploadPromptPhoto(int id, String captionText, File file){
+        completeProfileRepository.uploadUserPromptPhoto(id,captionText,file,getApplication().getApplicationContext());
+    }
+
     public void saveCompletProfileInputData(CompleteProfileInput profile) {
         completeProfileInputData.setValue(profile);
     }

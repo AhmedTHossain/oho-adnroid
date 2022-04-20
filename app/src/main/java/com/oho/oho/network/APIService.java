@@ -3,6 +3,7 @@ package com.oho.oho.network;
 import com.oho.oho.models.Profile;
 import com.oho.oho.models.Prompt;
 import com.oho.oho.responses.UploadProfilePhotoResponse;
+import com.oho.oho.responses.UploadPromptPhotoResponse;
 import com.oho.oho.responses.VerifyEmailResponse;
 
 import java.io.File;
@@ -37,4 +38,9 @@ public interface APIService {
 
     @GET("users/prompts")
     Call<List<Prompt>> getAllPrompts();
+
+    // for uploading prompt photos (atleast 3 for profile creation)
+    @Multipart
+    @POST("upload/upload_picture")
+    Call<List<UploadPromptPhotoResponse>> uploadPromptPhoto(@Part("user_id") RequestBody user_id, @Part("caption") RequestBody caption, @Part MultipartBody.Part file);
 }

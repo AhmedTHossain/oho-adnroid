@@ -160,7 +160,7 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
 
                                         completedProfile.setProfilePhoto(file);
                                         completeProfileViewModel.saveCompletProfileInputData(completedProfile);
-//                                        completeProfileViewModel.uploadProfilePhoto(userProfile.getId(),file);
+                                        completeProfileViewModel.uploadProfilePhoto(userProfile.getId(),file);
                                         break;
                                     case "first":
                                         Glide.with(getApplicationContext())
@@ -176,7 +176,7 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
                                         completedProfile.setFirstPromptPhoto(firstPromptPhoto);
                                         completeProfileViewModel.saveCompletProfileInputData(completedProfile);
 
-                                        showCaptionInputDialog("first");
+                                        showCaptionInputDialog("first", file);
                                         break;
                                     case "second":
                                         Glide.with(getApplicationContext())
@@ -192,7 +192,7 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
                                         completedProfile.setSecondPromptPhoto(secondPromptPhoto);
                                         completeProfileViewModel.saveCompletProfileInputData(completedProfile);
 
-                                        showCaptionInputDialog("second");
+                                        showCaptionInputDialog("second", file);
                                         break;
                                     case "third":
                                         Glide.with(getApplicationContext())
@@ -208,7 +208,7 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
                                         completedProfile.setThirdPromptPhoto(thirdPromptPhoto);
                                         completeProfileViewModel.saveCompletProfileInputData(completedProfile);
 
-                                        showCaptionInputDialog("third");
+                                        showCaptionInputDialog("third", file);
                                         break;
                                 }
                             }
@@ -323,7 +323,7 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
         return String.valueOf(height_in_inch);
     }
 
-    private void showCaptionInputDialog(String captionfor) {
+    private void showCaptionInputDialog(String captionfor, File file) {
         // get alert_dialog.xml view
         LayoutInflater li = LayoutInflater.from(getApplicationContext());
         View promptsView = li.inflate(R.layout.caption_input_dialog, null);
@@ -357,6 +357,8 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
                                     editTextFirstImageCaption.setTextColor(ResourcesCompat.getColor(getResources(), R.color.black, null));
                                     editTextFirstImageCaption.setText(userInput.getText().toString());
                                     alertDialog.dismiss();
+
+                                    completeProfileViewModel.uploadPromptPhoto(userProfile.getId(),editTextFirstImageCaption.getText().toString(),file);
                                 } else
                                     Toast.makeText(CompleteProfileActivity.this, "Must enter a caption!", Toast.LENGTH_SHORT).show();
                                 break;
@@ -365,6 +367,8 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
                                     editTextSecondImageCaption.setTextColor(ResourcesCompat.getColor(getResources(), R.color.black, null));
                                     editTextSecondImageCaption.setText(userInput.getText().toString());
                                     alertDialog.dismiss();
+
+                                    completeProfileViewModel.uploadPromptPhoto(userProfile.getId(),editTextSecondImageCaption.getText().toString(),file);
                                 } else
                                     Toast.makeText(CompleteProfileActivity.this, "Must enter a caption!", Toast.LENGTH_SHORT).show();
                                 break;
@@ -373,7 +377,8 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
                                     editTextThirdImageCaption.setTextColor(ResourcesCompat.getColor(getResources(), R.color.black, null));
                                     editTextThirdImageCaption.setText(userInput.getText().toString());
                                     alertDialog.dismiss();
-                                    break;
+
+                                    completeProfileViewModel.uploadPromptPhoto(userProfile.getId(),editTextThirdImageCaption.getText().toString(),file);
                                 } else
                                     Toast.makeText(CompleteProfileActivity.this, "Must enter a caption!", Toast.LENGTH_SHORT).show();
                                 break;
