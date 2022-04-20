@@ -354,16 +354,15 @@
                         android:src="@drawable/ic_add"
                         android:visibility="gone" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/first_image_caption"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:background="@null"
                         android:fontFamily="@font/sf_pro_rounded_regular"
-                        android:hint="@string/caption_for_the_photo"
-                        android:textColor="@color/black"
-                        android:textColorHint="#B0ADAD"
+                        android:text="@string/caption_for_the_photo"
+                        android:textColor="#B0ADAD"
                         android:textSize="@dimen/_16ssp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -463,16 +462,15 @@
                         android:src="@drawable/ic_add"
                         android:visibility="gone" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/second_image_caption"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:background="@null"
                         android:fontFamily="@font/sf_pro_rounded_regular"
-                        android:hint="@string/caption_for_the_photo"
-                        android:textColor="@color/black"
-                        android:textColorHint="#B0ADAD"
+                        android:text="@string/caption_for_the_photo"
+                        android:textColor="#B0ADAD"
                         android:textSize="@dimen/_16ssp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -572,15 +570,15 @@
                         android:src="@drawable/ic_add"
                         android:visibility="gone" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/third_image_caption"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:background="@null"
                         android:fontFamily="@font/sf_pro_rounded_regular"
-                        android:hint="@string/caption_for_the_photo"
-                        android:textColor="@color/black"
+                        android:text="@string/caption_for_the_photo"
+                        android:textColor="#B0ADAD"
                         android:textColorHint="#B0ADAD"
                         android:textSize="@dimen/_16ssp" />
                 </LinearLayout>

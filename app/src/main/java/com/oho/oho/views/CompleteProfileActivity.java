@@ -1,18 +1,20 @@
 package com.oho.oho.views;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,21 +24,24 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
 import com.oho.oho.R;
+import com.oho.oho.models.CompleteProfileInput;
 import com.oho.oho.models.Profile;
+import com.oho.oho.models.PromptPhoto;
 import com.oho.oho.viewmodels.CompleteProfileViewModel;
 import com.oho.oho.views.prompt.PromptQuestionActivity;
-import com.squareup.picasso.Picasso;
 
 import java.io.File;
-import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -46,14 +51,16 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
     private Profile userProfile;
     private static final int PICKER_REQUEST_CODE = 1;
     private static final int SELECT_PICTURE = 200;
-    private TextView nameAgeText, locationText, professionText, genderText, heightText, religionText, vaccinatedText, raceText, textButtonSave;
-    private EditText editTextBio, editTextFirstImageCaption, editTextSecondImageCaption, editTextThirdImageCaption;
+    private TextView nameAgeText, locationText, professionText, genderText, heightText, religionText, vaccinatedText, raceText, textButtonSave, editTextFirstImageCaption, editTextSecondImageCaption, editTextThirdImageCaption;
+    private EditText editTextBio;
     private CardView buttonPickImage, buttonPickFirstImage, buttonPickSecondImage, buttonPickThirdImage, selectButtonPrompt1, selectButtonPrompt2, selectButtonPrompt3;
     private CircleImageView profileImageVIew, firstImageView, secondImageView, thirdImageView;
 
     private String imageFor = "";
 
     private ActivityResultLauncher<Intent> galleryPickResultLauncher;
+
+    private CompleteProfileInput completedProfile = new CompleteProfileInput();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,7 +158,9 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
                                         buttonPickImage.setVisibility(View.GONE);
                                         profileImageVIew.setVisibility(View.VISIBLE);
 
-                                        completeProfileViewModel.uploadProfilePhoto(userProfile.getId(),file);
+                                        completedProfile.setProfilePhoto(file);
+                                        completeProfileViewModel.saveCompletProfileInputData(completedProfile);
+//                                        completeProfileViewModel.uploadProfilePhoto(userProfile.getId(),file);
                                         break;
                                     case "first":
                                         Glide.with(getApplicationContext())
@@ -160,7 +169,14 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
 
                                         buttonPickFirstImage.setVisibility(View.GONE);
                                         firstImageView.setVisibility(View.VISIBLE);
-                                        editTextFirstImageCaption.requestFocus();
+//                                        editTextFirstImageCaption.requestFocus();
+//
+                                        PromptPhoto firstPromptPhoto = new PromptPhoto();
+                                        firstPromptPhoto.setFile(file);
+                                        completedProfile.setFirstPromptPhoto(firstPromptPhoto);
+                                        completeProfileViewModel.saveCompletProfileInputData(completedProfile);
+
+                                        showCaptionInputDialog("first");
                                         break;
                                     case "second":
                                         Glide.with(getApplicationContext())
@@ -169,7 +185,14 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
 
                                         buttonPickSecondImage.setVisibility(View.GONE);
                                         secondImageView.setVisibility(View.VISIBLE);
-                                        editTextSecondImageCaption.requestFocus();
+//                                        editTextSecondImageCaption.requestFocus();
+
+                                        PromptPhoto secondPromptPhoto = new PromptPhoto();
+                                        secondPromptPhoto.setFile(file);
+                                        completedProfile.setSecondPromptPhoto(secondPromptPhoto);
+                                        completeProfileViewModel.saveCompletProfileInputData(completedProfile);
+
+                                        showCaptionInputDialog("second");
                                         break;
                                     case "third":
                                         Glide.with(getApplicationContext())
@@ -178,7 +201,14 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
 
                                         buttonPickThirdImage.setVisibility(View.GONE);
                                         thirdImageView.setVisibility(View.VISIBLE);
-                                        editTextThirdImageCaption.requestFocus();
+//                                        editTextThirdImageCaption.requestFocus();
+
+                                        PromptPhoto thirdPromptPhoto = new PromptPhoto();
+                                        thirdPromptPhoto.setFile(file);
+                                        completedProfile.setThirdPromptPhoto(thirdPromptPhoto);
+                                        completeProfileViewModel.saveCompletProfileInputData(completedProfile);
+
+                                        showCaptionInputDialog("third");
                                         break;
                                 }
                             }
@@ -200,7 +230,11 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
         if (v.getId() == R.id.button_text_save_profile){
             if (!TextUtils.isEmpty(editTextBio.getText())) {
                 userProfile.setBio(editTextBio.getText().toString());
-                completeProfileViewModel.updateUser(userProfile);
+
+                completedProfile.setBio(editTextBio.getText().toString());
+                completeProfileViewModel.saveCompletProfileInputData(completedProfile);
+
+//                completeProfileViewModel.updateUser(userProfile);
             } else
                 Toast.makeText(this, "Enter a bio first!", Toast.LENGTH_SHORT).show();
         }
@@ -248,6 +282,12 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
 
     private void initViewModel(){
         completeProfileViewModel = new ViewModelProvider(this).get(CompleteProfileViewModel.class);
+        completeProfileViewModel.getCompletProfileInputData().observe(this, new Observer<CompleteProfileInput>() {
+            @Override
+            public void onChanged(CompleteProfileInput completeProfileInput) {
+                completedProfile = completeProfileInput;
+            }
+        });
     }
 
     private void selectFromGallery(){
@@ -281,5 +321,69 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
     private String convertHeightFromCm(double height){
         double height_in_inch = height / 2.54;
         return String.valueOf(height_in_inch);
+    }
+
+    private void showCaptionInputDialog(String captionfor) {
+        // get alert_dialog.xml view
+        LayoutInflater li = LayoutInflater.from(getApplicationContext());
+        View promptsView = li.inflate(R.layout.caption_input_dialog, null);
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                this);
+
+        // set alert_dialog.xml to alertdialog builder
+        alertDialogBuilder.setView(promptsView);
+
+        final EditText userInput = promptsView.findViewById(R.id.userInputDialog);
+
+        // set dialog message
+        alertDialogBuilder
+                .setCancelable(false)
+                .setPositiveButton("DONE", null);
+
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        switch (captionfor) {
+                            case "first":
+                                if (!TextUtils.isEmpty(userInput.getText())) {
+                                    editTextFirstImageCaption.setTextColor(ResourcesCompat.getColor(getResources(), R.color.black, null));
+                                    editTextFirstImageCaption.setText(userInput.getText().toString());
+                                    alertDialog.dismiss();
+                                } else
+                                    Toast.makeText(CompleteProfileActivity.this, "Must enter a caption!", Toast.LENGTH_SHORT).show();
+                                break;
+                            case "second":
+                                if (!TextUtils.isEmpty(userInput.getText())) {
+                                    editTextSecondImageCaption.setTextColor(ResourcesCompat.getColor(getResources(), R.color.black, null));
+                                    editTextSecondImageCaption.setText(userInput.getText().toString());
+                                    alertDialog.dismiss();
+                                } else
+                                    Toast.makeText(CompleteProfileActivity.this, "Must enter a caption!", Toast.LENGTH_SHORT).show();
+                                break;
+                            case "third":
+                                if (!TextUtils.isEmpty(userInput.getText())) {
+                                    editTextThirdImageCaption.setTextColor(ResourcesCompat.getColor(getResources(), R.color.black, null));
+                                    editTextThirdImageCaption.setText(userInput.getText().toString());
+                                    alertDialog.dismiss();
+                                    break;
+                                } else
+                                    Toast.makeText(CompleteProfileActivity.this, "Must enter a caption!", Toast.LENGTH_SHORT).show();
+                                break;
+                        }
+                    }
+                });
+            }
+        });
+
+        // show it
+        alertDialog.show();
     }
 }
