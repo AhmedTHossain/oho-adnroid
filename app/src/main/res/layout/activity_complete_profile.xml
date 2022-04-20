@@ -352,7 +352,9 @@
                         android:layout_gravity="center"
                         android:layout_marginEnd="@dimen/_10sdp"
                         android:src="@drawable/ic_add"
-                        android:visibility="gone" />
+                        android:visibility="gone"
+                        android:clickable="true"
+                        android:focusable="true"/>
 
                     <TextView
                         android:id="@+id/first_image_caption"
@@ -460,7 +462,9 @@
                         android:layout_gravity="center"
                         android:layout_marginEnd="@dimen/_10sdp"
                         android:src="@drawable/ic_add"
-                        android:visibility="gone" />
+                        android:visibility="gone"
+                        android:clickable="true"
+                        android:focusable="true"/>
 
                     <TextView
                         android:id="@+id/second_image_caption"
@@ -568,7 +572,9 @@
                         android:layout_gravity="center"
                         android:layout_marginEnd="@dimen/_10sdp"
                         android:src="@drawable/ic_add"
-                        android:visibility="gone" />
+                        android:visibility="gone"
+                        android:clickable="true"
+                        android:focusable="true"/>
 
                     <TextView
                         android:id="@+id/third_image_caption"
