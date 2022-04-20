@@ -16,7 +16,7 @@ import java.io.File;
 public class CompleteProfileViewModel extends AndroidViewModel {
 
     private CompleteProfileRepository completeProfileRepository;
-
+    public LiveData<Integer> uploadedPhotoId;
 
     //this object is going to store user's inputs during the complete profile process
     private MutableLiveData<CompleteProfileInput> completeProfileInputData = new MutableLiveData<>();
@@ -35,7 +35,7 @@ public class CompleteProfileViewModel extends AndroidViewModel {
     }
 
     public void uploadPromptPhoto(int id, String captionText, File file){
-        completeProfileRepository.uploadUserPromptPhoto(id,captionText,file,getApplication().getApplicationContext());
+        uploadedPhotoId = completeProfileRepository.uploadUserPromptPhoto(id,captionText,file,getApplication().getApplicationContext());
     }
 
     public void saveCompletProfileInputData(CompleteProfileInput profile) {

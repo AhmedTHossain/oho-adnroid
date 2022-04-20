@@ -359,6 +359,9 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
                                     alertDialog.dismiss();
 
                                     completeProfileViewModel.uploadPromptPhoto(userProfile.getId(),editTextFirstImageCaption.getText().toString(),file);
+                                    completeProfileViewModel.uploadedPhotoId.observe(CompleteProfileActivity.this,id ->{
+                                        Log.d("CompleteProfileActivity","profile id for first prompt photo = "+id);
+                                    });
                                 } else
                                     Toast.makeText(CompleteProfileActivity.this, "Must enter a caption!", Toast.LENGTH_SHORT).show();
                                 break;
@@ -369,6 +372,9 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
                                     alertDialog.dismiss();
 
                                     completeProfileViewModel.uploadPromptPhoto(userProfile.getId(),editTextSecondImageCaption.getText().toString(),file);
+                                    completeProfileViewModel.uploadedPhotoId.observe(CompleteProfileActivity.this,id ->{
+                                        Log.d("CompleteProfileActivity","profile id for second prompt photo = "+id);
+                                    });
                                 } else
                                     Toast.makeText(CompleteProfileActivity.this, "Must enter a caption!", Toast.LENGTH_SHORT).show();
                                 break;
@@ -379,6 +385,9 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
                                     alertDialog.dismiss();
 
                                     completeProfileViewModel.uploadPromptPhoto(userProfile.getId(),editTextThirdImageCaption.getText().toString(),file);
+                                    completeProfileViewModel.uploadedPhotoId.observe(CompleteProfileActivity.this,id ->{
+                                        Log.d("CompleteProfileActivity","profile id for third prompt photo = "+id);
+                                    });
                                 } else
                                     Toast.makeText(CompleteProfileActivity.this, "Must enter a caption!", Toast.LENGTH_SHORT).show();
                                 break;
