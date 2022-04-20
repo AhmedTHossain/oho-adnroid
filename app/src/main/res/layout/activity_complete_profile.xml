@@ -322,7 +322,7 @@
                 app:cardBackgroundColor="@color/white">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="@dimen/_200sdp"
                     android:layout_gravity="center"
                     android:padding="@dimen/_25sdp">
@@ -356,7 +356,7 @@
 
                     <TextView
                         android:id="@+id/first_image_caption"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:background="@null"
@@ -430,7 +430,7 @@
                 app:cardBackgroundColor="@color/white">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="@dimen/_200sdp"
                     android:layout_gravity="center"
                     android:padding="@dimen/_25sdp">
@@ -464,7 +464,7 @@
 
                     <TextView
                         android:id="@+id/second_image_caption"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:background="@null"
@@ -538,7 +538,7 @@
                 app:cardBackgroundColor="@color/white">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="@dimen/_200sdp"
                     android:layout_gravity="center"
                     android:padding="@dimen/_25sdp">
@@ -572,7 +572,7 @@
 
                     <TextView
                         android:id="@+id/third_image_caption"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:background="@null"
