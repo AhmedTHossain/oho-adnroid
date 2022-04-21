@@ -1,6 +1,7 @@
 package com.oho.oho.views.prompt;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,11 +13,17 @@ import com.oho.oho.R;
 public class PromptQuestionActivity extends AppCompatActivity {
 
     private View fabButton;
+    private int promptNumber, promptPhotoId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prompt_question);
+
+        promptNumber  = getIntent().getIntExtra("promptNumber",0);
+        promptPhotoId = getIntent().getIntExtra("promptPhotoId",promptPhotoId);
+
+        Log.d("PromptQuestionActivity","promptNumber = "+promptNumber+ " & promptPhotoId = "+promptPhotoId);
 
         fabButton = findViewById(R.id.button_fab_prompt);
 

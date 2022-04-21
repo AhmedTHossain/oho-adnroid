@@ -39,7 +39,6 @@ public class PromptListFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerview);
 
         initPromptViewModel();
-
         promptViewModel.getAllPromptList();
         promptViewModel.promptList.observe(getViewLifecycleOwner(), prompts -> {
             promptArrayList.addAll(prompts);

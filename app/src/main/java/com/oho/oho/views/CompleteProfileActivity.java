@@ -243,7 +243,7 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
                 Toast.makeText(this, "Enter a bio first!", Toast.LENGTH_SHORT).show();
         }
         if (v.getId() == R.id.card_prompt_question_1){
-            navigateToPromptQuestionActivity();
+            navigateToPromptQuestionActivity(firstPhotoId,1);
         }
     }
 
@@ -317,8 +317,11 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
         return cursor.getString(column_index);
     }
 
-    public void navigateToPromptQuestionActivity(){
-        startActivity(new Intent(this, PromptQuestionActivity.class));
+    public void navigateToPromptQuestionActivity(int promptPhotoId, int promptNumber){
+        Intent intent = new Intent(CompleteProfileActivity.this,PromptQuestionActivity.class);
+        intent.putExtra("promptPhotoId",promptPhotoId);
+        intent.putExtra("promptNumber",promptNumber);
+        startActivity(intent);
     }
 
     //function to convert height input to centimeters

@@ -10,6 +10,15 @@ public class Prompt {
     @SerializedName("prompt_id")
     @Expose
     private Integer promptId;
+    private boolean isSelected;
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
 
     public String getName() {
         return name;

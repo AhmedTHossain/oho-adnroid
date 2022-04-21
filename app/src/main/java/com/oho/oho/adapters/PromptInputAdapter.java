@@ -20,7 +20,7 @@ public class PromptInputAdapter extends RecyclerView.Adapter<PromptInputAdapter.
 
     private Context context;
     private ArrayList<Prompt> promptList;
-    private String promptSelected = "";
+    private int promptSelected = 0;
 
     public PromptInputAdapter(Context context, ArrayList<Prompt> promptList) {
         this.context = context;
@@ -38,6 +38,14 @@ public class PromptInputAdapter extends RecyclerView.Adapter<PromptInputAdapter.
     @Override
     public void onBindViewHolder(@NonNull PromptHolder holder, int position) {
         holder.getTextView().setText(promptList.get(position).getName());
+        if (promptList.get(position).isSelected()){
+            holder.getTextView().setBackgroundResource(R.drawable.input_selected_background);
+            holder.getTextView().setTextColor(Color.parseColor("#FFFFFF"));
+        }
+        else {
+            holder.getTextView().setBackgroundColor(context.getResources().getColor(R.color.white,null));
+            holder.getTextView().setTextColor(context.getResources().getColor(R.color.black,null));
+        }
     }
 
     @Override
@@ -51,31 +59,26 @@ public class PromptInputAdapter extends RecyclerView.Adapter<PromptInputAdapter.
         public PromptHolder(@NonNull View itemView) {
             super(itemView);
 
-            textView = (TextView) itemView.findViewById(R.id.text_prompt);
-            itemView.setOnClickListener(new View.OnClickListener() {
+            textView = itemView.findViewById(R.id.text_prompt);
+
+            textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                        Log.d("RIFA","single input selected = "+promptSelected);
-                    if (promptSelected.equals("")) {
-                        textView.setBackgroundResource(R.drawable.input_selected_background);
-                        textView.setTextColor(Color.parseColor("#FFFFFF"));
-                        textView.setTag("selected");
-
-                        promptSelected = textView.getText().toString();
-//                        onInputSelectListener.onInputSelect(promptSelected);
-                    } else {
-                        if (textView.getText().equals(promptSelected)) {
-                            textView.setBackgroundColor(Color.parseColor("#FFFFFF"));
-                            textView.setTextColor(Color.parseColor("#000000"));
-                            textView.setTag("notselected");
-
-                            promptSelected = "";
-//                            onInputDeselectListener.onInputDeselect(textView.getText().toString());
-                        } else
-                            Toast.makeText(context, "Cannot select multiple religion!", Toast.LENGTH_SHORT).show();
+                    if (promptSelected == 0){
+                        promptList.get(getAdapterPosition()).setSelected(true);
+                        promptSelected = promptList.get(getAdapterPosition()).getPromptId();
                     }
-                }
+                    else {
+                        if (promptSelected == promptList.get(getAdapterPosition()).getPromptId()){
+                            promptList.get(getAdapterPosition()).setSelected(false);
+                            promptSelected = 0;
+                        }
+                        else
+                            Toast.makeText(context, "Cannot select multiple.", Toast.LENGTH_SHORT).show();
+                    }
 
+                    notifyDataSetChanged();
+                }
             });
         }
         public TextView getTextView() {
