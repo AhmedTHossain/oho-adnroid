@@ -25,6 +25,6 @@ public class MainActivity extends AppCompatActivity {
         String profile = mPrefs.getString("profile","");
         Profile userProfile = gson.fromJson(profile, Profile.class);
 
-        text.setText(userProfile.getEmail());
+//        text.setText(userProfile.getEmail());
     }
 }

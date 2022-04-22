@@ -19,6 +19,7 @@ public class PromptAnswer {
     @SerializedName("order_no")
     @Expose
     private Integer orderNo;
+    private String promptQuestion;
 
     public String getAnswer() {
         return answer;
@@ -58,5 +59,13 @@ public class PromptAnswer {
 
     public void setOrderNo(Integer orderNo) {
         this.orderNo = orderNo;
+    }
+
+    public String getPromptQuestion() {
+        return promptQuestion;
+    }
+
+    public void setPromptQuestion(String promptQuestion) {
+        this.promptQuestion = promptQuestion;
     }
 }

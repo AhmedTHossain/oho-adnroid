@@ -50,13 +50,6 @@ public class PromptRepository {
             @Override
             public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                 Toast.makeText(context, "Prompt answer uploaded successfully!", Toast.LENGTH_SHORT).show();
-
-                SharedPreferences mPrefs = context.getSharedPreferences("pref",Context.MODE_PRIVATE);
-                SharedPreferences.Editor prefsEditor = mPrefs.edit();
-                Gson gson = new Gson();
-                String json = gson.toJson(promptAnswer);
-                prefsEditor.putString("promptAnswer"+promptAnswer.getOrderNo(), json);
-                prefsEditor.apply();
             }
 
             @Override

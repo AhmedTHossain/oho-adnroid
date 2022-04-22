@@ -50,12 +50,13 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
 
     private CompleteProfileViewModel completeProfileViewModel;
     private Profile userProfile;
+    private PromptAnswer userPromptAnswer1, userPromptAnswer2, userPromptAnswer3;
     private static final int PICKER_REQUEST_CODE = 1;
     private static final int SELECT_PICTURE = 200;
-    private TextView nameAgeText, locationText, professionText, genderText, heightText, religionText, vaccinatedText, raceText, textButtonSave, editTextFirstImageCaption, editTextSecondImageCaption, editTextThirdImageCaption, editTextBio;
+    private TextView nameAgeText, locationText, professionText, genderText, heightText, religionText, vaccinatedText, raceText, textButtonSave, editTextFirstImageCaption, editTextSecondImageCaption, editTextThirdImageCaption, editTextBio, promptQuestion1Text, promptQuestion2Text, promptQuestion3Text, promptAnswer1Text, promptAnswer2Text, promptAnswer3Text;
     private CardView buttonPickImage, buttonPickFirstImage, buttonPickSecondImage, buttonPickThirdImage, selectButtonPrompt1, selectButtonPrompt2, selectButtonPrompt3;
     private CircleImageView profileImageVIew, firstImageView, secondImageView, thirdImageView;
-
+    private LinearLayout prompt1Layout, answer1Layout, prompt2Layout, answer2Layout, prompt3Layout, answer3Layout;
     private String imageFor = "";
     private int firstPhotoId, secondPhotoId, thirdPhotoId;
     private PromptAnswer promptAnswer1, promptAnswer2, promptAnswer3;
@@ -74,8 +75,17 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
         //fetching newly registered profile
         SharedPreferences mPrefs = getSharedPreferences("pref", Context.MODE_PRIVATE);
         Gson gson = new Gson();
-        String profile = mPrefs.getString("profile","");
-        userProfile = gson.fromJson(profile, Profile.class);
+
+        String profile      = mPrefs.getString("profile","");
+        userProfile         = gson.fromJson(profile, Profile.class);
+
+        String promptAnswer1 = mPrefs.getString("promptAnswer1","");
+        String promptAnswer2 = mPrefs.getString("promptAnswer2", "");
+        String promptAnswer3 = mPrefs.getString("promptAnswer3", "");
+
+        userPromptAnswer1    = gson.fromJson(promptAnswer1, PromptAnswer.class);
+        userPromptAnswer2    = gson.fromJson(promptAnswer2, PromptAnswer.class);
+        userPromptAnswer3    = gson.fromJson(promptAnswer3, PromptAnswer.class);
 
         Log.d("CompleteProfileActivity","user profile id in complete profile activity = "+userProfile.getId());
 
@@ -98,12 +108,27 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
         secondImageView       = findViewById(R.id.second_image_view);
         thirdImageView        = findViewById(R.id.third_image_view);
 
+        prompt1Layout         = findViewById(R.id.select_prompt_1_layout);
+        prompt2Layout         = findViewById(R.id.select_prompt_2_layout);
+        prompt3Layout         = findViewById(R.id.select_prompt_3_layout);
+
+        answer1Layout         = findViewById(R.id.answer_prompt_1_layout);
+        answer2Layout         = findViewById(R.id.answer_prompt_2_layout);
+        answer3Layout         = findViewById(R.id.answer_prompt_3_layout);
+
+        promptQuestion1Text   = findViewById(R.id.prompt_question_1_text);
+        promptQuestion2Text   = findViewById(R.id.prompt_question_2_text);
+        promptQuestion3Text   = findViewById(R.id.prompt_question_3_text);
+
+        promptAnswer1Text     = findViewById(R.id.prompt_answer_1_text);
+        promptAnswer2Text     = findViewById(R.id.prompt_answer_2_text);
+        promptAnswer3Text     = findViewById(R.id.prompt_answer_3_text);
+
         editTextFirstImageCaption  = findViewById(R.id.first_image_caption);
         editTextSecondImageCaption = findViewById(R.id.second_image_caption);
         editTextThirdImageCaption  = findViewById(R.id.third_image_caption);
 
         selectButtonPrompt1   = findViewById(R.id.card_prompt_question_1);
-
         selectButtonPrompt2   = findViewById(R.id.card_prompt_question_2);
         selectButtonPrompt3   = findViewById(R.id.card_prompt_question_3);
 
@@ -225,6 +250,33 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
                         }
                     }
                 });
+
+        if (userPromptAnswer1 != null){
+            prompt1Layout.setVisibility(View.GONE);
+            promptQuestion1Text.setText(userPromptAnswer1.getPromptQuestion());
+            promptAnswer1Text.setText(userPromptAnswer1.getAnswer());
+            answer1Layout.setVisibility(View.VISIBLE);
+        } else {
+            answer1Layout.setVisibility(View.GONE);
+        }
+
+        if (userPromptAnswer2 != null){
+            prompt2Layout.setVisibility(View.GONE);
+            promptQuestion2Text.setText(userPromptAnswer2.getPromptQuestion());
+            promptAnswer2Text.setText(userPromptAnswer2.getAnswer());
+            answer2Layout.setVisibility(View.VISIBLE);
+        } else {
+            answer2Layout.setVisibility(View.GONE);
+        }
+
+        if (userPromptAnswer3 != null){
+            prompt3Layout.setVisibility(View.GONE);
+            promptQuestion3Text.setText(userPromptAnswer3.getPromptQuestion());
+            promptAnswer3Text.setText(userPromptAnswer3.getAnswer());
+            answer3Layout.setVisibility(View.VISIBLE);
+        } else {
+            answer3Layout.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -242,12 +294,12 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
         if (v.getId() == R.id.button_text_save_profile){
 
         }
-        if (v.getId() == R.id.card_prompt_question_1){
-            if (firstPhotoId != 0)
-                navigateToPromptQuestionActivity(firstPhotoId,1);
-            else
-                Toast.makeText(getApplicationContext(),"Please enter a picture first!",Toast.LENGTH_SHORT).show();
-        }
+        if (v.getId() == R.id.card_prompt_question_1)
+            navigateToPromptQuestionActivity(1);
+        if (v.getId() == R.id.card_prompt_question_2)
+            navigateToPromptQuestionActivity(2);
+        if (v.getId() == R.id.card_prompt_question_3)
+            navigateToPromptQuestionActivity(3);
     }
 
     private void showBottomSheetDialog(String imageName) {
@@ -320,13 +372,13 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
         return cursor.getString(column_index);
     }
 
-    public void navigateToPromptQuestionActivity(int promptPhotoId, int promptNumber){
+    public void navigateToPromptQuestionActivity(int promptOrderNumber){
         Intent intent = new Intent(CompleteProfileActivity.this,PromptQuestionActivity.class);
-        intent.putExtra("promptPhotoId",promptPhotoId);
-        intent.putExtra("promptNumber",promptNumber);
+        intent.putExtra("promptOrderNumber",promptOrderNumber);
         startActivity(intent);
     }
 
+    //function to show alert box for entering captions for prompt photos
     private void showCaptionInputDialog(String captionfor, File file) {
         // get alert_dialog.xml view
         LayoutInflater li = LayoutInflater.from(getApplicationContext());
@@ -438,6 +490,7 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
         alertDialog.show();
     }
 
+    //function to show alert box for entering bio
     private void showBioInputDialog(){
         // get alert_dialog.xml view
         LayoutInflater li = LayoutInflater.from(getApplicationContext());

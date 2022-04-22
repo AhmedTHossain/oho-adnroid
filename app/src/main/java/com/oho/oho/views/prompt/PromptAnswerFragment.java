@@ -73,10 +73,31 @@ public class PromptAnswerFragment extends Fragment {
                     promptAnswer.setPictureId(promptPhotoId);
                     promptAnswer.setUserId(fetchNewlyRegisteredProfile().getId());
                     promptAnswer.setAnswer(answerEditText.getText().toString());
+                    promptAnswer.setPromptQuestion(prompt_question);
 
-                    promptViewModel.uploadUserPrompt(promptAnswer);
+//                    promptViewModel.uploadUserPrompt(promptAnswer);
 
-                    
+                    //saving the uploaded prompt answer in shared preference
+                    SharedPreferences mPrefs = requireContext().getSharedPreferences("pref",Context.MODE_PRIVATE);
+                    SharedPreferences.Editor prefsEditor = mPrefs.edit();
+
+                    Gson gson = new Gson();
+                    String json = gson.toJson(promptAnswer);
+
+                    switch (promptAnswer.getOrderNo()){
+                        case 1:
+                            prefsEditor.putString("promptAnswer1", json);
+                            break;
+                        case 2:
+                            prefsEditor.putString("promptAnswer2", json);
+                            break;
+                        case 3:
+                            prefsEditor.putString("promptAnswer3", json);
+                            break;
+                    }
+
+                    prefsEditor.apply();
+
                     startActivity(new Intent(requireActivity(), CompleteProfileActivity.class));
                 }
             }

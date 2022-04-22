@@ -22,7 +22,7 @@ public class PromptQuestionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prompt_question);
 
-        promptNumber  = getIntent().getIntExtra("promptNumber",0);
+        promptNumber  = getIntent().getIntExtra("promptOrderNumber",0);
         promptPhotoId = getIntent().getIntExtra("promptPhotoId",promptPhotoId);
 
         Log.d("PromptQuestionActivity","promptNumber = "+promptNumber+ " & promptPhotoId = "+promptPhotoId);
