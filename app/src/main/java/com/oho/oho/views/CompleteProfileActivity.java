@@ -37,6 +37,7 @@ import com.google.gson.Gson;
 import com.oho.oho.R;
 import com.oho.oho.models.CompleteProfileInput;
 import com.oho.oho.models.Profile;
+import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.models.PromptPhoto;
 import com.oho.oho.viewmodels.CompleteProfileViewModel;
 import com.oho.oho.views.prompt.PromptQuestionActivity;
@@ -51,13 +52,13 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
     private Profile userProfile;
     private static final int PICKER_REQUEST_CODE = 1;
     private static final int SELECT_PICTURE = 200;
-    private TextView nameAgeText, locationText, professionText, genderText, heightText, religionText, vaccinatedText, raceText, textButtonSave, editTextFirstImageCaption, editTextSecondImageCaption, editTextThirdImageCaption;
-    private EditText editTextBio;
+    private TextView nameAgeText, locationText, professionText, genderText, heightText, religionText, vaccinatedText, raceText, textButtonSave, editTextFirstImageCaption, editTextSecondImageCaption, editTextThirdImageCaption, editTextBio;
     private CardView buttonPickImage, buttonPickFirstImage, buttonPickSecondImage, buttonPickThirdImage, selectButtonPrompt1, selectButtonPrompt2, selectButtonPrompt3;
     private CircleImageView profileImageVIew, firstImageView, secondImageView, thirdImageView;
 
     private String imageFor = "";
     private int firstPhotoId, secondPhotoId, thirdPhotoId;
+    private PromptAnswer promptAnswer1, promptAnswer2, promptAnswer3;
 
     private ActivityResultLauncher<Intent> galleryPickResultLauncher;
 
@@ -102,6 +103,7 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
         editTextThirdImageCaption  = findViewById(R.id.third_image_caption);
 
         selectButtonPrompt1   = findViewById(R.id.card_prompt_question_1);
+
         selectButtonPrompt2   = findViewById(R.id.card_prompt_question_2);
         selectButtonPrompt3   = findViewById(R.id.card_prompt_question_3);
 
@@ -127,9 +129,13 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
         firstImageView.setOnClickListener(this);
         secondImageView.setOnClickListener(this);
         thirdImageView.setOnClickListener(this);
+
         buttonPickFirstImage.setOnClickListener(this);
         buttonPickSecondImage.setOnClickListener(this);
         buttonPickThirdImage.setOnClickListener(this);
+
+        editTextBio.setOnClickListener(this);
+
         textButtonSave.setOnClickListener(this);
 
         selectButtonPrompt1.setOnClickListener(this);
@@ -231,19 +237,16 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
             showBottomSheetDialog("second");
         if (v.getId() == R.id.button_third_profile_image || v.getId() == R.id.third_image_view)
             showBottomSheetDialog("third");
+        if (v.getId() == R.id.edit_text_bio)
+            showBioInputDialog();
         if (v.getId() == R.id.button_text_save_profile){
-            if (!TextUtils.isEmpty(editTextBio.getText())) {
-                userProfile.setBio(editTextBio.getText().toString());
 
-                completedProfile.setBio(editTextBio.getText().toString());
-                completeProfileViewModel.saveCompletProfileInputData(completedProfile);
-
-//                completeProfileViewModel.updateUser(userProfile);
-            } else
-                Toast.makeText(this, "Enter a bio first!", Toast.LENGTH_SHORT).show();
         }
         if (v.getId() == R.id.card_prompt_question_1){
-            navigateToPromptQuestionActivity(firstPhotoId,1);
+            if (firstPhotoId != 0)
+                navigateToPromptQuestionActivity(firstPhotoId,1);
+            else
+                Toast.makeText(getApplicationContext(),"Please enter a picture first!",Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -324,12 +327,6 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
         startActivity(intent);
     }
 
-    //function to convert height input to centimeters
-    private String convertHeightFromCm(double height){
-        double height_in_inch = height / 2.54;
-        return String.valueOf(height_in_inch);
-    }
-
     private void showCaptionInputDialog(String captionfor, File file) {
         // get alert_dialog.xml view
         LayoutInflater li = LayoutInflater.from(getApplicationContext());
@@ -362,7 +359,8 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
                             case "first":
                                 if (!TextUtils.isEmpty(userInput.getText())) {
                                     editTextFirstImageCaption.setTextColor(ResourcesCompat.getColor(getResources(), R.color.black, null));
-                                    editTextFirstImageCaption.setText(userInput.getText().toString());
+                                    String caption = "\""+userInput.getText().toString()+"\"";
+                                    editTextFirstImageCaption.setText(caption);
                                     alertDialog.dismiss();
 
                                     completeProfileViewModel.uploadPromptPhoto(userProfile.getId(),editTextFirstImageCaption.getText().toString(),file);
@@ -385,7 +383,8 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
                             case "second":
                                 if (!TextUtils.isEmpty(userInput.getText())) {
                                     editTextSecondImageCaption.setTextColor(ResourcesCompat.getColor(getResources(), R.color.black, null));
-                                    editTextSecondImageCaption.setText(userInput.getText().toString());
+                                    String caption = "\""+userInput.getText().toString()+"\"";
+                                    editTextSecondImageCaption.setText(caption);
                                     alertDialog.dismiss();
 
                                     completeProfileViewModel.uploadPromptPhoto(userProfile.getId(),editTextSecondImageCaption.getText().toString(),file);
@@ -408,7 +407,8 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
                             case "third":
                                 if (!TextUtils.isEmpty(userInput.getText())) {
                                     editTextThirdImageCaption.setTextColor(ResourcesCompat.getColor(getResources(), R.color.black, null));
-                                    editTextThirdImageCaption.setText(userInput.getText().toString());
+                                    String caption = "\""+userInput.getText().toString()+"\"";
+                                    editTextThirdImageCaption.setText(caption);
                                     alertDialog.dismiss();
 
                                     completeProfileViewModel.uploadPromptPhoto(userProfile.getId(),editTextThirdImageCaption.getText().toString(),file);
@@ -434,6 +434,46 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
             }
         });
 
+        // show it
+        alertDialog.show();
+    }
+
+    private void showBioInputDialog(){
+        // get alert_dialog.xml view
+        LayoutInflater li = LayoutInflater.from(getApplicationContext());
+        View promptsView = li.inflate(R.layout.bio_input_dialog, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                this);
+        // set alert_dialog.xml to alertdialog builder
+        alertDialogBuilder.setView(promptsView);
+        final EditText userInput = promptsView.findViewById(R.id.userInputDialog);
+        // set dialog message
+        alertDialogBuilder.setCancelable(false).setPositiveButton("DONE", null);
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (!TextUtils.isEmpty(userInput.getText())){
+                            String bio = userInput.getText().toString();
+                            userProfile.setBio(bio);
+                            completedProfile.setBio(bio);
+                            completeProfileViewModel.saveCompletProfileInputData(completedProfile);
+                            completeProfileViewModel.updateUser(userProfile);
+
+                            editTextBio.setText(bio);
+                            editTextBio.setTextColor(getResources().getColor(R.color.black,null));
+                            alertDialog.dismiss();
+                        } else
+                            Toast.makeText(CompleteProfileActivity.this, "Enter a bio first!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
         // show it
         alertDialog.show();
     }

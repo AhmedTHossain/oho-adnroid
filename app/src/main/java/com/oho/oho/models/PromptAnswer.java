@@ -1,40 +1,24 @@
 package com.oho.oho.models;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class PromptAnswer {
-    private int userId, promptId, pictureId, orderNumber;
+    @SerializedName("answer")
+    @Expose
     private String answer;
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public int getPromptId() {
-        return promptId;
-    }
-
-    public void setPromptId(int promptId) {
-        this.promptId = promptId;
-    }
-
-    public int getPictureId() {
-        return pictureId;
-    }
-
-    public void setPictureId(int pictureId) {
-        this.pictureId = pictureId;
-    }
-
-    public int getOrderNumber() {
-        return orderNumber;
-    }
-
-    public void setOrderNumber(int orderNumber) {
-        this.orderNumber = orderNumber;
-    }
+    @SerializedName("user_id")
+    @Expose
+    private Integer userId;
+    @SerializedName("prompt_id")
+    @Expose
+    private Integer promptId;
+    @SerializedName("picture_id")
+    @Expose
+    private Integer pictureId;
+    @SerializedName("order_no")
+    @Expose
+    private Integer orderNo;
 
     public String getAnswer() {
         return answer;
@@ -42,5 +26,37 @@ public class PromptAnswer {
 
     public void setAnswer(String answer) {
         this.answer = answer;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public Integer getPromptId() {
+        return promptId;
+    }
+
+    public void setPromptId(Integer promptId) {
+        this.promptId = promptId;
+    }
+
+    public Integer getPictureId() {
+        return pictureId;
+    }
+
+    public void setPictureId(Integer pictureId) {
+        this.pictureId = pictureId;
+    }
+
+    public Integer getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(Integer orderNo) {
+        this.orderNo = orderNo;
     }
 }

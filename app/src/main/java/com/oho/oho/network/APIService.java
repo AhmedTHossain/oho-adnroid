@@ -2,11 +2,13 @@ package com.oho.oho.network;
 
 import com.oho.oho.models.Profile;
 import com.oho.oho.models.Prompt;
+import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.responses.UploadProfilePhotoResponse;
 import com.oho.oho.responses.UploadPromptPhotoResponse;
 import com.oho.oho.responses.VerifyEmailResponse;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.MultipartBody;
@@ -43,4 +45,8 @@ public interface APIService {
     @Multipart
     @POST("upload/upload_picture")
     Call<List<UploadPromptPhotoResponse>> uploadPromptPhoto(@Part("user_id") RequestBody user_id, @Part("caption") RequestBody caption, @Part MultipartBody.Part file);
+
+    // for uploading user prompts
+    @POST("users/prompt_answer/add")
+    Call<String> uploadPrompt(@Body ArrayList<PromptAnswer> promptAnswer);
 }

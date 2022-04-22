@@ -1,6 +1,7 @@
 package com.oho.oho.adapters;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,6 +77,13 @@ public class PromptInputAdapter extends RecyclerView.Adapter<PromptInputAdapter.
                         else
                             Toast.makeText(context, "Cannot select multiple.", Toast.LENGTH_SHORT).show();
                     }
+
+
+                    SharedPreferences sharedPref = context.getSharedPreferences("prompt_selected", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putInt("id", promptSelected);
+                    editor.putString("question",promptList.get(getAdapterPosition()).getName());
+                    editor.apply();
 
                     notifyDataSetChanged();
                 }

@@ -1,5 +1,7 @@
 package com.oho.oho.views.prompt;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -27,6 +29,7 @@ public class PromptListFragment extends Fragment {
     private PromptViewModel promptViewModel;
     private ArrayList<Prompt> promptArrayList = new ArrayList<>();
 
+
     public PromptListFragment() {
         // Required empty public constructor
     }
@@ -39,6 +42,13 @@ public class PromptListFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerview);
 
         initPromptViewModel();
+
+        SharedPreferences sharedPref = requireContext().getSharedPreferences("prompt_selected", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("id", 0);
+        editor.putString("question",null);
+        editor.apply();
+
         promptViewModel.getAllPromptList();
         promptViewModel.promptList.observe(getViewLifecycleOwner(), prompts -> {
             promptArrayList.addAll(prompts);

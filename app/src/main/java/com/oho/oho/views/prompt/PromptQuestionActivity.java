@@ -1,8 +1,10 @@
 package com.oho.oho.views.prompt;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -34,9 +36,22 @@ public class PromptQuestionActivity extends AppCompatActivity {
         fabButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment;
-                fragment = new PromptAnswerFragment();
-                loadFragment(fragment);
+                SharedPreferences sharedPref = getSharedPreferences("prompt_selected", MODE_PRIVATE);
+                int prompt_id = sharedPref.getInt("id", 0);
+                if (prompt_id != 0) {
+                    Fragment fragment;
+                    fragment = new PromptAnswerFragment();
+
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("promptPhotoId", promptPhotoId);
+                    bundle.putInt("promptNumber", promptNumber);
+
+                    fragment.setArguments(bundle);
+
+                    loadFragment(fragment);
+                    fabButton.setVisibility(View.GONE);
+                } else
+                    Toast.makeText(getApplicationContext(), "Please select a prompt first!", Toast.LENGTH_SHORT).show();
             }
         });
     }

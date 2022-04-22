@@ -23,14 +23,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_30sdp">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:layout_marginStart="@dimen/_20sdp"
-                    android:layout_weight="2"
+                    android:layout_weight="1"
                     android:fontFamily="@font/sf_pro_rounded_medium"
                     android:text="Your Profile"
                     android:textColor="@color/black"
@@ -44,9 +45,9 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:fontFamily="@font/sf_pro_rounded_regular"
-                    android:gravity="center"
-                    android:text="Save"
-                    android:textColor="@color/black"
+                    android:gravity="end"
+                    android:text="Create Profile"
+                    android:textColor="@color/indicatioractive"
                     android:textSize="@dimen/_18ssp" />
             </LinearLayout>
 
@@ -243,20 +244,19 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <EditText
+                <TextView
                     android:id="@+id/edit_text_bio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_20sdp"
                     android:layout_marginEnd="@dimen/_20sdp"
                     android:layout_marginBottom="@dimen/_20sdp"
-                    android:background="@null"
                     android:fontFamily="@font/sf_pro_rounded_regular"
-                    android:hint="@string/please_fill_in_about_yourself"
-                    android:inputType="text"
-                    android:textColor="@color/black"
-                    android:textColorHint="#B0ADAD"
-                    android:textSize="@dimen/_14ssp" />
+                    android:text="@string/please_fill_in_about_yourself"
+                    android:textColor="#B0ADAD"
+                    android:textSize="@dimen/_14ssp"
+                    android:clickable="true"
+                    android:focusable="true"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -361,6 +361,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:textAlignment="center"
                         android:background="@null"
                         android:fontFamily="@font/sf_pro_rounded_regular"
                         android:text="@string/caption_for_the_photo"
@@ -389,9 +390,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:paddingStart="@dimen/_20sdp"
-                    android:paddingTop="@dimen/_20sdp"
+                    android:paddingTop="@dimen/_10sdp"
                     android:paddingEnd="@dimen/_10sdp"
-                    android:paddingBottom="@dimen/_20sdp">
+                    android:paddingBottom="@dimen/_10sdp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -471,6 +472,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:textAlignment="center"
                         android:background="@null"
                         android:fontFamily="@font/sf_pro_rounded_regular"
                         android:text="@string/caption_for_the_photo"
@@ -581,6 +583,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:textAlignment="center"
                         android:background="@null"
                         android:fontFamily="@font/sf_pro_rounded_regular"
                         android:text="@string/caption_for_the_photo"

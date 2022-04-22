@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.oho.oho.models.Prompt;
+import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.repositories.PromptRepository;
 
 import java.util.List;
@@ -24,5 +25,9 @@ public class PromptViewModel extends AndroidViewModel {
 
     public void getAllPromptList(){
         promptList = promptRepository.getPromptList();
+    }
+
+    public void uploadUserPrompt(PromptAnswer promptAnswer){
+        promptRepository.addPrompt(promptAnswer, getApplication().getApplicationContext());
     }
 }
