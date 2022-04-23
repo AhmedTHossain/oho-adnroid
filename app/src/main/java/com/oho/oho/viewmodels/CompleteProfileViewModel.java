@@ -9,7 +9,9 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.oho.oho.models.CompleteProfileInput;
 import com.oho.oho.models.Profile;
+import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.repositories.CompleteProfileRepository;
+import com.oho.oho.repositories.PromptRepository;
 
 import java.io.File;
 
@@ -18,12 +20,15 @@ public class CompleteProfileViewModel extends AndroidViewModel {
     private CompleteProfileRepository completeProfileRepository;
     public LiveData<Integer> uploadedPhotoId;
 
+    private PromptRepository promptRepository;
+
     //this object is going to store user's inputs during the complete profile process
     private MutableLiveData<CompleteProfileInput> completeProfileInputData = new MutableLiveData<>();
 
     public CompleteProfileViewModel(@NonNull Application application) {
         super(application);
         completeProfileRepository = new CompleteProfileRepository();
+        promptRepository = new PromptRepository();
     }
 
     public void updateUser(Profile profile){
@@ -44,5 +49,9 @@ public class CompleteProfileViewModel extends AndroidViewModel {
 
     public LiveData<CompleteProfileInput> getCompletProfileInputData() {
         return completeProfileInputData;
+    }
+
+    public void uploadUserPrompt(PromptAnswer promptAnswer){
+        promptRepository.addPrompt(promptAnswer, getApplication().getApplicationContext());
     }
 }

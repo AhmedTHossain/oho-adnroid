@@ -1,5 +1,7 @@
 package com.oho.oho.models;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -67,5 +69,18 @@ public class PromptAnswer {
 
     public void setPromptQuestion(String promptQuestion) {
         this.promptQuestion = promptQuestion;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "PromptAnswer{" +
+                "answer='" + answer + '\'' +
+                ", userId=" + userId +
+                ", promptId=" + promptId +
+                ", pictureId=" + pictureId +
+                ", orderNo=" + orderNo +
+                ", promptQuestion='" + promptQuestion + '\'' +
+                '}';
     }
 }

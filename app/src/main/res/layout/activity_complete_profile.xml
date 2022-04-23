@@ -301,6 +301,7 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/_16ssp" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/answer_prompt_1_layout"
                     android:layout_width="match_parent"
@@ -309,6 +310,7 @@
                     android:paddingTop="@dimen/_5sdp"
                     android:paddingBottom="@dimen/_5sdp"
                     android:visibility="gone">
+
                     <TextView
                         android:id="@+id/prompt_question_1_text"
                         android:layout_width="wrap_content"
@@ -317,21 +319,22 @@
                         android:layout_marginStart="@dimen/_20sdp"
                         android:layout_marginEnd="@dimen/_20sdp"
                         android:fontFamily="@font/sf_pro_rounded_medium"
-                        android:textStyle="bold"
                         android:text="@string/select_your_prompt_question"
                         android:textColor="@color/indicatioractive"
-                        android:textSize="@dimen/_20ssp" />
+                        android:textSize="@dimen/_20ssp"
+                        android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/prompt_answer_1_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
                         android:fontFamily="@font/sf_pro_rounded_regular"
                         android:text="@string/select_your_prompt_question"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_16ssp"
-                        android:layout_marginStart="@dimen/_20sdp"
-                        android:layout_marginEnd="@dimen/_20sdp"/>
+                        android:textSize="@dimen/_16ssp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -428,7 +431,7 @@
                     android:paddingTop="@dimen/_10sdp"
                     android:paddingEnd="@dimen/_10sdp"
                     android:paddingBottom="@dimen/_10sdp"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -453,7 +456,7 @@
                     android:orientation="vertical"
                     android:paddingTop="@dimen/_5sdp"
                     android:paddingBottom="@dimen/_5sdp"
-                    android:visibility="visible">
+                    android:visibility="gone">
                     <TextView
                         android:id="@+id/prompt_question_2_text"
                         android:layout_width="wrap_content"

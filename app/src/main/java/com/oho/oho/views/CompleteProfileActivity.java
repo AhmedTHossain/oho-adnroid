@@ -57,9 +57,8 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
     private CardView buttonPickImage, buttonPickFirstImage, buttonPickSecondImage, buttonPickThirdImage, selectButtonPrompt1, selectButtonPrompt2, selectButtonPrompt3;
     private CircleImageView profileImageVIew, firstImageView, secondImageView, thirdImageView;
     private LinearLayout prompt1Layout, answer1Layout, prompt2Layout, answer2Layout, prompt3Layout, answer3Layout;
-    private String imageFor = "";
-    private int firstPhotoId, secondPhotoId, thirdPhotoId;
-    private PromptAnswer promptAnswer1, promptAnswer2, promptAnswer3;
+    private String imageFor = "", firstPromptPhotoCaption, secondPromptPhotoCaption,thirdPromptPhotoCaption;
+    private int firstPromptPhotoId, secondPromptPhotoId, thirdPromptPhotoId;
 
     private ActivityResultLauncher<Intent> galleryPickResultLauncher;
 
@@ -148,6 +147,11 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
         else
             vaccinatedText.setText("Not Vaccinated");
         raceText.setText(userProfile.getRace());
+
+        if (!userProfile.getBio().equals("")) {
+            editTextBio.setTextColor(getResources().getColor(R.color.black,null));
+            editTextBio.setText(userProfile.getBio());
+        }
 
         buttonPickImage.setOnClickListener(this);
         profileImageVIew.setOnClickListener(this);
@@ -276,6 +280,50 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
             answer3Layout.setVisibility(View.VISIBLE);
         } else {
             answer3Layout.setVisibility(View.GONE);
+        }
+
+        CompleteProfileInput completeProfileInput = completeProfileViewModel.getCompletProfileInputData().getValue();
+
+        firstPromptPhotoId  = mPrefs.getInt("firstPromptPhotoId",0);
+        secondPromptPhotoId = mPrefs.getInt("secondPromptPhotoId",0);
+        thirdPromptPhotoId = mPrefs.getInt("thirdPromptPhotoId",0);
+
+
+        firstPromptPhotoCaption = mPrefs.getString("firstPromptPhotoCaption",null);
+        secondPromptPhotoCaption = mPrefs.getString("secondPromptPhotoCaption",null);
+        thirdPromptPhotoCaption = mPrefs.getString("thirdPromptPhotoCaption",null);
+
+        if(firstPromptPhotoId != 0 && firstPromptPhotoCaption != null) {
+            Glide.with(getApplicationContext())
+                    .load("http://3.217.3.219:5000/api/v1/upload/get_picture?picture_id=" +firstPromptPhotoId)
+                    .into(firstImageView);
+
+            buttonPickFirstImage.setVisibility(View.GONE);
+            firstImageView.setVisibility(View.VISIBLE);
+            editTextFirstImageCaption.setText(firstPromptPhotoCaption);
+            editTextFirstImageCaption.setTextColor(getResources().getColor(R.color.black,null));
+        }
+
+        if(secondPromptPhotoId != 0 && secondPromptPhotoCaption != null) {
+            Glide.with(getApplicationContext())
+                    .load("http://3.217.3.219:5000/api/v1/upload/get_picture?picture_id=" +secondPromptPhotoId)
+                    .into(secondImageView);
+
+            buttonPickSecondImage.setVisibility(View.GONE);
+            secondImageView.setVisibility(View.VISIBLE);
+            editTextSecondImageCaption.setText(secondPromptPhotoCaption);
+            editTextSecondImageCaption.setTextColor(getResources().getColor(R.color.black,null));
+        }
+
+        if(thirdPromptPhotoId != 0 && thirdPromptPhotoCaption != null) {
+            Glide.with(getApplicationContext())
+                    .load("http://3.217.3.219:5000/api/v1/upload/get_picture?picture_id=" +thirdPromptPhotoId)
+                    .into(thirdImageView);
+
+            buttonPickThirdImage.setVisibility(View.GONE);
+            thirdImageView.setVisibility(View.VISIBLE);
+            editTextThirdImageCaption.setText(thirdPromptPhotoCaption);
+            editTextThirdImageCaption.setTextColor(getResources().getColor(R.color.black,null));
         }
     }
 
@@ -419,8 +467,6 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
                                     completeProfileViewModel.uploadedPhotoId.observe(CompleteProfileActivity.this,id ->{
                                         Log.d("CompleteProfileActivity","profile id for first prompt photo = "+id);
 
-                                        firstPhotoId = id;
-
                                         PromptPhoto firstPromptPhoto = new PromptPhoto();
                                         firstPromptPhoto.setFile(file);
                                         firstPromptPhoto.setCaption(editTextThirdImageCaption.getText().toString());
@@ -428,6 +474,18 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
 
                                         completedProfile.setFirstPromptPhoto(firstPromptPhoto);
                                         completeProfileViewModel.saveCompletProfileInputData(completedProfile);
+                                        //uploading first prompt answer
+                                        Log.d("CompleteProfileActivity","user prompt = "+userPromptAnswer1.toString());
+                                        userPromptAnswer1.setPictureId(id);
+                                        completeProfileViewModel.uploadUserPrompt(userPromptAnswer1);
+
+                                        SharedPreferences mPrefs = getApplicationContext().getSharedPreferences("pref",Context.MODE_PRIVATE);
+                                        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+
+                                        prefsEditor.putInt("firstPromptPhotoId", id);
+                                        prefsEditor.putString("firstPromptPhotoCaption", caption);
+
+                                        prefsEditor.apply();
                                     });
                                 } else
                                     Toast.makeText(CompleteProfileActivity.this, "Must enter a caption!", Toast.LENGTH_SHORT).show();
@@ -443,15 +501,25 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
                                     completeProfileViewModel.uploadedPhotoId.observe(CompleteProfileActivity.this,id ->{
                                         Log.d("CompleteProfileActivity","profile id for second prompt photo = "+id);
 
-                                        secondPhotoId = id;
-
                                         PromptPhoto secondPromptPhoto = new PromptPhoto();
                                         secondPromptPhoto.setFile(file);
                                         secondPromptPhoto.setCaption(editTextSecondImageCaption.getText().toString());
                                         secondPromptPhoto.setId(id);
 
-                                        completedProfile.setSecondPromptPhoto(secondPromptPhoto);
+                                        completedProfile.setFirstPromptPhoto(secondPromptPhoto);
                                         completeProfileViewModel.saveCompletProfileInputData(completedProfile);
+                                        //uploading first prompt answer
+                                        Log.d("CompleteProfileActivity","user prompt = "+userPromptAnswer2.toString());
+                                        userPromptAnswer2.setPictureId(id);
+                                        completeProfileViewModel.uploadUserPrompt(userPromptAnswer2);
+
+                                        SharedPreferences mPrefs = getApplicationContext().getSharedPreferences("pref",Context.MODE_PRIVATE);
+                                        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+
+                                        prefsEditor.putInt("secondPromptPhotoId", id);
+                                        prefsEditor.putString("secondPromptPhotoCaption", caption);
+
+                                        prefsEditor.apply();
                                     });
                                 } else
                                     Toast.makeText(CompleteProfileActivity.this, "Must enter a caption!", Toast.LENGTH_SHORT).show();
@@ -467,15 +535,24 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
                                     completeProfileViewModel.uploadedPhotoId.observe(CompleteProfileActivity.this,id ->{
                                         Log.d("CompleteProfileActivity","profile id for third prompt photo = "+id);
 
-                                        thirdPhotoId = id;
-
                                         PromptPhoto thirdPromptPhoto = new PromptPhoto();
                                         thirdPromptPhoto.setFile(file);
                                         thirdPromptPhoto.setCaption(editTextThirdImageCaption.getText().toString());
                                         thirdPromptPhoto.setId(id);
 
-                                        completedProfile.setThirdPromptPhoto(thirdPromptPhoto);
+                                        completedProfile.setFirstPromptPhoto(thirdPromptPhoto);
                                         completeProfileViewModel.saveCompletProfileInputData(completedProfile);
+                                        //uploading first prompt answer
+                                        Log.d("CompleteProfileActivity","user prompt = "+userPromptAnswer3.toString());
+                                        userPromptAnswer3.setPictureId(id);
+                                        completeProfileViewModel.uploadUserPrompt(userPromptAnswer3);
+
+                                        SharedPreferences mPrefs = getApplicationContext().getSharedPreferences("pref",Context.MODE_PRIVATE);
+                                        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+
+                                        prefsEditor.putInt("thirdPromptPhotoId", id);
+                                        prefsEditor.putString("thirdPromptPhotoCaption", caption);
+                                        prefsEditor.apply();
                                     });
                                 } else
                                     Toast.makeText(CompleteProfileActivity.this, "Must enter a caption!", Toast.LENGTH_SHORT).show();
