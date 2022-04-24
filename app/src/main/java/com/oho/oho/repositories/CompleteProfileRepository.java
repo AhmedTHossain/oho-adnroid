@@ -67,6 +67,12 @@ public class CompleteProfileRepository {
             @Override
             public void onResponse(@NonNull Call<UploadProfilePhotoResponse> call, @NonNull Response<UploadProfilePhotoResponse> response) {
                 Toast.makeText(context, "Profile photo uploaded successfully!", Toast.LENGTH_SHORT).show();
+
+                SharedPreferences mPrefs = context.getSharedPreferences("pref",Context.MODE_PRIVATE);
+                SharedPreferences.Editor prefsEditor = mPrefs.edit();
+
+                prefsEditor.putInt("profile_picture_id", response.body().getProfilePictureId());
+                prefsEditor.apply();
             }
 
             @Override

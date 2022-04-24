@@ -58,7 +58,7 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
     private CircleImageView profileImageVIew, firstImageView, secondImageView, thirdImageView;
     private LinearLayout prompt1Layout, answer1Layout, prompt2Layout, answer2Layout, prompt3Layout, answer3Layout;
     private String imageFor = "", firstPromptPhotoCaption, secondPromptPhotoCaption,thirdPromptPhotoCaption;
-    private int firstPromptPhotoId, secondPromptPhotoId, thirdPromptPhotoId;
+    private int firstPromptPhotoId, secondPromptPhotoId, thirdPromptPhotoId, profilePictureId;
 
     private ActivityResultLauncher<Intent> galleryPickResultLauncher;
 
@@ -287,6 +287,7 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
         firstPromptPhotoId  = mPrefs.getInt("firstPromptPhotoId",0);
         secondPromptPhotoId = mPrefs.getInt("secondPromptPhotoId",0);
         thirdPromptPhotoId = mPrefs.getInt("thirdPromptPhotoId",0);
+        profilePictureId = mPrefs.getInt("profile_picture_id",0);
 
 
         firstPromptPhotoCaption = mPrefs.getString("firstPromptPhotoCaption",null);
@@ -324,6 +325,14 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
             thirdImageView.setVisibility(View.VISIBLE);
             editTextThirdImageCaption.setText(thirdPromptPhotoCaption);
             editTextThirdImageCaption.setTextColor(getResources().getColor(R.color.black,null));
+        }
+
+        if (profilePictureId != 0){
+            Glide.with(getApplicationContext())
+                    .load("http://3.217.3.219:5000/api/v1/upload/get_profile_picture?profile_picture_id=" +profilePictureId)
+                    .into(profileImageVIew);
+            buttonPickImage.setVisibility(View.GONE);
+            profileImageVIew.setVisibility(View.VISIBLE);
         }
     }
 
