@@ -4,17 +4,17 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.oho.oho.models.PromptAnswer;
+import com.oho.oho.db.tables.UserPrompt;
 
 import java.util.List;
 
 public interface UserPromptDao {
     @Insert
-    PromptAnswer insertPrompt(PromptAnswer promptAnswer);
+    UserPrompt insertPrompt(UserPrompt userPrompt);
 
     @Update
-    PromptAnswer updatePrompt(PromptAnswer promptAnswer, int orderNo);
+    UserPrompt updatePrompt(UserPrompt userPrompt, int orderNo);
 
     @Query("Select * from UserPrompt")
-    List<PromptAnswer> getAllPromptAnswers();
+    List<UserPrompt> getAllPromptAnswers();
 }
