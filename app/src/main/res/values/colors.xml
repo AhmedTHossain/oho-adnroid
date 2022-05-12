@@ -15,4 +15,6 @@
     <color name="textSubTitle">#404040</color>
     <color name="textTertiary">#686666</color>
     <color name="indicatiorInactive2">#EEEEEE</color>
+    <color name="bullets">#C4C4C4</color>
+    <color name="divider">#E0E0E0</color>
 </resources>
