@@ -28,7 +28,7 @@ public class CompleteProfileViewModel extends AndroidViewModel {
     public CompleteProfileViewModel(@NonNull Application application) {
         super(application);
         completeProfileRepository = new CompleteProfileRepository();
-        promptRepository = new PromptRepository();
+        promptRepository = new PromptRepository(getApplication().getApplicationContext());
     }
 
     public void updateUser(Profile profile){

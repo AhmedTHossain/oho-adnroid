@@ -20,7 +20,7 @@ public class PromptViewModel extends AndroidViewModel {
 
     public PromptViewModel(@NonNull Application application) {
         super(application);
-        promptRepository = new PromptRepository();
+        promptRepository = new PromptRepository(getApplication().getApplicationContext());
     }
 
     public void getAllPromptList(){
