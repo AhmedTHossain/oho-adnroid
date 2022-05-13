@@ -13,6 +13,7 @@ import com.oho.oho.R;
 import com.oho.oho.databinding.FragmentHomeBinding;
 import com.oho.oho.databinding.FragmentSettingsBinding;
 import com.oho.oho.views.FAQActivity;
+import com.oho.oho.views.LoginActivity;
 import com.oho.oho.views.TermsOfUseActivity;
 
 public class SettingsFragment extends Fragment implements View.OnClickListener {
@@ -31,6 +32,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
 
         binding.buttonFaqSettings.setOnClickListener(this);
         binding.buttonTermsSettings.setOnClickListener(this);
+        binding.buttonSignoutSettings.setOnClickListener(this);
 
         // Inflate the layout for this fragment
         return binding.getRoot();
@@ -46,6 +48,9 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.button_terms_settings:
                 startActivity(new Intent(requireActivity(), TermsOfUseActivity.class));
+                break;
+            case R.id.button_signout_settings:
+                startActivity(new Intent(requireActivity(), LoginActivity.class));
                 break;
         }
     }
