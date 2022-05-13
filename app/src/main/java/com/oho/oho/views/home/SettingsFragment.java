@@ -51,6 +51,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.button_signout_settings:
                 startActivity(new Intent(requireActivity(), LoginActivity.class));
+                requireActivity().finish();
                 break;
         }
     }
