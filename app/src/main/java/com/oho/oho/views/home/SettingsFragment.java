@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.oho.oho.R;
 import com.oho.oho.databinding.FragmentHomeBinding;
 import com.oho.oho.databinding.FragmentSettingsBinding;
+import com.oho.oho.views.AccountSettingsActivity;
 import com.oho.oho.views.FAQActivity;
 import com.oho.oho.views.LoginActivity;
 import com.oho.oho.views.TermsOfUseActivity;
@@ -30,6 +31,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
 
         binding = FragmentSettingsBinding.inflate(inflater,container,false);
 
+        binding.buttonAccountSettings.setOnClickListener(this);
         binding.buttonFaqSettings.setOnClickListener(this);
         binding.buttonTermsSettings.setOnClickListener(this);
         binding.buttonSignoutSettings.setOnClickListener(this);
@@ -42,6 +44,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.button_account_settings:
+                startActivity(new Intent(requireActivity(), AccountSettingsActivity.class));
                 break;
             case R.id.button_faq_settings:
                 startActivity(new Intent(requireActivity(), FAQActivity.class));

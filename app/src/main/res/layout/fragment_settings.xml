@@ -47,13 +47,14 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:background="?attr/selectableItemBackground">
+
                 <ImageView
                     android:id="@+id/image_bullet_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_bullets"
                     android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"/>
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_bullets" />
 
                 <TextView
                     android:id="@+id/text_settings_1"

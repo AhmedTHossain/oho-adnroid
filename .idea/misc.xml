@@ -54,6 +54,7 @@
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/drawable/button_background_gradient_light.xml" value="0.211" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/drawable/ic_arrow_right.xml" value="0.1395" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/drawable/ic_bullets.xml" value="0.1395" />
+        <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/drawable/ic_deactivate_account.xml" value="0.1555" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/drawable/ic_dot.xml" value="0.174" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/drawable/ic_location_24.xml" value="0.223" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/drawable/ic_match_menu_icon.xml" value="0.1" />
@@ -62,6 +63,7 @@
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/drawable/ic_profile_menu_icon.xml" value="0.134" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/drawable/ic_sign_out.xml" value="0.1395" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/drawable/input_selected_background.xml" value="0.1955" />
+        <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/activity_account_settings.xml" value="0.264" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/activity_complete_profile.xml" value="0.128" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/activity_faqactivity.xml" value="0.2" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/activity_main.xml" value="0.1" />
