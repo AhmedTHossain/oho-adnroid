@@ -284,11 +284,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
+                    android:layout_marginEnd="@dimen/_30sdp"
                     android:fontFamily="@font/sf_pro_rounded_regular"
                     android:text="What is our motivation for this app?"
                     android:textColor="@color/indicatioractive"
-                    android:textSize="@dimen/_16ssp"
-                    android:layout_marginEnd="@dimen/_30sdp"/>
+                    android:textSize="@dimen/_16ssp" />
 
                 <ImageView
                     android:id="@+id/button_collapse_motivation"
@@ -313,7 +313,7 @@
                 android:id="@+id/text_motivation_expand"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/if_i_dont_show_up"
+                android:text="@string/motivation"
                 android:justificationMode="inter_word"
                 android:fontFamily="@font/sf_pro_rounded_regular"
                 android:textColor="@color/black"

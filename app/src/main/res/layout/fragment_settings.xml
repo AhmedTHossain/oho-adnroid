@@ -236,7 +236,7 @@
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_toEndOf="@id/image_bullet_5"
                     android:fontFamily="@font/sf_pro_rounded_regular"
-                    android:text="Help Center"
+                    android:text="Dating Tips"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_16ssp" />
 
