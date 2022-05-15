@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,226 +7,334 @@
     android:background="@color/white"
     android:orientation="vertical"
     tools:context=".views.settings.AvailabilitySettingsActivity">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Availability"
         android:fontFamily="@font/sf_pro_rounded_medium"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingTop="@dimen/_30sdp"
+        android:paddingEnd="@dimen/_20sdp"
+        android:text="Availability"
         android:textColor="@color/black"
         android:textSize="@dimen/_40ssp"
-        android:textStyle="bold"
-        android:paddingTop="@dimen/_30sdp"
-        android:paddingStart="@dimen/_20sdp"
-        android:paddingEnd="@dimen/_20sdp"/>
-    <androidx.cardview.widget.CardView
+        android:textStyle="bold" />
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginEnd="@dimen/_20sdp">
+        android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingTop="@dimen/_10sdp"
-            android:paddingBottom="@dimen/_10sdp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/sf_pro_rounded_medium"
-                android:textStyle="bold"
-                android:text="Days"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_18ssp"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginEnd="@dimen/_20sdp"/>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1sdp"
-                android:background="@color/indicatioractive"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_10sdp"/>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
-                android:paddingBottom="@dimen/_10sdp">
-                <RadioGroup
-                    android:id="@+id/radiogroup"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <RadioButton
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="Fri"
-                        android:textAllCaps="true"
-                        android:buttonTint="@color/indicatioractive"
-                        android:gravity="center"
-                        android:textSize="@dimen/_16ssp"
-                        android:fontFamily="@font/sf_pro_rounded_regular"/>
-                    <RadioButton
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="Sat"
-                        android:textAllCaps="true"
-                        android:buttonTint="@color/indicatioractive"
-                        android:gravity="center"
-                        android:textSize="@dimen/_16ssp"
-                        android:fontFamily="@font/sf_pro_rounded_regular"/>
-                    <RadioButton
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="Sun"
-                        android:textAllCaps="true"
-                        android:buttonTint="@color/indicatioractive"
-                        android:gravity="center"
-                        android:textSize="@dimen/_16ssp"
-                        android:fontFamily="@font/sf_pro_rounded_regular"/>
+            android:orientation="vertical">
 
-                </RadioGroup>
-            </LinearLayout>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_30sdp"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginEnd="@dimen/_20sdp">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingTop="@dimen/_10sdp"
-            android:paddingBottom="@dimen/_10sdp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/sf_pro_rounded_medium"
-                android:textStyle="bold"
-                android:text="Time"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_18ssp"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginEnd="@dimen/_20sdp"/>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1sdp"
-                android:background="@color/indicatioractive"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_10sdp"/>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginEnd="@dimen/_20sdp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="From"
-                    android:textAllCaps="true"
-                    android:fontFamily="@font/sf_pro_rounded_regular"
-                    android:textSize="@dimen/_16ssp"
-                    android:textColor="@color/black"
-                    android:layout_alignParentStart="true"/>
-
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/spinner_from"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_gravity="center_vertical" />
-            </RelativeLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1sdp"
-                android:background="#40AB3B61"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_10sdp"/>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginEnd="@dimen/_20sdp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="To"
-                    android:textAllCaps="true"
-                    android:fontFamily="@font/sf_pro_rounded_regular"
-                    android:textSize="@dimen/_16ssp"
-                    android:textColor="@color/black"
-                    android:layout_alignParentStart="true"/>
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/spinner_to"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_gravity="center_vertical"/>
-            </RelativeLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1sdp"
-                android:background="#40AB3B61"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_10sdp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Add another Slot"
-                android:drawableEnd="@drawable/ic_add"
-                android:drawablePadding="@dimen/_5sdp"
-                android:drawableTint="@color/black"
-                android:textAllCaps="false"
-                android:fontFamily="@font/sf_pro_rounded_regular"
-                android:textSize="@dimen/_16ssp"
-                android:textColor="@color/black"
-                android:layout_gravity="end"
-                android:layout_marginEnd="@dimen/_20sdp"/>
             <androidx.cardview.widget.CardView
-                android:id="@+id/button_signin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:layout_marginBottom="@dimen/_20sdp"
-                app:cardCornerRadius="@dimen/_50sdp"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?attr/selectableItemBackground">
+                android:layout_marginEnd="@dimen/_20sdp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/_5sdp"
-                    android:gravity="center"
-                    android:background="@color/white">
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_10sdp">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Add to your Schedule"
-                        android:textColor="@color/deactivated_button_text"
-                        android:textSize="@dimen/_16ssp"
-                        android:fontFamily="@font/sf_pro_rounded_regular"/>
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:fontFamily="@font/sf_pro_rounded_medium"
+                        android:text="Friday"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_18ssp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:background="@color/indicatioractive" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:paddingBottom="@dimen/_10sdp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatCheckBox
+                                android:layout_width="@dimen/_200sdp"
+                                android:layout_height="wrap_content"
+                                android:button="@drawable/circular_checkbox"
+                                android:fontFamily="@font/sf_pro_rounded_regular"
+                                android:text="06:00 PM - 07:00 PM"
+                                android:textAlignment="viewEnd"
+                                android:textAllCaps="true"
+                                android:textSize="@dimen/_16ssp" />
+
+                            <androidx.appcompat.widget.AppCompatCheckBox
+                                android:layout_width="@dimen/_200sdp"
+                                android:layout_height="wrap_content"
+                                android:button="@drawable/circular_checkbox"
+                                android:fontFamily="@font/sf_pro_rounded_regular"
+                                android:text="07:00 PM - 08:00 PM"
+                                android:textAlignment="viewEnd"
+                                android:textAllCaps="true"
+                                android:textSize="@dimen/_16ssp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/button_save_slot_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:layout_marginBottom="@dimen/_20sdp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cardCornerRadius="@dimen/_50sdp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/button_background_gradient_dark"
+                            android:gravity="center"
+                            android:padding="@dimen/_5sdp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:fontFamily="@font/sf_pro_rounded_regular"
+                                android:text="Add to your Schedule"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_16ssp" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginEnd="@dimen/_20sdp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_10sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:fontFamily="@font/sf_pro_rounded_medium"
+                        android:text="Saturday"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_18ssp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:background="@color/indicatioractive" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:paddingBottom="@dimen/_10sdp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatCheckBox
+                                android:layout_width="@dimen/_200sdp"
+                                android:layout_height="wrap_content"
+                                android:button="@drawable/circular_checkbox"
+                                android:fontFamily="@font/sf_pro_rounded_regular"
+                                android:text="06:00 PM - 07:00 PM"
+                                android:textAlignment="viewEnd"
+                                android:textAllCaps="true"
+                                android:textSize="@dimen/_16ssp" />
+
+                            <androidx.appcompat.widget.AppCompatCheckBox
+                                android:layout_width="@dimen/_200sdp"
+                                android:layout_height="wrap_content"
+                                android:button="@drawable/circular_checkbox"
+                                android:fontFamily="@font/sf_pro_rounded_regular"
+                                android:text="07:00 PM - 08:00 PM"
+                                android:textAlignment="viewEnd"
+                                android:textAllCaps="true"
+                                android:textSize="@dimen/_16ssp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/button_save_slot_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:layout_marginBottom="@dimen/_20sdp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cardCornerRadius="@dimen/_50sdp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/button_background_gradient_dark"
+                            android:gravity="center"
+                            android:padding="@dimen/_5sdp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:fontFamily="@font/sf_pro_rounded_regular"
+                                android:text="Add to your Schedule"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_16ssp" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_30sdp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_10sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:fontFamily="@font/sf_pro_rounded_medium"
+                        android:text="Sunday"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_18ssp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:background="@color/indicatioractive" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:paddingBottom="@dimen/_10sdp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatCheckBox
+                                android:layout_width="@dimen/_200sdp"
+                                android:layout_height="wrap_content"
+                                android:button="@drawable/circular_checkbox"
+                                android:fontFamily="@font/sf_pro_rounded_regular"
+                                android:text="11:00 AM - 12:00 PM"
+                                android:textAlignment="viewEnd"
+                                android:textAllCaps="true"
+                                android:textSize="@dimen/_16ssp" />
+
+                            <androidx.appcompat.widget.AppCompatCheckBox
+                                android:layout_width="@dimen/_200sdp"
+                                android:layout_height="wrap_content"
+                                android:button="@drawable/circular_checkbox"
+                                android:fontFamily="@font/sf_pro_rounded_regular"
+                                android:text="12:00 PM - 01:00 PM"
+                                android:textAlignment="viewEnd"
+                                android:textAllCaps="true"
+                                android:textSize="@dimen/_16ssp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/button_save_slot_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:layout_marginBottom="@dimen/_20sdp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cardCornerRadius="@dimen/_50sdp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/button_background_gradient_dark"
+                            android:gravity="center"
+                            android:padding="@dimen/_5sdp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:fontFamily="@font/sf_pro_rounded_regular"
+                                android:text="Add to your Schedule"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_16ssp" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
-<!--    <TextView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:fontFamily="@font/sf_pro_rounded_medium"-->
-<!--        android:textStyle="bold"-->
-<!--        android:text="Your Schedule"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:textSize="@dimen/_18ssp"-->
-<!--        android:layout_marginTop="@dimen/_20sdp"-->
-<!--        android:layout_marginStart="@dimen/_20sdp"-->
-<!--        android:layout_marginEnd="@dimen/_20sdp"/>-->
+    </ScrollView>
+
 </LinearLayout>
