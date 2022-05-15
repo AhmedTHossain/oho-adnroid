@@ -61,12 +61,15 @@
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/drawable/ic_message_menu_icon.xml" value="0.134" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/drawable/ic_privacy_24.xml" value="0.207" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/drawable/ic_profile_menu_icon.xml" value="0.134" />
+        <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/drawable/ic_radio_button_unchecked.xml" value="0.167" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/drawable/ic_sign_out.xml" value="0.1395" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/drawable/ic_warning.xml" value="0.1185" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/drawable/input_selected_background.xml" value="0.1955" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/activity_account_settings.xml" value="0.264" />
+        <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/activity_availability_settings.xml" value="0.2" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/activity_complete_profile.xml" value="0.128" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/activity_faqactivity.xml" value="0.2" />
+        <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/activity_login.xml" value="0.20521590423257802" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/activity_onboarding.xml" value="0.1" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/activity_prompt_question.xml" value="0.1923899102180419" />
@@ -107,6 +110,7 @@
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/row_edit_profile_right.xml" value="0.21666666666666667" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/row_input_registration.xml" value="0.16145833333333334" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/row_prompt.xml" value="0.10816588285592134" />
+        <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/spinner_availability_list.xml" value="0.20436083796494228" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/menu/bottom_nav_menu.xml" value="0.17956391620350576" />
       </map>
     </option>

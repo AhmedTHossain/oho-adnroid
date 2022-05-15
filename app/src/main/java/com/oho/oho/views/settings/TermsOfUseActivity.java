@@ -1,4 +1,4 @@
-package com.oho.oho.views;
+package com.oho.oho.views.settings;
 
 import androidx.appcompat.app.AppCompatActivity;
 

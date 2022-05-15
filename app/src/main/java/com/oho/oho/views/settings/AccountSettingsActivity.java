@@ -1,4 +1,4 @@
-package com.oho.oho.views;
+package com.oho.oho.views.settings;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.oho.oho.R;
 import com.oho.oho.databinding.ActivityAccountSettingsBinding;
 import com.oho.oho.databinding.ActivityMainBinding;
+import com.oho.oho.views.LoginActivity;
 
 public class AccountSettingsActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -56,7 +57,7 @@ public class AccountSettingsActivity extends AppCompatActivity implements View.O
                                 Toast.makeText(AccountSettingsActivity.this,"Your profile will be deactivated shortly..",Toast.LENGTH_SHORT).show();
                                 int delay_in_ms = 1000; //1Second interval
                                 new Handler().postDelayed(() -> {
-                                    startActivity(new Intent(AccountSettingsActivity.this,LoginActivity.class));
+                                    startActivity(new Intent(AccountSettingsActivity.this, LoginActivity.class));
                                     finish();
                                 }, delay_in_ms);
                             }

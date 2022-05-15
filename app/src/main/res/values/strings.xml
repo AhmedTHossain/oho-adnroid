@@ -264,4 +264,14 @@
         \n\nYour access to the App, Our Content, and any Member Content, as well as these Terms are governed and interpreted by the laws of the State of New York, other than such laws, rules, regulations and case law that would result in the application of the laws of a jurisdiction other than the State of New York. By using the App, you are consenting to the exclusive jurisdiction of the courts of the United States and the State of New York. You agree that such courts shall have in personam jurisdiction and venue and waive any objection based on inconvenient forum. You agree that you will not file or participate in a class action against us. In the event there is a discrepancy between this English language version and any translated copies of the Terms, the English version shall prevail.
         \n\nThe Terms constitute a binding legal agreement between you as user (\"you\") and <b>Oho!</b>  (\"we\" or \"us\"). <b>Oho!</b>  is a Delaware Corporation with offices located at 6037 Ivy League Drive, Catonsville, MD 21228.
     </string>
+    <string-array name="evening_time_slots_array">
+        <item>06:00 PM</item>
+        <item>07:00 PM</item>
+        <item>08:00 PM</item>
+    </string-array>
+    <string-array name="morning_time_slots_array">
+        <item>11:00 PM</item>
+        <item>12:00 PM</item>
+        <item>01:00 PM</item>
+    </string-array>
 </resources>

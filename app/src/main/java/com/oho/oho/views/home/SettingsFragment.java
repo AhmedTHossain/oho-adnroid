@@ -12,10 +12,11 @@ import android.view.ViewGroup;
 import com.oho.oho.R;
 import com.oho.oho.databinding.FragmentHomeBinding;
 import com.oho.oho.databinding.FragmentSettingsBinding;
-import com.oho.oho.views.AccountSettingsActivity;
-import com.oho.oho.views.FAQActivity;
+import com.oho.oho.views.settings.AccountSettingsActivity;
+import com.oho.oho.views.settings.AvailabilitySettingsActivity;
+import com.oho.oho.views.settings.FAQActivity;
 import com.oho.oho.views.LoginActivity;
-import com.oho.oho.views.TermsOfUseActivity;
+import com.oho.oho.views.settings.TermsOfUseActivity;
 
 public class SettingsFragment extends Fragment implements View.OnClickListener {
 
@@ -33,6 +34,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
 
         binding.buttonAccountSettings.setOnClickListener(this);
         binding.buttonFaqSettings.setOnClickListener(this);
+        binding.buttonAvailabilitySettings.setOnClickListener(this);
         binding.buttonTermsSettings.setOnClickListener(this);
         binding.buttonSignoutSettings.setOnClickListener(this);
 
@@ -48,6 +50,9 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.button_faq_settings:
                 startActivity(new Intent(requireActivity(), FAQActivity.class));
+                break;
+            case R.id.button_availability_settings:
+                startActivity(new Intent(requireActivity(), AvailabilitySettingsActivity.class));
                 break;
             case R.id.button_terms_settings:
                 startActivity(new Intent(requireActivity(), TermsOfUseActivity.class));

@@ -15,13 +15,16 @@
         android:theme="@style/Theme.OHO.Launcher"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".views.AccountSettingsActivity"
+            android:name=".views.settings.AvailabilitySettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".views.TermsOfUseActivity"
+            android:name=".views.settings.AccountSettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".views.FAQActivity"
+            android:name=".views.settings.TermsOfUseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".views.settings.FAQActivity"
             android:exported="false" />
         <activity
             android:name=".views.prompt.PromptQuestionActivity"

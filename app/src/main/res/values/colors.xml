@@ -17,4 +17,5 @@
     <color name="indicatiorInactive2">#EEEEEE</color>
     <color name="bullets">#C4C4C4</color>
     <color name="divider">#E0E0E0</color>
+    <color name="deactivated_button_text">#C4C4C4</color>
 </resources>
