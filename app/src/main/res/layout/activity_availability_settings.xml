@@ -92,7 +92,8 @@
                                 android:text="06:00 PM - 07:00 PM"
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
-                                android:textSize="@dimen/_16ssp" />
+                                android:textSize="@dimen/_16ssp"
+                                android:onClick="onCheckboxClicked"/>
 
                             <androidx.appcompat.widget.AppCompatCheckBox
                                 android:id="@+id/fri_slot_2"
@@ -103,7 +104,8 @@
                                 android:text="07:00 PM - 08:00 PM"
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
-                                android:textSize="@dimen/_16ssp" />
+                                android:textSize="@dimen/_16ssp"
+                                android:onClick="onCheckboxClicked"/>
 
                             <androidx.appcompat.widget.AppCompatCheckBox
                                 android:id="@+id/fri_slot_3"
@@ -114,7 +116,8 @@
                                 android:text="08:00 PM - 09:00 PM"
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
-                                android:textSize="@dimen/_16ssp" />
+                                android:textSize="@dimen/_16ssp"
+                                android:onClick="onCheckboxClicked"/>
 
                         </LinearLayout>
                     </LinearLayout>
@@ -175,7 +178,8 @@
                                 android:text="06:00 PM - 07:00 PM"
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
-                                android:textSize="@dimen/_16ssp" />
+                                android:textSize="@dimen/_16ssp"
+                                android:onClick="onCheckboxClicked"/>
 
                             <androidx.appcompat.widget.AppCompatCheckBox
                                 android:id="@+id/sat_slot_2"
@@ -186,7 +190,8 @@
                                 android:text="07:00 PM - 08:00 PM"
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
-                                android:textSize="@dimen/_16ssp" />
+                                android:textSize="@dimen/_16ssp"
+                                android:onClick="onCheckboxClicked"/>
 
                             <androidx.appcompat.widget.AppCompatCheckBox
                                 android:id="@+id/sat_slot_3"
@@ -197,7 +202,8 @@
                                 android:text="08:00 PM - 09:00 PM"
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
-                                android:textSize="@dimen/_16ssp" />
+                                android:textSize="@dimen/_16ssp"
+                                android:onClick="onCheckboxClicked"/>
 
                         </LinearLayout>
                     </LinearLayout>
@@ -258,7 +264,8 @@
                                 android:text="11:00 AM - 12:00 PM"
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
-                                android:textSize="@dimen/_16ssp" />
+                                android:textSize="@dimen/_16ssp"
+                                android:onClick="onCheckboxClicked"/>
 
                             <androidx.appcompat.widget.AppCompatCheckBox
                                 android:id="@+id/sun_slot_2"
@@ -269,7 +276,8 @@
                                 android:text="12:00 PM - 01:00 PM"
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
-                                android:textSize="@dimen/_16ssp" />
+                                android:textSize="@dimen/_16ssp"
+                                android:onClick="onCheckboxClicked"/>
 
                         </LinearLayout>
                     </LinearLayout>
