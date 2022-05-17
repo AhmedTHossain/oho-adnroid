@@ -280,6 +280,11 @@ Oho! does not knowingly collect any Personal Identifiable Information from child
     </string>
     <string name="privacy_para_7">This Privacy Policy applies only to our online activities and is valid for visitors to our App with regards to the information that they shared and/or collect in Oho!. This policy is not applicable to any information collected offline or via channels other than this app. Our Privacy Policy was created with the help of the App Privacy Policy Generator from App-Privacy-Policy.com</string>
     <string name="privacy_para_8">By using our app, you hereby consent to our Privacy Policy and agree to its Terms and Conditions.</string>
+    <string name="safe_dating_tips_para_1">We want you to have a great dating experience but at the same time we want you to be safe! Here are some safe guidelines to keep in mind as you go on your dates:</string>
+    <string name="safe_dating_tip_1"><b>1.</b> Keep loved ones in the loop</string>
+    <string name="safe_dating_tip_2"><b>2.</b> Limit alcohol consumption</string>
+    <string name="safe_dating_tip_3"><b>3.</b> Do not give out personal info on the first date. The chat lines will open once you arrive at your date, and you can continue talking over the chat if you both connect</string>
+    <string name="safe_dating_tip_4"><b>4.</b> Enlist the help of the restaurant manager or waiter. Our restaurant managers know that you are coming through Oho! and they can safely walk you out to your transportation</string>
     <string-array name="evening_time_slots_array">
         <item>06:00 PM</item>
         <item>07:00 PM</item>
