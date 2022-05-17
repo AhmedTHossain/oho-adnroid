@@ -15,6 +15,9 @@
         android:theme="@style/Theme.OHO.Launcher"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".views.settings.PrivacyPolicyActivity"
+            android:exported="false" />
+        <activity
             android:name=".views.settings.AvailabilitySettingsActivity"
             android:exported="false" />
         <activity

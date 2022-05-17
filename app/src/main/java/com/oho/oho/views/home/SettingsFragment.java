@@ -16,6 +16,7 @@ import com.oho.oho.views.settings.AccountSettingsActivity;
 import com.oho.oho.views.settings.AvailabilitySettingsActivity;
 import com.oho.oho.views.settings.FAQActivity;
 import com.oho.oho.views.LoginActivity;
+import com.oho.oho.views.settings.PrivacyPolicyActivity;
 import com.oho.oho.views.settings.TermsOfUseActivity;
 
 public class SettingsFragment extends Fragment implements View.OnClickListener {
@@ -36,6 +37,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         binding.buttonFaqSettings.setOnClickListener(this);
         binding.buttonAvailabilitySettings.setOnClickListener(this);
         binding.buttonTermsSettings.setOnClickListener(this);
+        binding.buttonPrivacySettings.setOnClickListener(this);
         binding.buttonSignoutSettings.setOnClickListener(this);
 
         // Inflate the layout for this fragment
@@ -56,6 +58,10 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.button_terms_settings:
                 startActivity(new Intent(requireActivity(), TermsOfUseActivity.class));
+                break;
+            case R.id.button_privacy_settings:
+                startActivity(new Intent(requireActivity(), PrivacyPolicyActivity.class));
+                requireActivity().finish();
                 break;
             case R.id.button_signout_settings:
                 startActivity(new Intent(requireActivity(), LoginActivity.class));

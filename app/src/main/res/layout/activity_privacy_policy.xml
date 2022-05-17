@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".views.settings.PrivacyPolicyActivity">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Privacy Policy for Oho!"
+        android:fontFamily="@font/sf_pro_rounded_medium"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_40ssp"
+        android:textStyle="bold"
+        android:paddingTop="@dimen/_30sdp"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingEnd="@dimen/_20sdp"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/_20sdp"
+            android:paddingEnd="@dimen/_20sdp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacy_para_1"
+                android:justificationMode="inter_word"
+                android:fontFamily="@font/sf_pro_rounded_regular"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16ssp"
+                android:layout_marginTop="@dimen/_10sdp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Log Files"
+                android:fontFamily="@font/sf_pro_rounded_medium"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_24ssp"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/_10sdp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacy_para_2"
+                android:justificationMode="inter_word"
+                android:fontFamily="@font/sf_pro_rounded_regular"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16ssp"
+                android:layout_marginTop="@dimen/_10sdp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Our Advertising Partners"
+                android:fontFamily="@font/sf_pro_rounded_medium"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_24ssp"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/_10sdp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacy_para_3"
+                android:justificationMode="inter_word"
+                android:fontFamily="@font/sf_pro_rounded_regular"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16ssp"
+                android:layout_marginTop="@dimen/_10sdp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Privacy Policies"
+                android:fontFamily="@font/sf_pro_rounded_medium"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_24ssp"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/_10sdp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacy_para_4"
+                android:justificationMode="inter_word"
+                android:fontFamily="@font/sf_pro_rounded_regular"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16ssp"
+                android:layout_marginTop="@dimen/_10sdp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Third Party Privacy Policies"
+                android:fontFamily="@font/sf_pro_rounded_medium"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_24ssp"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/_10sdp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacy_para_5"
+                android:justificationMode="inter_word"
+                android:fontFamily="@font/sf_pro_rounded_regular"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16ssp"
+                android:layout_marginTop="@dimen/_10sdp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Children's Information"
+                android:fontFamily="@font/sf_pro_rounded_medium"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_24ssp"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/_10sdp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacy_para_6"
+                android:justificationMode="inter_word"
+                android:fontFamily="@font/sf_pro_rounded_regular"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16ssp"
+                android:layout_marginTop="@dimen/_10sdp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Online Privacy Policy Only"
+                android:fontFamily="@font/sf_pro_rounded_medium"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_24ssp"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/_10sdp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacy_para_3"
+                android:justificationMode="inter_word"
+                android:fontFamily="@font/sf_pro_rounded_regular"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16ssp"
+                android:layout_marginTop="@dimen/_10sdp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Consent"
+                android:fontFamily="@font/sf_pro_rounded_medium"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_24ssp"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/_10sdp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacy_para_8"
+                android:justificationMode="inter_word"
+                android:fontFamily="@font/sf_pro_rounded_regular"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16ssp"
+                android:layout_marginTop="@dimen/_10sdp"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
