@@ -182,13 +182,14 @@
                 android:focusable="true"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:background="?attr/selectableItemBackground">
+
                 <ImageView
                     android:id="@+id/image_bullet_3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_info"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"/>
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_faq" />
 
                 <TextView
                     android:id="@+id/text_settings_3"
@@ -225,11 +226,11 @@
 
                 <ImageView
                     android:id="@+id/image_bullet_5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/ic_info" />
+                    android:src="@drawable/ic_safety_tips" />
 
                 <TextView
                     android:id="@+id/text_settings_5"
@@ -269,11 +270,11 @@
 
                 <ImageView
                     android:id="@+id/image_bullet_6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/ic_info" />
+                    android:src="@drawable/ic_terms_and_conditions" />
 
                 <TextView
                     android:id="@+id/text_settings_6"
@@ -310,11 +311,11 @@
 
                 <ImageView
                     android:id="@+id/image_bullet_7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/ic_info" />
+                    android:src="@drawable/ic_privacy_policy" />
 
                 <TextView
                     android:id="@+id/text_settings_7"
@@ -358,7 +359,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/ic_info" />
+                    android:src="@drawable/ic_logout" />
 
                 <TextView
                     android:id="@+id/text_settings_8"
