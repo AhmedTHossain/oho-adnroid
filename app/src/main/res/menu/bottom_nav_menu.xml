@@ -15,6 +15,6 @@
         android:icon="@drawable/ic_message_menu_icon"/>
     <item
         android:id="@+id/settings"
-        android:title="Settings"
+        android:title="Settings &amp; Info"
         android:icon="@drawable/ic_settings_menu_icon"/>
 </menu>
