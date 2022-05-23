@@ -285,6 +285,7 @@ Oho! does not knowingly collect any Personal Identifiable Information from child
     <string name="safe_dating_tip_2"><b>2.</b> Limit alcohol consumption</string>
     <string name="safe_dating_tip_3"><b>3.</b> Do not give out personal info on the first date. The chat lines will open once you arrive at your date, and you can continue talking over the chat if you both connect</string>
     <string name="safe_dating_tip_4"><b>4.</b> Enlist the help of the restaurant manager or waiter. Our restaurant managers know that you are coming through Oho! and they can safely walk you out to your transportation</string>
+    <string name="availability_disclaimer">**Matches will only turn on if you decide to go on a date on the selected week shown above**</string>
     <string-array name="evening_time_slots_array">
         <item>06:00 PM</item>
         <item>07:00 PM</item>
