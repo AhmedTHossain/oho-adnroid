@@ -30,15 +30,16 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        binding = FragmentHomeBinding.inflate(inflater,container,false);
+        binding = FragmentHomeBinding.inflate(inflater, container, false);
 
         //finding which day of week is today in order to check if its the dating phase or matching phase. So that the appropriate UI can be shown based on that.
         Date date = new Date();
         CharSequence time = DateFormat.format("E", date.getTime()); // gives like (Wednesday)
 
-        if (String.valueOf(time).equals("Mon"))
+        if (String.valueOf(time).equals("Mon")) {
             startActivity(new Intent(requireActivity(), CheckAvailabilityActivity.class));
-
+            requireActivity().finish();
+        }
         binding.dayText.setText(String.valueOf(time));
 
         Calendar c = Calendar.getInstance();

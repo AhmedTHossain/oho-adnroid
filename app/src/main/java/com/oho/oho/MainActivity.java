@@ -6,8 +6,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -15,6 +17,7 @@ import com.oho.oho.databinding.ActivityMainBinding;
 import com.oho.oho.models.Profile;
 import com.oho.oho.views.home.HomeFragment;
 import com.oho.oho.views.home.MessagesFragment;
+import com.oho.oho.views.home.NotAvailableFragment;
 import com.oho.oho.views.home.ProfileFragment;
 import com.oho.oho.views.home.SettingsFragment;
 
@@ -29,16 +32,22 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        replaceFragment(new HomeFragment());
+        if (checkIfAvailable().equals("false")) {
+            replaceFragment(new NotAvailableFragment());
+        }
+        else {
+            Log.d("MainActivity","if available = "+checkIfAvailable());
+            replaceFragment(new HomeFragment());
+        }
 
         SharedPreferences mPrefs = getSharedPreferences("pref", Context.MODE_PRIVATE);
         Gson gson = new Gson();
-        String profile = mPrefs.getString("profile","");
+        String profile = mPrefs.getString("profile", "");
         Profile userProfile = gson.fromJson(profile, Profile.class);
 
         binding.bottomNavigationview.setOnItemSelectedListener(item -> {
 
-            switch (item.getItemId()){
+            switch (item.getItemId()) {
 
                 case R.id.home:
                     replaceFragment(new HomeFragment());
@@ -59,10 +68,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void replaceFragment(Fragment fragment){
+    private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout,fragment);
+        fragmentTransaction.replace(R.id.frame_layout, fragment);
         fragmentTransaction.commit();
+    }
+
+    private String checkIfAvailable() {
+        SharedPreferences sharedPref = getSharedPreferences("pref",Context.MODE_PRIVATE);
+        return sharedPref.getString("is_available", "N/A");
     }
 }

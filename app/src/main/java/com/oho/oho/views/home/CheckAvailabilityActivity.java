@@ -2,13 +2,19 @@ package com.oho.oho.views.home;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 
+import com.oho.oho.MainActivity;
 import com.oho.oho.R;
 import com.oho.oho.databinding.ActivityCheckAvailabilityBinding;
 import com.oho.oho.databinding.ActivityMainBinding;
+import com.oho.oho.views.settings.AvailabilitySettingsActivity;
 
-public class CheckAvailabilityActivity extends AppCompatActivity {
+public class CheckAvailabilityActivity extends AppCompatActivity implements View.OnClickListener {
     ActivityCheckAvailabilityBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,5 +22,34 @@ public class CheckAvailabilityActivity extends AppCompatActivity {
         setTheme(R.style.Theme_OHO);
         binding = ActivityCheckAvailabilityBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        // click listeners
+        binding.buttonStartMatching.setOnClickListener(this);
+        binding.buttonNotReady.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.button_start_matching:
+                storeIfAvailable(true);
+                startActivity(new Intent(this, AvailabilitySettingsActivity.class));
+                break;
+            case R.id.button_not_ready:
+                storeIfAvailable(false);
+                startActivity(new Intent(this, MainActivity.class));
+                break;
+        }
+    }
+
+    private void storeIfAvailable(boolean isAvailable){
+        SharedPreferences sharedPref = getSharedPreferences("pref",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        if (isAvailable)
+            editor.putString("is_available", "true");
+        else
+            editor.putString("is_available", "false");
+        editor.apply();
     }
 }
