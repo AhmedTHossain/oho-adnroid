@@ -79,4 +79,6 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPref = getSharedPreferences("pref",Context.MODE_PRIVATE);
         return sharedPref.getString("is_available", "N/A");
     }
+
+
 }

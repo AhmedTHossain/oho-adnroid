@@ -287,6 +287,7 @@ Oho! does not knowingly collect any Personal Identifiable Information from child
     <string name="safe_dating_tip_4"><b>4.</b> Enlist the help of the restaurant manager or waiter. Our restaurant managers know that you are coming through Oho! and they can safely walk you out to your transportation</string>
     <string name="availability_disclaimer">**Matches will only turn on if you decide to go on a date on the selected week shown above**</string>
     <string name="availability_change_disclaimer">Or if your availability changes, you can select your schedule for this weekend using the below button.</string>
+    <string name="availability_saved_disclaimer">Below is your schedule for this week, you can update it anytime from the <b>Availability Settings</b> menu</string>
     <string-array name="evening_time_slots_array">
         <item>06:00 PM</item>
         <item>07:00 PM</item>

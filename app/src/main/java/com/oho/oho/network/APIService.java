@@ -49,4 +49,12 @@ public interface APIService {
     // for uploading user prompts
     @POST("users/prompt_answer/add")
     Call<String> uploadPrompt(@Body ArrayList<PromptAnswer> promptAnswer);
+
+    // for adding/updating user availability
+    @POST("users/availability/add")
+    Call<ArrayList<String>> addAvailability(@Query("user_id") int user_id, @Body ArrayList<String> availList);
+
+    //for getting user availability
+    @GET("users/availability/")
+    Call<ArrayList<String>> getAvailability(@Query("user_id") int user_id);
 }

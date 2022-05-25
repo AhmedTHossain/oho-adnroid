@@ -71,6 +71,7 @@
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/drawable/ic_profile_menu_icon.xml" value="0.134" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/drawable/ic_radio_button_unchecked.xml" value="0.167" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/drawable/ic_safety.xml" value="0.167" />
+        <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/drawable/ic_schedule.xml" value="0.1105" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/drawable/ic_settings_menu_icon.xml" value="0.167" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/drawable/ic_sign_out.xml" value="0.1395" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/drawable/ic_terms.xml" value="0.144" />
@@ -89,6 +90,7 @@
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/activity_registration.xml" value="0.13055555555555556" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/activity_safe_dating_tips.xml" value="0.2" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/activity_terms_of_use.xml" value="0.1" />
+        <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/availability_saved_dialog.xml" value="0.2" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/bio_input_dialog.xml" value="0.20521590423257802" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/caption_input_dialog.xml" value="0.20521590423257802" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/deactivate_profile_dialog.xml" value="0.20436083796494228" />
@@ -120,6 +122,7 @@
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/imagepicker_bottom_sheet_dialog.xml" value="0.264" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/item_conatiner_boarding_one.xml" value="0.10989583333333333" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/layout_recyclerview.xml" value="0.15416666666666667" />
+        <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/row_available_time_slots.xml" value="0.1974050046339203" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/row_edit_profile_intro.xml" value="0.176" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/row_edit_profile_left.xml" value="0.264" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/layout/row_edit_profile_right.xml" value="0.21666666666666667" />
