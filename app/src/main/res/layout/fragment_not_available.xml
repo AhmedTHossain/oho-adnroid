@@ -40,7 +40,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:fontFamily="@font/sf_pro_rounded_regular"
-                android:text="Or if you are free now, you can select your schedule for this weekend using the below button!"
+                android:text="@string/availability_change_disclaimer"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_16ssp" />
 
