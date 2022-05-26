@@ -1,39 +1,29 @@
 package com.oho.oho.views.home;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.oho.oho.R;
-import com.oho.oho.databinding.FragmentHomeBinding;
-import com.oho.oho.views.settings.AvailabilitySettingsActivity;
+import com.oho.oho.databinding.FragmentMatchingPhaseBinding;
 
-import java.util.Calendar;
-import java.util.Date;
+public class MatchingPhaseFragment extends Fragment {
 
-public class HomeFragment extends Fragment {
+    FragmentMatchingPhaseBinding binding;
 
-    FragmentHomeBinding binding;
-
-    public HomeFragment() {
+    public MatchingPhaseFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
-
-
-        Calendar c = Calendar.getInstance();
+        binding = FragmentMatchingPhaseBinding.inflate(inflater, container, false);
 
         // Inflate the layout for this fragment
         return binding.getRoot();

@@ -33,23 +33,22 @@ public class CheckAvailabilityActivity extends AppCompatActivity implements View
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.button_start_matching:
-                storeIfAvailable(true);
                 startActivity(new Intent(this, AvailabilitySettingsActivity.class));
+
+                storeAvailabilityConsent(1);
                 break;
             case R.id.button_not_ready:
-                storeIfAvailable(false);
                 startActivity(new Intent(this, MainActivity.class));
+
+                storeAvailabilityConsent(0);
                 break;
         }
     }
 
-    private void storeIfAvailable(boolean isAvailable){
-        SharedPreferences sharedPref = getSharedPreferences("pref",Context.MODE_PRIVATE);
+    private void storeAvailabilityConsent(int available){
+        SharedPreferences sharedPref = this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        if (isAvailable)
-            editor.putString("is_available", "true");
-        else
-            editor.putString("is_available", "false");
-        editor.apply();
+        editor.putInt("available", available);
+        editor.commit();
     }
 }

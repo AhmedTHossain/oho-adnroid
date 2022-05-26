@@ -4,26 +4,37 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.oho.oho.databinding.ActivityMainBinding;
 import com.oho.oho.models.Profile;
+import com.oho.oho.viewmodels.AvailabilitySettingsViewModel;
+import com.oho.oho.views.home.CheckAvailabilityActivity;
 import com.oho.oho.views.home.HomeFragment;
+import com.oho.oho.views.home.MatchingPhaseFragment;
 import com.oho.oho.views.home.MessagesFragment;
 import com.oho.oho.views.home.NotAvailableFragment;
 import com.oho.oho.views.home.ProfileFragment;
 import com.oho.oho.views.home.SettingsFragment;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
+    private AvailabilitySettingsViewModel availabilitySettingsViewModel;
+
+    ArrayList<String> preSelectedSlotsArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,13 +43,19 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        if (checkIfAvailable().equals("false")) {
-            replaceFragment(new NotAvailableFragment());
-        }
-        else {
-            Log.d("MainActivity","if available = "+checkIfAvailable());
-            replaceFragment(new HomeFragment());
-        }
+        initAvailabilityViewModel();
+
+        preSelectedSlotsArray = new ArrayList<>();
+
+        checkIfAvailable();
+
+//        if (checkIfAvailable().equals("false")) {
+//            replaceFragment(new NotAvailableFragment());
+//        }
+//        else {
+//            Log.d("MainActivity","if available = "+checkIfAvailable());
+//            replaceFragment(new HomeFragment());
+//        }
 
         SharedPreferences mPrefs = getSharedPreferences("pref", Context.MODE_PRIVATE);
         Gson gson = new Gson();
@@ -75,10 +92,46 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    private String checkIfAvailable() {
-        SharedPreferences sharedPref = getSharedPreferences("pref",Context.MODE_PRIVATE);
-        return sharedPref.getString("is_available", "N/A");
+    private void checkIfAvailable() {
+        availabilitySettingsViewModel.getAvailableTimeSlots(2);
+        availabilitySettingsViewModel.selectedTimeSlotsList.observe(this, slotsSelected -> {
+            preSelectedSlotsArray.clear();
+            preSelectedSlotsArray.addAll(slotsSelected);
+
+
+            //finding which day of week is today in order to check if its the dating phase or matching phase. So that the appropriate UI can be shown based on that.
+            Date date = new Date();
+            CharSequence time = DateFormat.format("E", date.getTime()); // gives like (Wednesday)
+
+            if (!String.valueOf(time).equals("Fri") && !String.valueOf(time).equals("Sat") && !String.valueOf(time).equals("Sun")) {
+                if (getAvailabilityConsent() == -1) {
+                    startActivity(new Intent(this, CheckAvailabilityActivity.class));
+                    finish();
+                } else if (getAvailabilityConsent() == 0){
+                    replaceFragment(new NotAvailableFragment());
+                } else
+                    replaceFragment(new HomeFragment());
+            } else {
+                storeAvailabilityConsent(-1);
+                replaceFragment(new MatchingPhaseFragment());
+            }
+
+        });
     }
 
+    private void initAvailabilityViewModel(){
+        availabilitySettingsViewModel = new ViewModelProvider(this).get(AvailabilitySettingsViewModel.class);
+    }
+
+    private int getAvailabilityConsent(){
+        SharedPreferences sharedPref = this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        return sharedPref.getInt("available",-1);
+    }
+    private void storeAvailabilityConsent(int available){
+        SharedPreferences sharedPref = this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("available", available);
+        editor.commit();
+    }
 
 }
