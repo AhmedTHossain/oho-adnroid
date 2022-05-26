@@ -122,7 +122,7 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
                         });
 
                         Button button2 = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEGATIVE);
-                        button2.setText("ALRIGHT");
+                        button2.setText("OK");
                         button2.setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.textTitle));
                         button2.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -211,7 +211,7 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
                         });
 
                         Button button2 = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEGATIVE);
-                        button2.setText("ALRIGHT");
+                        button2.setText("OK");
                         button2.setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.textTitle));
                         button2.setOnClickListener(new View.OnClickListener() {
                             @Override

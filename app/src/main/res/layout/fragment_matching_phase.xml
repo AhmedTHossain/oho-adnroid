@@ -28,7 +28,7 @@
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:fontFamily="@font/sf_pro_rounded_regular"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:text="Currently our dating phase is going on!"
+                android:text="Currently we are in our dating phase."
                 android:textColor="@color/black"
                 android:textSize="@dimen/_30ssp"
                 android:textStyle="bold" />
