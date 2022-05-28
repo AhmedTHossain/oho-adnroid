@@ -50,14 +50,17 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
         selectedSlotsArray = new ArrayList<>();
         preSelectedSlotsArray = new ArrayList<>();
 
-        setAlreadySelectedTimeSlots();
+        if (getAvailabilityConsent() != -1)
+            setAlreadySelectedTimeSlots();
+        else
+            showCannotChangeAvailabilityDialog();
 
         //Click Listeners
         binding.buttonClearSlots.setOnClickListener(this);
         binding.buttonSaveSlots.setOnClickListener(this);
     }
 
-    private void initViewModel(){
+    private void initViewModel() {
         availabilitySettingsViewModel = new ViewModelProvider(this).get(AvailabilitySettingsViewModel.class);
     }
 
@@ -84,7 +87,7 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
         if (selectedSlotsArray.size() != 0) {
             //Call update availability API
             availabilitySettingsViewModel.addAvailableTimeSlots(2, selectedSlotsArray);
-            availabilitySettingsViewModel.selectedTimeSlotsList.observe(this,slotsSelected -> {
+            availabilitySettingsViewModel.selectedTimeSlotsList.observe(this, slotsSelected -> {
                 storeAvailabilityConsent(1);
 
                 selectedSlotsArray.clear();
@@ -105,7 +108,7 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
                 recyclerView.setAdapter(adapter);
 
                 alertDialogBuilder.setCancelable(false)
-                        .setPositiveButton("CONFIRM",null)
+                        .setPositiveButton("CONFIRM", null)
                         .setNegativeButton("CANCEL", null);
                 AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
@@ -113,7 +116,7 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
                     public void onShow(DialogInterface dialog) {
                         Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
                         button.setText("EDIT");
-                        button.setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.indicatioractive));
+                        button.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.indicatioractive));
                         button.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -123,7 +126,7 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
 
                         Button button2 = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEGATIVE);
                         button2.setText("OK");
-                        button2.setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.textTitle));
+                        button2.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.textTitle));
                         button2.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -138,7 +141,7 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
                 alertDialog.show();
             });
         } else
-            Toast.makeText(AvailabilitySettingsActivity.this,"You haven't selected any time slots yet!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(AvailabilitySettingsActivity.this, "You haven't selected any time slots yet!", Toast.LENGTH_SHORT).show();
     }
 
     public void onCheckboxClicked(View view) {
@@ -170,13 +173,13 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
         else
             selectedSlotsArray.remove(slot);
 
-        Log.d("AvailabilitySettingsActivity","selected slots = "+selectedSlotsArray.toString());
+        Log.d("AvailabilitySettingsActivity", "selected slots = " + selectedSlotsArray.toString());
     }
 
-    private void setAlreadySelectedTimeSlots(){
+    private void setAlreadySelectedTimeSlots() {
         availabilitySettingsViewModel.getAvailableTimeSlots(2);
         availabilitySettingsViewModel.selectedTimeSlotsList.observe(this, slotsSelected -> {
-            if (slotsSelected.size() != 0){
+            if (slotsSelected.size() != 0) {
                 preSelectedSlotsArray.addAll(slotsSelected);
 
                 LayoutInflater li = LayoutInflater.from(getApplicationContext());
@@ -194,7 +197,7 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
                 recyclerView.setAdapter(adapter);
 
                 alertDialogBuilder.setCancelable(false)
-                        .setPositiveButton("CONFIRM",null)
+                        .setPositiveButton("CONFIRM", null)
                         .setNegativeButton("CANCEL", null);
                 AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
@@ -202,7 +205,7 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
                     public void onShow(DialogInterface dialog) {
                         Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
                         button.setText("EDIT");
-                        button.setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.indicatioractive));
+                        button.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.indicatioractive));
                         button.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -212,7 +215,7 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
 
                         Button button2 = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEGATIVE);
                         button2.setText("OK");
-                        button2.setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.textTitle));
+                        button2.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.textTitle));
                         button2.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -225,16 +228,51 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
                 });
                 // show it
                 alertDialog.show();
-            }
-            else
-                Toast.makeText(getApplicationContext(),"Please select your available time slots for the week",Toast.LENGTH_SHORT).show();
+            } else
+                Toast.makeText(getApplicationContext(), "Please select your available time slots for the week", Toast.LENGTH_SHORT).show();
         });
     }
 
-    private void storeAvailabilityConsent(int available){
+    private void storeAvailabilityConsent(int available) {
         SharedPreferences sharedPref = this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putInt("available", available);
         editor.commit();
+    }
+
+    private int getAvailabilityConsent() {
+        SharedPreferences sharedPref = this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        return sharedPref.getInt("available", -1);
+    }
+
+    private void showCannotChangeAvailabilityDialog() {
+        LayoutInflater li = LayoutInflater.from(getApplicationContext());
+        View slotsView = li.inflate(R.layout.availabillity_cannot_change_dialog, null);
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                this);
+        // set alert_dialog.xml to alertdialog builder
+        alertDialogBuilder.setView(slotsView);
+
+        alertDialogBuilder.setCancelable(false)
+                .setPositiveButton("OK", null);
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                button.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.indicatioractive));
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                        onBackPressed();
+                        finish();
+                    }
+                });
+            }
+        });
+        // show it
+        alertDialog.show();
     }
 }
