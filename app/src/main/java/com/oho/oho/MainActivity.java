@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.oho.oho.databinding.ActivityMainBinding;
+import com.oho.oho.interfaces.ChangeHomeUiListener;
 import com.oho.oho.models.Profile;
 import com.oho.oho.viewmodels.AvailabilitySettingsViewModel;
 import com.oho.oho.views.home.CheckAvailabilityActivity;
@@ -29,7 +30,7 @@ import com.oho.oho.views.home.SettingsFragment;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ChangeHomeUiListener {
 
     ActivityMainBinding binding;
     private AvailabilitySettingsViewModel availabilitySettingsViewModel;
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
 
                 case R.id.home:
-                    replaceFragment(new HomeFragment());
+                    replaceFragment(new HomeFragment(this));
                     break;
                 case R.id.profile:
                     replaceFragment(new ProfileFragment());
@@ -98,25 +99,28 @@ public class MainActivity extends AppCompatActivity {
             preSelectedSlotsArray.clear();
             preSelectedSlotsArray.addAll(slotsSelected);
 
-
-            //finding which day of week is today in order to check if its the dating phase or matching phase. So that the appropriate UI can be shown based on that.
-            Date date = new Date();
-            CharSequence time = DateFormat.format("E", date.getTime()); // gives like (Wednesday)
-
-            if (!String.valueOf(time).equals("Fri") && !String.valueOf(time).equals("Sat") && !String.valueOf(time).equals("Sun")) {
-                if (getAvailabilityConsent() == -1) {
-                    startActivity(new Intent(this, CheckAvailabilityActivity.class));
-                    finish();
-                } else if (getAvailabilityConsent() == 0){
-                    replaceFragment(new NotAvailableFragment());
-                } else
-                    replaceFragment(new HomeFragment());
-            } else {
-                storeAvailabilityConsent(-1);
-                replaceFragment(new MatchingPhaseFragment());
-            }
+            changeUI();
 
         });
+    }
+
+    private void changeUI() {
+        //finding which day of week is today in order to check if its the dating phase or matching phase. So that the appropriate UI can be shown based on that.
+        Date date = new Date();
+        CharSequence time = DateFormat.format("E", date.getTime()); // gives like (Wednesday)
+
+        if (!String.valueOf(time).equals("Fri") && !String.valueOf(time).equals("Sat") && !String.valueOf(time).equals("Sun")) {
+            if (getAvailabilityConsent() == -1) {
+                startActivity(new Intent(this, CheckAvailabilityActivity.class));
+                finish();
+            } else if (getAvailabilityConsent() == 0){
+                replaceFragment(new NotAvailableFragment());
+            } else
+                replaceFragment(new HomeFragment(this));
+        } else {
+            storeAvailabilityConsent(-1);
+            replaceFragment(new MatchingPhaseFragment());
+        }
     }
 
     private void initAvailabilityViewModel(){
@@ -134,4 +138,8 @@ public class MainActivity extends AppCompatActivity {
         editor.commit();
     }
 
+    @Override
+    public void changeHomeUi() {
+        changeUI();
+    }
 }

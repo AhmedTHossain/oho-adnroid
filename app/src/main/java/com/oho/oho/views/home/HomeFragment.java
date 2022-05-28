@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.oho.oho.R;
 import com.oho.oho.databinding.FragmentHomeBinding;
+import com.oho.oho.interfaces.ChangeHomeUiListener;
 import com.oho.oho.views.settings.AvailabilitySettingsActivity;
 
 import java.util.Calendar;
@@ -20,9 +21,11 @@ import java.util.Date;
 public class HomeFragment extends Fragment {
 
     FragmentHomeBinding binding;
+    ChangeHomeUiListener changeHomeUiListener;
 
-    public HomeFragment() {
+    public HomeFragment( ChangeHomeUiListener changeHomeUiListener) {
         // Required empty public constructor
+        this.changeHomeUiListener = changeHomeUiListener;
     }
 
 
@@ -32,6 +35,7 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
 
+        changeHomeUiListener.changeHomeUi();
 
         Calendar c = Calendar.getInstance();
 
