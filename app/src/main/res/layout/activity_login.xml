@@ -90,12 +90,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center">
             <TextView
+                android:id="@+id/terms_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Terms"
                 android:layout_gravity="center"
                 android:textSize="@dimen/_15ssp"
                 android:textStyle="bold"
+                android:clickable="true"
+                android:focusable="true"
                 android:textColor="@color/indicatioractive"
                 android:fontFamily="@font/sf_pro_rounded_regular"/>
             <TextView
@@ -108,12 +111,15 @@
                 android:textSize="@dimen/_15ssp"
                 android:fontFamily="@font/sf_pro_rounded_regular"/>
             <TextView
+                android:id="@+id/privacy_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:text="Privacy Policy"
                 android:layout_gravity="center"
                 android:textSize="@dimen/_15ssp"
+                android:clickable="true"
+                android:focusable="true"
                 android:textStyle="bold"
                 android:textColor="@color/indicatioractive"
                 android:fontFamily="@font/sf_pro_rounded_regular"/>

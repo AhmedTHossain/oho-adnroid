@@ -21,7 +21,11 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.oho.oho.MainActivity;
 import com.oho.oho.R;
+import com.oho.oho.databinding.ActivityLoginBinding;
 import com.oho.oho.viewmodels.LoginViewModel;
+import com.oho.oho.views.settings.PrivacyPolicyActivity;
+import com.oho.oho.views.settings.TermsOfUseActivity;
+
 import static com.oho.oho.utils.Constants.RC_SIGN_IN;
 import static com.oho.oho.utils.HelperClass.logErrorMessage;
 
@@ -31,6 +35,8 @@ public class LoginActivity extends AppCompatActivity {
     private GoogleSignInClient googleSignInClient;
     private static final String TAG = "LoginActivity";
 
+    ActivityLoginBinding binding;
+
     @Override
     public void onBackPressed() {
         finish();
@@ -39,16 +45,30 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setTheme(R.style.Theme_OHO);
+        binding = ActivityLoginBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         initSignInButton();
         initAuthViewModel();
         initGoogleSignInClient();
+
+        binding.termsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, TermsOfUseActivity.class));
+            }
+        });
+        binding.privacyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, PrivacyPolicyActivity.class));
+            }
+        });
     }
 
     private void initSignInButton() {
-        CardView googleSignInButton = findViewById(R.id.button_signin);
-        googleSignInButton.setOnClickListener(v -> signIn());
+        binding.buttonSignin.setOnClickListener(v -> signIn());
     }
 
     private void initAuthViewModel() {
@@ -66,8 +86,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void signIn() {
-        ProgressBar progressBar = findViewById(R.id.login_progress);
-        progressBar.setVisibility(View.VISIBLE);
+        binding.loginProgress.setVisibility(View.VISIBLE);
         Intent signInIntent = googleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
