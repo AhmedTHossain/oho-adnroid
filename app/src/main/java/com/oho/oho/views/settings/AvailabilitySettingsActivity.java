@@ -177,7 +177,7 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
     }
 
     private void setAlreadySelectedTimeSlots() {
-        availabilitySettingsViewModel.getAvailableTimeSlots(2);
+        availabilitySettingsViewModel.getAvailableTimeSlots(3);
         availabilitySettingsViewModel.selectedTimeSlotsList.observe(this, slotsSelected -> {
             if (slotsSelected.size() != 0) {
                 preSelectedSlotsArray.addAll(slotsSelected);

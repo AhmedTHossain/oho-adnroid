@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements ChangeHomeUiListe
     }
 
     private void checkIfAvailable() {
-        availabilitySettingsViewModel.getAvailableTimeSlots(2);
+        availabilitySettingsViewModel.getAvailableTimeSlots(3);
         availabilitySettingsViewModel.selectedTimeSlotsList.observe(this, slotsSelected -> {
             preSelectedSlotsArray.clear();
             preSelectedSlotsArray.addAll(slotsSelected);
