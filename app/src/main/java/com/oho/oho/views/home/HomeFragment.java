@@ -35,7 +35,7 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
 
-        changeHomeUiListener.changeHomeUi();
+//        changeHomeUiListener.changeHomeUi();
 
         Calendar c = Calendar.getInstance();
 

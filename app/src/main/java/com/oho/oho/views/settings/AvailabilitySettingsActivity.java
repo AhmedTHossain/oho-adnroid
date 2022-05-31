@@ -76,6 +76,7 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
                 binding.satSlot3.setChecked(false);
                 binding.sunSlot1.setChecked(false);
                 binding.sunSlot2.setChecked(false);
+                selectedSlotsArray.clear();
                 break;
             case R.id.button_save_slots:
                 saveAvailability();
@@ -86,7 +87,7 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
     private void saveAvailability() {
         if (selectedSlotsArray.size() != 0) {
             //Call update availability API
-            availabilitySettingsViewModel.addAvailableTimeSlots(2, selectedSlotsArray);
+            availabilitySettingsViewModel.addAvailableTimeSlots(3, selectedSlotsArray);
             availabilitySettingsViewModel.selectedTimeSlotsList.observe(this, slotsSelected -> {
                 storeAvailabilityConsent(1);
 
