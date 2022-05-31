@@ -11,12 +11,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.format.DateFormat;
-import android.util.Log;
-import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.oho.oho.databinding.ActivityMainBinding;
-import com.oho.oho.interfaces.ChangeHomeUiListener;
 import com.oho.oho.models.Profile;
 import com.oho.oho.viewmodels.AvailabilitySettingsViewModel;
 import com.oho.oho.views.home.CheckAvailabilityActivity;
@@ -30,7 +27,7 @@ import com.oho.oho.views.home.SettingsFragment;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity implements ChangeHomeUiListener {
+public class MainActivity extends AppCompatActivity{
 
     ActivityMainBinding binding;
     private AvailabilitySettingsViewModel availabilitySettingsViewModel;
@@ -68,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements ChangeHomeUiListe
             switch (item.getItemId()) {
 
                 case R.id.home:
-                    replaceFragment(new HomeFragment(this));
+                    changeUI();
                     break;
                 case R.id.profile:
                     replaceFragment(new ProfileFragment());
@@ -116,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements ChangeHomeUiListe
             } else if (getAvailabilityConsent() == 0){
                 replaceFragment(new NotAvailableFragment());
             } else
-                replaceFragment(new HomeFragment(this));
+                replaceFragment(new HomeFragment());
         } else {
             storeAvailabilityConsent(-1);
             replaceFragment(new MatchingPhaseFragment());
@@ -136,10 +133,5 @@ public class MainActivity extends AppCompatActivity implements ChangeHomeUiListe
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putInt("available", available);
         editor.commit();
-    }
-
-    @Override
-    public void changeHomeUi() {
-        changeUI();
     }
 }
