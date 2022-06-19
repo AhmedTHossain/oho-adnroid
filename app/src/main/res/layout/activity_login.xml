@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout class="androidx.appcompat.app.AlertController$RecycleListView" xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login"
+    android:background="#FBC0BA"
     tools:context=".views.LoginActivity">
-
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:orientation="vertical"
-        android:layout_marginTop="@dimen/_50sdp">
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/_50sdp"
+        app:layout_constraintBottom_toTopOf="@id/imageview">
 
         <TextView
             android:id="@+id/image_logo"
@@ -27,32 +26,32 @@
 
         <TextView
             android:id="@+id/text_slogan"
-            android:layout_alignStart="@id/image_logo"
-            android:layout_alignEnd="@id/image_logo"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/image_logo"
             android:layout_centerInParent="true"
-            android:fontFamily="@font/sf_pro_rounded_medium"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:fontFamily="@font/inkfree"
             android:text="Dine in with your perfect date!"
-            android:textColor="@color/black"
             android:textAlignment="center"
-            android:textSize="@dimen/_16ssp" />
+            android:textColor="@color/indicatioractive"
+            android:textSize="@dimen/_20ssp"
+            android:textStyle="bold" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/button_signin"
-            android:layout_below="@id/text_slogan"
-            android:layout_alignStart="@+id/text_slogan"
-            android:layout_alignEnd="@id/text_slogan"
             android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_below="@id/text_slogan"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
             android:layout_marginBottom="@dimen/_20sdp"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp"
             android:clickable="true"
             android:focusable="true"
-            android:layout_gravity="center"
             android:foreground="?attr/selectableItemBackground"
-            app:cardCornerRadius="@dimen/_50sdp">
+            app:cardCornerRadius="@dimen/_20sdp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -68,7 +67,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_10sdp"
                     android:fontFamily="@font/sf_pro_rounded_regular"
                     android:text="Sign in with Google"
                     android:textColor="@color/black"
@@ -78,33 +76,24 @@
 
         </androidx.cardview.widget.CardView>
 
-        <ProgressBar
-            android:id="@+id/login_progress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="gone" />
-
         <TextView
             android:id="@+id/aggree_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/button_signin"
-            android:layout_gravity="center"
+            android:layout_centerHorizontal="true"
             android:fontFamily="@font/sf_pro_rounded_regular"
-            android:text="By signing in you're agreeing our"
+            android:text="By signing in you're agreeing to our"
             android:textColor="@color/black"
-            android:layout_alignStart="@id/button_signin"
-            android:layout_alignEnd="@id/button_signin"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp"
             android:textSize="@dimen/_14ssp" />
 
         <LinearLayout
-            android:layout_below="@id/aggree_text"
+            android:id="@+id/terms_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center">
+            android:layout_below="@id/aggree_text"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:layout_centerHorizontal="true">
 
             <TextView
                 android:id="@+id/terms_button"
@@ -116,7 +105,7 @@
                 android:fontFamily="@font/sf_pro_rounded_regular"
                 android:text="Terms"
                 android:textColor="@color/indicatioractive"
-                android:textSize="@dimen/_15ssp"
+                android:textSize="@dimen/_14ssp"
                 android:textStyle="bold" />
 
             <TextView
@@ -127,7 +116,7 @@
                 android:fontFamily="@font/sf_pro_rounded_regular"
                 android:text="&amp;"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_15ssp" />
+                android:textSize="@dimen/_14ssp" />
 
             <TextView
                 android:id="@+id/privacy_button"
@@ -140,9 +129,28 @@
                 android:fontFamily="@font/sf_pro_rounded_regular"
                 android:text="Privacy Policy"
                 android:textColor="@color/indicatioractive"
-                android:textSize="@dimen/_15ssp"
+                android:textSize="@dimen/_14ssp"
                 android:textStyle="bold" />
         </LinearLayout>
     </RelativeLayout>
 
-</RelativeLayout>
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/login_progress"
+        style="@style/SpinKitView.Large.Circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:SpinKit_Color="@color/indicatioractive"
+        android:visibility="gone"
+        android:elevation="@dimen/_10sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/imageview"/>
+
+    <ImageView
+        android:id="@+id/imageview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@drawable/dine_in"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
