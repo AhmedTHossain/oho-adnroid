@@ -20,6 +20,10 @@
         <item name="android:windowSplashScreenBackground" tools:targetApi="s">@drawable/splash</item>
     </style>
 
+    <style name="Theme.OHO.Reegistration">
+        <item name="android:windowBackground">@drawable/login_background</item>
+    </style>
+
     <style name="CustomCardViewStyle" parent="@style/Widget.MaterialComponents.CardView">
         <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay_card_custom_corners</item>
     </style>

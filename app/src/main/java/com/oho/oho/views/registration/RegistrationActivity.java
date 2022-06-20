@@ -37,7 +37,7 @@ public class RegistrationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(R.style.Theme_OHO);
+        setTheme(R.style.Theme_OHO_Reegistration);
         setContentView(R.layout.activity_registration);
 
         initAuthViewModel();
