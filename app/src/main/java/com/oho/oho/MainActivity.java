@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.view.WindowManager;
 
 import com.google.gson.Gson;
 import com.oho.oho.databinding.ActivityMainBinding;
@@ -40,6 +41,11 @@ public class MainActivity extends AppCompatActivity{
         setTheme(R.style.Theme_OHO);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        getWindow().setFlags(
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        );
 
         initAvailabilityViewModel();
 
