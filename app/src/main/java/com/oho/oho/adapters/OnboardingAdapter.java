@@ -69,11 +69,11 @@ public class OnboardingAdapter extends RecyclerView.Adapter<OnboardingAdapter.On
 //            descriptionText.setText(onboardingItem.getDescription());
 //            imageView.setImageResource(onboardingItem.getImage());
             if (onboardingItem.getTitle().equals("Start  Searching..."))
-                linearLayout.setBackground(AppCompatResources.getDrawable(context,R.drawable.onboarding1));
+                linearLayout.setBackground(AppCompatResources.getDrawable(context,R.drawable.onboarding_search));
             else if (onboardingItem.getTitle().equals("Match!"))
-                linearLayout.setBackground(AppCompatResources.getDrawable(context,R.drawable.onboarding2));
+                linearLayout.setBackground(AppCompatResources.getDrawable(context,R.drawable.onboarding_match));
             else
-                linearLayout.setBackground(AppCompatResources.getDrawable(context,R.drawable.onboarding3));
+                linearLayout.setBackground(AppCompatResources.getDrawable(context,R.drawable.onboarding_meeting));
         }
     }
 }
