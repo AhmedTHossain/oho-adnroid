@@ -39,7 +39,8 @@
             android:layout_marginStart="@dimen/_5sdp"
             android:layout_marginEnd="@dimen/_5sdp"
             android:backgroundTint="@color/white"
-            android:layout_marginBottom="@dimen/_10sdp">
+            android:layout_marginBottom="@dimen/_10sdp"
+            app:cardElevation="1dp">
             <EditText
                 android:id="@+id/text_profession"
                 android:layout_width="match_parent"

@@ -50,6 +50,7 @@
                     app:cardCornerRadius="@dimen/_50sdp"
                     android:clickable="true"
                     android:focusable="true"
+                    app:cardElevation="1dp"
                     android:layout_margin="@dimen/_5sdp">
                     <TextView
                         android:id="@+id/text_italian"
@@ -72,6 +73,7 @@
                     app:cardCornerRadius="@dimen/_50sdp"
                     android:clickable="true"
                     android:focusable="true"
+                    app:cardElevation="1dp"
                     android:layout_margin="@dimen/_5sdp">
                     <TextView
                         android:id="@+id/text_japanese"
@@ -98,6 +100,7 @@
                     android:layout_weight="1"
                     app:cardCornerRadius="@dimen/_50sdp"
                     android:clickable="true"
+                    app:cardElevation="1dp"
                     android:focusable="true"
                     android:layout_margin="@dimen/_5sdp">
                     <TextView
@@ -121,6 +124,7 @@
                     app:cardCornerRadius="@dimen/_50sdp"
                     android:clickable="true"
                     android:focusable="true"
+                    app:cardElevation="1dp"
                     android:layout_margin="@dimen/_5sdp">
                     <TextView
                         android:id="@+id/text_mediterranean"
@@ -148,6 +152,7 @@
                     app:cardCornerRadius="@dimen/_50sdp"
                     android:clickable="true"
                     android:focusable="true"
+                    app:cardElevation="1dp"
                     android:layout_margin="@dimen/_5sdp">
                     <TextView
                         android:id="@+id/text_korean"
@@ -170,6 +175,7 @@
                     app:cardCornerRadius="@dimen/_50sdp"
                     android:clickable="true"
                     android:focusable="true"
+                    app:cardElevation="1dp"
                     android:layout_margin="@dimen/_5sdp">
                     <TextView
                         android:id="@+id/text_american"
@@ -197,6 +203,7 @@
                     app:cardCornerRadius="@dimen/_50sdp"
                     android:clickable="true"
                     android:focusable="true"
+                    app:cardElevation="1dp"
                     android:layout_margin="@dimen/_5sdp">
                     <TextView
                         android:id="@+id/text_vegetarian"
@@ -219,6 +226,7 @@
                     app:cardCornerRadius="@dimen/_50sdp"
                     android:clickable="true"
                     android:focusable="true"
+                    app:cardElevation="1dp"
                     android:layout_margin="@dimen/_5sdp">
                     <TextView
                         android:id="@+id/text_vietnamese"
@@ -246,6 +254,7 @@
                     app:cardCornerRadius="@dimen/_50sdp"
                     android:clickable="true"
                     android:focusable="true"
+                    app:cardElevation="1dp"
                     android:layout_margin="@dimen/_5sdp">
                     <TextView
                         android:id="@+id/text_chinese"
@@ -268,6 +277,7 @@
                     app:cardCornerRadius="@dimen/_50sdp"
                     android:clickable="true"
                     android:focusable="true"
+                    app:cardElevation="1dp"
                     android:layout_margin="@dimen/_5sdp">
                     <TextView
                         android:id="@+id/text_open_to_all"
@@ -295,6 +305,7 @@
                     app:cardCornerRadius="@dimen/_50sdp"
                     android:clickable="true"
                     android:focusable="true"
+                    app:cardElevation="1dp"
                     android:layout_margin="@dimen/_5sdp">
                     <TextView
                         android:id="@+id/text_others"
@@ -317,6 +328,7 @@
                     app:cardCornerRadius="@dimen/_50sdp"
                     android:clickable="true"
                     android:focusable="true"
+                    app:cardElevation="1dp"
                     android:layout_margin="@dimen/_5sdp">
                     <TextView
                         android:id="@+id/text_healthy"

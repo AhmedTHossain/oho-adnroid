@@ -17,7 +17,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="What's your \n Budget?"
+            android:text="What's your \n Budget for the date?"
             android:textSize="@dimen/_35ssp"
             android:textColor="@color/textTitle"
             android:textStyle="bold"
@@ -49,7 +49,8 @@
                 app:cardCornerRadius="@dimen/_20sdp"
                 android:layout_margin="@dimen/_5sdp"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                app:cardElevation="1dp">
                 <TextView
                     android:id="@+id/text_one_dollar"
                     android:layout_width="match_parent"
@@ -69,7 +70,8 @@
                 app:cardCornerRadius="@dimen/_20sdp"
                 android:layout_margin="@dimen/_5sdp"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                app:cardElevation="1dp">
                 <TextView
                     android:id="@+id/text_two_dollar"
                     android:layout_width="match_parent"
@@ -89,7 +91,8 @@
                 app:cardCornerRadius="@dimen/_20sdp"
                 android:layout_margin="@dimen/_5sdp"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                app:cardElevation="1dp">
                 <TextView
                     android:id="@+id/text_three_dollar"
                     android:layout_width="match_parent"

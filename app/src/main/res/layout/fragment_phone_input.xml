@@ -18,9 +18,10 @@
             android:layout_height="wrap_content"
             android:text="What is your phone number?"
             android:textSize="@dimen/_35ssp"
+            android:textAlignment="center"
             android:textColor="@color/textTitle"
             android:textStyle="bold"
-            android:textAlignment="center"
+
             android:layout_marginBottom="@dimen/_25sdp"
             android:fontFamily="@font/sf_pro_rounded_regular" />
         <TextView
@@ -39,7 +40,8 @@
             app:cardBackgroundColor="@color/white"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_10sdp">
+            android:layout_marginBottom="@dimen/_10sdp"
+            app:cardElevation="1dp">
             <EditText
                 android:id="@+id/text_phone"
                 android:layout_width="match_parent"

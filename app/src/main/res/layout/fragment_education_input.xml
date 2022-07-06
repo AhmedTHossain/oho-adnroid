@@ -50,7 +50,8 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginBottom="@dimen/_20sdp"
                     android:layout_marginStart="@dimen/_40sdp"
-                    android:layout_marginEnd="@dimen/_40sdp">
+                    android:layout_marginEnd="@dimen/_40sdp"
+                    app:cardElevation="1dp">
                     <TextView
                         android:id="@+id/text_no_degree"
                         android:layout_width="match_parent"
@@ -76,7 +77,8 @@
                     app:cardCornerRadius="@dimen/_40sdp"
                     android:layout_marginBottom="@dimen/_20sdp"
                     android:layout_marginStart="@dimen/_40sdp"
-                    android:layout_marginEnd="@dimen/_40sdp">
+                    android:layout_marginEnd="@dimen/_40sdp"
+                    app:cardElevation="1dp">
                     <TextView
                         android:id="@+id/text_high_school_diploma"
                         android:layout_width="match_parent"
@@ -102,7 +104,8 @@
                     app:cardCornerRadius="@dimen/_40sdp"
                     android:layout_marginBottom="@dimen/_20sdp"
                     android:layout_marginStart="@dimen/_40sdp"
-                    android:layout_marginEnd="@dimen/_40sdp">
+                    android:layout_marginEnd="@dimen/_40sdp"
+                    app:cardElevation="1dp">
                     <TextView
                         android:id="@+id/text_undergrad"
                         android:layout_width="match_parent"
@@ -128,7 +131,8 @@
                     app:cardCornerRadius="@dimen/_40sdp"
                     android:layout_marginBottom="@dimen/_20sdp"
                     android:layout_marginStart="@dimen/_40sdp"
-                    android:layout_marginEnd="@dimen/_40sdp">
+                    android:layout_marginEnd="@dimen/_40sdp"
+                    app:cardElevation="1dp">
                     <TextView
                         android:id="@+id/text_masters"
                         android:layout_width="match_parent"
@@ -154,7 +158,8 @@
                     app:cardCornerRadius="@dimen/_40sdp"
                     android:layout_marginBottom="@dimen/_20sdp"
                     android:layout_marginStart="@dimen/_40sdp"
-                    android:layout_marginEnd="@dimen/_40sdp">
+                    android:layout_marginEnd="@dimen/_40sdp"
+                    app:cardElevation="1dp">
                     <TextView
                         android:id="@+id/text_phd"
                         android:layout_width="match_parent"

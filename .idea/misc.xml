@@ -54,10 +54,21 @@
         <entry key="..\:/Users/ASUS/Desktop/oho-adnroid/app/src/main/res/layout/activity_onboarding.xml" value="0.1375" />
         <entry key="..\:/Users/ASUS/Desktop/oho-adnroid/app/src/main/res/layout/activity_registration.xml" value="0.115625" />
         <entry key="..\:/Users/ASUS/Desktop/oho-adnroid/app/src/main/res/layout/caption_input_dialog.xml" value="0.1" />
+        <entry key="..\:/Users/ASUS/Desktop/oho-adnroid/app/src/main/res/layout/fragment_budget_input.xml" value="0.12118055555555556" />
+        <entry key="..\:/Users/ASUS/Desktop/oho-adnroid/app/src/main/res/layout/fragment_cuisine_preference_input.xml" value="0.12118055555555556" />
+        <entry key="..\:/Users/ASUS/Desktop/oho-adnroid/app/src/main/res/layout/fragment_dob_input.xml" value="0.12118055555555556" />
+        <entry key="..\:/Users/ASUS/Desktop/oho-adnroid/app/src/main/res/layout/fragment_education_input.xml" value="0.12118055555555556" />
+        <entry key="..\:/Users/ASUS/Desktop/oho-adnroid/app/src/main/res/layout/fragment_ethnicity_input.xml" value="0.12118055555555556" />
+        <entry key="..\:/Users/ASUS/Desktop/oho-adnroid/app/src/main/res/layout/fragment_gender_input.xml" value="0.176" />
+        <entry key="..\:/Users/ASUS/Desktop/oho-adnroid/app/src/main/res/layout/fragment_gender_preference_input.xml" value="0.12118055555555556" />
+        <entry key="..\:/Users/ASUS/Desktop/oho-adnroid/app/src/main/res/layout/fragment_height_input.xml" value="0.12118055555555556" />
         <entry key="..\:/Users/ASUS/Desktop/oho-adnroid/app/src/main/res/layout/fragment_intro.xml" value="0.115625" />
+        <entry key="..\:/Users/ASUS/Desktop/oho-adnroid/app/src/main/res/layout/fragment_location_input.xml" value="0.12118055555555556" />
         <entry key="..\:/Users/ASUS/Desktop/oho-adnroid/app/src/main/res/layout/fragment_not_available.xml" value="0.11354166666666667" />
-        <entry key="..\:/Users/ASUS/Desktop/oho-adnroid/app/src/main/res/layout/fragment_phone_input.xml" value="0.115625" />
+        <entry key="..\:/Users/ASUS/Desktop/oho-adnroid/app/src/main/res/layout/fragment_phone_input.xml" value="0.136" />
         <entry key="..\:/Users/ASUS/Desktop/oho-adnroid/app/src/main/res/layout/fragment_profession_input.xml" value="0.115625" />
+        <entry key="..\:/Users/ASUS/Desktop/oho-adnroid/app/src/main/res/layout/fragment_religion_input.xml" value="0.12118055555555556" />
+        <entry key="..\:/Users/ASUS/Desktop/oho-adnroid/app/src/main/res/layout/fragment_vaccine_input.xml" value="0.12118055555555556" />
         <entry key="..\:/Users/ASUS/Desktop/oho-adnroid/app/src/main/res/layout/item_conatiner_boarding_one.xml" value="0.1375" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/drawable/background_gradient_1.xml" value="0.152" />
         <entry key="..\:/Users/ASUS/Desktop/oho/app/src/main/res/drawable/background_gradient_screen.xml" value="0.1" />

@@ -37,7 +37,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="@dimen/_50sdp"
-            android:layout_marginBottom="@dimen/_25sdp">
+            android:layout_marginBottom="@dimen/_25sdp"
+            app:cardElevation="1dp">
             <TextView
                 android:id="@+id/text_location"
                 android:layout_width="match_parent"
