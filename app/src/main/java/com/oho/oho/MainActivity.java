@@ -97,7 +97,8 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private void checkIfAvailable() {
-        availabilitySettingsViewModel.getAvailableTimeSlots(3);
+        //Todo: Use logged in user's id instead of the hard coded one
+        availabilitySettingsViewModel.getAvailableTimeSlots(12);
         availabilitySettingsViewModel.selectedTimeSlotsList.observe(this, slotsSelected -> {
             preSelectedSlotsArray.clear();
             preSelectedSlotsArray.addAll(slotsSelected);

@@ -48,6 +48,7 @@ public class AvailabilitySettingsRepository {
         call.enqueue(new Callback<ArrayList<String>>() {
             @Override
             public void onResponse(@NonNull Call<ArrayList<String>> call, @NonNull Response<ArrayList<String>> response) {
+                Toast.makeText(context,"response code = "+response.code(),Toast.LENGTH_SHORT).show();
                 selectedAvailableTimeSlots.setValue(response.body());
             }
 

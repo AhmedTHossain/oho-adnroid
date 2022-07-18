@@ -5,8 +5,6 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingTop="@dimen/_30sdp"
-    android:paddingStart="@dimen/_20sdp"
-    android:paddingEnd="@dimen/_20sdp"
     android:background="@color/white"
     android:orientation="vertical"
     tools:context=".views.home.SettingsFragment">
@@ -15,14 +13,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Settings &amp; Info"
-        android:fontFamily="@font/sf_pro_rounded_medium"
+        android:fontFamily="@font/ptsans_bold"
         android:textColor="@color/black"
-        android:textSize="@dimen/_40ssp"
-        android:textStyle="bold"/>
+        android:textSize="@dimen/_25ssp"
+        android:textStyle="bold"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingEnd="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_10sdp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:background="#1A000000" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingEnd="@dimen/_20sdp"
         android:scrollbars="vertical">
         <LinearLayout
             android:layout_width="match_parent"

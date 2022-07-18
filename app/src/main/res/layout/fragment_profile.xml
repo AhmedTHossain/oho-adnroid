@@ -1,16 +1,223 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/_30sdp"
     tools:context=".views.home.ProfileFragment">
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:fontFamily="@font/ptsans_bold"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingEnd="@dimen/_20sdp"
+        android:text="Your Profile"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_25ssp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:background="#1A000000" />
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Profile Fragment"
-        android:textSize="@dimen/_20sdp"
-        android:gravity="center"/>
+        android:scrollbars="vertical">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_200sdp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/gradient_ring" />
+
+                <ImageView
+                    android:id="@+id/profile_image_view"
+                    android:layout_width="@dimen/_150sdp"
+                    android:layout_height="@dimen/_150sdp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="@dimen/_1sdp"
+                    android:src="@drawable/profile_photo_placeholder" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/_20sdp"
+                android:paddingEnd="@dimen/_20sdp">
+
+                <TextView
+                    android:id="@+id/name_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:layout_toStartOf="@id/textview_distance"
+                    android:fontFamily="@font/ptsans_bold"
+                    android:text="Jane Doe"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_20ssp" />
+
+                <TextView
+                    android:id="@+id/textview_distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/rounded_corner_drawable"
+                    android:fontFamily="@font/ptsans_bold"
+                    android:gravity="center_vertical"
+                    android:text="2 km"
+                    android:textColor="@color/indicatioractive"
+                    android:textSize="@dimen/_14ssp"
+                    app:drawableStartCompat="@drawable/ic_location_24" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:paddingStart="@dimen/_20sdp"
+                android:paddingEnd="@dimen/_20sdp">
+
+                <TextView
+                    android:id="@+id/textview_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/darkergrotesque_semibold"
+                    android:text="Sunnyvale, CA"
+                    android:textColor="@color/textSubTitle"
+                    android:textSize="@dimen/_16ssp" />
+
+                <TextView
+                    android:id="@+id/textview_profession"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:fontFamily="@font/darkergrotesque_semibold"
+                    android:text="Product Designer"
+                    android:textColor="@color/textSubTitle"
+                    android:textSize="@dimen/_16ssp" />
+            </RelativeLayout>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:paddingStart="@dimen/_20sdp"
+                android:paddingEnd="@dimen/_20sdp"
+                android:stretchColumns="*">
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:padding="@dimen/_5sdp"
+                        android:text="Female"
+                        android:gravity="center"
+                        android:textColor="@color/textSubTitle"
+                        android:textSize="@dimen/_14ssp"
+                        android:background="@drawable/border_drawable"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:padding="@dimen/_5sdp"
+                        android:gravity="center"
+                        android:text="@string/dummy_height"
+                        android:textColor="@color/textSubTitle"
+                        android:textSize="@dimen/_14ssp"
+                        android:background="@drawable/border_drawable"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:padding="@dimen/_5sdp"
+                        android:text="Asian"
+                        android:gravity="center"
+                        android:textColor="@color/textSubTitle"
+                        android:textSize="@dimen/_14ssp"
+                        android:background="@drawable/border_drawable"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:padding="@dimen/_5sdp"
+                        android:text="Agnostic"
+                        android:gravity="center"
+                        android:textColor="@color/textSubTitle"
+                        android:textSize="@dimen/_14ssp"
+                        android:background="@drawable/border_drawable"/>
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/_20sdp"
+                android:paddingEnd="@dimen/_20sdp"
+                android:stretchColumns="*">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:gravity="center"
+                    android:text="Vaccinated"
+                    android:padding="@dimen/_5sdp"
+                    android:textColor="@color/textSubTitle"
+                    android:textSize="@dimen/_14ssp"
+                    android:background="@drawable/border_drawable"/>
+            </TableLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:fontFamily="@font/darkergrotesque_bold"
+                android:paddingStart="@dimen/_20sdp"
+                android:paddingEnd="@dimen/_20sdp"
+                android:text="About"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18ssp" />
+
+            <TextView
+                android:id="@+id/textview_about"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ptsans_regular"
+                android:justificationMode="inter_word"
+                android:paddingStart="@dimen/_20sdp"
+                android:paddingEnd="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="@string/lorem_ipsum_2"
+                android:textColor="@color/textSubTitle"
+                android:textSize="@dimen/_14ssp" />
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
