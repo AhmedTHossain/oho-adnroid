@@ -9,12 +9,13 @@
     tools:context=".views.home.ProfileFragment">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_10sdp"
-        android:fontFamily="@font/ptsans_bold"
         android:paddingStart="@dimen/_20sdp"
         android:paddingEnd="@dimen/_20sdp"
+        android:layout_gravity="center_vertical"
+        android:fontFamily="@font/ptsans_bold"
         android:text="Your Profile"
         android:textColor="@color/black"
         android:textSize="@dimen/_25ssp" />
@@ -37,7 +38,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_20sdp">
+                android:layout_marginTop="@dimen/_10sdp">
 
                 <View
                     android:layout_width="match_parent"
@@ -45,7 +46,7 @@
                     android:layout_centerInParent="true"
                     android:background="@drawable/gradient_ring" />
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/profile_image_view"
                     android:layout_width="@dimen/_150sdp"
                     android:layout_height="@dimen/_150sdp"
@@ -130,53 +131,53 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/border_drawable"
                         android:fontFamily="@font/ptsans_regular"
+                        android:gravity="center"
                         android:padding="@dimen/_5sdp"
                         android:text="Female"
-                        android:gravity="center"
                         android:textColor="@color/textSubTitle"
-                        android:textSize="@dimen/_14ssp"
-                        android:background="@drawable/border_drawable"/>
+                        android:textSize="@dimen/_14ssp" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/border_drawable"
                         android:fontFamily="@font/ptsans_regular"
-                        android:padding="@dimen/_5sdp"
                         android:gravity="center"
+                        android:padding="@dimen/_5sdp"
                         android:text="@string/dummy_height"
                         android:textColor="@color/textSubTitle"
-                        android:textSize="@dimen/_14ssp"
-                        android:background="@drawable/border_drawable"/>
+                        android:textSize="@dimen/_14ssp" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/border_drawable"
                         android:fontFamily="@font/ptsans_regular"
+                        android:gravity="center"
                         android:padding="@dimen/_5sdp"
                         android:text="Asian"
-                        android:gravity="center"
                         android:textColor="@color/textSubTitle"
-                        android:textSize="@dimen/_14ssp"
-                        android:background="@drawable/border_drawable"/>
+                        android:textSize="@dimen/_14ssp" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/border_drawable"
                         android:fontFamily="@font/ptsans_regular"
+                        android:gravity="center"
                         android:padding="@dimen/_5sdp"
                         android:text="Agnostic"
-                        android:gravity="center"
                         android:textColor="@color/textSubTitle"
-                        android:textSize="@dimen/_14ssp"
-                        android:background="@drawable/border_drawable"/>
+                        android:textSize="@dimen/_14ssp" />
                 </TableRow>
             </TableLayout>
 
             <TableLayout
-                android:layout_marginTop="@dimen/_5sdp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:paddingStart="@dimen/_20sdp"
                 android:paddingEnd="@dimen/_20sdp"
                 android:stretchColumns="*">
@@ -184,13 +185,13 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/border_drawable"
                     android:fontFamily="@font/ptsans_regular"
                     android:gravity="center"
-                    android:text="Vaccinated"
                     android:padding="@dimen/_5sdp"
+                    android:text="Vaccinated"
                     android:textColor="@color/textSubTitle"
-                    android:textSize="@dimen/_14ssp"
-                    android:background="@drawable/border_drawable"/>
+                    android:textSize="@dimen/_14ssp" />
             </TableLayout>
 
             <TextView
@@ -208,14 +209,262 @@
                 android:id="@+id/textview_about"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:fontFamily="@font/ptsans_regular"
                 android:justificationMode="inter_word"
                 android:paddingStart="@dimen/_20sdp"
                 android:paddingEnd="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_5sdp"
                 android:text="@string/lorem_ipsum_2"
                 android:textColor="@color/textSubTitle"
                 android:textSize="@dimen/_14ssp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:fontFamily="@font/darkergrotesque_bold"
+                android:paddingStart="@dimen/_20sdp"
+                android:paddingEnd="@dimen/_20sdp"
+                android:text="Prompts &amp; Photos"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18ssp" />
+
+            <!-- Prompt 1 Layout -->
+            <LinearLayout
+                android:id="@+id/prompt_1_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@drawable/two_side_rounded_corner_right"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_20sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:text="the most adventurous thing I did was..."
+                    android:textColor="@color/textSubTitle"
+                    android:textSize="@dimen/_14ssp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/darkergrotesque_bold"
+                    android:text="Sky Diving from 22,000 ft"
+                    android:textColor="@color/indicatioractive"
+                    android:textSize="@dimen/_18ssp" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view_vertical_line_1"
+                android:layout_width="1dip"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_below="@id/card_prompt_question_1"
+                android:layout_gravity="start"
+                android:layout_marginStart="@dimen/_50sdp"
+                android:background="#E6E6E6" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:background="@drawable/border_corner_drawable">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/photo_image_view_1"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_100sdp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_10sdp"
+                    android:src="@drawable/photo_placeholder_1" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_10sdp"
+                    android:text="Fools are those that believe smiles are a sign of happiness."
+                    android:textColor="@color/textSubTitle"
+                    android:textSize="@dimen/_14ssp" />
+
+
+            </LinearLayout>
+
+            <!-- Prompt 2 Layout -->
+            <LinearLayout
+                android:id="@+id/prompt_2_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:background="@drawable/two_sided_rounded_vorner_left"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/_20sdp"
+                android:paddingTop="@dimen/_20sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:text="in a partner, I'm looking for..."
+                    android:textColor="@color/textSubTitle"
+                    android:textSize="@dimen/_14ssp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/darkergrotesque_bold"
+                    android:text="Commitment &amp; honesty"
+                    android:textColor="@color/indicatioractive"
+                    android:textSize="@dimen/_18ssp" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view_vertical_line_2"
+                android:layout_width="1dip"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_below="@id/card_prompt_question_1"
+                android:layout_gravity="end"
+                android:layout_marginEnd="@dimen/_50sdp"
+                android:background="#E6E6E6" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:background="@drawable/border_corner_left_drawable">
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_10sdp"
+                    android:text="There's power in looking silly and not caring that you do."
+                    android:textColor="@color/textSubTitle"
+                    android:textSize="@dimen/_14ssp" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/photo_image_view_2"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_100sdp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_10sdp"
+                    android:src="@drawable/photo_placeholder_3" />
+            </LinearLayout>
+
+            <!-- Prompt 3 Layout -->
+            <LinearLayout
+                android:id="@+id/prompt_3_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@drawable/two_side_rounded_corner_right"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_20sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:text="whiskey or wine?"
+                    android:textColor="@color/textSubTitle"
+                    android:textSize="@dimen/_14ssp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/darkergrotesque_bold"
+                    android:text="Whiskey"
+                    android:textColor="@color/indicatioractive"
+                    android:textSize="@dimen/_18ssp" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view_vertical_line_3"
+                android:layout_width="1dip"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_below="@id/card_prompt_question_1"
+                android:layout_gravity="start"
+                android:layout_marginStart="@dimen/_50sdp"
+                android:background="#E6E6E6" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:background="@drawable/border_corner_drawable">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/photo_image_view_3"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_100sdp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_10sdp"
+                    android:src="@drawable/photo_placeholder_2" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_10sdp"
+                    android:text="I mean sure, I have my bad days, but then I remember what a cute smile I have."
+                    android:textColor="@color/textSubTitle"
+                    android:textSize="@dimen/_14ssp" />
+
+
+            </LinearLayout>
         </LinearLayout>
 
     </ScrollView>
