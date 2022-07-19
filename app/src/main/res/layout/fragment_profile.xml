@@ -8,23 +8,6 @@
     android:paddingTop="@dimen/_30sdp"
     tools:context=".views.home.ProfileFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_10sdp"
-        android:paddingStart="@dimen/_20sdp"
-        android:paddingEnd="@dimen/_20sdp"
-        android:layout_gravity="center_vertical"
-        android:fontFamily="@font/ptsans_bold"
-        android:text="Your Profile"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_25ssp" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_1sdp"
-        android:background="#1A000000" />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -34,6 +17,49 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:paddingStart="@dimen/_20sdp"
+                android:paddingEnd="@dimen/_20sdp"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/ptsans_bold"
+                android:text="Your Profile"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_25ssp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:background="#1A000000" />
+
+            <LinearLayout
+                android:id="@+id/button_edit_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_5sdp"
+                android:paddingStart="@dimen/_20sdp"
+                android:paddingEnd="@dimen/_5sdp"
+                android:background="@drawable/border_corner_left_gradient">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Edit Profile"
+                    android:textSize="@dimen/_16ssp"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/darkergrotesque_bold"
+                    android:textColor="@color/white"
+                    android:layout_marginEnd="@dimen/_5sdp"/>
+                <ImageView
+                    android:layout_width="@dimen/_24sdp"
+                    android:layout_height="@dimen/_24sdp"
+                    android:src="@drawable/ic_edit_profile_white"/>
+            </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
