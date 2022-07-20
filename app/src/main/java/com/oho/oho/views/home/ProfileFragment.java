@@ -1,5 +1,6 @@
 package com.oho.oho.views.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,8 +12,9 @@ import android.view.ViewGroup;
 
 import com.oho.oho.R;
 import com.oho.oho.databinding.FragmentProfileBinding;
+import com.oho.oho.views.UpdateProfileActivity;
 
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     FragmentProfileBinding binding;
 
@@ -25,7 +27,16 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentProfileBinding.inflate(inflater, container, false);
 
+        binding.buttonEditProfile.setOnClickListener(this);
+
         // Inflate the layout for this fragment
         return binding.getRoot();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == binding.buttonEditProfile.getId()){
+            startActivity(new Intent(getContext(), UpdateProfileActivity.class));
+        }
     }
 }

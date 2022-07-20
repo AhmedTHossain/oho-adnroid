@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -45,6 +46,8 @@
                 android:paddingBottom="@dimen/_5sdp"
                 android:paddingStart="@dimen/_20sdp"
                 android:paddingEnd="@dimen/_5sdp"
+                android:clickable="true"
+                android:focusable="true"
                 android:background="@drawable/border_corner_left_gradient">
                 <TextView
                     android:layout_width="wrap_content"
@@ -462,6 +465,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_20sdp"
                 android:background="@drawable/border_corner_drawable">
 
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -488,7 +492,6 @@
                     android:text="I mean sure, I have my bad days, but then I remember what a cute smile I have."
                     android:textColor="@color/textSubTitle"
                     android:textSize="@dimen/_14ssp" />
-
 
             </LinearLayout>
         </LinearLayout>
