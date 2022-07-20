@@ -1,15 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:scrollbars="vertical"
+    android:paddingTop="@dimen/_30sdp"
     tools:context=".views.UpdateProfileActivity">
-    <TextView
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Update Profile"
-        android:layout_centerInParent="true"/>
-</RelativeLayout>
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:paddingStart="@dimen/_20sdp"
+            android:paddingEnd="@dimen/_20sdp"
+            android:layout_gravity="center_vertical"
+            android:fontFamily="@font/ptsans_bold"
+            android:text="Update Profile"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_25ssp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="#1A000000" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:fontFamily="@font/darkergrotesque_bold"
+                android:paddingStart="@dimen/_20sdp"
+                android:paddingEnd="@dimen/_20sdp"
+                android:text="About"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18ssp" />
+
+            <EditText
+                android:id="@+id/edittext_about"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/ptsans_regular"
+                android:hint="@string/lorem_ipsum_2"
+                android:padding="@dimen/_10sdp"
+                android:textColor="@color/textSubTitle"
+                android:textSize="@dimen/_14ssp"
+                android:background="@drawable/border_drawable"/>
+
+            <TextView
+                android:id="@+id/button_update_about"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Update"
+                android:textAlignment="center"
+                android:textSize="@dimen/_16ssp"
+                android:fontFamily="@font/darkergrotesque_bold"
+                android:textColor="@color/white"
+                android:background="@drawable/background_gradient_button"
+                android:visibility="gone"
+                android:padding="@dimen/_5sdp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</ScrollView>
