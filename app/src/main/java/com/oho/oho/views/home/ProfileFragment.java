@@ -38,6 +38,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         if (v.getId() == binding.buttonEditProfile.getId()){
             Intent intent = new Intent(getContext(), UpdateProfileActivity.class);
             intent.putExtra("BIO",binding.textviewAbout.getText().toString());
+            intent.putExtra("PROMPT1",binding.textPrompt1.getText().toString());
+            intent.putExtra("ANSWER1",binding.textAnswer1.getText().toString());
 
             startActivity(intent);
         }

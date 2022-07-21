@@ -76,6 +76,49 @@
                 android:background="@drawable/background_gradient_button"
                 android:visibility="gone"
                 android:padding="@dimen/_5sdp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:fontFamily="@font/darkergrotesque_bold"
+                android:paddingStart="@dimen/_20sdp"
+                android:paddingEnd="@dimen/_20sdp"
+                android:text="Prompts"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18ssp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview_prompts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="vertical"-->
+<!--                android:layout_marginTop="@dimen/_5sdp"-->
+<!--                android:padding="@dimen/_10sdp"-->
+<!--                android:background="@drawable/border_drawable">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/text_promp_1"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:textColor="@color/textSubTitle"-->
+<!--                    android:textSize="@dimen/_14ssp"-->
+<!--                    android:fontFamily="@font/ptsans_bold"-->
+<!--                    app:drawableEndCompat="@drawable/ic_arrow_down" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/text_answer_1"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:textColor="@color/textSubTitle"-->
+<!--                    android:textSize="@dimen/_14ssp"-->
+<!--                    android:fontFamily="@font/ptsans_regular" />-->
+<!--            </LinearLayout>-->
+
         </LinearLayout>
     </LinearLayout>
 
