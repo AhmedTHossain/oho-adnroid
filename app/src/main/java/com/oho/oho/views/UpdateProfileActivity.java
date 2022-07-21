@@ -17,6 +17,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
     ActivityUpdateProfileBinding binding;
 
     String bio = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +32,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         TextView updateBioButton = binding.buttonUpdateAbout;
 
         aboutEditText.setText(bio);
+
         aboutEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
