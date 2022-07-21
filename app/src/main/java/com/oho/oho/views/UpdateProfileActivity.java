@@ -90,9 +90,11 @@ public class UpdateProfileActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() > 0) {
                     if (!aboutEditText.getText().toString().equals(bio)) {
-                        updateBioButton.setVisibility(View.VISIBLE);
-                        if (updateBioButton.getVisibility() != View.VISIBLE)
+
+                        if (updateBioButton.getVisibility() != View.VISIBLE) {
                             updateBioButton.startAnimation(animShow);
+                            updateBioButton.setVisibility(View.VISIBLE);
+                        }
                     } else {
                         updateBioButton.setVisibility(View.GONE);
                         updateBioButton.startAnimation(animHide);

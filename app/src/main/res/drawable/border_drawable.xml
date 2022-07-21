@@ -1,3 +1,11 @@
-<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle" >
-    <stroke android:width="1dip" android:color="#E6E6E6"/>
-</shape>
+<ripple
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#B42254">
+    <item>
+        <shape android:shape="rectangle" >
+            <stroke
+                android:width="1dip"
+                android:color="#E6E6E6"/>
+        </shape>
+    </item>
+</ripple>

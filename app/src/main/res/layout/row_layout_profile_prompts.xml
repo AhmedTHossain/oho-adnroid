@@ -6,6 +6,8 @@
     android:layout_marginTop="@dimen/_5sdp"
     android:padding="@dimen/_10sdp"
     android:background="@drawable/border_drawable"
+    android:clickable="true"
+    android:focusable="true"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
