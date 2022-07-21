@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.oho.oho.R;
 import com.oho.oho.databinding.ActivityCompleteProfileBinding;
@@ -13,6 +15,8 @@ import com.oho.oho.databinding.ActivityUpdateProfileBinding;
 
 public class UpdateProfileActivity extends AppCompatActivity {
     ActivityUpdateProfileBinding binding;
+
+    String bio = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +25,13 @@ public class UpdateProfileActivity extends AppCompatActivity {
         binding = ActivityUpdateProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.edittextAbout.addTextChangedListener(new TextWatcher() {
+        bio = getIntent().getStringExtra("BIO");
+
+        EditText aboutEditText = binding.edittextAbout;
+        TextView updateBioButton = binding.buttonUpdateAbout;
+
+        aboutEditText.setText(bio);
+        aboutEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -29,10 +39,15 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length()>0)
-                    binding.buttonUpdateAbout.setVisibility(View.VISIBLE);
-                else
-                    binding.buttonUpdateAbout.setVisibility(View.GONE);
+                if (s.length()>0) {
+                    if (!aboutEditText.getText().toString().equals(bio))
+                        updateBioButton.setVisibility(View.VISIBLE);
+                    else
+                        updateBioButton.setVisibility(View.GONE);
+                }
+                else {
+                    updateBioButton.setVisibility(View.GONE);
+                }
             }
 
             @Override

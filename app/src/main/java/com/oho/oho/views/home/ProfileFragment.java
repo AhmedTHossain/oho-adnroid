@@ -36,7 +36,10 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v.getId() == binding.buttonEditProfile.getId()){
-            startActivity(new Intent(getContext(), UpdateProfileActivity.class));
+            Intent intent = new Intent(getContext(), UpdateProfileActivity.class);
+            intent.putExtra("BIO",binding.textviewAbout.getText().toString());
+
+            startActivity(intent);
         }
     }
 }
