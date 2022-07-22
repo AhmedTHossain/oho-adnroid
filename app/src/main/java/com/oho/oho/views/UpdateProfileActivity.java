@@ -1,28 +1,40 @@
 package com.oho.oho.views;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.oho.oho.MainActivity;
 import com.oho.oho.R;
 import com.oho.oho.adapters.ProfilePromptAdapter;
 import com.oho.oho.databinding.ActivityCompleteProfileBinding;
 import com.oho.oho.databinding.ActivityUpdateProfileBinding;
+import com.oho.oho.interfaces.OnProfilePromptClickListener;
+import com.oho.oho.interfaces.OnProfilePromptDeleteListener;
 import com.oho.oho.models.PromptAnswer;
+import com.oho.oho.views.prompt.PromptQuestionActivity;
 
 import java.util.ArrayList;
 
-public class UpdateProfileActivity extends AppCompatActivity {
+public class UpdateProfileActivity extends AppCompatActivity implements OnProfilePromptClickListener, OnProfilePromptDeleteListener {
     private ActivityUpdateProfileBinding binding;
     private Animation animShow, animHide;
     private ProfilePromptAdapter adapter;
@@ -68,13 +80,33 @@ public class UpdateProfileActivity extends AppCompatActivity {
         promptAnswer3.setPromptQuestion("whiskey or wine?");
         promptAnswer3.setAnswer("Whiskey");
 
+        PromptAnswer promptAnswer4 = new PromptAnswer();
+        promptAnswer4.setPromptQuestion("Recently, I learned...");
+        promptAnswer4.setAnswer("To play Cello");
+
+        PromptAnswer promptAnswer5 = new PromptAnswer();
+        promptAnswer5.setPromptQuestion("I am passionate about...");
+        promptAnswer5.setAnswer("Motorcycles");
+
+        PromptAnswer promptAnswer6 = new PromptAnswer();
+        promptAnswer6.setPromptQuestion("What is your spirit animal?");
+        promptAnswer6.setAnswer("Bear");
+
+        PromptAnswer promptAnswer7 = new PromptAnswer();
+        promptAnswer7.setPromptQuestion("Ideal Sunday for me is...");
+        promptAnswer7.setAnswer("ZZzz..");
+
         promptList.add(promptAnswer1);
         promptList.add(promptAnswer2);
         promptList.add(promptAnswer3);
+        promptList.add(promptAnswer4);
+        promptList.add(promptAnswer5);
+        promptList.add(promptAnswer6);
+        promptList.add(promptAnswer7);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         Log.d("UpdateProfile", "prompt list size = " + promptList.size());
-        adapter = new ProfilePromptAdapter(this, promptList);
+        adapter = new ProfilePromptAdapter(this, promptList,this, this);
 
         recyclerView.setAdapter(adapter);
 
@@ -110,5 +142,51 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onProfilePromptClick() {
+        startActivity(new Intent(this, PromptQuestionActivity.class));
+    }
+
+    @Override
+    public void onProfilePromptDelete(int id) {
+        LayoutInflater li = LayoutInflater.from(getApplicationContext());
+        View slotsView = li.inflate(R.layout.prompt_delete_dialog, null);
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                this);
+        // set alert_dialog.xml to alertdialog builder
+        alertDialogBuilder.setView(slotsView);
+        alertDialogBuilder.setCancelable(false)
+                .setPositiveButton("OK", null)
+                .setNegativeButton("CANCEL", null);
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                button.setText("DELETE");
+                button.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.indicatioractive));
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
+
+                Button button2 = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEGATIVE);
+                button2.setText("CANCEL");
+                button2.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.textTitle));
+                button2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
+            }
+        });
+        // show it
+        alertDialog.show();
     }
 }
