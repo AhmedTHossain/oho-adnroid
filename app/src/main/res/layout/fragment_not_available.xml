@@ -26,8 +26,7 @@
             android:fontFamily="@font/ptsans_bold"
             android:text="Come back next week when you are available!"
             android:textColor="@color/black"
-            android:textSize="@dimen/_20ssp"
-            android:textStyle="bold" />
+            android:textSize="@dimen/_20ssp" />
 
         <TextView
             android:layout_width="match_parent"
