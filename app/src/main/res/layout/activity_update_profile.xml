@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbars="vertical"
     android:paddingTop="@dimen/_30sdp"
+    android:scrollbars="vertical"
     tools:context=".views.UpdateProfileActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_marginBottom="@dimen/_10sdp"
+            android:fontFamily="@font/ptsans_bold"
             android:paddingStart="@dimen/_20sdp"
             android:paddingEnd="@dimen/_20sdp"
-            android:layout_gravity="center_vertical"
-            android:fontFamily="@font/ptsans_bold"
             android:text="Update Profile"
             android:textColor="@color/black"
             android:textSize="@dimen/_25ssp" />
@@ -33,10 +33,56 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginStart="@dimen/_20sdp"
-            android:layout_marginEnd="@dimen/_20sdp">
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:orientation="vertical">
 
+            <!-- Profile Photo -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:fontFamily="@font/darkergrotesque_bold"
+                android:paddingStart="@dimen/_20sdp"
+                android:paddingEnd="@dimen/_20sdp"
+                android:text="Profile Photo"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18ssp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/border_drawable"
+                android:padding="@dimen/_10sdp">
+
+                <TextView
+                    android:id="@+id/text_promp_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/photo_image_view"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:orientation="vertical"
+                    android:text="Select or capture new profile photo"
+                    android:textColor="@color/textSubTitle"
+                    android:textSize="@dimen/_14ssp"
+                    app:drawableEndCompat="@drawable/ic_arrow_right" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/photo_image_view"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="@dimen/_60sdp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:clickable="true"
+                    android:focusable="true"
+
+                    android:src="@drawable/photo_placeholder_1" />
+            </RelativeLayout>
+
+            <!-- About -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -53,30 +99,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/border_drawable"
                 android:fontFamily="@font/ptsans_regular"
-                android:text="Bio"
-                android:padding="@dimen/_10sdp"
-                android:textColor="@color/textSubTitle"
-                android:textSize="@dimen/_14ssp"
                 android:gravity="top"
                 android:inputType="textMultiLine"
-                android:scrollbars="vertical"
                 android:lines="5"
-                android:background="@drawable/border_drawable"/>
+                android:padding="@dimen/_10sdp"
+                android:scrollbars="vertical"
+                android:text="Bio"
+                android:textColor="@color/textSubTitle"
+                android:textSize="@dimen/_14ssp" />
 
             <TextView
                 android:id="@+id/button_update_about"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/background_gradient_button"
+                android:fontFamily="@font/darkergrotesque_bold"
+                android:padding="@dimen/_5sdp"
                 android:text="Update"
                 android:textAlignment="center"
-                android:textSize="@dimen/_16ssp"
-                android:fontFamily="@font/darkergrotesque_bold"
                 android:textColor="@color/white"
-                android:background="@drawable/background_gradient_button"
-                android:visibility="gone"
-                android:padding="@dimen/_5sdp" />
+                android:textSize="@dimen/_16ssp"
+                android:visibility="gone" />
 
+            <!-- Photos & Prompts -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -84,7 +131,7 @@
                 android:fontFamily="@font/darkergrotesque_bold"
                 android:paddingStart="@dimen/_20sdp"
                 android:paddingEnd="@dimen/_20sdp"
-                android:text="Prompts"
+                android:text="Photos &amp; Prompts"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_18ssp" />
 
@@ -93,32 +140,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_20sdp"/>
-
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="vertical"-->
-<!--                android:layout_marginTop="@dimen/_5sdp"-->
-<!--                android:padding="@dimen/_10sdp"-->
-<!--                android:background="@drawable/border_drawable">-->
-
-<!--                <TextView-->
-<!--                    android:id="@+id/text_promp_1"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:textColor="@color/textSubTitle"-->
-<!--                    android:textSize="@dimen/_14ssp"-->
-<!--                    android:fontFamily="@font/ptsans_bold"-->
-<!--                    app:drawableEndCompat="@drawable/ic_arrow_down" />-->
-
-<!--                <TextView-->
-<!--                    android:id="@+id/text_answer_1"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:textColor="@color/textSubTitle"-->
-<!--                    android:textSize="@dimen/_14ssp"-->
-<!--                    android:fontFamily="@font/ptsans_regular" />-->
-<!--            </LinearLayout>-->
+<!--                android:fadeScrollbars="false"-->
+<!--                android:scrollbarFadeDuration="0"-->
+<!--                android:scrollbars="vertical" -->
+<!--                />-->
 
         </LinearLayout>
     </LinearLayout>
