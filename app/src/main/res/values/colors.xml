@@ -18,4 +18,7 @@
     <color name="bullets">#C4C4C4</color>
     <color name="divider">#E0E0E0</color>
     <color name="deactivated_button_text">#C4C4C4</color>
+
+    <color name="ted_image_picker_primary">#000</color>
+    <color name="ted_image_picker_primary_pressed">#B42254</color>
 </resources>

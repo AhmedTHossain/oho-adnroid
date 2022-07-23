@@ -50,11 +50,14 @@
                 android:textSize="@dimen/_18ssp" />
 
             <RelativeLayout
+                android:id="@+id/button_update_profile_photo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:background="@drawable/border_drawable"
-                android:padding="@dimen/_10sdp">
+                android:padding="@dimen/_10sdp"
+                android:clickable="true"
+                android:focusable="true">
 
                 <TextView
                     android:id="@+id/text_promp_profile"

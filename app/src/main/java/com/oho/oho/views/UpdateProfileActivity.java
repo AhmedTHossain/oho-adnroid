@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,6 +20,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,12 +34,19 @@ import com.oho.oho.interfaces.OnProfilePromptDeleteListener;
 import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.views.prompt.PromptQuestionActivity;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
-public class UpdateProfileActivity extends AppCompatActivity implements OnProfilePromptClickListener, OnProfilePromptDeleteListener {
+import gun0912.tedimagepicker.builder.TedImagePicker;
+import gun0912.tedimagepicker.builder.listener.OnSelectedListener;
+
+public class UpdateProfileActivity extends AppCompatActivity implements OnProfilePromptClickListener, OnProfilePromptDeleteListener, View.OnClickListener {
     private ActivityUpdateProfileBinding binding;
     private Animation animShow, animHide;
     private ProfilePromptAdapter adapter;
+
+    private RelativeLayout updateProfilePhotoButton;
 
     String bio = "";
 
@@ -56,6 +65,8 @@ public class UpdateProfileActivity extends AppCompatActivity implements OnProfil
 
         EditText aboutEditText = binding.edittextAbout;
         TextView updateBioButton = binding.buttonUpdateAbout;
+
+        updateProfilePhotoButton = binding.buttonUpdateProfilePhoto;
 //        TextView prompt1 = binding.textPromp1;
 //        TextView answer1 = binding.textAnswer1;
 //
@@ -142,6 +153,9 @@ public class UpdateProfileActivity extends AppCompatActivity implements OnProfil
 
             }
         });
+
+        //Setting Click Listeners
+        updateProfilePhotoButton.setOnClickListener(this);
     }
 
     @Override
@@ -188,5 +202,21 @@ public class UpdateProfileActivity extends AppCompatActivity implements OnProfil
         });
         // show it
         alertDialog.show();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == updateProfilePhotoButton.getId()){
+            TedImagePicker.with(this)
+                    .title("Select Profile Photo")
+                    .cameraTileImage(R.drawable.ic_camera_48dp)
+                    .start(new OnSelectedListener() {
+                        @Override
+                        public void onSelected(@NotNull Uri uri) {
+//                            showSingleImage(uri);
+                            binding.photoImageView.setImageURI(uri);
+                        }
+                    });
+        }
     }
 }
