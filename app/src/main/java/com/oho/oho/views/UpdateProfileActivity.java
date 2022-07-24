@@ -32,6 +32,7 @@ import com.oho.oho.databinding.ActivityUpdateProfileBinding;
 import com.oho.oho.interfaces.OnProfilePromptClickListener;
 import com.oho.oho.interfaces.OnProfilePromptDeleteListener;
 import com.oho.oho.models.PromptAnswer;
+import com.oho.oho.views.prompt.PromptActivity;
 import com.oho.oho.views.prompt.PromptQuestionActivity;
 
 import org.jetbrains.annotations.NotNull;
@@ -160,7 +161,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements OnProfil
 
     @Override
     public void onProfilePromptClick() {
-        startActivity(new Intent(this, PromptQuestionActivity.class));
+        startActivity(new Intent(this, PromptActivity.class));
     }
 
     @Override
@@ -210,6 +211,8 @@ public class UpdateProfileActivity extends AppCompatActivity implements OnProfil
             TedImagePicker.with(this)
                     .title("Select Profile Photo")
                     .cameraTileImage(R.drawable.ic_camera_48dp)
+                    .zoomIndicator(false)
+                    .cameraTileBackground(R.color.black)
                     .start(new OnSelectedListener() {
                         @Override
                         public void onSelected(@NotNull Uri uri) {

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/_30sdp"
+    tools:context=".views.prompt.PromptActivity">
+
+    <TextView
+        android:id="@+id/text_screen_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:fontFamily="@font/ptsans_bold"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingEnd="@dimen/_20sdp"
+        android:text="Select Prompt"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_25ssp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:background="#1A000000" />
+
+    <LinearLayout
+        android:id="@+id/layout_question_selected"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingEnd="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/text_question_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/darkergrotesque_bold"
+            android:text="Question"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_18ssp" />
+        <TextView
+            android:id="@+id/text_question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/darkergrotesque_regular"
+            android:text="in a partner, I'm looking for..."
+            android:textColor="@color/textSubTitle"
+            android:textSize="@dimen/_18ssp" />
+    </LinearLayout>
+
+    <!-- Prompt Question recyclerview -->
+    <TextView
+        android:id="@+id/text_title_select_prompt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:fontFamily="@font/darkergrotesque_bold"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingEnd="@dimen/_20sdp"
+        android:text="Prompts"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_18ssp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_prompt_questions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_20sdp"/>
+
+    <EditText
+        android:id="@+id/edittext_answer_prompt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:background="@drawable/border_drawable"
+        android:fontFamily="@font/ptsans_regular"
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        android:lines="2"
+        android:padding="@dimen/_10sdp"
+        android:scrollbars="vertical"
+        android:hint="my answer to the prompt.."
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:textColor="@color/textSubTitle"
+        android:textSize="@dimen/_14ssp"
+        android:visibility="gone"/>
+</LinearLayout>
