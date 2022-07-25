@@ -127,16 +127,49 @@
                 android:visibility="gone" />
 
             <!-- Photos & Prompts -->
-            <TextView
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:fontFamily="@font/darkergrotesque_bold"
-                android:paddingStart="@dimen/_20sdp"
-                android:paddingEnd="@dimen/_20sdp"
-                android:text="Photos &amp; Prompts"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_18ssp" />
+                android:layout_marginTop="@dimen/_20sdp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_toStartOf="@id/button_add_prompt"
+                    android:fontFamily="@font/darkergrotesque_bold"
+                    android:paddingStart="@dimen/_20sdp"
+                    android:text="Photos &amp; Prompts"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_18ssp"
+                    android:layout_centerVertical="true"/>
+                <LinearLayout
+                    android:id="@+id/button_add_prompt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/_20sdp"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:paddingEnd="@dimen/_5sdp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/border_corner_left_gradient">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Add New"
+                        android:textSize="@dimen/_14ssp"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/darkergrotesque_bold"
+                        android:textColor="@color/white"
+                        android:layout_marginEnd="@dimen/_5sdp"/>
+                    <ImageView
+                        android:layout_width="@dimen/_24sdp"
+                        android:layout_height="@dimen/_24sdp"
+                        android:src="@drawable/ic_edit_profile_white"/>
+                </LinearLayout>
+            </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview_prompts"
