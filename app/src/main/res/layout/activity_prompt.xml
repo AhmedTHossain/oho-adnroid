@@ -125,14 +125,14 @@
         android:layout_marginEnd="@dimen/_20sdp">
 
         <TextView
-            android:id="@+id/text_promp_profile"
+            android:id="@+id/text_select_promp_image_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toEndOf="@id/photo_image_view"
             android:fontFamily="@font/ptsans_regular"
             android:orientation="vertical"
-            android:text="Select or capture new prompt photo"
+            android:text="Select/capture new prompt photo or use the existing photo."
             android:textColor="@color/textSubTitle"
             android:textSize="@dimen/_14ssp"
             app:drawableEndCompat="@drawable/ic_arrow_right" />
@@ -148,4 +148,18 @@
             android:focusable="true"
             android:src="@drawable/photo_placeholder_1" />
     </RelativeLayout>
+    <TextView
+        android:id="@+id/button_upload_prompt_anwers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_gradient_button"
+        android:fontFamily="@font/darkergrotesque_bold"
+        android:padding="@dimen/_5sdp"
+        android:text="Update"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_16ssp"
+        android:visibility="gone"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"/>
 </LinearLayout>

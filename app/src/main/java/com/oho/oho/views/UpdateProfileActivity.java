@@ -20,6 +20,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,6 +48,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements OnProfil
     private Animation animShow, animHide;
     private ProfilePromptAdapter adapter;
 
+    private LinearLayout addNewPromptButton;
     private RelativeLayout updateProfilePhotoButton;
 
     String bio = "";
@@ -67,6 +69,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements OnProfil
         EditText aboutEditText = binding.edittextAbout;
         TextView updateBioButton = binding.buttonUpdateAbout;
 
+        addNewPromptButton =binding.buttonAddPrompt;
         updateProfilePhotoButton = binding.buttonUpdateProfilePhoto;
 //        TextView prompt1 = binding.textPromp1;
 //        TextView answer1 = binding.textAnswer1;
@@ -157,6 +160,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements OnProfil
 
         //Setting Click Listeners
         updateProfilePhotoButton.setOnClickListener(this);
+        addNewPromptButton.setOnClickListener(this);
     }
 
     @Override
@@ -220,6 +224,11 @@ public class UpdateProfileActivity extends AppCompatActivity implements OnProfil
                             binding.photoImageView.setImageURI(uri);
                         }
                     });
+        }
+        if (v.getId() == addNewPromptButton.getId()){
+            Intent intent = new Intent(this,PromptActivity.class);
+            intent.putExtra("NEW",true);
+            startActivity(intent);
         }
     }
 }

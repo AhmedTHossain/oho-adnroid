@@ -34,7 +34,7 @@ public class PromptActivity extends AppCompatActivity implements OnPromptQuestio
     ActivityPromptBinding binding;
     private EditText answerText;
     private RecyclerView recyclerView;
-    private TextView titleText, screenTitleText, saveAnswerButton;
+    private TextView titleText, screenTitleText, saveAnswerButton, uploadPromptButton;
     private LinearLayout answerLayout;
     private RelativeLayout buttonUpdatePhoto;
     private Animation animShow, animHide;
@@ -54,6 +54,7 @@ public class PromptActivity extends AppCompatActivity implements OnPromptQuestio
         answerLayout = binding.layoutQuestionSelected;
         saveAnswerButton = binding.buttonSave;
         buttonUpdatePhoto = binding.buttonUpdatePromptPhoto;
+        uploadPromptButton = binding.buttonUploadPromptAnwers;
 
         animShow = AnimationUtils.loadAnimation(this, R.anim.view_show);
         animHide = AnimationUtils.loadAnimation(this, R.anim.view_hide);
@@ -113,6 +114,11 @@ public class PromptActivity extends AppCompatActivity implements OnPromptQuestio
 
                 buttonUpdatePhoto.setVisibility(View.VISIBLE);
                 buttonUpdatePhoto.setAnimation(animShow);
+
+                if (getIntent().getBooleanExtra("NEW",false))
+                    binding.textSelectPrompImageButton.setText("Select/capture new prompt photo");
+                else
+                    uploadPromptButton.setVisibility(View.VISIBLE);
             }
         });
 
@@ -129,6 +135,8 @@ public class PromptActivity extends AppCompatActivity implements OnPromptQuestio
                             public void onSelected(@NotNull Uri uri) {
 //                            showSingleImage(uri);
                                 binding.photoImageView.setImageURI(uri);
+                                uploadPromptButton.startAnimation(animShow);
+                                uploadPromptButton.setVisibility(View.VISIBLE);
                             }
                         });
             }
@@ -176,6 +184,9 @@ public class PromptActivity extends AppCompatActivity implements OnPromptQuestio
         else if (buttonUpdatePhoto.getVisibility() == View.VISIBLE){
             buttonUpdatePhoto.setAnimation(animHide);
             buttonUpdatePhoto.setVisibility(View.GONE);
+
+            uploadPromptButton.setAnimation(animHide);
+            uploadPromptButton.setVisibility(View.GONE);
 
             answerText.startAnimation(animShow);
             answerText.setVisibility(View.VISIBLE);
