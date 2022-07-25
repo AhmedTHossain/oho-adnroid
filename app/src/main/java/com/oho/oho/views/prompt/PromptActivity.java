@@ -5,12 +5,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.oho.oho.R;
@@ -18,15 +22,21 @@ import com.oho.oho.adapters.PromptAdapter;
 import com.oho.oho.databinding.ActivityPromptBinding;
 import com.oho.oho.interfaces.OnPromptQuestionSelectedListener;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
+
+import gun0912.tedimagepicker.builder.TedImagePicker;
+import gun0912.tedimagepicker.builder.listener.OnSelectedListener;
 
 public class PromptActivity extends AppCompatActivity implements OnPromptQuestionSelectedListener {
 
     ActivityPromptBinding binding;
     private EditText answerText;
     private RecyclerView recyclerView;
-    private TextView titleText, screenTitleText;
+    private TextView titleText, screenTitleText, saveAnswerButton;
     private LinearLayout answerLayout;
+    private RelativeLayout buttonUpdatePhoto;
     private Animation animShow, animHide;
 
     @Override
@@ -42,6 +52,8 @@ public class PromptActivity extends AppCompatActivity implements OnPromptQuestio
         titleText = binding.textTitleSelectPrompt;
         screenTitleText = binding.textScreenTitle;
         answerLayout = binding.layoutQuestionSelected;
+        saveAnswerButton = binding.buttonSave;
+        buttonUpdatePhoto = binding.buttonUpdatePromptPhoto;
 
         animShow = AnimationUtils.loadAnimation(this, R.anim.view_show);
         animHide = AnimationUtils.loadAnimation(this, R.anim.view_hide);
@@ -62,6 +74,65 @@ public class PromptActivity extends AppCompatActivity implements OnPromptQuestio
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
+
+        answerText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length() > 0) {
+                    if (saveAnswerButton.getVisibility() != View.VISIBLE) {
+                        saveAnswerButton.startAnimation(animShow);
+                        saveAnswerButton.setVisibility(View.VISIBLE);
+                    }
+                } else {
+                    saveAnswerButton.setVisibility(View.GONE);
+                    saveAnswerButton.startAnimation(animHide);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        saveAnswerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                answerText.setVisibility(View.GONE);
+                answerText.startAnimation(animHide);
+                answerText.setText(null);
+                answerText.clearFocus();
+
+                answerLayout.setVisibility(View.GONE);
+                answerLayout.startAnimation(animHide);
+
+                buttonUpdatePhoto.setVisibility(View.VISIBLE);
+                buttonUpdatePhoto.setAnimation(animShow);
+            }
+        });
+
+        buttonUpdatePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TedImagePicker.with(PromptActivity.this)
+                        .title("Select Profile Photo")
+                        .cameraTileImage(R.drawable.ic_camera_48dp)
+                        .zoomIndicator(false)
+                        .cameraTileBackground(R.color.black)
+                        .start(new OnSelectedListener() {
+                            @Override
+                            public void onSelected(@NotNull Uri uri) {
+//                            showSingleImage(uri);
+                                binding.photoImageView.setImageURI(uri);
+                            }
+                        });
+            }
+        });
     }
 
     @Override
@@ -90,11 +161,28 @@ public class PromptActivity extends AppCompatActivity implements OnPromptQuestio
 
             answerText.setVisibility(View.GONE);
             answerText.startAnimation(animHide);
+            answerText.setText(null);
+            answerText.clearFocus();
+
             answerLayout.setVisibility(View.GONE);
+            answerLayout.startAnimation(animHide);
+
+            saveAnswerButton.setVisibility(View.GONE);
             answerLayout.startAnimation(animHide);
 
             recyclerView.startAnimation(animShow);
             recyclerView.setVisibility(View.VISIBLE);
+        }
+        else if (buttonUpdatePhoto.getVisibility() == View.VISIBLE){
+            buttonUpdatePhoto.setAnimation(animHide);
+            buttonUpdatePhoto.setVisibility(View.GONE);
+
+            answerText.startAnimation(animShow);
+            answerText.setVisibility(View.VISIBLE);
+            answerText.clearFocus();
+
+            answerLayout.startAnimation(animShow);
+            answerLayout.setVisibility(View.VISIBLE);
         }
     }
 }

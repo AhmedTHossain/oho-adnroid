@@ -95,4 +95,57 @@
         android:textColor="@color/textSubTitle"
         android:textSize="@dimen/_14ssp"
         android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/button_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_gradient_button"
+        android:fontFamily="@font/darkergrotesque_bold"
+        android:padding="@dimen/_5sdp"
+        android:text="Save"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:textSize="@dimen/_16ssp"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/button_update_prompt_photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:background="@drawable/border_drawable"
+        android:padding="@dimen/_10sdp"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp">
+
+        <TextView
+            android:id="@+id/text_promp_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/photo_image_view"
+            android:fontFamily="@font/ptsans_regular"
+            android:orientation="vertical"
+            android:text="Select or capture new prompt photo"
+            android:textColor="@color/textSubTitle"
+            android:textSize="@dimen/_14ssp"
+            app:drawableEndCompat="@drawable/ic_arrow_right" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/photo_image_view"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_60sdp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/photo_placeholder_1" />
+    </RelativeLayout>
 </LinearLayout>
