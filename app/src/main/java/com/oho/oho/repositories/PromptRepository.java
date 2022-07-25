@@ -3,6 +3,7 @@ package com.oho.oho.repositories;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -39,6 +40,7 @@ public class PromptRepository {
             @Override
             public void onResponse(@NonNull Call<List<Prompt>> call, @NonNull Response<List<Prompt>> response) {
                 promptList.setValue(response.body());
+                Log.d("PromptRepository","number of prompts = "+response.body());
             }
 
             @Override

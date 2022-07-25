@@ -1,6 +1,7 @@
 package com.oho.oho.views.prompt;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -21,6 +23,8 @@ import com.oho.oho.R;
 import com.oho.oho.adapters.PromptAdapter;
 import com.oho.oho.databinding.ActivityPromptBinding;
 import com.oho.oho.interfaces.OnPromptQuestionSelectedListener;
+import com.oho.oho.models.Prompt;
+import com.oho.oho.viewmodels.PromptViewModel;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -39,6 +43,8 @@ public class PromptActivity extends AppCompatActivity implements OnPromptQuestio
     private RelativeLayout buttonUpdatePhoto;
     private Animation animShow, animHide;
 
+    private PromptViewModel promptViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +52,8 @@ public class PromptActivity extends AppCompatActivity implements OnPromptQuestio
         setTheme(R.style.Theme_OHO);
         binding = ActivityPromptBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        initPromptViewModel();
 
         recyclerView = binding.recyclerviewPromptQuestions;
         answerText = binding.edittextAnswerPrompt;
@@ -61,20 +69,32 @@ public class PromptActivity extends AppCompatActivity implements OnPromptQuestio
 
         //TODO: later will be replaced by the API response of prompts
         ArrayList<String> promptList = new ArrayList<>();
-        promptList.add("what is your favorite color?");
-        promptList.add("what is your spirit animal?");
-        promptList.add("I am passionate about...");
-        promptList.add("recently, I learned...");
-        promptList.add("ideal Sunday for me is...");
-        promptList.add("in a partner, I'm looking for...");
-        promptList.add("most adventurous thing I did was..");
-        promptList.add("whiskey or wine?");
-        promptList.add("ideal sunday for me is...");
+//        promptList.add("what is your favorite color?");
+//        promptList.add("what is your spirit animal?");
+//        promptList.add("I am passionate about...");
+//        promptList.add("recently, I learned...");
+//        promptList.add("ideal Sunday for me is...");
+//        promptList.add("in a partner, I'm looking for...");
+//        promptList.add("most adventurous thing I did was..");
+//        promptList.add("whiskey or wine?");
+//        promptList.add("ideal sunday for me is...");
 
-        PromptAdapter adapter = new PromptAdapter(this,promptList,this);
+        promptViewModel.getAllPromptList();
+        promptViewModel.promptList.observe(this, prompts -> {
+            Log.d("PromptActivity","number of prompts = "+prompts.size());
+            if (prompts.size() != 0){
+                for (Prompt prompt: prompts)
+                    promptList.add(prompt.getName());
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
+                binding.spinKit.setVisibility(View.GONE);
+
+                binding.textScrollDisclaimer.setVisibility(View.VISIBLE);
+                PromptAdapter adapter = new PromptAdapter(this,promptList,this);
+
+                recyclerView.setLayoutManager(new LinearLayoutManager(this));
+                recyclerView.setAdapter(adapter);
+            }
+        });
 
         answerText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -143,8 +163,13 @@ public class PromptActivity extends AppCompatActivity implements OnPromptQuestio
         });
     }
 
+    private void initPromptViewModel(){
+        promptViewModel = new ViewModelProvider(this).get(PromptViewModel.class);
+    }
+
     @Override
     public void onPromptQuestionSelected(String s) {
+        binding.textScrollDisclaimer.setVisibility(View.GONE);
         screenTitleText.setText("Answer Prompt");
         titleText.setText("Answer");
         binding.textQuestion.setText(s);
@@ -164,6 +189,7 @@ public class PromptActivity extends AppCompatActivity implements OnPromptQuestio
         if (recyclerView.getVisibility() == View.VISIBLE)
             super.onBackPressed();
         else if (answerText.getVisibility() == View.VISIBLE){
+            binding.textScrollDisclaimer.setVisibility(View.VISIBLE);
             screenTitleText.setText("Select Prompt");
             titleText.setText("Prompts");
 
