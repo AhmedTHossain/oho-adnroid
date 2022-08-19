@@ -481,8 +481,8 @@
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginEnd="@dimen/_20sdp"
                 android:layout_marginBottom="@dimen/_20sdp"
-                android:paddingStart="@dimen/_20sdp"
-                android:paddingEnd="@dimen/_20sdp"
+                android:paddingStart="@dimen/_30sdp"
+                android:paddingEnd="@dimen/_30sdp"
                 android:progressTint="@color/indicatioractive"
                 android:progressBackgroundTint="@color/indicatioractive"/>
         </LinearLayout>

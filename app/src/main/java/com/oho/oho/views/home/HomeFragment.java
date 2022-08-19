@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
+import android.widget.Toast;
 
 import com.oho.oho.R;
 import com.oho.oho.databinding.FragmentHomeBinding;
@@ -34,12 +35,18 @@ public class HomeFragment extends Fragment {
         binding.seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (progress == -1)
+                if (progress == -1) {
                     binding.seekbar.setThumb(getResources().getDrawable(R.drawable.thumb_seekbar_left));
-                else if (progress == 1)
+//                    Toast.makeText(requireContext(),"Swiped Left :(",Toast.LENGTH_SHORT).show();
+                }
+                else if (progress == 1) {
                     binding.seekbar.setThumb(getResources().getDrawable(R.drawable.thumb_seekbar_right));
-                else
+//                    Toast.makeText(requireContext(),"Swiped Right :)",Toast.LENGTH_SHORT).show();
+                }
+                else {
                     binding.seekbar.setThumb(getResources().getDrawable(R.drawable.thumb_seekbar));
+//                    Toast.makeText(requireContext(),"Still deciding...",Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
