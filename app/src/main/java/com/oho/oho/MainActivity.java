@@ -114,18 +114,20 @@ public class MainActivity extends AppCompatActivity{
         Date date = new Date();
         CharSequence time = DateFormat.format("E", date.getTime()); // gives like (Wednesday)
 
-        if (!String.valueOf(time).equals("Fri") && !String.valueOf(time).equals("Sat") && !String.valueOf(time).equals("Sun")) {
-            if (getAvailabilityConsent() == -1) {
-                startActivity(new Intent(this, CheckAvailabilityActivity.class));
-                finish();
-            } else if (getAvailabilityConsent() == 0){
-                replaceFragment(new NotAvailableFragment());
-            } else
-                replaceFragment(new HomeFragment());
-        } else {
-            storeAvailabilityConsent(-1);
-            replaceFragment(new MatchingPhaseFragment());
-        }
+//        if (!String.valueOf(time).equals("Fri") && !String.valueOf(time).equals("Sat") && !String.valueOf(time).equals("Sun")) {
+//            if (getAvailabilityConsent() == -1) {
+//                startActivity(new Intent(this, CheckAvailabilityActivity.class));
+//                finish();
+//            } else if (getAvailabilityConsent() == 0){
+//                replaceFragment(new NotAvailableFragment());
+//            } else
+//                replaceFragment(new HomeFragment());
+//        } else {
+//            storeAvailabilityConsent(-1);
+//            replaceFragment(new MatchingPhaseFragment());
+//        }
+
+        replaceFragment(new HomeFragment());
     }
 
     private void initAvailabilityViewModel(){

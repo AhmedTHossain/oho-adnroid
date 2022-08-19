@@ -106,18 +106,18 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/_20ssp" />
 
-                <TextView
-                    android:id="@+id/textview_distance"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:background="@drawable/rounded_corner_drawable"
-                    android:fontFamily="@font/ptsans_bold"
-                    android:gravity="center_vertical"
-                    android:text="2 km"
-                    android:textColor="@color/indicatioractive"
-                    android:textSize="@dimen/_14ssp"
-                    app:drawableStartCompat="@drawable/ic_location_24" />
+<!--                <TextView-->
+<!--                    android:id="@+id/textview_distance"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:background="@drawable/rounded_corner_drawable"-->
+<!--                    android:fontFamily="@font/ptsans_bold"-->
+<!--                    android:gravity="center_vertical"-->
+<!--                    android:text="2 km"-->
+<!--                    android:textColor="@color/indicatioractive"-->
+<!--                    android:textSize="@dimen/_14ssp"-->
+<!--                    app:drawableStartCompat="@drawable/ic_location_24" />-->
             </RelativeLayout>
 
             <RelativeLayout
