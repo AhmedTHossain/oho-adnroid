@@ -1,95 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@android:color/transparent">
-    <androidx.cardview.widget.CardView
-        android:layout_width="@dimen/_30sdp"
-        android:layout_height="@dimen/_30sdp"
-        app:cardCornerRadius="@dimen/_100sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:layout_alignEnd="@id/card_prompt_question">
-        <ImageView
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:src="@drawable/ic_delete_gradient"
-            android:layout_gravity="center"/>
-    </androidx.cardview.widget.CardView>
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card_prompt_question"
-        android:layout_width="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/CustomCardViewStyle"
-        android:layout_alignEnd="@id/card_image_caption"
-        android:layout_marginTop="@dimen/_10sdp">
-        <LinearLayout
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@drawable/two_side_rounded_corner_right"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_20sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/text_prompt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/_10sdp"
-            android:paddingBottom="@dimen/_10sdp"
-            android:paddingStart="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_20sdp"
-            android:layout_gravity="center">
-            <ImageView
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_40sdp"
-                android:src="@drawable/ic_add"
-                android:layout_gravity="center"
-                android:layout_marginEnd="@dimen/_10sdp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/select_your_prompt_question"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp"
-                android:layout_gravity="center"
-                android:fontFamily="@font/sf_pro_rounded_regular"/>
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+            android:layout_gravity="start"
+            android:fontFamily="@font/ptsans_regular"
+            android:text="the most adventurous thing I did was..."
+            android:textColor="@color/textSubTitle"
+            android:textSize="@dimen/_14ssp" />
+
+        <TextView
+            android:id="@+id/text_answer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/darkergrotesque_bold"
+            android:text="Sky Diving from 22,000 ft"
+            android:textColor="@color/indicatioractive"
+            android:textSize="@dimen/_18ssp" />
+    </LinearLayout>
 
     <View
-        android:id="@+id/view_vertical_line"
-        android:layout_width="@dimen/_5sdp"
+        android:layout_width="1dip"
         android:layout_height="@dimen/_20sdp"
-        android:layout_below="@id/card_prompt_question"
-        android:layout_centerHorizontal="true"
-        android:background="@color/white" />
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_image_caption"
-        android:layout_width="match_parent"
+        android:layout_gravity="start"
+        android:layout_marginStart="@dimen/_50sdp"
+        android:background="#E6E6E6" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_20sdp"
         android:layout_marginStart="@dimen/_20sdp"
-        android:layout_below="@id/view_vertical_line"
-        app:cardCornerRadius="@dimen/_10sdp"
-        android:layout_centerHorizontal="true">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_200sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:background="@drawable/border_corner_drawable">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/image_view"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_100sdp"
             android:layout_gravity="center"
-            android:padding="@dimen/_25sdp">
-            <androidx.cardview.widget.CardView
-                android:layout_width="@dimen/_100sdp"
-                android:layout_height="@dimen/_100sdp"
-                android:layout_gravity="center"
-                app:cardCornerRadius="@dimen/_500sdp"
-                android:layout_marginEnd="@dimen/_10sdp">
-                <ImageView
-                    android:layout_width="@dimen/_50sdp"
-                    android:layout_height="@dimen/_50sdp"
-                    android:src="@drawable/ic_add"
-                    android:layout_gravity="center"/>
-            </androidx.cardview.widget.CardView>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/_16ssp"
-                android:text="@string/caption_for_the_photo"
-                android:layout_gravity="center"
-                android:textColor="#B0ADAD"
-                android:fontFamily="@font/sf_pro_rounded_regular"/>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-</RelativeLayout>
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:src="@drawable/photo_placeholder_1" />
+
+        <TextView
+            android:id="@+id/text_caption"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_weight="1"
+            android:fontFamily="@font/ptsans_regular"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:text="Fools are those that believe smiles are a sign of happiness."
+            android:textColor="@color/textSubTitle"
+            android:textSize="@dimen/_14ssp" />
+
+    </LinearLayout>
+</LinearLayout>
