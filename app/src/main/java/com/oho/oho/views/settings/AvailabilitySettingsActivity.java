@@ -12,11 +12,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
@@ -25,9 +23,7 @@ import com.oho.oho.MainActivity;
 import com.oho.oho.R;
 import com.oho.oho.adapters.SavedSlotsAdapter;
 import com.oho.oho.databinding.ActivityAvailabilitySettingsBinding;
-import com.oho.oho.databinding.ActivityMainBinding;
 import com.oho.oho.viewmodels.AvailabilitySettingsViewModel;
-import com.oho.oho.views.LoginActivity;
 
 import java.util.ArrayList;
 
@@ -102,7 +98,7 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
                 // set alert_dialog.xml to alertdialog builder
                 alertDialogBuilder.setView(slotsView);
 
-                RecyclerView recyclerView = slotsView.findViewById(R.id.recyclerview);
+                RecyclerView recyclerView = slotsView.findViewById(R.id.recyclerview_prompt_section);
                 SavedSlotsAdapter adapter = new SavedSlotsAdapter(selectedSlotsArray);
                 recyclerView.setHasFixedSize(true);
                 recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -191,7 +187,7 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
                 // set alert_dialog.xml to alertdialog builder
                 alertDialogBuilder.setView(slotsView);
 
-                RecyclerView recyclerView = slotsView.findViewById(R.id.recyclerview);
+                RecyclerView recyclerView = slotsView.findViewById(R.id.recyclerview_prompt_section);
                 SavedSlotsAdapter adapter = new SavedSlotsAdapter(preSelectedSlotsArray);
                 recyclerView.setHasFixedSize(true);
                 recyclerView.setLayoutManager(new LinearLayoutManager(this));

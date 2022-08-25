@@ -100,7 +100,6 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_20sdp"
-                    android:layout_toStartOf="@id/textview_distance"
                     android:fontFamily="@font/ptsans_bold"
                     android:text="Jane Doe"
                     android:textColor="@color/black"

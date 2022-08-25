@@ -55,7 +55,6 @@
         android:layout_marginEnd="@dimen/_20sdp"
         android:background="@drawable/border_corner_left_drawable">
 
-
         <TextView
             android:id="@+id/text_caption"
             android:layout_width="0dp"

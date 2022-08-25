@@ -19,8 +19,6 @@ import com.oho.oho.models.Prompt;
 import com.oho.oho.viewmodels.PromptViewModel;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class PromptListFragment extends Fragment {
 
@@ -39,7 +37,7 @@ public class PromptListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_prompt_list, container, false);
 
-        recyclerView = view.findViewById(R.id.recyclerview);
+        recyclerView = view.findViewById(R.id.recyclerview_prompt_section);
 
         initPromptViewModel();
 
