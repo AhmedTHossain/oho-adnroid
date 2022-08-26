@@ -1,6 +1,9 @@
 package com.oho.oho.views.home;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +28,6 @@ import java.util.Calendar;
 public class HomeFragment extends Fragment implements SwipeListener {
 
     FragmentHomeBinding binding;
-    private Animation animShow, animHide;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -37,39 +39,6 @@ public class HomeFragment extends Fragment implements SwipeListener {
                              Bundle savedInstanceState) {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-
-        Calendar c = Calendar.getInstance();
-
-        animShow = AnimationUtils.loadAnimation(requireContext(), R.anim.view_show);
-        animHide = AnimationUtils.loadAnimation(requireContext(), R.anim.view_hide);
-
-//        binding.seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-//            @Override
-//            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-//                if (progress == -1) {
-//                    binding.seekbar.setThumb(getResources().getDrawable(R.drawable.thumb_seekbar_left));
-////                    Toast.makeText(requireContext(),"Swiped Left :(",Toast.LENGTH_SHORT).show();
-//                }
-//                else if (progress == 1) {
-//                    binding.seekbar.setThumb(getResources().getDrawable(R.drawable.thumb_seekbar_right));
-////                    Toast.makeText(requireContext(),"Swiped Right :)",Toast.LENGTH_SHORT).show();
-//                }
-//                else {
-//                    binding.seekbar.setThumb(getResources().getDrawable(R.drawable.thumb_seekbar));
-////                    Toast.makeText(requireContext(),"Still deciding...",Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onStartTrackingTouch(SeekBar seekBar) {
-//
-//            }
-//
-//            @Override
-//            public void onStopTrackingTouch(SeekBar seekBar) {
-//
-//            }
-//        });
 
         ProfileDisplay profileDisplay = new ProfileDisplay(
                 "https://drive.google.com/uc?id=1WFQlei8QJG6XEUpND3eNZcuCHA4pOXF_",
@@ -130,14 +99,34 @@ public class HomeFragment extends Fragment implements SwipeListener {
     public void onSwipe(int swipeDirection, SeekBar seekBar) {
         Log.d("Home","swipe value = "+swipeDirection);
         if (swipeDirection == -1) {
+            vibrate();
             seekBar.setThumb(getResources().getDrawable(R.drawable.thumb_seekbar_left));
 //                    Toast.makeText(requireContext(),"Swiped Left :(",Toast.LENGTH_SHORT).show();
         } else if (swipeDirection == 1) {
+            vibrate();
             seekBar.setThumb(getResources().getDrawable(R.drawable.thumb_seekbar_right));
 //                    Toast.makeText(requireContext(),"Swiped Right :)",Toast.LENGTH_SHORT).show();
         } else {
             seekBar.setThumb(getResources().getDrawable(R.drawable.thumb_seekbar));
 //                    Toast.makeText(requireContext(),"Still deciding...",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void vibrate(){
+        // get the VIBRATOR_SERVICE system service
+        final Vibrator vibrator = (Vibrator) requireContext().getSystemService(Context.VIBRATOR_SERVICE);
+        // this type of vibration requires API 29
+        final VibrationEffect vibrationEffect2;
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+
+            // create vibrator effect with the constant EFFECT_CLICK
+            vibrationEffect2 = VibrationEffect.createPredefined(VibrationEffect.EFFECT_DOUBLE_CLICK);
+
+            // it is safe to cancel other vibrations currently taking place
+            vibrator.cancel();
+
+            vibrator.vibrate(vibrationEffect2);
         }
     }
 }
