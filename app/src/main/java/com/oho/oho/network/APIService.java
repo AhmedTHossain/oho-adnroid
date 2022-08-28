@@ -3,11 +3,12 @@ package com.oho.oho.network;
 import com.oho.oho.models.Profile;
 import com.oho.oho.models.Prompt;
 import com.oho.oho.models.PromptAnswer;
+import com.oho.oho.models.Swipe;
+import com.oho.oho.responses.MessageResponse;
 import com.oho.oho.responses.UploadProfilePhotoResponse;
 import com.oho.oho.responses.UploadPromptPhotoResponse;
 import com.oho.oho.responses.VerifyEmailResponse;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,6 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface APIService {
@@ -57,4 +57,8 @@ public interface APIService {
     //for getting user availability
     @GET("users/availability/")
     Call<ArrayList<String>> getAvailability(@Query("user_id") int user_id);
+
+    //swiping profile left/right
+    @POST("match/swipe")
+    Call<MessageResponse> swipeProfile(@Body Swipe swipeResponse);
 }

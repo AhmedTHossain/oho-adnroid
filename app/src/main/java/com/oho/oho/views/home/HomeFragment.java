@@ -12,14 +12,18 @@ import android.view.ViewGroup;
 import android.widget.SeekBar;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.oho.oho.R;
-import com.oho.oho.adapters.PromptDisplayAdapter;
+import com.oho.oho.adapters.ProfileDisplayAdapter;
 import com.oho.oho.databinding.FragmentHomeBinding;
 import com.oho.oho.interfaces.SwipeListener;
 import com.oho.oho.models.ProfileDisplay;
 import com.oho.oho.models.PromptDisplay;
+import com.oho.oho.models.Swipe;
+import com.oho.oho.viewmodels.HomeViewModel;
+import com.oho.oho.viewmodels.PromptViewModel;
 
 import java.util.ArrayList;
 
@@ -28,6 +32,8 @@ public class HomeFragment extends Fragment implements SwipeListener {
     FragmentHomeBinding binding;
     ArrayList<PromptDisplay> promptDisplayArrayList = new ArrayList<>();
     ProfileDisplay profileDisplay;
+
+    private HomeViewModel homeViewModel;
 
     String mockProfileDisplayed = "female";
 
@@ -43,6 +49,7 @@ public class HomeFragment extends Fragment implements SwipeListener {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
 
         showMaleProfile();
+        initHomeViewModel();
 
         // Inflate the layout for this fragment
         return binding.getRoot();
@@ -58,6 +65,8 @@ public class HomeFragment extends Fragment implements SwipeListener {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    //TODO: show the next recommended profile from the API
+                    swipeProfile(1,2, 0);
                     if (mockProfileDisplayed.equals("male")) {
                         showFemaleProfile();
                     } else
@@ -71,6 +80,8 @@ public class HomeFragment extends Fragment implements SwipeListener {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    //TODO: show the next recommended profile from the API
+                    swipeProfile(1,2,1);
                     if (mockProfileDisplayed.equals("male")) {
                         showFemaleProfile();
                     } else
@@ -149,7 +160,7 @@ public class HomeFragment extends Fragment implements SwipeListener {
         promptDisplayArrayList.add(prompt4);
         promptDisplayArrayList.add(null);
 
-        PromptDisplayAdapter adapter = new PromptDisplayAdapter(promptDisplayArrayList, profileDisplay, this, requireContext());
+        ProfileDisplayAdapter adapter = new ProfileDisplayAdapter(promptDisplayArrayList, profileDisplay, this, requireContext());
         binding.recyclerviewPromptSection.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recyclerviewPromptSection.setAdapter(adapter);
     }
@@ -209,8 +220,20 @@ public class HomeFragment extends Fragment implements SwipeListener {
         promptDisplayArrayList.add(prompt4);
         promptDisplayArrayList.add(null);
 
-        PromptDisplayAdapter adapter = new PromptDisplayAdapter(promptDisplayArrayList, profileDisplay, this, requireContext());
+        ProfileDisplayAdapter adapter = new ProfileDisplayAdapter(promptDisplayArrayList, profileDisplay, this, requireContext());
         binding.recyclerviewPromptSection.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recyclerviewPromptSection.setAdapter(adapter);
+    }
+
+    private void initHomeViewModel(){
+        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+    }
+
+    private void swipeProfile(int userId, int profileShown, int direction){
+        Swipe swipeProfile = new Swipe();
+        swipeProfile.setUserId(1);
+        swipeProfile.setProfileShown(2);
+        swipeProfile.setDirection(direction);
+        homeViewModel.swipeUserProfile(swipeProfile);
     }
 }

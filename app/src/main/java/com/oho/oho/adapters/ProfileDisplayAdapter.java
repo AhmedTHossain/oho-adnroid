@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class PromptDisplayAdapter extends RecyclerView.Adapter{
+public class ProfileDisplayAdapter extends RecyclerView.Adapter{
 
     private ArrayList<PromptDisplay> promptDisplayArrayList;
     private ProfileDisplay profileDisplay;
@@ -33,7 +33,7 @@ public class PromptDisplayAdapter extends RecyclerView.Adapter{
     private final int VIEW_TYPE_RIGHT = 1;
     private final int VIEW_TYPE_SWIPE = 2;
 
-    public PromptDisplayAdapter(ArrayList<PromptDisplay> promptDisplayArrayList, ProfileDisplay profileDisplay, SwipeListener listener, Context context) {
+    public ProfileDisplayAdapter(ArrayList<PromptDisplay> promptDisplayArrayList, ProfileDisplay profileDisplay, SwipeListener listener, Context context) {
         this.promptDisplayArrayList = promptDisplayArrayList;
         this.context = context;
         this.profileDisplay = profileDisplay;
