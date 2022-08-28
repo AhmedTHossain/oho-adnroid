@@ -120,6 +120,7 @@ public class HomeFragment extends Fragment implements SwipeListener {
         profileDisplay = new ProfileDisplay(
                 "https://drive.google.com/uc?id=1WFQlei8QJG6XEUpND3eNZcuCHA4pOXF_",
                 "James B. Marchetti",
+                "31",
                 "Honolulu, HI",
                 "Application Support Engineer",
                 "Male",
@@ -173,6 +174,7 @@ public class HomeFragment extends Fragment implements SwipeListener {
         profileDisplay = new ProfileDisplay(
                 "https://drive.google.com/uc?id=1-3SuycWwHPN4Sit63R4um7yK27eBuAFM",
                 "Ruby D. Snyder",
+                "26",
                 "New York, NY",
                 "Interior Designer",
                 "Femal",

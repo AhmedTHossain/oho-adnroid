@@ -65,7 +65,8 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter{
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         switch (getItemViewType(position)){
             case VIEW_TYPE_INFO:
-                ((Holder1) holder).name.setText(profileDisplay.getName());
+                String name_age = profileDisplay.getName()+", "+profileDisplay.getAge();
+                ((Holder1) holder).name.setText(name_age);
                 ((Holder1) holder).location.setText(profileDisplay.getLocation());
                 ((Holder1) holder).profession.setText(profileDisplay.getProfession());
                 ((Holder1) holder).gender.setText(profileDisplay.getGender());

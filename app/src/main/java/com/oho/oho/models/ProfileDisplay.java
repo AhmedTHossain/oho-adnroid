@@ -1,10 +1,11 @@
 package com.oho.oho.models;
 
 public class ProfileDisplay {
-    private String imageUrl, name, location, profession, gender, height, race, religion, vaccinated, distance ;
+    private String imageUrl, name, age, location, profession, gender, height, race, religion, vaccinated, distance ;
 
-    public ProfileDisplay(String imageUrl, String name, String location, String profession, String gender, String height, String race, String religion, String vaccinated, String distance) {
+    public ProfileDisplay(String imageUrl, String name, String age, String location, String profession, String gender, String height, String race, String religion, String vaccinated, String distance) {
         this.name = name;
+        this.age = age;
         this.location = location;
         this.profession = profession;
         this.gender = gender;
@@ -30,6 +31,14 @@ public class ProfileDisplay {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
     }
 
     public String getLocation() {
