@@ -1,6 +1,7 @@
 package com.oho.oho.views.home;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.VibrationEffect;
@@ -32,7 +33,7 @@ public class HomeFragment extends Fragment implements SwipeListener {
     FragmentHomeBinding binding;
     ArrayList<PromptDisplay> promptDisplayArrayList = new ArrayList<>();
     ProfileDisplay profileDisplay;
-
+    MediaPlayer mp;
     private HomeViewModel homeViewModel;
 
     String mockProfileDisplayed = "female";
@@ -57,6 +58,7 @@ public class HomeFragment extends Fragment implements SwipeListener {
 
     @Override
     public void onSwipe(int swipeDirection, SeekBar seekBar) {
+        playSwipeRightSound();
         Log.d("Home", "swipe value = " + swipeDirection);
         if (swipeDirection == -1) {
             vibrate();
@@ -235,5 +237,16 @@ public class HomeFragment extends Fragment implements SwipeListener {
         swipeProfile.setProfileShown(2);
         swipeProfile.setDirection(direction);
         homeViewModel.swipeUserProfile(swipeProfile);
+    }
+
+    private void playSwipeRightSound(){
+        mp = MediaPlayer.create(requireContext(), R.raw.positive);
+        mp.start();
+        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mp.release();
+            }
+        });
     }
 }
