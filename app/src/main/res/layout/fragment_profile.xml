@@ -298,7 +298,6 @@
                 android:id="@+id/view_vertical_line_1"
                 android:layout_width="1dip"
                 android:layout_height="@dimen/_20sdp"
-                android:layout_below="@id/card_prompt_question_1"
                 android:layout_gravity="start"
                 android:layout_marginStart="@dimen/_50sdp"
                 android:background="#E6E6E6" />
@@ -378,7 +377,6 @@
                 android:id="@+id/view_vertical_line_2"
                 android:layout_width="1dip"
                 android:layout_height="@dimen/_20sdp"
-                android:layout_below="@id/card_prompt_question_1"
                 android:layout_gravity="end"
                 android:layout_marginEnd="@dimen/_50sdp"
                 android:background="#E6E6E6" />
@@ -456,7 +454,6 @@
                 android:id="@+id/view_vertical_line_3"
                 android:layout_width="1dip"
                 android:layout_height="@dimen/_20sdp"
-                android:layout_below="@id/card_prompt_question_1"
                 android:layout_gravity="start"
                 android:layout_marginStart="@dimen/_50sdp"
                 android:background="#E6E6E6" />

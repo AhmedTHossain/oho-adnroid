@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -24,41 +23,16 @@
 
     <View
         android:id="@+id/view"
-        android:layout_below="@id/screentitle"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_1sdp"
+        android:layout_below="@id/screentitle"
         android:background="#1A000000" />
 
-    <!-- Prompt Layout -->
+    <!-- Profile Layout -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_prompt_section"
-        android:layout_below="@id/view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-<!--    <View-->
-<!--        android:id="@+id/view2"-->
-<!--        android:layout_below="@id/recyclerview_prompt_section"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="@dimen/_1sdp"-->
-<!--        android:background="#1A000000" />-->
-
-<!--    <androidx.appcompat.widget.AppCompatSeekBar-->
-<!--        android:id="@+id/seekbar"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:layout_marginStart="@dimen/_20sdp"-->
-<!--        android:layout_marginEnd="@dimen/_20sdp"-->
-<!--        android:max="1"-->
-<!--        android:min="-1"-->
-<!--        android:paddingStart="@dimen/_30sdp"-->
-<!--        android:paddingEnd="@dimen/_30sdp"-->
-<!--        android:progress="0"-->
-<!--        android:progressBackgroundTint="@color/indicatioractive"-->
-<!--        android:progressTint="@color/indicatioractive"-->
-<!--        android:thumb="@drawable/thumb_seekbar"-->
-<!--        android:visibility="visible"/>-->
-
+        android:layout_height="wrap_content"
+        android:layout_below="@id/view" />
 
 </RelativeLayout>

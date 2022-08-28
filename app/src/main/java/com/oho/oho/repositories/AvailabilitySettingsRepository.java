@@ -54,7 +54,7 @@ public class AvailabilitySettingsRepository {
 
             @Override
             public void onFailure(@NonNull Call<ArrayList<String>> call, @NonNull Throwable t) {
-
+                Toast.makeText(context,"response code = "+t.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
 

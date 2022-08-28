@@ -128,6 +128,7 @@ public class HomeFragment extends Fragment implements SwipeListener {
                 "White",
                 "Agnostic",
                 "Not Vaccinated",
+                "The last time I was someone’s “type” was when I donated blood.",
                 "5 km"
         );
 
@@ -176,12 +177,13 @@ public class HomeFragment extends Fragment implements SwipeListener {
                 "Ruby D. Snyder",
                 "26",
                 "New York, NY",
-                "Interior Designer",
+                "Systems Engineer",
                 "Femal",
                 "5'10\"",
                 "White",
                 "Agnostic",
                 "Vaccinated",
+                "First rounds on me if you work in tech too (you need a drink).",
                 "1 km"
         );
 
