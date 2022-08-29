@@ -9,15 +9,19 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.oho.oho.R;
 import com.oho.oho.adapters.CompleteProfileAdapter;
 import com.oho.oho.databinding.ActivityCompleteProfileBinding;
+import com.oho.oho.interfaces.AddPromptListener;
 import com.oho.oho.interfaces.OnProfilePromptClickListener;
 import com.oho.oho.interfaces.OnProfilePromptDeleteListener;
 import com.oho.oho.models.PromptAnswer;
 
 import java.util.ArrayList;
 
-public class CompleteProfileActivity extends AppCompatActivity implements OnProfilePromptClickListener, OnProfilePromptDeleteListener {
+public class CompleteProfileActivity extends AppCompatActivity implements OnProfilePromptClickListener, OnProfilePromptDeleteListener, AddPromptListener {
 
     ActivityCompleteProfileBinding binding;
+
+    CompleteProfileAdapter adapter;
+    ArrayList<PromptAnswer> profilePromptsList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,13 +31,10 @@ public class CompleteProfileActivity extends AppCompatActivity implements OnProf
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(binding.getRoot());
 
-
-        ArrayList<PromptAnswer> profilePromptsList = new ArrayList<>();
-
         for(int i=0; i<4; i++)
             profilePromptsList.add(new PromptAnswer(0,null,null,0,null,null));
 
-        CompleteProfileAdapter adapter = new CompleteProfileAdapter(profilePromptsList,this,this,this);
+        adapter = new CompleteProfileAdapter(profilePromptsList,this,this, this,this);
         binding.recyclerviewProfile.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerviewProfile.setAdapter(adapter);
     }
@@ -46,5 +47,11 @@ public class CompleteProfileActivity extends AppCompatActivity implements OnProf
     @Override
     public void onProfilePromptDelete(int id) {
 
+    }
+
+    @Override
+    public void addPrompt() {
+        profilePromptsList.add(new PromptAnswer(0,null,null,0,null,null));
+        adapter.notifyItemInserted(profilePromptsList.size());
     }
 }

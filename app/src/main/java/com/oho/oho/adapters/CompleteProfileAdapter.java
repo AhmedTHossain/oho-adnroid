@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.oho.oho.R;
+import com.oho.oho.interfaces.AddPromptListener;
 import com.oho.oho.interfaces.OnProfilePromptClickListener;
 import com.oho.oho.interfaces.OnProfilePromptDeleteListener;
 import com.oho.oho.models.PromptAnswer;
@@ -36,14 +37,21 @@ public class CompleteProfileAdapter extends RecyclerView.Adapter {
 
     private OnProfilePromptClickListener promptClickListener;
     private OnProfilePromptDeleteListener deleteListener;
+    private AddPromptListener addPromptListener;
 
     private Animation animShow, animHide;
 
-    public CompleteProfileAdapter(ArrayList<PromptAnswer> profilePromptsList, OnProfilePromptClickListener promptClickListener, OnProfilePromptDeleteListener deleteListener, Context context) {
+    public CompleteProfileAdapter(
+            ArrayList<PromptAnswer> profilePromptsList,
+            OnProfilePromptClickListener promptClickListener,
+            OnProfilePromptDeleteListener deleteListener,
+            AddPromptListener addPromptListener,
+            Context context) {
         this.profilePromptsList = profilePromptsList;
         this.context = context;
         this.promptClickListener = promptClickListener;
         this.deleteListener = deleteListener;
+        this.addPromptListener = addPromptListener;
 
         animShow = AnimationUtils.loadAnimation(context, R.anim.view_show);
         animHide = AnimationUtils.loadAnimation(context, R.anim.view_hide);
@@ -102,6 +110,7 @@ public class CompleteProfileAdapter extends RecyclerView.Adapter {
                     @Override
                     public void onClick(View v) {
                         //TODO: add new prompt section
+                        addPromptListener.addPrompt();
                     }
                 });
                 break;
@@ -109,12 +118,14 @@ public class CompleteProfileAdapter extends RecyclerView.Adapter {
                 if (profilePromptsList.get(position).getId() == 0){
                     ((PromptInfoHolder) holder).promptText.setText("Select your prompt question.");
                     ((PromptInfoHolder) holder).answerText.setVisibility(View.GONE);
-
-                    if (profilePromptsList.get(position).getImage() != null) {
-                        Glide.with(context)
-                                .load(profilePromptsList.get(position).getImage())
-                                .into((((PromptInfoHolder) holder).promptImage));
-                    }
+                    if (position < 4)
+                        ((PromptInfoHolder) holder).deleteButton.setVisibility(View.GONE);
+                    else
+                        ((PromptInfoHolder) holder).deleteButton.setVisibility(View.VISIBLE);
+                } else {
+                    ((PromptInfoHolder) holder).promptText.setText(profilePromptsList.get(position).getPrompt());
+                    ((PromptInfoHolder) holder).answerText.setVisibility(View.VISIBLE);
+                    ((PromptInfoHolder) holder).answerText.setText(profilePromptsList.get(position).getAnswer());
                 }
                 ((PromptInfoHolder) holder).editPromptButton.setOnClickListener(new View.OnClickListener() {
                     @Override
