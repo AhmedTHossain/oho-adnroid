@@ -44,9 +44,6 @@
             android:name=".views.settings.FAQActivity"
             android:exported="false" />
         <activity
-            android:name=".views.prompt.PromptQuestionActivity"
-            android:exported="false" />
-        <activity
             android:name=".views.CompleteProfileActivity"
             android:exported="true">
 
@@ -81,11 +78,11 @@
         <activity
             android:name=".MainActivity"
             android:exported="true">
-            <!--            <intent-filter>-->
-            <!--                <action android:name="android.intent.action.MAIN" />-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
-            <!--            </intent-filter>-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
     </application>
 

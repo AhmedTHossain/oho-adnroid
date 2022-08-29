@@ -42,7 +42,7 @@ public class ProfilePromptAdapter extends RecyclerView.Adapter<ProfilePromptAdap
 
     @Override
     public void onBindViewHolder(@NonNull ProfilePromptHolder holder, int position) {
-        holder.getPromptText().setText(profilePromptsList.get(position).getPromptQuestion());
+        holder.getPromptText().setText(profilePromptsList.get(position).getPrompt());
         holder.getAnswerText().setText(profilePromptsList.get(position).getAnswer());
         if (position>2)
             holder.getDeleteButton().setVisibility(View.VISIBLE);

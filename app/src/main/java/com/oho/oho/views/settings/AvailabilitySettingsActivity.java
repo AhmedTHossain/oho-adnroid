@@ -1,6 +1,7 @@
 package com.oho.oho.views.settings;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -36,9 +37,9 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_availability_settings);
-
+        setTheme(R.style.Theme_OHO);
         binding = ActivityAvailabilitySettingsBinding.inflate(getLayoutInflater());
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(binding.getRoot());
 
         initViewModel();

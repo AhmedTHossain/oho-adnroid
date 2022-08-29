@@ -19,22 +19,17 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.oho.oho.MainActivity;
 import com.oho.oho.R;
 import com.oho.oho.adapters.ProfilePromptAdapter;
-import com.oho.oho.databinding.ActivityCompleteProfileBinding;
 import com.oho.oho.databinding.ActivityUpdateProfileBinding;
 import com.oho.oho.interfaces.OnProfilePromptClickListener;
 import com.oho.oho.interfaces.OnProfilePromptDeleteListener;
 import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.views.prompt.PromptActivity;
-import com.oho.oho.views.prompt.PromptQuestionActivity;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -84,31 +79,31 @@ public class UpdateProfileActivity extends AppCompatActivity implements OnProfil
         ArrayList<PromptAnswer> promptList = new ArrayList<>();
 
         PromptAnswer promptAnswer1 = new PromptAnswer();
-        promptAnswer1.setPromptQuestion("the most adventurous thing I did was...");
+        promptAnswer1.setPrompt("the most adventurous thing I did was...");
         promptAnswer1.setAnswer("Sky Diving from 22,000 ft");
 
         PromptAnswer promptAnswer2 = new PromptAnswer();
-        promptAnswer2.setPromptQuestion("in a partner, I'm looking for...");
+        promptAnswer2.setPrompt("in a partner, I'm looking for...");
         promptAnswer2.setAnswer("Commitment &amp; honesty");
 
         PromptAnswer promptAnswer3 = new PromptAnswer();
-        promptAnswer3.setPromptQuestion("whiskey or wine?");
+        promptAnswer3.setPrompt("whiskey or wine?");
         promptAnswer3.setAnswer("Whiskey");
 
         PromptAnswer promptAnswer4 = new PromptAnswer();
-        promptAnswer4.setPromptQuestion("Recently, I learned...");
+        promptAnswer4.setPrompt("Recently, I learned...");
         promptAnswer4.setAnswer("To play Cello");
 
         PromptAnswer promptAnswer5 = new PromptAnswer();
-        promptAnswer5.setPromptQuestion("I am passionate about...");
+        promptAnswer5.setPrompt("I am passionate about...");
         promptAnswer5.setAnswer("Motorcycles");
 
         PromptAnswer promptAnswer6 = new PromptAnswer();
-        promptAnswer6.setPromptQuestion("What is your spirit animal?");
+        promptAnswer6.setPrompt("What is your spirit animal?");
         promptAnswer6.setAnswer("Bear");
 
         PromptAnswer promptAnswer7 = new PromptAnswer();
-        promptAnswer7.setPromptQuestion("Ideal Sunday for me is...");
+        promptAnswer7.setPrompt("Ideal Sunday for me is...");
         promptAnswer7.setAnswer("ZZzz..");
 
         promptList.add(promptAnswer1);

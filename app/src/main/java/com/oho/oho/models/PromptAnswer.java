@@ -6,22 +6,52 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class PromptAnswer {
+    @SerializedName("id")
+    @Expose
+    private Integer id;
+    @SerializedName("prompt")
+    @Expose
+    private String prompt;
     @SerializedName("answer")
     @Expose
     private String answer;
     @SerializedName("user_id")
     @Expose
     private Integer userId;
-    @SerializedName("prompt_id")
+    @SerializedName("image")
     @Expose
-    private Integer promptId;
-    @SerializedName("picture_id")
+    private String image;
+    @SerializedName("caption")
     @Expose
-    private Integer pictureId;
-    @SerializedName("order_no")
-    @Expose
-    private Integer orderNo;
-    private String promptQuestion;
+    private String caption;
+
+    public PromptAnswer() {
+    }
+
+    public PromptAnswer(Integer id, String prompt, String answer, Integer userId, String image, String caption) {
+        this.id = id;
+        this.prompt = prompt;
+        this.answer = answer;
+        this.userId = userId;
+        this.image = image;
+        this.caption = caption;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getPrompt() {
+        return prompt;
+    }
+
+    public void setPrompt(String prompt) {
+        this.prompt = prompt;
+    }
 
     public String getAnswer() {
         return answer;
@@ -39,48 +69,19 @@ public class PromptAnswer {
         this.userId = userId;
     }
 
-    public Integer getPromptId() {
-        return promptId;
+    public String getImage() {
+        return image;
     }
 
-    public void setPromptId(Integer promptId) {
-        this.promptId = promptId;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public Integer getPictureId() {
-        return pictureId;
+    public String getCaption() {
+        return caption;
     }
 
-    public void setPictureId(Integer pictureId) {
-        this.pictureId = pictureId;
-    }
-
-    public Integer getOrderNo() {
-        return orderNo;
-    }
-
-    public void setOrderNo(Integer orderNo) {
-        this.orderNo = orderNo;
-    }
-
-    public String getPromptQuestion() {
-        return promptQuestion;
-    }
-
-    public void setPromptQuestion(String promptQuestion) {
-        this.promptQuestion = promptQuestion;
-    }
-
-    @NonNull
-    @Override
-    public String toString() {
-        return "PromptAnswer{" +
-                "answer='" + answer + '\'' +
-                ", userId=" + userId +
-                ", promptId=" + promptId +
-                ", pictureId=" + pictureId +
-                ", orderNo=" + orderNo +
-                ", promptQuestion='" + promptQuestion + '\'' +
-                '}';
+    public void setCaption(String caption) {
+        this.caption = caption;
     }
 }

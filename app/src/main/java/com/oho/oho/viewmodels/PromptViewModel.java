@@ -26,8 +26,4 @@ public class PromptViewModel extends AndroidViewModel {
     public void getAllPromptList(){
         promptList = promptRepository.getPromptList();
     }
-
-    public void uploadUserPrompt(PromptAnswer promptAnswer){
-        promptRepository.addPrompt(promptAnswer, getApplication().getApplicationContext());
-    }
 }

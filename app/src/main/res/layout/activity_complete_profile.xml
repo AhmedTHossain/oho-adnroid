@@ -63,5 +63,7 @@
         android:id="@+id/recyclerview_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/view" />
+        android:layout_below="@id/view"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"/>
 </LinearLayout>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <!-- Profile Photo -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:fontFamily="@font/darkergrotesque_bold"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingEnd="@dimen/_20sdp"
+        android:text="Profile Photo"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_18ssp" />
+
+    <RelativeLayout
+        android:id="@+id/button_update_profile_photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:background="@drawable/border_drawable"
+        android:padding="@dimen/_10sdp"
+        android:clickable="true"
+        android:focusable="true">
+
+        <TextView
+            android:id="@+id/text_promp_profile"
+            app:drawableEndCompat="@drawable/ic_arrow_right"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/photo_image_view"
+            android:fontFamily="@font/ptsans_regular"
+            android:orientation="vertical"
+            android:text="Select or capture new profile photo"
+            android:textColor="@color/textSubTitle"
+            android:textSize="@dimen/_14ssp" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/photo_image_view"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_60sdp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/person" />
+    </RelativeLayout>
+
+    <!-- About -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:fontFamily="@font/darkergrotesque_bold"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingEnd="@dimen/_20sdp"
+        android:text="About"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_18ssp" />
+
+    <EditText
+        android:id="@+id/edittext_about"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:background="@drawable/border_drawable"
+        android:fontFamily="@font/ptsans_regular"
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        android:lines="5"
+        android:padding="@dimen/_10sdp"
+        android:scrollbars="vertical"
+        android:hint="Write something about yourself"
+        android:textColor="@color/textSubTitle"
+        android:textSize="@dimen/_14ssp" />
+
+    <TextView
+        android:id="@+id/button_update_about"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_gradient_button"
+        android:fontFamily="@font/darkergrotesque_bold"
+        android:padding="@dimen/_5sdp"
+        android:text="Update"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_16ssp"
+        android:visibility="gone" />
+
+    <!-- Photos & Prompts -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@id/button_add_prompt"
+            android:fontFamily="@font/darkergrotesque_bold"
+            android:paddingStart="@dimen/_20sdp"
+            android:text="Photos &amp; Prompts"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_18ssp"
+            android:layout_centerVertical="true"/>
+
+        <LinearLayout
+            android:id="@+id/button_add_prompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/border_corner_left_gradient"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingStart="@dimen/_20sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingEnd="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:fontFamily="@font/darkergrotesque_bold"
+                android:text="Add New"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp" />
+
+            <ImageView
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:src="@drawable/ic_edit_profile_white" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>
