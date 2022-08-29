@@ -31,7 +31,7 @@ public class CompleteProfileActivity extends AppCompatActivity implements OnProf
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(binding.getRoot());
 
-        for(int i=0; i<4; i++)
+        for(int i=0; i<5; i++)
             profilePromptsList.add(new PromptAnswer(0,null,null,0,null,null));
 
         adapter = new CompleteProfileAdapter(profilePromptsList,this,this, this,this);

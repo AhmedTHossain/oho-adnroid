@@ -29,35 +29,35 @@
         android:layout_below="@id/screentitle"
         android:background="#1A000000" />
 
-    <LinearLayout
-        android:id="@+id/button_edit_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:background="@drawable/border_corner_left_gradient"
-        android:clickable="true"
-        android:focusable="true"
-        android:paddingStart="@dimen/_20sdp"
-        android:paddingTop="@dimen/_5sdp"
-        android:paddingEnd="@dimen/_5sdp"
-        android:paddingBottom="@dimen/_5sdp">
+<!--    <LinearLayout-->
+<!--        android:id="@+id/button_edit_profile"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="end"-->
+<!--        android:layout_marginTop="@dimen/_20sdp"-->
+<!--        android:background="@drawable/border_corner_left_gradient"-->
+<!--        android:clickable="true"-->
+<!--        android:focusable="true"-->
+<!--        android:paddingStart="@dimen/_20sdp"-->
+<!--        android:paddingTop="@dimen/_5sdp"-->
+<!--        android:paddingEnd="@dimen/_5sdp"-->
+<!--        android:paddingBottom="@dimen/_5sdp">-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginEnd="@dimen/_5sdp"
-            android:fontFamily="@font/darkergrotesque_bold"
-            android:text="Save Profile"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_16ssp" />
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center_vertical"-->
+<!--            android:layout_marginEnd="@dimen/_5sdp"-->
+<!--            android:fontFamily="@font/darkergrotesque_bold"-->
+<!--            android:text="Save Profile"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="@dimen/_16ssp" />-->
 
-        <ImageView
-            android:layout_width="@dimen/_24sdp"
-            android:layout_height="@dimen/_24sdp"
-            android:src="@drawable/ic_edit_profile_white" />
-    </LinearLayout>
+<!--        <ImageView-->
+<!--            android:layout_width="@dimen/_24sdp"-->
+<!--            android:layout_height="@dimen/_24sdp"-->
+<!--            android:src="@drawable/ic_edit_profile_white" />-->
+<!--    </LinearLayout>-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_profile"

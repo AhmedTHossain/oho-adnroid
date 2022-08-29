@@ -32,6 +32,8 @@ public class CompleteProfileAdapter extends RecyclerView.Adapter {
 
     private final int VIEW_TYPE_PROFILE_INFO = 0;
     private final int VIEW_TYPE_PROFILE_PROMPT = 1;
+    private final int VIEW_TYPE_PROFILE_COMPLETE = 2;
+
     private ArrayList<PromptAnswer> profilePromptsList;
     private Context context;
 
@@ -68,6 +70,9 @@ public class CompleteProfileAdapter extends RecyclerView.Adapter {
             case VIEW_TYPE_PROFILE_PROMPT:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_layout_profile_prompts, parent, false);
                 return new PromptInfoHolder(view);
+            case VIEW_TYPE_PROFILE_COMPLETE:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_add_profile, parent, false);
+                return new CompleteProfileHolder(view);
         }
         return null;
     }
@@ -76,36 +81,6 @@ public class CompleteProfileAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         switch (getItemViewType(position)) {
             case VIEW_TYPE_PROFILE_INFO:
-                ((ProfileInfoHolder) holder).aboutText.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-                        if (s.length() > 0) {
-                            if ( ((ProfileInfoHolder) holder).updateAboutButton.getVisibility() != View.VISIBLE) {
-                                ((ProfileInfoHolder) holder).updateAboutButton.startAnimation(animShow);
-                                ((ProfileInfoHolder) holder).updateAboutButton.setVisibility(View.VISIBLE);
-                            }
-                        } else {
-                            ((ProfileInfoHolder) holder).updateAboutButton.setVisibility(View.GONE);
-                            ((ProfileInfoHolder) holder).updateAboutButton.startAnimation(animHide);
-                        }
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable s) {
-
-                    }
-                });
-                ((ProfileInfoHolder) holder).updateAboutButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //TODO: call update profile API
-                    }
-                });
                 ((ProfileInfoHolder) holder).addPromptButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -140,6 +115,13 @@ public class CompleteProfileAdapter extends RecyclerView.Adapter {
                     }
                 });
                 break;
+            case VIEW_TYPE_PROFILE_COMPLETE:
+                ((CompleteProfileHolder) holder).completeProfileButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
         }
     }
 
@@ -152,6 +134,8 @@ public class CompleteProfileAdapter extends RecyclerView.Adapter {
     public int getItemViewType(int position) {
         if (position == 0)
             return VIEW_TYPE_PROFILE_INFO;
+        else if (position == profilePromptsList.size()-1)
+            return VIEW_TYPE_PROFILE_COMPLETE;
         else
             return VIEW_TYPE_PROFILE_PROMPT;
     }
@@ -160,14 +144,12 @@ public class CompleteProfileAdapter extends RecyclerView.Adapter {
         private RelativeLayout selectProfilePhotoButton;
         private EditText aboutText;
         private LinearLayout addPromptButton;
-        private TextView updateAboutButton;
 
         public ProfileInfoHolder(View view) {
             super(view);
             selectProfilePhotoButton = view.findViewById(R.id.button_update_profile_photo);
             aboutText = view.findViewById(R.id.edittext_about);
             addPromptButton = view.findViewById(R.id.button_add_prompt);
-            updateAboutButton = view.findViewById(R.id.button_update_about);
         }
     }
 
@@ -183,6 +165,17 @@ public class CompleteProfileAdapter extends RecyclerView.Adapter {
             editPromptButton = view.findViewById(R.id.linearlayout);
             deleteButton = view.findViewById(R.id.button_delete);
             promptImage = view.findViewById(R.id.photo_image_view);
+        }
+    }
+
+    public class CompleteProfileHolder extends RecyclerView.ViewHolder {
+
+        private TextView completeProfileButton;
+
+        public CompleteProfileHolder(@NonNull View view) {
+            super(view);
+
+            completeProfileButton = view.findViewById(R.id.button_update_about);
         }
     }
 }

@@ -80,19 +80,6 @@
         android:textColor="@color/textSubTitle"
         android:textSize="@dimen/_14ssp" />
 
-    <TextView
-        android:id="@+id/button_update_about"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/background_gradient_button"
-        android:fontFamily="@font/darkergrotesque_bold"
-        android:padding="@dimen/_5sdp"
-        android:text="Update"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_16ssp"
-        android:visibility="gone" />
-
     <!-- Photos & Prompts -->
     <RelativeLayout
         android:layout_width="match_parent"
