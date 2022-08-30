@@ -1,6 +1,7 @@
 package com.oho.oho.adapters;
 
 import android.content.Context;
+import android.net.Uri;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ import com.oho.oho.R;
 import com.oho.oho.interfaces.AddPromptListener;
 import com.oho.oho.interfaces.OnProfilePromptClickListener;
 import com.oho.oho.interfaces.OnProfilePromptDeleteListener;
+import com.oho.oho.interfaces.SelectProfilePhotoListener;
 import com.oho.oho.models.PromptAnswer;
 
 import java.util.ArrayList;
@@ -40,6 +42,7 @@ public class CompleteProfileAdapter extends RecyclerView.Adapter {
     private OnProfilePromptClickListener promptClickListener;
     private OnProfilePromptDeleteListener deleteListener;
     private AddPromptListener addPromptListener;
+    private SelectProfilePhotoListener selectProfilePhotoListener;
 
     private Animation animShow, animHide;
 
@@ -48,12 +51,14 @@ public class CompleteProfileAdapter extends RecyclerView.Adapter {
             OnProfilePromptClickListener promptClickListener,
             OnProfilePromptDeleteListener deleteListener,
             AddPromptListener addPromptListener,
+            SelectProfilePhotoListener selectProfilePhotoListener,
             Context context) {
         this.profilePromptsList = profilePromptsList;
         this.context = context;
         this.promptClickListener = promptClickListener;
         this.deleteListener = deleteListener;
         this.addPromptListener = addPromptListener;
+        this.selectProfilePhotoListener = selectProfilePhotoListener;
 
         animShow = AnimationUtils.loadAnimation(context, R.anim.view_show);
         animHide = AnimationUtils.loadAnimation(context, R.anim.view_hide);
@@ -88,9 +93,20 @@ public class CompleteProfileAdapter extends RecyclerView.Adapter {
                         addPromptListener.addPrompt();
                     }
                 });
+                ((ProfileInfoHolder) holder).selectProfilePhotoButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        selectProfilePhotoListener.onSelectProfilePhoto(position);
+                    }
+                });
+                if (profilePromptsList.get(position).getImage() != null) {
+                    Glide.with(context)
+                            .load(Uri.parse(profilePromptsList.get(position).getImage()))
+                            .into(((ProfileInfoHolder) holder).profileImageVIew);
+                }
                 break;
             case VIEW_TYPE_PROFILE_PROMPT:
-                if (profilePromptsList.get(position).getId() == 0){
+                if (profilePromptsList.get(position).getPrompt() == null){
                     ((PromptInfoHolder) holder).promptText.setText("Select your prompt question.");
                     ((PromptInfoHolder) holder).answerText.setVisibility(View.GONE);
                     if (position < 4)
@@ -111,7 +127,7 @@ public class CompleteProfileAdapter extends RecyclerView.Adapter {
                 ((PromptInfoHolder) holder).deleteButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        deleteListener.onProfilePromptDelete(1);
+                        deleteListener.onProfilePromptDelete(position);
                     }
                 });
                 break;
@@ -140,16 +156,18 @@ public class CompleteProfileAdapter extends RecyclerView.Adapter {
             return VIEW_TYPE_PROFILE_PROMPT;
     }
 
-    private class ProfileInfoHolder extends RecyclerView.ViewHolder {
+    public class ProfileInfoHolder extends RecyclerView.ViewHolder {
         private RelativeLayout selectProfilePhotoButton;
         private EditText aboutText;
         private LinearLayout addPromptButton;
+        private CircleImageView profileImageVIew;
 
         public ProfileInfoHolder(View view) {
             super(view);
             selectProfilePhotoButton = view.findViewById(R.id.button_update_profile_photo);
             aboutText = view.findViewById(R.id.edittext_about);
             addPromptButton = view.findViewById(R.id.button_add_prompt);
+            profileImageVIew = view.findViewById(R.id.photo_image_view);
         }
     }
 
