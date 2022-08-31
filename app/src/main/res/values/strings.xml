@@ -48,11 +48,11 @@
         <item>Mediterranean</item>
         <item>Korean</item>
         <item>American</item>
-        <item>Vegeterian</item>
+        <item>Vegetarian</item>
         <item>Vietnamese</item>
         <item>Chinese</item>
+        <item>Healthy</item>
         <item>Open to all</item>
-        <item>Others</item>
     </string-array>
     <string-array name="prompt_list">
         <item>The most adventurous thing I did was…</item>

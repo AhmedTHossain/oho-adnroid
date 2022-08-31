@@ -1,125 +1,771 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/_30sdp"
     tools:context=".views.registration.RegistrationActivity">
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewpager_registration"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/_25sdp"
-        android:layout_gravity="top|center"
-        app:cardBackgroundColor="@color/white">
-        <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
-            android:id="@+id/dots_indicator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:dotsColor="@color/indicatiorInactive2"
-            app:dotsCornerRadius="8dp"
-            app:dotsSize="@dimen/_5sdp"
-            app:dotsSpacing="1dp"
-            app:dotsWidthFactor="2.5"
-            app:selectedDotColor="@color/indicatioractive"
-            app:progressMode="false"
-            android:paddingTop="@dimen/_5sdp"
-            android:paddingBottom="@dimen/_5sdp"
-            android:paddingStart="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_10sdp"/>
-    </androidx.cardview.widget.CardView>
-
-    <include
-        android:id="@+id/button_prev_registration"
-        layout="@layout/fab_previous_page"
-        android:layout_width="@dimen/_45sdp"
-        android:layout_height="@dimen/_45sdp"
-        android:layout_gravity="start|bottom"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="40dp"
-        android:visibility="visible"/>
-    <include
-        android:id="@+id/button_next_registration"
-        layout="@layout/fab_next_page"
-        android:layout_width="@dimen/_45sdp"
-        android:layout_height="@dimen/_45sdp"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="40dp"
-        android:visibility="visible"/>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/button_start_registration"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="40dp"
-        app:cardCornerRadius="@dimen/_50sdp"
-        android:visibility="gone">
-        <TextView
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:fontFamily="@font/ptsans_bold"
+        android:text="About You"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_25ssp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:background="#1A000000" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Let's get started"
-            android:fontFamily="@font/sf_pro_rounded_regular"
-            android:textColor="@color/indicatioractive"
-            android:textAlignment="center"
-            android:textSize="@dimen/_15ssp"
-            android:padding="@dimen/_10sdp"
-            android:background="@drawable/button_background_gradient"/>
-    </androidx.cardview.widget.CardView>
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:orientation="vertical">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/button_complete_registration"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="40dp"
-        app:cardCornerRadius="@dimen/_50sdp"
-        android:visibility="gone">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Next"
-            android:fontFamily="@font/sf_pro_rounded_regular"
-            android:textColor="@color/indicatioractive"
-            android:textAlignment="center"
-            android:textSize="@dimen/_15ssp"
-            android:padding="@dimen/_10sdp"
-            android:background="@drawable/button_background_gradient"/>
-    </androidx.cardview.widget.CardView>
+            <!-- Phone Input Lyout -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:fontFamily="@font/darkergrotesque_bold"
+                android:text="Your phone number"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18ssp"
+                android:textStyle="bold" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/button_complete_profile_registration"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="40dp"
-        app:cardCornerRadius="@dimen/_50sdp"
-        android:visibility="gone"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?attr/selectableItemBackground">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Complete profile"
-            android:fontFamily="@font/sf_pro_rounded_regular"
-            android:textColor="@color/indicatioractive"
-            android:textAlignment="center"
-            android:textSize="@dimen/_15ssp"
-            android:padding="@dimen/_10sdp"
-            android:background="@drawable/button_background_gradient"/>
-    </androidx.cardview.widget.CardView>
+            <EditText
+                android:id="@+id/text_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:background="@drawable/border_drawable"
+                android:fontFamily="@font/ptsans_regular"
+                android:hint="000-000-0000"
+                android:paddingStart="@dimen/_15sdp"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/textSubTitle"
+                android:textSize="@dimen/_14ssp" />
 
-</FrameLayout>
+            <!-- Gender Input Lyout -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:fontFamily="@font/darkergrotesque_bold"
+                android:text="Who do you identify as?"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18ssp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:text="Male"
+                    android:textColor="@color/textSubTitle"
+                    android:textSize="@dimen/_14ssp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:text="Female"
+                    android:textColor="@color/textSubTitle"
+                    android:textSize="@dimen/_14ssp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:text="Other"
+                    android:textColor="@color/textSubTitle"
+                    android:textSize="@dimen/_14ssp" />
+            </RadioGroup>
+
+            <!-- Height Input Lyout -->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:fontFamily="@font/darkergrotesque_bold"
+                android:text="Enter your height"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18ssp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textview_height"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:background="@drawable/border_drawable"
+                android:clickable="true"
+                android:drawableEnd="@drawable/ic_height"
+                android:drawableTint="@color/black"
+                android:focusable="true"
+                android:fontFamily="@font/ptsans_regular"
+                android:paddingStart="@dimen/_15sdp"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_15sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:text="Tap to select height"
+                android:textColor="@color/textSubTitle"
+                android:textSize="@dimen/_14ssp" />
+
+            <!-- DOB Input Lyout -->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:fontFamily="@font/darkergrotesque_bold"
+                android:text="Select your date of birth"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18ssp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textview_date_of_birth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:background="@drawable/border_drawable"
+                android:clickable="true"
+                android:drawableEnd="@drawable/ic_calendar"
+                android:drawableTint="@color/black"
+                android:focusable="true"
+                android:fontFamily="@font/ptsans_regular"
+                android:paddingStart="@dimen/_15sdp"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_15sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:text="Tap to select date"
+                android:textColor="@color/textSubTitle"
+                android:textSize="@dimen/_14ssp" />
+
+            <!-- Education Input Lyout -->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:fontFamily="@font/darkergrotesque_bold"
+                android:text="Select your last degree"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18ssp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:fontFamily="@font/darkergrotesque_regular"
+                android:text="(scroll right to view more)"
+                android:textColor="@color/textSubTitle"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp">
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:text="No Degree"
+                        android:textColor="@color/textSubTitle"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:text="High School"
+                        android:textColor="@color/textSubTitle"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:text="Undergrad"
+                        android:textColor="@color/textSubTitle"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:text="Masters"
+                        android:textColor="@color/textSubTitle"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:text="Phd"
+                        android:textColor="@color/textSubTitle"
+                        android:textSize="@dimen/_14ssp" />
+                </RadioGroup>
+            </HorizontalScrollView>
+
+            <!-- Profession Input Lyout -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:fontFamily="@font/darkergrotesque_bold"
+                android:text="You'r a/an..."
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18ssp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edittext_profession"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:background="@drawable/border_drawable"
+                android:fontFamily="@font/ptsans_regular"
+                android:hint="Software Engineer"
+                android:paddingStart="@dimen/_15sdp"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/textSubTitle"
+                android:textSize="@dimen/_14ssp" />
+
+            <!-- Race Input Layout -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:fontFamily="@font/darkergrotesque_bold"
+                android:text="Select your ethnicity"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18ssp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:fontFamily="@font/darkergrotesque_regular"
+                android:text="(scroll right to view more)"
+                android:textColor="@color/textSubTitle"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp">
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:text="South Asian"
+                        android:textColor="@color/textSubTitle"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:text="East Asian"
+                        android:textColor="@color/textSubTitle"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:text="African American"
+                        android:textColor="@color/textSubTitle"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:text="Black"
+                        android:textColor="@color/textSubTitle"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:text="Latinx"
+                        android:textColor="@color/textSubTitle"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:text="Pacific Islander"
+                        android:textColor="@color/textSubTitle"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:text="American Indian"
+                        android:textColor="@color/textSubTitle"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:text="Hispanic"
+                        android:textColor="@color/textSubTitle"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:text="White"
+                        android:textColor="@color/textSubTitle"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:text="Other"
+                        android:textColor="@color/textSubTitle"
+                        android:textSize="@dimen/_14ssp" />
+                </RadioGroup>
+            </HorizontalScrollView>
+
+            <!-- Religion Input Layout -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:fontFamily="@font/darkergrotesque_bold"
+                android:text="You are?"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18ssp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:fontFamily="@font/darkergrotesque_regular"
+                android:text="(scroll right to view more)"
+                android:textColor="@color/textSubTitle"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp">
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:text="Christian"
+                        android:textColor="@color/textSubTitle"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:text="Catholic"
+                        android:textColor="@color/textSubTitle"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:text="Jewish"
+                        android:textColor="@color/textSubTitle"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:text="Muslim"
+                        android:textColor="@color/textSubTitle"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:text="Hindu"
+                        android:textColor="@color/textSubTitle"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:text="Sikh"
+                        android:textColor="@color/textSubTitle"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:text="Agnostic"
+                        android:textColor="@color/textSubTitle"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:text="Buddhist"
+                        android:textColor="@color/textSubTitle"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:text="Spiritual / Not Religious"
+                        android:textColor="@color/textSubTitle"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:text="Atheist"
+                        android:textColor="@color/textSubTitle"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:text="Other"
+                        android:textColor="@color/textSubTitle"
+                        android:textSize="@dimen/_14ssp" />
+                </RadioGroup>
+            </HorizontalScrollView>
+
+            <!-- Vaccine status Input Lyout -->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:fontFamily="@font/darkergrotesque_bold"
+                android:text="Did you take Covid-19 vaccine?"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18ssp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:text="Yes"
+                    android:textColor="@color/textSubTitle"
+                    android:textSize="@dimen/_14ssp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:text="No"
+                    android:textColor="@color/textSubTitle"
+                    android:textSize="@dimen/_14ssp" />
+
+            </RadioGroup>
+
+            <!-- Budget Input Lyout -->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:fontFamily="@font/darkergrotesque_bold"
+                android:text="What's your budget for the date?"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18ssp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:text="$"
+                    android:textColor="@color/textSubTitle"
+                    android:textSize="@dimen/_14ssp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:text="$$"
+                    android:textColor="@color/textSubTitle"
+                    android:textSize="@dimen/_14ssp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:text="$$$"
+                    android:textColor="@color/textSubTitle"
+                    android:textSize="@dimen/_14ssp" />
+            </RadioGroup>
+
+            <!-- Gender Preference Input Layout -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:fontFamily="@font/darkergrotesque_bold"
+                android:text="Who do you want to date?"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18ssp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:text="Male"
+                    android:textColor="@color/textSubTitle"
+                    android:textSize="@dimen/_14ssp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:text="Female"
+                    android:textColor="@color/textSubTitle"
+                    android:textSize="@dimen/_14ssp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:text="Open to all"
+                    android:textColor="@color/textSubTitle"
+                    android:textSize="@dimen/_14ssp" />
+            </RadioGroup>
+
+            <!-- Cuisine Preference Input Layout -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:fontFamily="@font/darkergrotesque_bold"
+                android:text="Select your preferred cusines"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18ssp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:fontFamily="@font/darkergrotesque_regular"
+                android:text="(scroll right to view more)"
+                android:textColor="@color/textSubTitle"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview_cuisine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:paddingTop="@dimen/_5sdp" />
+
+            <TextView
+                android:id="@+id/button_update_about"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_30sdp"
+                android:background="@drawable/border_rounded_corner"
+                android:clickable="true"
+                android:drawableEnd="@drawable/ic_arrow_forward"
+                android:focusable="true"
+                android:fontFamily="@font/darkergrotesque_bold"
+                android:padding="@dimen/_10sdp"
+                android:text="Let's go!"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_18ssp"
+                app:drawableTint="@color/white" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

@@ -29,7 +29,6 @@
 
         <TextView
             android:id="@+id/text_promp_profile"
-            app:drawableEndCompat="@drawable/ic_arrow_right"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -38,7 +37,8 @@
             android:orientation="vertical"
             android:text="Select or capture new profile photo"
             android:textColor="@color/textSubTitle"
-            android:textSize="@dimen/_14ssp" />
+            android:textSize="@dimen/_14ssp"
+            app:drawableEndCompat="@drawable/ic_arrow_right" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/photo_image_view"
