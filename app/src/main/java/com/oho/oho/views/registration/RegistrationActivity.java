@@ -1,8 +1,10 @@
 package com.oho.oho.views.registration;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -94,7 +97,7 @@ public class RegistrationActivity extends AppCompatActivity
         if (v.getId() == binding.textviewHeight.getId())
             showHeightInputDialog();
         if (v.getId() == binding.textviewLocation.getId()){}
-
+            showLocationInputDialog();
     }
 
     @Override
@@ -157,6 +160,36 @@ public class RegistrationActivity extends AppCompatActivity
                         int birthMonth = datePicker.getMonth() + 1;
                         String dateToDisplay = birthMonth + "-" + datePicker.getDayOfMonth() + "-" + datePicker.getYear();
                         binding.textviewDateOfBirth.setText(dateToDisplay);
+                        dialog.dismiss();
+                    }
+                });
+            }
+        });
+        // show it
+        alertDialog.show();
+    }
+
+    private void showLocationInputDialog(){
+        LayoutInflater li = LayoutInflater.from(getApplicationContext());
+        View promptsView = li.inflate(R.layout.location_input_dialog, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                this);
+        // set alert_dialog.xml to alertdialog builder
+        alertDialogBuilder.setView(promptsView);
+//        final DatePicker datePicker = promptsView.findViewById(R.id.datepicker);
+        alertDialogBuilder.setCancelable(false)
+                .setPositiveButton("USE",null);
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                button.setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.indicatioractive));
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
                         dialog.dismiss();
                     }
                 });
