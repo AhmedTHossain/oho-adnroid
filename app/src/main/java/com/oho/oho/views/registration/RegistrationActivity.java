@@ -5,6 +5,9 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -14,6 +17,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
@@ -22,7 +26,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.oho.oho.R;
 import com.oho.oho.adapters.RadioListItemAdapter;
 import com.oho.oho.databinding.ActivityRegistrationBinding;
@@ -32,9 +40,11 @@ import com.oho.oho.views.LoginActivity;
 import com.oho.oho.views.settings.AccountSettingsActivity;
 import com.shawnlin.numberpicker.NumberPicker;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 public class RegistrationActivity extends AppCompatActivity
         implements
@@ -96,7 +106,7 @@ public class RegistrationActivity extends AppCompatActivity
             showDateInputDialog();
         if (v.getId() == binding.textviewHeight.getId())
             showHeightInputDialog();
-        if (v.getId() == binding.textviewLocation.getId()){}
+        if (v.getId() == binding.textviewLocation.getId())
             showLocationInputDialog();
     }
 
@@ -170,32 +180,41 @@ public class RegistrationActivity extends AppCompatActivity
     }
 
     private void showLocationInputDialog(){
-        LayoutInflater li = LayoutInflater.from(getApplicationContext());
-        View promptsView = li.inflate(R.layout.location_input_dialog, null);
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                this);
-        // set alert_dialog.xml to alertdialog builder
-        alertDialogBuilder.setView(promptsView);
-//        final DatePicker datePicker = promptsView.findViewById(R.id.datepicker);
-        alertDialogBuilder.setCancelable(false)
-                .setPositiveButton("USE",null);
-        AlertDialog alertDialog = alertDialogBuilder.create();
+        if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            FusedLocationProviderClient fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getApplicationContext());
+            fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
+                @Override
+                public void onComplete(@NonNull Task<Location> task) {
+                    Location location = task.getResult();
+                    if (location != null) {
 
-        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-            @Override
-            public void onShow(DialogInterface dialog) {
-                Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
-                button.setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.indicatioractive));
-                button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+                        double lat = location.getLatitude();
+                        double lon = location.getLongitude();
 
-                        dialog.dismiss();
+                        try {
+                            Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+                            List<Address> addresses = geocoder.getFromLocation(
+                                    location.getLatitude(), location.getLongitude(), 1
+                            );
+
+                            String city = addresses.get(0).getLocality();
+                            String state = addresses.get(0).getAdminArea();
+
+                            String locationText = city + ", " + state;
+                            binding.textviewLocation.setText(locationText);
+
+                            LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
-                });
-            }
-        });
-        // show it
-        alertDialog.show();
+                }
+            });
+        } else {
+            binding.textviewLocation.setText("Tap again to set your location");
+            //when permission denied
+            ActivityCompat.requestPermissions(RegistrationActivity.this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
+        }
     }
 }
