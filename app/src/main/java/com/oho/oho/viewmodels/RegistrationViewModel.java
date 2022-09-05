@@ -19,6 +19,7 @@ public class RegistrationViewModel extends AndroidViewModel {
     private RegistrationRepository registrationRepository;
     public LiveData<Profile> registeredUserProfileData;
     private ArrayList<String> preferredCuisineList;
+    private double lat, lon;
 
     public RegistrationViewModel(@NonNull Application application) {
         super(application);
@@ -39,7 +40,6 @@ public class RegistrationViewModel extends AndroidViewModel {
     }
 
     public String getPreferredCuisineList() {
-
         String cuisineList = "";
         for (int i=0; i<preferredCuisineList.size(); i++){
             if (i != preferredCuisineList.size()-1)
@@ -49,5 +49,18 @@ public class RegistrationViewModel extends AndroidViewModel {
         }
 
         return cuisineList;
+    }
+
+    public void storeCoordinates(double lat, double lon){
+        this.lat = lat;
+        this.lon = lon;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public double getLon() {
+        return lon;
     }
 }

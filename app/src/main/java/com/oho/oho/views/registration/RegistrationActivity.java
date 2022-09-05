@@ -111,7 +111,10 @@ public class RegistrationActivity extends AppCompatActivity
     }
 
     private void startRegistration() {
-        Log.d("RegistrationActivity","final cuisine list = " + registrationViewModel.getPreferredCuisineList());
+        Log.d("RegistrationActivity",
+                "final cuisine list = " + registrationViewModel.getPreferredCuisineList() +
+                        " & final lat = " + registrationViewModel.getLat() +
+                        " & final lon = " + registrationViewModel.getLon());
     }
 
     @Override
@@ -222,6 +225,8 @@ public class RegistrationActivity extends AppCompatActivity
 
                         double lat = location.getLatitude();
                         double lon = location.getLongitude();
+
+                        registrationViewModel.storeCoordinates(lat,lon);
 
                         try {
                             Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
