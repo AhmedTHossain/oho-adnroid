@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.oho.oho.models.Cuisine;
 import com.oho.oho.models.Profile;
 import com.oho.oho.models.RegistrationInput;
 import com.oho.oho.repositories.RegistrationRepository;
@@ -17,57 +18,36 @@ public class RegistrationViewModel extends AndroidViewModel {
 
     private RegistrationRepository registrationRepository;
     public LiveData<Profile> registeredUserProfileData;
-
-    //this object is going to store user's inputs during the registration process
-    private MutableLiveData<Profile> registrationFormData = new MutableLiveData<>();
-
-    //this object is going to store user's ethnicity input during the registration process and will populate the recyclerview
-    private MutableLiveData<ArrayList<RegistrationInput>> ethnicityFormData = new MutableLiveData<>();
-
-    //this object is going to store user's cuisine input during the registration process and will populate the recyclerview
-    private MutableLiveData<ArrayList<RegistrationInput>> cuisineFormData = new MutableLiveData<>();
-
-    //this object is going to store user's religion input during the registration process and will populate the recyclerview
-    private MutableLiveData<ArrayList<RegistrationInput>> religionFormData = new MutableLiveData<>();
+    private ArrayList<String> preferredCuisineList;
 
     public RegistrationViewModel(@NonNull Application application) {
         super(application);
         registrationRepository = new RegistrationRepository();
+        preferredCuisineList = new ArrayList<>();
     }
 
     public void registerUser(Profile profile){
         registeredUserProfileData = registrationRepository.registerNewUser(profile, getApplication().getApplicationContext());
     }
 
-    public void saveRegistrationFormData(Profile profile) {
-        registrationFormData.setValue(profile);
+    public void removeCuisine(String cuisine){
+        preferredCuisineList.remove(cuisine);
     }
 
-    public LiveData<Profile> getRegistrationFormData() {
-        return registrationFormData;
+    public void addCuisine(String cuisine){
+        preferredCuisineList.add(cuisine);
     }
 
-    public void setEthnicityList(ArrayList<RegistrationInput> ethnicityList){
-        ethnicityFormData.setValue(ethnicityList);
-    }
+    public String getPreferredCuisineList() {
 
-    public void setCuisineList(ArrayList<RegistrationInput> cuisineList){
-        cuisineFormData.setValue(cuisineList);
-    }
+        String cuisineList = "";
+        for (int i=0; i<preferredCuisineList.size(); i++){
+            if (i != preferredCuisineList.size()-1)
+                cuisineList = cuisineList + preferredCuisineList.get(i) + ", ";
+            else
+                cuisineList = cuisineList + preferredCuisineList.get(i);
+        }
 
-    public void setReligionList(ArrayList<RegistrationInput> religionList){
-        religionFormData.setValue(religionList);
-    }
-
-    public LiveData<ArrayList<RegistrationInput>> getEthnicityList(){
-        return ethnicityFormData;
-    }
-
-    public LiveData<ArrayList<RegistrationInput>> getCuisineList(){
-        return cuisineFormData;
-    }
-
-    public LiveData<ArrayList<RegistrationInput>> getReligionList(){
-        return religionFormData;
+        return cuisineList;
     }
 }

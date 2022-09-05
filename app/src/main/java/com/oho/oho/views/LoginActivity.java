@@ -128,7 +128,8 @@ public class LoginActivity extends AppCompatActivity {
                     Intent intent = new Intent(this, OnboardingActivity.class);
                     intent.putExtra("name",authenticatedUser.getDisplayName());
                     intent.putExtra("email",authenticatedUser.getEmail());
-                    Log.d("LoginActivity","email from login activity = "+authenticatedUser.getEmail());
+                    intent.putExtra("phone",authenticatedUser.getPhoneNumber());
+                    Log.d("LoginActivity","phone from login activity = "+authenticatedUser.getPhoneNumber());
                     startActivity(intent);
                     finish();
                 }else {

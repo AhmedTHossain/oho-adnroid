@@ -3,6 +3,7 @@ package com.oho.oho.views.registration;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -34,6 +35,7 @@ import com.oho.oho.databinding.ActivityRegistrationBinding;
 import com.oho.oho.interfaces.RadioListItemClickListener;
 import com.oho.oho.models.Cuisine;
 import com.oho.oho.viewmodels.RegistrationViewModel;
+import com.oho.oho.views.CompleteProfileActivity;
 import com.shawnlin.numberpicker.NumberPicker;
 
 import java.io.IOException;
@@ -69,6 +71,8 @@ public class RegistrationActivity extends AppCompatActivity
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
         );
 
+        String nameFromGmailAccount = getIntent().getStringExtra("name");;
+
         initAuthViewModel();
 
         binding.textviewHeight.setOnClickListener(this);
@@ -91,11 +95,15 @@ public class RegistrationActivity extends AppCompatActivity
         cuisineAdapter = new RadioListItemAdapter(cuisineArrayList, this, this);
         binding.recyclerviewCuisine.setLayoutManager(layoutManager);
         binding.recyclerviewCuisine.setAdapter(cuisineAdapter);
+        binding.textName.setText(nameFromGmailAccount);
+        if (getIntent().getStringExtra("phone") != null)
+            binding.textPhone.setText(getIntent().getStringExtra("phone"));
 
         //setting up click listeners
         binding.textviewDateOfBirth.setOnClickListener(this);
         binding.textviewHeight.setOnClickListener(this);
         binding.textviewLocation.setOnClickListener(this);
+        binding.buttonRegisterProfile.setOnClickListener(this);
     }
 
     private void initAuthViewModel() {
@@ -103,7 +111,7 @@ public class RegistrationActivity extends AppCompatActivity
     }
 
     private void startRegistration() {
-
+        Log.d("RegistrationActivity","final cuisine list = " + registrationViewModel.getPreferredCuisineList());
     }
 
     @Override
@@ -114,6 +122,10 @@ public class RegistrationActivity extends AppCompatActivity
             showHeightInputDialog();
         if (v.getId() == binding.textviewLocation.getId())
             showLocationInputDialog();
+        if (v.getId() == binding.buttonRegisterProfile.getId()) {
+            startRegistration();
+            startActivity(new Intent(this, CompleteProfileActivity.class));
+        }
     }
 
     @Override
@@ -127,6 +139,11 @@ public class RegistrationActivity extends AppCompatActivity
 
         cuisineArrayList.get(position).setChecked(isChecked);
         cuisineAdapter.notifyItemChanged(position);
+
+        if (isChecked)
+            registrationViewModel.addCuisine(checkboxLabel);
+        else
+            registrationViewModel.removeCuisine(checkboxLabel);
 
     }
 

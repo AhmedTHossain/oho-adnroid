@@ -1,6 +1,7 @@
 package com.oho.oho.views;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -16,6 +17,8 @@ import android.widget.LinearLayout;
 import com.google.android.material.button.MaterialButton;
 import com.oho.oho.R;
 import com.oho.oho.adapters.OnboardingAdapter;
+import com.oho.oho.databinding.ActivityOnboardingBinding;
+import com.oho.oho.databinding.ActivityRegistrationBinding;
 import com.oho.oho.models.OnboardingItem;
 import com.oho.oho.views.animations.ZoomOutPageTransformer;
 import com.oho.oho.views.registration.RegistrationActivity;
@@ -29,14 +32,16 @@ public class OnboardingActivity extends AppCompatActivity {
     private OnboardingAdapter onboardingAdapter;
     private LinearLayout layoutOnboardingIndicator;
     private MaterialButton buttonOnboardingAction;
-    private String onBoardingUserName;
-    private String onBoardingUserEmail;
+    private String onBoardingUserName, onBoardingUserPhone, onBoardingUserEmail;
+    private ActivityOnboardingBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(R.style.Theme_OHO);
-        setContentView(R.layout.activity_onboarding);
+        binding = ActivityOnboardingBinding.inflate(getLayoutInflater());
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        setContentView(binding.getRoot());
 
         getWindow().setFlags(
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
@@ -48,6 +53,7 @@ public class OnboardingActivity extends AppCompatActivity {
 
         onBoardingUserName = getIntent().getStringExtra("name");
         onBoardingUserEmail = getIntent().getStringExtra("email");
+        onBoardingUserPhone = getIntent().getStringExtra("phone");
 
         Log.d(TAG,"name of google logged in user = "+onBoardingUserName);
 
