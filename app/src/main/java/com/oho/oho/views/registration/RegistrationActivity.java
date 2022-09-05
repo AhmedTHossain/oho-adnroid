@@ -3,19 +3,17 @@ package com.oho.oho.views.registration;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
-import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,7 +25,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -35,9 +32,8 @@ import com.oho.oho.R;
 import com.oho.oho.adapters.RadioListItemAdapter;
 import com.oho.oho.databinding.ActivityRegistrationBinding;
 import com.oho.oho.interfaces.RadioListItemClickListener;
+import com.oho.oho.models.Cuisine;
 import com.oho.oho.viewmodels.RegistrationViewModel;
-import com.oho.oho.views.LoginActivity;
-import com.oho.oho.views.settings.AccountSettingsActivity;
 import com.shawnlin.numberpicker.NumberPicker;
 
 import java.io.IOException;
@@ -57,6 +53,8 @@ public class RegistrationActivity extends AppCompatActivity
     private LinearLayoutManager layoutManager;
     private int feetInput = 0;
     private int inchInput = 0;
+    private ArrayList<String> radioItemArrayList;
+    private ArrayList<Cuisine> cuisineArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,11 +76,19 @@ public class RegistrationActivity extends AppCompatActivity
 
         String[] resArray = getResources().getStringArray(R.array.cuisine_list);
         List<String> radioItemList = Arrays.asList(resArray);
-        ArrayList<String> radioItemArrayList = new ArrayList<>(radioItemList);
+        radioItemArrayList = new ArrayList<>(radioItemList);
+
+        cuisineArrayList = new ArrayList<>();
+        for (String s : radioItemList) {
+            Cuisine cuisine = new Cuisine();
+            cuisine.setName(s);
+            cuisine.setChecked(false);
+            cuisineArrayList.add(cuisine);
+        }
 
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
 
-        cuisineAdapter = new RadioListItemAdapter(radioItemArrayList,this,this);
+        cuisineAdapter = new RadioListItemAdapter(cuisineArrayList, this, this);
         binding.recyclerviewCuisine.setLayoutManager(layoutManager);
         binding.recyclerviewCuisine.setAdapter(cuisineAdapter);
 
@@ -111,11 +117,20 @@ public class RegistrationActivity extends AppCompatActivity
     }
 
     @Override
-    public void radioListItemClick(int position) {
+    public void radioListItemClick(int position, boolean isChecked, String checkboxLabel) {
+        Log.d("RegistrationActivity", "check value = " + isChecked);
+
+//        if (checkboxLabel.equals("Open to all")){
+//            for (int i=0; i<cuisineArrayList.size(); i++)
+//                cuisineArrayList.get(i).setChecked(false);
+//        }
+
+        cuisineArrayList.get(position).setChecked(isChecked);
+        cuisineAdapter.notifyItemChanged(position);
 
     }
 
-    private void showHeightInputDialog(){
+    private void showHeightInputDialog() {
         LayoutInflater li = LayoutInflater.from(getApplicationContext());
         View promptsView = li.inflate(R.layout.height_input_dialog, null);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
@@ -125,14 +140,14 @@ public class RegistrationActivity extends AppCompatActivity
         final NumberPicker feetPicker = promptsView.findViewById(R.id.number_picker_feet);
         final NumberPicker inchPicker = promptsView.findViewById(R.id.number_picker_inch);
         alertDialogBuilder.setCancelable(false)
-                .setPositiveButton("ENTER",null);
+                .setPositiveButton("ENTER", null);
         AlertDialog alertDialog = alertDialogBuilder.create();
 
         alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(DialogInterface dialog) {
                 Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
-                button.setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.indicatioractive));
+                button.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.indicatioractive));
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -147,7 +162,7 @@ public class RegistrationActivity extends AppCompatActivity
         alertDialog.show();
     }
 
-    private void showDateInputDialog(){
+    private void showDateInputDialog() {
         LayoutInflater li = LayoutInflater.from(getApplicationContext());
         View promptsView = li.inflate(R.layout.date_input_dialog, null);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
@@ -156,14 +171,14 @@ public class RegistrationActivity extends AppCompatActivity
         alertDialogBuilder.setView(promptsView);
         final DatePicker datePicker = promptsView.findViewById(R.id.datepicker);
         alertDialogBuilder.setCancelable(false)
-                .setPositiveButton("SELECT",null);
+                .setPositiveButton("SELECT", null);
         AlertDialog alertDialog = alertDialogBuilder.create();
 
         alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(DialogInterface dialog) {
                 Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
-                button.setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.indicatioractive));
+                button.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.indicatioractive));
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -179,7 +194,7 @@ public class RegistrationActivity extends AppCompatActivity
         alertDialog.show();
     }
 
-    private void showLocationInputDialog(){
+    private void showLocationInputDialog() {
         if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             FusedLocationProviderClient fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getApplicationContext());
             fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
@@ -203,7 +218,7 @@ public class RegistrationActivity extends AppCompatActivity
                             String locationText = city + ", " + state;
                             binding.textviewLocation.setText(locationText);
 
-                            LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
+                            LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

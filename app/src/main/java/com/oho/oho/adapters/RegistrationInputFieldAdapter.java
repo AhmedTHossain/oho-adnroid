@@ -65,6 +65,7 @@ public class RegistrationInputFieldAdapter extends RecyclerView.Adapter<Registra
             holder.getTextView().setTag("selected");
             selectedItemPos = position;
         }
+
     }
 
     @Override
