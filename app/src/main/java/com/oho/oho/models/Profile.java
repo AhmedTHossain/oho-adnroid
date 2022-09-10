@@ -68,6 +68,9 @@ public class Profile {
     @Expose
     private String vaccinated;
 
+    public Profile() {
+    }
+
     public Integer getAge() {
         return age;
     }

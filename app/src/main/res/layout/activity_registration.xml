@@ -112,6 +112,7 @@
                 android:textStyle="bold" />
 
             <RadioGroup
+                android:id="@+id/radiogroup_gender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20sdp"
@@ -288,6 +289,7 @@
                 android:layout_marginEnd="@dimen/_20sdp">
 
                 <RadioGroup
+                    android:id="@+id/radiogroup_education"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
@@ -403,6 +405,7 @@
                 android:layout_marginEnd="@dimen/_20sdp">
 
                 <RadioGroup
+                    android:id="@+id/radiogroup_race"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
@@ -532,6 +535,7 @@
                 android:layout_marginEnd="@dimen/_20sdp">
 
                 <RadioGroup
+                    android:id="@+id/radiogroup_religion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
@@ -653,6 +657,7 @@
                 android:textStyle="bold" />
 
             <RadioGroup
+                android:id="@+id/radiogroup_vaccinated"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20sdp"
@@ -695,6 +700,7 @@
                 android:textStyle="bold" />
 
             <RadioGroup
+                android:id="@+id/radiogroup_budget"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20sdp"
@@ -744,6 +750,7 @@
                 android:textStyle="bold" />
 
             <RadioGroup
+                android:id="@+id/radiogroup_interested_in"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20sdp"

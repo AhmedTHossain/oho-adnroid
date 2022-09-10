@@ -5,6 +5,7 @@ import static com.oho.oho.utils.HelperClass.logErrorMessage;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
@@ -32,16 +33,18 @@ public class RegistrationRepository {
         call.enqueue(new Callback<Profile>() {
             @Override
             public void onResponse(@NonNull Call<Profile> call, @NonNull Response<Profile> response) {
-                registeredUserProfile.setValue(response.body());
-                Log.d("RegistrationRepository","age in response body = "+response.body().getAge());
-                Log.d("RegistrationRepository","response body = "+response.code());
+//                registeredUserProfile.setValue(response.body());
+//                Log.d("RegistrationRepository","age in response body = "+response.body().getAge());
+//                Log.d("RegistrationRepository","response body = "+response.code());
+//
+//                SharedPreferences mPrefs = context.getSharedPreferences("pref",Context.MODE_PRIVATE);
+//                SharedPreferences.Editor prefsEditor = mPrefs.edit();
+//                Gson gson = new Gson();
+//                String json = gson.toJson(response.body());
+//                prefsEditor.putString("profile", json);
+//                prefsEditor.apply();
 
-                SharedPreferences mPrefs = context.getSharedPreferences("pref",Context.MODE_PRIVATE);
-                SharedPreferences.Editor prefsEditor = mPrefs.edit();
-                Gson gson = new Gson();
-                String json = gson.toJson(response.body());
-                prefsEditor.putString("profile", json);
-                prefsEditor.apply();
+                Toast.makeText(context,"Profile created Successfully!",Toast.LENGTH_LONG).show();
             }
 
             @Override

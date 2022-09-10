@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.RadioButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,6 +35,7 @@ import com.oho.oho.adapters.RadioListItemAdapter;
 import com.oho.oho.databinding.ActivityRegistrationBinding;
 import com.oho.oho.interfaces.RadioListItemClickListener;
 import com.oho.oho.models.Cuisine;
+import com.oho.oho.models.Profile;
 import com.oho.oho.viewmodels.RegistrationViewModel;
 import com.oho.oho.views.CompleteProfileActivity;
 import com.shawnlin.numberpicker.NumberPicker;
@@ -71,7 +73,7 @@ public class RegistrationActivity extends AppCompatActivity
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
         );
 
-        String nameFromGmailAccount = getIntent().getStringExtra("name");;
+        String nameFromGmailAccount = getIntent().getStringExtra("name");
 
         initAuthViewModel();
 
@@ -111,10 +113,29 @@ public class RegistrationActivity extends AppCompatActivity
     }
 
     private void startRegistration() {
-        Log.d("RegistrationActivity",
-                "final cuisine list = " + registrationViewModel.getPreferredCuisineList() +
-                        " & final lat = " + registrationViewModel.getLat() +
-                        " & final lon = " + registrationViewModel.getLon());
+//        Log.d("RegistrationActivity",
+//                "final cuisine list = " + registrationViewModel.getPreferredCuisineList() +
+//                        " & final lat = " + registrationViewModel.getLat() +
+//                        " & final lon = " + registrationViewModel.getUserProfile().getLon());
+//        Log.d("RegistrationActivity"," & final age = "+ registrationViewModel.calculateAge());
+
+        Profile profileData = registrationViewModel.getUserProfile();
+        profileData.setEmail(getIntent().getStringExtra("email"));
+        profileData.setName(binding.textName.getText().toString());
+        profileData.setPhone(binding.textPhone.getText().toString());
+        profileData.setSex(getSelectedRadioButtonText(binding.radiogroupGender.getCheckedRadioButtonId()));
+        profileData.setEducation(getSelectedRadioButtonText(binding.radiogroupEducation.getCheckedRadioButtonId()));
+        profileData.setOccupation(binding.edittextProfession.getText().toString());
+        profileData.setRace(getSelectedRadioButtonText(binding.radiogroupRace.getCheckedRadioButtonId()));
+        profileData.setReligion(getSelectedRadioButtonText(binding.radiogroupReligion.getCheckedRadioButtonId()));
+        profileData.setVaccinated(getSelectedRadioButtonText(binding.radiogroupVaccinated.getCheckedRadioButtonId()));
+        profileData.setBudget(getSelectedRadioButtonText(binding.radiogroupBudget.getCheckedRadioButtonId()));
+        profileData.setInterested_in(getSelectedRadioButtonText(binding.radiogroupInterestedIn.getCheckedRadioButtonId()));
+        profileData.setDob(binding.textviewDateOfBirth.getText().toString());
+//        profileData.setAge(registrationViewModel.getUserProfile().getAge());
+        registrationViewModel.setCuisine();
+        profileData.setCuisine(registrationViewModel.getUserProfile().getCuisine());
+        registrationViewModel.registerUser(profileData);
     }
 
     @Override
@@ -171,6 +192,7 @@ public class RegistrationActivity extends AppCompatActivity
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        registrationViewModel.calculateHeight(feetPicker.getValue(),inchPicker.getValue());
                         String heightToDisplay = feetPicker.getValue() + "' " + inchPicker.getValue() + "\"";
                         binding.textviewHeight.setText(heightToDisplay);
                         dialog.dismiss();
@@ -203,6 +225,8 @@ public class RegistrationActivity extends AppCompatActivity
                     @Override
                     public void onClick(View v) {
                         int birthMonth = datePicker.getMonth() + 1;
+                        registrationViewModel.setBirthYear(datePicker.getYear());
+                        registrationViewModel.calculateAge();
                         String dateToDisplay = birthMonth + "-" + datePicker.getDayOfMonth() + "-" + datePicker.getYear();
                         binding.textviewDateOfBirth.setText(dateToDisplay);
                         dialog.dismiss();
@@ -226,8 +250,6 @@ public class RegistrationActivity extends AppCompatActivity
                         double lat = location.getLatitude();
                         double lon = location.getLongitude();
 
-                        registrationViewModel.storeCoordinates(lat,lon);
-
                         try {
                             Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
                             List<Address> addresses = geocoder.getFromLocation(
@@ -236,6 +258,8 @@ public class RegistrationActivity extends AppCompatActivity
 
                             String city = addresses.get(0).getLocality();
                             String state = addresses.get(0).getAdminArea();
+
+                            registrationViewModel.storeCoordinates(lat,lon,city,state);
 
                             String locationText = city + ", " + state;
                             binding.textviewLocation.setText(locationText);
@@ -253,5 +277,11 @@ public class RegistrationActivity extends AppCompatActivity
             ActivityCompat.requestPermissions(RegistrationActivity.this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
         }
+    }
+
+    public String getSelectedRadioButtonText(int id){
+        // find the radiobutton by returned id
+        RadioButton radioButton = (RadioButton) findViewById(id);
+        return radioButton.getText().toString();
     }
 }
