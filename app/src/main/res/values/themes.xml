@@ -58,4 +58,9 @@
         <item name="android:textSize">@dimen/_14ssp</item>
         <item name="android:font">@font/ptsans_regular</item>
     </style>
+
+    <style name="roundedCornersImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/_20sdp</item>
+    </style>
 </resources>

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:paddingTop="@dimen/_30sdp"
     tools:context=".views.CompleteProfileActivity">
@@ -13,14 +14,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_10sdp"
+        android:fontFamily="@font/ptsans_bold"
         android:paddingStart="@dimen/_20sdp"
         android:paddingEnd="@dimen/_20sdp"
-        android:fontFamily="@font/ptsans_bold"
         android:text="Complete Your Profile"
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textSize="@dimen/_25ssp" />
-
 
     <View
         android:id="@+id/view"
@@ -29,41 +29,53 @@
         android:layout_below="@id/screentitle"
         android:background="#1A000000" />
 
-<!--    <LinearLayout-->
-<!--        android:id="@+id/button_edit_profile"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="end"-->
-<!--        android:layout_marginTop="@dimen/_20sdp"-->
-<!--        android:background="@drawable/border_corner_left_gradient"-->
-<!--        android:clickable="true"-->
-<!--        android:focusable="true"-->
-<!--        android:paddingStart="@dimen/_20sdp"-->
-<!--        android:paddingTop="@dimen/_5sdp"-->
-<!--        android:paddingEnd="@dimen/_5sdp"-->
-<!--        android:paddingBottom="@dimen/_5sdp">-->
-
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center_vertical"-->
-<!--            android:layout_marginEnd="@dimen/_5sdp"-->
-<!--            android:fontFamily="@font/darkergrotesque_bold"-->
-<!--            android:text="Save Profile"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:textSize="@dimen/_16ssp" />-->
-
-<!--        <ImageView-->
-<!--            android:layout_width="@dimen/_24sdp"-->
-<!--            android:layout_height="@dimen/_24sdp"-->
-<!--            android:src="@drawable/ic_edit_profile_white" />-->
-<!--    </LinearLayout>-->
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview_profile"
+    <LinearLayout
+        android:id="@+id/profile_photo_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/view"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginEnd="@dimen/_20sdp"/>
-</LinearLayout>
+        android:orientation="vertical"
+        android:layout_centerInParent="true">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:fontFamily="@font/darkergrotesque_regular"
+            android:text="Select your profile photo"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_18ssp"
+            android:textStyle="bold" />
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/profile_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_200sdp"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            app:srcCompat="@drawable/ic_person"
+            android:background="#0D000000"
+            android:scaleType="centerCrop"
+            app:shapeAppearanceOverlay="@style/roundedCornersImageView" />
+        <TextView
+            android:id="@+id/select_profile_photo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_30sdp"
+            android:background="@drawable/border_rounded_corner"
+            android:clickable="true"
+            android:drawableEnd="@drawable/ic_arrow_forward"
+            android:focusable="true"
+            android:fontFamily="@font/darkergrotesque_bold"
+            android:padding="@dimen/_10sdp"
+            android:text="Select"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_18ssp"
+            app:drawableTint="@color/white" />
+    </LinearLayout>
+
+</RelativeLayout>

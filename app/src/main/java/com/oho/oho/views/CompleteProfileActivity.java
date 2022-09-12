@@ -2,6 +2,7 @@ package com.oho.oho.views;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,12 +26,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import gun0912.tedimagepicker.builder.TedImagePicker;
 import gun0912.tedimagepicker.builder.listener.OnSelectedListener;
 
-public class CompleteProfileActivity extends AppCompatActivity
-        implements
-        OnProfilePromptClickListener,
-        OnProfilePromptDeleteListener,
-        AddPromptListener,
-        SelectProfilePhotoListener {
+public class CompleteProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
     ActivityCompleteProfileBinding binding;
 
@@ -45,44 +41,24 @@ public class CompleteProfileActivity extends AppCompatActivity
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(binding.getRoot());
 
-        for(int i=0; i<5; i++)
-            profilePromptsList.add(new PromptAnswer(i,null,null,0,null,null));
-
-        adapter = new CompleteProfileAdapter(profilePromptsList,this,this, this,this,this);
-        binding.recyclerviewProfile.setLayoutManager(new LinearLayoutManager(this));
-        binding.recyclerviewProfile.setAdapter(adapter);
+        //set click listeners
+        binding.selectProfilePhoto.setOnClickListener(this);
     }
 
     @Override
-    public void onProfilePromptClick() {
-
-    }
-
-    @Override
-    public void onProfilePromptDelete(int id) {
-        profilePromptsList.remove(id);
-        adapter.notifyItemRemoved(id);
-    }
-
-    @Override
-    public void addPrompt() {
-        profilePromptsList.add(new PromptAnswer(0,null,null,0,null,null));
-        adapter.notifyItemInserted(profilePromptsList.size());
-    }
-
-    @Override
-    public void onSelectProfilePhoto(int id) {
-        TedImagePicker.with(this)
-                .title("Select Profile Photo")
-                .cameraTileImage(R.drawable.ic_camera_48dp)
-                .zoomIndicator(false)
-                .cameraTileBackground(R.color.black)
-                .start(new OnSelectedListener() {
-                    @Override
-                    public void onSelected(@NonNull Uri uri) {
-                        profilePromptsList.get(id).setImage(String.valueOf(uri));
-                        adapter.notifyItemChanged(id);
-                    }
-                });
+    public void onClick(View view) {
+        if (view.getId() == binding.selectProfilePhoto.getId()){
+            TedImagePicker.with(this)
+                    .title("Select Profile Photo")
+                    .cameraTileImage(R.drawable.ic_camera_48dp)
+                    .zoomIndicator(false)
+                    .cameraTileBackground(R.color.black)
+                    .start(new OnSelectedListener() {
+                        @Override
+                        public void onSelected(@NonNull Uri uri) {
+                            binding.profileImageView.setImageURI(uri);
+                        }
+                    });
+        }
     }
 }
