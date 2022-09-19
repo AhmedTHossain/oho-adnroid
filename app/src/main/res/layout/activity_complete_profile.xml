@@ -34,7 +34,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_centerInParent="true">
+        android:layout_below="@id/view"
+        android:layout_marginTop="@dimen/_20sdp">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,7 +47,7 @@
             android:textSize="@dimen/_18ssp"
             android:textStyle="bold" />
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/profile_image_view"
+            android:id="@+id/profile_image_view_landscape"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_200sdp"
             android:layout_marginStart="@dimen/_20sdp"
@@ -54,8 +55,19 @@
             android:layout_marginTop="@dimen/_15sdp"
             app:srcCompat="@drawable/ic_person"
             android:background="#0D000000"
-            android:scaleType="centerCrop"
-            app:shapeAppearanceOverlay="@style/roundedCornersImageView" />
+            app:shapeAppearanceOverlay="@style/roundedCornersImageView"
+            android:visibility="visible"/>
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/profile_image_view_portrait"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_400sdp"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            app:srcCompat="@drawable/ic_person"
+            android:background="#0D000000"
+            app:shapeAppearanceOverlay="@style/roundedCornersImageView"
+            android:visibility="gone"/>
         <TextView
             android:id="@+id/select_profile_photo"
             android:layout_width="match_parent"
@@ -64,10 +76,8 @@
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_20sdp"
-            android:layout_marginBottom="@dimen/_30sdp"
             android:background="@drawable/border_rounded_corner"
             android:clickable="true"
-            android:drawableEnd="@drawable/ic_arrow_forward"
             android:focusable="true"
             android:fontFamily="@font/darkergrotesque_bold"
             android:padding="@dimen/_10sdp"
@@ -75,7 +85,28 @@
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="@dimen/_18ssp"
-            app:drawableTint="@color/white" />
+            app:drawableTint="@color/white"
+            app:drawableEndCompat="@drawable/ic_arrow_forward" />
+        <TextView
+            android:id="@+id/upload_profile_photo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:background="@drawable/border_rounded_corner"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/darkergrotesque_bold"
+            android:padding="@dimen/_10sdp"
+            android:text="Upload"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_18ssp"
+            app:drawableTint="@color/white"
+            android:visibility="gone"
+            app:drawableEndCompat="@drawable/ic_upload" />
     </LinearLayout>
 
 </RelativeLayout>
