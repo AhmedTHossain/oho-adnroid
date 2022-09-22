@@ -205,8 +205,10 @@
         <entry key="..\:/Users/TanHos/Downloads/oho-adnroid/app/src/main/res/drawable/select_upload_image.xml" value="0.102" />
         <entry key="..\:/Users/TanHos/Downloads/oho-adnroid/app/src/main/res/layout/activity_complete_profile.xml" value="0.1" />
         <entry key="..\:/Users/TanHos/Downloads/oho-adnroid/app/src/main/res/layout/activity_cropper.xml" value="0.1890625" />
+        <entry key="..\:/Users/TanHos/Downloads/oho-adnroid/app/src/main/res/layout/activity_login.xml" value="0.16822916666666668" />
         <entry key="..\:/Users/TanHos/Downloads/oho-adnroid/app/src/main/res/layout/activity_registration.xml" value="0.2028301886792453" />
         <entry key="..\:/Users/TanHos/Downloads/oho-adnroid/app/src/main/res/layout/activity_update_profile.xml" value="0.16822916666666668" />
+        <entry key="..\:/Users/TanHos/Downloads/oho-adnroid/app/src/main/res/layout/row_add_profile_info.xml" value="0.1890625" />
       </map>
     </option>
   </component>

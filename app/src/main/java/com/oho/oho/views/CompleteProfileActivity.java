@@ -93,8 +93,11 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
 
             viewModel.uploadProfilePhoto(18, imageFile, CompleteProfileActivity.this);
             viewModel.ifUploaded.observe(this, uploadComplete -> {
-                if (uploadComplete)
+                if (uploadComplete) {
                     binding.uploadingProgress.setVisibility(View.GONE);
+                    binding.profilePhotoLayout.setVisibility(View.GONE);
+                    binding.bioLayout.setVisibility(View.VISIBLE);
+                }
             });
         }
     }
