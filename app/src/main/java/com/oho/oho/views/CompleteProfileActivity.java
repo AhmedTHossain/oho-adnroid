@@ -48,6 +48,7 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
     ActivityCompleteProfileBinding binding;
     private CompleteProfileViewModel viewModel;
     private Uri imageUri;
+    private File imageFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +71,7 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == binding.selectProfilePhoto.getId()){
+        if (view.getId() == binding.selectProfilePhoto.getId()) {
             TedImagePicker.with(this)
                     .title("Select Profile Photo")
                     .cameraTileImage(R.drawable.ic_camera_48dp)
@@ -93,19 +94,19 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
 //                            }
 //                            binding.uploadProfilePhoto.setVisibility(View.VISIBLE);
                             Intent intent = new Intent(CompleteProfileActivity.this, CropperActivity.class);
-                            intent.putExtra("DATA",imageUri.toString());
-                            startActivityForResult(intent,101);
+                            intent.putExtra("DATA", imageUri.toString());
+                            startActivityForResult(intent, 101);
                         }
                     });
         }
 
-        if (view.getId() == binding.uploadProfilePhoto.getId()){
-//            viewModel.uploadProfilePhoto();
+        if (view.getId() == binding.uploadProfilePhoto.getId()) {
+            viewModel.uploadProfilePhoto(18, imageFile, CompleteProfileActivity.this);
         }
     }
 
     // find selected/captured image aspect ratio for toggling the image views
-    public String findImageAspectRatio(Uri uri){
+    public String findImageAspectRatio(Uri uri) {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         try {
@@ -165,10 +166,10 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode==-1 && requestCode==101){
+        if (resultCode == -1 && requestCode == 101) {
             String result = data.getStringExtra("RESULT");
             Uri resultUri = null;
-            if (result != null){
+            if (result != null) {
                 resultUri = Uri.parse(result);
                 String aspectRatio = findImageAspectRatio(resultUri);
                 if (aspectRatio.equals("landscape")) {
@@ -181,6 +182,9 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
                     binding.profileImageViewPortrait.setVisibility(View.VISIBLE);
                 }
                 binding.uploadProfilePhoto.setVisibility(View.VISIBLE);
+
+                imageFile = new File(resultUri.getPath());
+
             }
         }
     }

@@ -66,6 +66,7 @@ public class CompleteProfileRepository {
         call.enqueue(new Callback<UploadProfilePhotoResponse>() {
             @Override
             public void onResponse(@NonNull Call<UploadProfilePhotoResponse> call, @NonNull Response<UploadProfilePhotoResponse> response) {
+                Log.d("CompleteProfileRepository", "respone code = "+response.code());
                 Toast.makeText(context, "Profile photo uploaded successfully!", Toast.LENGTH_SHORT).show();
 
                 SharedPreferences mPrefs = context.getSharedPreferences("pref",Context.MODE_PRIVATE);
@@ -77,7 +78,7 @@ public class CompleteProfileRepository {
 
             @Override
             public void onFailure(@NonNull Call<UploadProfilePhotoResponse> call, @NonNull Throwable t) {
-
+                Log.d("CompleteProfileRepository", "respone code = "+t.getMessage());
             }
         });
     }
