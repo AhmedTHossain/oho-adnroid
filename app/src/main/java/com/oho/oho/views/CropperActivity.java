@@ -41,13 +41,14 @@ public class CropperActivity extends AppCompatActivity {
         options.setCropFrameColor(getColor(R.color.black));
         options.setCropGridColor(getColor(R.color.black));
         options.setCropGridCornerColor(getColor(R.color.black));
-        options.setFreeStyleCropEnabled(true);
+//        options.setFreeStyleCropEnabled(true);
         options.setCropGridCornerColor(getColor(R.color.indicatioractive));
         options.setStatusBarColor(getColor(R.color.white));
         options.setActiveControlsWidgetColor(getColor(R.color.indicatioractive));
 
         UCrop.of(fileUri,Uri.fromFile(new File(getCacheDir(),dest_uri)))
                 .withOptions(options)
+                .withAspectRatio(1,1)
                 .withMaxResultSize(2000,2000)
                 .start(CropperActivity.this);
 

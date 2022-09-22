@@ -56,7 +56,8 @@ public class CompleteProfileRepository {
         return latestUserProfile;
     }
 
-    public void updateUserProfilePhoto(int id, File file, Context context){
+    public  MutableLiveData<Boolean> updateUserProfilePhoto(int id, File file, Context context){
+        MutableLiveData<Boolean> ifResponseReceived = new MutableLiveData<>();
         APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
 
         RequestBody user_id = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(id));
@@ -74,13 +75,19 @@ public class CompleteProfileRepository {
 
                 prefsEditor.putInt("profile_picture_id", response.body().getProfilePictureId());
                 prefsEditor.apply();
+
+                ifResponseReceived.setValue(true);
             }
 
             @Override
             public void onFailure(@NonNull Call<UploadProfilePhotoResponse> call, @NonNull Throwable t) {
                 Log.d("CompleteProfileRepository", "respone code = "+t.getMessage());
+
+                ifResponseReceived.setValue(true);
             }
         });
+
+        return ifResponseReceived;
     }
 
     public MutableLiveData<Integer> uploadUserPromptPhoto(int id, String captionText, File file, Context context){

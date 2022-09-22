@@ -81,18 +81,6 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
                         @Override
                         public void onSelected(@NonNull Uri uri) {
                             imageUri = uri;
-//                            Log.d("CompleteProfileActivity","image uri = "+uri);
-//                            String aspectRatio = findImageAspectRatio(uri);
-//                            if (aspectRatio.equals("landscape")) {
-//                                binding.profileImageViewLandscape.setVisibility(View.VISIBLE);
-//                                binding.profileImageViewLandscape.setImageURI(uri);
-//                                binding.profileImageViewPortrait.setVisibility(View.GONE);
-//                            } else {
-//                                binding.profileImageViewLandscape.setVisibility(View.GONE);
-//                                binding.profileImageViewPortrait.setImageURI(uri);
-//                                binding.profileImageViewPortrait.setVisibility(View.VISIBLE);
-//                            }
-//                            binding.uploadProfilePhoto.setVisibility(View.VISIBLE);
                             Intent intent = new Intent(CompleteProfileActivity.this, CropperActivity.class);
                             intent.putExtra("DATA", imageUri.toString());
                             startActivityForResult(intent, 101);
@@ -101,7 +89,13 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
         }
 
         if (view.getId() == binding.uploadProfilePhoto.getId()) {
+            binding.uploadingProgress.setVisibility(View.VISIBLE);
+
             viewModel.uploadProfilePhoto(18, imageFile, CompleteProfileActivity.this);
+            viewModel.ifUploaded.observe(this, uploadComplete -> {
+                if (uploadComplete)
+                    binding.uploadingProgress.setVisibility(View.GONE);
+            });
         }
     }
 
@@ -171,18 +165,8 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
             Uri resultUri = null;
             if (result != null) {
                 resultUri = Uri.parse(result);
-                String aspectRatio = findImageAspectRatio(resultUri);
-                if (aspectRatio.equals("landscape")) {
-                    binding.profileImageViewLandscape.setVisibility(View.VISIBLE);
-                    binding.profileImageViewLandscape.setImageURI(resultUri);
-                    binding.profileImageViewPortrait.setVisibility(View.GONE);
-                } else {
-                    binding.profileImageViewLandscape.setVisibility(View.GONE);
-                    binding.profileImageViewPortrait.setImageURI(resultUri);
-                    binding.profileImageViewPortrait.setVisibility(View.VISIBLE);
-                }
+                binding.profileImageViewPortrait.setImageURI(resultUri);
                 binding.uploadProfilePhoto.setVisibility(View.VISIBLE);
-
                 imageFile = new File(resultUri.getPath());
 
             }
