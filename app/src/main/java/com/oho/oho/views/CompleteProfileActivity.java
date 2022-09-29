@@ -33,6 +33,7 @@ import com.oho.oho.interfaces.SelectProfilePhotoListener;
 import com.oho.oho.models.Profile;
 import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.viewmodels.CompleteProfileViewModel;
+import com.oho.oho.views.prompt.PromptActivity;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -74,6 +75,9 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
         binding.selectProfilePhoto.setOnClickListener(this);
         binding.uploadProfilePhoto.setOnClickListener(this);
         binding.updateBio.setOnClickListener(this);
+        binding.textPromptQuestion1.setOnClickListener(this);
+        binding.textPromptQuestion2.setOnClickListener(this);
+        binding.textPromptQuestion3.setOnClickListener(this);
     }
 
     private void initViewModel() {
@@ -120,7 +124,7 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
 
         if (view.getId() == binding.updateBio.getId()) {
             binding.uploadingProgress.setVisibility(View.VISIBLE);
-            if (!TextUtils.isEmpty(binding.edittextAbout.getText())){
+            if (!TextUtils.isEmpty(binding.edittextAbout.getText())) {
                 String bioText = binding.edittextAbout.getText().toString();
 
                 Profile profile = new Profile();
@@ -137,7 +141,25 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
 
                 layoutVisible = "prompt";
             } else
-                Toast.makeText(CompleteProfileActivity.this,"Please enter a bio first!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(CompleteProfileActivity.this, "Please enter a bio first!", Toast.LENGTH_SHORT).show();
+        }
+
+        if (view.getId() == binding.textPromptQuestion1.getId()){
+            Intent intent = new Intent(CompleteProfileActivity.this, PromptActivity.class);
+            intent.putExtra("PROMPT_NO",1);
+            startActivity(intent);
+        }
+
+        if (view.getId() == binding.textPromptQuestion2.getId()){
+            Intent intent = new Intent(CompleteProfileActivity.this, PromptActivity.class);
+            intent.putExtra("PROMPT_NO",2);
+            startActivity(intent);
+        }
+
+        if (view.getId() == binding.textPromptQuestion3.getId()){
+            Intent intent = new Intent(CompleteProfileActivity.this, PromptActivity.class);
+            intent.putExtra("PROMPT_NO",3);
+            startActivity(intent);
         }
     }
 
