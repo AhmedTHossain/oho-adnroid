@@ -133,6 +133,9 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
                 binding.uploadingProgress.setVisibility(View.GONE);
                 binding.promptAnswerLayout.startAnimation(animShow);
                 binding.promptAnswerLayout.setVisibility(View.VISIBLE);
+
+
+                layoutVisible = "prompt";
             } else
                 Toast.makeText(CompleteProfileActivity.this,"Please enter a bio first!",Toast.LENGTH_SHORT).show();
         }
@@ -231,6 +234,13 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
                 binding.profilePhotoLayout.setVisibility(View.VISIBLE);
 
                 layoutVisible = "photo";
+                break;
+            case "prompt":
+                binding.promptAnswerLayout.setVisibility(View.GONE);
+                binding.bioLayout.startAnimation(animShow);
+                binding.bioLayout.setVisibility(View.VISIBLE);
+
+                layoutVisible = "bio";
                 break;
         }
     }
