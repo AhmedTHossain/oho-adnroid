@@ -79,7 +79,7 @@
             android:focusable="true"
             android:paddingTop="@dimen/_10sdp"
             android:paddingBottom="@dimen/_10sdp"
-            android:src="@drawable/photo_placeholder_3" />
+            android:src="@drawable/person" />
     </LinearLayout>
 
 </LinearLayout>

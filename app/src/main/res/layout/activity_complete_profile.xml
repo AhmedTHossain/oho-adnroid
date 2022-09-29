@@ -36,7 +36,7 @@
         android:layout_below="@id/view"
         android:layout_marginTop="@dimen/_20sdp"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <TextView
             android:layout_width="match_parent"
@@ -174,7 +174,7 @@
         android:layout_below="@id/view"
         android:layout_marginTop="@dimen/_20sdp"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -196,6 +196,33 @@
                     android:textSize="@dimen/_18ssp"
                     android:textStyle="bold" />
 
+                <LinearLayout
+                    android:id="@+id/button_edit_prompt1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/_20sdp"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:paddingEnd="@dimen/_5sdp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_gravity="end"
+                    android:background="@drawable/border_corner_left_gradient">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Edit"
+                        android:textSize="@dimen/_14ssp"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/darkergrotesque_bold"
+                        android:textColor="@color/white"
+                        android:layout_marginEnd="@dimen/_5sdp"/>
+                    <ImageView
+                        android:layout_width="@dimen/_24sdp"
+                        android:layout_height="@dimen/_24sdp"
+                        android:src="@drawable/ic_edit_profile_white"/>
+                </LinearLayout>
+
                 <TextView
                     android:id="@+id/text_prompt_question_1"
                     android:layout_width="match_parent"
@@ -212,23 +239,37 @@
                     android:clickable="true"
                     android:focusable="true"/>
 
-                <EditText
-                    android:id="@+id/text_prompt_answer_1"
-                    android:layout_width="match_parent"
+                <include
+                    layout="@layout/row_prompt_profile__left"
+                    android:id="@+id/prompt_answer_1"/>
+
+                <LinearLayout
+                    android:id="@+id/button_edit_prompt2"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_20sdp"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:paddingEnd="@dimen/_20sdp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_gravity="start"
                     android:layout_marginTop="@dimen/_15sdp"
-                    android:layout_marginEnd="@dimen/_20sdp"
-                    android:background="@drawable/border_drawable"
-                    android:fontFamily="@font/ptsans_regular"
-                    android:gravity="top"
-                    android:hint="Enter your answer"
-                    android:inputType="textMultiLine"
-                    android:lines="5"
-                    android:padding="@dimen/_10sdp"
-                    android:scrollbars="vertical"
-                    android:textColor="@color/textSubTitle"
-                    android:textSize="@dimen/_14ssp" />
+                    android:background="@drawable/brder_corner_right_gradient">
+                    <ImageView
+                        android:layout_width="@dimen/_24sdp"
+                        android:layout_height="@dimen/_24sdp"
+                        android:src="@drawable/ic_edit_profile_white"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Edit"
+                        android:textSize="@dimen/_14ssp"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/darkergrotesque_bold"
+                        android:textColor="@color/white"
+                        android:layout_marginStart="@dimen/_5sdp"/>
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/text_prompt_question_2"
@@ -241,28 +282,42 @@
                     android:drawableEnd="@drawable/ic_arrow_right"
                     android:fontFamily="@font/ptsans_regular"
                     android:padding="@dimen/_10sdp"
-                    android:text="Tap to select your first prompt"
+                    android:text="Tap to select your second prompt"
                     android:textSize="@dimen/_14ssp"
                     android:clickable="true"
                     android:focusable="true"/>
 
-                <EditText
-                    android:id="@+id/text_prompt_answer_2"
-                    android:layout_width="match_parent"
+                <include
+                    layout="@layout/row_prompt_profile_right"
+                    android:id="@+id/prompt_answer_2"/>
+
+                <LinearLayout
+                    android:id="@+id/button_edit_prompt3"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_20sdp"
+                    android:paddingStart="@dimen/_20sdp"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:paddingEnd="@dimen/_5sdp"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:layout_marginTop="@dimen/_15sdp"
-                    android:layout_marginEnd="@dimen/_20sdp"
-                    android:background="@drawable/border_drawable"
-                    android:fontFamily="@font/ptsans_regular"
-                    android:gravity="top"
-                    android:hint="Enter your answer"
-                    android:inputType="textMultiLine"
-                    android:lines="5"
-                    android:padding="@dimen/_10sdp"
-                    android:scrollbars="vertical"
-                    android:textColor="@color/textSubTitle"
-                    android:textSize="@dimen/_14ssp" />
+                    android:layout_gravity="end"
+                    android:background="@drawable/border_corner_left_gradient">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Edit"
+                        android:textSize="@dimen/_14ssp"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/darkergrotesque_bold"
+                        android:textColor="@color/white"
+                        android:layout_marginEnd="@dimen/_5sdp"/>
+                    <ImageView
+                        android:layout_width="@dimen/_24sdp"
+                        android:layout_height="@dimen/_24sdp"
+                        android:src="@drawable/ic_edit_profile_white"/>
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/text_prompt_question_3"
@@ -275,29 +330,14 @@
                     android:drawableEnd="@drawable/ic_arrow_right"
                     android:fontFamily="@font/ptsans_regular"
                     android:padding="@dimen/_10sdp"
-                    android:text="Tap to select your first prompt"
+                    android:text="Tap to select your third prompt"
                     android:textSize="@dimen/_14ssp"
                     android:clickable="true"
                     android:focusable="true"/>
 
-                <EditText
-                    android:id="@+id/text_prompt_answer_3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_20sdp"
-                    android:layout_marginTop="@dimen/_15sdp"
-                    android:layout_marginEnd="@dimen/_20sdp"
-                    android:background="@drawable/border_drawable"
-                    android:fontFamily="@font/ptsans_regular"
-                    android:gravity="top"
-                    android:hint="Enter your answer"
-                    android:inputType="textMultiLine"
-                    android:lines="5"
-                    android:padding="@dimen/_10sdp"
-                    android:scrollbars="vertical"
-                    android:textColor="@color/textSubTitle"
-                    android:textSize="@dimen/_14ssp"
-                    android:layout_marginBottom="@dimen/_15sdp"/>
+                <include
+                    layout="@layout/row_prompt_profile__left"
+                    android:id="@+id/prompt_answer_3"/>
 
                 <TextView
                     android:id="@+id/upload_prompt"
@@ -305,7 +345,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="@dimen/_20sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:layout_marginEnd="@dimen/_20sdp"
                     android:background="@drawable/border_rounded_corner"
                     android:clickable="true"

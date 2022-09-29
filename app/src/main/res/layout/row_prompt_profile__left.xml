@@ -64,7 +64,7 @@
             android:focusable="true"
             android:paddingTop="@dimen/_10sdp"
             android:paddingBottom="@dimen/_10sdp"
-            android:src="@drawable/photo_placeholder_1" />
+            android:src="@drawable/person" />
 
         <TextView
             android:id="@+id/text_caption"
