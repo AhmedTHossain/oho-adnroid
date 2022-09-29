@@ -7,8 +7,12 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
@@ -26,6 +30,7 @@ import com.oho.oho.interfaces.AddPromptListener;
 import com.oho.oho.interfaces.OnProfilePromptClickListener;
 import com.oho.oho.interfaces.OnProfilePromptDeleteListener;
 import com.oho.oho.interfaces.SelectProfilePhotoListener;
+import com.oho.oho.models.Profile;
 import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.viewmodels.CompleteProfileViewModel;
 
@@ -49,6 +54,8 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
     private CompleteProfileViewModel viewModel;
     private Uri imageUri;
     private File imageFile;
+    private String layoutVisible = "";
+    private Animation animShow, animHide;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +65,15 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(binding.getRoot());
 
+        animShow = AnimationUtils.loadAnimation(this, R.anim.view_show);
+        animHide = AnimationUtils.loadAnimation(this, R.anim.view_hide);
+
         initViewModel();
 
         //set click listeners
         binding.selectProfilePhoto.setOnClickListener(this);
         binding.uploadProfilePhoto.setOnClickListener(this);
+        binding.updateBio.setOnClickListener(this);
     }
 
     private void initViewModel() {
@@ -95,10 +106,30 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
             viewModel.ifUploaded.observe(this, uploadComplete -> {
                 if (uploadComplete) {
                     binding.uploadingProgress.setVisibility(View.GONE);
+
+//                    binding.profilePhotoLayout.startAnimation(animHide);
                     binding.profilePhotoLayout.setVisibility(View.GONE);
+
+                    binding.bioLayout.startAnimation(animShow);
                     binding.bioLayout.setVisibility(View.VISIBLE);
+
+                    layoutVisible = "bio";
                 }
             });
+        }
+
+        if (view.getId() == binding.updateBio.getId()) {
+            binding.uploadingProgress.setVisibility(View.VISIBLE);
+            if (!TextUtils.isEmpty(binding.edittextAbout.getText())){
+                String bioText = binding.edittextAbout.getText().toString();
+
+                Profile profile = new Profile();
+                profile.setId(18);
+                profile.setBio(bioText);
+
+                viewModel.updateBio(profile);
+            } else
+                Toast.makeText(CompleteProfileActivity.this,"Please enter a bio first!",Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -169,10 +200,33 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
             if (result != null) {
                 resultUri = Uri.parse(result);
                 binding.profileImageViewPortrait.setImageURI(resultUri);
+                binding.uploadProfilePhoto.startAnimation(animShow);
                 binding.uploadProfilePhoto.setVisibility(View.VISIBLE);
                 imageFile = new File(resultUri.getPath());
-
             }
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        switch (layoutVisible) {
+            case "photo":
+                super.onBackPressed();
+                break;
+            case "bio":
+//                binding.bioLayout.startAnimation(animHide);
+                binding.bioLayout.setVisibility(View.GONE);
+                binding.profilePhotoLayout.startAnimation(animShow);
+                binding.profilePhotoLayout.setVisibility(View.VISIBLE);
+
+                layoutVisible = "photo";
+                break;
         }
     }
 }

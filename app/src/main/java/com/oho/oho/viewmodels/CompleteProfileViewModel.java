@@ -8,6 +8,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.google.firebase.auth.FirebaseUser;
+import com.oho.oho.models.Profile;
 import com.oho.oho.repositories.CompleteProfileRepository;
 
 import java.io.File;
@@ -25,5 +26,9 @@ public class CompleteProfileViewModel extends AndroidViewModel {
 
     public void uploadProfilePhoto(int user_id, File file, Context context){
         ifUploaded = repository.updateUserProfilePhoto(user_id, file, getApplication().getApplicationContext());
+    }
+
+    public void updateBio(Profile profile){
+        repository.updateUserBio(profile,getApplication().getApplicationContext());
     }
 }
