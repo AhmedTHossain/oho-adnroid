@@ -28,6 +28,7 @@
         android:layout_below="@id/screentitle"
         android:background="#1A000000" />
 
+    <!-- Upload photo layout -->
     <LinearLayout
         android:id="@+id/profile_photo_layout"
         android:layout_width="match_parent"
@@ -52,12 +53,12 @@
             android:id="@+id/profile_image_view_portrait"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_250sdp"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:background="#0D000000"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:layout_marginEnd="@dimen/_20sdp"
             android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
             android:adjustViewBounds="true"
+            android:background="#0D000000"
             android:scaleType="centerCrop"
             app:shapeAppearanceOverlay="@style/roundedCornersImageView"
             app:srcCompat="@drawable/ic_person" />
@@ -104,6 +105,7 @@
             app:drawableTint="@color/white" />
     </LinearLayout>
 
+    <!-- Update bio layout -->
     <LinearLayout
         android:id="@+id/bio_layout"
         android:layout_width="match_parent"
@@ -128,17 +130,17 @@
             android:id="@+id/edittext_about"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_15sdp"
             android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:layout_marginEnd="@dimen/_20sdp"
             android:background="@drawable/border_drawable"
             android:fontFamily="@font/ptsans_regular"
             android:gravity="top"
+            android:hint="Write something about yourself"
             android:inputType="textMultiLine"
             android:lines="5"
             android:padding="@dimen/_10sdp"
             android:scrollbars="vertical"
-            android:hint="Write something about yourself"
             android:textColor="@color/textSubTitle"
             android:textSize="@dimen/_14ssp" />
 
@@ -164,17 +166,176 @@
 
     </LinearLayout>
 
+    <!-- Upload prompt layout -->
+    <LinearLayout
+        android:id="@+id/prompt_answer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/view"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:fontFamily="@font/darkergrotesque_regular"
+                    android:text="Select &amp; answer 3 prompt questions for your profile"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_18ssp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/text_prompt_question_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:background="@drawable/border_drawable"
+                    android:drawableEnd="@drawable/ic_arrow_right"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:padding="@dimen/_10sdp"
+                    android:text="Tap to select your first prompt"
+                    android:textSize="@dimen/_14ssp"
+                    android:clickable="true"
+                    android:focusable="true"/>
+
+                <EditText
+                    android:id="@+id/text_prompt_answer_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:background="@drawable/border_drawable"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:gravity="top"
+                    android:hint="Enter your answer"
+                    android:inputType="textMultiLine"
+                    android:lines="5"
+                    android:padding="@dimen/_10sdp"
+                    android:scrollbars="vertical"
+                    android:textColor="@color/textSubTitle"
+                    android:textSize="@dimen/_14ssp" />
+
+                <TextView
+                    android:id="@+id/text_prompt_question_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:background="@drawable/border_drawable"
+                    android:drawableEnd="@drawable/ic_arrow_right"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:padding="@dimen/_10sdp"
+                    android:text="Tap to select your first prompt"
+                    android:textSize="@dimen/_14ssp"
+                    android:clickable="true"
+                    android:focusable="true"/>
+
+                <EditText
+                    android:id="@+id/text_prompt_answer_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:background="@drawable/border_drawable"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:gravity="top"
+                    android:hint="Enter your answer"
+                    android:inputType="textMultiLine"
+                    android:lines="5"
+                    android:padding="@dimen/_10sdp"
+                    android:scrollbars="vertical"
+                    android:textColor="@color/textSubTitle"
+                    android:textSize="@dimen/_14ssp" />
+
+                <TextView
+                    android:id="@+id/text_prompt_question_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:background="@drawable/border_drawable"
+                    android:drawableEnd="@drawable/ic_arrow_right"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:padding="@dimen/_10sdp"
+                    android:text="Tap to select your first prompt"
+                    android:textSize="@dimen/_14ssp"
+                    android:clickable="true"
+                    android:focusable="true"/>
+
+                <EditText
+                    android:id="@+id/text_prompt_answer_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:background="@drawable/border_drawable"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:gravity="top"
+                    android:hint="Enter your answer"
+                    android:inputType="textMultiLine"
+                    android:lines="5"
+                    android:padding="@dimen/_10sdp"
+                    android:scrollbars="vertical"
+                    android:textColor="@color/textSubTitle"
+                    android:textSize="@dimen/_14ssp"
+                    android:layout_marginBottom="@dimen/_15sdp"/>
+
+                <TextView
+                    android:id="@+id/upload_prompt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:background="@drawable/border_rounded_corner"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/darkergrotesque_bold"
+                    android:padding="@dimen/_10sdp"
+                    android:text="Upload"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_18ssp"
+                    android:visibility="visible"
+                    app:drawableEndCompat="@drawable/ic_upload"
+                    app:drawableTint="@color/white"
+                    android:layout_marginBottom="@dimen/_15sdp"/>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+
     <com.github.ybq.android.spinkit.SpinKitView
         android:id="@+id/uploading_progress"
         style="@style/SpinKitView.Large.Circle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:SpinKit_Color="@color/indicatioractive"
-        android:layout_centerHorizontal="true"
-        android:elevation="@dimen/_10sdp"
-        android:layout_gravity="center"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:elevation="@dimen/_10sdp"
         android:visibility="gone"
-        android:layout_marginBottom="@dimen/_20sdp"/>
+        app:SpinKit_Color="@color/indicatioractive" />
 
 </RelativeLayout>

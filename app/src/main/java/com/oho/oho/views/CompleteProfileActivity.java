@@ -128,6 +128,11 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
                 profile.setBio(bioText);
 
                 viewModel.updateBio(profile);
+                binding.bioLayout.setVisibility(View.GONE);
+
+                binding.uploadingProgress.setVisibility(View.GONE);
+                binding.promptAnswerLayout.startAnimation(animShow);
+                binding.promptAnswerLayout.setVisibility(View.VISIBLE);
             } else
                 Toast.makeText(CompleteProfileActivity.this,"Please enter a bio first!",Toast.LENGTH_SHORT).show();
         }
