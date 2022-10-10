@@ -135,10 +135,12 @@ public class PromptActivity extends AppCompatActivity implements OnPromptQuestio
                 buttonUpdatePhoto.setVisibility(View.VISIBLE);
                 buttonUpdatePhoto.setAnimation(animShow);
 
+                titleText.setText("Photo");
+
                 if (getIntent().getBooleanExtra("NEW",false))
                     binding.textSelectPrompImageButton.setText("Select/capture new prompt photo");
                 else
-                    uploadPromptButton.setVisibility(View.VISIBLE);
+                    binding.layoutPromptPicture.setVisibility(View.VISIBLE);
             }
         });
 
