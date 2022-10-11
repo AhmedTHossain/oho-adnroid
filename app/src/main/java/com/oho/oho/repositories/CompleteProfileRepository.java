@@ -45,7 +45,7 @@ public class CompleteProfileRepository {
         });
     }
 
-    public  MutableLiveData<Boolean> updateUserProfilePhoto(int id, File file, Context context){
+    public MutableLiveData<Boolean> updateUserProfilePhoto(int id, File file, Context context){
         MutableLiveData<Boolean> ifResponseReceived = new MutableLiveData<>();
         APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
 
@@ -72,7 +72,7 @@ public class CompleteProfileRepository {
             public void onFailure(@NonNull Call<UploadProfilePhotoResponse> call, @NonNull Throwable t) {
                 Log.d("CompleteProfileRepository", "respone code = "+t.getMessage());
 
-                ifResponseReceived.setValue(true);
+                ifResponseReceived.setValue(false);
             }
         });
 

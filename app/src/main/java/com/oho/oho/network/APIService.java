@@ -47,8 +47,9 @@ public interface APIService {
     Call<List<UploadPromptPhotoResponse>> uploadPromptPhoto(@Part("user_id") RequestBody user_id, @Part("caption") RequestBody caption, @Part MultipartBody.Part file);
 
     // for uploading user prompts
+    @Multipart
     @POST("users/prompt_answer/add")
-    Call<String> uploadPrompt(@Body ArrayList<PromptAnswer> promptAnswer);
+    Call<PromptAnswer> uploadPromptAnswer(@Part("prompt") RequestBody prompt, @Part("answer") RequestBody answer, @Part("user_id") RequestBody user_id, @Part("caption") RequestBody caption, @Part MultipartBody.Part image);
 
     // for adding/updating user availability
     @POST("users/availability/add")

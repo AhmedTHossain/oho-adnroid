@@ -1,5 +1,6 @@
 package com.oho.oho.views.prompt;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,6 +19,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.oho.oho.R;
 import com.oho.oho.adapters.PromptAdapter;
@@ -25,9 +27,12 @@ import com.oho.oho.databinding.ActivityPromptBinding;
 import com.oho.oho.interfaces.OnPromptQuestionSelectedListener;
 import com.oho.oho.models.Prompt;
 import com.oho.oho.viewmodels.PromptViewModel;
+import com.oho.oho.views.CompleteProfileActivity;
+import com.oho.oho.views.CropperActivity;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import gun0912.tedimagepicker.builder.TedImagePicker;
@@ -44,6 +49,8 @@ public class PromptActivity extends AppCompatActivity implements OnPromptQuestio
     private Animation animShow, animHide;
 
     private PromptViewModel promptViewModel;
+    private File imageFile;
+    private Uri imageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,11 +163,30 @@ public class PromptActivity extends AppCompatActivity implements OnPromptQuestio
                             @Override
                             public void onSelected(@NotNull Uri uri) {
 //                            showSingleImage(uri);
-                                binding.photoImageView.setImageURI(uri);
-                                uploadPromptButton.startAnimation(animShow);
-                                uploadPromptButton.setVisibility(View.VISIBLE);
+//                                binding.photoImageView.setImageURI(uri);
+//                                uploadPromptButton.startAnimation(animShow);
+//                                uploadPromptButton.setVisibility(View.VISIBLE);
+
+                                imageUri = uri;
+
+                                Intent intent = new Intent(PromptActivity.this, CropperActivity.class);
+                                intent.putExtra("DATA", imageUri.toString());
+                                startActivityForResult(intent, 101);
                             }
                         });
+            }
+        });
+
+        uploadPromptButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                promptViewModel.uploadPromptAnswer(binding.textQuestion.getText().toString(),binding.edittextAnswerPrompt.getText().toString(),18,binding.edittextCaption.getText().toString(),imageFile);
+                promptViewModel.ifUploaded.observe(PromptActivity.this, uploadComplete -> {
+                    if (uploadComplete){
+                        Toast.makeText(PromptActivity.this,"Prompt uploaded successfully",Toast.LENGTH_SHORT).show();
+                    } else
+                        Toast.makeText(PromptActivity.this,"Prompt upload Failed!",Toast.LENGTH_SHORT).show();
+                });
             }
         });
     }
@@ -222,6 +248,22 @@ public class PromptActivity extends AppCompatActivity implements OnPromptQuestio
 
             answerLayout.startAnimation(animShow);
             answerLayout.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == -1 && requestCode == 101) {
+            String result = data.getStringExtra("RESULT");
+            Uri resultUri = null;
+            if (result != null) {
+                resultUri = Uri.parse(result);
+                binding.photoImageView.setImageURI(resultUri);
+                uploadPromptButton.startAnimation(animShow);
+                uploadPromptButton.setVisibility(View.VISIBLE);
+                imageFile = new File(resultUri.getPath());
+            }
         }
     }
 }
