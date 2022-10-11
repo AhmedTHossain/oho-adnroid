@@ -133,7 +133,7 @@ public class PromptActivity extends AppCompatActivity implements OnPromptQuestio
             public void onClick(View v) {
                 answerText.setVisibility(View.GONE);
                 answerText.startAnimation(animHide);
-                answerText.setText(null);
+//                answerText.setText(null);
                 answerText.clearFocus();
 
                 answerLayout.setVisibility(View.GONE);
@@ -148,6 +148,8 @@ public class PromptActivity extends AppCompatActivity implements OnPromptQuestio
                     binding.textSelectPrompImageButton.setText("Select/capture new prompt photo");
                 else
                     binding.layoutPromptPicture.setVisibility(View.VISIBLE);
+
+                saveAnswerButton.setVisibility(View.GONE);
             }
         });
 
@@ -180,7 +182,7 @@ public class PromptActivity extends AppCompatActivity implements OnPromptQuestio
         uploadPromptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                promptViewModel.uploadPromptAnswer(binding.textQuestion.getText().toString(),binding.edittextAnswerPrompt.getText().toString(),18,binding.edittextCaption.getText().toString(),imageFile);
+                promptViewModel.uploadPromptAnswer(binding.textQuestion.getText().toString(),answerText.getText().toString(),18,binding.edittextCaption.getText().toString(),imageFile);
                 promptViewModel.ifUploaded.observe(PromptActivity.this, uploadComplete -> {
                     if (uploadComplete){
                         Toast.makeText(PromptActivity.this,"Prompt uploaded successfully",Toast.LENGTH_SHORT).show();
