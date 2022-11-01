@@ -3,6 +3,8 @@ package com.oho.oho.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class Profile {
     @SerializedName("age")
     @Expose
@@ -67,6 +69,9 @@ public class Profile {
     @SerializedName("vaccinated")
     @Expose
     private String vaccinated;
+    @SerializedName("prompts")
+    @Expose
+    private List<PromptAnswer> promptList;
 
     public Profile() {
     }
@@ -237,5 +242,13 @@ public class Profile {
 
     public void setCuisine(String cuisine) {
         this.cuisine = cuisine;
+    }
+
+    public List<PromptAnswer> getPromptList() {
+        return promptList;
+    }
+
+    public void setPromptList(List<PromptAnswer> promptList) {
+        this.promptList = promptList;
     }
 }

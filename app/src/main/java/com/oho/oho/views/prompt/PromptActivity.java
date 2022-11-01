@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
@@ -21,11 +22,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.oho.oho.R;
 import com.oho.oho.adapters.PromptAdapter;
 import com.oho.oho.databinding.ActivityPromptBinding;
 import com.oho.oho.interfaces.OnPromptQuestionSelectedListener;
+import com.oho.oho.models.Profile;
 import com.oho.oho.models.Prompt;
+import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.viewmodels.PromptViewModel;
 import com.oho.oho.views.CompleteProfileActivity;
 import com.oho.oho.views.CropperActivity;
@@ -182,10 +186,35 @@ public class PromptActivity extends AppCompatActivity implements OnPromptQuestio
         uploadPromptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("PromptActivity","image uri in onCLick() = "+imageUri);
+
                 promptViewModel.uploadPromptAnswer(binding.textQuestion.getText().toString(),answerText.getText().toString(),18,binding.edittextCaption.getText().toString(),imageFile);
                 promptViewModel.ifUploaded.observe(PromptActivity.this, uploadComplete -> {
                     if (uploadComplete){
                         Toast.makeText(PromptActivity.this,"Prompt uploaded successfully",Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(PromptActivity.this,CompleteProfileActivity.class);
+
+//                        int promp_no = getIntent().getIntExtra("PROMPT_NO",0);
+//                        intent.putExtra("PROMPT_NO", promp_no);
+//                        intent.putExtra("URI",imageUri.toString());
+//                        intent.putExtra("PROMPT_TEXT", binding.textQuestion.getText().toString());
+//                        intent.putExtra("PROMPT_ANSWER", answerText.getText().toString());
+
+                        PromptAnswer promptAnswer = new PromptAnswer();
+                        promptAnswer.setPrompt(binding.textQuestion.getText().toString());
+                        promptAnswer.setAnswer(answerText.getText().toString());
+                        promptAnswer.setImage(imageUri.toString());
+                        promptAnswer.setCaption(binding.edittextCaption.getText().toString());
+
+                        SharedPreferences mPrefs = getPreferences(MODE_PRIVATE);
+                        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                        Gson gson = new Gson();
+                        String json = gson.toJson(promptAnswer);
+                        prefsEditor.putString("PromptAnswer", json);
+                        prefsEditor.commit();
+
+                        startActivity(intent);
+                        finish();
                     } else
                         Toast.makeText(PromptActivity.this,"Prompt upload Failed!",Toast.LENGTH_SHORT).show();
                 });
@@ -265,6 +294,8 @@ public class PromptActivity extends AppCompatActivity implements OnPromptQuestio
                 uploadPromptButton.startAnimation(animShow);
                 uploadPromptButton.setVisibility(View.VISIBLE);
                 imageFile = new File(resultUri.getPath());
+
+                imageUri = resultUri;
             }
         }
     }

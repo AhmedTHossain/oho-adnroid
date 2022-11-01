@@ -9,14 +9,19 @@ import androidx.lifecycle.LiveData;
 
 import com.google.firebase.auth.FirebaseUser;
 import com.oho.oho.models.Profile;
+import com.oho.oho.models.Prompt;
 import com.oho.oho.repositories.CompleteProfileRepository;
 
 import java.io.File;
+import java.util.List;
 
 public class CompleteProfileViewModel extends AndroidViewModel {
 
     private CompleteProfileRepository repository;
     public LiveData<Boolean> ifUploaded;
+    public LiveData<Boolean> ifBioUpdated;
+
+    public Profile userProfile;
 
     public CompleteProfileViewModel(@NonNull Application application) {
         super(application);
@@ -29,6 +34,14 @@ public class CompleteProfileViewModel extends AndroidViewModel {
     }
 
     public void updateBio(Profile profile){
-        repository.updateUserBio(profile,getApplication().getApplicationContext());
+        ifBioUpdated = repository.updateUserBio(profile,getApplication().getApplicationContext());
+    }
+
+    public void setUserProfile(Profile profile){
+        userProfile = profile;
+    }
+
+    public Profile getUserProfile(){
+        return userProfile;
     }
 }

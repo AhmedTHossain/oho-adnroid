@@ -27,39 +27,41 @@ import retrofit2.Response;
 
 public class CompleteProfileRepository {
 
-    public void updateUserBio(Profile updatedUserProfile, Context context){
+    public MutableLiveData<Boolean> updateUserBio(Profile updatedUserProfile, Context context) {
         MutableLiveData<Profile> userProfile = new MutableLiveData<>();
-
+        MutableLiveData<Boolean> ifResponseReceived = new MutableLiveData<>();
         APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
         Call<Profile> call = apiService.updateUser(updatedUserProfile);
         call.enqueue(new Callback<Profile>() {
             @Override
             public void onResponse(@NonNull Call<Profile> call, @NonNull Response<Profile> response) {
                 Toast.makeText(context, "Bio updated successfully!", Toast.LENGTH_SHORT).show();
+                ifResponseReceived.setValue(true);
             }
 
             @Override
             public void onFailure(@NonNull Call<Profile> call, @NonNull Throwable t) {
-
+                ifResponseReceived.setValue(false);
             }
         });
+        return ifResponseReceived;
     }
 
-    public MutableLiveData<Boolean> updateUserProfilePhoto(int id, File file, Context context){
+    public MutableLiveData<Boolean> updateUserProfilePhoto(int id, File file, Context context) {
         MutableLiveData<Boolean> ifResponseReceived = new MutableLiveData<>();
         APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
 
         RequestBody user_id = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(id));
         MultipartBody.Part filePart = MultipartBody.Part.createFormData("file", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
 
-        Call<UploadProfilePhotoResponse> call = apiService.uploadProfilePhoto(user_id,filePart);
+        Call<UploadProfilePhotoResponse> call = apiService.uploadProfilePhoto(user_id, filePart);
         call.enqueue(new Callback<UploadProfilePhotoResponse>() {
             @Override
             public void onResponse(@NonNull Call<UploadProfilePhotoResponse> call, @NonNull Response<UploadProfilePhotoResponse> response) {
-                Log.d("CompleteProfileRepository", "respone code = "+response.code());
-                Toast.makeText(context, "Profile photo uploaded successfully!", Toast.LENGTH_SHORT).show();
+                Log.d("CompleteProfileRepository", "respone code = " + response.code());
+//                Toast.makeText(context, "Profile photo uploaded successfully!", Toast.LENGTH_SHORT).show();
 
-                SharedPreferences mPrefs = context.getSharedPreferences("pref",Context.MODE_PRIVATE);
+                SharedPreferences mPrefs = context.getSharedPreferences("pref", Context.MODE_PRIVATE);
                 SharedPreferences.Editor prefsEditor = mPrefs.edit();
 
                 prefsEditor.putInt("profile_picture_id", response.body().getProfilePictureId());
@@ -70,7 +72,7 @@ public class CompleteProfileRepository {
 
             @Override
             public void onFailure(@NonNull Call<UploadProfilePhotoResponse> call, @NonNull Throwable t) {
-                Log.d("CompleteProfileRepository", "respone code = "+t.getMessage());
+                Log.d("CompleteProfileRepository", "respone code = " + t.getMessage());
 
                 ifResponseReceived.setValue(false);
             }
@@ -79,7 +81,7 @@ public class CompleteProfileRepository {
         return ifResponseReceived;
     }
 
-    public MutableLiveData<Integer> uploadUserPromptPhoto(int id, String captionText, File file, Context context){
+    public MutableLiveData<Integer> uploadUserPromptPhoto(int id, String captionText, File file, Context context) {
 
         MutableLiveData<Integer> uploadedPhotoId = new MutableLiveData<>();
         APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
@@ -87,12 +89,12 @@ public class CompleteProfileRepository {
         RequestBody caption = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(captionText));
         MultipartBody.Part filePart = MultipartBody.Part.createFormData("file", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
 
-        Call<List<UploadPromptPhotoResponse>> call = apiService.uploadPromptPhoto(user_id,caption,filePart);
+        Call<List<UploadPromptPhotoResponse>> call = apiService.uploadPromptPhoto(user_id, caption, filePart);
         call.enqueue(new Callback<List<UploadPromptPhotoResponse>>() {
             @Override
             public void onResponse(@NonNull Call<List<UploadPromptPhotoResponse>> call, @NonNull Response<List<UploadPromptPhotoResponse>> response) {
-                Log.d("CompleteProfileRepository","CompleteProfileRepository called = YES");
-                Toast.makeText(context, "Photo uploaded successfully! and photo id = "+response.body().get(0).getPictureId(), Toast.LENGTH_SHORT).show();
+                Log.d("CompleteProfileRepository", "CompleteProfileRepository called = YES");
+                Toast.makeText(context, "Photo uploaded successfully! and photo id = " + response.body().get(0).getPictureId(), Toast.LENGTH_SHORT).show();
                 uploadedPhotoId.setValue(response.body().get(0).getPictureId());
             }
 
