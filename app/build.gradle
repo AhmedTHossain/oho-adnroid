@@ -42,6 +42,7 @@ android {
             enabled = true
         }
     }
+    namespace 'com.oho.oho'
 }
 
 dependencies {
