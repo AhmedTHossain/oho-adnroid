@@ -194,11 +194,7 @@ public class PromptActivity extends AppCompatActivity implements OnPromptQuestio
                         Toast.makeText(PromptActivity.this,"Prompt uploaded successfully",Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(PromptActivity.this,CompleteProfileActivity.class);
 
-//                        int promp_no = getIntent().getIntExtra("PROMPT_NO",0);
-//                        intent.putExtra("PROMPT_NO", promp_no);
-//                        intent.putExtra("URI",imageUri.toString());
-//                        intent.putExtra("PROMPT_TEXT", binding.textQuestion.getText().toString());
-//                        intent.putExtra("PROMPT_ANSWER", answerText.getText().toString());
+                        int promp_no = getIntent().getIntExtra("PROMPT_NO",0);
 
                         PromptAnswer promptAnswer = new PromptAnswer();
                         promptAnswer.setPrompt(binding.textQuestion.getText().toString());
@@ -206,13 +202,26 @@ public class PromptActivity extends AppCompatActivity implements OnPromptQuestio
                         promptAnswer.setImage(imageUri.toString());
                         promptAnswer.setCaption(binding.edittextCaption.getText().toString());
 
-                        SharedPreferences mPrefs = getPreferences(MODE_PRIVATE);
-                        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+//                        SharedPreferences mPrefs = getPreferences(MODE_PRIVATE);
+
+                        SharedPreferences.Editor prefsEditor = getSharedPreferences("PROMPT_PREF", MODE_PRIVATE).edit();
+
+//                        SharedPreferences.Editor prefsEditor = mPrefs.edit();
                         Gson gson = new Gson();
                         String json = gson.toJson(promptAnswer);
-                        prefsEditor.putString("PromptAnswer", json);
-                        prefsEditor.commit();
+                        switch (promp_no){
+                            case 1:
+                                prefsEditor.putString("PromptAnswer1", json);
+                                break;
+                            case 2:
+                                prefsEditor.putString("PromptAnswer2", json);
+                                break;
+                            case 3:
+                                prefsEditor.putString("PromptAnswer3", json);
+                                break;
+                        }
 
+                        prefsEditor.commit();
                         startActivity(intent);
                         finish();
                     } else

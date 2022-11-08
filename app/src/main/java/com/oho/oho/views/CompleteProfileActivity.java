@@ -333,45 +333,32 @@ public class CompleteProfileActivity extends AppCompatActivity implements View.O
     protected void onResume() {
         super.onResume();
 
-        SharedPreferences mPrefs = getPreferences(MODE_PRIVATE);
+        SharedPreferences mPrefs = getSharedPreferences("PROMPT_PREF", MODE_PRIVATE);
+
         Gson gson = new Gson();
-        String json = mPrefs.getString("PromptAnswer", "");
-        PromptAnswer promptAnswer = gson.fromJson(json, PromptAnswer.class);
+        String json1 = mPrefs.getString("PromptAnswer1", "");
+        PromptAnswer promptAnswer1 = gson.fromJson(json1, PromptAnswer.class);
 
-        Profile profile = new Profile();
-        profile = viewModel.getUserProfile();
+        String json2 = mPrefs.getString("PromptAnswer2", "");
+        PromptAnswer promptAnswer2 = gson.fromJson(json2, PromptAnswer.class);
 
-        List<PromptAnswer> promptAnswerList = viewModel.getUserProfile().getPromptList();
-        promptAnswerList.add(promptAnswer);
-        profile.setPromptList(promptAnswerList);
-        viewModel.setUserProfile(profile);
+        String json3 = mPrefs.getString("PromptAnswer3", "");
+        PromptAnswer promptAnswer3 = gson.fromJson(json3, PromptAnswer.class);
 
-        int promp_no = getIntent().getIntExtra("PROMPT_NO",0);
-        String uri = getIntent().getStringExtra("URI");
-        String prompt = getIntent().getStringExtra("PROMPT_TEXT");
-        String answer = getIntent().getStringExtra("PROMPT_ANSWER");
-
-        Log.d("CompleteProfileActivity"," uri returned = "+uri);
-
-        if (promp_no != 0){
-            Uri photoUri = Uri.parse(uri);
-            switch (promp_no){
-                case 1:
-                    binding.photoPrompt1.setImageURI(photoUri);
-                    binding.textPromp1.setText(prompt);
-                    binding.textAnswer1.setText(answer);
-                    break;
-                case 2:
-                    binding.photoPrompt2.setImageURI(photoUri);
-                    binding.textPromp2.setText(prompt);
-                    binding.textAnswer2.setText(answer);
-                    break;
-                case 3:
-                    binding.photoPrompt3.setImageURI(photoUri);
-                    binding.textPromp3.setText(prompt);
-                    binding.textAnswer3.setText(answer);
-                    break;
-            }
+        if (promptAnswer1 != null){
+            binding.textPromp1.setText(promptAnswer1.getPrompt());
+            binding.textAnswer1.setText(promptAnswer1.getAnswer());
+            binding.photoPrompt1.setImageURI(Uri.parse(promptAnswer1.getImage()));
+        }
+        if (promptAnswer2 != null){
+            binding.textPromp2.setText(promptAnswer2.getPrompt());
+            binding.textAnswer2.setText(promptAnswer2.getAnswer());
+            binding.photoPrompt2.setImageURI(Uri.parse(promptAnswer2.getImage()));
+        }
+        if (promptAnswer3 != null){
+            binding.textPromp3.setText(promptAnswer3.getPrompt());
+            binding.textAnswer3.setText(promptAnswer3.getAnswer());
+            binding.photoPrompt3.setImageURI(Uri.parse(promptAnswer3.getImage()));
         }
     }
 
