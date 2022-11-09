@@ -186,11 +186,13 @@ public class PromptActivity extends AppCompatActivity implements OnPromptQuestio
         uploadPromptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                binding.uploadProgress.setVisibility(View.VISIBLE);
                 Log.d("PromptActivity","image uri in onCLick() = "+imageUri);
 
                 promptViewModel.uploadPromptAnswer(binding.textQuestion.getText().toString(),answerText.getText().toString(),18,binding.edittextCaption.getText().toString(),imageFile);
                 promptViewModel.ifUploaded.observe(PromptActivity.this, uploadComplete -> {
                     if (uploadComplete){
+                        binding.uploadProgress.setVisibility(View.GONE);
                         Toast.makeText(PromptActivity.this,"Prompt uploaded successfully",Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(PromptActivity.this,CompleteProfileActivity.class);
 
@@ -224,9 +226,12 @@ public class PromptActivity extends AppCompatActivity implements OnPromptQuestio
                         prefsEditor.commit();
                         startActivity(intent);
                         finish();
-                    } else
-                        Toast.makeText(PromptActivity.this,"Prompt upload Failed!",Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(PromptActivity.this, "Prompt upload Failed!", Toast.LENGTH_SHORT).show();
+                        binding.uploadProgress.setVisibility(View.GONE);
+                    }
                 });
+
             }
         });
     }

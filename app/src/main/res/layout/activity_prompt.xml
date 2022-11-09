@@ -221,6 +221,17 @@
                     app:drawableEndCompat="@drawable/ic_arrow_forward"
                     app:drawableTint="@color/white" />
 
+                <com.github.ybq.android.spinkit.SpinKitView
+                    android:id="@+id/upload_progress"
+                    style="@style/SpinKitView.Large.Circle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:SpinKit_Color="@color/indicatioractive"
+                    android:visibility="gone"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:elevation="@dimen/_10sdp" />
+
             </LinearLayout>
 
         </LinearLayout>
