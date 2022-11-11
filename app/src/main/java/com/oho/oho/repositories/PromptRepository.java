@@ -25,12 +25,11 @@ import retrofit2.Response;
 public class PromptRepository {
 
 
-
-    public PromptRepository(Context context){
+    public PromptRepository(Context context) {
 
     }
 
-    public MutableLiveData<List<Prompt>> getPromptList(){
+    public MutableLiveData<List<Prompt>> getPromptList() {
         MutableLiveData<List<Prompt>> promptList = new MutableLiveData<>();
         APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
         Call<List<Prompt>> call = apiService.getAllPrompts();
@@ -38,7 +37,7 @@ public class PromptRepository {
             @Override
             public void onResponse(@NonNull Call<List<Prompt>> call, @NonNull Response<List<Prompt>> response) {
                 promptList.setValue(response.body());
-                Log.d("PromptRepository","number of prompts = "+response.body());
+                Log.d("PromptRepository", "number of prompts = " + response.body());
             }
 
             @Override
@@ -49,7 +48,7 @@ public class PromptRepository {
         return promptList;
     }
 
-    public MutableLiveData<Boolean> uploadUserPromptAnswer(String prompt, String answer, int user_id, String caption, File image, Context context){
+    public MutableLiveData<Boolean> uploadUserPromptAnswer(String prompt, String answer, int user_id, String caption, File image, Context context) {
         MutableLiveData<Boolean> ifResponseReceived = new MutableLiveData<>();
 
         APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
@@ -61,7 +60,7 @@ public class PromptRepository {
 
         MultipartBody.Part filePart = MultipartBody.Part.createFormData("image", image.getName(), RequestBody.create(MediaType.parse("image/*"), image));
 
-        Call<PromptAnswer> call = apiService.uploadPromptAnswer(promptText,answerText,userId,captionText,filePart);
+        Call<PromptAnswer> call = apiService.uploadPromptAnswer(promptText, answerText, userId, captionText, filePart);
         call.enqueue(new Callback<PromptAnswer>() {
             @Override
             public void onResponse(@NonNull Call<PromptAnswer> call, @NonNull Response<PromptAnswer> response) {

@@ -18,6 +18,7 @@ public class LikeYouVIewModel extends AndroidViewModel {
 
     public LikeYouVIewModel(@NonNull Application application) {
         super(application);
+        likeYouRepository = new LikeYouRepository(getApplication().getApplicationContext());
     }
 
     public void getAllLikedByProfiles(int user_id) {

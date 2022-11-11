@@ -29,10 +29,10 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@color/placeholder_background"
                 android:fontFamily="@font/darkergrotesque_black"
+                android:padding="@dimen/_5sdp"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp"
-                android:padding="@dimen/_5sdp"/>
+                android:textSize="@dimen/_16ssp" />
 
         </LinearLayout>
 
@@ -55,10 +55,10 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@color/placeholder_background"
                 android:fontFamily="@font/darkergrotesque_black"
+                android:padding="@dimen/_5sdp"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp"
-                android:padding="@dimen/_5sdp"/>
+                android:textSize="@dimen/_16ssp" />
 
         </LinearLayout>
 
