@@ -4,6 +4,10 @@
     <item
         android:id="@+id/home"
         android:title="Home"
+        android:icon="@drawable/ic_baseline_home_24"/>
+    <item
+        android:id="@+id/like"
+        android:title="Likes"
         android:icon="@drawable/ic_match_menu_icon"/>
     <item
         android:id="@+id/profile"

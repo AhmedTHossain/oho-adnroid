@@ -20,6 +20,7 @@ import com.oho.oho.models.Profile;
 import com.oho.oho.viewmodels.AvailabilitySettingsViewModel;
 import com.oho.oho.views.home.CheckAvailabilityActivity;
 import com.oho.oho.views.home.HomeFragment;
+import com.oho.oho.views.home.LikeYouFragment;
 import com.oho.oho.views.home.MatchingPhaseFragment;
 import com.oho.oho.views.home.MessagesFragment;
 import com.oho.oho.views.home.NotAvailableFragment;
@@ -75,6 +76,9 @@ public class MainActivity extends AppCompatActivity{
 
                 case R.id.home:
                     changeUI();
+                    break;
+                case R.id.like:
+                    replaceFragment(new LikeYouFragment());
                     break;
                 case R.id.profile:
                     replaceFragment(new ProfileFragment());

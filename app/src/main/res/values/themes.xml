@@ -50,6 +50,11 @@
         <item name="cornerSizeBottomLeft">@dimen/_10sdp</item>
     </style>
 
+    <style name="ShapeAppearanceOverlay_card_custom_corners2" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/_10sdp</item>
+    </style>
+
     <style name="MyDatePicker" >
         <!-- Text color -->
         <item name="android:textColorPrimary">@color/black</item>

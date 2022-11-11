@@ -108,4 +108,6 @@ dependencies {
 
     //image crop and edit library
     implementation 'com.github.krokyze:ucropnedit:2.2.8'
+
+    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
 }

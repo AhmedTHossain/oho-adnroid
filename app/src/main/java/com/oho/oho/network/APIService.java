@@ -4,6 +4,7 @@ import com.oho.oho.models.Profile;
 import com.oho.oho.models.Prompt;
 import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.models.Swipe;
+import com.oho.oho.models.User;
 import com.oho.oho.responses.MessageResponse;
 import com.oho.oho.responses.UploadProfilePhotoResponse;
 import com.oho.oho.responses.UploadPromptPhotoResponse;
@@ -62,4 +63,8 @@ public interface APIService {
     //swiping profile left/right
     @POST("match/swipe")
     Call<MessageResponse> swipeProfile(@Body Swipe swipeResponse);
+
+    //get likes on profile
+    @GET("users/get_likes")
+    Call<List<User>> getLikedByUserProfiles(@Query("user_id") String user_id);
 }
