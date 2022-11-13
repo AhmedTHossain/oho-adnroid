@@ -4,6 +4,8 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +14,15 @@ import android.widget.Toast;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.oho.oho.R;
+import com.oho.oho.adapters.LikeYouAdapter;
 import com.oho.oho.databinding.FragmentHomeBinding;
 import com.oho.oho.databinding.FragmentLikeYouBinding;
+import com.oho.oho.models.User;
 import com.oho.oho.viewmodels.LikeYouVIewModel;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class LikeYouFragment extends Fragment {
 
@@ -62,9 +70,21 @@ public class LikeYouFragment extends Fragment {
         viewModel.getAllLikedByProfiles(18);
         viewModel.userList.observe(getViewLifecycleOwner(), userList -> {
 //            Toast.makeText(requireContext(),"number of users = "+userList.size(),Toast.LENGTH_SHORT).show();
-
+            if (userList != null){
+                setRecyclerview(userList);
+            }
             shimmerViewContainer.stopShimmerAnimation();
             shimmerViewContainer.setVisibility(View.GONE);
         });
+    }
+
+    public void setRecyclerview(List<User> userList){
+        ArrayList<User> userArrayList = new ArrayList<>(userList);
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(requireContext(),2);
+        binding.recyclerview.setLayoutManager(gridLayoutManager); // set LayoutManager to RecyclerView
+
+        LikeYouAdapter adapter = new LikeYouAdapter(requireContext(),userArrayList);
+        binding.recyclerview.setAdapter(adapter);
     }
 }

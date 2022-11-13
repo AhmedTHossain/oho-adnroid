@@ -52,7 +52,10 @@
 
     <style name="ShapeAppearanceOverlay_card_custom_corners2" parent="">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">@dimen/_10sdp</item>
+        <item name="cornerSizeTopRight">@dimen/_10sdp</item>
+        <item name="cornerSizeTopLeft">@dimen/_10sdp</item>
+        <item name="cornerSizeBottomRight">@dimen/_10sdp</item>
+        <item name="cornerSizeBottomLeft">@dimen/_10sdp</item>
     </style>
 
     <style name="MyDatePicker" >

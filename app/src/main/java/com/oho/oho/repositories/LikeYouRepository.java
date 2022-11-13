@@ -1,6 +1,7 @@
 package com.oho.oho.repositories;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -41,6 +42,7 @@ public class LikeYouRepository {
             public void onFailure(@NonNull Call<List<User>> call, @NonNull Throwable t) {
                 userProfileList.setValue(null);
                 Toast.makeText(context,"Request failed!",Toast.LENGTH_SHORT).show();
+                Log.d("LikeYouRepository","Request failed with code: "+t.getMessage());
             }
         });
         return userProfileList;
