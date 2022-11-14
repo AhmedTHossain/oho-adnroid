@@ -12,13 +12,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Privacy Policy for Oho!"
-        android:fontFamily="@font/sf_pro_rounded_medium"
+        android:fontFamily="@font/ptsans_bold"
         android:textColor="@color/black"
-        android:textSize="@dimen/_40ssp"
+        android:textSize="@dimen/_25ssp"
         android:textStyle="bold"
         android:paddingTop="@dimen/_30sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
         android:paddingStart="@dimen/_20sdp"
         android:paddingEnd="@dimen/_20sdp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:background="#1A000000" />
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -34,17 +39,17 @@
                 android:layout_height="wrap_content"
                 android:text="@string/privacy_para_1"
                 android:justificationMode="inter_word"
-                android:fontFamily="@font/sf_pro_rounded_regular"
+                android:fontFamily="@font/ptsans_regular"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp"
+                android:textSize="@dimen/_14ssp"
                 android:layout_marginTop="@dimen/_10sdp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Log Files"
-                android:fontFamily="@font/sf_pro_rounded_medium"
+                android:fontFamily="@font/ptsans_bold"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_24ssp"
+                android:textSize="@dimen/_16ssp"
                 android:textStyle="bold"
                 android:layout_marginTop="@dimen/_10sdp" />
             <TextView
@@ -52,17 +57,17 @@
                 android:layout_height="wrap_content"
                 android:text="@string/privacy_para_2"
                 android:justificationMode="inter_word"
-                android:fontFamily="@font/sf_pro_rounded_regular"
+                android:fontFamily="@font/ptsans_regular"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp"
+                android:textSize="@dimen/_14ssp"
                 android:layout_marginTop="@dimen/_10sdp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Our Advertising Partners"
-                android:fontFamily="@font/sf_pro_rounded_medium"
+                android:fontFamily="@font/ptsans_bold"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_24ssp"
+                android:textSize="@dimen/_16ssp"
                 android:textStyle="bold"
                 android:layout_marginTop="@dimen/_10sdp" />
             <TextView
@@ -70,17 +75,17 @@
                 android:layout_height="wrap_content"
                 android:text="@string/privacy_para_3"
                 android:justificationMode="inter_word"
-                android:fontFamily="@font/sf_pro_rounded_regular"
+                android:fontFamily="@font/ptsans_regular"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp"
+                android:textSize="@dimen/_14ssp"
                 android:layout_marginTop="@dimen/_10sdp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Privacy Policies"
-                android:fontFamily="@font/sf_pro_rounded_medium"
+                android:fontFamily="@font/ptsans_bold"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_24ssp"
+                android:textSize="@dimen/_16ssp"
                 android:textStyle="bold"
                 android:layout_marginTop="@dimen/_10sdp" />
             <TextView
@@ -88,17 +93,17 @@
                 android:layout_height="wrap_content"
                 android:text="@string/privacy_para_4"
                 android:justificationMode="inter_word"
-                android:fontFamily="@font/sf_pro_rounded_regular"
+                android:fontFamily="@font/ptsans_regular"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp"
+                android:textSize="@dimen/_14ssp"
                 android:layout_marginTop="@dimen/_10sdp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Third Party Privacy Policies"
-                android:fontFamily="@font/sf_pro_rounded_medium"
+                android:fontFamily="@font/ptsans_bold"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_24ssp"
+                android:textSize="@dimen/_16ssp"
                 android:textStyle="bold"
                 android:layout_marginTop="@dimen/_10sdp" />
             <TextView
@@ -106,17 +111,17 @@
                 android:layout_height="wrap_content"
                 android:text="@string/privacy_para_5"
                 android:justificationMode="inter_word"
-                android:fontFamily="@font/sf_pro_rounded_regular"
+                android:fontFamily="@font/ptsans_regular"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp"
+                android:textSize="@dimen/_14ssp"
                 android:layout_marginTop="@dimen/_10sdp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Children's Information"
-                android:fontFamily="@font/sf_pro_rounded_medium"
+                android:fontFamily="@font/ptsans_bold"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_24ssp"
+                android:textSize="@dimen/_16ssp"
                 android:textStyle="bold"
                 android:layout_marginTop="@dimen/_10sdp" />
             <TextView
@@ -124,17 +129,17 @@
                 android:layout_height="wrap_content"
                 android:text="@string/privacy_para_6"
                 android:justificationMode="inter_word"
-                android:fontFamily="@font/sf_pro_rounded_regular"
+                android:fontFamily="@font/ptsans_regular"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp"
+                android:textSize="@dimen/_14ssp"
                 android:layout_marginTop="@dimen/_10sdp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Online Privacy Policy Only"
-                android:fontFamily="@font/sf_pro_rounded_medium"
+                android:fontFamily="@font/ptsans_bold"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_24ssp"
+                android:textSize="@dimen/_16ssp"
                 android:textStyle="bold"
                 android:layout_marginTop="@dimen/_10sdp" />
             <TextView
@@ -142,17 +147,17 @@
                 android:layout_height="wrap_content"
                 android:text="@string/privacy_para_7"
                 android:justificationMode="inter_word"
-                android:fontFamily="@font/sf_pro_rounded_regular"
+                android:fontFamily="@font/ptsans_regular"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp"
+                android:textSize="@dimen/_14ssp"
                 android:layout_marginTop="@dimen/_10sdp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Consent"
-                android:fontFamily="@font/sf_pro_rounded_medium"
+                android:fontFamily="@font/ptsans_bold"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_24ssp"
+                android:textSize="@dimen/_16ssp"
                 android:textStyle="bold"
                 android:layout_marginTop="@dimen/_10sdp" />
             <TextView
@@ -160,9 +165,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/privacy_para_8"
                 android:justificationMode="inter_word"
-                android:fontFamily="@font/sf_pro_rounded_regular"
+                android:fontFamily="@font/ptsans_regular"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp"
+                android:textSize="@dimen/_14ssp"
                 android:layout_marginTop="@dimen/_10sdp"/>
         </LinearLayout>
     </ScrollView>

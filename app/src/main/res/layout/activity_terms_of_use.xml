@@ -13,13 +13,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Terms Of Use"
-        android:fontFamily="@font/sf_pro_rounded_medium"
+        android:fontFamily="@font/ptsans_bold"
         android:textColor="@color/black"
-        android:textSize="@dimen/_40ssp"
+        android:textSize="@dimen/_25ssp"
         android:textStyle="bold"
         android:paddingTop="@dimen/_30sdp"
         android:paddingStart="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
         android:paddingEnd="@dimen/_20sdp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:background="#1A000000" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -36,9 +42,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/terms_para_1"
                 android:justificationMode="inter_word"
-                android:fontFamily="@font/sf_pro_rounded_regular"
+                android:fontFamily="@font/ptsans_regular"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp"
+                android:textSize="@dimen/_14ssp"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="@dimen/_10sdp"/>
             <TextView
@@ -46,9 +52,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/terms_para_2"
                 android:justificationMode="inter_word"
-                android:fontFamily="@font/sf_pro_rounded_regular"
+                android:fontFamily="@font/ptsans_regular"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp"
+                android:textSize="@dimen/_14ssp"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="@dimen/_10sdp"/>
             <TextView
@@ -56,9 +62,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/terms_para_3"
                 android:justificationMode="inter_word"
-                android:fontFamily="@font/sf_pro_rounded_regular"
+                android:fontFamily="@font/ptsans_regular"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp"
+                android:textSize="@dimen/_14ssp"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="@dimen/_10sdp"/>
             <TextView
@@ -66,9 +72,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/terms_para_4"
                 android:justificationMode="inter_word"
-                android:fontFamily="@font/sf_pro_rounded_regular"
+                android:fontFamily="@font/ptsans_regular"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp"
+                android:textSize="@dimen/_14ssp"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="@dimen/_10sdp"/>
             <TextView
@@ -76,9 +82,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/terms_para_5"
                 android:justificationMode="inter_word"
-                android:fontFamily="@font/sf_pro_rounded_regular"
+                android:fontFamily="@font/ptsans_regular"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp"
+                android:textSize="@dimen/_14ssp"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="@dimen/_10sdp"/>
             <TextView
@@ -86,9 +92,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/terms_para_6"
                 android:justificationMode="inter_word"
-                android:fontFamily="@font/sf_pro_rounded_regular"
+                android:fontFamily="@font/ptsans_regular"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp"
+                android:textSize="@dimen/_14ssp"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="@dimen/_10sdp"/>
             <TextView
@@ -96,9 +102,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/terms_para_7"
                 android:justificationMode="inter_word"
-                android:fontFamily="@font/sf_pro_rounded_regular"
+                android:fontFamily="@font/ptsans_regular"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp"
+                android:textSize="@dimen/_14ssp"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="@dimen/_10sdp"/>
             <TextView
@@ -106,9 +112,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/terms_para_8"
                 android:justificationMode="inter_word"
-                android:fontFamily="@font/sf_pro_rounded_regular"
+                android:fontFamily="@font/ptsans_regular"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp"
+                android:textSize="@dimen/_14ssp"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="@dimen/_10sdp"/>
             <TextView
@@ -116,9 +122,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/terms_para_9"
                 android:justificationMode="inter_word"
-                android:fontFamily="@font/sf_pro_rounded_regular"
+                android:fontFamily="@font/ptsans_regular"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp"
+                android:textSize="@dimen/_14ssp"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="@dimen/_10sdp"/>
             <TextView
@@ -126,9 +132,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/terms_para_10"
                 android:justificationMode="inter_word"
-                android:fontFamily="@font/sf_pro_rounded_regular"
+                android:fontFamily="@font/ptsans_regular"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp"
+                android:textSize="@dimen/_14ssp"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="@dimen/_10sdp"/>
             <TextView
@@ -136,9 +142,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/terms_para_11"
                 android:justificationMode="inter_word"
-                android:fontFamily="@font/sf_pro_rounded_regular"
+                android:fontFamily="@font/ptsans_regular"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp"
+                android:textSize="@dimen/_14ssp"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="@dimen/_10sdp"/>
             <TextView
@@ -146,9 +152,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/terms_para_12"
                 android:justificationMode="inter_word"
-                android:fontFamily="@font/sf_pro_rounded_regular"
+                android:fontFamily="@font/ptsans_regular"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp"
+                android:textSize="@dimen/_14ssp"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="@dimen/_10sdp"/>
             <TextView
@@ -156,9 +162,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/terms_para_13"
                 android:justificationMode="inter_word"
-                android:fontFamily="@font/sf_pro_rounded_regular"
+                android:fontFamily="@font/ptsans_regular"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp"
+                android:textSize="@dimen/_14ssp"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="@dimen/_10sdp"/>
         </LinearLayout>

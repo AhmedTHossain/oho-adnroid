@@ -67,4 +67,8 @@ public interface APIService {
     //get likes on profile
     @GET("users/get_likes")
     Call<List<User>> getLikedByUserProfiles(@Query("user_id") String user_id);
+
+    //get likes on profile
+    @GET("match/get_recommendations")
+    Call<List<User>> getRecommendations(@Query("user_id") String user_id);
 }

@@ -7,6 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:paddingTop="@dimen/_30sdp"
     android:orientation="vertical"
     tools:context=".views.settings.FAQActivity">
 
@@ -14,13 +15,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="FAQs"
-        android:fontFamily="@font/sf_pro_rounded_medium"
+        android:fontFamily="@font/ptsans_bold"
         android:textColor="@color/black"
-        android:textSize="@dimen/_40ssp"
+        android:textSize="@dimen/_25ssp"
         android:textStyle="bold"
-        android:paddingTop="@dimen/_30sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
         android:paddingStart="@dimen/_20sdp"
         android:paddingEnd="@dimen/_20sdp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:background="#1A000000" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -48,7 +54,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:fontFamily="@font/sf_pro_rounded_regular"
+                    android:fontFamily="@font/ptsans_regular"
                     android:text="What is Oho!?"
                     android:layout_marginEnd="@dimen/_30sdp"
                     android:textColor="@color/indicatioractive"
@@ -81,7 +87,7 @@
                 android:justificationMode="inter_word"
                 android:fontFamily="@font/sf_pro_rounded_regular"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp"
+                android:textSize="@dimen/_14ssp"
                 android:layout_alignParentStart="true"
                 android:visibility="gone"
                 android:layout_marginTop="@dimen/_10sdp"/>
@@ -107,7 +113,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:fontFamily="@font/sf_pro_rounded_regular"
+                    android:fontFamily="@font/ptsans_regular"
                     android:text="How does it work?"
                     android:layout_marginEnd="@dimen/_30sdp"
                     android:textColor="@color/indicatioractive"
@@ -138,9 +144,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/how_does_it_work"
                 android:justificationMode="inter_word"
-                android:fontFamily="@font/sf_pro_rounded_regular"
+                android:fontFamily="@font/ptsans_regular"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp"
+                android:textSize="@dimen/_14ssp"
                 android:layout_alignParentStart="true"
                 android:visibility="gone"
                 android:layout_marginTop="@dimen/_10sdp"/>
@@ -166,7 +172,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:fontFamily="@font/sf_pro_rounded_regular"
+                    android:fontFamily="@font/ptsans_regular"
                     android:text="What happens if I don't show up on my date?"
                     android:textColor="@color/indicatioractive"
                     android:layout_marginEnd="@dimen/_30sdp"
@@ -197,9 +203,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/if_i_dont_show_up"
                 android:justificationMode="inter_word"
-                android:fontFamily="@font/sf_pro_rounded_regular"
+                android:fontFamily="@font/ptsans_regular"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp"
+                android:textSize="@dimen/_14ssp"
                 android:layout_alignParentStart="true"
                 android:visibility="gone"
                 android:layout_marginTop="@dimen/_10sdp"/>
@@ -225,7 +231,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:fontFamily="@font/sf_pro_rounded_regular"
+                    android:fontFamily="@font/ptsans_regular"
                     android:text="Is Oho! safe for me?"
                     android:layout_marginEnd="@dimen/_30sdp"
                     android:textColor="@color/indicatioractive"
@@ -256,9 +262,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/if_i_dont_show_up"
                 android:justificationMode="inter_word"
-                android:fontFamily="@font/sf_pro_rounded_regular"
+                android:fontFamily="@font/ptsans_regular"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp"
+                android:textSize="@dimen/_14ssp"
                 android:layout_alignParentStart="true"
                 android:visibility="gone"
                 android:layout_marginTop="@dimen/_10sdp"/>
@@ -285,7 +291,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_30sdp"
-                    android:fontFamily="@font/sf_pro_rounded_regular"
+                    android:fontFamily="@font/ptsans_regular"
                     android:text="What is our motivation for this app?"
                     android:textColor="@color/indicatioractive"
                     android:textSize="@dimen/_16ssp" />
@@ -315,9 +321,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/motivation"
                 android:justificationMode="inter_word"
-                android:fontFamily="@font/sf_pro_rounded_regular"
+                android:fontFamily="@font/ptsans_regular"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp"
+                android:textSize="@dimen/_14ssp"
                 android:layout_alignParentStart="true"
                 android:visibility="gone"
                 android:layout_marginTop="@dimen/_10sdp"/>

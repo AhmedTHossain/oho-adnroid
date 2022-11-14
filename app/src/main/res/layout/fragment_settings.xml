@@ -41,9 +41,9 @@
                 android:layout_height="wrap_content"
                 android:text="User Settings"
                 android:textAllCaps="true"
-                android:fontFamily="@font/sf_pro_rounded_regular"
+                android:fontFamily="@font/ptsans_regular"
                 android:textColor="@color/indicatioractive"
-                android:textSize="@dimen/_12ssp"
+                android:textSize="@dimen/_14ssp"
                 android:textStyle="bold"
                 android:layout_marginTop="@dimen/_15sdp"/>
 
@@ -71,10 +71,12 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_toEndOf="@id/image_bullet_1"
-                    android:fontFamily="@font/sf_pro_rounded_regular"
+                    android:fontFamily="@font/ptsans_regular"
                     android:text="Account Settings"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_16ssp" />
+                    android:textSize="@dimen/_16ssp"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_5sdp"/>
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -111,10 +113,12 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_toEndOf="@id/image_bullet_2"
-                    android:fontFamily="@font/sf_pro_rounded_regular"
+                    android:fontFamily="@font/ptsans_regular"
                     android:text="Preference Settings"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_16ssp" />
+                    android:textSize="@dimen/_16ssp"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_5sdp"/>
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -151,10 +155,12 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_toEndOf="@id/image_bullet_4"
-                    android:fontFamily="@font/sf_pro_rounded_regular"
+                    android:fontFamily="@font/ptsans_regular"
                     android:text="Availability Setings"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_16ssp" />
+                    android:textSize="@dimen/_16ssp"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_5sdp"/>
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -176,9 +182,9 @@
                 android:layout_height="wrap_content"
                 android:text="App Information"
                 android:textAllCaps="true"
-                android:fontFamily="@font/sf_pro_rounded_regular"
+                android:fontFamily="@font/ptsans_regular"
                 android:textColor="@color/indicatioractive"
-                android:textSize="@dimen/_12ssp"
+                android:textSize="@dimen/_14ssp"
                 android:textStyle="bold"
                 android:layout_marginTop="@dimen/_25sdp"/>
 
@@ -206,10 +212,12 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_toEndOf="@id/image_bullet_3"
-                    android:fontFamily="@font/sf_pro_rounded_regular"
+                    android:fontFamily="@font/ptsans_regular"
                     android:text="FAQs"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_16ssp" />
+                    android:textSize="@dimen/_16ssp"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_5sdp"/>
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -247,10 +255,12 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_toEndOf="@id/image_bullet_5"
-                    android:fontFamily="@font/sf_pro_rounded_regular"
+                    android:fontFamily="@font/ptsans_regular"
                     android:text="Safe Dating Tips"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_16ssp" />
+                    android:textSize="@dimen/_16ssp"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_5sdp"/>
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -291,10 +301,12 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_toEndOf="@id/image_bullet_6"
-                    android:fontFamily="@font/sf_pro_rounded_regular"
+                    android:fontFamily="@font/ptsans_regular"
                     android:text="Terms Of Use"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_16ssp" />
+                    android:textSize="@dimen/_16ssp"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_5sdp"/>
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -332,10 +344,12 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_toEndOf="@id/image_bullet_7"
-                    android:fontFamily="@font/sf_pro_rounded_regular"
+                    android:fontFamily="@font/ptsans_regular"
                     android:text="Privacy Policy"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_16ssp" />
+                    android:textSize="@dimen/_16ssp"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_5sdp"/>
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -376,10 +390,12 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_toEndOf="@id/image_bullet_8"
-                    android:fontFamily="@font/sf_pro_rounded_regular"
+                    android:fontFamily="@font/ptsans_regular"
                     android:text="Sign out"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_16ssp" />
+                    android:textSize="@dimen/_16ssp"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_5sdp"/>
 
                 <ImageView
                     android:layout_width="wrap_content"
