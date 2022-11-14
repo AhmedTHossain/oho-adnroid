@@ -20,21 +20,21 @@ import com.oho.oho.R;
 import com.oho.oho.adapters.ProfileDisplayAdapter;
 import com.oho.oho.databinding.FragmentHomeBinding;
 import com.oho.oho.interfaces.SwipeListener;
-import com.oho.oho.models.ProfileDisplay;
-import com.oho.oho.models.PromptDisplay;
+import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.models.Swipe;
+import com.oho.oho.models.User;
 import com.oho.oho.viewmodels.HomeViewModel;
-import com.oho.oho.viewmodels.PromptViewModel;
 
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment implements SwipeListener {
 
     FragmentHomeBinding binding;
-    ArrayList<PromptDisplay> promptDisplayArrayList = new ArrayList<>();
-    ProfileDisplay profileDisplay;
+    ArrayList<PromptAnswer> promptArrayList = new ArrayList<>();
+    User userProfile;
     MediaPlayer mp;
     private HomeViewModel homeViewModel;
+    private int user_type;
 
     String mockProfileDisplayed = "female";
 
@@ -49,8 +49,21 @@ public class HomeFragment extends Fragment implements SwipeListener {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
 
-        showMaleProfile();
         initHomeViewModel();
+
+        Bundle arguments = getArguments();
+        if (arguments != null) {
+            user_type = arguments.getInt("USERTYPE");
+            if (user_type > 0) {
+                userProfile = arguments.getParcelable("USERPROFILE");
+
+                promptArrayList.addAll(userProfile.getPromptAnswers());
+
+                setProfile(promptArrayList, userProfile);
+
+                binding.screentitle.setText("Liked Your Profile");
+            }
+        }
 
         // Inflate the layout for this fragment
         return binding.getRoot();
@@ -68,11 +81,15 @@ public class HomeFragment extends Fragment implements SwipeListener {
                 @Override
                 public void run() {
                     //TODO: show the next recommended profile from the API
-                    swipeProfile(1,2, 0);
-                    if (mockProfileDisplayed.equals("male")) {
-                        showFemaleProfile();
-                    } else
-                        showMaleProfile();
+                    swipeProfile(1, 2, 0);
+                    if (user_type > 0) {
+                        requireActivity().getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.frame_layout, new LikeYouFragment())
+                                .addToBackStack(null)
+                                .commit();
+                    } else {
+//                        showMaleProfile();
+                    }
                 }
             }, 250);
         } else if (swipeDirection == 1) {
@@ -83,11 +100,12 @@ public class HomeFragment extends Fragment implements SwipeListener {
                 @Override
                 public void run() {
                     //TODO: show the next recommended profile from the API
-                    swipeProfile(1,2,1);
-                    if (mockProfileDisplayed.equals("male")) {
-                        showFemaleProfile();
-                    } else
-                        showMaleProfile();
+                    swipeProfile(1, 2, 1);
+
+                    requireActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.frame_layout, new MessagesFragment())
+                            .addToBackStack(null)
+                            .commit();
                 }
             }, 250);
         } else {
@@ -114,128 +132,18 @@ public class HomeFragment extends Fragment implements SwipeListener {
         }
     }
 
-    public void showMaleProfile() {
-        mockProfileDisplayed = "male";
-        promptDisplayArrayList.clear();
-        profileDisplay = new ProfileDisplay(
-                "https://drive.google.com/uc?id=1WFQlei8QJG6XEUpND3eNZcuCHA4pOXF_",
-                "James B. Marchetti",
-                "31",
-                "Honolulu, HI",
-                "Application Support Engineer",
-                "Male",
-                "6'2\"",
-                "White",
-                "Agnostic",
-                "Not Vaccinated",
-                "The last time I was someone’s “type” was when I donated blood.",
-                "5 km"
-        );
+    public void setProfile(ArrayList<PromptAnswer> promptArrayList, User userProfile) {
 
-        //TODO: for now hard coded data for the profiles' prompt section which will later be replaced with data coming from the APIs from the ViewModel
-        PromptDisplay prompt1 = new PromptDisplay(
-                "the most adventurous thing I did was...",
-                "Sky Diving from 22,000 ft",
-                "https://drive.google.com/uc?id=1NOF8cCgbIZOTluaU9WW5OP-HdB2RxRnO",
-                "Fools are those that believe smiles are a sign of happiness.");
-        PromptDisplay prompt2 = new PromptDisplay(
-                "in a partner, I'm looking for...",
-                "Humbleness",
-                "https://drive.google.com/uc?id=1kXeY2QzqmIV_pTmj4fc5jvq2ZVA-JuWb",
-                "There's power in looking silly and not caring that you do."
-        );
-        PromptDisplay prompt3 = new PromptDisplay(
-                "whiskey or wine?",
-                "Whiskey!",
-                "https://drive.google.com/uc?id=1NFwSfMnJbBe-DWdFcEB1X3SDgtXWNwQo",
-                "I mean sure, I have my bad days, but then I remember what a cute smile I have."
-        );
-        PromptDisplay prompt4 = new PromptDisplay(
-                "ideal Sunday for me is...",
-                "All day long outdooor activities!",
-                "https://drive.google.com/uc?id=1AmdGTggplSNhyCo7B--w9C6feLz3yOIY",
-                "Life is short, don't wanna waste any moment to live :)"
-        );
-
-        promptDisplayArrayList.add(null);
-        promptDisplayArrayList.add(prompt1);
-        promptDisplayArrayList.add(prompt2);
-        promptDisplayArrayList.add(prompt3);
-        promptDisplayArrayList.add(prompt4);
-        promptDisplayArrayList.add(null);
-
-        ProfileDisplayAdapter adapter = new ProfileDisplayAdapter(promptDisplayArrayList, profileDisplay, this, requireContext());
+        ProfileDisplayAdapter adapter = new ProfileDisplayAdapter(promptArrayList, userProfile, this, requireContext());
         binding.recyclerviewPromptSection.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recyclerviewPromptSection.setAdapter(adapter);
     }
 
-    public void showFemaleProfile() {
-        mockProfileDisplayed = "female";
-        promptDisplayArrayList.clear();
-        profileDisplay = new ProfileDisplay(
-                "https://drive.google.com/uc?id=1-3SuycWwHPN4Sit63R4um7yK27eBuAFM",
-                "Ruby D. Snyder",
-                "26",
-                "New York, NY",
-                "Systems Engineer",
-                "Femal",
-                "5'10\"",
-                "White",
-                "Agnostic",
-                "Vaccinated",
-                "First rounds on me if you work in tech too (you need a drink).",
-                "1 km"
-        );
-
-        //TODO: for now hard coded data for the profiles' prompt section which will later be replaced with data coming from the APIs from the ViewModel
-        PromptDisplay prompt1 = new PromptDisplay(
-                "the most adventurous thing I did was...",
-                "Sky Diving from 22,000 ft",
-                "https://drive.google.com/uc?id=10pQFA_nCvOyFbubW4w4DzsFc16WesrO4",
-                "Fools are those that believe smiles are a sign of happiness.");
-        PromptDisplay prompt2 = new PromptDisplay(
-                "in a partner, I'm looking for...",
-                "Humbleness",
-                "https://drive.google.com/uc?id=1VmE4VN7AB8DHFUgMyKbsCBsP4vMdY6ce",
-                "There's power in looking silly and not caring that you do."
-        );
-        PromptDisplay prompt0 = new PromptDisplay(
-                "in a partner, I'm looking for...",
-                "Humbleness",
-                "https://drive.google.com/uc?id=1_5UTcqIYhH8BMhQArmJ_uaAVwV75jwkx",
-                "There's power in looking silly and not caring that you do."
-        );
-        PromptDisplay prompt3 = new PromptDisplay(
-                "whiskey or wine?",
-                "Whiskey!",
-                "https://drive.google.com/uc?id=1Ke8W48GImyiLH5rhvO501pkh-GxgDV88",
-                "I mean sure, I have my bad days, but then I remember what a cute smile I have."
-        );
-        PromptDisplay prompt4 = new PromptDisplay(
-                "ideal Sunday for me is...",
-                "All day long outdooor activities!",
-                "https://drive.google.com/uc?id=1EiPKNPIIy7LI1ZcKmLfKZwLaWoyi-6kw",
-                "Life is short, don't wanna waste any moment to live :)"
-        );
-
-        promptDisplayArrayList.add(null);
-        promptDisplayArrayList.add(prompt1);
-        promptDisplayArrayList.add(prompt2);
-        promptDisplayArrayList.add(prompt0);
-        promptDisplayArrayList.add(prompt3);
-        promptDisplayArrayList.add(prompt4);
-        promptDisplayArrayList.add(null);
-
-        ProfileDisplayAdapter adapter = new ProfileDisplayAdapter(promptDisplayArrayList, profileDisplay, this, requireContext());
-        binding.recyclerviewPromptSection.setLayoutManager(new LinearLayoutManager(requireContext()));
-        binding.recyclerviewPromptSection.setAdapter(adapter);
-    }
-
-    private void initHomeViewModel(){
+    private void initHomeViewModel() {
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
     }
 
-    private void swipeProfile(int userId, int profileShown, int direction){
+    private void swipeProfile(int userId, int profileShown, int direction) {
         Swipe swipeProfile = new Swipe();
         swipeProfile.setUserId(1);
         swipeProfile.setProfileShown(2);
@@ -243,7 +151,7 @@ public class HomeFragment extends Fragment implements SwipeListener {
         homeViewModel.swipeUserProfile(swipeProfile);
     }
 
-    private void playSwipeRightSound(){
+    private void playSwipeRightSound() {
         mp = MediaPlayer.create(requireContext(), R.raw.positive);
         mp.start();
         mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -253,4 +161,5 @@ public class HomeFragment extends Fragment implements SwipeListener {
             }
         });
     }
+
 }

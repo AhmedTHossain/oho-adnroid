@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    android:id="@+id/linear_layout_root"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="@dimen/_2sdp"
     android:layout_marginTop="@dimen/_10sdp"
-    android:orientation="vertical">
+    android:layout_marginEnd="@dimen/_2sdp"
+    android:orientation="vertical"
+    android:clickable="true"
+    android:focusable="true">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/shapeable_image_view"
@@ -16,12 +20,12 @@
         android:id="@+id/name_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/background_gradient_button"
         android:fontFamily="@font/ptsans_regular"
+        android:padding="@dimen/_5sdp"
         android:text="Jane"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="@dimen/_14ssp"
-        android:padding="@dimen/_5sdp"
-        android:background="@drawable/background_gradient_button"/>
+        android:textSize="@dimen/_14ssp" />
 
 </LinearLayout>

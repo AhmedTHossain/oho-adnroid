@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_20sdp"
         android:background="@drawable/two_sided_rounded_vorner_left"
         android:orientation="vertical"
@@ -33,7 +34,7 @@
             android:id="@+id/text_answer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
+            android:layout_gravity="end"
             android:layout_marginTop="@dimen/_10sdp"
             android:fontFamily="@font/darkergrotesque_bold"
             android:text="Commitment &amp; honesty"
@@ -49,7 +50,7 @@
         android:background="#E6E6E6" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_20sdp"

@@ -27,12 +27,26 @@
         android:layout_below="@id/screentitle"
         android:background="#1A000000" />
 
+    <TextView
+        android:id="@+id/textview_disclaimer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:fontFamily="@font/ptsans_regular"
+        android:justificationMode="inter_word"
+        android:paddingStart="@dimen/_20sdp"
+        android:layout_below="@id/view"
+        android:paddingEnd="@dimen/_20sdp"
+        android:text="These users are interested to go on a date with you this weekend!"
+        android:textColor="@color/textSubTitle"
+        android:textSize="@dimen/_14ssp" />
+
     <!-- shimmer layout list -->
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmer_view_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/view"
+        android:layout_below="@id/textview_disclaimer"
         android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:layout_marginStart="@dimen/_20sdp"
@@ -60,8 +74,7 @@
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/view"
-        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_below="@id/textview_disclaimer"
         android:paddingStart="@dimen/_20sdp"
         android:paddingEnd="@dimen/_20sdp"/>
 

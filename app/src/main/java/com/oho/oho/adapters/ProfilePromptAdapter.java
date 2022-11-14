@@ -36,7 +36,7 @@ public class ProfilePromptAdapter extends RecyclerView.Adapter<ProfilePromptAdap
     @Override
     public ProfilePromptHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.row_layout_profile_prompts,parent,false);
+                .inflate(R.layout.row_layout_profile_prompts, parent, false);
         return new ProfilePromptHolder(view);
     }
 
@@ -44,7 +44,7 @@ public class ProfilePromptAdapter extends RecyclerView.Adapter<ProfilePromptAdap
     public void onBindViewHolder(@NonNull ProfilePromptHolder holder, int position) {
         holder.getPromptText().setText(profilePromptsList.get(position).getPrompt());
         holder.getAnswerText().setText(profilePromptsList.get(position).getAnswer());
-        if (position>2)
+        if (position > 2)
             holder.getDeleteButton().setVisibility(View.VISIBLE);
         else
             holder.getDeleteButton().setVisibility(View.GONE);
@@ -57,7 +57,7 @@ public class ProfilePromptAdapter extends RecyclerView.Adapter<ProfilePromptAdap
 
     public class ProfilePromptHolder extends RecyclerView.ViewHolder {
 
-        private TextView promptText,answerText;
+        private TextView promptText, answerText;
         private LinearLayout linearLayout;
         private ImageView deleteButton;
 
@@ -85,13 +85,16 @@ public class ProfilePromptAdapter extends RecyclerView.Adapter<ProfilePromptAdap
             });
 
         }
-        public TextView getPromptText(){
+
+        public TextView getPromptText() {
             return promptText;
         }
-        public TextView getAnswerText(){
+
+        public TextView getAnswerText() {
             return answerText;
         }
-        public ImageView getDeleteButton(){
+
+        public ImageView getDeleteButton() {
             return deleteButton;
         }
     }

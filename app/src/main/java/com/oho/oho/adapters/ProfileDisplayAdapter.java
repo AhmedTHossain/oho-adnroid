@@ -8,15 +8,13 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatSeekBar;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.android.material.transition.Hold;
 import com.oho.oho.R;
 import com.oho.oho.interfaces.SwipeListener;
-import com.oho.oho.models.ProfileDisplay;
-import com.oho.oho.models.PromptDisplay;
+import com.oho.oho.models.PromptAnswer;
+import com.oho.oho.models.User;
 
 import java.util.ArrayList;
 
@@ -24,19 +22,21 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileDisplayAdapter extends RecyclerView.Adapter{
 
-    private ArrayList<PromptDisplay> promptDisplayArrayList;
-    private ProfileDisplay profileDisplay;
+    private ArrayList<PromptAnswer> promptArrayList;
+    private User userProfile;
+
     private SwipeListener listener;
     private Context context;
+
     private final int VIEW_TYPE_LEFT = -1;
     private final int VIEW_TYPE_INFO = 0;
     private final int VIEW_TYPE_RIGHT = 1;
     private final int VIEW_TYPE_SWIPE = 2;
 
-    public ProfileDisplayAdapter(ArrayList<PromptDisplay> promptDisplayArrayList, ProfileDisplay profileDisplay, SwipeListener listener, Context context) {
-        this.promptDisplayArrayList = promptDisplayArrayList;
+    public ProfileDisplayAdapter(ArrayList<PromptAnswer> promptArrayList, User userProfile, SwipeListener listener, Context context) {
+        this.promptArrayList = promptArrayList;
         this.context = context;
-        this.profileDisplay = profileDisplay;
+        this.userProfile = userProfile;
         this.listener = listener;
     }
 
@@ -65,27 +65,30 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter{
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         switch (getItemViewType(position)){
             case VIEW_TYPE_INFO:
-                String name_age = profileDisplay.getName()+", "+profileDisplay.getAge();
+                String name_age = userProfile.getName()+", "+userProfile.getAge();
+
                 ((Holder1) holder).name.setText(name_age);
-                ((Holder1) holder).location.setText(profileDisplay.getLocation());
-                ((Holder1) holder).profession.setText(profileDisplay.getProfession());
-                ((Holder1) holder).gender.setText(profileDisplay.getGender());
-                ((Holder1) holder).height.setText(profileDisplay.getHeight());
-                ((Holder1) holder).race.setText(profileDisplay.getRace());
-                ((Holder1) holder).religion.setText(profileDisplay.getReligion());
-                ((Holder1) holder).vaccinated.setText(profileDisplay.getVaccinated());
-                ((Holder1) holder).distance.setText(profileDisplay.getDistance());
+                String location = userProfile.getCity() + ", " + userProfile.getState();
+                ((Holder1) holder).location.setText(location);
+
+                ((Holder1) holder).profession.setText(userProfile.getOccupation());
+                ((Holder1) holder).gender.setText(userProfile.getSex());
+                ((Holder1) holder).height.setText(String.valueOf(userProfile.getHeight()));
+                ((Holder1) holder).race.setText(userProfile.getRace());
+                ((Holder1) holder).religion.setText(userProfile.getReligion());
+                ((Holder1) holder).vaccinated.setText(userProfile.getVaccinated());
+//                ((Holder1) holder).distance.setText(userProfile.getDistance());
                 Glide.with(context)
-                        .load(profileDisplay.getImageUrl())
+                        .load(userProfile.getProfilePicture())
                         .into( ((Holder1) holder).imageView);
                 break;
             case VIEW_TYPE_LEFT:
             case VIEW_TYPE_RIGHT:
-                ((Holder)holder).prompt.setText(promptDisplayArrayList.get(position).getPrompt());
-                ((Holder)holder).answer.setText(promptDisplayArrayList.get(position).getAnswer());
-                ((Holder)holder).caption.setText(promptDisplayArrayList.get(position).getCaption());
+                ((Holder)holder).prompt.setText(promptArrayList.get(position).getPrompt());
+                ((Holder)holder).answer.setText(promptArrayList.get(position).getAnswer());
+                ((Holder)holder).caption.setText(promptArrayList.get(position).getCaption());
                 Glide.with(context)
-                        .load(promptDisplayArrayList.get(position).getImageUrl())
+                        .load(promptArrayList.get(position).getImage())
                         .into(((Holder)holder).imageView);
                 break;
             case VIEW_TYPE_SWIPE:
@@ -111,14 +114,14 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter{
 
     @Override
     public int getItemCount() {
-        return promptDisplayArrayList.size();
+        return promptArrayList.size();
     }
 
     @Override
     public int getItemViewType(int position) {
         if (position == 0)
             return VIEW_TYPE_INFO;
-        else if (position == promptDisplayArrayList.size()-1)
+        else if (position == promptArrayList.size()-1)
             return VIEW_TYPE_SWIPE;
         else {
             if (position % 2 != 0)

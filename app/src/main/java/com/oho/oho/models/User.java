@@ -1,11 +1,14 @@
 package com.oho.oho.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class User {
+public class User implements Parcelable {
     @SerializedName("age")
     @Expose
     private Integer age;
@@ -69,6 +72,30 @@ public class User {
     @SerializedName("vaccinated")
     @Expose
     private String vaccinated;
+
+    public User(Integer age, String bio, String budget, String city, String dob, String education, String email, Double height, Integer id, Double lat, Double lon, String name, String occupation, String phone, String profilePicture, List<PromptAnswer> promptAnswers, String race, String religion, String sex, String state, String vaccinated) {
+        this.age = age;
+        this.bio = bio;
+        this.budget = budget;
+        this.city = city;
+        this.dob = dob;
+        this.education = education;
+        this.email = email;
+        this.height = height;
+        this.id = id;
+        this.lat = lat;
+        this.lon = lon;
+        this.name = name;
+        this.occupation = occupation;
+        this.phone = phone;
+        this.profilePicture = profilePicture;
+        this.promptAnswers = promptAnswers;
+        this.race = race;
+        this.religion = religion;
+        this.sex = sex;
+        this.state = state;
+        this.vaccinated = vaccinated;
+    }
 
     public Integer getAge() {
         return age;
@@ -236,5 +263,35 @@ public class User {
 
     public void setVaccinated(String vaccinated) {
         this.vaccinated = vaccinated;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(age);
+        parcel.writeString(bio);
+        parcel.writeString(budget);
+        parcel.writeString(city);
+        parcel.writeString(dob);
+        parcel.writeString(education);
+        parcel.writeString(email);
+        parcel.writeDouble(height);
+        parcel.writeInt(id);
+        parcel.writeDouble(lat);
+        parcel.writeDouble(lon);
+        parcel.writeString(name);
+        parcel.writeString(occupation);
+        parcel.writeString(phone);
+        parcel.writeString(profilePicture);
+        parcel.writeList(promptAnswers);
+        parcel.writeString(race);
+        parcel.writeString(religion);
+        parcel.writeString(sex);
+        parcel.writeString(state);
+        parcel.writeString(vaccinated);
     }
 }
