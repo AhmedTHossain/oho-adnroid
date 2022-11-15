@@ -134,6 +134,10 @@ public class HomeFragment extends Fragment implements SwipeListener {
 
     public void setProfile(ArrayList<PromptAnswer> promptArrayList, User userProfile) {
 
+        //so that all the prompts are shown without hiding the first and last one under the profile info view and the swipe view
+        promptArrayList.add(0,null);
+        promptArrayList.add(null);
+
         ProfileDisplayAdapter adapter = new ProfileDisplayAdapter(promptArrayList, userProfile, this, requireContext());
         binding.recyclerviewPromptSection.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recyclerviewPromptSection.setAdapter(adapter);
