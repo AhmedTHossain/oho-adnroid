@@ -27,11 +27,10 @@ import com.oho.oho.R;
 import com.oho.oho.adapters.PromptAdapter;
 import com.oho.oho.databinding.ActivityPromptBinding;
 import com.oho.oho.interfaces.OnPromptQuestionSelectedListener;
-import com.oho.oho.models.Profile;
 import com.oho.oho.models.Prompt;
 import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.viewmodels.PromptViewModel;
-import com.oho.oho.views.CompleteProfileActivity;
+import com.oho.oho.views.registration.CompleteProfileActivity;
 import com.oho.oho.views.CropperActivity;
 
 import org.jetbrains.annotations.NotNull;

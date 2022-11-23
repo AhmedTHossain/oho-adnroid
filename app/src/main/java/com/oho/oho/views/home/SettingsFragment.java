@@ -16,6 +16,7 @@ import com.oho.oho.views.settings.AccountSettingsActivity;
 import com.oho.oho.views.settings.AvailabilitySettingsActivity;
 import com.oho.oho.views.settings.FAQActivity;
 import com.oho.oho.views.LoginActivity;
+import com.oho.oho.views.settings.PreferenceSettingsFragment;
 import com.oho.oho.views.settings.PrivacyPolicyActivity;
 import com.oho.oho.views.settings.SafeDatingTipsActivity;
 import com.oho.oho.views.settings.TermsOfUseActivity;
@@ -35,6 +36,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         binding = FragmentSettingsBinding.inflate(inflater,container,false);
 
         binding.buttonAccountSettings.setOnClickListener(this);
+        binding.buttonPreferenceSettings.setOnClickListener(this);
         binding.buttonFaqSettings.setOnClickListener(this);
         binding.buttonAvailabilitySettings.setOnClickListener(this);
         binding.buttonHelpcenterSettings.setOnClickListener(this);
@@ -51,6 +53,12 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()){
             case R.id.button_account_settings:
                 startActivity(new Intent(requireActivity(), AccountSettingsActivity.class));
+                break;
+            case R.id.button_preference_settings:
+                requireActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frame_layout, new PreferenceSettingsFragment())
+                        .addToBackStack(null)
+                        .commit();
                 break;
             case R.id.button_faq_settings:
                 startActivity(new Intent(requireActivity(), FAQActivity.class));

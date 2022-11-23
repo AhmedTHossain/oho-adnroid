@@ -45,7 +45,7 @@
             android:name=".views.settings.FAQActivity"
             android:exported="false" />
         <activity
-            android:name=".views.CompleteProfileActivity"
+            android:name=".views.registration.CompleteProfileActivity"
             android:exported="true">
 
             <!--            <intent-filter>-->

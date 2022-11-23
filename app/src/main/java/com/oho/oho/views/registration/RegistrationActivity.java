@@ -37,7 +37,6 @@ import com.oho.oho.interfaces.RadioListItemClickListener;
 import com.oho.oho.models.Cuisine;
 import com.oho.oho.models.Profile;
 import com.oho.oho.viewmodels.RegistrationViewModel;
-import com.oho.oho.views.CompleteProfileActivity;
 import com.shawnlin.numberpicker.NumberPicker;
 
 import java.io.IOException;

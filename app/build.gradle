@@ -110,4 +110,7 @@ dependencies {
     implementation 'com.github.krokyze:ucropnedit:2.2.8'
 
     implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
+
+    //toggle button group library
+    implementation 'com.nex3z:toggle-button-group:1.2.3'
 }

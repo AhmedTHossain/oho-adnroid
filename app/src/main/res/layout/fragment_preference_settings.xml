@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:paddingTop="@dimen/_30sdp"
+    tools:context=".views.settings.PreferenceSettingsFragment">
+
+    <LinearLayout
+        android:id="@+id/title_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:fontFamily="@font/ptsans_bold"
+            android:text="Preference Settings"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_25ssp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="#1A000000" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/update_profile"
+        android:layout_below="@id/title_view"
+        android:scrollbars="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Interested In Group-->
+
+            <TextView
+                android:id="@+id/text_settings_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:fontFamily="@font/darkergrotesque_regular"
+                android:paddingStart="@dimen/_20sdp"
+                android:paddingEnd="@dimen/_20sdp"
+                android:paddingBottom="@dimen/_5sdp"
+                android:text="Interested In"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14ssp" />
+
+            <com.nex3z.togglebuttongroup.SingleSelectToggleGroup
+                android:id="@+id/group_interested_in"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                app:tbgChildSpacing="@dimen/_10sdp"
+                app:tbgFlow="true">
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Male"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Female"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Both"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+            </com.nex3z.togglebuttongroup.SingleSelectToggleGroup>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:background="#E0E0E0" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_20sdp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/darkergrotesque_regular"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:text="Distance"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14ssp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:text="20 miles"
+                    android:textColor="@color/indicatioractive"
+                    android:textSize="@dimen/_14ssp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:background="#E0E0E0" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_20sdp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/darkergrotesque_regular"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:text="Location"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14ssp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:text="Fairfax, VA"
+                    android:textColor="@color/indicatioractive"
+                    android:textSize="@dimen/_14ssp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:background="#E0E0E0" />
+
+            <!-- Education Group-->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:fontFamily="@font/darkergrotesque_regular"
+                android:paddingEnd="@dimen/_20sdp"
+                android:paddingBottom="@dimen/_5sdp"
+                android:text="Education"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14ssp" />
+
+            <com.nex3z.togglebuttongroup.SingleSelectToggleGroup
+                android:id="@+id/group_education"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                app:tbgChildSpacing="@dimen/_10sdp"
+                app:tbgFlow="true"
+                app:tbgRowSpacing="@dimen/_10sdp">
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No Degree"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="High School"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Undergrad"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Masters"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PHD"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+
+            </com.nex3z.togglebuttongroup.SingleSelectToggleGroup>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:background="#E0E0E0" />
+
+            <!-- Race Group-->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:fontFamily="@font/darkergrotesque_regular"
+                android:paddingEnd="@dimen/_20sdp"
+                android:paddingBottom="@dimen/_5sdp"
+                android:text="Race"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14ssp" />
+
+            <com.nex3z.togglebuttongroup.MultiSelectToggleGroup
+                android:id="@+id/group_race"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                app:tbgChildSpacing="@dimen/_10sdp"
+                app:tbgFlow="true"
+                app:tbgRowSpacing="@dimen/_10sdp">
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="White"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Asian"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Black"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="African American"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hispanic"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Latinx"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pacific Islander"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="American Indian"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Others"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Open to All"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+            </com.nex3z.togglebuttongroup.MultiSelectToggleGroup>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:background="#E0E0E0" />
+
+            <!-- Religion Group-->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:fontFamily="@font/darkergrotesque_regular"
+                android:paddingEnd="@dimen/_20sdp"
+                android:paddingBottom="@dimen/_5sdp"
+                android:text="Religion"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14ssp" />
+
+            <com.nex3z.togglebuttongroup.SingleSelectToggleGroup
+                android:id="@+id/group_religion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                app:tbgChildSpacing="@dimen/_10sdp"
+                app:tbgFlow="true"
+                app:tbgRowSpacing="@dimen/_10sdp">
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Christian"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:text="Catholic"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Jewish"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Muslim"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hindu"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sikh"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Agnostic"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Buddhist"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Spiritual / Not Religious"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Atheist"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Other"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+
+            </com.nex3z.togglebuttongroup.SingleSelectToggleGroup>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:background="#E0E0E0" />
+
+            <!-- Cuisine Group-->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:fontFamily="@font/darkergrotesque_regular"
+                android:paddingEnd="@dimen/_20sdp"
+                android:paddingBottom="@dimen/_5sdp"
+                android:text="Cuisine"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14ssp" />
+
+            <com.nex3z.togglebuttongroup.MultiSelectToggleGroup
+                android:id="@+id/group_cuisine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                app:tbgChildSpacing="@dimen/_10sdp"
+                app:tbgFlow="true"
+                app:tbgRowSpacing="@dimen/_10sdp">
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Italian"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:text="Japanese"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:text="Indian"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mediterranean"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Korean"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="American"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vegetarian"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vietnamese"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Chinese"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Others"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+                <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Open to all"
+                    android:textSize="@dimen/_14ssp"
+                    app:tbgMarkerColor="@color/indicatioractive" />
+
+
+            </com.nex3z.togglebuttongroup.MultiSelectToggleGroup>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/update_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:background="@drawable/border_rounded_corner_disabled"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/darkergrotesque_regular"
+        android:padding="@dimen/_10sdp"
+        android:text="Update"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_18ssp"
+        android:visibility="visible"
+        app:drawableEndCompat="@drawable/ic_start"
+        app:drawableTint="@color/white" />
+</RelativeLayout>

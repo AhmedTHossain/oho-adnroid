@@ -1,4 +1,4 @@
-package com.oho.oho.views;
+package com.oho.oho.views.registration;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,29 +19,20 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.gson.Gson;
 import com.oho.oho.R;
-import com.oho.oho.adapters.CompleteProfileAdapter;
 import com.oho.oho.databinding.ActivityCompleteProfileBinding;
-import com.oho.oho.interfaces.AddPromptListener;
-import com.oho.oho.interfaces.OnProfilePromptClickListener;
-import com.oho.oho.interfaces.OnProfilePromptDeleteListener;
-import com.oho.oho.interfaces.SelectProfilePhotoListener;
 import com.oho.oho.models.Profile;
 import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.viewmodels.CompleteProfileViewModel;
+import com.oho.oho.views.CropperActivity;
 import com.oho.oho.views.prompt.PromptActivity;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -49,10 +40,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import gun0912.tedimagepicker.builder.TedImagePicker;
 import gun0912.tedimagepicker.builder.listener.OnSelectedListener;
 

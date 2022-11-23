@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingTop="@dimen/_30sdp"
     android:background="@color/white"
     android:orientation="vertical"
@@ -41,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:text="User Settings"
                 android:textAllCaps="true"
-                android:fontFamily="@font/ptsans_regular"
+                android:fontFamily="@font/darkergrotesque_bold"
                 android:textColor="@color/indicatioractive"
                 android:textSize="@dimen/_14ssp"
                 android:textStyle="bold"
@@ -74,7 +73,7 @@
                     android:fontFamily="@font/ptsans_regular"
                     android:text="Account Settings"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_16ssp"
+                    android:textSize="@dimen/_14ssp"
                     android:paddingTop="@dimen/_5sdp"
                     android:paddingBottom="@dimen/_5sdp"/>
 
@@ -116,7 +115,7 @@
                     android:fontFamily="@font/ptsans_regular"
                     android:text="Preference Settings"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_16ssp"
+                    android:textSize="@dimen/_14ssp"
                     android:paddingTop="@dimen/_5sdp"
                     android:paddingBottom="@dimen/_5sdp"/>
 
@@ -158,7 +157,7 @@
                     android:fontFamily="@font/ptsans_regular"
                     android:text="Availability Setings"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_16ssp"
+                    android:textSize="@dimen/_14ssp"
                     android:paddingTop="@dimen/_5sdp"
                     android:paddingBottom="@dimen/_5sdp"/>
 
@@ -182,7 +181,7 @@
                 android:layout_height="wrap_content"
                 android:text="App Information"
                 android:textAllCaps="true"
-                android:fontFamily="@font/ptsans_regular"
+                android:fontFamily="@font/darkergrotesque_bold"
                 android:textColor="@color/indicatioractive"
                 android:textSize="@dimen/_14ssp"
                 android:textStyle="bold"
@@ -215,7 +214,7 @@
                     android:fontFamily="@font/ptsans_regular"
                     android:text="FAQs"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_16ssp"
+                    android:textSize="@dimen/_14ssp"
                     android:paddingTop="@dimen/_5sdp"
                     android:paddingBottom="@dimen/_5sdp"/>
 
@@ -258,7 +257,7 @@
                     android:fontFamily="@font/ptsans_regular"
                     android:text="Safe Dating Tips"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_16ssp"
+                    android:textSize="@dimen/_14ssp"
                     android:paddingTop="@dimen/_5sdp"
                     android:paddingBottom="@dimen/_5sdp"/>
 
@@ -304,7 +303,7 @@
                     android:fontFamily="@font/ptsans_regular"
                     android:text="Terms Of Use"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_16ssp"
+                    android:textSize="@dimen/_14ssp"
                     android:paddingTop="@dimen/_5sdp"
                     android:paddingBottom="@dimen/_5sdp"/>
 
@@ -347,7 +346,7 @@
                     android:fontFamily="@font/ptsans_regular"
                     android:text="Privacy Policy"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_16ssp"
+                    android:textSize="@dimen/_14ssp"
                     android:paddingTop="@dimen/_5sdp"
                     android:paddingBottom="@dimen/_5sdp"/>
 
@@ -393,7 +392,7 @@
                     android:fontFamily="@font/ptsans_regular"
                     android:text="Sign out"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_16ssp"
+                    android:textSize="@dimen/_14ssp"
                     android:paddingTop="@dimen/_5sdp"
                     android:paddingBottom="@dimen/_5sdp"/>
 
