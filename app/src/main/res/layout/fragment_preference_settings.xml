@@ -386,7 +386,6 @@
                 <com.nex3z.togglebuttongroup.button.LabelToggle
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_10sdp"
                     android:text="Catholic"
                     android:textSize="@dimen/_14ssp"
                     app:tbgMarkerColor="@color/indicatioractive" />
@@ -500,7 +499,6 @@
                 <com.nex3z.togglebuttongroup.button.LabelToggle
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_10sdp"
                     android:text="Japanese"
                     android:textSize="@dimen/_14ssp"
                     app:tbgMarkerColor="@color/indicatioractive" />
@@ -508,7 +506,6 @@
                 <com.nex3z.togglebuttongroup.button.LabelToggle
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_10sdp"
                     android:text="Indian"
                     android:textSize="@dimen/_14ssp"
                     app:tbgMarkerColor="@color/indicatioractive" />
