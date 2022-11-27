@@ -293,6 +293,10 @@ Oho! does not knowingly collect any Personal Identifiable Information from child
     <string name="cannot_change_schedule_disclaimer">We do not allow changing schedule during the dating phase please come back on <b>Monday</b> next week when matching phase begins.</string>
     <string name="lorem_ipsum_2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s</string>
     <string name="dummy_height">5\'11\"</string>
+    <string name="female">Female</string>
+    <string name="both">Other</string>
+    <string name="male">Male</string>
+    <string name="preference_settings">Preference Settings</string>
     <string-array name="evening_time_slots_array">
         <item>06:00 PM</item>
         <item>07:00 PM</item>
@@ -302,5 +306,13 @@ Oho! does not knowingly collect any Personal Identifiable Information from child
         <item>11:00 PM</item>
         <item>12:00 PM</item>
         <item>01:00 PM</item>
+    </string-array>
+    <string-array name="rangeSliderValuesHeight">
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+    <string-array name="rangeSliderValuesAge">
+        <item>22</item>
+        <item>30</item>
     </string-array>
 </resources>

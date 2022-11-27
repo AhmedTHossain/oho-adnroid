@@ -6,6 +6,7 @@ import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.models.Swipe;
 import com.oho.oho.models.User;
 import com.oho.oho.responses.MessageResponse;
+import com.oho.oho.responses.PreferenceResponse;
 import com.oho.oho.responses.UploadProfilePhotoResponse;
 import com.oho.oho.responses.UploadPromptPhotoResponse;
 import com.oho.oho.responses.VerifyEmailResponse;
@@ -71,4 +72,8 @@ public interface APIService {
     //get likes on profile
     @GET("match/get_recommendations")
     Call<List<User>> getRecommendations(@Query("user_id") String user_id);
+
+    //get user preference
+    @GET("users/get_preference")
+    Call<PreferenceResponse> getPreference(@Query("user_id") String user_id);
 }

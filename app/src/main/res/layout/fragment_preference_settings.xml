@@ -20,7 +20,7 @@
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginBottom="@dimen/_10sdp"
             android:fontFamily="@font/ptsans_bold"
-            android:text="Preference Settings"
+            android:text="@string/preference_settings"
             android:textColor="@color/black"
             android:textSize="@dimen/_25ssp"
             android:textStyle="bold" />
@@ -69,23 +69,26 @@
                 app:tbgFlow="true">
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Male"
+                    android:text="@string/male"
                     android:textSize="@dimen/_14ssp"
                     app:tbgMarkerColor="@color/indicatioractive" />
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Female"
+                    android:text="@string/female"
                     android:textSize="@dimen/_14ssp"
                     app:tbgMarkerColor="@color/indicatioractive" />
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Both"
+                    android:text="@string/both"
                     android:textSize="@dimen/_14ssp"
                     app:tbgMarkerColor="@color/indicatioractive" />
 
@@ -107,6 +110,7 @@
                 android:layout_marginEnd="@dimen/_20sdp">
 
                 <TextView
+                    android:id="@+id/distance_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
@@ -157,6 +161,7 @@
                     android:textSize="@dimen/_14ssp" />
 
                 <TextView
+                    android:id="@+id/text_location_preference"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -183,7 +188,7 @@
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:fontFamily="@font/darkergrotesque_regular"
-                android:paddingEnd="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
                 android:paddingBottom="@dimen/_5sdp"
                 android:text="Education"
                 android:textColor="@color/black"
@@ -201,6 +206,7 @@
                 app:tbgRowSpacing="@dimen/_10sdp">
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="No Degree"
@@ -208,6 +214,7 @@
                     app:tbgMarkerColor="@color/indicatioractive" />
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="High School"
@@ -215,6 +222,7 @@
                     app:tbgMarkerColor="@color/indicatioractive" />
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Undergrad"
@@ -222,6 +230,7 @@
                     app:tbgMarkerColor="@color/indicatioractive" />
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Masters"
@@ -229,6 +238,7 @@
                     app:tbgMarkerColor="@color/indicatioractive" />
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="PHD"
@@ -272,6 +282,7 @@
                 app:tbgRowSpacing="@dimen/_10sdp">
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="White"
@@ -279,6 +290,7 @@
                     app:tbgMarkerColor="@color/indicatioractive" />
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Asian"
@@ -286,6 +298,7 @@
                     app:tbgMarkerColor="@color/indicatioractive" />
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Black"
@@ -293,6 +306,7 @@
                     app:tbgMarkerColor="@color/indicatioractive" />
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="African American"
@@ -300,6 +314,7 @@
                     app:tbgMarkerColor="@color/indicatioractive" />
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Hispanic"
@@ -307,6 +322,7 @@
                     app:tbgMarkerColor="@color/indicatioractive" />
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Latinx"
@@ -314,6 +330,7 @@
                     app:tbgMarkerColor="@color/indicatioractive" />
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Pacific Islander"
@@ -321,6 +338,7 @@
                     app:tbgMarkerColor="@color/indicatioractive" />
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="American Indian"
@@ -328,6 +346,7 @@
                     app:tbgMarkerColor="@color/indicatioractive" />
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Others"
@@ -335,6 +354,7 @@
                     app:tbgMarkerColor="@color/indicatioractive" />
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Open to All"
@@ -359,7 +379,7 @@
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:fontFamily="@font/darkergrotesque_regular"
-                android:paddingEnd="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
                 android:paddingBottom="@dimen/_5sdp"
                 android:text="Religion"
                 android:textColor="@color/black"
@@ -377,6 +397,7 @@
                 app:tbgRowSpacing="@dimen/_10sdp">
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Christian"
@@ -384,6 +405,7 @@
                     app:tbgMarkerColor="@color/indicatioractive" />
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Catholic"
@@ -391,6 +413,7 @@
                     app:tbgMarkerColor="@color/indicatioractive" />
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Jewish"
@@ -398,6 +421,7 @@
                     app:tbgMarkerColor="@color/indicatioractive" />
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Muslim"
@@ -405,6 +429,7 @@
                     app:tbgMarkerColor="@color/indicatioractive" />
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Hindu"
@@ -412,6 +437,7 @@
                     app:tbgMarkerColor="@color/indicatioractive" />
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Sikh"
@@ -419,6 +445,7 @@
                     app:tbgMarkerColor="@color/indicatioractive" />
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Agnostic"
@@ -426,6 +453,7 @@
                     app:tbgMarkerColor="@color/indicatioractive" />
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Buddhist"
@@ -433,6 +461,7 @@
                     app:tbgMarkerColor="@color/indicatioractive" />
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Spiritual / Not Religious"
@@ -440,6 +469,7 @@
                     app:tbgMarkerColor="@color/indicatioractive" />
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Atheist"
@@ -447,6 +477,7 @@
                     app:tbgMarkerColor="@color/indicatioractive" />
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Other"
@@ -490,6 +521,7 @@
                 app:tbgRowSpacing="@dimen/_10sdp">
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Italian"
@@ -497,6 +529,7 @@
                     app:tbgMarkerColor="@color/indicatioractive" />
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Japanese"
@@ -504,6 +537,7 @@
                     app:tbgMarkerColor="@color/indicatioractive" />
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Indian"
@@ -511,6 +545,7 @@
                     app:tbgMarkerColor="@color/indicatioractive" />
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Mediterranean"
@@ -518,6 +553,7 @@
                     app:tbgMarkerColor="@color/indicatioractive" />
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Korean"
@@ -525,6 +561,7 @@
                     app:tbgMarkerColor="@color/indicatioractive" />
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="American"
@@ -532,6 +569,7 @@
                     app:tbgMarkerColor="@color/indicatioractive" />
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Vegetarian"
@@ -539,6 +577,7 @@
                     app:tbgMarkerColor="@color/indicatioractive" />
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Vietnamese"
@@ -546,6 +585,7 @@
                     app:tbgMarkerColor="@color/indicatioractive" />
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Chinese"
@@ -553,6 +593,7 @@
                     app:tbgMarkerColor="@color/indicatioractive" />
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Others"
@@ -560,14 +601,114 @@
                     app:tbgMarkerColor="@color/indicatioractive" />
 
                 <com.nex3z.togglebuttongroup.button.LabelToggle
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Open to all"
                     android:textSize="@dimen/_14ssp"
                     app:tbgMarkerColor="@color/indicatioractive" />
 
-
             </com.nex3z.togglebuttongroup.MultiSelectToggleGroup>
+
+            <!-- Height range selector -->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:background="#E0E0E0" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:fontFamily="@font/darkergrotesque_regular"
+                    android:text="Height"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14ssp" />
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/height_spinner_min"
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/darkergrotesque_regular"
+                    android:text="to"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14ssp" />
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/height_spinner_max"
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <!-- Age range selector -->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:background="#E0E0E0" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:fontFamily="@font/darkergrotesque_regular"
+                    android:text="Age"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14ssp" />
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/age_spinner_min"
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/darkergrotesque_regular"
+                    android:text="to"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14ssp" />
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/age_spinner_max"
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
@@ -589,7 +730,7 @@
         android:padding="@dimen/_10sdp"
         android:text="Update"
         android:textAlignment="center"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="@dimen/_18ssp"
         android:visibility="visible"
         app:drawableEndCompat="@drawable/ic_start"
