@@ -113,4 +113,5 @@ dependencies {
 
     //toggle button group library
     implementation 'com.nex3z:toggle-button-group:1.2.3'
+    implementation 'nl.bryanderidder:themed-toggle-button-group:1.4.1'
 }

@@ -33,7 +33,7 @@ public class PreferenceSettingsFragment extends Fragment {
         binding = FragmentPreferenceSettingsBinding.inflate(inflater, container, false);
 
         initViewModel();
-//        getPreferences();
+        getPreferences();
 
         setHeightSpinner();
         setAgeSpinner();
@@ -67,11 +67,11 @@ public class PreferenceSettingsFragment extends Fragment {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item, heightList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        binding.heightSpinnerMin.setAdapter(adapter);
-        binding.heightSpinnerMax.setAdapter(adapter);
-
-        binding.heightSpinnerMin.setSelection(13);
-        binding.heightSpinnerMax.setSelection(19);
+//        binding.heightSpinnerMin.setAdapter(adapter);
+//        binding.heightSpinnerMax.setAdapter(adapter);
+//
+//        binding.heightSpinnerMin.setSelection(13);
+//        binding.heightSpinnerMax.setSelection(19);
     }
 
     private void setAgeSpinner() {
@@ -86,41 +86,47 @@ public class PreferenceSettingsFragment extends Fragment {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item, ageList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        binding.ageSpinnerMin.setAdapter(adapter);
-        binding.ageSpinnerMax.setAdapter(adapter);
-
-        binding.ageSpinnerMin.setSelection(5);
-        binding.ageSpinnerMax.setSelection(10);
+//        binding.ageSpinnerMin.setAdapter(adapter);
+//        binding.ageSpinnerMax.setAdapter(adapter);
+//
+//        binding.ageSpinnerMin.setSelection(5);
+//        binding.ageSpinnerMax.setSelection(10);
     }
 
     private void setPreferences(PreferenceResponse preferences) {
-        switch (preferences.getInterestedIn()) {
-            case "Male":
-                binding.groupInterestedIn.check(0);
-                break;
-            case "Female":
-                binding.groupInterestedIn.check(1);
-                break;
-            default:
-                binding.groupInterestedIn.check(2);
-                break;
-        }
-        binding.distanceText.setText(preferences.getDistance());
-        switch (preferences.getEducation()) {
-            case "No Degree":
-                binding.groupEducation.check(0);
-                break;
-            case "High School":
-                binding.groupEducation.check(1);
-                break;
-            case "Undergrad":
-                binding.groupEducation.check(2);
-                break;
-            case "Masters":
-                binding.groupEducation.check(3);
-                break;
-            case "PHD":
-                binding.groupEducation.check(4);
-        }
+//        switch (preferences.getInterestedIn()) {
+//            case "Male":
+//                binding.groupInterestedIn.check(0);
+//                break;
+//            case "Female":
+//                binding.groupInterestedIn.check(1);
+//                break;
+//            default:
+//                binding.groupInterestedIn.check(2);
+//                break;
+//        }
+////        binding.textDistancePreference.setText(preferences.getDistance());
+//        switch (preferences.getEducation()) {
+//            case "No Degree":
+//                binding.groupEducation.check(0);
+//                break;
+//            case "High School":
+//                binding.groupEducation.check(1);
+//                break;
+//            case "Undergrad":
+//                binding.groupEducation.check(2);
+//                break;
+//            case "Masters":
+//                binding.groupEducation.check(3);
+//                break;
+//            case "PHD":
+//                binding.groupEducation.check(4);
+//        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getPreferences();
     }
 }
