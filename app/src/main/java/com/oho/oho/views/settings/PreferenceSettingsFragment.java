@@ -1,7 +1,9 @@
 package com.oho.oho.views.settings;
 
+import android.app.Dialog;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -67,11 +69,11 @@ public class PreferenceSettingsFragment extends Fragment {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item, heightList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        binding.heightSpinnerMin.setAdapter(adapter);
-//        binding.heightSpinnerMax.setAdapter(adapter);
-//
-//        binding.heightSpinnerMin.setSelection(13);
-//        binding.heightSpinnerMax.setSelection(19);
+        binding.heightSpinnerMin.setAdapter(adapter);
+        binding.heightSpinnerMax.setAdapter(adapter);
+
+        binding.heightSpinnerMin.setSelection(13);
+        binding.heightSpinnerMax.setSelection(19);
     }
 
     private void setAgeSpinner() {
@@ -86,11 +88,11 @@ public class PreferenceSettingsFragment extends Fragment {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item, ageList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        binding.ageSpinnerMin.setAdapter(adapter);
-//        binding.ageSpinnerMax.setAdapter(adapter);
-//
-//        binding.ageSpinnerMin.setSelection(5);
-//        binding.ageSpinnerMax.setSelection(10);
+        binding.ageSpinnerMin.setAdapter(adapter);
+        binding.ageSpinnerMax.setAdapter(adapter);
+
+        binding.ageSpinnerMin.setSelection(5);
+        binding.ageSpinnerMax.setSelection(10);
     }
 
     private void setPreferences(PreferenceResponse preferences) {

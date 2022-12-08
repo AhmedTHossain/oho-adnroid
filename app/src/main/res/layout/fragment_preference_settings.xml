@@ -59,7 +59,7 @@
                 android:id="@+id/button_group_gender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
                 app:toggle_selectAnimation="fade">
@@ -103,64 +103,125 @@
             </nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup>
 
             <!-- Distance selector button -->
-            <RelativeLayout
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:fontFamily="@font/darkergrotesque_regular"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_5sdp"
+                android:text="Distance"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14ssp" />
+
+            <nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup
+                android:id="@+id/button_group_distance"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                app:toggle_selectAnimation="fade"
+                app:flexWrap="wrap">
+
+                <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+                    android:id="@+id/button_10_miles"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_margin="@dimen/_5sdp"
+                    app:toggle_text="10 miles"
+                    app:toggle_selectedBackgroundColor="@color/indicatioractive"
+                    app:toggle_backgroundColor="@color/white"
+                    app:toggle_borderWidth="@dimen/_1sdp"
+                    app:toggle_borderColor="#E0E0E0"
+                    app:toggle_textPadding="@dimen/_5sdp"/>
+
+                <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+                    android:id="@+id/button_20_miles"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_margin="@dimen/_5sdp"
+                    app:toggle_text="20 miles"
+                    app:toggle_selectedBackgroundColor="@color/indicatioractive"
+                    app:toggle_backgroundColor="@color/white"
+                    app:toggle_borderWidth="@dimen/_1sdp"
+                    app:toggle_borderColor="#E0E0E0"
+                    app:toggle_textPadding="@dimen/_5sdp"/>
+
+                <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+                    android:id="@+id/button_30_miles"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_margin="@dimen/_5sdp"
+                    app:toggle_text="30 miles"
+                    app:toggle_selectedBackgroundColor="@color/indicatioractive"
+                    app:toggle_backgroundColor="@color/white"
+                    app:toggle_borderWidth="@dimen/_1sdp"
+                    app:toggle_borderColor="#E0E0E0"
+                    app:toggle_textPadding="@dimen/_5sdp"/>
+
+                <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+                    android:id="@+id/button_40_miles"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_margin="@dimen/_5sdp"
+                    app:toggle_text="40 miles"
+                    app:toggle_selectedBackgroundColor="@color/indicatioractive"
+                    app:toggle_backgroundColor="@color/white"
+                    app:toggle_borderWidth="@dimen/_1sdp"
+                    app:toggle_borderColor="#E0E0E0"
+                    app:toggle_textPadding="@dimen/_5sdp"/>
+
+                <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+                    android:id="@+id/button_50_miles"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_margin="@dimen/_5sdp"
+                    app:toggle_text="50 miles"
+                    app:toggle_selectedBackgroundColor="@color/indicatioractive"
+                    app:toggle_backgroundColor="@color/white"
+                    app:toggle_borderWidth="@dimen/_1sdp"
+                    app:toggle_borderColor="#E0E0E0"
+                    app:toggle_textPadding="@dimen/_5sdp"/>
+
+            </nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_15sdp"
-                android:layout_marginEnd="@dimen/_20sdp">
-
-                <TextView
-                    android:id="@+id/text_distance_preference"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:fontFamily="@font/darkergrotesque_regular"
-                    android:paddingTop="@dimen/_5sdp"
-                    android:paddingBottom="@dimen/_5sdp"
-                    android:text="Distance"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_14ssp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:fontFamily="@font/darkergrotesque_bold"
-                    android:text="20 miles"
-                    android:textColor="@color/indicatioractive"
-                    android:textSize="@dimen/_14ssp" />
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1sdp"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
-                android:background="#E0E0E0" />
+                android:fontFamily="@font/darkergrotesque_regular"
+                android:paddingBottom="@dimen/_5sdp"
+                android:text="Location"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14ssp" />
 
             <!-- Location picker button -->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:layout_marginEnd="@dimen/_20sdp">
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/border_drawable">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
+                    android:layout_toStartOf="@id/text_location_preference"
                     android:layout_centerVertical="true"
                     android:fontFamily="@font/darkergrotesque_regular"
                     android:paddingTop="@dimen/_5sdp"
                     android:paddingBottom="@dimen/_5sdp"
-                    android:text="Location"
+                    android:text="Change location"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_14ssp" />
+                    android:textSize="@dimen/_14ssp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"/>
 
                 <TextView
                     android:id="@+id/text_location_preference"
@@ -171,16 +232,11 @@
                     android:fontFamily="@font/darkergrotesque_bold"
                     android:text="Fairfax, VA"
                     android:textColor="@color/indicatioractive"
-                    android:textSize="@dimen/_14ssp" />
+                    android:textSize="@dimen/_14ssp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"/>
             </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1sdp"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
-                android:background="#E0E0E0" />
 
             <!-- Education button group -->
             <TextView
@@ -198,7 +254,7 @@
                 android:id="@+id/button_group_education"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
                 app:toggle_selectAnimation="fade"
@@ -282,7 +338,7 @@
                 android:id="@+id/button_group_race"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
                 app:toggle_selectAnimation="fade"
@@ -415,7 +471,7 @@
                 android:id="@+id/button_group_religion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
                 app:toggle_selectAnimation="fade"
@@ -572,7 +628,7 @@
                 android:id="@+id/button_group_cuisine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
                 app:toggle_selectAnimation="fade"
@@ -812,29 +868,29 @@
                     android:layout_weight="3" />
 
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/update_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:background="@drawable/border_rounded_corner"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/darkergrotesque_regular"
+                android:padding="@dimen/_10sdp"
+                android:text="Update"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_18ssp"
+                android:visibility="visible"
+                app:drawableEndCompat="@drawable/ic_start"
+                app:drawableTint="@color/white" />
         </LinearLayout>
     </ScrollView>
-
-    <TextView
-        android:id="@+id/update_profile"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="center"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginEnd="@dimen/_20sdp"
-        android:layout_marginBottom="@dimen/_20sdp"
-        android:background="@drawable/border_rounded_corner_disabled"
-        android:clickable="true"
-        android:focusable="true"
-        android:fontFamily="@font/darkergrotesque_regular"
-        android:padding="@dimen/_10sdp"
-        android:text="Update"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_18ssp"
-        android:visibility="visible"
-        app:drawableEndCompat="@drawable/ic_start"
-        app:drawableTint="@color/white" />
 </RelativeLayout>
