@@ -13,6 +13,8 @@ public class PreferenceSettingsViewModel extends AndroidViewModel {
 
     private PreferenceSettingsRepository repository;
     public LiveData<PreferenceResponse> preferenceResponse;
+    public LiveData<String> userLocation;
+    public LiveData<Boolean> ifPreferenceUpdated;
 
     public LiveData<Boolean> ifUploaded;
 
@@ -23,5 +25,13 @@ public class PreferenceSettingsViewModel extends AndroidViewModel {
 
     public void getProfilePreference(String user_id){
         preferenceResponse = repository.getUserPreference(user_id);
+    }
+
+    public void getStoredUserLocation(int user_id){
+        userLocation = repository.getUserLocation(user_id);
+    }
+
+    public void updatePreference(PreferenceResponse preferences){
+        ifPreferenceUpdated = repository.updatePreference(preferences);
     }
 }

@@ -71,7 +71,7 @@ public class HomeFragment extends Fragment implements SwipeListener {
 
     @Override
     public void onSwipe(int swipeDirection, SeekBar seekBar) {
-        playSwipeRightSound();
+//        playSwipeRightSound();
         Log.d("Home", "swipe value = " + swipeDirection);
         if (swipeDirection == -1) {
             vibrate();

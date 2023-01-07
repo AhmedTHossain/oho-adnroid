@@ -3,13 +3,15 @@ package com.oho.oho.responses;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class PreferenceResponse {
     @SerializedName("budget")
     @Expose
     private String budget;
     @SerializedName("cuisine")
     @Expose
-    private String cuisine;
+    private List<String> cuisine = null;
     @SerializedName("distance")
     @Expose
     private Integer distance;
@@ -44,6 +46,9 @@ public class PreferenceResponse {
     @Expose
     private Integer userId;
 
+    public PreferenceResponse() {
+    }
+
     public String getBudget() {
         return budget;
     }
@@ -52,11 +57,11 @@ public class PreferenceResponse {
         this.budget = budget;
     }
 
-    public String getCuisine() {
+    public List<String> getCuisine() {
         return cuisine;
     }
 
-    public void setCuisine(String cuisine) {
+    public void setCuisine(List<String> cuisine) {
         this.cuisine = cuisine;
     }
 

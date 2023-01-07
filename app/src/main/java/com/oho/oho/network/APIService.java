@@ -36,6 +36,9 @@ public interface APIService {
     @PUT("users/update")
     Call<Profile> updateUser(@Body Profile profile);
 
+    @GET("users/get_profile")
+    Call<Profile> getUserProfile(@Query("user_id") int user_id);
+
     @Multipart
     @POST("upload/upload_profile_picture")
     Call<UploadProfilePhotoResponse> uploadProfilePhoto(@Part("user_id") RequestBody user_id, @Part MultipartBody.Part file);
@@ -76,4 +79,8 @@ public interface APIService {
     //get user preference
     @GET("users/get_preference")
     Call<PreferenceResponse> getPreference(@Query("user_id") String user_id);
+
+    //update user preference
+    @PUT("users/update/preference")
+    Call<PreferenceResponse> updatePreference(@Body PreferenceResponse preferenceResponse);
 }

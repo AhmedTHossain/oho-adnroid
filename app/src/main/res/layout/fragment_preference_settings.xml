@@ -34,9 +34,9 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/update_profile"
         android:layout_below="@id/title_view"
-        android:scrollbars="vertical">
+        android:scrollbars="vertical"
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -200,6 +200,7 @@
 
             <!-- Location picker button -->
             <RelativeLayout
+                android:id="@+id/button_get_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_15sdp"
@@ -230,7 +231,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:fontFamily="@font/darkergrotesque_bold"
-                    android:text="Fairfax, VA"
+                    android:text=""
                     android:textColor="@color/indicatioractive"
                     android:textSize="@dimen/_14ssp"
                     android:layout_marginEnd="@dimen/_10sdp"
@@ -342,7 +343,7 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
                 app:toggle_selectAnimation="fade"
-                app:toggle_selectableAmount="3"
+                app:toggle_selectableAmount="9"
                 app:flexWrap="wrap">
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
@@ -648,11 +649,11 @@
                     app:toggle_textPadding="@dimen/_5sdp"/>
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-                    android:id="@+id/button_japaneese"
+                    android:id="@+id/button_japanese"
                     android:layout_width="wrap_content"
                     android:layout_height="38dp"
                     android:layout_margin="@dimen/_5sdp"
-                    app:toggle_text="Japaneese"
+                    app:toggle_text="Japanese"
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_backgroundColor="@color/white"
                     app:toggle_borderWidth="@dimen/_1sdp"
@@ -870,7 +871,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/update_profile"
+                android:id="@+id/update_preferences"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -893,4 +894,14 @@
                 app:drawableTint="@color/white" />
         </LinearLayout>
     </ScrollView>
+
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/update_preferences_progress"
+        style="@style/SpinKitView.Large.Circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        app:SpinKit_Color="@color/indicatioractive"
+        android:visibility="gone"
+        android:elevation="@dimen/_20sdp"/>
 </RelativeLayout>
