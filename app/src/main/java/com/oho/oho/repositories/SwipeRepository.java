@@ -28,7 +28,8 @@ public class SwipeRepository {
         this.context = context;
     }
 
-    public void swipeRecommendedProfile(Swipe swipeProfile) {
+    public MutableLiveData<Boolean> swipeRecommendedProfile(Swipe swipeProfile) {
+        MutableLiveData<Boolean> isSwipeSuccessful = new MutableLiveData<>();
         APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
         Call<MessageResponse> call = apiService.swipeProfile(swipeProfile);
         call.enqueue(new Callback<MessageResponse>() {
@@ -37,14 +38,17 @@ public class SwipeRepository {
                 MessageResponse messageResponse = response.body();
                 if (messageResponse != null) {
                     Log.d("SwipeRepository","swipe api response: "+ messageResponse.getMessage());
+                    isSwipeSuccessful.setValue(true);
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<MessageResponse> call, @NonNull Throwable t) {
                 Log.d("SwipeRepository","swipe api response: "+ t.getMessage());
+                isSwipeSuccessful.setValue(false);
             }
         });
+        return isSwipeSuccessful;
     }
 
     public MutableLiveData<List<User>> getRecommendedProfiles(String user_id){
@@ -56,7 +60,7 @@ public class SwipeRepository {
             public void onResponse(@NonNull Call<List<User>> call, @NonNull Response<List<User>> response) {
                 if (response.body()!=null)
                     recommendedProfilesList.setValue(response.body());
-                Toast.makeText(context,"All profiles loaded successfully!",Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context,"All profiles loaded successfully!",Toast.LENGTH_SHORT).show();
             }
 
             @Override

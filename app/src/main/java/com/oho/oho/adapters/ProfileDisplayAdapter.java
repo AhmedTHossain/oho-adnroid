@@ -28,16 +28,19 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter{
     private SwipeListener listener;
     private Context context;
 
+    private String user_type = "";
+
     private final int VIEW_TYPE_LEFT = -1;
     private final int VIEW_TYPE_INFO = 0;
     private final int VIEW_TYPE_RIGHT = 1;
     private final int VIEW_TYPE_SWIPE = 2;
 
-    public ProfileDisplayAdapter(ArrayList<PromptAnswer> promptArrayList, User userProfile, SwipeListener listener, Context context) {
+    public ProfileDisplayAdapter(ArrayList<PromptAnswer> promptArrayList, User userProfile, SwipeListener listener, Context context, String user_type ) {
         this.promptArrayList = promptArrayList;
         this.context = context;
         this.userProfile = userProfile;
         this.listener = listener;
+        this.user_type = user_type;
     }
 
     @NonNull
@@ -65,6 +68,8 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter{
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         switch (getItemViewType(position)){
             case VIEW_TYPE_INFO:
+                if (!user_type.equals("self"))
+                    ((Holder1) holder).distance.setVisibility(View.GONE);
                 String name_age = userProfile.getName()+", "+userProfile.getAge();
 
                 ((Holder1) holder).name.setText(name_age);
@@ -76,7 +81,14 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter{
                 ((Holder1) holder).height.setText(String.valueOf(userProfile.getHeight()));
                 ((Holder1) holder).race.setText(userProfile.getRace());
                 ((Holder1) holder).religion.setText(userProfile.getReligion());
-                ((Holder1) holder).vaccinated.setText(userProfile.getVaccinated());
+                switch (userProfile.getVaccinated()){
+                    case "true":
+                        ((Holder1) holder).vaccinated.setText("Vaccinated");
+                        break;
+                    case "false":
+                        ((Holder1) holder).vaccinated.setText("Not Vaccinated");
+                        break;
+                }
 //                ((Holder1) holder).distance.setText(userProfile.getDistance());
                 Glide.with(context)
                         .load(userProfile.getProfilePicture())
@@ -95,7 +107,7 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter{
                 ((Holder2) holder).seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                     @Override
                     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                       listener.onSwipe(progress,seekBar);
+                       listener.onSwipe(progress,seekBar,userProfile.getId());
                     }
 
                     @Override

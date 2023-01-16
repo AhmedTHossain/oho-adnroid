@@ -47,8 +47,10 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
 
     MediaPlayer mp;
     private HomeViewModel homeViewModel;
-    private int user_type;
+    private String user_type = "other";
     private ArrayList<User> recommendedProfiles;
+
+    private int profileToShow = -1;
 
     String mockProfileDisplayed = "female";
 
@@ -89,6 +91,7 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
         homeViewModel.recommendedProfiles.observe(getViewLifecycleOwner(), recommendedList -> {
             if (recommendedList != null) {
                 if (recommendedList.size() != 0) {
+                    profileToShow = homeViewModel.getProfileToShow();
                     recommendedProfiles.addAll(recommendedList);
                     showRecommendations();
                 } else
@@ -98,7 +101,7 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
     }
 
     @Override
-    public void onSwipe(int swipeDirection, SeekBar seekBar) {
+    public void onSwipe(int swipeDirection, SeekBar seekBar, int id) {
 //        playSwipeRightSound();
         Log.d("Home", "swipe value = " + swipeDirection);
         if (swipeDirection == -1) {
@@ -108,16 +111,16 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    //TODO: show the next recommended profile from the API
-                    swipeProfile(1, 2, 0);
-                    if (user_type > 0) {
-                        requireActivity().getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.frame_layout, new LikeYouFragment())
-                                .addToBackStack(null)
-                                .commit();
-                    } else {
-//                        showMaleProfile();
-                    }
+                    //TODO: set the userId of the currently logged in user
+                    swipeProfile(99, id, swipeDirection);
+//                    if (user_type > 0) {
+//                        requireActivity().getSupportFragmentManager().beginTransaction()
+//                                .replace(R.id.frame_layout, new LikeYouFragment())
+//                                .addToBackStack(null)
+//                                .commit();
+//                    } else {
+////                        showMaleProfile();
+//                    }
                 }
             }, 250);
         } else if (swipeDirection == 1) {
@@ -127,13 +130,13 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    //TODO: show the next recommended profile from the API
-                    swipeProfile(1, 2, 1);
+                    //TODO: set the userId of the currently logged in user
+                    swipeProfile(99, id, swipeDirection);
 
-                    requireActivity().getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.frame_layout, new MessagesFragment())
-                            .addToBackStack(null)
-                            .commit();
+//                    requireActivity().getSupportFragmentManager().beginTransaction()
+//                            .replace(R.id.frame_layout, new MessagesFragment())
+//                            .addToBackStack(null)
+//                            .commit();
                 }
             }, 250);
         } else {
@@ -160,12 +163,9 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
         }
     }
 
-    public void setProfile(ArrayList<User> profilesArrayList) {
-        ArrayList<PromptAnswer> promptArrayList = new ArrayList<>();
+    public void setProfile(User user) {
 
-        User user = profilesArrayList.get(0);
-
-        promptArrayList.addAll(user.getPromptAnswers());
+        ArrayList<PromptAnswer> promptArrayList = new ArrayList<>(user.getPromptAnswers());
 
 
         //so that all the prompts are shown without hiding the first and last one under the profile info view and the swipe view
@@ -174,7 +174,7 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
 
         User userProfile = new User(user.getAge(),user.getBio(),user.getBudget(),user.getCity(),user.getDob(),user.getEducation(),user.getEmail(),user.getHeight(),user.getId(),user.getLat(),user.getLon(),user.getName(),user.getOccupation(),user.getPhone(),user.getProfilePicture(),user.getPromptAnswers(),user.getRace(),user.getReligion(),user.getSex(),user.getState(),user.getVaccinated());
 
-        ProfileDisplayAdapter adapter = new ProfileDisplayAdapter(promptArrayList, userProfile, this, requireContext());
+        ProfileDisplayAdapter adapter = new ProfileDisplayAdapter(promptArrayList, userProfile, this, requireContext(), user_type);
         binding.recyclerviewPromptSection.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recyclerviewPromptSection.setAdapter(adapter);
     }
@@ -185,10 +185,20 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
 
     private void swipeProfile(int userId, int profileShown, int direction) {
         Swipe swipeProfile = new Swipe();
-        swipeProfile.setUserId(1);
-        swipeProfile.setProfileShown(2);
+        swipeProfile.setUserId(userId);
+        swipeProfile.setProfileShown(profileShown);
         swipeProfile.setDirection(direction);
         homeViewModel.swipeUserProfile(swipeProfile);
+        homeViewModel.isSwipeSuccessful.observe(getViewLifecycleOwner(), isSuccessful -> {
+            if (isSuccessful){
+                profileToShow++;
+                if (profileToShow < recommendedProfiles.size()){
+                    User user = recommendedProfiles.get(profileToShow);
+                    setProfile(user);
+                } else
+                    showNoRecommendationsDisclaimer();
+            }
+        });
     }
 
     private void playSwipeRightSound() {
@@ -207,11 +217,19 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
        binding.openPreferenceSettingsButton.setOnClickListener(this);
     }
 
+    private void noMoreRecommendationsDisclaimer(){
+        binding.noMoreRecommendationsLayout.setVisibility(View.VISIBLE);
+        binding.recommendationsAvailableLayout.setVisibility(View.GONE);
+        binding.progressLoadingRecommendations.setVisibility(View.GONE);
+    }
+
     private void showRecommendations() {
         Toast.makeText(getContext(),"Number of recommendations = "+recommendedProfiles.size(),Toast.LENGTH_LONG).show();
         binding.progressLoadingRecommendations.setVisibility(View.GONE);
         binding.recommendationsAvailableLayout.setVisibility(View.VISIBLE);
-        setProfile(recommendedProfiles);
+
+        User user = recommendedProfiles.get(profileToShow);
+        setProfile(user);
     }
 
     @Override

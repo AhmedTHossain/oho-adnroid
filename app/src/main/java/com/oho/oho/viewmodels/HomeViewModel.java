@@ -16,6 +16,8 @@ public class HomeViewModel extends AndroidViewModel {
 
     private SwipeRepository swipeRepository;
     public LiveData<List<User>> recommendedProfiles;
+    public int profileToShow;
+    public LiveData<Boolean> isSwipeSuccessful;
 
     public HomeViewModel(@NonNull Application application) {
         super(application);
@@ -24,9 +26,19 @@ public class HomeViewModel extends AndroidViewModel {
 
     public void getRecommendation(int user_id){
         recommendedProfiles = swipeRepository.getRecommendedProfiles(String.valueOf(user_id));
+
+        profileToShow = 0;
     }
 
     public void swipeUserProfile(Swipe swipeProfile){
-        swipeRepository.swipeRecommendedProfile(swipeProfile);
+        isSwipeSuccessful = swipeRepository.swipeRecommendedProfile(swipeProfile);
+    }
+
+    public void setProfileToShow(int id){
+        profileToShow = id;
+    }
+
+    public int getProfileToShow(){
+        return profileToShow;
     }
 }
