@@ -105,11 +105,11 @@ public class MainActivity extends AppCompatActivity{
 
     private void checkIfAvailable() {
         //Todo: Use logged in user's id instead of the hard coded one
-        availabilitySettingsViewModel.getAvailableTimeSlots(13);
+        availabilitySettingsViewModel.getAvailableTimeSlots(99);
         availabilitySettingsViewModel.selectedTimeSlotsList.observe(this, slotsSelected -> {
             preSelectedSlotsArray.clear();
             if (slotsSelected != null)
-                preSelectedSlotsArray.addAll(slotsSelected);
+//                preSelectedSlotsArray.addAll(slotsSelected);
 
             changeUI();
 
@@ -122,12 +122,12 @@ public class MainActivity extends AppCompatActivity{
         CharSequence time = DateFormat.format("E", date.getTime()); // gives like (Wednesday)
 
         if (!String.valueOf(time).equals("Fri") && !String.valueOf(time).equals("Sat") && !String.valueOf(time).equals("Sun")) {
-            if (getAvailabilityConsent() == -1) {
-                startActivity(new Intent(this, CheckAvailabilityActivity.class));
-                finish();
-            } else if (getAvailabilityConsent() == 0){
-                replaceFragment(new NotAvailableFragment());
-            } else
+//            if (getAvailabilityConsent() == -1) {
+//                startActivity(new Intent(this, CheckAvailabilityActivity.class));
+//                finish();
+//            } else if (getAvailabilityConsent() == 0){
+//                replaceFragment(new NotAvailableFragment());
+//            } else
                 replaceFragment(new HomeFragment());
         } else {
             storeAvailabilityConsent(-1);

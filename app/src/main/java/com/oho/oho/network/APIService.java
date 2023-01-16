@@ -1,5 +1,6 @@
 package com.oho.oho.network;
 
+import com.oho.oho.models.Availability;
 import com.oho.oho.models.Profile;
 import com.oho.oho.models.Prompt;
 import com.oho.oho.models.PromptAnswer;
@@ -62,7 +63,7 @@ public interface APIService {
 
     //for getting user availability
     @GET("users/availability/")
-    Call<ArrayList<String>> getAvailability(@Query("user_id") int user_id);
+    Call<Availability> getAvailability(@Query("user_id") int user_id);
 
     //swiping profile left/right
     @POST("match/swipe")

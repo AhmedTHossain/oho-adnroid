@@ -64,8 +64,8 @@ public class CompleteProfileRepository {
                 SharedPreferences mPrefs = context.getSharedPreferences("pref", Context.MODE_PRIVATE);
                 SharedPreferences.Editor prefsEditor = mPrefs.edit();
 
-                prefsEditor.putInt("profile_picture_id", response.body().getProfilePictureId());
-                prefsEditor.apply();
+//                prefsEditor.putInt("profile_picture_id", response.body().getProfilePictureId());
+//                prefsEditor.apply();
 
                 ifResponseReceived.setValue(true);
             }

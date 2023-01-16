@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.oho.oho.MainActivity;
+import com.oho.oho.models.Availability;
 import com.oho.oho.network.APIService;
 import com.oho.oho.network.RetrofitInstance;
 
@@ -40,21 +41,21 @@ public class AvailabilitySettingsRepository {
         return selectedAvailableTimeSlots;
     }
 
-    public MutableLiveData<ArrayList<String>> getUserAvailability(int user_id, Context context){
-        MutableLiveData<ArrayList<String>> selectedAvailableTimeSlots = new MutableLiveData<>();
+    public MutableLiveData<Availability> getUserAvailability(int user_id, Context context){
+        MutableLiveData<Availability> selectedAvailableTimeSlots = new MutableLiveData<>();
 
         APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
-        Call<ArrayList<String>> call = apiService.getAvailability(user_id);
-        call.enqueue(new Callback<ArrayList<String>>() {
+        Call<Availability> call = apiService.getAvailability(user_id);
+        call.enqueue(new Callback<Availability>() {
             @Override
-            public void onResponse(@NonNull Call<ArrayList<String>> call, @NonNull Response<ArrayList<String>> response) {
-                Toast.makeText(context,"response code = "+response.code(),Toast.LENGTH_SHORT).show();
+            public void onResponse(@NonNull Call<Availability> call, @NonNull Response<Availability> response) {
+                Toast.makeText(context,"response code if available = "+response.code(),Toast.LENGTH_SHORT).show();
                 selectedAvailableTimeSlots.setValue(response.body());
             }
 
             @Override
-            public void onFailure(@NonNull Call<ArrayList<String>> call, @NonNull Throwable t) {
-                Toast.makeText(context,"response code = "+t.getMessage(),Toast.LENGTH_SHORT).show();
+            public void onFailure(@NonNull Call<Availability> call, @NonNull Throwable t) {
+                Toast.makeText(context,"response code if failed = "+t.getCause(),Toast.LENGTH_SHORT).show();
             }
         });
 

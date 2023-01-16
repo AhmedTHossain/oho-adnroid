@@ -65,7 +65,8 @@
                 android:paddingBottom="@dimen/_10sdp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/textSubTitle"
-                android:textSize="@dimen/_14ssp" />
+                android:textSize="@dimen/_14ssp"
+                android:inputType="textCapWords"/>
 
             <!-- Phone Input Lyout -->
             <TextView

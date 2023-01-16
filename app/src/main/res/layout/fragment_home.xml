@@ -3,36 +3,110 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:paddingTop="@dimen/_30sdp"
     tools:context=".views.home.HomeFragment">
 
-
-    <TextView
-        android:id="@+id/screentitle"
-        android:layout_width="match_parent"
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/progress_loading_recommendations"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginBottom="@dimen/_10sdp"
-        android:fontFamily="@font/ptsans_bold"
-        android:paddingStart="@dimen/_20sdp"
-        android:paddingEnd="@dimen/_20sdp"
-        android:text="Find Your Match"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_25ssp" />
+        android:layout_centerInParent="true"
+        style="@style/SpinKitView.Large.Wave"
+        app:SpinKit_Color="@color/indicatioractive"/>
 
-    <View
-        android:id="@+id/view"
+    <RelativeLayout
+        android:id="@+id/recommendations_available_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_1sdp"
-        android:layout_below="@id/screentitle"
-        android:background="#1A000000" />
+        android:layout_height="match_parent"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/screentitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/_30sdp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:fontFamily="@font/ptsans_bold"
+            android:paddingStart="@dimen/_20sdp"
+            android:paddingEnd="@dimen/_20sdp"
+            android:text="Find Your Match"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_25ssp" />
 
-    <!-- Profile Layout -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview_prompt_section"
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_below="@id/screentitle"
+            android:background="#1A000000" />
+
+        <!-- Profile Layout -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_prompt_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/view" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/no_recommendations_available_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/view" />
+        android:layout_height="match_parent"
+        android:background="@drawable/background_gradient_screen"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="@dimen/_20sdp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:fontFamily="@font/ptsans_bold"
+                android:text="No Recommendations!"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_20ssp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:fontFamily="@font/ptsans_regular"
+                android:justificationMode="inter_word"
+                android:text="@string/no_recommendations_disclaimer"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14ssp" />
+
+            <TextView
+                android:id="@+id/open_preference_settings_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:fontFamily="@font/darkergrotesque_bold"
+                android:textAlignment="center"
+                android:text="Open Preference Settings"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16ssp"
+                android:padding="@dimen/_10sdp"
+                android:background="@drawable/border_rounded_corner"
+                android:clickable="true"
+                android:focusable="true"/>
+
+        </LinearLayout>
+    </RelativeLayout>
 
 </RelativeLayout>

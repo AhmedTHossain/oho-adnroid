@@ -47,8 +47,9 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
         selectedSlotsArray = new ArrayList<>();
         preSelectedSlotsArray = new ArrayList<>();
 
-        if (getAvailabilityConsent() != -1)
-            setAlreadySelectedTimeSlots();
+        if (getAvailabilityConsent() != -1) {
+//            setAlreadySelectedTimeSlots();
+        }
         else
             showCannotChangeAvailabilityDialog();
 
@@ -76,71 +77,71 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
                 selectedSlotsArray.clear();
                 break;
             case R.id.button_save_slots:
-                saveAvailability();
+//                saveAvailability();
                 break;
         }
     }
 
-    private void saveAvailability() {
-        if (selectedSlotsArray.size() != 0) {
-            //Call update availability API
-            availabilitySettingsViewModel.addAvailableTimeSlots(3, selectedSlotsArray);
-            availabilitySettingsViewModel.selectedTimeSlotsList.observe(this, slotsSelected -> {
-                storeAvailabilityConsent(1);
-
-                selectedSlotsArray.clear();
-                selectedSlotsArray.addAll(slotsSelected);
-
-                LayoutInflater li = LayoutInflater.from(getApplicationContext());
-                View slotsView = li.inflate(R.layout.availability_saved_dialog, null);
-
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                        this);
-                // set alert_dialog.xml to alertdialog builder
-                alertDialogBuilder.setView(slotsView);
-
-                RecyclerView recyclerView = slotsView.findViewById(R.id.recyclerview_prompt_section);
-                SavedSlotsAdapter adapter = new SavedSlotsAdapter(selectedSlotsArray);
-                recyclerView.setHasFixedSize(true);
-                recyclerView.setLayoutManager(new LinearLayoutManager(this));
-                recyclerView.setAdapter(adapter);
-
-                alertDialogBuilder.setCancelable(false)
-                        .setPositiveButton("CONFIRM", null)
-                        .setNegativeButton("CANCEL", null);
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-                    @Override
-                    public void onShow(DialogInterface dialog) {
-                        Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
-                        button.setText("EDIT");
-                        button.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.indicatioractive));
-                        button.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                alertDialog.dismiss();
-                            }
-                        });
-
-                        Button button2 = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEGATIVE);
-                        button2.setText("OK");
-                        button2.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.textTitle));
-                        button2.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                alertDialog.dismiss();
-                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                                finish();
-                            }
-                        });
-                    }
-                });
-                // show it
-                alertDialog.show();
-            });
-        } else
-            Toast.makeText(AvailabilitySettingsActivity.this, "You haven't selected any time slots yet!", Toast.LENGTH_SHORT).show();
-    }
+//    private void saveAvailability() {
+//        if (selectedSlotsArray.size() != 0) {
+//            //Call update availability API
+//            availabilitySettingsViewModel.addAvailableTimeSlots(3, selectedSlotsArray);
+//            availabilitySettingsViewModel.selectedTimeSlotsList.observe(this, slotsSelected -> {
+//                storeAvailabilityConsent(1);
+//
+//                selectedSlotsArray.clear();
+//                selectedSlotsArray.addAll(slotsSelected);
+//
+//                LayoutInflater li = LayoutInflater.from(getApplicationContext());
+//                View slotsView = li.inflate(R.layout.availability_saved_dialog, null);
+//
+//                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+//                        this);
+//                // set alert_dialog.xml to alertdialog builder
+//                alertDialogBuilder.setView(slotsView);
+//
+//                RecyclerView recyclerView = slotsView.findViewById(R.id.recyclerview_prompt_section);
+//                SavedSlotsAdapter adapter = new SavedSlotsAdapter(selectedSlotsArray);
+//                recyclerView.setHasFixedSize(true);
+//                recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//                recyclerView.setAdapter(adapter);
+//
+//                alertDialogBuilder.setCancelable(false)
+//                        .setPositiveButton("CONFIRM", null)
+//                        .setNegativeButton("CANCEL", null);
+//                AlertDialog alertDialog = alertDialogBuilder.create();
+//                alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+//                    @Override
+//                    public void onShow(DialogInterface dialog) {
+//                        Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+//                        button.setText("EDIT");
+//                        button.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.indicatioractive));
+//                        button.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                alertDialog.dismiss();
+//                            }
+//                        });
+//
+//                        Button button2 = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEGATIVE);
+//                        button2.setText("OK");
+//                        button2.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.textTitle));
+//                        button2.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                alertDialog.dismiss();
+//                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//                                finish();
+//                            }
+//                        });
+//                    }
+//                });
+//                // show it
+//                alertDialog.show();
+//            });
+//        } else
+//            Toast.makeText(AvailabilitySettingsActivity.this, "You haven't selected any time slots yet!", Toast.LENGTH_SHORT).show();
+//    }
 
     public void onCheckboxClicked(View view) {
         // Is the view now checked?
@@ -174,62 +175,62 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
         Log.d("AvailabilitySettingsActivity", "selected slots = " + selectedSlotsArray.toString());
     }
 
-    private void setAlreadySelectedTimeSlots() {
-        availabilitySettingsViewModel.getAvailableTimeSlots(3);
-        availabilitySettingsViewModel.selectedTimeSlotsList.observe(this, slotsSelected -> {
-            if (slotsSelected.size() != 0) {
-                preSelectedSlotsArray.addAll(slotsSelected);
-
-                LayoutInflater li = LayoutInflater.from(getApplicationContext());
-                View slotsView = li.inflate(R.layout.availability_saved_dialog, null);
-
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                        this);
-                // set alert_dialog.xml to alertdialog builder
-                alertDialogBuilder.setView(slotsView);
-
-                RecyclerView recyclerView = slotsView.findViewById(R.id.recyclerview_prompt_section);
-                SavedSlotsAdapter adapter = new SavedSlotsAdapter(preSelectedSlotsArray);
-                recyclerView.setHasFixedSize(true);
-                recyclerView.setLayoutManager(new LinearLayoutManager(this));
-                recyclerView.setAdapter(adapter);
-
-                alertDialogBuilder.setCancelable(false)
-                        .setPositiveButton("CONFIRM", null)
-                        .setNegativeButton("CANCEL", null);
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-                    @Override
-                    public void onShow(DialogInterface dialog) {
-                        Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
-                        button.setText("EDIT");
-                        button.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.indicatioractive));
-                        button.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                alertDialog.dismiss();
-                            }
-                        });
-
-                        Button button2 = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEGATIVE);
-                        button2.setText("OK");
-                        button2.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.textTitle));
-                        button2.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                alertDialog.dismiss();
-                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                                finish();
-                            }
-                        });
-                    }
-                });
-                // show it
-                alertDialog.show();
-            } else
-                Toast.makeText(getApplicationContext(), "Please select your available time slots for the week", Toast.LENGTH_SHORT).show();
-        });
-    }
+//    private void setAlreadySelectedTimeSlots() {
+//        availabilitySettingsViewModel.getAvailableTimeSlots(3);
+//        availabilitySettingsViewModel.selectedTimeSlotsList.observe(this, slotsSelected -> {
+//            if (slotsSelected.size() != 0) {
+//                preSelectedSlotsArray.addAll(slotsSelected);
+//
+//                LayoutInflater li = LayoutInflater.from(getApplicationContext());
+//                View slotsView = li.inflate(R.layout.availability_saved_dialog, null);
+//
+//                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+//                        this);
+//                // set alert_dialog.xml to alertdialog builder
+//                alertDialogBuilder.setView(slotsView);
+//
+//                RecyclerView recyclerView = slotsView.findViewById(R.id.recyclerview_prompt_section);
+//                SavedSlotsAdapter adapter = new SavedSlotsAdapter(preSelectedSlotsArray);
+//                recyclerView.setHasFixedSize(true);
+//                recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//                recyclerView.setAdapter(adapter);
+//
+//                alertDialogBuilder.setCancelable(false)
+//                        .setPositiveButton("CONFIRM", null)
+//                        .setNegativeButton("CANCEL", null);
+//                AlertDialog alertDialog = alertDialogBuilder.create();
+//                alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+//                    @Override
+//                    public void onShow(DialogInterface dialog) {
+//                        Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+//                        button.setText("EDIT");
+//                        button.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.indicatioractive));
+//                        button.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                alertDialog.dismiss();
+//                            }
+//                        });
+//
+//                        Button button2 = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEGATIVE);
+//                        button2.setText("OK");
+//                        button2.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.textTitle));
+//                        button2.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                alertDialog.dismiss();
+//                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//                                finish();
+//                            }
+//                        });
+//                    }
+//                });
+//                // show it
+//                alertDialog.show();
+//            } else
+//                Toast.makeText(getApplicationContext(), "Please select your available time slots for the week", Toast.LENGTH_SHORT).show();
+//        });
+//    }
 
     private void storeAvailabilityConsent(int available) {
         SharedPreferences sharedPref = this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
