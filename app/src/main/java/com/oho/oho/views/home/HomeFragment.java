@@ -68,19 +68,19 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
         initHomeViewModel();
         getProfileRecommendation();
 
-//        Bundle arguments = getArguments();
-//        if (arguments != null) {
-//            user_type = arguments.getInt("USERTYPE");
-//            if (user_type > 0) {
-//                userProfile = arguments.getParcelable("USERPROFILE");
-//
-//                promptArrayList.addAll(userProfile.getPromptAnswers());
-//
-//                setProfile(promptArrayList, userProfile);
-//
-//                binding.screentitle.setText("Liked Your Profile");
-//            }
-//        }
+        Bundle arguments = getArguments();
+        if (arguments != null) {
+            user_type = arguments.getString("USERTYPE");
+            if (user_type.equals("other")) {
+                User userProfile = arguments.getParcelable("USERPROFILE");
+
+                promptArrayList.addAll(userProfile.getPromptAnswers());
+
+                setProfile(promptArrayList, userProfile);
+
+                binding.screentitle.setText("Liked Your Profile");
+            }
+        }
 
         // Inflate the layout for this fragment
         return binding.getRoot();

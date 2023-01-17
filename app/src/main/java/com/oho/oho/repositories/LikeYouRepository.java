@@ -29,13 +29,13 @@ public class LikeYouRepository {
     public MutableLiveData<List<User>> getLikedByProfiles(int user_id){
         MutableLiveData<List<User>> userProfileList = new MutableLiveData<>();
         APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
-        Call<List<User>> call = apiService.getLikedByUserProfiles(String.valueOf(18));
+        Call<List<User>> call = apiService.getLikedByUserProfiles(String.valueOf(user_id));
         call.enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(@NonNull Call<List<User>> call, @NonNull Response<List<User>> response) {
                 if (response.body()!=null)
                     userProfileList.setValue(response.body());
-                Toast.makeText(context,"All profiles loaded successfully!",Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context,"All profiles loaded successfully! = "+ response.body().size(),Toast.LENGTH_SHORT).show();
             }
 
             @Override
