@@ -7,6 +7,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
+import com.oho.oho.models.DatesLeft;
 import com.oho.oho.models.User;
 import com.oho.oho.network.APIService;
 import com.oho.oho.network.RetrofitInstance;
@@ -46,5 +47,29 @@ public class LikeYouRepository {
             }
         });
         return userProfileList;
+    }
+
+    public MutableLiveData<Boolean> getNumberOfDatesAvailable(int user_id){
+        MutableLiveData<Boolean> isDateAvailable = new MutableLiveData<>();
+        APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
+        Call<DatesLeft> call = apiService.getNumberOfDatesLeft(user_id);
+        call.enqueue(new Callback<DatesLeft>() {
+            @Override
+            public void onResponse(@NonNull Call<DatesLeft> call, @NonNull Response<DatesLeft> response) {
+                DatesLeft datesLeft = response.body();
+                if (datesLeft != null) {
+                    if (datesLeft.getDatesLeft() > 0)
+                        isDateAvailable.setValue(true);
+                    else
+                        isDateAvailable.setValue(false);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<DatesLeft> call, @NonNull Throwable t) {
+
+            }
+        });
+        return isDateAvailable;
     }
 }

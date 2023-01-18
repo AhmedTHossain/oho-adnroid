@@ -28,11 +28,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.oho.oho.R;
 import com.oho.oho.adapters.ProfileDisplayAdapter;
 import com.oho.oho.databinding.FragmentHomeBinding;
+import com.oho.oho.databinding.FragmentLikedByBinding;
 import com.oho.oho.interfaces.SwipeListener;
 import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.models.Swipe;
 import com.oho.oho.models.User;
 import com.oho.oho.viewmodels.HomeViewModel;
+import com.oho.oho.viewmodels.LikedByViewModel;
 import com.oho.oho.views.LoginActivity;
 import com.oho.oho.views.settings.AccountSettingsActivity;
 import com.oho.oho.views.settings.PreferenceSettingsFragment;
@@ -40,21 +42,12 @@ import com.oho.oho.views.settings.PreferenceSettingsFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends Fragment implements SwipeListener, View.OnClickListener {
+public class LikedByFragment extends Fragment implements SwipeListener{
 
-    FragmentHomeBinding binding;
+    FragmentLikedByBinding binding;
+    private LikedByViewModel likedByViewModel;
 
-
-    MediaPlayer mp;
-    private HomeViewModel homeViewModel;
-    private String user_type = "other";
-    private ArrayList<User> recommendedProfiles;
-
-    private int profileToShow = -1;
-
-    String mockProfileDisplayed = "female";
-
-    public HomeFragment() {
+    public LikedByFragment() {
         // Required empty public constructor
     }
 
@@ -63,27 +56,15 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
-        recommendedProfiles = new ArrayList<>();
-        initHomeViewModel();
-        getProfileRecommendation();
+        binding = FragmentLikedByBinding.inflate(inflater, container, false);
+        initLikedByViewModel();
 
-        // Inflate the layout for this fragment
+        Bundle arguments = getArguments();
+        if (arguments != null) {
+            setProfile(arguments.getParcelable("USERPROFILE"));
+        }
+
         return binding.getRoot();
-    }
-
-    private void getProfileRecommendation() {
-        homeViewModel.getRecommendation(99);
-        homeViewModel.recommendedProfiles.observe(getViewLifecycleOwner(), recommendedList -> {
-            if (recommendedList != null) {
-                if (recommendedList.size() != 0) {
-                    profileToShow = homeViewModel.getProfileToShow();
-                    recommendedProfiles.addAll(recommendedList);
-                    showRecommendations();
-                } else
-                    showNoRecommendationsDisclaimer();
-            }
-        });
     }
 
     @Override
@@ -160,13 +141,13 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
 
         User userProfile = new User(user.getAge(),user.getBio(),user.getBudget(),user.getCity(),user.getDob(),user.getEducation(),user.getEmail(),user.getHeight(),user.getId(),user.getLat(),user.getLon(),user.getName(),user.getOccupation(),user.getPhone(),user.getProfilePicture(),user.getPromptAnswers(),user.getRace(),user.getReligion(),user.getSex(),user.getState(),user.getVaccinated());
 
-        ProfileDisplayAdapter adapter = new ProfileDisplayAdapter(promptArrayList, userProfile, this, requireContext(), user_type);
+        ProfileDisplayAdapter adapter = new ProfileDisplayAdapter(promptArrayList, userProfile, this, requireContext(),"other");
         binding.recyclerviewPromptSection.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recyclerviewPromptSection.setAdapter(adapter);
     }
 
-    private void initHomeViewModel() {
-        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+    private void initLikedByViewModel() {
+        likedByViewModel = new ViewModelProvider(this).get(LikedByViewModel.class);
     }
 
     private void swipeProfile(int userId, int profileShown, int direction) {
@@ -174,57 +155,17 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
         swipeProfile.setUserId(userId);
         swipeProfile.setProfileShown(profileShown);
         swipeProfile.setDirection(direction);
-        homeViewModel.swipeUserProfile(swipeProfile);
-        homeViewModel.isSwipeSuccessful.observe(getViewLifecycleOwner(), isSuccessful -> {
-            if (isSuccessful){
-                profileToShow++;
-                if (profileToShow < recommendedProfiles.size()){
-                    User user = recommendedProfiles.get(profileToShow);
-                    setProfile(user);
-                } else
-                    showNoRecommendationsDisclaimer();
-            }
+        likedByViewModel.swipeUserProfile(swipeProfile);
+        likedByViewModel.isSwipeSuccessful.observe(getViewLifecycleOwner(), isSuccessful -> {
+            if (isSuccessful)
+                backToLikeYouScreen();
         });
     }
 
-    private void playSwipeRightSound() {
-        mp = MediaPlayer.create(requireContext(), R.raw.positive);
-        mp.start();
-        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                mp.release();
-            }
-        });
-    }
-
-    private void showNoRecommendationsDisclaimer(){
-       binding.noRecommendationsAvailableLayout.setVisibility(View.VISIBLE);
-       binding.openPreferenceSettingsButton.setOnClickListener(this);
-    }
-
-    private void noMoreRecommendationsDisclaimer(){
-        binding.noMoreRecommendationsLayout.setVisibility(View.VISIBLE);
-        binding.recommendationsAvailableLayout.setVisibility(View.GONE);
-        binding.progressLoadingRecommendations.setVisibility(View.GONE);
-    }
-
-    private void showRecommendations() {
-        Toast.makeText(getContext(),"Number of recommendations = "+recommendedProfiles.size(),Toast.LENGTH_LONG).show();
-        binding.progressLoadingRecommendations.setVisibility(View.GONE);
-        binding.recommendationsAvailableLayout.setVisibility(View.VISIBLE);
-
-        User user = recommendedProfiles.get(profileToShow);
-        setProfile(user);
-    }
-
-    @Override
-    public void onClick(View view) {
-        if (view.getId() == binding.openPreferenceSettingsButton.getId()){
-            requireActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.frame_layout, new PreferenceSettingsFragment())
-                    .addToBackStack(null)
-                    .commit();
-        }
+    private void backToLikeYouScreen(){
+        requireActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frame_layout, new LikeYouFragment())
+                .addToBackStack(null)
+                .commit();
     }
 }

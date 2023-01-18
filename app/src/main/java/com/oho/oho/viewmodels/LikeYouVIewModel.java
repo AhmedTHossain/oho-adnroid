@@ -15,6 +15,7 @@ public class LikeYouVIewModel extends AndroidViewModel {
 
     private LikeYouRepository likeYouRepository;
     public LiveData<List<User>> userList;
+    public LiveData<Boolean> isDateAvailable;
 
     public LikeYouVIewModel(@NonNull Application application) {
         super(application);
@@ -23,5 +24,9 @@ public class LikeYouVIewModel extends AndroidViewModel {
 
     public void getAllLikedByProfiles(int user_id) {
         userList = likeYouRepository.getLikedByProfiles(user_id);
+    }
+
+    public void getNumberOfDates(int user_id){
+        isDateAvailable = likeYouRepository.getNumberOfDatesAvailable(user_id);
     }
 }

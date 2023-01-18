@@ -1,6 +1,7 @@
 package com.oho.oho.network;
 
 import com.oho.oho.models.Availability;
+import com.oho.oho.models.DatesLeft;
 import com.oho.oho.models.Profile;
 import com.oho.oho.models.Prompt;
 import com.oho.oho.models.PromptAnswer;
@@ -84,4 +85,8 @@ public interface APIService {
     //update user preference
     @PUT("users/update/preference")
     Call<PreferenceResponse> updatePreference(@Body PreferenceResponse preferenceResponse);
+
+    //get number of matches/dates left
+    @GET("users/get_date_count")
+    Call<DatesLeft> getNumberOfDatesLeft(@Query("user_id") int user_id);
 }
