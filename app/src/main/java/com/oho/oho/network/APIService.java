@@ -89,4 +89,8 @@ public interface APIService {
     //get number of matches/dates left
     @GET("users/get_date_count")
     Call<DatesLeft> getNumberOfDatesLeft(@Query("user_id") int user_id);
+
+    //check if user is available for the weekend (if the user has selected any slot for the week)
+    @GET("users/get_availability_status")
+    Call<Boolean> ifAvailable(@Query("user_id") int user_id);
 }

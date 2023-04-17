@@ -62,4 +62,21 @@ public class AvailabilitySettingsRepository {
         return selectedAvailableTimeSlots;
     }
 
+    public MutableLiveData<Boolean> checkIfAvailable(int user_id){
+        MutableLiveData<Boolean> isAvailable = new MutableLiveData<>();
+        APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
+        Call<Boolean> call = apiService.ifAvailable(user_id);
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(@NonNull Call<Boolean> call, @NonNull Response<Boolean> response) {
+                isAvailable.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Boolean> call, @NonNull Throwable t) {
+
+            }
+        });
+        return isAvailable;
+    }
 }

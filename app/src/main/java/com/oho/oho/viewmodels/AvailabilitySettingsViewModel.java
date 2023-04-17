@@ -15,6 +15,7 @@ public class AvailabilitySettingsViewModel extends AndroidViewModel {
 
     private AvailabilitySettingsRepository availabilitySettingsRepository;
     public LiveData<Availability> selectedTimeSlotsList;
+    public LiveData<Boolean> isAvailable;
 
     public AvailabilitySettingsViewModel(@NonNull Application application){
         super(application);
@@ -27,5 +28,9 @@ public class AvailabilitySettingsViewModel extends AndroidViewModel {
 
     public void getAvailableTimeSlots(int user_id){
         selectedTimeSlotsList = availabilitySettingsRepository.getUserAvailability(user_id, getApplication().getApplicationContext());
+    }
+
+    public void checkIfAvailable(int user_id){
+        isAvailable = availabilitySettingsRepository.checkIfAvailable(user_id);
     }
 }

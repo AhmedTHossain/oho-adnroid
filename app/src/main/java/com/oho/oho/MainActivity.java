@@ -30,7 +30,7 @@ import com.oho.oho.views.home.SettingsFragment;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
     private AvailabilitySettingsViewModel availabilitySettingsViewModel;
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity{
             switch (item.getItemId()) {
 
                 case R.id.home:
-                    changeUI();
+                    replaceFragment(new HomeFragment());
                     break;
                 case R.id.like:
                     replaceFragment(new LikeYouFragment());
@@ -105,14 +105,19 @@ public class MainActivity extends AppCompatActivity{
 
     private void checkIfAvailable() {
         //Todo: Use logged in user's id instead of the hard coded one
-        availabilitySettingsViewModel.getAvailableTimeSlots(99);
-        availabilitySettingsViewModel.selectedTimeSlotsList.observe(this, slotsSelected -> {
-            preSelectedSlotsArray.clear();
-            if (slotsSelected != null)
-//                preSelectedSlotsArray.addAll(slotsSelected);
+        availabilitySettingsViewModel.checkIfAvailable(99);
+        availabilitySettingsViewModel.isAvailable.observe(this, isAvailable -> {
 
-            changeUI();
-
+            //finding which day of week is today in order to check if its the dating phase or matching phase. So that the appropriate UI can be shown based on that.
+            Date date = new Date();
+            CharSequence time = DateFormat.format("E", date.getTime()); // gives like (Wednesday)
+            if (!String.valueOf(time).equals("Fri") && !String.valueOf(time).equals("Sat") && !String.valueOf(time).equals("Sun")) {
+                if (isAvailable) {
+                    startActivity(new Intent(this, CheckAvailabilityActivity.class));
+                    finish();
+                }
+            } else
+                replaceFragment(new MatchingPhaseFragment());
         });
     }
 
@@ -128,7 +133,7 @@ public class MainActivity extends AppCompatActivity{
 //            } else if (getAvailabilityConsent() == 0){
 //                replaceFragment(new NotAvailableFragment());
 //            } else
-                replaceFragment(new HomeFragment());
+            replaceFragment(new HomeFragment());
         } else {
             storeAvailabilityConsent(-1);
             replaceFragment(new MatchingPhaseFragment());
@@ -137,15 +142,16 @@ public class MainActivity extends AppCompatActivity{
 //        replaceFragment(new HomeFragment());
     }
 
-    private void initAvailabilityViewModel(){
+    private void initAvailabilityViewModel() {
         availabilitySettingsViewModel = new ViewModelProvider(this).get(AvailabilitySettingsViewModel.class);
     }
 
-    private int getAvailabilityConsent(){
+    private int getAvailabilityConsent() {
         SharedPreferences sharedPref = this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        return sharedPref.getInt("available",-1);
+        return sharedPref.getInt("available", -1);
     }
-    private void storeAvailabilityConsent(int available){
+
+    private void storeAvailabilityConsent(int available) {
         SharedPreferences sharedPref = this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putInt("available", available);
