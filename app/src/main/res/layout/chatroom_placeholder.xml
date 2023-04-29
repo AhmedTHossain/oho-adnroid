@@ -11,7 +11,7 @@
         android:orientation="horizontal">
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="0dp"
-            android:layout_height="@dimen/_70sdp"
+            android:layout_height="@dimen/_50sdp"
             android:layout_weight="1"
             android:src="@drawable/elipse"/>
         <LinearLayout
@@ -25,14 +25,13 @@
                 android:id="@+id/name_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/_16ssp"
+                android:textSize="@dimen/_14ssp"
                 android:background="@color/placeholder_background"/>
             <TextView
                 android:id="@+id/last_message_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/_16ssp"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:textSize="@dimen/_14ssp"
                 android:background="@color/placeholder_background"
                 android:maxLines="1"/>
         </LinearLayout>
