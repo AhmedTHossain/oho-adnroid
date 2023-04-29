@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,11 +10,13 @@
     tools:context=".views.chat.ChatActivity">
 
     <LinearLayout
+        android:id="@+id/layout_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_10sdp"
         android:paddingStart="@dimen/_20sdp"
-        android:paddingEnd="@dimen/_20sdp">
+        android:paddingEnd="@dimen/_20sdp"
+        android:layout_alignParentTop="true">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/title_image"
@@ -37,6 +40,46 @@
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_1sdp"
-        android:layout_below="@id/screentitle"
+        android:layout_below="@id/layout_title"
         android:background="#1A000000" />
-</LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/view"
+        android:layout_above="@id/layout_input_message"/>
+
+    <EditText
+        android:id="@+id/layout_input_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:hint="Message..."
+        android:textSize="@dimen/_14ssp"
+        android:fontFamily="@font/ptsans_regular"
+        android:paddingTop="@dimen/_15sdp"
+        android:paddingBottom="@dimen/_15sdp"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingEnd="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@id/fab_send"
+        android:background="@drawable/chat_message_input_drawable"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/fab_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/_50sdp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_5sdp">
+        <ImageView
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:src="@drawable/send" />
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
