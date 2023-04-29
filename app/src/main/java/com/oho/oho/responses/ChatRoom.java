@@ -3,7 +3,9 @@ package com.oho.oho.responses;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ChatRoom {
+import java.io.Serializable;
+
+public class ChatRoom implements Serializable {
     @SerializedName("channel_name")
     @Expose
     private String channelName;

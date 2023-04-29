@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.oho.oho.R;
+import com.oho.oho.interfaces.OnChatRoomClickListener;
 import com.oho.oho.responses.ChatRoom;
 
 import java.util.ArrayList;
@@ -20,10 +21,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHolder>{
 
     private ArrayList<ChatRoom> chatRoomArrayList;
+
+    private OnChatRoomClickListener chatRoomClickListener;
     private Context context;
 
-    public ChatRoomAdapter(ArrayList<ChatRoom> chatRoomArrayList, Context context) {
+    public ChatRoomAdapter(ArrayList<ChatRoom> chatRoomArrayList, OnChatRoomClickListener chatRoomClickListener, Context context) {
         this.chatRoomArrayList = chatRoomArrayList;
+        this.chatRoomClickListener = chatRoomClickListener;
         this.context = context;
     }
 
@@ -58,6 +62,13 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
             senderNameText = (TextView) itemView.findViewById(R.id.name_text);
             lastMessageBodyText = (TextView) itemView.findViewById(R.id.last_message_text);
             senderImage = (CircleImageView) itemView.findViewById(R.id.image);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    chatRoomClickListener.onChatRoomClick(chatRoomArrayList.get(getAdapterPosition()));
+                }
+            });
         }
 
         public TextView getSenderNameText() {

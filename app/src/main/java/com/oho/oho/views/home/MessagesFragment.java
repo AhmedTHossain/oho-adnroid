@@ -1,5 +1,6 @@
 package com.oho.oho.views.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,13 +14,15 @@ import android.view.ViewGroup;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.oho.oho.adapters.ChatRoomAdapter;
 import com.oho.oho.databinding.FragmentMessagesBinding;
+import com.oho.oho.interfaces.OnChatRoomClickListener;
 import com.oho.oho.responses.ChatRoom;
 import com.oho.oho.viewmodels.LikeYouVIewModel;
 import com.oho.oho.viewmodels.MessageViewModel;
+import com.oho.oho.views.chat.ChatActivity;
 
 import java.util.ArrayList;
 
-public class MessagesFragment extends Fragment {
+public class MessagesFragment extends Fragment implements OnChatRoomClickListener {
 
     FragmentMessagesBinding binding;
     private MessageViewModel viewModel;
@@ -84,7 +87,7 @@ public class MessagesFragment extends Fragment {
     }
 
     private void setChatRoomList(ArrayList<ChatRoom> chatRoomArrayList) {
-        ChatRoomAdapter adapter = new ChatRoomAdapter(chatRoomArrayList, requireContext());
+        ChatRoomAdapter adapter = new ChatRoomAdapter(chatRoomArrayList, this, requireContext());
         binding.recyclerview.setHasFixedSize(true);
         binding.recyclerview.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recyclerview.setAdapter(adapter);
@@ -102,5 +105,12 @@ public class MessagesFragment extends Fragment {
             shimmerViewContainer.stopShimmerAnimation();
             shimmerViewContainer.setVisibility(View.GONE);
         });
+    }
+
+    @Override
+    public void onChatRoomClick(ChatRoom chatRoom) {
+        Intent intent = new Intent(requireActivity(), ChatActivity.class);
+        intent.putExtra("chatroom", chatRoom); //where user is an instance of User object
+        startActivity(intent);
     }
 }
