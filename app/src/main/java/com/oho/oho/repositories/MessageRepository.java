@@ -33,6 +33,7 @@ public class MessageRepository {
             public void onResponse(@NonNull Call<List<ChatRoom>> call, @NonNull Response<List<ChatRoom>> response) {
                 if (response.body()!=null){
                     chatRoomList.setValue(response.body());
+                    Log.d("MessageRepository","Number of chat rooms: "+response.body().size());
                 }
             }
 

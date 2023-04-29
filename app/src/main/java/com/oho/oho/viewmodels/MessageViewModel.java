@@ -1,4 +1,27 @@
 package com.oho.oho.viewmodels;
 
-public class MessageViewModel {
+import android.app.Application;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModel;
+
+import com.oho.oho.repositories.MessageRepository;
+import com.oho.oho.responses.ChatRoom;
+
+import java.util.List;
+
+public class MessageViewModel extends AndroidViewModel {
+
+    private final MessageRepository messageRepository;
+    public LiveData<List<ChatRoom>> chatRoomList;
+    public MessageViewModel(@NonNull Application application){
+        super(application);
+        messageRepository = new MessageRepository(getApplication().getApplicationContext());
+    }
+
+    public void getAllChatRooms(int user_id){
+        chatRoomList = messageRepository.getChatRooms(user_id);
+    }
 }

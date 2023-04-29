@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
     android:paddingTop="@dimen/_30sdp"
     android:orientation="vertical"
     tools:context=".views.home.MessagesFragment">
@@ -26,6 +27,35 @@
         android:layout_height="@dimen/_1sdp"
         android:layout_below="@id/screentitle"
         android:background="#1A000000" />
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        shimmer:duration="800">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include layout="@layout/chatroom_placeholder" />
+
+            <include layout="@layout/chatroom_placeholder" />
+
+            <include layout="@layout/chatroom_placeholder" />
+
+            <include layout="@layout/chatroom_placeholder" />
+
+            <include layout="@layout/chatroom_placeholder" />
+
+            <include layout="@layout/chatroom_placeholder" />
+
+            <include layout="@layout/chatroom_placeholder" />
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"

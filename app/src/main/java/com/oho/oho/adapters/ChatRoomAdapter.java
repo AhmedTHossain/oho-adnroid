@@ -36,11 +36,12 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ChatRoomAdapter.ViewHolder holder, int position) {
-        holder.getSenderNameText().setText(chatRoomArrayList.get(position).getSenderFullName());
+        holder.getSenderNameText().setText(chatRoomArrayList.get(position).getFullName());
         holder.getLastMessageBodyText().setText(chatRoomArrayList.get(position).getLastMessage());
-        Glide.with(context)
-                .load(chatRoomArrayList.get(position).getSenderProfilePhotoUrl())
-                .into(holder.getSenderImage());
+
+//        Glide.with(context)
+//                .load(chatRoomArrayList.get(position).getProfilePhoto())
+//                .into(holder.getSenderImage());
     }
 
     @Override
