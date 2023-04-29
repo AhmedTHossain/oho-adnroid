@@ -10,24 +10,24 @@ public class ChatRoom {
     @SerializedName("created_at")
     @Expose
     private String createdAt;
+    @SerializedName("full_name")
+    @Expose
+    private String fullName;
     @SerializedName("id")
     @Expose
     private Integer id;
-    @SerializedName("participants")
-    @Expose
-    private String participants;
-    @SerializedName("status")
-    @Expose
-    private String status;
-    @SerializedName("sender_profile_photo_url")
-    @Expose
-    private String senderProfilePhotoUrl;
-    @SerializedName("sender_full_name")
-    @Expose
-    private String senderFullName;
     @SerializedName("last_message")
     @Expose
     private String lastMessage;
+    @SerializedName("participants")
+    @Expose
+    private String participants;
+    @SerializedName("profile_photo")
+    @Expose
+    private String profilePhoto;
+    @SerializedName("status")
+    @Expose
+    private String status;
 
     public String getChannelName() {
         return channelName;
@@ -45,12 +45,28 @@ public class ChatRoom {
         this.createdAt = createdAt;
     }
 
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getLastMessage() {
+        return lastMessage;
+    }
+
+    public void setLastMessage(String lastMessage) {
+        this.lastMessage = lastMessage;
     }
 
     public String getParticipants() {
@@ -61,6 +77,14 @@ public class ChatRoom {
         this.participants = participants;
     }
 
+    public String getProfilePhoto() {
+        return profilePhoto;
+    }
+
+    public void setProfilePhoto(String profilePhoto) {
+        this.profilePhoto = profilePhoto;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -69,27 +93,4 @@ public class ChatRoom {
         this.status = status;
     }
 
-    public String getSenderProfilePhotoUrl() {
-        return senderProfilePhotoUrl;
-    }
-
-    public void setSenderProfilePhotoUrl(String senderProfilePhotoUrl) {
-        this.senderProfilePhotoUrl = senderProfilePhotoUrl;
-    }
-
-    public String getSenderFullName() {
-        return senderFullName;
-    }
-
-    public void setSenderFullName(String senderFullName) {
-        this.senderFullName = senderFullName;
-    }
-
-    public String getLastMessage() {
-        return lastMessage;
-    }
-
-    public void setLastMessage(String lastMessage) {
-        this.lastMessage = lastMessage;
-    }
 }
