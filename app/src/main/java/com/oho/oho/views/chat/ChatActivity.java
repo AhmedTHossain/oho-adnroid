@@ -1,18 +1,29 @@
 package com.oho.oho.views.chat;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.oho.oho.R;
+import com.oho.oho.adapters.ChatAdapter;
+import com.oho.oho.adapters.ChatRoomAdapter;
 import com.oho.oho.databinding.ActivityChatBinding;
 import com.oho.oho.databinding.ActivityFaqactivityBinding;
+import com.oho.oho.responses.Chat;
 import com.oho.oho.responses.ChatRoom;
+import com.oho.oho.viewmodels.ChatViewModel;
+import com.oho.oho.viewmodels.MessageViewModel;
+
+import java.util.ArrayList;
 
 public class ChatActivity extends AppCompatActivity {
 
     ActivityChatBinding binding;
     private ChatRoom selectedChatRoom;
+    private ChatViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,5 +34,31 @@ public class ChatActivity extends AppCompatActivity {
         if(getIntent().getExtras() != null)
             selectedChatRoom = (ChatRoom) getIntent().getSerializableExtra("chatroom");
         binding.screentitle.setText(selectedChatRoom.getFullName());
+        initChatViewModel();
+    }
+
+    private void initChatViewModel() {
+        viewModel = new ViewModelProvider(this).get(ChatViewModel.class);
+        //TODO: replace with logged in user's id
+        viewModel.getChatHistory(selectedChatRoom.getId());
+        viewModel.chatHistory.observe(this, chatHistory -> {
+            if (chatHistory != null) {
+                ArrayList<Chat> chatList= new ArrayList<>(chatHistory);
+//                for (Chat chat: chatList)
+//                    if (chat.getChatType().equals("delegate"))
+//                        if (chat.getSender()==99)
+//                            chatList.remove(chat);
+                setChatList(chatList);
+            }
+//            shimmerViewContainer.stopShimmerAnimation();
+//            shimmerViewContainer.setVisibility(View.GONE);
+        });
+    }
+
+    private void setChatList(ArrayList<Chat> chatList) {
+        ChatAdapter adapter = new ChatAdapter(chatList, 99, this);
+        binding.recyclerview.setHasFixedSize(true);
+        binding.recyclerview.setLayoutManager(new LinearLayoutManager(this));
+        binding.recyclerview.setAdapter(adapter);
     }
 }

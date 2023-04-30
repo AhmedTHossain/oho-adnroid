@@ -7,6 +7,7 @@ import com.oho.oho.models.Prompt;
 import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.models.Swipe;
 import com.oho.oho.models.User;
+import com.oho.oho.responses.Chat;
 import com.oho.oho.responses.ChatRoom;
 import com.oho.oho.responses.MessageResponse;
 import com.oho.oho.responses.PreferenceResponse;
@@ -98,4 +99,8 @@ public interface APIService {
     //get all chat rooms for the user
     @GET("chat/rooms")
     Call<List<ChatRoom>> getChatRooms(@Query("user_id") int user_id);
+
+    //get chat history
+    @GET("chat/history")
+    Call<List<Chat>> getChatHistory(@Query("chat_id") int chat_id);
 }
