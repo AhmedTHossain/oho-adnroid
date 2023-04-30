@@ -81,5 +81,6 @@ public class ChatActivity extends AppCompatActivity {
         binding.recyclerview.setHasFixedSize(true);
         binding.recyclerview.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerview.setAdapter(adapter);
+        binding.recyclerview.scrollToPosition(chatList.size()-1);
     }
 }

@@ -100,8 +100,8 @@
         android:hint="Message..."
         android:textSize="@dimen/_14ssp"
         android:fontFamily="@font/ptsans_regular"
-        android:paddingTop="@dimen/_15sdp"
-        android:paddingBottom="@dimen/_15sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp"
         android:paddingStart="@dimen/_20sdp"
         android:paddingEnd="@dimen/_20sdp"
         android:layout_marginStart="@dimen/_10sdp"
@@ -119,8 +119,8 @@
         android:layout_marginEnd="@dimen/_10sdp"
         android:layout_marginStart="@dimen/_5sdp">
         <ImageView
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_50sdp"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
             android:src="@drawable/send" />
     </androidx.cardview.widget.CardView>
 
