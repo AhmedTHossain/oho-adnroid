@@ -44,10 +44,14 @@ public class ChatActivity extends AppCompatActivity {
         viewModel.chatHistory.observe(this, chatHistory -> {
             if (chatHistory != null) {
                 ArrayList<Chat> chatList= new ArrayList<>(chatHistory);
-//                for (Chat chat: chatList)
-//                    if (chat.getChatType().equals("delegate"))
-//                        if (chat.getSender()==99)
-//                            chatList.remove(chat);
+                int chatToRemove = 0;
+                for (int i=0; i<chatList.size(); i++)
+                    if (chatList.get(i).getChatType().equals("delegate"))
+                        if (chatList.get(i).getSender() == 99)
+                            chatToRemove = i;
+
+                chatList.remove(chatToRemove);
+
                 setChatList(chatList);
             }
 //            shimmerViewContainer.stopShimmerAnimation();
