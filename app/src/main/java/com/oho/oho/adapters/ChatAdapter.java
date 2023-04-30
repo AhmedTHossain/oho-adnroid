@@ -12,7 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.oho.oho.R;
 import com.oho.oho.responses.Chat;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
@@ -45,6 +50,13 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.getChatMessageView().setText(chatList.get(position).getBody());
+
+        Date date = new Date(chatList.get(position).getCreatedAt() * 1000L);
+        DateFormat format = new SimpleDateFormat("E, dd MMM, HH:mm, yyyy", Locale.getDefault());
+        format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
+        String formatted = format.format(date);
+
+        holder.getTimestampView().setText(formatted);
     }
 
     @Override
@@ -68,11 +80,22 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView chatMessageView;
+        private TextView chatMessageView, timestampView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             chatMessageView = (TextView) itemView.findViewById(R.id.textview_chat);
+            timestampView = (TextView) itemView.findViewById(R.id.timestamp_text);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (timestampView.getVisibility() == View.GONE)
+                        timestampView.setVisibility(View.VISIBLE);
+                    else
+                        timestampView.setVisibility(View.GONE);
+                }
+            });
         }
 
         public TextView getChatMessageView() {
@@ -81,6 +104,14 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
         public void setChatMessageView(TextView chatMessageView) {
             this.chatMessageView = chatMessageView;
+        }
+
+        public TextView getTimestampView() {
+            return timestampView;
+        }
+
+        public void setTimestampView(TextView timestampView) {
+            this.timestampView = timestampView;
         }
     }
 }
