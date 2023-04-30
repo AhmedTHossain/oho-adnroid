@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.oho.oho.R;
 import com.oho.oho.adapters.ChatAdapter;
 import com.oho.oho.adapters.ChatRoomAdapter;
@@ -24,6 +26,7 @@ public class ChatActivity extends AppCompatActivity {
     ActivityChatBinding binding;
     private ChatRoom selectedChatRoom;
     private ChatViewModel viewModel;
+    private ShimmerFrameLayout shimmerViewContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +37,27 @@ public class ChatActivity extends AppCompatActivity {
         if(getIntent().getExtras() != null)
             selectedChatRoom = (ChatRoom) getIntent().getSerializableExtra("chatroom");
         binding.screentitle.setText(selectedChatRoom.getFullName());
+        shimmerViewContainer = binding.shimmerViewContainer;
         initChatViewModel();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        binding.shimmerViewContainer.startShimmerAnimation();
+    }
+
+    @Override
+    public void onPause() {
+        binding.shimmerViewContainer.stopShimmerAnimation();
+        super.onPause();
     }
 
     private void initChatViewModel() {
         viewModel = new ViewModelProvider(this).get(ChatViewModel.class);
         //TODO: replace with logged in user's id
         viewModel.getChatHistory(selectedChatRoom.getId());
+        Toast.makeText(this,"Fetch chats for room: "+ selectedChatRoom.getId(), Toast.LENGTH_SHORT).show();
         viewModel.chatHistory.observe(this, chatHistory -> {
             if (chatHistory != null) {
                 ArrayList<Chat> chatList= new ArrayList<>(chatHistory);
@@ -54,8 +71,8 @@ public class ChatActivity extends AppCompatActivity {
 
                 setChatList(chatList);
             }
-//            shimmerViewContainer.stopShimmerAnimation();
-//            shimmerViewContainer.setVisibility(View.GONE);
+            shimmerViewContainer.stopShimmerAnimation();
+            shimmerViewContainer.setVisibility(View.GONE);
         });
     }
 

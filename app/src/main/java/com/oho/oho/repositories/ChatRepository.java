@@ -1,6 +1,7 @@
 package com.oho.oho.repositories;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -40,7 +41,8 @@ public class ChatRepository {
             @Override
             public void onFailure(@NonNull Call<List<Chat>> call, @NonNull Throwable t) {
                 chatHistory.setValue(null);
-                Toast.makeText(context,"Failed to fetch chat history!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"Failed to fetch chat history! " + t.getMessage(),Toast.LENGTH_SHORT).show();
+                Log.d("ChatRepository","Failed to fetch chat history! " + t.getMessage());
             }
         });
         return chatHistory;
