@@ -21,6 +21,7 @@ import com.oho.oho.viewmodels.MessageViewModel;
 import com.oho.oho.views.chat.ChatActivity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MessagesFragment extends Fragment implements OnChatRoomClickListener {
 
@@ -88,6 +89,8 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
 
     private void setChatRoomList(ArrayList<ChatRoom> chatRoomArrayList) {
         ChatRoomAdapter adapter = new ChatRoomAdapter(chatRoomArrayList, this, requireContext());
+
+        Collections.reverse(chatRoomArrayList);
         binding.recyclerview.setHasFixedSize(true);
         binding.recyclerview.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recyclerview.setAdapter(adapter);
@@ -110,7 +113,7 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
     @Override
     public void onChatRoomClick(ChatRoom chatRoom) {
         Intent intent = new Intent(requireActivity(), ChatActivity.class);
-        intent.putExtra("chatroom", chatRoom); //where user is an instance of User object
+        intent.putExtra("chatroom", chatRoom); //where chatroom is an instance of ChatRoom object
         startActivity(intent);
     }
 }
