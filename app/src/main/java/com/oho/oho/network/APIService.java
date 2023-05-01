@@ -1,6 +1,7 @@
 package com.oho.oho.network;
 
 import com.oho.oho.models.Availability;
+import com.oho.oho.models.CreateDeviceId;
 import com.oho.oho.models.DatesLeft;
 import com.oho.oho.models.Profile;
 import com.oho.oho.models.Prompt;
@@ -11,6 +12,7 @@ import com.oho.oho.responses.Chat;
 import com.oho.oho.responses.ChatRoom;
 import com.oho.oho.responses.MessageResponse;
 import com.oho.oho.responses.PreferenceResponse;
+import com.oho.oho.responses.StoreDeviceIdResponse;
 import com.oho.oho.responses.UploadProfilePhotoResponse;
 import com.oho.oho.responses.UploadPromptPhotoResponse;
 import com.oho.oho.responses.VerifyEmailResponse;
@@ -103,4 +105,12 @@ public interface APIService {
     //get chat history
     @GET("chat/history")
     Call<List<Chat>> getChatHistory(@Query("chat_id") int chat_id);
+
+    //store device id (FCM token) for the first time
+    @POST("users/user_device_token/create")
+    Call<StoreDeviceIdResponse> storeDeviceId(@Body CreateDeviceId createDeviceId);
+
+    //update device id (FCM token) for the first time
+    @PUT("users/user_device_token/update")
+    Call<StoreDeviceIdResponse> updateDeviceId(@Body CreateDeviceId createDeviceId);
 }

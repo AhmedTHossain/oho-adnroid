@@ -1,5 +1,6 @@
 package com.oho.oho;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
@@ -8,22 +9,24 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.format.DateFormat;
-import android.view.WindowManager;
+import android.util.Log;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 import com.oho.oho.databinding.ActivityMainBinding;
+import com.oho.oho.models.CreateDeviceId;
 import com.oho.oho.models.Profile;
-import com.oho.oho.viewmodels.AvailabilitySettingsViewModel;
-import com.oho.oho.views.home.CheckAvailabilityActivity;
+import com.oho.oho.viewmodels.MainViewModel;
 import com.oho.oho.views.home.HomeFragment;
 import com.oho.oho.views.home.LikeYouFragment;
 import com.oho.oho.views.home.MatchingPhaseFragment;
 import com.oho.oho.views.home.MessagesFragment;
-import com.oho.oho.views.home.NotAvailableFragment;
 import com.oho.oho.views.home.ProfileFragment;
 import com.oho.oho.views.home.SettingsFragment;
 
@@ -32,8 +35,9 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
     ActivityMainBinding binding;
-    private AvailabilitySettingsViewModel availabilitySettingsViewModel;
+    private MainViewModel viewModel;
 
     ArrayList<String> preSelectedSlotsArray;
 
@@ -53,9 +57,11 @@ public class MainActivity extends AppCompatActivity {
 
         initAvailabilityViewModel();
 
+        getFCMToken();
+
         preSelectedSlotsArray = new ArrayList<>();
 
-        checkIfAvailable();
+//        checkIfAvailable();
 
 //        if (checkIfAvailable().equals("false")) {
 //            replaceFragment(new NotAvailableFragment());
@@ -103,23 +109,23 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    private void checkIfAvailable() {
-        //Todo: Use logged in user's id instead of the hard coded one
-        availabilitySettingsViewModel.checkIfAvailable(99);
-        availabilitySettingsViewModel.isAvailable.observe(this, isAvailable -> {
-
-            //finding which day of week is today in order to check if its the dating phase or matching phase. So that the appropriate UI can be shown based on that.
-            Date date = new Date();
-            CharSequence time = DateFormat.format("E", date.getTime()); // gives like (Wednesday)
-            if (!String.valueOf(time).equals("Fri") && !String.valueOf(time).equals("Sat") && !String.valueOf(time).equals("Sun")) {
-                if (isAvailable) {
-                    startActivity(new Intent(this, CheckAvailabilityActivity.class));
-                    finish();
-                }
-            } else
-                replaceFragment(new MatchingPhaseFragment());
-        });
-    }
+//    private void checkIfAvailable() {
+//        //Todo: Use logged in user's id instead of the hard coded one
+//        availabilitySettingsViewModel.checkIfAvailable(99);
+//        availabilitySettingsViewModel.isAvailable.observe(this, isAvailable -> {
+//
+//            //finding which day of week is today in order to check if its the dating phase or matching phase. So that the appropriate UI can be shown based on that.
+//            Date date = new Date();
+//            CharSequence time = DateFormat.format("E", date.getTime()); // gives like (Wednesday)
+//            if (!String.valueOf(time).equals("Fri") && !String.valueOf(time).equals("Sat") && !String.valueOf(time).equals("Sun")) {
+//                if (isAvailable) {
+//                    startActivity(new Intent(this, CheckAvailabilityActivity.class));
+//                    finish();
+//                }
+//            } else
+//                replaceFragment(new MatchingPhaseFragment());
+//        });
+//    }
 
     private void changeUI() {
         //finding which day of week is today in order to check if its the dating phase or matching phase. So that the appropriate UI can be shown based on that.
@@ -143,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initAvailabilityViewModel() {
-        availabilitySettingsViewModel = new ViewModelProvider(this).get(AvailabilitySettingsViewModel.class);
+        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
     }
 
     private int getAvailabilityConsent() {
@@ -156,5 +162,50 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putInt("available", available);
         editor.commit();
+    }
+
+    private void getFCMToken() {
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
+
+                        // Get new FCM registration token
+                        String token = task.getResult();
+                        storeDeviceToken(token, 107, "android"); //TODO: later replace the hard coded user_id with logged in user's id
+
+                        // Log and toast
+                        String msg = "FCM token of this device: " + token;
+                        Log.d(TAG, msg);
+                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void storeDeviceToken(String token, int user_id, String device_type) {
+        CreateDeviceId createDeviceId = new CreateDeviceId();
+        createDeviceId.setToken(token);
+        createDeviceId.setUserId(user_id);
+        createDeviceId.setDeviceType(device_type);
+
+        viewModel.storeDeviceId(createDeviceId);
+        viewModel.storedIdResponse.observe(this, storedIdResponse -> {
+            if (storedIdResponse != null)
+                Toast.makeText(this, "Device ID found in response!!", Toast.LENGTH_SHORT).show();
+            else {
+//                Toast.makeText(this, "No Device ID found in response!!", Toast.LENGTH_SHORT).show();
+                viewModel.updateDeviceId(createDeviceId);
+                viewModel.storedIdResponse.observe(this, updatedIdResponse -> {
+                    if (updatedIdResponse != null)
+                        Toast.makeText(this, "Device ID found in response!!", Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(this, "No Device ID found in response!!", Toast.LENGTH_SHORT).show();
+                });
+            }
+        });
     }
 }
