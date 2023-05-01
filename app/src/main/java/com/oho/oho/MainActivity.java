@@ -21,6 +21,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 import com.oho.oho.databinding.ActivityMainBinding;
 import com.oho.oho.models.CreateDeviceId;
+import com.oho.oho.models.JWTTokenRequest;
 import com.oho.oho.models.Profile;
 import com.oho.oho.viewmodels.MainViewModel;
 import com.oho.oho.views.home.HomeFragment;
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         initAvailabilityViewModel();
 
         getFCMToken();
+        getJwtToken("ahmed.t.hossain@gmail.com"); //TODO: later replace the hard coded email with logged in user's email
 
         preSelectedSlotsArray = new ArrayList<>();
 
@@ -208,4 +210,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void getJwtToken(String email) {
+        JWTTokenRequest jwtTokenRequest = new JWTTokenRequest();
+        jwtTokenRequest.setEmail(email);
+        viewModel.getJwtToken(jwtTokenRequest);
+        viewModel.jwtToken.observe(this, jwtToken -> {
+            if (jwtToken != null)
+                Toast.makeText(this, "jwt token = " + jwtToken, Toast.LENGTH_LONG).show();
+            else
+                Toast.makeText(this, "Unable to fetch JWT Token!",Toast.LENGTH_LONG).show();
+        });
+    }
+
 }

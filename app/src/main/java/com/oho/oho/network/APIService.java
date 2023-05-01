@@ -3,6 +3,7 @@ package com.oho.oho.network;
 import com.oho.oho.models.Availability;
 import com.oho.oho.models.CreateDeviceId;
 import com.oho.oho.models.DatesLeft;
+import com.oho.oho.models.JWTTokenRequest;
 import com.oho.oho.models.Profile;
 import com.oho.oho.models.Prompt;
 import com.oho.oho.models.PromptAnswer;
@@ -10,6 +11,7 @@ import com.oho.oho.models.Swipe;
 import com.oho.oho.models.User;
 import com.oho.oho.responses.Chat;
 import com.oho.oho.responses.ChatRoom;
+import com.oho.oho.responses.JWTTokenResponse;
 import com.oho.oho.responses.MessageResponse;
 import com.oho.oho.responses.PreferenceResponse;
 import com.oho.oho.responses.StoreDeviceIdResponse;
@@ -113,4 +115,8 @@ public interface APIService {
     //update device id (FCM token) for the first time
     @PUT("users/user_device_token/update")
     Call<StoreDeviceIdResponse> updateDeviceId(@Body CreateDeviceId createDeviceId);
+
+    //get JWT token for socket connection
+    @POST("users/token")
+    Call<JWTTokenResponse> getJwtToken(@Body JWTTokenRequest jwtTokenRequest);
 }
