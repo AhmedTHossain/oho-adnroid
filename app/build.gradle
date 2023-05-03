@@ -117,4 +117,9 @@ dependencies {
     implementation 'com.nex3z:toggle-button-group:1.2.3'
     implementation 'nl.bryanderidder:themed-toggle-button-group:1.4.1'
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
+
+    //socket.io for real time chat
+    implementation ('io.socket:socket.io-client:2.0.0') {
+        exclude group: 'org.json', module: 'json'
+    }
 }
