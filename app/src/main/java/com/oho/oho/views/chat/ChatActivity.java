@@ -15,6 +15,7 @@ import com.oho.oho.adapters.ChatAdapter;
 import com.oho.oho.adapters.ChatRoomAdapter;
 import com.oho.oho.databinding.ActivityChatBinding;
 import com.oho.oho.databinding.ActivityFaqactivityBinding;
+import com.oho.oho.models.ChatRoomObj;
 import com.oho.oho.responses.Chat;
 import com.oho.oho.responses.ChatRoom;
 import com.oho.oho.viewmodels.ChatViewModel;
@@ -40,7 +41,11 @@ public class ChatActivity extends AppCompatActivity {
     private ChatViewModel viewModel;
     private ShimmerFrameLayout shimmerViewContainer;
 
+    public ArrayList<Chat> chatList;
+
     private Socket mSocket;
+    public ChatAdapter adapter;
+
     {
         try {
             IO.Options options = new IO.Options();
@@ -51,7 +56,7 @@ public class ChatActivity extends AppCompatActivity {
 
             mSocket = IO.socket("http://34.232.79.30:3000", options);
         } catch (URISyntaxException e) {
-            Log.d("ChatActivity","socket exception: "+ e.getMessage());
+            Log.d("ChatActivity", "socket exception: " + e.getMessage());
         }
     }
 
@@ -61,7 +66,7 @@ public class ChatActivity extends AppCompatActivity {
         binding = ActivityChatBinding.inflate(getLayoutInflater());
         setTheme(R.style.Theme_OHO);
         setContentView(binding.getRoot());
-        if(getIntent().getExtras() != null)
+        if (getIntent().getExtras() != null)
             selectedChatRoom = (ChatRoom) getIntent().getSerializableExtra("chatroom");
         binding.screentitle.setText(selectedChatRoom.getFullName());
         shimmerViewContainer = binding.shimmerViewContainer;
@@ -72,31 +77,40 @@ public class ChatActivity extends AppCompatActivity {
         mSocket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
             @Override
             public void call(Object... args) {
-                Log.d("ChatActivity","socket connected");
+                Log.d("ChatActivity", "socket connected");
             }
         });
         mSocket.on(Socket.EVENT_CONNECT_ERROR, new Emitter.Listener() {
             @Override
             public void call(Object... args) {
                 Exception e = (Exception) args[0];
-                Log.d("ChatActivity","socket connection error: " + e.getCause());
+                Log.d("ChatActivity", "socket connection error: " + e.getCause());
             }
         });
 
         mSocket.on(Socket.EVENT_DISCONNECT, new Emitter.Listener() {
             @Override
             public void call(Object... args) {
-                Log.d("ChatActivity","socket dis-connected");
+                Log.d("ChatActivity", "socket dis-connected");
             }
         });
 
         mSocket.on("227bc74c-5d49-4beb-8b70-1743a4b912e0", new Emitter.Listener() {
             @Override
             public void call(Object... args) {
-                Log.d("ChatActivity","socket connection to chatroom: Successfull!");
+                Log.d("ChatActivity", "socket connection to chatroom: Successfull!");
 
                 String message = (String) args[0];
+
                 Log.d("ChatActivity", "Received message: " + message);
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        binding.layoutInputMessage.setText("");
+                        binding.layoutInputMessage.setHint("Message...");
+                    }
+                });
             }
         });
 
@@ -111,6 +125,27 @@ public class ChatActivity extends AppCompatActivity {
 
 
 //        mSocket.disconnect();
+
+        binding.fabSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ChatRoomObj chatRoomObj = new ChatRoomObj();
+                chatRoomObj.setRoomName("227bc74c-5d49-4beb-8b70-1743a4b912e0");
+                chatRoomObj.setChat_id(21);
+
+
+                try {
+                    JSONObject jsonObject = new JSONObject().accumulate("roomName", chatRoomObj.getRoomName()).accumulate("chat_id", chatRoomObj.getChat_id());
+
+                    mSocket.emit("private message", jsonObject);
+                    mSocket.emit(chatRoomObj.getRoomName(), binding.layoutInputMessage.getText().toString());
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }
+        });
+
     }
 
     @Override
@@ -136,12 +171,12 @@ public class ChatActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(ChatViewModel.class);
         //TODO: replace with logged in user's id
         viewModel.getChatHistory(selectedChatRoom.getId());
-        Toast.makeText(this,"Fetch chats for room: "+ selectedChatRoom.getId(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Fetch chats for room: " + selectedChatRoom.getId(), Toast.LENGTH_SHORT).show();
         viewModel.chatHistory.observe(this, chatHistory -> {
             if (chatHistory != null) {
-                ArrayList<Chat> chatList= new ArrayList<>(chatHistory);
+                chatList = new ArrayList<>(chatHistory);
                 int chatToRemove = 0;
-                for (int i=0; i<chatList.size(); i++)
+                for (int i = 0; i < chatList.size(); i++)
                     if (chatList.get(i).getChatType().equals("delegate"))
                         if (chatList.get(i).getSender() == 99)
                             chatToRemove = i;
@@ -156,10 +191,10 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void setChatList(ArrayList<Chat> chatList) {
-        ChatAdapter adapter = new ChatAdapter(chatList, 99, this);
+        adapter = new ChatAdapter(chatList, 99, this);
         binding.recyclerview.setHasFixedSize(true);
         binding.recyclerview.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerview.setAdapter(adapter);
-        binding.recyclerview.scrollToPosition(chatList.size()-1);
+        binding.recyclerview.scrollToPosition(chatList.size() - 1);
     }
 }
