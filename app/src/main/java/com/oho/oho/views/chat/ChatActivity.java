@@ -45,20 +45,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private Socket mSocket;
     public ChatAdapter adapter;
-
-    {
-        try {
-            IO.Options options = new IO.Options();
-            options.auth = new HashMap<>();
-            options.auth.put("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODM1MzE2NzEsImlhdCI6MTY4MzQ0NTI3MSwic3ViIjo5OX0.JFKCWT9NhKiJ-8k7RBlnatE5wN9-5vgOptswXT5dfiI");
-
-//            options.transports = new String[]{WebSocket.NAME};
-
-            mSocket = IO.socket("http://34.232.79.30:3000", options);
-        } catch (URISyntaxException e) {
-            Log.d("ChatActivity", "socket exception: " + e.getMessage());
-        }
-    }
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,12 +53,27 @@ public class ChatActivity extends AppCompatActivity {
         binding = ActivityChatBinding.inflate(getLayoutInflater());
         setTheme(R.style.Theme_OHO);
         setContentView(binding.getRoot());
-        if (getIntent().getExtras() != null)
+        if (getIntent().getExtras() != null) {
             selectedChatRoom = (ChatRoom) getIntent().getSerializableExtra("chatroom");
+            token = (String) getIntent().getStringExtra("token");
+        }
         binding.screentitle.setText(selectedChatRoom.getFullName());
         shimmerViewContainer = binding.shimmerViewContainer;
         initChatViewModel();
 
+        {
+            try {
+                IO.Options options = new IO.Options();
+                options.auth = new HashMap<>();
+                options.auth.put("token", token);
+
+//            options.transports = new String[]{WebSocket.NAME};
+
+                mSocket = IO.socket("http://34.232.79.30:3000", options);
+            } catch (URISyntaxException e) {
+                Log.d("ChatActivity", "socket exception: " + e.getMessage());
+            }
+        }
         mSocket.connect();
 
         mSocket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {

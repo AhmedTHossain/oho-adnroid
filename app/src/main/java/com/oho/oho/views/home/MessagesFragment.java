@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
     FragmentMessagesBinding binding;
     private MessageViewModel viewModel;
     private ShimmerFrameLayout shimmerViewContainer;
+    private String token;
 
     public MessagesFragment() {
         // Required empty public constructor
@@ -127,6 +129,7 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
     public void onChatRoomClick(ChatRoom chatRoom) {
         Intent intent = new Intent(requireActivity(), ChatActivity.class);
         intent.putExtra("chatroom", chatRoom); //where chatroom is an instance of ChatRoom object
+        intent.putExtra("token", token); //a newly generated token has been sent to ChatActivity
         startActivity(intent);
     }
 
@@ -134,9 +137,12 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
         JWTTokenRequest jwtTokenRequest = new JWTTokenRequest();
         jwtTokenRequest.setEmail(email);
         viewModel.getJwtToken(jwtTokenRequest);
-        viewModel.jwtToken.observe(this, jwtToken -> {
-            if (jwtToken != null)
-                Toast.makeText(requireContext(), "jwt token = " + jwtToken, Toast.LENGTH_LONG).show();
+        viewModel.jwtToken.observe(requireActivity(), jwtToken -> {
+            if (jwtToken != null){
+                Log.d("MessageFragment","initial jwt token: "+jwtToken);
+
+                token = jwtToken;
+            }
             else
                 Toast.makeText(requireContext(), "Unable to fetch JWT Token!", Toast.LENGTH_LONG).show();
         });
