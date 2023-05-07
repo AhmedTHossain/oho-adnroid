@@ -50,9 +50,10 @@
         android:layout_height="match_parent"
         android:layout_below="@id/view"
         android:layout_above="@id/layout_input_message"
-        android:layout_marginTop="@dimen/_20sdp"
         android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_20sdp"
+        android:paddingTop="@dimen/_20sdp"
+        android:paddingBottom="@dimen/_10sdp"
         shimmer:duration="800">
 
         <LinearLayout
@@ -87,16 +88,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/view"
-        android:layout_above="@id/layout_input_message"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginEnd="@dimen/_20sdp"/>
+        android:layout_above="@id/layout_input_message" />
 
     <EditText
         android:id="@+id/layout_input_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_20sdp"
         android:hint="Message..."
         android:textSize="@dimen/_14ssp"
         android:fontFamily="@font/ptsans_regular"
