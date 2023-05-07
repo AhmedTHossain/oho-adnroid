@@ -50,7 +50,7 @@ public class ChatActivity extends AppCompatActivity {
         try {
             IO.Options options = new IO.Options();
             options.auth = new HashMap<>();
-            options.auth.put("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODMxNzYzOTIsImlhdCI6MTY4MzA4OTk5Miwic3ViIjo5OX0.dneixvG-WuYMYYMf0Cm6sEhnWZBGKMTCWBjG2b5cs94");
+            options.auth.put("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODM1MzE2NzEsImlhdCI6MTY4MzQ0NTI3MSwic3ViIjo5OX0.JFKCWT9NhKiJ-8k7RBlnatE5wN9-5vgOptswXT5dfiI");
 
 //            options.transports = new String[]{WebSocket.NAME};
 

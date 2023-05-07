@@ -10,11 +10,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.oho.oho.adapters.ChatRoomAdapter;
 import com.oho.oho.databinding.FragmentMessagesBinding;
 import com.oho.oho.interfaces.OnChatRoomClickListener;
+import com.oho.oho.models.JWTTokenRequest;
 import com.oho.oho.responses.ChatRoom;
 import com.oho.oho.viewmodels.LikeYouVIewModel;
 import com.oho.oho.viewmodels.MessageViewModel;
@@ -40,6 +42,8 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
         shimmerViewContainer = binding.shimmerViewContainer;
         initMessageViewModel();
 
+        getJwtToken("tanzeerhossain@gmail.com"); //TODO: later replace the hard coded email with logged in user's email
+
 //        ArrayList<ChatRoom> chatRoomArrayList = new ArrayList<>(createDummyChatRooms());
 //        setChatRoomList(chatRoomArrayList);
 
@@ -51,6 +55,15 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
     public void onResume() {
         super.onResume();
         binding.shimmerViewContainer.startShimmerAnimation();
+        viewModel.getAllChatRooms(99);
+        viewModel.chatRoomList.observe(getViewLifecycleOwner(), chatRoomList -> {
+            if (chatRoomList != null) {
+                ArrayList<ChatRoom> chatRoomArrayList = new ArrayList<>(chatRoomList);
+                setChatRoomList(chatRoomArrayList);
+            }
+            shimmerViewContainer.stopShimmerAnimation();
+            shimmerViewContainer.setVisibility(View.GONE);
+        });
     }
 
     @Override
@@ -115,5 +128,17 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
         Intent intent = new Intent(requireActivity(), ChatActivity.class);
         intent.putExtra("chatroom", chatRoom); //where chatroom is an instance of ChatRoom object
         startActivity(intent);
+    }
+
+    private void getJwtToken(String email) {
+        JWTTokenRequest jwtTokenRequest = new JWTTokenRequest();
+        jwtTokenRequest.setEmail(email);
+        viewModel.getJwtToken(jwtTokenRequest);
+        viewModel.jwtToken.observe(this, jwtToken -> {
+            if (jwtToken != null)
+                Toast.makeText(requireContext(), "jwt token = " + jwtToken, Toast.LENGTH_LONG).show();
+            else
+                Toast.makeText(requireContext(), "Unable to fetch JWT Token!", Toast.LENGTH_LONG).show();
+        });
     }
 }

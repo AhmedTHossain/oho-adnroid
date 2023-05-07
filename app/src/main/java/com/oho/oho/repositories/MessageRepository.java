@@ -7,9 +7,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
+import com.oho.oho.models.JWTTokenRequest;
 import com.oho.oho.network.APIService;
 import com.oho.oho.network.RetrofitInstance;
 import com.oho.oho.responses.ChatRoom;
+import com.oho.oho.responses.JWTTokenResponse;
 
 import java.util.List;
 
@@ -45,5 +47,27 @@ public class MessageRepository {
             }
         });
         return chatRoomList;
+    }
+
+    public MutableLiveData<String> getJwtToken(JWTTokenRequest jwtTokenRequest){
+        MutableLiveData<String> jwtToken = new MutableLiveData<>();
+
+        APIService service = RetrofitInstance.getRetrofitClient().create(APIService.class);
+        Call<JWTTokenResponse> call = service.getJwtToken(jwtTokenRequest);
+
+        call.enqueue(new Callback<JWTTokenResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<JWTTokenResponse> call, @NonNull Response<JWTTokenResponse> response) {
+                if (response.isSuccessful()){
+                    jwtToken.setValue(response.body().getJwtToken());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<JWTTokenResponse> call, @NonNull Throwable t) {
+                jwtToken.setValue(null);
+            }
+        });
+        return jwtToken;
     }
 }

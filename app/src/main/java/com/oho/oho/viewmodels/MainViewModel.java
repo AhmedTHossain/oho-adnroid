@@ -13,7 +13,6 @@ import com.oho.oho.responses.StoreDeviceIdResponse;
 
 public class MainViewModel extends AndroidViewModel {
     public LiveData<StoreDeviceIdResponse> storedIdResponse;
-    public LiveData<String> jwtToken;
     private MainRepository repository;
 
     public MainViewModel(@NonNull Application application) {
@@ -27,9 +26,5 @@ public class MainViewModel extends AndroidViewModel {
 
     public void updateDeviceId(CreateDeviceId createDeviceId) {
         storedIdResponse = repository.updateDeviceId(createDeviceId, getApplication().getApplicationContext());
-    }
-
-    public void getJwtToken(JWTTokenRequest jwtTokenRequest){
-        jwtToken = repository.getJwtToken(jwtTokenRequest);
     }
 }

@@ -73,25 +73,4 @@ public class MainRepository {
         return storedIdResponse;
     }
 
-    public MutableLiveData<String> getJwtToken(JWTTokenRequest jwtTokenRequest){
-        MutableLiveData<String> jwtToken = new MutableLiveData<>();
-
-        APIService service = RetrofitInstance.getRetrofitClient().create(APIService.class);
-        Call<JWTTokenResponse> call = service.getJwtToken(jwtTokenRequest);
-
-        call.enqueue(new Callback<JWTTokenResponse>() {
-            @Override
-            public void onResponse(@NonNull Call<JWTTokenResponse> call, @NonNull Response<JWTTokenResponse> response) {
-                if (response.isSuccessful()){
-                    jwtToken.setValue(response.body().getJwtToken());
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<JWTTokenResponse> call, @NonNull Throwable t) {
-                jwtToken.setValue(null);
-            }
-        });
-        return jwtToken;
-    }
 }

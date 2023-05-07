@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
         initAvailabilityViewModel();
 
         getFCMToken();
-        getJwtToken("ahmed.t.hossain@gmail.com"); //TODO: later replace the hard coded email with logged in user's email
 
         preSelectedSlotsArray = new ArrayList<>();
 
@@ -208,18 +207,6 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(this, "No Device ID found in response!!", Toast.LENGTH_SHORT).show();
                 });
             }
-        });
-    }
-
-    private void getJwtToken(String email) {
-        JWTTokenRequest jwtTokenRequest = new JWTTokenRequest();
-        jwtTokenRequest.setEmail(email);
-        viewModel.getJwtToken(jwtTokenRequest);
-        viewModel.jwtToken.observe(this, jwtToken -> {
-            if (jwtToken != null)
-                Toast.makeText(this, "jwt token = " + jwtToken, Toast.LENGTH_LONG).show();
-            else
-                Toast.makeText(this, "Unable to fetch JWT Token!",Toast.LENGTH_LONG).show();
         });
     }
 
