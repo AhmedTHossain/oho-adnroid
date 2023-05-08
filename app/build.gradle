@@ -96,10 +96,6 @@ dependencies {
 
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
 
-//    //room database
-//    implementation 'androidx.room:room-runtime:2.4.1'
-//    annotationProcessor 'androidx.room:room-compiler:2.4.1'
-
     implementation 'com.ms-square:expandableTextView:0.1.4'
 
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
@@ -122,4 +118,8 @@ dependencies {
     implementation ('io.socket:socket.io-client:2.0.0') {
         exclude group: 'org.json', module: 'json'
     }
+
+    //Room Database
+    implementation "androidx.room:room-runtime:2.2.5"
+    annotationProcessor "androidx.room:room-compiler:2.2.5"
 }

@@ -102,9 +102,18 @@ public class ChatActivity extends AppCompatActivity {
             public void call(Object... args) {
                 Log.d("ChatActivity", "socket connection to chatroom: Successfull!");
 
-                String message = (String) args[0];
 
-                Log.d("ChatActivity", "Received message: " + message);
+
+                try {
+                    JSONObject messageJSON = new JSONObject(args[0].toString());
+                    String message = messageJSON.getString("message");
+                    int user_id = messageJSON.getInt("user_id");
+
+                    Log.d("ChatActivity", "Received message body: " + message);
+                    Log.d("ChatActivity", "Received message from user: " + user_id);
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
 
                 runOnUiThread(new Runnable() {
                     @Override
