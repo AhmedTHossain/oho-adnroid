@@ -53,7 +53,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
         Date date = new Date(chatList.get(position).getCreatedAt() * 1000L);
         DateFormat format = new SimpleDateFormat("E, dd MMM, HH:mm, yyyy", Locale.getDefault());
-        format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
+        format.setTimeZone(TimeZone.getDefault());
         String formatted = format.format(date);
 
         holder.getTimestampView().setText(formatted);
@@ -87,7 +87,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
             chatMessageView = (TextView) itemView.findViewById(R.id.textview_chat);
             timestampView = (TextView) itemView.findViewById(R.id.timestamp_text);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+            chatMessageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (timestampView.getVisibility() == View.GONE)

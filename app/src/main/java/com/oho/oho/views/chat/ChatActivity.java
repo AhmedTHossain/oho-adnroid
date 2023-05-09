@@ -97,31 +97,44 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-        mSocket.on("227bc74c-5d49-4beb-8b70-1743a4b912e0", new Emitter.Listener() {
+        mSocket.on(selectedChatRoom.getChannelName(), new Emitter.Listener() {
             @Override
             public void call(Object... args) {
                 Log.d("ChatActivity", "socket connection to chatroom: Successfull!");
-
-
 
                 try {
                     JSONObject messageJSON = new JSONObject(args[0].toString());
                     String message = messageJSON.getString("message");
                     int user_id = messageJSON.getInt("user_id");
+                    int time = messageJSON.getInt("time");
 
                     Log.d("ChatActivity", "Received message body: " + message);
                     Log.d("ChatActivity", "Received message from user: " + user_id);
+
+                    Chat newChat = new Chat();
+                    newChat.setChatType("private");
+                    newChat.setSender(user_id);
+                    newChat.setCreatedAt(time);
+                    newChat.setBody(message);
+
+                    chatList.add(newChat);
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            binding.layoutInputMessage.setText("");
+                            binding.layoutInputMessage.setHint("Message...");
+
+                            setChatList(chatList); //TODO: Find if there's a better way to refresh the chat list on new message to the socket
+                        }
+                    });
+
+
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
 
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        binding.layoutInputMessage.setText("");
-                        binding.layoutInputMessage.setHint("Message...");
-                    }
-                });
+
             }
         });
 
