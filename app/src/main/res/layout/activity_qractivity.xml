@@ -71,13 +71,15 @@
                     android:text="Attendance code"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp" />
+                    android:textSize="@dimen/_14ssp" />
 
                 <ImageView
                     android:id="@+id/imageview_qr_code"
                     android:layout_width="@dimen/_150sdp"
                     android:layout_height="@dimen/_150sdp"
                     android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginBottom="@dimen/_20sdp"
                     android:src="@drawable/ic_qr_code" />
             </LinearLayout>
 
@@ -89,8 +91,8 @@
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_20sdp"
-            android:fontFamily="@font/darkergrotesque_regular"
-            android:text="This is yur private code. Show this to your server so that we can understand you've arrived for your date. Thanks."
+            android:fontFamily="@font/ptsans_regular"
+            android:text="This is your private code. Show this to your server so that we can understand you've arrived for your date. Thanks."
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="@dimen/_12ssp" />

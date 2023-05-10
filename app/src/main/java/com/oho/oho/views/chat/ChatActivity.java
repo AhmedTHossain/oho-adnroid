@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -48,6 +49,7 @@ public class ChatActivity extends AppCompatActivity {
     public ChatAdapter adapter;
     private String token;
     private boolean iFSentButtonClicked = false;
+    private String qrcodeUrl = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -180,7 +182,10 @@ public class ChatActivity extends AppCompatActivity {
         binding.imageButtonShowQrcode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(ChatActivity.this,QRActivity.class);
+                intent.putExtra("qrcode",qrcodeUrl);
+                intent.putExtra("username","Ahmed Tanzeer Hossain"); //TODO: Later replace with logged in user's fullname
+                startActivity(intent);
             }
         });
 
@@ -225,6 +230,13 @@ public class ChatActivity extends AppCompatActivity {
             }
             shimmerViewContainer.stopShimmerAnimation();
             shimmerViewContainer.setVisibility(View.GONE);
+        });
+
+        viewModel.getQrCode(99,selectedChatRoom.getId()); //TODO: later replace with logged in user's id
+        viewModel.qrcode.observe(this, qrcode ->{
+            if (qrcode!=null){
+                qrcodeUrl = qrcode;
+            }
         });
     }
 

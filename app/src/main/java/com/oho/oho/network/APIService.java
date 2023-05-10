@@ -14,6 +14,7 @@ import com.oho.oho.responses.ChatRoom;
 import com.oho.oho.responses.JWTTokenResponse;
 import com.oho.oho.responses.MessageResponse;
 import com.oho.oho.responses.PreferenceResponse;
+import com.oho.oho.responses.QRCodeResponse;
 import com.oho.oho.responses.StoreDeviceIdResponse;
 import com.oho.oho.responses.UploadProfilePhotoResponse;
 import com.oho.oho.responses.UploadPromptPhotoResponse;
@@ -119,4 +120,8 @@ public interface APIService {
     //get JWT token for socket connection
     @POST("users/token")
     Call<JWTTokenResponse> getJwtToken(@Body JWTTokenRequest jwtTokenRequest);
+
+    //get QRCode for date for user
+    @GET("match/get_qr_code")
+    Call<QRCodeResponse> getQRCode(@Query("user_id") int user_id, @Query("chat_id") int chat_id);
 }

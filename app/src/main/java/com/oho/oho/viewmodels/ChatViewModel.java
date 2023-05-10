@@ -14,6 +14,7 @@ import java.util.List;
 public class ChatViewModel extends AndroidViewModel {
     private final ChatRepository chatRepository;
     public LiveData<List<Chat>> chatHistory;
+    public LiveData<String> qrcode;
 
     public ChatViewModel(@NonNull Application application) {
         super(application);
@@ -22,5 +23,9 @@ public class ChatViewModel extends AndroidViewModel {
 
     public void getChatHistory(int chat_id){
         chatHistory = chatRepository.getChatHistory(chat_id);
+    }
+
+    public void getQrCode(int user_id,int chat_id){
+        qrcode = chatRepository.getQRCode(user_id,chat_id);
     }
 }
