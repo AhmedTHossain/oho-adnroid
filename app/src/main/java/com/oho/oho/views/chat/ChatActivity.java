@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -46,6 +47,7 @@ public class ChatActivity extends AppCompatActivity {
     private Socket mSocket;
     public ChatAdapter adapter;
     private String token;
+    private boolean iFSentButtonClicked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,9 +124,6 @@ public class ChatActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            binding.layoutInputMessage.setText("");
-                            binding.layoutInputMessage.setHint("Message...");
-
                             setChatList(chatList); //TODO: Find if there's a better way to refresh the chat list on new message to the socket
                         }
                     });
@@ -153,20 +152,28 @@ public class ChatActivity extends AppCompatActivity {
         binding.fabSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ChatRoomObj chatRoomObj = new ChatRoomObj();
-                chatRoomObj.setRoomName("227bc74c-5d49-4beb-8b70-1743a4b912e0");
-                chatRoomObj.setChat_id(21);
+                if (!iFSentButtonClicked && !TextUtils.isEmpty(binding.layoutInputMessage.getText())) {
+                    iFSentButtonClicked = true;
+
+                    ChatRoomObj chatRoomObj = new ChatRoomObj();
+                    chatRoomObj.setRoomName("227bc74c-5d49-4beb-8b70-1743a4b912e0");
+                    chatRoomObj.setChat_id(21);
 
 
-                try {
-                    JSONObject jsonObject = new JSONObject().accumulate("roomName", chatRoomObj.getRoomName()).accumulate("chat_id", chatRoomObj.getChat_id());
+                    try {
+                        JSONObject jsonObject = new JSONObject().accumulate("roomName", chatRoomObj.getRoomName()).accumulate("chat_id", chatRoomObj.getChat_id());
 
-                    mSocket.emit("private message", jsonObject);
-                    mSocket.emit(chatRoomObj.getRoomName(), binding.layoutInputMessage.getText().toString());
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
+                        mSocket.emit("private message", jsonObject);
+                        mSocket.emit(chatRoomObj.getRoomName(), binding.layoutInputMessage.getText().toString());
+
+                        binding.layoutInputMessage.setText("");
+                        binding.layoutInputMessage.setHint("Message...");
+
+                        iFSentButtonClicked = false;
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
-
             }
         });
 
