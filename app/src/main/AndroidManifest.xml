@@ -14,13 +14,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OHO.Launcher"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".views.chat.QRActivity"
+            android:exported="false" />
+
         <service
-            android:name="com.oho.oho.services.PushNotificationService"
+            android:name=".services.PushNotificationService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
         <activity
             android:name=".views.chat.ChatActivity"
             android:exported="false" />

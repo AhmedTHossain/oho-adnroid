@@ -177,6 +177,13 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
+        binding.imageButtonShowQrcode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
     }
 
     @Override
