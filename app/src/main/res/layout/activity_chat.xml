@@ -10,7 +10,7 @@
     android:paddingTop="@dimen/_30sdp"
     tools:context=".views.chat.ChatActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/layout_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,19 +23,33 @@
             android:id="@+id/title_image"
             android:layout_width="@dimen/_30sdp"
             android:layout_height="@dimen/_30sdp"
-            android:src="@drawable/ic_photo_placeholder" />
+            android:src="@drawable/ic_photo_placeholder"
+            android:layout_alignParentStart="true"/>
 
         <TextView
             android:id="@+id/screentitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
             android:fontFamily="@font/ptsans_bold"
             android:paddingStart="@dimen/_10sdp"
             android:text="Jane Doe"
             android:textColor="@color/black"
-            android:textSize="@dimen/_16ssp" />
-    </LinearLayout>
+            android:textSize="@dimen/_16ssp"
+            android:layout_toEndOf="@id/title_image"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/image_button_show_qrcode"/>
+
+        <ImageView
+            android:id="@+id/image_button_show_qrcode"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:src="@drawable/ic_qr_code"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            app:tint="#B42254"
+            android:clickable="true"
+            android:focusable="true"/>
+    </RelativeLayout>
 
     <View
         android:id="@+id/view"
