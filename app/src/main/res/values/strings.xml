@@ -54,6 +54,13 @@
         <item>Healthy</item>
         <item>Open to all</item>
     </string-array>
+    <string-array name="quickmessage_list">
+        <item>Hey there!</item>
+        <item>What\'s up?</item>
+        <item>Hi, you seem interesting.</item>
+        <item>Nice pics!</item>
+        <item>I\'m intrigued by your bio!</item>
+    </string-array>
     <string-array name="prompt_list">
         <item>The most adventurous thing I did was…</item>
         <item>In a relationship I am looking for…</item>

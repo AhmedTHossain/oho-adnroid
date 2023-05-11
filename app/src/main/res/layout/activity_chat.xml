@@ -102,7 +102,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/view"
-        android:layout_above="@id/layout_input_message" />
+        android:layout_above="@id/recyclerview_quickmessages" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_quickmessages"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/layout_input_message"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_20sdp"/>
 
     <EditText
         android:id="@+id/layout_input_message"

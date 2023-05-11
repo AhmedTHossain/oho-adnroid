@@ -15,8 +15,10 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import com.oho.oho.R;
 import com.oho.oho.adapters.ChatAdapter;
 import com.oho.oho.adapters.ChatRoomAdapter;
+import com.oho.oho.adapters.QuickMessageAdapter;
 import com.oho.oho.databinding.ActivityChatBinding;
 import com.oho.oho.databinding.ActivityFaqactivityBinding;
+import com.oho.oho.interfaces.QuickMessageClickListener;
 import com.oho.oho.models.ChatRoomObj;
 import com.oho.oho.responses.Chat;
 import com.oho.oho.responses.ChatRoom;
@@ -36,7 +38,7 @@ import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 import io.socket.engineio.client.transports.WebSocket;
 
-public class ChatActivity extends AppCompatActivity {
+public class ChatActivity extends AppCompatActivity implements QuickMessageClickListener {
 
     ActivityChatBinding binding;
     private ChatRoom selectedChatRoom;
@@ -189,6 +191,8 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
+        setQuickMessages();
+
     }
 
     @Override
@@ -246,5 +250,22 @@ public class ChatActivity extends AppCompatActivity {
         binding.recyclerview.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerview.setAdapter(adapter);
         binding.recyclerview.scrollToPosition(chatList.size() - 1);
+    }
+
+    private void setQuickMessages(){
+
+        // Get the string array of quick messages from the resources
+        String[] myStringArray = getResources().getStringArray(R.array.quickmessage_list);
+
+        QuickMessageAdapter quickMessageAdapter = new QuickMessageAdapter(myStringArray,this,this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        binding.recyclerviewQuickmessages.setHasFixedSize(true);
+        binding.recyclerviewQuickmessages.setLayoutManager(layoutManager);
+        binding.recyclerviewQuickmessages.setAdapter(quickMessageAdapter);
+    }
+
+    @Override
+    public void onQuickMessageClick(String message) {
+
     }
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/textview_quickmessage"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/quick_message_drawable"
+    android:text="Hey there!"
+    android:fontFamily="@font/darkergrotesque_regular"
+    android:textColor="#B42254"
+    android:textSize="@dimen/_14ssp"
+    android:layout_marginEnd="@dimen/_10sdp"
+    android:paddingTop="@dimen/_5sdp"
+    android:paddingBottom="@dimen/_5sdp"/>
+
