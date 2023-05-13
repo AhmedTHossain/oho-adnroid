@@ -111,7 +111,8 @@
         android:layout_above="@id/layout_input_message"
         android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_20sdp"
-        android:layout_marginBottom="@dimen/_20sdp"/>
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:visibility="gone"/>
 
     <EditText
         android:id="@+id/layout_input_message"
@@ -127,7 +128,8 @@
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_alignParentBottom="true"
         android:layout_toStartOf="@id/fab_send"
-        android:background="@drawable/chat_message_input_drawable"/>
+        android:background="@drawable/chat_message_input_drawable"
+        android:visibility="visible"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/fab_send"
@@ -137,7 +139,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="@dimen/_10sdp"
-        android:layout_marginStart="@dimen/_5sdp">
+        android:layout_marginStart="@dimen/_5sdp"
+        android:visibility="visible">
         <ImageView
             android:layout_width="@dimen/_40sdp"
             android:layout_height="@dimen/_40sdp"

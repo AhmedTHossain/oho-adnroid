@@ -55,11 +55,15 @@
         <item>Open to all</item>
     </string-array>
     <string-array name="quickmessage_list">
-        <item>Hey there!</item>
-        <item>What\'s up?</item>
-        <item>Hi, you seem interesting.</item>
-        <item>Nice pics!</item>
-        <item>I\'m intrigued by your bio!</item>
+        <item>Excited for our date tomorrow :D</item>
+        <item>Yes</item>
+        <item>No</item>
+        <item>I\'m here</item>
+        <item>Be there in 15 mins</item>
+        <item>Are you here?</item>
+        <item>Be there in 30 mins</item>
+        <item>Running late!</item>
+        <item>Be there in a moment</item>
     </string-array>
     <string-array name="prompt_list">
         <item>The most adventurous thing I did was…</item>

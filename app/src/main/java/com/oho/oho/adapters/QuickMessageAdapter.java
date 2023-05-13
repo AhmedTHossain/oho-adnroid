@@ -46,7 +46,7 @@ public class QuickMessageAdapter extends RecyclerView.Adapter<QuickMessageAdapte
 
     @Override
     public int getItemCount() {
-        return quickMessageList.length-1;
+        return quickMessageList.length;
     }
 
     public class Holder extends RecyclerView.ViewHolder {

@@ -6,10 +6,12 @@
     android:layout_height="wrap_content"
     android:background="@drawable/quick_message_drawable"
     android:text="Hey there!"
-    android:fontFamily="@font/darkergrotesque_regular"
+    android:fontFamily="@font/darkergrotesque_bold"
     android:textColor="#B42254"
     android:textSize="@dimen/_14ssp"
-    android:layout_marginEnd="@dimen/_10sdp"
+    android:layout_marginEnd="@dimen/_5sdp"
+    android:layout_marginBottom="@dimen/_5sdp"
+    android:layout_marginTop="@dimen/_5sdp"
     android:paddingTop="@dimen/_5sdp"
     android:paddingBottom="@dimen/_5sdp"/>
 

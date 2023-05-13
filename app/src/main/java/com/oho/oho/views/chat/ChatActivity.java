@@ -3,6 +3,7 @@ package com.oho.oho.views.chat;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -52,6 +53,8 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
     private String token;
     private boolean iFSentButtonClicked = false;
     private String qrcodeUrl = "";
+
+    private ChatRoomObj chatRoomObj;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,30 +156,26 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
 
 //        mSocket.disconnect();
 
+        chatRoomObj = new ChatRoomObj();
+        chatRoomObj.setRoomName(selectedChatRoom.getChannelName());
+        chatRoomObj.setChat_id(selectedChatRoom.getId());
+        try {
+            JSONObject jsonObject = new JSONObject().accumulate("roomName", chatRoomObj.getRoomName()).accumulate("chat_id", chatRoomObj.getChat_id());
+
+            mSocket.emit("private message", jsonObject);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+
         binding.fabSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!iFSentButtonClicked && !TextUtils.isEmpty(binding.layoutInputMessage.getText())) {
                     iFSentButtonClicked = true;
+                    sendNewChat(binding.layoutInputMessage.getText().toString());
 
-                    ChatRoomObj chatRoomObj = new ChatRoomObj();
-                    chatRoomObj.setRoomName("227bc74c-5d49-4beb-8b70-1743a4b912e0");
-                    chatRoomObj.setChat_id(21);
-
-
-                    try {
-                        JSONObject jsonObject = new JSONObject().accumulate("roomName", chatRoomObj.getRoomName()).accumulate("chat_id", chatRoomObj.getChat_id());
-
-                        mSocket.emit("private message", jsonObject);
-                        mSocket.emit(chatRoomObj.getRoomName(), binding.layoutInputMessage.getText().toString());
-
-                        binding.layoutInputMessage.setText("");
-                        binding.layoutInputMessage.setHint("Message...");
-
-                        iFSentButtonClicked = false;
-                    } catch (JSONException e) {
-                        throw new RuntimeException(e);
-                    }
+                    binding.layoutInputMessage.setText("");
+                    binding.layoutInputMessage.setHint("Message...");
                 }
             }
         });
@@ -184,9 +183,9 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
         binding.imageButtonShowQrcode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ChatActivity.this,QRActivity.class);
-                intent.putExtra("qrcode",qrcodeUrl);
-                intent.putExtra("username","Ahmed Tanzeer Hossain"); //TODO: Later replace with logged in user's fullname
+                Intent intent = new Intent(ChatActivity.this, QRActivity.class);
+                intent.putExtra("qrcode", qrcodeUrl);
+                intent.putExtra("username", "Ahmed Tanzeer Hossain"); //TODO: Later replace with logged in user's fullname
                 startActivity(intent);
             }
         });
@@ -204,13 +203,19 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
     @Override
     public void onPause() {
         binding.shimmerViewContainer.stopShimmerAnimation();
-        mSocket.disconnect();
+        if (mSocket != null) {
+            mSocket.disconnect();
+            mSocket.off();
+        }
         super.onPause();
     }
 
     @Override
     protected void onDestroy() {
-        mSocket.disconnect();
+        if (mSocket != null) {
+            mSocket.disconnect();
+            mSocket.off();
+        }
         super.onDestroy();
     }
 
@@ -234,11 +239,12 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
             }
             shimmerViewContainer.stopShimmerAnimation();
             shimmerViewContainer.setVisibility(View.GONE);
+            binding.recyclerviewQuickmessages.setVisibility(View.VISIBLE);
         });
 
-        viewModel.getQrCode(99,selectedChatRoom.getId()); //TODO: later replace with logged in user's id
-        viewModel.qrcode.observe(this, qrcode ->{
-            if (qrcode!=null){
+        viewModel.getQrCode(99, selectedChatRoom.getId()); //TODO: later replace with logged in user's id
+        viewModel.qrcode.observe(this, qrcode -> {
+            if (qrcode != null) {
                 qrcodeUrl = qrcode;
             }
         });
@@ -252,20 +258,35 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
         binding.recyclerview.scrollToPosition(chatList.size() - 1);
     }
 
-    private void setQuickMessages(){
+    //set quick messages in recyclerview
+    private void setQuickMessages() {
 
         // Get the string array of quick messages from the resources
         String[] myStringArray = getResources().getStringArray(R.array.quickmessage_list);
 
-        QuickMessageAdapter quickMessageAdapter = new QuickMessageAdapter(myStringArray,this,this);
+        QuickMessageAdapter quickMessageAdapter = new QuickMessageAdapter(myStringArray, this, this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.HORIZONTAL);
+
         binding.recyclerviewQuickmessages.setHasFixedSize(true);
-        binding.recyclerviewQuickmessages.setLayoutManager(layoutManager);
+        binding.recyclerviewQuickmessages.setLayoutManager(staggeredGridLayoutManager);
         binding.recyclerviewQuickmessages.setAdapter(quickMessageAdapter);
     }
 
     @Override
     public void onQuickMessageClick(String message) {
+        Log.d("ChatActivity", "onQuickMessageClick() called: YES");
+        sendNewChat(message);
+    }
 
+    public void sendNewChat(String message) {
+
+        mSocket.emit(chatRoomObj.getRoomName(), message);
+
+        iFSentButtonClicked = false;
+        Log.d("ChatActivity", "Socket ID:" + mSocket.id());
+
+        iFSentButtonClicked = false;
     }
 }
