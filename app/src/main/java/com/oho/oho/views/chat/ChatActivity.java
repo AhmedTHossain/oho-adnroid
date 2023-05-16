@@ -20,7 +20,9 @@ import com.oho.oho.adapters.QuickMessageAdapter;
 import com.oho.oho.databinding.ActivityChatBinding;
 import com.oho.oho.databinding.ActivityFaqactivityBinding;
 import com.oho.oho.interfaces.QuickMessageClickListener;
+import com.oho.oho.models.ChatNotificationPayload;
 import com.oho.oho.models.ChatRoomObj;
+import com.oho.oho.models.JWTTokenRequest;
 import com.oho.oho.responses.Chat;
 import com.oho.oho.responses.ChatRoom;
 import com.oho.oho.viewmodels.ChatViewModel;
@@ -45,16 +47,15 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
     private ChatRoom selectedChatRoom;
     private ChatViewModel viewModel;
     private ShimmerFrameLayout shimmerViewContainer;
-
     public ArrayList<Chat> chatList;
-
     private Socket mSocket;
     public ChatAdapter adapter;
     private String token;
     private boolean iFSentButtonClicked = false;
     private String qrcodeUrl = "";
-
     private ChatRoomObj chatRoomObj;
+    private int chat_id;
+    private String channel_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,21 +63,161 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
         binding = ActivityChatBinding.inflate(getLayoutInflater());
         setTheme(R.style.Theme_OHO);
         setContentView(binding.getRoot());
-        if (getIntent().getExtras() != null) {
+        if (getIntent().hasExtra("chatroom")) {
             selectedChatRoom = (ChatRoom) getIntent().getSerializableExtra("chatroom");
-            token = (String) getIntent().getStringExtra("token");
+            binding.screentitle.setText(selectedChatRoom.getFullName());
+            chat_id = selectedChatRoom.getId();
+            channel_name = selectedChatRoom.getChannelName();
         }
-        binding.screentitle.setText(selectedChatRoom.getFullName());
+
+        if (getIntent().hasExtra("notificationPayload")){
+            ChatNotificationPayload notificationPayload = (ChatNotificationPayload) getIntent().getSerializableExtra("notificationPayload");
+            binding.screentitle.setText(notificationPayload.getSenderName());
+            chat_id = Integer.parseInt(notificationPayload.getChatId());
+            channel_name = notificationPayload.getChannelName();
+            Log.d("ChatActivity","inside Chat Activity");
+        }
+
         shimmerViewContainer = binding.shimmerViewContainer;
         initChatViewModel();
 
+        binding.fabSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!iFSentButtonClicked && !TextUtils.isEmpty(binding.layoutInputMessage.getText())) {
+                    iFSentButtonClicked = true;
+                    sendNewChat(binding.layoutInputMessage.getText().toString());
+                    binding.layoutInputMessage.setText("");
+                    binding.layoutInputMessage.setHint("Message...");
+                }
+            }
+        });
+
+        binding.imageButtonShowQrcode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChatActivity.this, QRActivity.class);
+                intent.putExtra("qrcode", qrcodeUrl);
+                intent.putExtra("username", "Ahmed Tanzeer Hossain"); //TODO: Later replace with logged in user's fullname
+                startActivity(intent);
+            }
+        });
+
+        setQuickMessages();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        binding.shimmerViewContainer.startShimmerAnimation();
+    }
+
+    @Override
+    public void onPause() {
+        binding.shimmerViewContainer.stopShimmerAnimation();
+        if (mSocket != null) {
+            mSocket.disconnect();
+            mSocket.off();
+        }
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (mSocket != null) {
+            mSocket.disconnect();
+            mSocket.off();
+        }
+        super.onDestroy();
+    }
+
+    private void initChatViewModel() {
+        viewModel = new ViewModelProvider(this).get(ChatViewModel.class);
+        //TODO: replace with logged in user's id
+        viewModel.getChatHistory(chat_id);
+        Toast.makeText(this, "Fetch chats for room: " + chat_id, Toast.LENGTH_SHORT).show();
+        viewModel.chatHistory.observe(this, chatHistory -> {
+            if (chatHistory != null) {
+                chatList = new ArrayList<>(chatHistory);
+                int chatToRemove = 0;
+                for (int i = 0; i < chatList.size(); i++)
+                    if (chatList.get(i).getChatType().equals("delegate"))
+                        if (chatList.get(i).getSender() == 99)
+                            chatToRemove = i;
+
+                chatList.remove(chatToRemove);
+
+                setChatList(chatList);
+            }
+            shimmerViewContainer.stopShimmerAnimation();
+            shimmerViewContainer.setVisibility(View.GONE);
+            binding.recyclerviewQuickmessages.setVisibility(View.VISIBLE);
+        });
+
+        viewModel.getQrCode(99, chat_id); //TODO: later replace with logged in user's id
+        viewModel.qrcode.observe(this, qrcode -> {
+            if (qrcode != null) {
+                qrcodeUrl = qrcode;
+            }
+        });
+        getJwtToken("tanzeerhossain@gmail.com"); //TODO: later replace the hard coded email with logged in user's email
+    }
+
+    private void setChatList(ArrayList<Chat> chatList) {
+        adapter = new ChatAdapter(chatList, 99, this);
+        binding.recyclerview.setHasFixedSize(true);
+        binding.recyclerview.setLayoutManager(new LinearLayoutManager(this));
+        binding.recyclerview.setAdapter(adapter);
+        binding.recyclerview.scrollToPosition(chatList.size() - 1);
+    }
+
+    //set quick messages in recyclerview
+    private void setQuickMessages() {
+        // Get the string array of quick messages from the resources
+        String[] myStringArray = getResources().getStringArray(R.array.quickmessage_list);
+        QuickMessageAdapter quickMessageAdapter = new QuickMessageAdapter(myStringArray, this, this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.HORIZONTAL);
+        binding.recyclerviewQuickmessages.setHasFixedSize(true);
+        binding.recyclerviewQuickmessages.setLayoutManager(staggeredGridLayoutManager);
+        binding.recyclerviewQuickmessages.setAdapter(quickMessageAdapter);
+    }
+
+    @Override
+    public void onQuickMessageClick(String message) {
+        Log.d("ChatActivity", "onQuickMessageClick() called: YES");
+        sendNewChat(message);
+    }
+
+    public void sendNewChat(String message) {
+        mSocket.emit(chatRoomObj.getRoomName(), message);
+        iFSentButtonClicked = false;
+        Log.d("ChatActivity", "Socket ID:" + mSocket.id());
+        iFSentButtonClicked = false;
+    }
+
+    private void getJwtToken(String email) {
+        JWTTokenRequest jwtTokenRequest = new JWTTokenRequest();
+        jwtTokenRequest.setEmail(email);
+        viewModel.getJwtToken(jwtTokenRequest);
+        viewModel.jwtToken.observe(this, jwtToken -> {
+            if (jwtToken != null){
+                Log.d("MessageFragment","initial jwt token: "+jwtToken);
+
+                token = jwtToken;
+                connectSocket();
+            }
+            else
+                Toast.makeText(this, "Unable to fetch JWT Token!", Toast.LENGTH_LONG).show();
+        });
+    }
+
+    private void connectSocket(){
         {
             try {
                 IO.Options options = new IO.Options();
                 options.auth = new HashMap<>();
                 options.auth.put("token", token);
-
-//            options.transports = new String[]{WebSocket.NAME};
 
                 mSocket = IO.socket("http://34.232.79.30:3000", options);
             } catch (URISyntaxException e) {
@@ -106,7 +247,7 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
             }
         });
 
-        mSocket.on(selectedChatRoom.getChannelName(), new Emitter.Listener() {
+        mSocket.on(channel_name, new Emitter.Listener() {
             @Override
             public void call(Object... args) {
                 Log.d("ChatActivity", "socket connection to chatroom: Successfull!");
@@ -143,22 +284,9 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
 
             }
         });
-
-//        mSocket.on("message", new Emitter.Listener() {
-//            @Override
-//            public void call(Object... args) {
-//                String message = (String) args[0];
-//                // Process the message here
-//                Log.d("ChatActivity", "Received message: " + message);
-//            }
-//        });
-
-
-//        mSocket.disconnect();
-
         chatRoomObj = new ChatRoomObj();
-        chatRoomObj.setRoomName(selectedChatRoom.getChannelName());
-        chatRoomObj.setChat_id(selectedChatRoom.getId());
+        chatRoomObj.setRoomName(channel_name);
+        chatRoomObj.setChat_id(chat_id);
         try {
             JSONObject jsonObject = new JSONObject().accumulate("roomName", chatRoomObj.getRoomName()).accumulate("chat_id", chatRoomObj.getChat_id());
 
@@ -166,127 +294,5 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
-
-        binding.fabSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!iFSentButtonClicked && !TextUtils.isEmpty(binding.layoutInputMessage.getText())) {
-                    iFSentButtonClicked = true;
-                    sendNewChat(binding.layoutInputMessage.getText().toString());
-
-                    binding.layoutInputMessage.setText("");
-                    binding.layoutInputMessage.setHint("Message...");
-                }
-            }
-        });
-
-        binding.imageButtonShowQrcode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ChatActivity.this, QRActivity.class);
-                intent.putExtra("qrcode", qrcodeUrl);
-                intent.putExtra("username", "Ahmed Tanzeer Hossain"); //TODO: Later replace with logged in user's fullname
-                startActivity(intent);
-            }
-        });
-
-        setQuickMessages();
-
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        binding.shimmerViewContainer.startShimmerAnimation();
-    }
-
-    @Override
-    public void onPause() {
-        binding.shimmerViewContainer.stopShimmerAnimation();
-        if (mSocket != null) {
-            mSocket.disconnect();
-            mSocket.off();
-        }
-        super.onPause();
-    }
-
-    @Override
-    protected void onDestroy() {
-        if (mSocket != null) {
-            mSocket.disconnect();
-            mSocket.off();
-        }
-        super.onDestroy();
-    }
-
-    private void initChatViewModel() {
-        viewModel = new ViewModelProvider(this).get(ChatViewModel.class);
-        //TODO: replace with logged in user's id
-        viewModel.getChatHistory(selectedChatRoom.getId());
-        Toast.makeText(this, "Fetch chats for room: " + selectedChatRoom.getId(), Toast.LENGTH_SHORT).show();
-        viewModel.chatHistory.observe(this, chatHistory -> {
-            if (chatHistory != null) {
-                chatList = new ArrayList<>(chatHistory);
-                int chatToRemove = 0;
-                for (int i = 0; i < chatList.size(); i++)
-                    if (chatList.get(i).getChatType().equals("delegate"))
-                        if (chatList.get(i).getSender() == 99)
-                            chatToRemove = i;
-
-                chatList.remove(chatToRemove);
-
-                setChatList(chatList);
-            }
-            shimmerViewContainer.stopShimmerAnimation();
-            shimmerViewContainer.setVisibility(View.GONE);
-            binding.recyclerviewQuickmessages.setVisibility(View.VISIBLE);
-        });
-
-        viewModel.getQrCode(99, selectedChatRoom.getId()); //TODO: later replace with logged in user's id
-        viewModel.qrcode.observe(this, qrcode -> {
-            if (qrcode != null) {
-                qrcodeUrl = qrcode;
-            }
-        });
-    }
-
-    private void setChatList(ArrayList<Chat> chatList) {
-        adapter = new ChatAdapter(chatList, 99, this);
-        binding.recyclerview.setHasFixedSize(true);
-        binding.recyclerview.setLayoutManager(new LinearLayoutManager(this));
-        binding.recyclerview.setAdapter(adapter);
-        binding.recyclerview.scrollToPosition(chatList.size() - 1);
-    }
-
-    //set quick messages in recyclerview
-    private void setQuickMessages() {
-
-        // Get the string array of quick messages from the resources
-        String[] myStringArray = getResources().getStringArray(R.array.quickmessage_list);
-
-        QuickMessageAdapter quickMessageAdapter = new QuickMessageAdapter(myStringArray, this, this);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-
-        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.HORIZONTAL);
-
-        binding.recyclerviewQuickmessages.setHasFixedSize(true);
-        binding.recyclerviewQuickmessages.setLayoutManager(staggeredGridLayoutManager);
-        binding.recyclerviewQuickmessages.setAdapter(quickMessageAdapter);
-    }
-
-    @Override
-    public void onQuickMessageClick(String message) {
-        Log.d("ChatActivity", "onQuickMessageClick() called: YES");
-        sendNewChat(message);
-    }
-
-    public void sendNewChat(String message) {
-
-        mSocket.emit(chatRoomObj.getRoomName(), message);
-
-        iFSentButtonClicked = false;
-        Log.d("ChatActivity", "Socket ID:" + mSocket.id());
-
-        iFSentButtonClicked = false;
     }
 }

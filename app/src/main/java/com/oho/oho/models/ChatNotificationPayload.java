@@ -1,5 +1,7 @@
 package com.oho.oho.models;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -73,4 +75,16 @@ public class ChatNotificationPayload  implements Serializable {
         this.channelName = channelName;
     }
 
+//    @NonNull
+//    @Override
+//    public String toString() {
+//        return "ChatNotificationPayload{" +
+//                "title='" + title + '\'' +
+//                ", body='" + body + '\'' +
+//                ", senderName='" + senderName + '\'' +
+//                ", senderPhoto='" + senderPhoto + '\'' +
+//                ", chatId='" + chatId + '\'' +
+//                ", channelName='" + channelName + '\'' +
+//                '}';
+//    }
 }
