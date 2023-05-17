@@ -3,6 +3,7 @@ package com.oho.oho;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.splashscreen.SplashScreen;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -47,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
         super.onCreate(savedInstanceState);
-        setTheme(R.style.Theme_OHO);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         //TODO: for now Dark Theme is forced stopped - once we customise the Dark Theme this line will be removed
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
