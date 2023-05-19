@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.oho.oho.R;
 import com.oho.oho.adapters.ChatAdapter;
@@ -56,6 +57,7 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
     private ChatRoomObj chatRoomObj;
     private int chat_id;
     private String channel_name;
+    private String sender_photo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +70,8 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
             binding.screentitle.setText(selectedChatRoom.getFullName());
             chat_id = selectedChatRoom.getId();
             channel_name = selectedChatRoom.getChannelName();
+            sender_photo = selectedChatRoom.getProfilePhoto();
+//            gender = selectedChatRoom.getGender();
         }
 
         if (getIntent().hasExtra("notificationPayload")){
@@ -75,8 +79,16 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
             binding.screentitle.setText(notificationPayload.getSenderName());
             chat_id = Integer.parseInt(notificationPayload.getChatId());
             channel_name = notificationPayload.getChannelName();
+            sender_photo = notificationPayload.getSenderPhoto();
+//            gender = notificationPayload.getGender();
+
             Log.d("ChatActivity","inside Chat Activity");
         }
+
+        Glide.with(this)
+                .load(sender_photo)
+                .placeholder(R.drawable.person_placeholder)
+                .into(binding.titleImage);
 
         shimmerViewContainer = binding.shimmerViewContainer;
         initChatViewModel();

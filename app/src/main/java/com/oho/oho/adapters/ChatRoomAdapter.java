@@ -43,9 +43,22 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
         holder.getSenderNameText().setText(chatRoomArrayList.get(position).getFullName());
         holder.getLastMessageBodyText().setText(chatRoomArrayList.get(position).getLastMessage());
 
-//        Glide.with(context)
-//                .load(chatRoomArrayList.get(position).getProfilePhoto())
-//                .into(holder.getSenderImage());
+        if (chatRoomArrayList.get(position).getGender().equals("F")){
+            Glide.with(context)
+                    .load(chatRoomArrayList.get(position).getProfilePhoto())
+                    .placeholder(R.drawable.portrait_female)
+                    .into(holder.getSenderImage());
+        } else if(chatRoomArrayList.get(position).getGender().equals("M")) {
+            Glide.with(context)
+                    .load(chatRoomArrayList.get(position).getProfilePhoto())
+                    .placeholder(R.drawable.portrait_male)
+                    .into(holder.getSenderImage());
+        } else {
+            Glide.with(context)
+                    .load(chatRoomArrayList.get(position).getProfilePhoto())
+                    .placeholder(R.drawable.person_placeholder)
+                    .into(holder.getSenderImage());
+        }
     }
 
     @Override

@@ -9,10 +9,12 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
+import android.widget.RemoteViews;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.oho.oho.MainActivity;
@@ -31,7 +33,7 @@ public class PushNotificationService extends FirebaseMessagingService {
     public void onMessageReceived(@NonNull RemoteMessage message) {
         super.onMessageReceived(message);
 
-        Log.d("PushNotificationService","data notification = "+message.getData());
+        Log.d("PushNotificationService", "data notification = " + message.getData());
 
         if (message.getData().size() > 0) {
             ChatNotificationPayload notificationPayload = new ChatNotificationPayload();
@@ -55,14 +57,33 @@ public class PushNotificationService extends FirebaseMessagingService {
 
         String channelId = "fcm_default_channel";
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+        // Layouts for the custom notification
+        RemoteViews notificationLayout = new RemoteViews(getPackageName(), R.layout.notification_collapsed);
+        RemoteViews notificationLayoutExpanded = new RemoteViews(getPackageName(), R.layout.notification_expanded);
+
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this, channelId)
-                        .setSmallIcon(R.mipmap.icon_launcher_round)
+                        .setStyle(new NotificationCompat.DecoratedCustomViewStyle())
+                        .setSmallIcon(R.mipmap.ic_launcher)
                         .setContentTitle(notificationPayload.getTitle())
                         .setContentText(notificationPayload.getBody())
                         .setAutoCancel(true)
                         .setSound(defaultSoundUri)
+                        .setCustomContentView(notificationLayout)
+                        .setCustomBigContentView(notificationLayoutExpanded)
                         .setContentIntent(pendingIntent);
+
+        notificationLayout.setTextViewText(R.id.textview_sender,notificationPayload.getSenderName());
+        notificationLayout.setTextViewText(R.id.textview_chat_message,notificationPayload.getBody());
+
+        notificationLayoutExpanded.setTextViewText(R.id.textview_notification_title,notificationPayload.getSenderName());
+        notificationLayoutExpanded.setTextViewText(R.id.textview_notification_message,notificationPayload.getBody());
+
+        Log.d("PushNotificationservice","notification sender's photo url: "+notificationPayload.getSenderPhoto());
+        Uri uri = Uri.parse(notificationPayload.getSenderPhoto());
+        Log.d("PushNotificationservice","notification sender's photo uri: "+uri);
+        notificationLayoutExpanded.setImageViewUri(R.id.imageview_notification_sender,uri);
 
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);

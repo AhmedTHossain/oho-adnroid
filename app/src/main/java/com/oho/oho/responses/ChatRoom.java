@@ -30,6 +30,9 @@ public class ChatRoom implements Serializable {
     @SerializedName("status")
     @Expose
     private String status;
+    @SerializedName("gender")
+    @Expose
+    private String gender;
 
     public String getChannelName() {
         return channelName;
@@ -95,4 +98,11 @@ public class ChatRoom implements Serializable {
         this.status = status;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 }
