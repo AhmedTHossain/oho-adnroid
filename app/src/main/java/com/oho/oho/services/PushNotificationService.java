@@ -1,5 +1,6 @@
 package com.oho.oho.services;
 
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -8,6 +9,8 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.RemoteViews;
 
@@ -20,6 +23,7 @@ import com.google.firebase.messaging.RemoteMessage;
 import com.oho.oho.MainActivity;
 import com.oho.oho.R;
 import com.oho.oho.models.ChatNotificationPayload;
+import com.squareup.picasso.Picasso;
 
 public class PushNotificationService extends FirebaseMessagingService {
     @Override
@@ -43,6 +47,7 @@ public class PushNotificationService extends FirebaseMessagingService {
             notificationPayload.setChatId(message.getData().get("chat_id"));
             notificationPayload.setSenderName(message.getData().get("sender_name"));
             notificationPayload.setSenderPhoto(message.getData().get("sender_photo"));
+
 
             sendNotification(notificationPayload);
         }
@@ -74,16 +79,18 @@ public class PushNotificationService extends FirebaseMessagingService {
                         .setCustomBigContentView(notificationLayoutExpanded)
                         .setContentIntent(pendingIntent);
 
+        final Notification notification = notificationBuilder.build();
+
         notificationLayout.setTextViewText(R.id.textview_sender,notificationPayload.getSenderName());
         notificationLayout.setTextViewText(R.id.textview_chat_message,notificationPayload.getBody());
 
         notificationLayoutExpanded.setTextViewText(R.id.textview_notification_title,notificationPayload.getSenderName());
         notificationLayoutExpanded.setTextViewText(R.id.textview_notification_message,notificationPayload.getBody());
 
-        Log.d("PushNotificationservice","notification sender's photo url: "+notificationPayload.getSenderPhoto());
-        Uri uri = Uri.parse(notificationPayload.getSenderPhoto());
-        Log.d("PushNotificationservice","notification sender's photo uri: "+uri);
-        notificationLayoutExpanded.setImageViewUri(R.id.imageview_notification_sender,uri);
+//        Log.d("PushNotificationservice","notification sender's photo url: "+notificationPayload.getSenderPhoto());
+//        Uri uri = Uri.parse(notificationPayload.getSenderPhoto());
+//        Log.d("PushNotificationservice","notification sender's photo uri: "+uri);
+//        notificationLayoutExpanded.setImageViewUri(R.id.imageview_notification_sender,uri);
 
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -94,7 +101,18 @@ public class PushNotificationService extends FirebaseMessagingService {
                 NotificationManager.IMPORTANCE_DEFAULT);
         notificationManager.createNotificationChannel(channel);
 
-        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+        notificationManager.notify(0 /* ID of notification */, notification);
+
+        Handler uiHandler = new Handler(Looper.getMainLooper());
+        uiHandler.post(new Runnable(){
+            @Override
+            public void run() {
+                Picasso
+                        .get()
+                        .load(notificationPayload.getSenderPhoto())
+                        .into(notificationLayoutExpanded, R.id.imageview_notification_sender, 0, notification);
+            }
+        });
     }
 
 
