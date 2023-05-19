@@ -1,99 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FBC0BA"
     tools:context=".views.LoginActivity">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="@dimen/_50sdp"
-        app:layout_constraintBottom_toTopOf="@id/imageview">
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/image_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:fontFamily="@font/lovina_october_five_regular"
             android:text="Oho!"
-            android:textColor="@color/indicatioractive"
-            android:textSize="@dimen/_80ssp" />
+            android:textColor="@color/black"
+            android:textSize="@dimen/_50ssp"
+            android:paddingStart="@dimen/_20sdp"
+            android:paddingEnd="@dimen/_20sdp"/>
 
-        <TextView
-            android:id="@+id/text_slogan"
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/image_logo"
-            android:layout_centerInParent="true"
-            android:layout_marginBottom="@dimen/_20sdp"
-            android:fontFamily="@font/inkfree"
-            android:text="Dine in with your perfect date!"
-            android:textAlignment="center"
-            android:textColor="@color/indicatioractive"
-            android:textSize="@dimen/_20ssp"
-            android:textStyle="bold" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/button_signin"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_below="@id/text_slogan"
-            android:layout_gravity="center"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:layout_marginEnd="@dimen/_20sdp"
-            android:layout_marginBottom="@dimen/_20sdp"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?attr/selectableItemBackground"
-            app:cardCornerRadius="@dimen/_20sdp">
+            android:layout_marginBottom="@dimen/_70sdp"
+            android:paddingStart="@dimen/_20sdp"
+            android:paddingEnd="@dimen/_20sdp">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/text_slogan"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:gravity="center">
-
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="@dimen/_50sdp"
-                    android:src="@drawable/google_logo" />
+                android:layout_marginBottom="@dimen/_5sdp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/sf_pro_rounded_regular"
-                    android:text="Sign in with Google"
+                    android:fontFamily="@font/ptsans_bold"
+                    android:text="Dine in"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_15ssp"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/_16ssp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:text="with your"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16ssp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:fontFamily="@font/ptsans_bold"
+                    android:text="Perfect Date"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16ssp" />
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_below="@id/text_slogan"
+                android:layout_alignStart="@id/text_slogan"
+                android:layout_alignEnd="@id/text_slogan"
+                android:background="@drawable/zigzag" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/button_signin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:background="@drawable/border_rounded_corner"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:src="@drawable/google_logo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/darkergrotesque_bold"
+                android:text="Sign in with Google"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_18ssp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/aggree_text"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/button_signin"
-            android:layout_centerHorizontal="true"
-            android:fontFamily="@font/sf_pro_rounded_regular"
-            android:text="By signing in you're agreeing to our"
+            android:layout_gravity="center"
+            android:fontFamily="@font/ptsans_regular"
+            android:text="By logging in you're agreeing to our"
             android:textColor="@color/black"
-            android:textSize="@dimen/_14ssp" />
+            android:textSize="@dimen/_14ssp"
+            android:paddingStart="@dimen/_20sdp"
+            android:paddingEnd="@dimen/_20sdp"/>
 
         <LinearLayout
             android:id="@+id/terms_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/aggree_text"
             android:layout_marginBottom="@dimen/_20sdp"
-            android:layout_centerHorizontal="true">
+            android:paddingStart="@dimen/_20sdp"
+            android:paddingEnd="@dimen/_20sdp">
 
             <TextView
                 android:id="@+id/terms_button"
@@ -104,7 +133,7 @@
                 android:focusable="true"
                 android:fontFamily="@font/sf_pro_rounded_regular"
                 android:text="Terms"
-                android:textColor="@color/indicatioractive"
+                android:textColor="@color/black"
                 android:textSize="@dimen/_14ssp"
                 android:textStyle="bold" />
 
@@ -126,31 +155,24 @@
                 android:layout_marginStart="@dimen/_5sdp"
                 android:clickable="true"
                 android:focusable="true"
-                android:fontFamily="@font/sf_pro_rounded_regular"
+                android:fontFamily="@font/ptsans_regular"
                 android:text="Privacy Policy"
-                android:textColor="@color/indicatioractive"
+                android:textColor="@color/black"
                 android:textSize="@dimen/_14ssp"
                 android:textStyle="bold" />
         </LinearLayout>
-    </RelativeLayout>
 
-    <com.github.ybq.android.spinkit.SpinKitView
-        android:id="@+id/login_progress"
-        style="@style/SpinKitView.Large.Circle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:SpinKit_Color="@color/indicatioractive"
-        android:visibility="gone"
-        android:elevation="@dimen/_10sdp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/imageview"/>
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/login_progress"
+            style="@style/SpinKitView.Large.Circle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="@dimen/_10sdp"
+            android:visibility="gone"
+            app:SpinKit_Color="@color/indicatioractive"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:src="@drawable/dine_in"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+</RelativeLayout>
