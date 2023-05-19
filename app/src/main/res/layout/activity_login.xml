@@ -169,7 +169,8 @@
             android:layout_height="wrap_content"
             android:elevation="@dimen/_10sdp"
             android:visibility="gone"
-            app:SpinKit_Color="@color/indicatioractive"
+            android:layout_gravity="center"
+            app:SpinKit_Color="@color/ted_image_picker_primary_pressed"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
