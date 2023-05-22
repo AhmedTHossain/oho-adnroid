@@ -11,7 +11,7 @@
         android:id="@+id/datepicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:calendarViewShown="false"
-        android:datePickerMode="spinner"
-        android:theme="@style/MyDatePicker"/>
+        android:calendarViewShown="true"
+        android:datePickerMode="calendar"
+        android:theme="@style/MyDatePickerDialogTheme" />
 </LinearLayout>

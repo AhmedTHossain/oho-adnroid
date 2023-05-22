@@ -194,6 +194,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
         android:background="@drawable/border_drawable"
         android:hint="000-000-0000"
         android:fontFamily="@font/ptsans_regular"
@@ -204,7 +205,8 @@
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         android:textSize="@dimen/_14ssp"
-        android:inputType="phone"/>
+        android:inputType="phone"
+        android:maxLength="11"/>
 
     <TextView
         android:id="@+id/button_next_fourth"
@@ -223,6 +225,5 @@
         android:textColor="@color/white"
         android:textSize="@dimen/_18ssp"
         app:drawableTint="@color/white"
-        android:layout_gravity="end"
-        android:layout_marginBottom="@dimen/_10sdp"/>
+        android:layout_gravity="end" />
 </LinearLayout>

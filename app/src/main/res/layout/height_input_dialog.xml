@@ -2,17 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:gravity="center"
+    android:padding="@dimen/_10sdp"
     android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/ptsans_bold"
+        android:text="Your Height"
+        android:textColor="@color/black"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:textSize="@dimen/_20ssp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_40sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_gravity="center"
-        android:layout_marginEnd="@dimen/_40sdp">
+        android:layout_height="wrap_content">
 
         <com.shawnlin.numberpicker.NumberPicker
             android:id="@+id/number_picker_feet"
@@ -25,9 +32,9 @@
             app:np_height="180dp"
             app:np_max="7"
             app:np_min="3"
-            app:np_selectedTextColor="@color/black"
-            app:np_selectedTextSize="@dimen/_16ssp"
-            app:np_textColor="@color/textSubTitle"
+            app:np_selectedTextColor="@color/ted_image_picker_primary_pressed"
+            app:np_selectedTextSize="@dimen/_14ssp"
+            app:np_textColor="@color/black"
             app:np_textSize="@dimen/_12ssp"
             app:np_value="5" />
 
@@ -41,12 +48,11 @@
             app:np_height="180dp"
             app:np_max="11"
             app:np_min="0"
-            app:np_selectedTextColor="@color/black"
-            app:np_selectedTextSize="@dimen/_16ssp"
-            app:np_textColor="@color/textSubTitle"
+            app:np_selectedTextColor="@color/ted_image_picker_primary_pressed"
+            app:np_selectedTextSize="@dimen/_14ssp"
+            app:np_textColor="@color/black"
             app:np_textSize="@dimen/_12ssp"
             app:np_value="0" />
-
     </LinearLayout>
 
 </LinearLayout>
