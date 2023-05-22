@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".views.registration.SecondProfileSetup">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/ptsans_bold"
+        android:text="What's your last degree?"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16ssp" />
+
+    <nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup
+        android:id="@+id/button_group_education"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:flexWrap="wrap"
+        app:toggle_requiredAmount="1"
+        app:toggle_selectAnimation="fade">
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:id="@+id/button_no_degree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:toggle_backgroundColor="@color/white"
+            app:toggle_borderColor="#E6E6E6"
+            app:toggle_borderWidth="@dimen/_2sdp"
+            app:toggle_paddingLeft="@dimen/_10sdp"
+            app:toggle_paddingRight="@dimen/_10sdp"
+            app:toggle_selectedBackgroundColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_selectedBorderColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_text="No Degree"
+            app:toggle_textColor="@color/black"
+            app:toggle_textPadding="@dimen/_10sdp"
+            app:toggle_textSize="@dimen/_14ssp" />
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:id="@+id/button_highschool"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:toggle_backgroundColor="@color/white"
+            app:toggle_borderColor="#E6E6E6"
+            app:toggle_borderWidth="@dimen/_2sdp"
+            app:toggle_paddingLeft="@dimen/_10sdp"
+            app:toggle_paddingRight="@dimen/_10sdp"
+            app:toggle_selectedBackgroundColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_selectedBorderColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_text="High School"
+            app:toggle_textColor="@color/black"
+            app:toggle_textPadding="@dimen/_10sdp"
+            app:toggle_textSize="@dimen/_14ssp" />
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:id="@+id/button_undergrad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:toggle_backgroundColor="@color/white"
+            app:toggle_borderColor="#E6E6E6"
+            app:toggle_borderWidth="@dimen/_2sdp"
+            app:toggle_paddingLeft="@dimen/_10sdp"
+            app:toggle_paddingRight="@dimen/_10sdp"
+            app:toggle_selectedBackgroundColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_selectedBorderColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_text="Undergrad"
+            app:toggle_textColor="@color/black"
+            app:toggle_textPadding="@dimen/_10sdp"
+            app:toggle_textSize="@dimen/_14ssp" />
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:id="@+id/button_masters"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:toggle_backgroundColor="@color/white"
+            app:toggle_borderColor="#E6E6E6"
+            app:toggle_borderWidth="@dimen/_2sdp"
+            app:toggle_paddingLeft="@dimen/_10sdp"
+            app:toggle_paddingRight="@dimen/_10sdp"
+            app:toggle_selectedBackgroundColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_selectedBorderColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_text="Masters"
+            app:toggle_textColor="@color/black"
+            app:toggle_textPadding="@dimen/_10sdp"
+            app:toggle_textSize="@dimen/_14ssp" />
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:id="@+id/button_phd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:toggle_backgroundColor="@color/white"
+            app:toggle_borderColor="#E6E6E6"
+            app:toggle_borderWidth="@dimen/_2sdp"
+            app:toggle_paddingLeft="@dimen/_10sdp"
+            app:toggle_paddingRight="@dimen/_10sdp"
+            app:toggle_selectedBackgroundColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_selectedBorderColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_text="Phd"
+            app:toggle_textColor="@color/black"
+            app:toggle_textPadding="@dimen/_10sdp"
+            app:toggle_textSize="@dimen/_14ssp" />
+
+    </nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:fontFamily="@font/ptsans_bold"
+        android:text="Your height is.."
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16ssp" />
+
+    <TextView
+        android:id="@+id/textview_date_of_birth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="@drawable/border_drawable"
+        android:clickable="true"
+        android:drawableEnd="@drawable/ic_height"
+        android:focusable="true"
+        android:fontFamily="@font/ptsans_regular"
+        android:paddingStart="@dimen/_15sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_15sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:text="Tap to select height"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14ssp" />
+
+    <TextView
+        android:id="@+id/button_next_second"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_weight="1"
+        android:background="@drawable/border_rounded_corner"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/darkergrotesque_bold"
+        android:foreground="?attr/selectableItemBackground"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:text="Next"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_18ssp"
+        app:drawableTint="@color/white"
+        android:layout_gravity="end"/>
+
+
+</LinearLayout>

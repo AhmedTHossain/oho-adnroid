@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".views.registration.IntroProfileSetup">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/ptsans_bold"
+        android:text="Who do you identify as?"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16ssp" />
+
+    <nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup
+        android:id="@+id/button_group_gender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        app:toggle_selectAnimation="fade">
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:id="@+id/button_male"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:toggle_backgroundColor="@color/white"
+            app:toggle_borderWidth="@dimen/_2sdp"
+            app:toggle_borderColor="#E6E6E6"
+            app:toggle_selectedBorderColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_selectedBackgroundColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_text="Male"
+            app:toggle_textColor="@color/black"
+            app:toggle_paddingRight="@dimen/_10sdp"
+            app:toggle_paddingLeft="@dimen/_10sdp"
+            app:toggle_textPadding="@dimen/_10sdp"
+            app:toggle_textSize="@dimen/_14ssp" />
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:id="@+id/button_female"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:toggle_backgroundColor="@color/white"
+            app:toggle_borderWidth="@dimen/_2sdp"
+            app:toggle_borderColor="#E6E6E6"
+            app:toggle_selectedBorderColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_selectedBackgroundColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_text="Female"
+            app:toggle_textColor="@color/black"
+            app:toggle_paddingRight="@dimen/_10sdp"
+            app:toggle_paddingLeft="@dimen/_10sdp"
+            app:toggle_textPadding="@dimen/_10sdp"
+            app:toggle_textSize="@dimen/_14ssp" />
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:id="@+id/button_both"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:toggle_backgroundColor="@color/white"
+            app:toggle_borderWidth="@dimen/_2sdp"
+            app:toggle_borderColor="#E6E6E6"
+            app:toggle_selectedBorderColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_selectedBackgroundColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_text="Both"
+            app:toggle_textColor="@color/black"
+            app:toggle_textPadding="@dimen/_10sdp"
+            app:toggle_paddingRight="@dimen/_10sdp"
+            app:toggle_paddingLeft="@dimen/_10sdp"
+            app:toggle_textSize="@dimen/_14ssp" />
+
+    </nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:fontFamily="@font/ptsans_bold"
+        android:text="When were you born?"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16ssp" />
+
+    <TextView
+        android:id="@+id/textview_date_of_birth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="@drawable/border_drawable"
+        android:clickable="true"
+        android:drawableEnd="@drawable/ic_calendar"
+        android:drawableTint="@color/black"
+        android:focusable="true"
+        android:fontFamily="@font/ptsans_regular"
+        android:paddingStart="@dimen/_15sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_15sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:text="Tap to select date"
+        android:textColor="@color/textSubTitle"
+        android:textSize="@dimen/_14ssp" />
+
+    <TextView
+        android:id="@+id/button_next_intro"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:background="@drawable/border_rounded_corner"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/darkergrotesque_bold"
+        android:text="Next"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_18ssp"
+        app:drawableTint="@color/white"
+        android:foreground="?attr/selectableItemBackground"/>
+
+</LinearLayout>

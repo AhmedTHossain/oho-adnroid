@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".views.registration.FourthProfileSetup">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/ptsans_bold"
+        android:text="What's your ethnicity?"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16ssp" />
+
+    <nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup
+        android:id="@+id/button_group_race"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        app:flexWrap="wrap"
+        app:toggle_requiredAmount="1"
+        app:toggle_selectAnimation="fade">
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:id="@+id/button_white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:toggle_backgroundColor="@color/white"
+            app:toggle_borderColor="#E6E6E6"
+            app:toggle_borderWidth="@dimen/_2sdp"
+            app:toggle_paddingLeft="@dimen/_10sdp"
+            app:toggle_paddingRight="@dimen/_10sdp"
+            app:toggle_selectedBackgroundColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_selectedBorderColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_text="White"
+            app:toggle_textColor="@color/black"
+            app:toggle_textPadding="@dimen/_10sdp"
+            app:toggle_textSize="@dimen/_14ssp" />
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:id="@+id/button_asian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:toggle_backgroundColor="@color/white"
+            app:toggle_borderColor="#E6E6E6"
+            app:toggle_borderWidth="@dimen/_2sdp"
+            app:toggle_paddingLeft="@dimen/_10sdp"
+            app:toggle_paddingRight="@dimen/_10sdp"
+            app:toggle_selectedBackgroundColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_selectedBorderColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_text="Asian"
+            app:toggle_textColor="@color/black"
+            app:toggle_textPadding="@dimen/_10sdp"
+            app:toggle_textSize="@dimen/_14ssp" />
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:id="@+id/button_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:toggle_backgroundColor="@color/white"
+            app:toggle_borderColor="#E6E6E6"
+            app:toggle_borderWidth="@dimen/_2sdp"
+            app:toggle_paddingLeft="@dimen/_10sdp"
+            app:toggle_paddingRight="@dimen/_10sdp"
+            app:toggle_selectedBackgroundColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_selectedBorderColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_text="Black"
+            app:toggle_textColor="@color/black"
+            app:toggle_textPadding="@dimen/_10sdp"
+            app:toggle_textSize="@dimen/_14ssp" />
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:id="@+id/button_africanamerican"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:toggle_backgroundColor="@color/white"
+            app:toggle_borderColor="#E6E6E6"
+            app:toggle_borderWidth="@dimen/_2sdp"
+            app:toggle_paddingLeft="@dimen/_10sdp"
+            app:toggle_paddingRight="@dimen/_10sdp"
+            app:toggle_selectedBackgroundColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_selectedBorderColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_text="African American"
+            app:toggle_textColor="@color/black"
+            app:toggle_textPadding="@dimen/_10sdp"
+            app:toggle_textSize="@dimen/_14ssp" />
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:id="@+id/button_hispanic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:toggle_backgroundColor="@color/white"
+            app:toggle_borderColor="#E6E6E6"
+            app:toggle_borderWidth="@dimen/_2sdp"
+            app:toggle_paddingLeft="@dimen/_10sdp"
+            app:toggle_paddingRight="@dimen/_10sdp"
+            app:toggle_selectedBackgroundColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_selectedBorderColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_text="Hispanic"
+            app:toggle_textColor="@color/black"
+            app:toggle_textPadding="@dimen/_10sdp"
+            app:toggle_textSize="@dimen/_14ssp" />
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:id="@+id/button_latinx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:toggle_backgroundColor="@color/white"
+            app:toggle_borderColor="#E6E6E6"
+            app:toggle_borderWidth="@dimen/_2sdp"
+            app:toggle_paddingLeft="@dimen/_10sdp"
+            app:toggle_paddingRight="@dimen/_10sdp"
+            app:toggle_selectedBackgroundColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_selectedBorderColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_text="Latinx"
+            app:toggle_textColor="@color/black"
+            app:toggle_textPadding="@dimen/_10sdp"
+            app:toggle_textSize="@dimen/_14ssp" />
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:id="@+id/button_pacificislander"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:toggle_backgroundColor="@color/white"
+            app:toggle_borderColor="#E6E6E6"
+            app:toggle_borderWidth="@dimen/_2sdp"
+            app:toggle_paddingLeft="@dimen/_10sdp"
+            app:toggle_paddingRight="@dimen/_10sdp"
+            app:toggle_selectedBackgroundColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_selectedBorderColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_text="Pacific Islander"
+            app:toggle_textColor="@color/black"
+            app:toggle_textPadding="@dimen/_10sdp"
+            app:toggle_textSize="@dimen/_14ssp" />
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:id="@+id/button_americanindian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:toggle_backgroundColor="@color/white"
+            app:toggle_borderColor="#E6E6E6"
+            app:toggle_borderWidth="@dimen/_2sdp"
+            app:toggle_paddingLeft="@dimen/_10sdp"
+            app:toggle_paddingRight="@dimen/_10sdp"
+            app:toggle_selectedBackgroundColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_selectedBorderColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_text="American Indian"
+            app:toggle_textColor="@color/black"
+            app:toggle_textPadding="@dimen/_10sdp"
+            app:toggle_textSize="@dimen/_14ssp" />
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:id="@+id/button_others"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:toggle_backgroundColor="@color/white"
+            app:toggle_borderColor="#E6E6E6"
+            app:toggle_borderWidth="@dimen/_2sdp"
+            app:toggle_paddingLeft="@dimen/_10sdp"
+            app:toggle_paddingRight="@dimen/_10sdp"
+            app:toggle_selectedBackgroundColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_selectedBorderColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_text="Others"
+            app:toggle_textColor="@color/black"
+            app:toggle_textPadding="@dimen/_10sdp"
+            app:toggle_textSize="@dimen/_14ssp" />
+
+    </nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:fontFamily="@font/ptsans_bold"
+        android:text="What is your phone Number?"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16ssp" />
+
+    <EditText
+        android:id="@+id/text_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/border_drawable"
+        android:hint="000-000-0000"
+        android:fontFamily="@font/ptsans_regular"
+        android:paddingStart="@dimen/_15sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_15sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="@dimen/_14ssp"
+        android:inputType="phone"/>
+
+    <TextView
+        android:id="@+id/button_next_fourth"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/border_rounded_corner"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/darkergrotesque_bold"
+        android:foreground="?attr/selectableItemBackground"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:text="Next"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_18ssp"
+        app:drawableTint="@color/white"
+        android:layout_gravity="end"
+        android:layout_marginBottom="@dimen/_10sdp"/>
+</LinearLayout>

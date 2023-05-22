@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".views.registration.ThirdProfileSetup">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/ptsans_bold"
+        android:text="Where are you from?"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16ssp" />
+
+    <TextView
+        android:id="@+id/textview_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@drawable/border_drawable"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/ptsans_regular"
+        android:paddingStart="@dimen/_15sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_15sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:text="Tap to share your location"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14ssp"
+        app:drawableEndCompat="@drawable/ic_location_24"
+        app:drawableTint="@color/black" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:fontFamily="@font/ptsans_bold"
+        android:text="Select your religion.."
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16ssp" />
+
+    <nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup
+        android:id="@+id/button_group_religion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:flexWrap="wrap"
+        app:toggle_requiredAmount="1"
+        app:toggle_selectAnimation="fade"
+        android:layout_marginBottom="@dimen/_10sdp">
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:id="@+id/button_christian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:toggle_backgroundColor="@color/white"
+            app:toggle_borderWidth="@dimen/_2sdp"
+            app:toggle_borderColor="#E6E6E6"
+            app:toggle_paddingLeft="@dimen/_10sdp"
+            app:toggle_paddingRight="@dimen/_10sdp"
+            app:toggle_selectedBackgroundColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_selectedBorderColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_text="Christian"
+            app:toggle_textColor="@color/black"
+            app:toggle_textPadding="@dimen/_10sdp"
+            app:toggle_textSize="@dimen/_14ssp" />
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:id="@+id/button_jewish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:toggle_backgroundColor="@color/white"
+            app:toggle_borderWidth="@dimen/_2sdp"
+            app:toggle_borderColor="#E6E6E6"
+            app:toggle_paddingLeft="@dimen/_10sdp"
+            app:toggle_paddingRight="@dimen/_10sdp"
+            app:toggle_selectedBackgroundColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_selectedBorderColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_text="Jewish"
+            app:toggle_textColor="@color/black"
+            app:toggle_textPadding="@dimen/_10sdp"
+            app:toggle_textSize="@dimen/_14ssp" />
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:id="@+id/button_muslim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:toggle_backgroundColor="@color/white"
+            app:toggle_borderWidth="@dimen/_2sdp"
+            app:toggle_borderColor="#E6E6E6"
+            app:toggle_paddingLeft="@dimen/_10sdp"
+            app:toggle_paddingRight="@dimen/_10sdp"
+            app:toggle_selectedBackgroundColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_selectedBorderColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_text="Muslim"
+            app:toggle_textColor="@color/black"
+            app:toggle_textPadding="@dimen/_10sdp"
+            app:toggle_textSize="@dimen/_14ssp" />
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:id="@+id/button_hindu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:toggle_backgroundColor="@color/white"
+            app:toggle_borderWidth="@dimen/_2sdp"
+            app:toggle_borderColor="#E6E6E6"
+            app:toggle_paddingLeft="@dimen/_10sdp"
+            app:toggle_paddingRight="@dimen/_10sdp"
+            app:toggle_selectedBackgroundColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_selectedBorderColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_text="Hindu"
+            app:toggle_textColor="@color/black"
+            app:toggle_textPadding="@dimen/_10sdp"
+            app:toggle_textSize="@dimen/_14ssp" />
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:id="@+id/button_sikh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:toggle_backgroundColor="@color/white"
+            app:toggle_borderWidth="@dimen/_2sdp"
+            app:toggle_borderColor="#E6E6E6"
+            app:toggle_paddingLeft="@dimen/_10sdp"
+            app:toggle_paddingRight="@dimen/_10sdp"
+            app:toggle_selectedBackgroundColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_selectedBorderColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_text="Sikh"
+            app:toggle_textColor="@color/black"
+            app:toggle_textPadding="@dimen/_10sdp"
+            app:toggle_textSize="@dimen/_14ssp" />
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:id="@+id/button_agnostic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:toggle_backgroundColor="@color/white"
+            app:toggle_borderWidth="@dimen/_2sdp"
+            app:toggle_borderColor="#E6E6E6"
+            app:toggle_paddingLeft="@dimen/_10sdp"
+            app:toggle_paddingRight="@dimen/_10sdp"
+            app:toggle_selectedBackgroundColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_selectedBorderColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_text="Agnostic"
+            app:toggle_textColor="@color/black"
+            app:toggle_textPadding="@dimen/_10sdp"
+            app:toggle_textSize="@dimen/_14ssp" />
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:id="@+id/button_buddhist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:toggle_backgroundColor="@color/white"
+            app:toggle_borderWidth="@dimen/_2sdp"
+            app:toggle_borderColor="#E6E6E6"
+            app:toggle_paddingLeft="@dimen/_10sdp"
+            app:toggle_paddingRight="@dimen/_10sdp"
+            app:toggle_selectedBackgroundColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_selectedBorderColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_text="Buddhist"
+            app:toggle_textColor="@color/black"
+            app:toggle_textPadding="@dimen/_10sdp"
+            app:toggle_textSize="@dimen/_14ssp" />
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:id="@+id/button_spiritual"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:toggle_backgroundColor="@color/white"
+            app:toggle_borderWidth="@dimen/_2sdp"
+            app:toggle_borderColor="#E6E6E6"
+            app:toggle_paddingLeft="@dimen/_10sdp"
+            app:toggle_paddingRight="@dimen/_10sdp"
+            app:toggle_selectedBackgroundColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_selectedBorderColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_text="Spiritual"
+            app:toggle_textColor="@color/black"
+            app:toggle_textPadding="@dimen/_10sdp"
+            app:toggle_textSize="@dimen/_14ssp" />
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:id="@+id/button_atheist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:toggle_backgroundColor="@color/white"
+            app:toggle_borderWidth="@dimen/_2sdp"
+            app:toggle_borderColor="#E6E6E6"
+            app:toggle_paddingLeft="@dimen/_10sdp"
+            app:toggle_paddingRight="@dimen/_10sdp"
+            app:toggle_selectedBackgroundColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_selectedBorderColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_text="Atheist"
+            app:toggle_textColor="@color/black"
+            app:toggle_textPadding="@dimen/_10sdp"
+            app:toggle_textSize="@dimen/_14ssp" />
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:id="@+id/button_other"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:toggle_backgroundColor="@color/white"
+            app:toggle_borderWidth="@dimen/_2sdp"
+            app:toggle_borderColor="#E6E6E6"
+            app:toggle_paddingLeft="@dimen/_10sdp"
+            app:toggle_paddingRight="@dimen/_10sdp"
+            app:toggle_selectedBackgroundColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_selectedBorderColor="@color/ted_image_picker_primary_pressed"
+            app:toggle_text="Other"
+            app:toggle_textColor="@color/black"
+            app:toggle_textPadding="@dimen/_10sdp"
+            app:toggle_textSize="@dimen/_14ssp" />
+
+    </nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup>
+
+    <TextView
+        android:id="@+id/button_next_third"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_weight="1"
+        android:background="@drawable/border_rounded_corner"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/darkergrotesque_bold"
+        android:foreground="?attr/selectableItemBackground"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:text="Next"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_18ssp"
+        app:drawableTint="@color/white"
+        android:layout_gravity="end"/>
+
+</LinearLayout>

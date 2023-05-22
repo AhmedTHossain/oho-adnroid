@@ -143,7 +143,7 @@
                 android:layout_gravity="center"
                 android:clickable="true"
                 android:focusable="true"
-                android:fontFamily="@font/sf_pro_rounded_regular"
+                android:fontFamily="@font/ptsans_regular"
                 android:text="Terms"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_16ssp"

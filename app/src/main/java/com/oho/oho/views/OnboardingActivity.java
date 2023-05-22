@@ -21,6 +21,7 @@ import com.oho.oho.databinding.ActivityOnboardingBinding;
 import com.oho.oho.databinding.ActivityRegistrationBinding;
 import com.oho.oho.models.OnboardingItem;
 import com.oho.oho.views.animations.ZoomOutPageTransformer;
+import com.oho.oho.views.registration.ProfileSetupActivity;
 import com.oho.oho.views.registration.RegistrationActivity;
 
 import java.util.ArrayList;
@@ -83,7 +84,7 @@ public class OnboardingActivity extends AppCompatActivity {
                 if (viewPager.getCurrentItem() + 1 < onboardingAdapter.getItemCount()){
                     viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
                 } else {
-                    Intent intent = new Intent(getApplicationContext(), RegistrationActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), ProfileSetupActivity.class);
                     intent.putExtra("name",onBoardingUserName);
                     intent.putExtra("email",onBoardingUserEmail);
                     startActivity(intent);
