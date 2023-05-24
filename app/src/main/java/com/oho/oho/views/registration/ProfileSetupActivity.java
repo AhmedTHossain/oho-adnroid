@@ -51,6 +51,10 @@ public class ProfileSetupActivity extends AppCompatActivity implements OnProfile
                 if (moveTo.equals("next"))
                     setScreen(new FifthProfileSetup(this));
                 break;
+            case "fifth":
+                if (moveTo.equals("next"))
+                    setScreen(new SixthProfileSetup(this));
+                break;
 
         }
     }

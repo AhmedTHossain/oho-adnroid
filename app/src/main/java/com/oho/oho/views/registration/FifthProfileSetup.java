@@ -1,5 +1,7 @@
 package com.oho.oho.views.registration;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
@@ -12,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.oho.oho.R;
 import com.oho.oho.adapters.PromptAdapter;
 import com.oho.oho.databinding.FragmentFifthProfileSetupBinding;
@@ -45,8 +48,10 @@ public class FifthProfileSetup extends Fragment implements OnPromptSelectListene
             public void onClick(View v) {
                 if (selectedPromptsList.size()<3)
                     Toast.makeText(requireContext(),"You have to select at least 3 prompts in order to proceed",Toast.LENGTH_LONG).show();
-                else
-                    listener.onScreenChange("next","fifth");
+                else {
+                    listener.onScreenChange("next", "fifth");
+                    saveStringArray(selectedPromptsList);
+                }
             }
         });
 
@@ -84,5 +89,14 @@ public class FifthProfileSetup extends Fragment implements OnPromptSelectListene
 
         binding.recyclerviewPromptQuestions.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recyclerviewPromptQuestions.setAdapter(adapter);
+    }
+
+    private void saveStringArray(ArrayList<SelectedPrompt> stringArray) {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(stringArray);
+        editor.putString("stringArray", json);
+        editor.apply();
     }
 }
