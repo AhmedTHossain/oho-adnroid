@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.oho.oho.R;
 import com.oho.oho.adapters.PromptAdapter;
@@ -26,6 +27,7 @@ public class FifthProfileSetup extends Fragment implements OnPromptSelectListene
     private ArrayList<SelectedPrompt> selectedPromptsList = new ArrayList<>();
     private ArrayList<SelectedPrompt> promptsArrayList = new ArrayList<>();
     private PromptAdapter adapter;
+
     public FifthProfileSetup(OnProfileSetupScreenChange listener) {
         // Required empty public constructor
         this.listener = listener;
@@ -34,18 +36,19 @@ public class FifthProfileSetup extends Fragment implements OnPromptSelectListene
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentFifthProfileSetupBinding.inflate(inflater,container, false);
+        binding = FragmentFifthProfileSetupBinding.inflate(inflater, container, false);
 
-        String[] promptList = getResources().getStringArray(R.array.prompt_list);
-        for (String prompt: promptList){
-            SelectedPrompt selectedPrompt = new SelectedPrompt(prompt,false);
-            promptsArrayList.add(selectedPrompt);
-        }
+        setPromptsList();
 
-        adapter = new PromptAdapter(requireContext(),promptsArrayList,this);
-
-        binding.recyclerviewPromptQuestions.setLayoutManager(new LinearLayoutManager(requireContext()));
-        binding.recyclerviewPromptQuestions.setAdapter(adapter);
+        binding.buttonNextFifth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (selectedPromptsList.size()<3)
+                    Toast.makeText(requireContext(),"You have to select at least 3 prompts in order to proceed",Toast.LENGTH_LONG).show();
+                else
+                    listener.onScreenChange("next","fifth");
+            }
+        });
 
         // Inflate the layout for this fragment
         return binding.getRoot();
@@ -58,15 +61,28 @@ public class FifthProfileSetup extends Fragment implements OnPromptSelectListene
         else
             selectedPromptsList.add(selectedPrompt);
 
-        for (SelectedPrompt prompt: promptsArrayList){
-            if (prompt.getPrompt().equals(selectedPrompt.getPrompt())){
+        for (SelectedPrompt prompt : promptsArrayList) {
+            if (prompt.getPrompt().equals(selectedPrompt.getPrompt())) {
                 prompt.setIsSelected(!selectedPrompt.getIsSelected());
             }
         }
         adapter.notifyDataSetChanged();
 
-        String selectedCountText = selectedPromptsList.size() +"/3";
+        String selectedCountText = selectedPromptsList.size() + "/3";
 
         binding.textSelectionCount.setText(selectedCountText);
+    }
+
+    public void setPromptsList() {
+        String[] promptList = getResources().getStringArray(R.array.prompt_list);
+        for (String prompt : promptList) {
+            SelectedPrompt selectedPrompt = new SelectedPrompt(prompt, false);
+            promptsArrayList.add(selectedPrompt);
+        }
+
+        adapter = new PromptAdapter(requireContext(), promptsArrayList, this);
+
+        binding.recyclerviewPromptQuestions.setLayoutManager(new LinearLayoutManager(requireContext()));
+        binding.recyclerviewPromptQuestions.setAdapter(adapter);
     }
 }

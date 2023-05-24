@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/ptsans_bold"
-            android:text="Choose at least 3 prompts.."
+            android:text="Select at least 3 prompts.."
             android:textColor="@color/black"
             android:textSize="@dimen/_16ssp"
             android:layout_alignParentStart="true"/>
