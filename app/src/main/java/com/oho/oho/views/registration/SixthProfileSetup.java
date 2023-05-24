@@ -27,6 +27,7 @@ public class SixthProfileSetup extends Fragment {
     FragmentSixthProfileSetupBinding binding;
     SharedPreferences sharedPreferences;
     OnProfileSetupScreenChange listener;
+
     public SixthProfileSetup(OnProfileSetupScreenChange listener) {
         // Required empty public constructor
         this.listener = listener;
@@ -35,15 +36,25 @@ public class SixthProfileSetup extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentSixthProfileSetupBinding.inflate(inflater,container, false);
+        binding = FragmentSixthProfileSetupBinding.inflate(inflater, container, false);
 
         ArrayList<SelectedPrompt> selectedPrompts = retrieveStringArray();
 
 
-        SelectedPromptAdapter adapter = new SelectedPromptAdapter(selectedPrompts,requireContext());
-        binding.recyclerviewInputPrompt.setLayoutManager(new LinearLayoutManager(requireContext()));
-        binding.recyclerviewInputPrompt.setHasFixedSize(true);
-        binding.recyclerviewInputPrompt.setAdapter(adapter);
+        SelectedPromptAdapter adapter = new SelectedPromptAdapter(selectedPrompts, requireContext());
+
+        binding.viewpager.setAdapter(adapter);
+        binding.viewpager.setClipToPadding(false);
+        binding.viewpager.setClipChildren(false);
+        binding.viewpager.setUserInputEnabled(false);
+        binding.viewpager.getChildAt(0).setOverScrollMode(View.OVER_SCROLL_NEVER);
+
+        binding.buttonNextSixth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.viewpager.setCurrentItem(binding.viewpager.getCurrentItem()+1);
+            }
+        });
 
 
         // Inflate the layout for this fragment
@@ -53,7 +64,8 @@ public class SixthProfileSetup extends Fragment {
     private ArrayList<SelectedPrompt> retrieveStringArray() {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         String json = sharedPreferences.getString("stringArray", null);
-        Type type = new TypeToken<ArrayList<SelectedPrompt>>() {}.getType();
+        Type type = new TypeToken<ArrayList<SelectedPrompt>>() {
+        }.getType();
         Gson gson = new Gson();
         return gson.fromJson(json, type);
     }

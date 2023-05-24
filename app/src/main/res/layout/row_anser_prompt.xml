@@ -1,73 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="@dimen/_20sdp"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/border_drawable"
-        android:padding="@dimen/_10sdp">
+        android:orientation="vertical"
+        android:layout_centerInParent="true">
 
         <TextView
             android:id="@+id/text_prompt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_toStartOf="@id/image_drop_down_arrow"
             android:fontFamily="@font/ptsans_bold"
             android:text="One social cause that I really care about is…"
             android:textColor="@color/black"
-            android:textSize="@dimen/_16ssp" />
+            android:textSize="@dimen/_20ssp" />
 
-        <ImageView
-            android:id="@+id/image_drop_down_arrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/ic_arrow_drop_down_black_24dp" />
-    </RelativeLayout>
-
-    <EditText
-        android:id="@+id/text_answer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginBottom="@dimen/_10sdp"
-        android:background="@drawable/border_drawable"
-        android:hint="your answer.."
-        android:fontFamily="@font/ptsans_regular"
-        android:padding="@dimen/_10sdp"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_14ssp"
-        android:inputType="textMultiLine"
-        android:maxLength="250"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/image_prompt"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_100sdp"
-            android:layout_weight="1"
-            android:src="@drawable/add_photo"/>
         <EditText
-            android:id="@+id/text_caption_image"
-            android:layout_width="0dp"
+            android:id="@+id/text_answer"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:hint="enter a caption"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
             android:background="@drawable/border_drawable"
             android:fontFamily="@font/ptsans_regular"
+            android:hint="your answer.."
+            android:inputType="textMultiLine"
+            android:gravity="start"
+            android:maxLength="250"
             android:padding="@dimen/_10sdp"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:layout_gravity="center"
             android:textColor="@color/black"
             android:textSize="@dimen/_14ssp"
+            android:lines="4"/>
+
+        <ImageView
+            android:id="@+id/image_prompt"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_150sdp"
+            android:layout_weight="1"
+            android:src="@drawable/add_photo"
+            android:layout_gravity="center_horizontal"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/darkergrotesque_medium"
+            android:text="Tap to select photo"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16ssp"
+            android:layout_gravity="center_horizontal"/>
+
+        <EditText
+            android:id="@+id/text_caption_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:gravity="start"
+            android:background="@drawable/border_drawable"
+            android:fontFamily="@font/ptsans_regular"
+            android:hint="enter a caption"
             android:inputType="textMultiLine"
-            android:maxLength="150"/>
+            android:maxLength="150"
+            android:padding="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14ssp"
+            android:lines="2"/>
     </LinearLayout>
 
-</LinearLayout>
+
+</RelativeLayout>
