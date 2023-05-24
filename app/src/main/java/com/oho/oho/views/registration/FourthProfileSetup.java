@@ -27,6 +27,14 @@ public class FourthProfileSetup extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentFourthProfileSetupBinding.inflate(inflater, container, false);
+
+        binding.buttonNextFourth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onScreenChange("next","fourth");
+            }
+        });
+
         // Inflate the layout for this fragment
         return binding.getRoot();
     }

@@ -99,10 +99,10 @@ public class PromptActivity extends AppCompatActivity implements OnPromptQuestio
                 binding.spinKit.setVisibility(View.GONE);
 
                 binding.textScrollDisclaimer.setVisibility(View.VISIBLE);
-                PromptAdapter adapter = new PromptAdapter(this,promptList,this);
-
-                recyclerView.setLayoutManager(new LinearLayoutManager(this));
-                recyclerView.setAdapter(adapter);
+//                PromptAdapter adapter = new PromptAdapter(this,promptList,this);
+//
+//                recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//                recyclerView.setAdapter(adapter);
             }
         });
 

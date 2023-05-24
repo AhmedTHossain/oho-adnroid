@@ -22,4 +22,5 @@
     <color name="ted_image_picker_primary">#000</color>
     <color name="ted_image_picker_primary_pressed">#B42254</color>
     <color name="placeholder_background">#dddddd</color>
+    <color name="border_color">#E6E6E6</color>
 </resources>
