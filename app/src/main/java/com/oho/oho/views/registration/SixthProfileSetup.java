@@ -107,25 +107,28 @@ public class SixthProfileSetup extends Fragment implements OnPhotoPickerPrompt, 
 
     @Override
     public void onPromptAnswer(String prompt, String answer, String caption, SpinKitView progressview) {
-        progressview.setVisibility(View.VISIBLE);
-        NewPromptAnswer newPromptAnswer = new NewPromptAnswer();
-        newPromptAnswer.setUser_id(99); //TODO: Later replace 99 with logged in user's id
-        newPromptAnswer.setPrompt(prompt);
-        newPromptAnswer.setAnswer(answer);
-        newPromptAnswer.setCaption(caption);
-        newPromptAnswer.setImage(imageFile);
+        if (imageFile != null) {
+            progressview.setVisibility(View.VISIBLE);
+            NewPromptAnswer newPromptAnswer = new NewPromptAnswer();
+            newPromptAnswer.setUser_id(99); //TODO: Later replace 99 with logged in user's id
+            newPromptAnswer.setPrompt(prompt);
+            newPromptAnswer.setAnswer(answer);
+            newPromptAnswer.setCaption(caption);
+            newPromptAnswer.setImage(imageFile);
 
-        viewmodel.uploadPromptAnswer(newPromptAnswer);
-        viewmodel.ifUploaded.observe(requireActivity(), ifUploaded->{
-            if (ifUploaded) {
-                progressview.setVisibility(View.GONE);
-                Toast.makeText(requireContext(), "Your answer was uploaded successfully!", Toast.LENGTH_SHORT).show();
-                if (binding.viewpager.getCurrentItem() != selectedPrompts.size() - 1) {
-                    binding.viewpager.setCurrentItem(binding.viewpager.getCurrentItem() + 1);
+            viewmodel.uploadPromptAnswer(newPromptAnswer);
+            viewmodel.ifUploaded.observe(requireActivity(), ifUploaded -> {
+                if (ifUploaded) {
+                    progressview.setVisibility(View.GONE);
+                    Toast.makeText(requireContext(), "Your answer was uploaded successfully!", Toast.LENGTH_SHORT).show();
+                    if (binding.viewpager.getCurrentItem() != selectedPrompts.size() - 1) {
+                        binding.viewpager.setCurrentItem(binding.viewpager.getCurrentItem() + 1);
+                    }
+                } else {
+                    Toast.makeText(requireContext(), "Answer upload failed!", Toast.LENGTH_SHORT).show();
                 }
-            } else {
-                Toast.makeText(requireContext(), "Answer upload failed!", Toast.LENGTH_SHORT).show();
-            }
-        });
+            });
+        } else
+            Toast.makeText(requireContext(), "Enter a Photo before you proceed.", Toast.LENGTH_SHORT).show();
     }
 }
