@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="@dimen/_20sdp"
@@ -8,8 +9,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/text_prompt"
@@ -28,49 +29,82 @@
             android:layout_marginBottom="@dimen/_10sdp"
             android:background="@drawable/border_drawable"
             android:fontFamily="@font/ptsans_regular"
+            android:gravity="start"
             android:hint="your answer.."
             android:inputType="textMultiLine"
-            android:gravity="start"
+            android:lines="4"
             android:maxLength="250"
             android:padding="@dimen/_10sdp"
             android:textColor="@color/black"
-            android:textSize="@dimen/_14ssp"
-            android:lines="4"/>
+            android:textSize="@dimen/_14ssp" />
 
         <ImageView
             android:id="@+id/image_prompt"
             android:layout_width="@dimen/_150sdp"
             android:layout_height="@dimen/_150sdp"
+            android:layout_gravity="center_horizontal"
             android:layout_weight="1"
-            android:src="@drawable/add_photo"
-            android:layout_gravity="center_horizontal"/>
+            android:src="@drawable/add_photo" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:fontFamily="@font/darkergrotesque_medium"
             android:text="Tap to select photo"
             android:textColor="@color/black"
-            android:textSize="@dimen/_16ssp"
-            android:layout_gravity="center_horizontal"/>
+            android:textSize="@dimen/_16ssp" />
 
         <EditText
             android:id="@+id/text_caption_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:gravity="start"
+            android:layout_marginTop="@dimen/_10sdp"
             android:background="@drawable/border_drawable"
             android:fontFamily="@font/ptsans_regular"
+            android:gravity="start"
             android:hint="enter a caption"
             android:inputType="textMultiLine"
+            android:lines="2"
             android:maxLength="150"
             android:padding="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
             android:textColor="@color/black"
-            android:textSize="@dimen/_14ssp"
-            android:lines="2"/>
+            android:textSize="@dimen/_14ssp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp">
+
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/upload_prompt_progress"
+                style="@style/SpinKitView.Large.ThreeBounce"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:elevation="@dimen/_10sdp"
+                android:visibility="gone"
+                app:SpinKit_Color="@color/ted_image_picker_primary_pressed" />
+
+            <TextView
+                android:id="@+id/button_next"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/border_rounded_corner"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/darkergrotesque_bold"
+                android:foreground="?attr/selectableItemBackground"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:text="Next"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_18ssp" />
+
+        </RelativeLayout>
     </LinearLayout>
 
 

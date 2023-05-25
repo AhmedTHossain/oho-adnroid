@@ -32,24 +32,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/text_prompt"
-        android:layout_above="@id/button_next_sixth"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginBottom="@dimen/_20sdp"/>
-    <TextView
-        android:id="@+id/button_next_sixth"
-        android:layout_width="@dimen/_100sdp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:background="@drawable/border_rounded_corner"
-        android:clickable="true"
-        android:focusable="true"
-        android:fontFamily="@font/darkergrotesque_bold"
-        android:foreground="?attr/selectableItemBackground"
-        android:paddingTop="@dimen/_10sdp"
-        android:paddingBottom="@dimen/_10sdp"
-        android:text="Next"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_18ssp"
-        android:layout_alignParentBottom="true"/>
+        android:layout_marginTop="@dimen/_20sdp" />
+
 </RelativeLayout>

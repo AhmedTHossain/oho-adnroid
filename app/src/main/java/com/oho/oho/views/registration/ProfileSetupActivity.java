@@ -4,15 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 
 import com.oho.oho.R;
 import com.oho.oho.databinding.ActivityProfileSetupBinding;
 import com.oho.oho.interfaces.OnProfileSetupScreenChange;
+import com.oho.oho.viewmodels.ProfileSetupViewModel;
 
 public class ProfileSetupActivity extends AppCompatActivity implements OnProfileSetupScreenChange {
     ActivityProfileSetupBinding binding;
+     ProfileSetupViewModel viewmodel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +24,8 @@ public class ProfileSetupActivity extends AppCompatActivity implements OnProfile
         setTheme(R.style.Theme_OHO);
         setContentView(binding.getRoot());
 
+
+        initViewModel();
         setScreen(new IntroProfileSetup(this));
     }
 
@@ -57,5 +62,9 @@ public class ProfileSetupActivity extends AppCompatActivity implements OnProfile
                 break;
 
         }
+    }
+
+    private void initViewModel(){
+        viewmodel = new ViewModelProvider(this).get(ProfileSetupViewModel.class);
     }
 }
