@@ -14,6 +14,8 @@ import java.io.File;
 
 public class ProfileSetupViewModel extends AndroidViewModel {
     public LiveData<Boolean> ifUploaded;
+    public LiveData<Boolean> ifProfilePhotoUploaded;
+    public LiveData<Boolean> ifGenderPreferenceUpdated;
     private ProfileSetupRepository repository;
 
     public ProfileSetupViewModel(@NonNull Application application) {
@@ -21,7 +23,15 @@ public class ProfileSetupViewModel extends AndroidViewModel {
         repository = new ProfileSetupRepository(getApplication().getApplicationContext());
     }
 
-    public void uploadPromptAnswer(NewPromptAnswer newPromptAnswer){
-        ifUploaded = repository.uploadNewPromptAnswer(newPromptAnswer,getApplication().getApplicationContext());
+    public void uploadPromptAnswer(NewPromptAnswer newPromptAnswer) {
+        ifUploaded = repository.uploadNewPromptAnswer(newPromptAnswer, getApplication().getApplicationContext());
+    }
+
+    public void uploadProfilePhoto(int user_id, File image) {
+        ifProfilePhotoUploaded = repository.uploadProfilePhoto(user_id, image, getApplication().getApplicationContext());
+    }
+
+    public void updateGenderPreference(int user_id, String interested_in){
+        ifGenderPreferenceUpdated = repository.updateGenderPreference(user_id,interested_in,getApplication().getApplicationContext());
     }
 }

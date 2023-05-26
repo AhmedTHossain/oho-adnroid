@@ -42,14 +42,16 @@ public interface APIService {
     @POST("users/register")
     Call<Profile> createUser(@Body Profile profile);
 
+    //for update user profile basic info
     @PUT("users/update")
     Call<Profile> updateUser(@Body Profile profile);
 
     @GET("users/get_profile")
     Call<Profile> getUserProfile(@Query("user_id") int user_id);
 
+    //for uploading profile photo
     @Multipart
-    @POST("upload/upload_profile_picture")
+    @POST("upload/upload_profile_picture_v2")
     Call<UploadProfilePhotoResponse> uploadProfilePhoto(@Part("user_id") RequestBody user_id, @Part MultipartBody.Part file);
 
     @GET("users/prompts")
@@ -58,7 +60,7 @@ public interface APIService {
     // for uploading prompt photos (atleast 3 for profile creation)
     @Multipart
     @POST("upload/upload_picture")
-    Call<List<UploadPromptPhotoResponse>> uploadPromptPhoto(@Part("user_id") RequestBody user_id, @Part("caption") RequestBody caption, @Part MultipartBody.Part file);
+    Call<List<UploadPromptPhotoResponse>> uploadPromptPhoto(@Part("user_id") RequestBody user_id, @Part("caption") RequestBody caption, @Part MultipartBody.Part image);
 
     // for uploading user prompts
     @Multipart

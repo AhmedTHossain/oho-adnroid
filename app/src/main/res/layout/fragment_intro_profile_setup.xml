@@ -55,7 +55,7 @@
             app:toggle_textSize="@dimen/_14ssp" />
 
         <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-            android:id="@+id/button_both"
+            android:id="@+id/button_other"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:toggle_backgroundColor="@color/white"
@@ -63,7 +63,7 @@
             app:toggle_borderColor="#E6E6E6"
             app:toggle_selectedBorderColor="@color/ted_image_picker_primary_pressed"
             app:toggle_selectedBackgroundColor="@color/ted_image_picker_primary_pressed"
-            app:toggle_text="Both"
+            app:toggle_text="Other"
             app:toggle_textColor="@color/black"
             app:toggle_textPadding="@dimen/_10sdp"
             app:toggle_paddingRight="@dimen/_10sdp"

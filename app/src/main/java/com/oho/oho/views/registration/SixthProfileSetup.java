@@ -123,7 +123,8 @@ public class SixthProfileSetup extends Fragment implements OnPhotoPickerPrompt, 
                     Toast.makeText(requireContext(), "Your answer was uploaded successfully!", Toast.LENGTH_SHORT).show();
                     if (binding.viewpager.getCurrentItem() != selectedPrompts.size() - 1) {
                         binding.viewpager.setCurrentItem(binding.viewpager.getCurrentItem() + 1);
-                    }
+                    } else
+                        listener.onScreenChange("next","sixth");
                 } else {
                     Toast.makeText(requireContext(), "Answer upload failed!", Toast.LENGTH_SHORT).show();
                 }

@@ -1,14 +1,22 @@
 package com.oho.oho.repositories;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.oho.oho.models.NewPromptAnswer;
 import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.network.APIService;
 import com.oho.oho.network.RetrofitInstance;
+import com.oho.oho.responses.PreferenceResponse;
+import com.oho.oho.responses.UploadProfilePhotoResponse;
+
+import org.json.JSONObject;
+
+import java.io.File;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -46,6 +54,52 @@ public class ProfileSetupRepository {
             public void onFailure(@NonNull Call<PromptAnswer> call, @NonNull Throwable t) {
 
                 ifResponseReceived.setValue(false);
+            }
+        });
+        return ifResponseReceived;
+    }
+
+    public MutableLiveData<Boolean> uploadProfilePhoto(int user_id, File image, Context applicationContext) {
+        MutableLiveData<Boolean> ifResponseReceived = new MutableLiveData<>();
+        APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
+        RequestBody userId = RequestBody.create(String.valueOf(user_id),MediaType.parse("text/plain"));
+
+        MultipartBody.Part filePart = MultipartBody.Part.createFormData("image", image.getName(), RequestBody.create(MediaType.parse("image/*"), image));
+        Call<UploadProfilePhotoResponse> call = apiService.uploadProfilePhoto(userId, filePart);
+        call.enqueue(new Callback<UploadProfilePhotoResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<UploadProfilePhotoResponse> call, @NonNull Response<UploadProfilePhotoResponse> response) {
+                ifResponseReceived.setValue(true);
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<UploadProfilePhotoResponse> call, @NonNull Throwable t) {
+                ifResponseReceived.setValue(false);
+            }
+        });
+        return ifResponseReceived;
+    }
+
+    public MutableLiveData<Boolean> updateGenderPreference(int user_id, String interested_in, Context context){
+        MutableLiveData<Boolean> ifResponseReceived = new MutableLiveData<>();
+        APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
+
+        PreferenceResponse preferenceResponse = new PreferenceResponse();
+        preferenceResponse.setUserId(user_id);
+        preferenceResponse.setInterestedIn(interested_in);
+
+        Call<PreferenceResponse> call = apiService.updatePreference(preferenceResponse);
+        call.enqueue(new Callback<PreferenceResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<PreferenceResponse> call, @NonNull Response<PreferenceResponse> response) {
+                ifResponseReceived.setValue(true);
+                Log.d("ProfileSetupRepository","gender update: successful");
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<PreferenceResponse> call, @NonNull Throwable t) {
+                ifResponseReceived.setValue(false);
+                Log.d("ProfileSetupRepository","gender update: failed");
             }
         });
         return ifResponseReceived;

@@ -6,8 +6,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.oho.oho.MainActivity;
 import com.oho.oho.R;
 import com.oho.oho.databinding.ActivityProfileSetupBinding;
 import com.oho.oho.interfaces.OnProfileSetupScreenChange;
@@ -60,7 +62,16 @@ public class ProfileSetupActivity extends AppCompatActivity implements OnProfile
                 if (moveTo.equals("next"))
                     setScreen(new SixthProfileSetup(this));
                 break;
-
+            case "sixth":
+                if (moveTo.equals("next")) {
+                    setScreen(new SeventProfileSetup(this));
+                }
+                break;
+            case "seventh":
+                if (moveTo.equals("next")) {
+                    startActivity(new Intent(this,MainActivity.class));
+                }
+                break;
         }
     }
 

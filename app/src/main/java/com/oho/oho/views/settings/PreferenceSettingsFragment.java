@@ -308,8 +308,8 @@ public class PreferenceSettingsFragment extends Fragment {
                 break;
         }
 
-//        String [] cuisines = preferences.getCuisine();
-        cuisineList.addAll(preferences.getCuisine());
+        String [] cuisines = preferences.getCuisine().split(",");
+        cuisineList.addAll(Arrays.asList(cuisines));
 
         for (String cuisine : cuisineList) {
             if (cuisine.equals("Italian"))
