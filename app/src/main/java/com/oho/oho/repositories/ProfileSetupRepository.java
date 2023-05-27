@@ -1,5 +1,6 @@
 package com.oho.oho.repositories;
 
+import android.app.Person;
 import android.content.Context;
 import android.util.Log;
 
@@ -8,6 +9,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.oho.oho.models.NewPromptAnswer;
+import com.oho.oho.models.Profile;
 import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.network.APIService;
 import com.oho.oho.network.RetrofitInstance;
@@ -103,5 +105,24 @@ public class ProfileSetupRepository {
             }
         });
         return ifResponseReceived;
+    }
+
+    public MutableLiveData<Profile> registerUser(Profile profile){
+        MutableLiveData<Profile>  uploadedProfile = new MutableLiveData<>();
+        APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
+
+        Call<Profile> call = apiService.createUser(profile);
+        call.enqueue(new Callback<Profile>() {
+            @Override
+            public void onResponse(@NonNull Call<Profile> call, @NonNull Response<Profile> response) {
+                uploadedProfile.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Profile> call, @NonNull Throwable t) {
+                uploadedProfile.setValue(null);
+            }
+        });
+        return uploadedProfile;
     }
 }

@@ -18,9 +18,6 @@ public class Profile {
     @SerializedName("city")
     @Expose
     private String city;
-    @SerializedName("cuisine")
-    @Expose
-    private String cuisine;
     @SerializedName("dob")
     @Expose
     private String dob;
@@ -36,9 +33,6 @@ public class Profile {
     @SerializedName("id")
     @Expose
     private Integer id;
-    @SerializedName("interested_in")
-    @Expose
-    private String interested_in;
     @SerializedName("lat")
     @Expose
     private Double lat;
@@ -54,6 +48,9 @@ public class Profile {
     @SerializedName("phone")
     @Expose
     private String phone;
+    @SerializedName("prompt_answers")
+    @Expose
+    private List<Object> promptAnswers;
     @SerializedName("race")
     @Expose
     private String race;
@@ -69,12 +66,6 @@ public class Profile {
     @SerializedName("vaccinated")
     @Expose
     private String vaccinated;
-    @SerializedName("prompts")
-    @Expose
-    private List<PromptAnswer> promptList;
-
-    public Profile() {
-    }
 
     public Integer getAge() {
         return age;
@@ -148,14 +139,6 @@ public class Profile {
         this.id = id;
     }
 
-    public String getInterested_in() {
-        return interested_in;
-    }
-
-    public void setInterested_in(String interested_in) {
-        this.interested_in = interested_in;
-    }
-
     public Double getLat() {
         return lat;
     }
@@ -196,6 +179,14 @@ public class Profile {
         this.phone = phone;
     }
 
+    public List<Object> getPromptAnswers() {
+        return promptAnswers;
+    }
+
+    public void setPromptAnswers(List<Object> promptAnswers) {
+        this.promptAnswers = promptAnswers;
+    }
+
     public String getRace() {
         return race;
     }
@@ -234,21 +225,5 @@ public class Profile {
 
     public void setVaccinated(String vaccinated) {
         this.vaccinated = vaccinated;
-    }
-
-    public String getCuisine() {
-        return cuisine;
-    }
-
-    public void setCuisine(String cuisine) {
-        this.cuisine = cuisine;
-    }
-
-    public List<PromptAnswer> getPromptList() {
-        return promptList;
-    }
-
-    public void setPromptList(List<PromptAnswer> promptList) {
-        this.promptList = promptList;
     }
 }

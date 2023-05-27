@@ -111,6 +111,6 @@ public class RegistrationViewModel extends AndroidViewModel {
                 cuisine = cuisine + ", " + cuisineStr;
         }
 
-        userProfile.setCuisine(cuisine);
+//        userProfile.setCuisine(cuisine);
     }
 }
