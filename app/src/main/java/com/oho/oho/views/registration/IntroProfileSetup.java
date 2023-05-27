@@ -53,8 +53,8 @@ public class IntroProfileSetup extends Fragment {
         binding.buttonNextIntro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!TextUtils.isEmpty(gender)) {
-                    if (!TextUtils.isEmpty(dob)) {
+                if (!gender.equals("")) {
+                    if (!dob.equals("")) {
                         if (age >= 18) {
                             viewmodel = new ViewModelProvider(requireActivity()).get(ProfileSetupViewModel.class);
 

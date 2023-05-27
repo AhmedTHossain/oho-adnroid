@@ -6,7 +6,10 @@ import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +18,20 @@ import android.widget.Button;
 import com.oho.oho.R;
 import com.oho.oho.databinding.FragmentSecondProfileSetupBinding;
 import com.oho.oho.interfaces.OnProfileSetupScreenChange;
+import com.oho.oho.models.Profile;
+import com.oho.oho.viewmodels.ProfileSetupViewModel;
 import com.shawnlin.numberpicker.NumberPicker;
+
+import nl.bryanderidder.themedtogglebuttongroup.ThemedButton;
 
 public class SecondProfileSetup extends Fragment {
     private OnProfileSetupScreenChange listener;
     FragmentSecondProfileSetupBinding binding;
+    private ProfileSetupViewModel viewmodel;
+    private double height = 0.0;
+    private String education = "";
+    private String heightToDisplay = "";
+
     public SecondProfileSetup() {
         // Required empty public constructor
     }
@@ -36,7 +48,21 @@ public class SecondProfileSetup extends Fragment {
         binding.buttonNextSecond.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onScreenChange("next","second");
+                if (!education.equals("")) {
+                    if (!heightToDisplay.equals("")) {
+                        viewmodel = new ViewModelProvider(requireActivity()).get(ProfileSetupViewModel.class);
+
+                        Profile profile = viewmodel.getNewUserProfile().getValue();
+                        profile.setEducation(education);
+                        profile.setHeight(height);
+
+                        viewmodel.updateNewUserProfile(profile);
+                        viewmodel.newUserProfile.observe(requireActivity(), newUserProfile -> {
+                            Log.d("IntroProfileSetup", "education stored in viewmodel: " + newUserProfile.getEducation());
+                        });
+                    }
+                }
+                listener.onScreenChange("next", "second");
             }
         });
 
@@ -45,6 +71,12 @@ public class SecondProfileSetup extends Fragment {
             public void onClick(View v) {
                 showHeightInputDialog();
             }
+        });
+
+        binding.buttonGroupEducation.setOnSelectListener((ThemedButton btn) -> {
+            education = btn.getText();
+            // handle selected button
+            return kotlin.Unit.INSTANCE;
         });
 
         // Inflate the layout for this fragment
@@ -72,8 +104,8 @@ public class SecondProfileSetup extends Fragment {
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Double height = calculateHeight(feetPicker.getValue(),inchPicker.getValue());
-                        String heightToDisplay = feetPicker.getValue() + "' " + inchPicker.getValue() + "\"";
+                        height = calculateHeight(feetPicker.getValue(), inchPicker.getValue());
+                        heightToDisplay = feetPicker.getValue() + "' " + inchPicker.getValue() + "\"";
                         binding.textviewHeight.setText(heightToDisplay);
                         dialog.dismiss();
                     }
@@ -84,8 +116,8 @@ public class SecondProfileSetup extends Fragment {
         alertDialog.show();
     }
 
-    public double calculateHeight(int feet, int inch){
-        int totalInch = (feet*12) + inch;
+    public double calculateHeight(int feet, int inch) {
+        int totalInch = (feet * 12) + inch;
 
         return totalInch * 2.54;
     }
