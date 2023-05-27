@@ -10,10 +10,14 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -23,17 +27,20 @@ import com.google.android.gms.tasks.Task;
 import com.oho.oho.R;
 import com.oho.oho.databinding.FragmentThirdProfileSetupBinding;
 import com.oho.oho.interfaces.OnProfileSetupScreenChange;
+import com.oho.oho.models.Profile;
 import com.oho.oho.viewmodels.ProfileSetupViewModel;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+import nl.bryanderidder.themedtogglebuttongroup.ThemedButton;
+
 public class ThirdProfileSetup extends Fragment {
     private OnProfileSetupScreenChange listener;
     FragmentThirdProfileSetupBinding binding;
     private ProfileSetupViewModel viewmodel;
-    private String city, state;
+    private String city, state, religion;
     private double lat,lon;
 
     public ThirdProfileSetup() {
@@ -52,7 +59,27 @@ public class ThirdProfileSetup extends Fragment {
         binding.buttonNextThird.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onScreenChange("next", "third");
+                if (city != null){
+                    if (religion != null) {
+                        viewmodel = new ViewModelProvider(requireActivity()).get(ProfileSetupViewModel.class);
+
+                        Profile profile = viewmodel.getNewUserProfile().getValue();
+                        profile.setCity(city);
+                        profile.setState(state);
+                        profile.setLon(lon);
+                        profile.setLat(lat);
+                        profile.setReligion(religion);
+
+                        viewmodel.updateNewUserProfile(profile);
+                        viewmodel.newUserProfile.observe(requireActivity(), newUserProfile -> {
+                            Log.d("ThirdProfileSetup", "city stored in viewmodel: " + newUserProfile.getCity());
+                        });
+
+                        listener.onScreenChange("next", "third");
+                    } else
+                        Toast.makeText(requireContext(), "Please select your Religion first!", Toast.LENGTH_SHORT).show();
+                } else
+                    Toast.makeText(requireContext(), "Please enter your Location first!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -61,6 +88,12 @@ public class ThirdProfileSetup extends Fragment {
             public void onClick(View v) {
                 showLocationInputDialog();
             }
+        });
+
+        binding.buttonGroupReligion.setOnSelectListener((ThemedButton btn) -> {
+            religion = btn.getText();
+            // handle selected button
+            return kotlin.Unit.INSTANCE;
         });
 
         // Inflate the layout for this fragment

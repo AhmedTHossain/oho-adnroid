@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.oho.oho.R;
 import com.oho.oho.databinding.FragmentSecondProfileSetupBinding;
@@ -58,11 +59,13 @@ public class SecondProfileSetup extends Fragment {
 
                         viewmodel.updateNewUserProfile(profile);
                         viewmodel.newUserProfile.observe(requireActivity(), newUserProfile -> {
-                            Log.d("IntroProfileSetup", "education stored in viewmodel: " + newUserProfile.getEducation());
+                            Log.d("SecondProfileSetup", "education stored in viewmodel: " + newUserProfile.getEducation());
                         });
-                    }
-                }
-                listener.onScreenChange("next", "second");
+                        listener.onScreenChange("next", "second");
+                    } else
+                        Toast.makeText(requireContext(), "Please select your Height first!", Toast.LENGTH_SHORT).show();
+                } else
+                    Toast.makeText(requireContext(), "Please select your Degree first!", Toast.LENGTH_SHORT).show();
             }
         });
 
