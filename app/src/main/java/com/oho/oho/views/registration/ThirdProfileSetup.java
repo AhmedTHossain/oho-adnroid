@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.Task;
 import com.oho.oho.R;
 import com.oho.oho.databinding.FragmentThirdProfileSetupBinding;
 import com.oho.oho.interfaces.OnProfileSetupScreenChange;
+import com.oho.oho.viewmodels.ProfileSetupViewModel;
 
 import java.io.IOException;
 import java.util.List;
@@ -31,6 +32,10 @@ import java.util.Locale;
 public class ThirdProfileSetup extends Fragment {
     private OnProfileSetupScreenChange listener;
     FragmentThirdProfileSetupBinding binding;
+    private ProfileSetupViewModel viewmodel;
+    private String city, state;
+    private double lat,lon;
+
     public ThirdProfileSetup() {
         // Required empty public constructor
     }
@@ -47,7 +52,7 @@ public class ThirdProfileSetup extends Fragment {
         binding.buttonNextThird.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onScreenChange("next","third");
+                listener.onScreenChange("next", "third");
             }
         });
 
@@ -71,17 +76,17 @@ public class ThirdProfileSetup extends Fragment {
                     Location location = task.getResult();
                     if (location != null) {
 
-                        double lat = location.getLatitude();
-                        double lon = location.getLongitude();
+                        lat = location.getLatitude();
+                        lon = location.getLongitude();
 
                         try {
-                            Geocoder geocoder = new Geocoder(requireContext(), Locale.US);
+                            Geocoder geocoder = new Geocoder(requireContext(), Locale.ENGLISH);
                             List<Address> addresses = geocoder.getFromLocation(
-                                    location.getLatitude(), location.getLongitude(), 1
+                                    location.getLatitude(), location.getLongitude(), 2
                             );
 
-                            String city = addresses.get(0).getLocality();
-                            String state = addresses.get(0).getAdminArea();
+                            city = addresses.get(1).getLocality();
+                            state = addresses.get(1).getAdminArea();
 
                             String locationText = city + ", " + state;
                             binding.textviewLocation.setText(locationText);
