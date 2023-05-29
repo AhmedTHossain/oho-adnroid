@@ -12,16 +12,11 @@
         android:layout_centerInParent="true"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/image_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/lovina_october_five_regular"
-            android:text="Oho!"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_50ssp"
-            android:paddingStart="@dimen/_20sdp"
-            android:paddingEnd="@dimen/_20sdp"/>
+        <ImageView
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_80sdp"
+            android:src="@drawable/oho"
+            android:layout_marginStart="@dimen/_10sdp"/>
 
         <RelativeLayout
             android:layout_width="wrap_content"
