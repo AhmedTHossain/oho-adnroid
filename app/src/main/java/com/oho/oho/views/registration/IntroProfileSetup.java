@@ -36,7 +36,6 @@ public class IntroProfileSetup extends Fragment {
     private int age;
     private String gender = "";
     private String dob = "";
-    ;
 
     public IntroProfileSetup() {
         // Required empty public constructor
@@ -59,6 +58,9 @@ public class IntroProfileSetup extends Fragment {
                             viewmodel = new ViewModelProvider(requireActivity()).get(ProfileSetupViewModel.class);
 
                             Profile profile = new Profile();
+
+                            profile.setName(requireActivity().getIntent().getStringExtra("name"));
+                            profile.setEmail(requireActivity().getIntent().getStringExtra("email"));
                             profile.setSex(gender);
                             profile.setAge(age);
                             profile.setDob(binding.textviewDateOfBirth.getText().toString());

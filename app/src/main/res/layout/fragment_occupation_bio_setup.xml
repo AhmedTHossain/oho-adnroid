@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".views.registration.OccupationBioSetup">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/ptsans_bold"
+        android:text="I am a/an.."
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16ssp" />
+
+    <AutoCompleteTextView
+        android:id="@+id/text_occupation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:hint="Type your occupation here.."
+        android:completionThreshold="1"
+        android:fontFamily="@font/ptsans_regular"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14ssp"
+        android:background="@drawable/border_drawable"
+        android:paddingStart="@dimen/_15sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_15sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:drawableEnd="@drawable/ic_occupation"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/ptsans_bold"
+        android:text="Share something about yourself.."
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16ssp"
+        android:layout_marginTop="@dimen/_40sdp"/>
+
+    <EditText
+        android:id="@+id/text_bio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="@drawable/border_drawable"
+        android:fontFamily="@font/ptsans_regular"
+        android:gravity="start"
+        android:hint="Type your bio here.."
+        android:inputType="textMultiLine"
+        android:lines="4"
+        android:maxLength="250"
+        android:padding="@dimen/_10sdp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14ssp" />
+
+    <TextView
+        android:id="@+id/button_next_occupation_bio"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:background="@drawable/border_rounded_corner"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/darkergrotesque_bold"
+        android:text="Next"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_18ssp"
+        app:drawableTint="@color/white"
+        android:foreground="?attr/selectableItemBackground"/>
+
+</LinearLayout>

@@ -254,7 +254,7 @@
     <string name="terms_para_12"><b>11. MISCELLANEOUS</b>
         \n\nA few final points:
         \n\nThese Terms, which we may amend from time to time, constitute the entire agreement between you and <b>Oho!</b> . The Terms supersede all previous agreements, representations and arrangements between us (written or oral). Nothing in this clause shall limit or exclude any liability for fraudulent misrepresentation.
-        \n\n<b>Oho!</b>  has taken reasonable steps to ensure the currency, availability, correctness and completeness of the information contained on <b>Oho!</b> and provides that information on an "as is", "as available" basis. <b>Oho!</b>  does not give or make any warranty or representation of any kind about the information contained on <b>Oho!</b>, whether express or implied. Use of <b>Oho!</b> and the materials available on it is at your sole risk. <b>Oho!</b>  cannot be held responsible for any loss arising from the transmission, use of data, or inaccurate User Content.
+        \n\n<b>Oho!</b>  has taken reasonable steps to ensure the currency, availability, correctness and completeness of the information contained on <b>Oho!</b> and provides that information on an "as is "as available" basis. <b>Oho!</b>  does not give or make any warranty or representation of any kind about the information contained on <b>Oho!</b>, whether express or implied. Use of <b>Oho!</b> and the materials available on it is at your sole risk. <b>Oho!</b>  cannot be held responsible for any loss arising from the transmission, use of data, or inaccurate User Content.
         \n\nYou are responsible for taking all necessary precautions to ensure that any material you may obtain from <b>Oho!</b> is free of viruses or other harmful components. You accept that <b>Oho!</b> will not be provided uninterrupted or error free, that defects may not be corrected or that <b>Oho!</b>  or the server that makes it available, are free of viruses or bugs, spyware, Trojan horse or any similar malicious software. <b>Oho!</b>  is not responsible for any damage to your computer hardware, computer software, or other equipment or technology including, but without limitation damage from any security breach or from any virus, bugs, tampering, fraud, error, omission, interruption, defect, delay in operation or transmission, computer line or network failure or any other technical or other malfunction.
         \n\nWe’ll keep you updated should our terms change …
         \n\nAs <b>Oho!</b>  grows, we reserve the right to modify, amend or change the Terms at any time (a "Change"). If we do this then the Changes will be posted on this page and we will indicate the Effective Date of the updates at the bottom of the Terms. In certain circumstances, we may send an email to you notifying you of a Change. You should regularly check this page for notice of any Changes – we want our users to be as informed as possible.
@@ -327,5 +327,140 @@ Oho! does not knowingly collect any Personal Identifiable Information from child
     <string-array name="rangeSliderValuesAge">
         <item>22</item>
         <item>30</item>
+    </string-array>
+    <string-array name="profession_list">
+        <item>Accountant</item>
+        <item>Actor</item>
+        <item>Architect </item>
+        <item>Artist</item>
+        <item>Astronaut</item>
+        <item>Athlete</item>
+        <item>Author</item>
+        <item>Baker</item>
+        <item>Banker</item>
+        <item>Barber</item>
+        <item>Biologist</item>
+        <item>Chef</item>
+        <item>Chemist</item>
+        <item>Civil engineer</item>
+        <item>Clergy</item>
+        <item>Computer programmer</item>
+        <item>Dentist</item>
+        <item>Doctor</item>
+        <item>Economist</item>
+        <item>Electrician</item>
+        <item>Engineer</item>
+        <item>Entrepreneur</item>
+        <item>Fashion designer</item>
+        <item>Firefighter</item>
+        <item>Flight attendant</item>
+        <item>Graphic designer</item>
+        <item>Historian</item>
+        <item>Journalist</item>
+        <item>Lawyer</item>
+        <item>Librarian</item>
+        <item>Manager</item>
+        <item>Marketing specialist</item>
+        <item>Mathematician</item>
+        <item>Mechanic</item>
+        <item>Musician</item>
+        <item>Nurse</item>
+        <item>Optometrist</item>
+        <item>Pharmacist</item>
+        <item>Photographer</item>
+        <item>Physician</item>
+        <item>Pilot</item>
+        <item>Police officer</item>
+        <item>Professor</item>
+        <item>Psychologist</item>
+        <item>Real estate agent</item>
+        <item>Scientist</item>
+        <item>Social worker</item>
+        <item>Software developer</item>
+        <item>Teacher</item>
+        <item>Translator</item>
+        <item>Veterinarian</item>
+        <item>Waiter/Waitress</item>
+        <item>Writer</item>
+        <item>Acupuncturist</item>
+        <item>Air traffic controller</item>
+        <item>Animator</item>
+        <item>Archaeologist</item>
+        <item>Audiologist</item>
+        <item>Automotive technician</item>
+        <item>Barista</item>
+        <item>Biochemist</item>
+        <item>Botanist</item>
+        <item>Bus driver</item>
+        <item>Carpenter</item>
+        <item>Cartoonist</item>
+        <item>Chiropractor</item>
+        <item>Coach</item>
+        <item>Comedian</item>
+        <item>Copywriter</item>
+        <item>Counselor</item>
+        <item>Cryptographer</item>
+        <item>Curator</item>
+        <item>Data analyst</item>
+        <item>Dietitian</item>
+        <item>Dispatcher</item>
+        <item>Editor</item>
+        <item>Electrician</item>
+        <item>Event planner</item>
+        <item>Financial advisor</item>
+        <item>Fitness instructor</item>
+        <item>Flight instructor</item>
+        <item>Forensic scientist</item>
+        <item>Game designer</item>
+        <item>Geologist</item>
+        <item>Glassblower</item>
+        <item>Hair stylist</item>
+        <item>Historical interpreter</item>
+        <item>Interior designer</item>
+        <item>Investment banker</item>
+        <item>Jeweler</item>
+        <item>Landscape architect</item>
+        <item>Lifeguard</item>
+        <item>Magician</item>
+        <item>Marine biologist</item>
+        <item>Massage therapist</item>
+        <item>Meteorologist</item>
+        <item>Model</item>
+        <item>Neurologist</item>
+        <item>Notary public</item>
+        <item>Nutritionist</item>
+        <item>Occupational therapist</item>
+        <item>Paramedic</item>
+        <item>Park ranger</item>
+        <item>Personal trainer</item>
+        <item>Phlebotomist</item>
+        <item>Physical therapist</item>
+        <item>Pianist</item>
+        <item>Plumber</item>
+        <item>Police detective</item>
+        <item>Political analyst</item>
+        <item>Probation officer</item>
+        <item>Product manager</item>
+        <item>Project manager</item>
+        <item>Radiologist</item>
+        <item>Receptionist</item>
+        <item>Robotics engineer</item>
+        <item>Sales representative</item>
+        <item>Sculptor</item>
+        <item>Security guard</item>
+        <item>Singer</item>
+        <item>Social media manager</item>
+        <item>Speech therapist</item>
+        <item>Statistician</item>
+        <item>Surgeon</item>
+        <item>Taxi driver</item>
+        <item>Tour guide</item>
+        <item>Umpire</item>
+        <item>Urban planner</item>
+        <item>Video game tester</item>
+        <item>Web designer</item>
+        <item>Welder</item>
+        <item>Yoga instructor</item>
+
     </string-array>
 </resources>

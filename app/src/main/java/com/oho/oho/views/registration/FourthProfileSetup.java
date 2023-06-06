@@ -57,6 +57,7 @@ public class FourthProfileSetup extends Fragment {
                             });
 
                             listener.onScreenChange("next", "fourth");
+
                         } else
                             Toast.makeText(requireContext(), "Please enter a valid Phone number first!", Toast.LENGTH_SHORT).show();
                     } else

@@ -49,7 +49,7 @@ public class ProfileSetupViewModel extends AndroidViewModel {
         newUserProfile.setValue(profile);
     }
 
-    public void uploadBasicUserInfo(){
+    public void registerNewUser(){
         uploadedNewUserProfile = repository.registerUser(newUserProfile.getValue());
     }
 }

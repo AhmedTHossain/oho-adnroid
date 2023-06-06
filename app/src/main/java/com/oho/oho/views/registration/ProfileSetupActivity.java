@@ -56,6 +56,10 @@ public class ProfileSetupActivity extends AppCompatActivity implements OnProfile
                 break;
             case "fourth":
                 if (moveTo.equals("next"))
+                    setScreen(new OccupationBioSetup(this));
+                break;
+            case "occupation":
+                if (moveTo.equals("next"))
                     setScreen(new FifthProfileSetup(this));
                 break;
             case "fifth":
