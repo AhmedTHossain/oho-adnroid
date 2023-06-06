@@ -127,7 +127,7 @@
             android:id="@+id/terms_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:paddingStart="@dimen/_20sdp"
             android:paddingEnd="@dimen/_20sdp">
 
@@ -135,19 +135,17 @@
                 android:id="@+id/terms_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:clickable="true"
                 android:focusable="true"
                 android:fontFamily="@font/ptsans_regular"
                 android:text="Terms"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp"
+                android:textColor="@color/ted_image_picker_primary_pressed"
+                android:textSize="@dimen/_14ssp"
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:fontFamily="@font/sf_pro_rounded_regular"
                 android:text="&amp;"
@@ -158,25 +156,24 @@
                 android:id="@+id/privacy_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:clickable="true"
                 android:focusable="true"
                 android:fontFamily="@font/ptsans_regular"
                 android:text="Privacy Policy"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp"
+                android:textColor="@color/ted_image_picker_primary_pressed"
+                android:textSize="@dimen/_14ssp"
                 android:textStyle="bold" />
         </LinearLayout>
 
         <com.github.ybq.android.spinkit.SpinKitView
             android:id="@+id/login_progress"
-            style="@style/SpinKitView.Large.Circle"
+            style="@style/SpinKitView.Large.ThreeBounce"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:elevation="@dimen/_10sdp"
             android:visibility="gone"
-            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_20sdp"
             app:SpinKit_Color="@color/ted_image_picker_primary_pressed"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

@@ -66,6 +66,11 @@ public class OccupationBioSetup extends Fragment {
                         viewmodel.uploadedNewUserProfile.observe(requireActivity(), uploadedNewUserProfile ->{
                             if (uploadedNewUserProfile!=null){
                                 Log.d("OccupationBio","id of newly registered user = "+uploadedNewUserProfile.getId());
+
+                                Profile newProfile = viewmodel.getNewUserProfile().getValue();
+                                newProfile.setId(uploadedNewUserProfile.getId());
+                                viewmodel.updateNewUserProfile(newProfile);
+
                                 listener.onScreenChange("next","occupation");
                             } else
                                 Toast.makeText(requireContext(),"Registration Failed! Please check your connection and try again.",Toast.LENGTH_SHORT).show();

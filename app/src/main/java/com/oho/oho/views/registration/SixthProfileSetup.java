@@ -27,6 +27,7 @@ import com.oho.oho.interfaces.OnPhotoPickerPrompt;
 import com.oho.oho.interfaces.OnProfileSetupScreenChange;
 import com.oho.oho.interfaces.OnPromptAnswerListener;
 import com.oho.oho.models.NewPromptAnswer;
+import com.oho.oho.models.Profile;
 import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.models.SelectedPrompt;
 import com.oho.oho.utils.ImageUtils;
@@ -109,8 +110,10 @@ public class SixthProfileSetup extends Fragment implements OnPhotoPickerPrompt, 
     public void onPromptAnswer(String prompt, String answer, String caption, SpinKitView progressview) {
         if (imageFile != null) {
             progressview.setVisibility(View.VISIBLE);
+            Profile profile = viewmodel.getNewUserProfile().getValue();
+
             NewPromptAnswer newPromptAnswer = new NewPromptAnswer();
-            newPromptAnswer.setUser_id(99); //TODO: Later replace 99 with logged in user's id
+            newPromptAnswer.setUser_id(profile.getId()); //TODO: Later replace 99 with logged in user's id
             newPromptAnswer.setPrompt(prompt);
             newPromptAnswer.setAnswer(answer);
             newPromptAnswer.setCaption(caption);
