@@ -19,6 +19,7 @@ import com.oho.oho.MainActivity;
 import com.oho.oho.R;
 import com.oho.oho.databinding.FragmentSeventProfileSetupBinding;
 import com.oho.oho.interfaces.OnProfileSetupScreenChange;
+import com.oho.oho.models.Profile;
 import com.oho.oho.utils.ImageUtils;
 import com.oho.oho.viewmodels.ProfileSetupViewModel;
 
@@ -63,8 +64,11 @@ public class SeventProfileSetup extends Fragment {
         binding.buttonNextSeventh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uploadProfilePhoto(99); //TODO: later replace 99 with logged in user's id
-                updateGenderPreference(99,binding.buttonGroupGender.getSelectedButtons().get(0).getText());
+                initViewModel();
+                Profile profile = viewmodel.getNewUserProfile().getValue();
+
+                uploadProfilePhoto(profile.getId()); //TODO: later replace 99 with logged in user's id
+                updateGenderPreference(profile.getId(),binding.buttonGroupGender.getSelectedButtons().get(0).getText());
             }
         });
 
@@ -74,7 +78,6 @@ public class SeventProfileSetup extends Fragment {
 
     private void uploadProfilePhoto(int user_id){
         binding.uploadPhotoProgress.setVisibility(View.VISIBLE);
-        viewmodel = new ViewModelProvider(requireActivity()).get(ProfileSetupViewModel.class);
         viewmodel.uploadProfilePhoto(user_id,imageFile);
         viewmodel.ifProfilePhotoUploaded.observe(requireActivity(),ifProfilePhotoUploaded -> {
             if (ifProfilePhotoUploaded){
@@ -97,5 +100,9 @@ public class SeventProfileSetup extends Fragment {
             else
                 Toast.makeText(requireContext(), "Preference update failed!", Toast.LENGTH_SHORT).show();
         });
+    }
+
+    private void initViewModel(){
+        viewmodel = new ViewModelProvider(requireActivity()).get(ProfileSetupViewModel.class);
     }
 }

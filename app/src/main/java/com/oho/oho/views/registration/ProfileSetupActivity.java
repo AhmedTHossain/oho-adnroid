@@ -13,6 +13,7 @@ import com.oho.oho.MainActivity;
 import com.oho.oho.R;
 import com.oho.oho.databinding.ActivityProfileSetupBinding;
 import com.oho.oho.interfaces.OnProfileSetupScreenChange;
+import com.oho.oho.models.Profile;
 import com.oho.oho.viewmodels.ProfileSetupViewModel;
 
 public class ProfileSetupActivity extends AppCompatActivity implements OnProfileSetupScreenChange {
@@ -73,7 +74,11 @@ public class ProfileSetupActivity extends AppCompatActivity implements OnProfile
                 break;
             case "seventh":
                 if (moveTo.equals("next")) {
-                    startActivity(new Intent(this,MainActivity.class));
+                    Profile profile = viewmodel.getNewUserProfile().getValue();
+
+                    Intent intent = new Intent(this, MainActivity.class);
+                    intent.putExtra("id",profile.getId());
+                    startActivity(intent);
                 }
                 break;
         }

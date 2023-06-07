@@ -1,17 +1,12 @@
 package com.oho.oho.viewmodels;
 
 import android.app.Application;
-import android.widget.RadioButton;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
-import com.oho.oho.models.Cuisine;
 import com.oho.oho.models.Profile;
-import com.oho.oho.models.RegistrationInput;
-import com.oho.oho.models.UserProfile;
 import com.oho.oho.repositories.RegistrationRepository;
 
 import java.util.ArrayList;
