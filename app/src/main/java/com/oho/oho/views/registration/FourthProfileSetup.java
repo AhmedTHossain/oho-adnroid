@@ -44,7 +44,7 @@ public class FourthProfileSetup extends Fragment {
             public void onClick(View v) {
                 if (!race.equals("")) {
                     if (!TextUtils.isEmpty(binding.textPhone.getText())) {
-                        if (binding.textPhone.getText().toString().length() == 11) {
+                        if (binding.textPhone.getText().toString().length() == 10) {
                             viewmodel = new ViewModelProvider(requireActivity()).get(ProfileSetupViewModel.class);
 
                             Profile profile = viewmodel.getNewUserProfile().getValue();

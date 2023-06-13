@@ -7,18 +7,21 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import com.oho.oho.MainActivity;
 import com.oho.oho.R;
+import com.oho.oho.database.LocalDatabase;
 import com.oho.oho.databinding.ActivityProfileSetupBinding;
+import com.oho.oho.entities.UserProfile;
 import com.oho.oho.interfaces.OnProfileSetupScreenChange;
 import com.oho.oho.models.Profile;
 import com.oho.oho.viewmodels.ProfileSetupViewModel;
 
 public class ProfileSetupActivity extends AppCompatActivity implements OnProfileSetupScreenChange {
     ActivityProfileSetupBinding binding;
-     ProfileSetupViewModel viewmodel;
+    ProfileSetupViewModel viewmodel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,16 +78,27 @@ public class ProfileSetupActivity extends AppCompatActivity implements OnProfile
             case "seventh":
                 if (moveTo.equals("next")) {
                     Profile profile = viewmodel.getNewUserProfile().getValue();
+                    UserProfile userProfile = new UserProfile(profile.getAge(), profile.getBio(), profile.getCity(), profile.getDob(), profile.getEducation(), profile.getEmail(), profile.getHeight(), profile.getId(), profile.getLat(), profile.getLon(), profile.getName(), profile.getOccupation(), profile.getPhone(), null, null, profile.getRace(), profile.getReligion(), profile.getSex(), profile.getState());
+
+                    LocalDatabase localDatabase = LocalDatabase.getInstance(this);
+
+                    AsyncTask.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            // Insert Data
+                            localDatabase.userProfileDao().updateUserProfile(userProfile);
+                        }
+                    });
 
                     Intent intent = new Intent(this, MainActivity.class);
-                    intent.putExtra("id",profile.getId());
+                    intent.putExtra("id", profile.getId());
                     startActivity(intent);
                 }
                 break;
         }
     }
 
-    private void initViewModel(){
+    private void initViewModel() {
         viewmodel = new ViewModelProvider(this).get(ProfileSetupViewModel.class);
     }
 }

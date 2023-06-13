@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -46,8 +47,8 @@ public class FifthProfileSetup extends Fragment implements OnPromptSelectListene
         binding.buttonNextFifth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (selectedPromptsList.size()<3)
-                    Toast.makeText(requireContext(),"You have to select at least 3 prompts in order to proceed",Toast.LENGTH_LONG).show();
+                if (selectedPromptsList.size() < 3)
+                    Toast.makeText(requireContext(), "You have to select at least 3 prompts in order to proceed", Toast.LENGTH_LONG).show();
                 else {
                     listener.onScreenChange("next", "fifth");
                     saveStringArray(selectedPromptsList);
@@ -61,21 +62,37 @@ public class FifthProfileSetup extends Fragment implements OnPromptSelectListene
 
     @Override
     public void onPromptSelect(SelectedPrompt selectedPrompt) {
-        if (selectedPromptsList.contains(selectedPrompt))
+        if (selectedPromptsList.contains(selectedPrompt)) {
             selectedPromptsList.remove(selectedPrompt);
-        else
-            selectedPromptsList.add(selectedPrompt);
 
-        for (SelectedPrompt prompt : promptsArrayList) {
-            if (prompt.getPrompt().equals(selectedPrompt.getPrompt())) {
-                prompt.setIsSelected(!selectedPrompt.getIsSelected());
+            for (SelectedPrompt prompt : promptsArrayList) {
+                if (prompt.getPrompt().equals(selectedPrompt.getPrompt())) {
+                    prompt.setIsSelected(!selectedPrompt.getIsSelected());
+                }
             }
+            adapter.notifyDataSetChanged();
+            String selectedCountText = selectedPromptsList.size() + "/6";
+            binding.textSelectionCount.setText(selectedCountText);
+        } else {
+            if (selectedPromptsList.size() < 6) {
+                selectedPromptsList.add(selectedPrompt);
+
+                for (SelectedPrompt prompt : promptsArrayList) {
+                    if (prompt.getPrompt().equals(selectedPrompt.getPrompt())) {
+                        prompt.setIsSelected(!selectedPrompt.getIsSelected());
+                    }
+                }
+                adapter.notifyDataSetChanged();
+                String selectedCountText = selectedPromptsList.size() + "/6";
+                binding.textSelectionCount.setText(selectedCountText);
+            } else
+                Toast.makeText(requireContext(), "You can select a maximum of 6 prompts for now, later you can add more from profile settings.", Toast.LENGTH_SHORT).show();
         }
-        adapter.notifyDataSetChanged();
 
-        String selectedCountText = selectedPromptsList.size() + "/3";
-
-        binding.textSelectionCount.setText(selectedCountText);
+        if (selectedPromptsList.size() >= 3)
+            binding.textSelectionCount.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
+        else
+            binding.textSelectionCount.setTextColor(ContextCompat.getColor(requireContext(), R.color.ted_image_picker_primary_pressed));
     }
 
     public void setPromptsList() {
