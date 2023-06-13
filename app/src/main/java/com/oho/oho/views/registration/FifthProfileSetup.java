@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.oho.oho.R;
 import com.oho.oho.adapters.PromptAdapter;
@@ -86,7 +87,11 @@ public class FifthProfileSetup extends Fragment implements OnPromptSelectListene
                 String selectedCountText = selectedPromptsList.size() + "/6";
                 binding.textSelectionCount.setText(selectedCountText);
             } else
-                Toast.makeText(requireContext(), "You can select a maximum of 6 prompts for now, later you can add more from profile settings.", Toast.LENGTH_SHORT).show();
+                Snackbar.make(
+                        requireView(),
+                        "You can select a maximum of 6 prompts for now, later you can add more from profile settings.",
+                        Snackbar.LENGTH_SHORT
+                ).show();
         }
 
         if (selectedPromptsList.size() >= 3)
