@@ -1,6 +1,7 @@
 package com.oho.oho.views.home;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,14 +11,18 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.oho.oho.R;
 import com.oho.oho.adapters.ChatRoomAdapter;
 import com.oho.oho.databinding.FragmentMessagesBinding;
 import com.oho.oho.interfaces.OnChatRoomClickListener;
+import com.oho.oho.interfaces.OnMessageOptionsMenu;
 import com.oho.oho.models.JWTTokenRequest;
 import com.oho.oho.responses.ChatRoom;
 import com.oho.oho.viewmodels.LikeYouVIewModel;
@@ -27,7 +32,7 @@ import com.oho.oho.views.chat.ChatActivity;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class MessagesFragment extends Fragment implements OnChatRoomClickListener {
+public class MessagesFragment extends Fragment implements OnChatRoomClickListener, OnMessageOptionsMenu {
 
     FragmentMessagesBinding binding;
     private MessageViewModel viewModel;
@@ -73,7 +78,7 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
     }
 
     private void setChatRoomList(ArrayList<ChatRoom> chatRoomArrayList) {
-        ChatRoomAdapter adapter = new ChatRoomAdapter(chatRoomArrayList, this, requireContext());
+        ChatRoomAdapter adapter = new ChatRoomAdapter(chatRoomArrayList, this, this, requireContext());
 
         Collections.reverse(chatRoomArrayList);
         binding.recyclerview.setHasFixedSize(true);
@@ -121,5 +126,27 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
             shimmerViewContainer.setVisibility(View.GONE);
             binding.swiperefreshlayout.setRefreshing(false);
         });
+    }
+
+    @Override
+    public void openMenu(View view) {
+        // Initializing the popup menu and giving the reference as current context
+        PopupMenu popupMenu = new PopupMenu(requireContext(), view);
+
+        // Inflating popup menu from popup_menu.xml file
+        popupMenu.getMenuInflater().inflate(R.menu.message_options_menu, popupMenu.getMenu());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            popupMenu.setForceShowIcon(true);
+        }
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                // Toast message on menu item clicked
+                Toast.makeText(requireContext(), "You Clicked " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
+        // Showing the popup menu
+        popupMenu.show();
     }
 }

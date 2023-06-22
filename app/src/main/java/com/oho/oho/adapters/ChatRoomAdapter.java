@@ -12,22 +12,25 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.oho.oho.R;
 import com.oho.oho.interfaces.OnChatRoomClickListener;
+import com.oho.oho.interfaces.OnMessageOptionsMenu;
 import com.oho.oho.responses.ChatRoom;
 
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHolder>{
+public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHolder> {
 
     private ArrayList<ChatRoom> chatRoomArrayList;
 
     private OnChatRoomClickListener chatRoomClickListener;
+    private OnMessageOptionsMenu onMessageOptionsMenuListener;
     private Context context;
 
-    public ChatRoomAdapter(ArrayList<ChatRoom> chatRoomArrayList, OnChatRoomClickListener chatRoomClickListener, Context context) {
+    public ChatRoomAdapter(ArrayList<ChatRoom> chatRoomArrayList, OnChatRoomClickListener chatRoomClickListener, OnMessageOptionsMenu onMessageOptionsMenuListener, Context context) {
         this.chatRoomArrayList = chatRoomArrayList;
         this.chatRoomClickListener = chatRoomClickListener;
+        this.onMessageOptionsMenuListener = onMessageOptionsMenuListener;
         this.context = context;
     }
 
@@ -43,12 +46,12 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
         holder.getSenderNameText().setText(chatRoomArrayList.get(position).getFullName());
         holder.getLastMessageBodyText().setText(chatRoomArrayList.get(position).getLastMessage());
 
-        if (chatRoomArrayList.get(position).getGender().equals("F")){
+        if (chatRoomArrayList.get(position).getGender().equals("F")) {
             Glide.with(context)
                     .load(chatRoomArrayList.get(position).getProfilePhoto())
                     .placeholder(R.drawable.portrait_female)
                     .into(holder.getSenderImage());
-        } else if(chatRoomArrayList.get(position).getGender().equals("M")) {
+        } else if (chatRoomArrayList.get(position).getGender().equals("M")) {
             Glide.with(context)
                     .load(chatRoomArrayList.get(position).getProfilePhoto())
                     .placeholder(R.drawable.portrait_male)
@@ -67,8 +70,9 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView senderNameText,lastMessageBodyText;
+        private TextView senderNameText, lastMessageBodyText;
         private CircleImageView senderImage;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -80,6 +84,14 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
                 @Override
                 public void onClick(View view) {
                     chatRoomClickListener.onChatRoomClick(chatRoomArrayList.get(getAdapterPosition()));
+                }
+            });
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    onMessageOptionsMenuListener.openMenu(senderImage);
+                    return false;
                 }
             });
         }
