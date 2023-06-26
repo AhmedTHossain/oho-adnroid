@@ -46,6 +46,7 @@ public interface APIService {
     @PUT("users/update")
     Call<Profile> updateUser(@Body Profile profile);
 
+    //for getting user profile
     @GET("users/get_profile")
     Call<Profile> getUserProfile(@Query("user_id") int user_id);
 

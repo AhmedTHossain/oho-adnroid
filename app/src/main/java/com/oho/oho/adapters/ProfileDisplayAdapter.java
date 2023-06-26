@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.oho.oho.R;
 import com.oho.oho.interfaces.SwipeListener;
+import com.oho.oho.models.Profile;
 import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.models.User;
 
@@ -23,7 +24,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ProfileDisplayAdapter extends RecyclerView.Adapter{
 
     private ArrayList<PromptAnswer> promptArrayList;
-    private User userProfile;
+    private Profile userProfile;
 
     private SwipeListener listener;
     private Context context;
@@ -35,8 +36,9 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter{
     private final int VIEW_TYPE_RIGHT = 1;
     private final int VIEW_TYPE_SWIPE = 2;
 
-    public ProfileDisplayAdapter(ArrayList<PromptAnswer> promptArrayList, User userProfile, SwipeListener listener, Context context, String user_type ) {
-        this.promptArrayList = promptArrayList;
+    public ProfileDisplayAdapter(Profile userProfile, SwipeListener listener, Context context, String user_type ) {
+        this.promptArrayList = new ArrayList<>(userProfile.getPromptAnswers());
+        promptArrayList.add(0, new PromptAnswer());
         this.context = context;
         this.userProfile = userProfile;
         this.listener = listener;
@@ -81,28 +83,23 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter{
                 ((Holder1) holder).height.setText(String.valueOf(userProfile.getHeight()));
                 ((Holder1) holder).race.setText(userProfile.getRace());
                 ((Holder1) holder).religion.setText(userProfile.getReligion());
-                switch (userProfile.getVaccinated()){
-                    case "true":
-                        ((Holder1) holder).vaccinated.setText("Vaccinated");
-                        break;
-                    case "false":
-                        ((Holder1) holder).vaccinated.setText("Not Vaccinated");
-                        break;
-                }
-//                ((Holder1) holder).distance.setText(userProfile.getDistance());
+
+                ((Holder1) holder).about.setText(userProfile.getBio());
                 Glide.with(context)
                         .load(userProfile.getProfilePicture())
                         .into( ((Holder1) holder).imageView);
                 break;
             case VIEW_TYPE_LEFT:
             case VIEW_TYPE_RIGHT:
-                ((Holder)holder).prompt.setText(promptArrayList.get(position).getPrompt());
-                ((Holder)holder).answer.setText(promptArrayList.get(position).getAnswer());
-                ((Holder)holder).caption.setText(promptArrayList.get(position).getCaption());
-                Glide.with(context)
-                        .load(promptArrayList.get(position).getImage())
-                        .into(((Holder)holder).imageView);
-                break;
+                if (position<promptArrayList.size()) {
+                    ((Holder) holder).prompt.setText(promptArrayList.get(position).getPrompt());
+                    ((Holder) holder).answer.setText(promptArrayList.get(position).getAnswer());
+                    ((Holder) holder).caption.setText(promptArrayList.get(position).getCaption());
+                    Glide.with(context)
+                            .load(promptArrayList.get(position).getImage())
+                            .into(((Holder) holder).imageView);
+                    break;
+                }
             case VIEW_TYPE_SWIPE:
                 ((Holder2) holder).seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                     @Override
@@ -133,7 +130,7 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter{
     public int getItemViewType(int position) {
         if (position == 0)
             return VIEW_TYPE_INFO;
-        else if (position == promptArrayList.size()-1)
+        else if (position == promptArrayList.size())
             return VIEW_TYPE_SWIPE;
         else {
             if (position % 2 != 0)
@@ -158,7 +155,7 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter{
     }
 
     public class Holder1 extends RecyclerView.ViewHolder {
-        private TextView name, location, profession, gender, height, race, religion, vaccinated, distance;
+        private TextView name, location, profession, gender, height, race, religion, about, distance;
         private CircleImageView imageView;
 
         public Holder1(@NonNull View itemView) {
@@ -171,7 +168,7 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter{
             height = itemView.findViewById(R.id.textview_height);
             race = itemView.findViewById(R.id.textview_race);
             religion = itemView.findViewById(R.id.textview_religion);
-            vaccinated = itemView.findViewById(R.id.textview_vaccinated);
+            about = itemView.findViewById(R.id.textview_about);
             distance = itemView.findViewById(R.id.textview_distance);
             imageView = itemView.findViewById(R.id.profile_image_view);
         }

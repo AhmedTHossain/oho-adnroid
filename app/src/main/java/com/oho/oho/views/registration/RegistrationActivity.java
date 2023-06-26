@@ -127,8 +127,8 @@ public class RegistrationActivity extends AppCompatActivity
         profileData.setOccupation(binding.edittextProfession.getText().toString());
         profileData.setRace(getSelectedRadioButtonText(binding.radiogroupRace.getCheckedRadioButtonId()));
         profileData.setReligion(getSelectedRadioButtonText(binding.radiogroupReligion.getCheckedRadioButtonId()));
-        profileData.setVaccinated(getSelectedRadioButtonText(binding.radiogroupVaccinated.getCheckedRadioButtonId()));
-        profileData.setBudget(getSelectedRadioButtonText(binding.radiogroupBudget.getCheckedRadioButtonId()));
+//        profileData.setVaccinated(getSelectedRadioButtonText(binding.radiogroupVaccinated.getCheckedRadioButtonId()));
+//        profileData.setBudget(getSelectedRadioButtonText(binding.radiogroupBudget.getCheckedRadioButtonId()));
 //        profileData.setInterested_in(getSelectedRadioButtonText(binding.radiogroupInterestedIn.getCheckedRadioButtonId()));
         profileData.setDob(binding.textviewDateOfBirth.getText().toString());
 //        profileData.setAge(registrationViewModel.getUserProfile().getAge());

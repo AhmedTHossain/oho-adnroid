@@ -162,17 +162,6 @@
         android:paddingEnd="@dimen/_20sdp"
         android:stretchColumns="*">
 
-        <TextView
-            android:id="@+id/textview_vaccinated"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/border_drawable"
-            android:fontFamily="@font/ptsans_regular"
-            android:gravity="center"
-            android:padding="@dimen/_5sdp"
-            android:text="Vaccinated"
-            android:textColor="@color/textSubTitle"
-            android:textSize="@dimen/_14ssp" />
     </TableLayout>
 
     <TextView
