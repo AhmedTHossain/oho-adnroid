@@ -70,8 +70,6 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter{
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         switch (getItemViewType(position)){
             case VIEW_TYPE_INFO:
-                if (!user_type.equals("self"))
-                    ((Holder1) holder).distance.setVisibility(View.GONE);
                 String name_age = userProfile.getName()+", "+userProfile.getAge();
 
                 ((Holder1) holder).name.setText(name_age);
@@ -80,10 +78,10 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter{
 
                 ((Holder1) holder).profession.setText(userProfile.getOccupation());
                 ((Holder1) holder).gender.setText(userProfile.getSex());
-                ((Holder1) holder).height.setText(String.valueOf(userProfile.getHeight()));
+                ((Holder1) holder).height.setText(String.valueOf(userProfile.getHeight()+" cm"));
                 ((Holder1) holder).race.setText(userProfile.getRace());
                 ((Holder1) holder).religion.setText(userProfile.getReligion());
-
+                ((Holder1) holder).education.setText(userProfile.getEducation());
                 ((Holder1) holder).about.setText(userProfile.getBio());
                 Glide.with(context)
                         .load(userProfile.getProfilePicture())
@@ -155,7 +153,7 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter{
     }
 
     public class Holder1 extends RecyclerView.ViewHolder {
-        private TextView name, location, profession, gender, height, race, religion, about, distance;
+        private TextView name, location, profession, gender, height, race, religion, about, education;
         private CircleImageView imageView;
 
         public Holder1(@NonNull View itemView) {
@@ -169,8 +167,8 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter{
             race = itemView.findViewById(R.id.textview_race);
             religion = itemView.findViewById(R.id.textview_religion);
             about = itemView.findViewById(R.id.textview_about);
-            distance = itemView.findViewById(R.id.textview_distance);
             imageView = itemView.findViewById(R.id.profile_image_view);
+            education = itemView.findViewById(R.id.textview_education);
         }
     }
 

@@ -58,7 +58,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
     }
 
     private void setProfileView(Profile profile){
-        ProfileDisplayAdapter adapter = new ProfileDisplayAdapter(profile, this, requireContext(),"own");
+        ProfileDisplayAdapter adapter = new ProfileDisplayAdapter(profile, this, requireContext(),"self");
         binding.recyclerviewProfile.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recyclerviewProfile.setAdapter(adapter);
     }

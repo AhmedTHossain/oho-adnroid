@@ -107,8 +107,7 @@
                 android:fontFamily="@font/darkergrotesque_bold"
                 android:text="Sign in with Google"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_18ssp"
-                android:textStyle="bold" />
+                android:textSize="@dimen/_18ssp" />
         </LinearLayout>
 
         <TextView
