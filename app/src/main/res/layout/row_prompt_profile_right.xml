@@ -25,10 +25,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:fontFamily="@font/ptsans_regular"
+            android:fontFamily="@font/darkergrotesque_medium"
             android:text="in a partner, I'm looking for..."
             android:textColor="@color/textSubTitle"
-            android:textSize="@dimen/_14ssp" />
+            android:textSize="@dimen/_16ssp" />
 
         <TextView
             android:id="@+id/text_answer"
@@ -36,10 +36,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginTop="@dimen/_10sdp"
-            android:fontFamily="@font/darkergrotesque_bold"
+            android:fontFamily="@font/ptsans_bold"
             android:text="Commitment &amp; honesty"
-            android:textColor="@color/indicatioractive"
-            android:textSize="@dimen/_18ssp" />
+            android:textColor="@color/ted_image_picker_primary_pressed"
+            android:textSize="@dimen/_16ssp" />
     </LinearLayout>
 
     <View
@@ -63,12 +63,12 @@
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_weight="1"
-            android:fontFamily="@font/ptsans_regular"
+            android:fontFamily="@font/darkergrotesque_medium"
             android:paddingTop="@dimen/_10sdp"
             android:paddingBottom="@dimen/_10sdp"
             android:text="There's power in looking silly and not caring that you do."
             android:textColor="@color/textSubTitle"
-            android:textSize="@dimen/_14ssp" />
+            android:textSize="@dimen/_16ssp" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/image_view"

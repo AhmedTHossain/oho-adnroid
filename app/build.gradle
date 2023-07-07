@@ -38,9 +38,7 @@ android {
     }
     buildFeatures {
         viewBinding true
-        dataBinding {
-            enabled = true
-        }
+        dataBinding true
     }
     namespace 'com.oho.oho'
 }
@@ -76,10 +74,10 @@ dependencies {
     String lifecycle_version = "2.5.0-alpha01"
 
     // ViewModel
-    implementation 'androidx.lifecycle:lifecycle-viewmodel:'+lifecycle_version
+    implementation 'androidx.lifecycle:lifecycle-viewmodel:' + lifecycle_version
 
     // LiveData
-    implementation 'androidx.lifecycle:lifecycle-livedata:'+lifecycle_version
+    implementation 'androidx.lifecycle:lifecycle-livedata:' + lifecycle_version
 
     // Firebase BoM
 //    implementation 'com.google.firebase:firebase-bom:29.0.4'
@@ -87,8 +85,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:21.3.0'
     // Google Play services
     implementation 'com.google.android.gms:play-services-auth:20.5.0'
-    //Material dots indicator
-    implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:4.1.2'
     //Number picker
     implementation 'io.github.ShawnLin013:number-picker:2.4.13'
 
@@ -115,7 +111,7 @@ dependencies {
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
 
     //socket.io for real time chat
-    implementation ('io.socket:socket.io-client:2.0.0') {
+    implementation('io.socket:socket.io-client:2.0.0') {
         exclude group: 'org.json', module: 'json'
     }
 

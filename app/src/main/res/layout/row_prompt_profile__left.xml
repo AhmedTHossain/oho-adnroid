@@ -25,10 +25,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:paddingEnd="@dimen/_20sdp"
-            android:fontFamily="@font/ptsans_regular"
+            android:fontFamily="@font/darkergrotesque_medium"
             android:text="the most adventurous thing I did was..."
             android:textColor="@color/textSubTitle"
-            android:textSize="@dimen/_14ssp" />
+            android:textSize="@dimen/_16ssp" />
 
         <TextView
             android:id="@+id/text_answer"
@@ -36,10 +36,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:layout_marginTop="@dimen/_10sdp"
-            android:fontFamily="@font/darkergrotesque_bold"
+            android:fontFamily="@font/ptsans_bold"
             android:text="Sky Diving from 22,000 ft"
-            android:textColor="@color/indicatioractive"
-            android:textSize="@dimen/_18ssp" />
+            android:textColor="@color/ted_image_picker_primary_pressed"
+            android:textSize="@dimen/_16ssp" />
     </LinearLayout>
 
     <View
@@ -75,12 +75,12 @@
             android:layout_gravity="center"
             android:layout_marginEnd="@dimen/_20sdp"
             android:layout_weight="1"
-            android:fontFamily="@font/ptsans_regular"
+            android:fontFamily="@font/darkergrotesque_medium"
             android:paddingTop="@dimen/_10sdp"
             android:paddingBottom="@dimen/_10sdp"
             android:text="Fools are those that believe smiles are a sign of happiness."
             android:textColor="@color/textSubTitle"
-            android:textSize="@dimen/_14ssp" />
+            android:textSize="@dimen/_16ssp" />
 
     </LinearLayout>
 </LinearLayout>
