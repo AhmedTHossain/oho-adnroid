@@ -5,18 +5,36 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_image_view"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_200sdp"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/profile_photo_placeholder"
-        app:civ_border_color="#F8F8F8"
-        app:civ_border_overlay="true"
-        app:civ_border_width="@dimen/_5sdp" />
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image_view"
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="@dimen/_200sdp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/profile_photo_placeholder"
+            app:civ_border_color="#E8E8E8"
+            app:civ_border_overlay="true"
+            app:civ_border_width="@dimen/_5sdp" />
+
+        <ImageView
+            android:id="@+id/fab_edit_profile_photo"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_alignEnd="@id/profile_image_view"
+            android:layout_alignBottom="@id/profile_image_view"
+            android:background="@drawable/rounded_button_solid"
+            android:src="@drawable/ic_edit_profile_white"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:foreground="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"/>
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -185,21 +203,25 @@
             android:id="@+id/button_edit_bio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true">
+            android:layout_alignParentEnd="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/_3sdp"
                 android:fontFamily="@font/ptsans_regular"
-                android:layout_marginEnd="@dimen/_2sdp"
                 android:text="Edit"
                 android:textColor="@color/ted_image_picker_primary_pressed"
-                android:textSize="@dimen/_14ssp"
-                android:layout_gravity="center"/>
+                android:textSize="@dimen/_14ssp" />
 
             <ImageView
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="match_parent"
+                android:layout_gravity="center"
                 android:src="@drawable/ic_edit_profile" />
 
         </LinearLayout>
@@ -235,28 +257,28 @@
             android:textColor="@color/black"
             android:textSize="@dimen/_16ssp" />
 
-        <LinearLayout
-            android:id="@+id/button_edit_prompts"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true">
+        <!--        <LinearLayout-->
+        <!--            android:id="@+id/button_edit_prompts"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_alignParentEnd="true">-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/ptsans_regular"
-                android:text="Edit"
-                android:layout_marginEnd="@dimen/_2sdp"
-                android:textColor="@color/ted_image_picker_primary_pressed"
-                android:textSize="@dimen/_14ssp"
-                android:layout_gravity="center"/>
+        <!--            <TextView-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:fontFamily="@font/ptsans_regular"-->
+        <!--                android:text="Edit"-->
+        <!--                android:layout_marginEnd="@dimen/_2sdp"-->
+        <!--                android:textColor="@color/ted_image_picker_primary_pressed"-->
+        <!--                android:textSize="@dimen/_14ssp"-->
+        <!--                android:layout_gravity="center"/>-->
 
-            <ImageView
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_edit_profile" />
+        <!--            <ImageView-->
+        <!--                android:layout_width="@dimen/_20sdp"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:src="@drawable/ic_edit_profile" />-->
 
-        </LinearLayout>
+        <!--        </LinearLayout>-->
 
     </RelativeLayout>
 

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="@dimen/_40sdp"
+    android:layout_marginBottom="@dimen/_40sdp">
+
+    <TextView
+        android:id="@+id/button_add_prompt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:background="@drawable/border_rounded_corner"
+        android:backgroundTint="#E8E8E8"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/darkergrotesque_bold"
+        android:foreground="?attr/selectableItemBackground"
+        android:gravity="center"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:text="Add a new prompt"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_18ssp"
+        android:layout_marginBottom="@dimen/_5sdp"/>
+
+    <TextView
+        android:id="@+id/button_save_changes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:background="@drawable/border_rounded_corner"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/darkergrotesque_bold"
+        android:foreground="?attr/selectableItemBackground"
+        android:gravity="center"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:text="Save changes"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_18ssp" />
+
+</LinearLayout>

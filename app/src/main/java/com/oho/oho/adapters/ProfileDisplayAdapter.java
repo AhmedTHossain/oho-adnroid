@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,13 +14,12 @@ import com.oho.oho.R;
 import com.oho.oho.interfaces.SwipeListener;
 import com.oho.oho.models.Profile;
 import com.oho.oho.models.PromptAnswer;
-import com.oho.oho.models.User;
 
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ProfileDisplayAdapter extends RecyclerView.Adapter{
+public class ProfileDisplayAdapter extends RecyclerView.Adapter {
 
     private ArrayList<PromptAnswer> promptArrayList;
     private Profile userProfile;
@@ -36,7 +34,7 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter{
     private final int VIEW_TYPE_RIGHT = 1;
     private final int VIEW_TYPE_SWIPE = 2;
 
-    public ProfileDisplayAdapter(Profile userProfile, SwipeListener listener, Context context, String user_type ) {
+    public ProfileDisplayAdapter(Profile userProfile, SwipeListener listener, Context context, String user_type) {
         this.promptArrayList = new ArrayList<>(userProfile.getPromptAnswers());
         promptArrayList.add(0, new PromptAnswer());
         this.context = context;
@@ -60,7 +58,7 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter{
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_prompt_profile_right, parent, false);
                 return new Holder(view);
             case VIEW_TYPE_SWIPE:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_swipe_profile, parent, false);
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_add_prompt_profile, parent, false);
                 return new Holder2(view);
         }
         return null;
@@ -68,9 +66,9 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter{
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        switch (getItemViewType(position)){
+        switch (getItemViewType(position)) {
             case VIEW_TYPE_INFO:
-                String name_age = userProfile.getName()+", "+userProfile.getAge();
+                String name_age = userProfile.getName() + ", " + userProfile.getAge();
 
                 ((Holder1) holder).name.setText(name_age);
                 String location = userProfile.getCity() + ", " + userProfile.getState();
@@ -78,18 +76,18 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter{
 
                 ((Holder1) holder).profession.setText(userProfile.getOccupation());
                 ((Holder1) holder).gender.setText(userProfile.getSex());
-                ((Holder1) holder).height.setText(String.valueOf(userProfile.getHeight()+" cm"));
+                ((Holder1) holder).height.setText(String.valueOf(userProfile.getHeight() + " cm"));
                 ((Holder1) holder).race.setText(userProfile.getRace());
                 ((Holder1) holder).religion.setText(userProfile.getReligion());
                 ((Holder1) holder).education.setText(userProfile.getEducation());
                 ((Holder1) holder).about.setText(userProfile.getBio());
                 Glide.with(context)
                         .load(userProfile.getProfilePicture())
-                        .into( ((Holder1) holder).imageView);
+                        .into(((Holder1) holder).imageView);
                 break;
             case VIEW_TYPE_LEFT:
             case VIEW_TYPE_RIGHT:
-                if (position<promptArrayList.size()) {
+                if (position < promptArrayList.size()) {
                     ((Holder) holder).prompt.setText(promptArrayList.get(position).getPrompt());
                     ((Holder) holder).answer.setText(promptArrayList.get(position).getAnswer());
                     ((Holder) holder).caption.setText(promptArrayList.get(position).getCaption());
@@ -99,20 +97,33 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter{
                     break;
                 }
             case VIEW_TYPE_SWIPE:
-                ((Holder2) holder).seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+//                ((Holder2) holder).seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+//                    @Override
+//                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+//                       listener.onSwipe(progress,seekBar,userProfile.getId());
+//                    }
+//
+//                    @Override
+//                    public void onStartTrackingTouch(SeekBar seekBar) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onStopTrackingTouch(SeekBar seekBar) {
+//
+//                    }
+//                });
+                ((Holder2) holder).addButton.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                       listener.onSwipe(progress,seekBar,userProfile.getId());
+                    public void onClick(View v) {
+//                        listener.onAddPrompt();
                     }
+                });
 
+                ((Holder2) holder).saveChangesButton.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onStartTrackingTouch(SeekBar seekBar) {
-
-                    }
-
-                    @Override
-                    public void onStopTrackingTouch(SeekBar seekBar) {
-
+                    public void onClick(View v) {
+//                        listener.onSaveChanges();
                     }
                 });
                 break;
@@ -121,7 +132,7 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter{
 
     @Override
     public int getItemCount() {
-        return promptArrayList.size();
+        return promptArrayList.size() + 1;
     }
 
     @Override
@@ -172,11 +183,18 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter{
         }
     }
 
-    public class Holder2 extends RecyclerView.ViewHolder{
-        private SeekBar seekBar;
+    public class Holder2 extends RecyclerView.ViewHolder {
+        //        private SeekBar seekBar;
+//        public Holder2(@NonNull View itemView) {
+//            super(itemView);
+//            seekBar = itemView.findViewById(R.id.seekbar);
+//        }
+        private TextView addButton, saveChangesButton;
+
         public Holder2(@NonNull View itemView) {
             super(itemView);
-            seekBar = itemView.findViewById(R.id.seekbar);
+            addButton = itemView.findViewById(R.id.button_add_prompt);
+            saveChangesButton = itemView.findViewById(R.id.button_save_changes);
         }
     }
 }

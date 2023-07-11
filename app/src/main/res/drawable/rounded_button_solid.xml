@@ -7,7 +7,10 @@
         android:left="8dp"
         android:right="8dp"
         android:top="8dp" />
-    <stroke
-        android:width="1dip"
-        android:color="#E6E6E6" />
+    <gradient
+        android:type="linear"
+        android:gradientRadius="150%"
+        android:startColor="#FF6FA0"
+        android:centerColor="#B42254"
+        android:endColor="#B42254" />
 </shape>
