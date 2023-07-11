@@ -9,7 +9,7 @@
         android:left="8dp"
         android:right="8dp"
         android:top="8dp" />
-    <stroke
+    <solid
         android:width="1dip"
-        android:color="#E6E6E6" />
+        android:color="#F8F8F8" />
 </shape>

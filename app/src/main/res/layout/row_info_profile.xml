@@ -14,7 +14,7 @@
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/profile_photo_placeholder"
-        app:civ_border_color="#E6E6E6"
+        app:civ_border_color="#F8F8F8"
         app:civ_border_overlay="true"
         app:civ_border_width="@dimen/_5sdp" />
 
@@ -70,7 +70,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_20sdp"
         android:orientation="vertical">
 
@@ -159,7 +159,7 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_20sdp"
+        android:layout_height="@dimen/_30sdp"
         android:layout_below="@id/text_slogan"
         android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_10sdp"
@@ -169,7 +169,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_40sdp"
         android:paddingStart="@dimen/_20sdp"
         android:paddingEnd="@dimen/_20sdp">
 
@@ -210,7 +210,7 @@
         android:id="@+id/textview_about"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:fontFamily="@font/ptsans_regular"
         android:justificationMode="inter_word"
         android:paddingStart="@dimen/_20sdp"
@@ -222,7 +222,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_40sdp"
         android:paddingStart="@dimen/_20sdp"
         android:paddingEnd="@dimen/_20sdp">
 
