@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_200sdp"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_5sdp"
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/profile_photo_placeholder"
@@ -30,19 +30,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_toStartOf="@id/button_edit_basic_info"
             android:fontFamily="@font/ptsans_bold"
             android:text="Jane Doe"
             android:textColor="@color/black"
-            android:textSize="@dimen/_22ssp" />
-
-        <ImageView
-            android:id="@+id/button_edit_basic_info"
-            android:layout_width="@dimen/_24sdp"
-            android:layout_height="@dimen/_24sdp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="@dimen/_5sdp"
-            android:src="@drawable/ic_edit_profile" />
+            android:textSize="@dimen/_18ssp" />
 
     </RelativeLayout>
 
@@ -79,9 +70,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_20sdp"
-        android:orientation="vertical"
-        android:layout_marginTop="@dimen/_20sdp">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -190,13 +181,29 @@
             android:textColor="@color/black"
             android:textSize="@dimen/_16ssp" />
 
-        <ImageView
+        <LinearLayout
             android:id="@+id/button_edit_bio"
-            android:layout_width="@dimen/_24sdp"
-            android:layout_height="@dimen/_24sdp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="@dimen/_5sdp"
-            android:src="@drawable/ic_edit_profile" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ptsans_regular"
+                android:layout_marginEnd="@dimen/_2sdp"
+                android:text="Edit"
+                android:textColor="@color/ted_image_picker_primary_pressed"
+                android:textSize="@dimen/_14ssp"
+                android:layout_gravity="center"/>
+
+            <ImageView
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_edit_profile" />
+
+        </LinearLayout>
+
     </RelativeLayout>
 
     <TextView
@@ -204,13 +211,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_5sdp"
-        android:fontFamily="@font/darkergrotesque_medium"
+        android:fontFamily="@font/ptsans_regular"
         android:justificationMode="inter_word"
         android:paddingStart="@dimen/_20sdp"
         android:paddingEnd="@dimen/_20sdp"
         android:text="@string/lorem_ipsum_2"
         android:textColor="@color/black"
-        android:textSize="@dimen/_16ssp" />
+        android:textSize="@dimen/_14ssp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -228,13 +235,28 @@
             android:textColor="@color/black"
             android:textSize="@dimen/_16ssp" />
 
-        <ImageView
+        <LinearLayout
             android:id="@+id/button_edit_prompts"
-            android:layout_width="@dimen/_24sdp"
-            android:layout_height="@dimen/_24sdp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="@dimen/_5sdp"
-            android:src="@drawable/ic_edit_profile" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ptsans_regular"
+                android:text="Edit"
+                android:layout_marginEnd="@dimen/_2sdp"
+                android:textColor="@color/ted_image_picker_primary_pressed"
+                android:textSize="@dimen/_14ssp"
+                android:layout_gravity="center"/>
+
+            <ImageView
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_edit_profile" />
+
+        </LinearLayout>
 
     </RelativeLayout>
 

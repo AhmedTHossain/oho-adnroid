@@ -6,17 +6,13 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_20sdp"
         android:background="@drawable/two_side_rounded_corner_right"
         android:orientation="vertical"
-        android:paddingStart="@dimen/_10sdp"
-        android:paddingTop="@dimen/_10sdp"
-        android:paddingEnd="@dimen/_20sdp"
-        android:paddingBottom="@dimen/_10sdp"
+        android:padding="@dimen/_20sdp"
         android:visibility="visible">
 
         <TextView
@@ -25,10 +21,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:paddingEnd="@dimen/_20sdp"
-            android:fontFamily="@font/darkergrotesque_medium"
+            android:fontFamily="@font/ptsans_regular"
             android:text="the most adventurous thing I did was..."
             android:textColor="@color/textSubTitle"
-            android:textSize="@dimen/_16ssp" />
+            android:textSize="@dimen/_14ssp" />
 
         <TextView
             android:id="@+id/text_answer"
@@ -45,8 +41,7 @@
     <View
         android:layout_width="1dip"
         android:layout_height="@dimen/_20sdp"
-        android:layout_gravity="start"
-        android:layout_marginStart="@dimen/_50sdp"
+        android:layout_gravity="center"
         android:background="#E6E6E6" />
 
     <LinearLayout
@@ -54,6 +49,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_20sdp"
+        android:paddingTop="@dimen/_20sdp"
+        android:paddingBottom="@dimen/_20sdp"
         android:background="@drawable/border_corner_drawable">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -75,12 +72,12 @@
             android:layout_gravity="center"
             android:layout_marginEnd="@dimen/_20sdp"
             android:layout_weight="1"
-            android:fontFamily="@font/darkergrotesque_medium"
+            android:fontFamily="@font/ptsans_regular"
             android:paddingTop="@dimen/_10sdp"
             android:paddingBottom="@dimen/_10sdp"
             android:text="Fools are those that believe smiles are a sign of happiness."
             android:textColor="@color/textSubTitle"
-            android:textSize="@dimen/_16ssp" />
+            android:textSize="@dimen/_14ssp" />
 
     </LinearLayout>
 </LinearLayout>
