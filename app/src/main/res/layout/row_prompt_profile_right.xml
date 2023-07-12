@@ -51,7 +51,7 @@
             android:fontFamily="@font/ptsans_bold"
             android:text="Commitment &amp; honesty"
             android:textColor="@color/ted_image_picker_primary_pressed"
-            android:textSize="@dimen/_16ssp" />
+            android:textSize="@dimen/_14ssp" />
     </LinearLayout>
 
     <View

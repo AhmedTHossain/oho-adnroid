@@ -50,7 +50,7 @@
             android:fontFamily="@font/ptsans_bold"
             android:text="Sky Diving from 22,000 ft"
             android:textColor="@color/ted_image_picker_primary_pressed"
-            android:textSize="@dimen/_16ssp" />
+            android:textSize="@dimen/_14ssp" />
     </LinearLayout>
 
     <View
