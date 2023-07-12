@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -48,6 +49,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
     private ArrayList<PromptAnswer> promptAnswers = new ArrayList<>();
     private ProfileDisplayAdapter adapter;
 
+    private AlertDialog alertDialogUploading;
+
     File imageFile;
     ActivityResultLauncher<PickVisualMediaRequest> pickMedia =
             registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
@@ -58,6 +61,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
                     adapter.notifyDataSetChanged();
                     imageFile = ImageUtils.getImageFileFromUri(requireContext(), uri);
 
+                    showUploadDialog();
                     profileViewModel.uploadProfilePhoto(userProfile.getId(), imageFile);
                     profileViewModel.ifProfilePhotoUploaded.observe(requireActivity(), ifProfilePhotoUploaded -> {
                         if (ifProfilePhotoUploaded) {
@@ -65,6 +69,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
                         } else {
                             Toast.makeText(requireContext(), "Photo upload failed!", Toast.LENGTH_SHORT).show();
                         }
+                        alertDialogUploading.dismiss();
                     });
                 }
             });
@@ -83,6 +88,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
 
         profileViewModel.getPromptToDelete().observe(getViewLifecycleOwner(), promptToDelete -> {
             if (promptToDelete != null) {
+
                 profileViewModel.deletePromptAnswer(promptToDelete);
                 profileViewModel.ifPromptDeleted.observe(getViewLifecycleOwner(), ifPromptDeleted -> {
                     if (ifPromptDeleted) {
@@ -243,5 +249,23 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
         });
         // show it
         alertDialog.show();
+    }
+
+    private void showUploadDialog() {
+        LayoutInflater li = LayoutInflater.from(requireContext());
+        View promptsView = li.inflate(R.layout.upload_dialog, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                requireContext());
+        // set alert_dialog.xml to alertdialog builder
+        alertDialogBuilder.setView(promptsView);
+
+        // setting up the previous bio in edit text
+        TextView titleText = promptsView.findViewById(R.id.text_title_upload_dialog);
+        titleText.setText("Uploading New Photo...");
+
+        alertDialogBuilder.setCancelable(false);
+        alertDialogUploading = alertDialogBuilder.create();
+        // show it
+        alertDialogUploading.show();
     }
 }
