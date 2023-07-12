@@ -4,7 +4,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +17,7 @@ import com.oho.oho.R;
 import com.oho.oho.interfaces.SwipeListener;
 import com.oho.oho.models.Profile;
 import com.oho.oho.models.PromptAnswer;
+import com.oho.oho.viewmodels.ProfileViewModel;
 
 import java.util.ArrayList;
 
@@ -33,14 +37,15 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
     private final int VIEW_TYPE_INFO = 0;
     private final int VIEW_TYPE_RIGHT = 1;
     private final int VIEW_TYPE_SWIPE = 2;
+    private ProfileViewModel viewModel;
 
-    public ProfileDisplayAdapter(Profile userProfile, SwipeListener listener, Context context, String user_type) {
+    public ProfileDisplayAdapter(Profile userProfile, SwipeListener listener, Context context, ProfileViewModel viewModel) {
         this.promptArrayList = new ArrayList<>(userProfile.getPromptAnswers());
         promptArrayList.add(0, new PromptAnswer());
         this.context = context;
         this.userProfile = userProfile;
         this.listener = listener;
-        this.user_type = user_type;
+        this.viewModel = viewModel;
     }
 
     @NonNull
@@ -84,6 +89,12 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
                 Glide.with(context)
                         .load(userProfile.getProfilePicture())
                         .into(((Holder1) holder).imageView);
+                ((Holder1) holder).editBioButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        viewModel.editBio();
+                    }
+                });
                 break;
             case VIEW_TYPE_LEFT:
             case VIEW_TYPE_RIGHT:
@@ -94,6 +105,14 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
                     Glide.with(context)
                             .load(promptArrayList.get(position).getImage())
                             .into(((Holder) holder).imageView);
+
+                    ((Holder) holder).deleteButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(context, "Delete!", Toast.LENGTH_SHORT).show();
+                            viewModel.deletePrompt(promptArrayList.get(position).getId());
+                        }
+                    });
                     break;
                 }
             case VIEW_TYPE_SWIPE:
@@ -152,6 +171,7 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
     public class Holder extends RecyclerView.ViewHolder {
         private TextView prompt, answer, caption;
         private CircleImageView imageView;
+        private ImageView deleteButton;
 
         public Holder(@NonNull View itemView) {
             super(itemView);
@@ -160,12 +180,14 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
             answer = itemView.findViewById(R.id.text_answer);
             caption = itemView.findViewById(R.id.text_caption);
             imageView = itemView.findViewById(R.id.image_view);
+            deleteButton = itemView.findViewById(R.id.button_delete);
         }
     }
 
     public class Holder1 extends RecyclerView.ViewHolder {
         private TextView name, location, profession, gender, height, race, religion, about, education;
         private CircleImageView imageView;
+        private LinearLayout editBioButton;
 
         public Holder1(@NonNull View itemView) {
             super(itemView);
@@ -180,6 +202,7 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
             about = itemView.findViewById(R.id.textview_about);
             imageView = itemView.findViewById(R.id.profile_image_view);
             education = itemView.findViewById(R.id.textview_education);
+            editBioButton = itemView.findViewById(R.id.button_edit_bio);
         }
     }
 

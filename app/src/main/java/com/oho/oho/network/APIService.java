@@ -27,6 +27,7 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -67,6 +68,10 @@ public interface APIService {
     @Multipart
     @POST("users/prompt_answer/add")
     Call<PromptAnswer> uploadPromptAnswer(@Part("prompt") RequestBody prompt, @Part("answer") RequestBody answer, @Part("user_id") RequestBody user_id, @Part("caption") RequestBody caption, @Part MultipartBody.Part image);
+
+    // for deleting user prompts
+    @DELETE("users/prompt_answers/delete")
+    Call<MessageResponse> deletePromptAnswer(@Query("id") int id);
 
     // for adding/updating user availability
     @POST("users/availability/add")
