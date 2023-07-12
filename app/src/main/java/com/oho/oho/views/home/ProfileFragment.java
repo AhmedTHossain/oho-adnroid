@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,12 +23,13 @@ import com.oho.oho.R;
 import com.oho.oho.adapters.ProfileDisplayAdapter;
 import com.oho.oho.databinding.FragmentProfileBinding;
 import com.oho.oho.interfaces.SwipeListener;
-import com.oho.oho.models.Profile;
 import com.oho.oho.models.BioUpdateRequest;
+import com.oho.oho.models.Profile;
 import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.viewmodels.ProfileViewModel;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ProfileFragment extends Fragment implements View.OnClickListener, SwipeListener {
 
@@ -53,16 +55,31 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
 
         profileViewModel.getPromptToDelete().observe(getViewLifecycleOwner(), promptToDelete -> {
             if (promptToDelete != null) {
-                ArrayList<PromptAnswer> promptAnswers = new ArrayList<>(userProfile.getPromptAnswers());
-                for (PromptAnswer promptAnswer : promptAnswers) {
-                    if (promptAnswer.getId().equals(promptToDelete)) {
-                        promptAnswers.remove(promptAnswer);
-                        userProfile.setPromptAnswers(promptAnswers);
-//                        adapter.notifyItemChanged();
-                        setProfileView(userProfile);
-                        break;
+                profileViewModel.deletePromptAnswer(promptToDelete);
+                profileViewModel.ifPromptDeleted.observe(getViewLifecycleOwner(), ifPromptDeleted -> {
+                    if (ifPromptDeleted) {
+                        ArrayList<PromptAnswer> promptAnswers = new ArrayList<>(userProfile.getPromptAnswers());
+                        for (PromptAnswer promptAnswer : promptAnswers) {
+                            if (Objects.equals(promptAnswer.getId(), promptToDelete)){
+                                Log.d("ProfileFragment", "number of prompts before deletion = " + userProfile.getPromptAnswers().size());
+                                promptAnswers.remove(promptAnswer);
+
+
+                                userProfile.setPromptAnswers(promptAnswers);
+
+                                Log.d("ProfileFragment", "number of prompts after deletion = " + userProfile.getPromptAnswers().size());
+
+//                                adapter.notifyDataSetChanged();
+
+                                setProfileView();
+
+                                break;
+                            }
+                        }
+
                     }
-                }
+                });
+
             }
         });
 
@@ -84,13 +101,13 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
         profileViewModel.userProfile.observe(getViewLifecycleOwner(), userProfile -> {
             if (userProfile != null) {
                 this.userProfile = userProfile;
-                setProfileView(userProfile);
+                setProfileView();
             }
         });
     }
 
-    private void setProfileView(Profile profile) {
-        adapter = new ProfileDisplayAdapter(profile, this, requireContext(), profileViewModel);
+    private void setProfileView() {
+        adapter = new ProfileDisplayAdapter(userProfile, this, requireContext(), profileViewModel);
         binding.recyclerviewProfile.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recyclerviewProfile.setAdapter(adapter);
     }
@@ -119,13 +136,14 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
         bioEditText.requestFocus();
 
         alertDialogBuilder.setCancelable(false)
-                .setPositiveButton("Save", null).setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
+                .setPositiveButton("Save", null).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         bioEditText.setText(previousBio);
                         dialog.dismiss();
                     }
-                });;
+                });
+        ;
         AlertDialog alertDialog = alertDialogBuilder.create();
 
         alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
@@ -182,6 +200,13 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
                     public void onClick(View v) {
                         BioUpdateRequest request = new BioUpdateRequest(userProfile.getId(), bioEditText.getText().toString());
                         profileViewModel.updateBio(request);
+                        profileViewModel.ifBioUpdated.observe(getViewLifecycleOwner(), ifBioUpdated -> {
+                            if (ifBioUpdated) {
+                                userProfile.setBio(bioEditText.getText().toString());
+                                adapter.notifyDataSetChanged();
+                            }
+                        });
+
                         alertDialog.dismiss();
                     }
                 });
