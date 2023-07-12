@@ -12,7 +12,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
+import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.PickVisualMediaRequest;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -26,8 +30,10 @@ import com.oho.oho.interfaces.SwipeListener;
 import com.oho.oho.models.BioUpdateRequest;
 import com.oho.oho.models.Profile;
 import com.oho.oho.models.PromptAnswer;
+import com.oho.oho.utils.ImageUtils;
 import com.oho.oho.viewmodels.ProfileViewModel;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -41,6 +47,27 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
     private Profile userProfile;
     private ArrayList<PromptAnswer> promptAnswers = new ArrayList<>();
     private ProfileDisplayAdapter adapter;
+
+    File imageFile;
+    ActivityResultLauncher<PickVisualMediaRequest> pickMedia =
+            registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
+                // Callback is invoked after the user selects a media item or closes the
+                // photo picker.
+                if (uri != null) {
+                    userProfile.setProfilePicture(uri.toString());
+                    adapter.notifyDataSetChanged();
+                    imageFile = ImageUtils.getImageFileFromUri(requireContext(), uri);
+
+                    profileViewModel.uploadProfilePhoto(userProfile.getId(), imageFile);
+                    profileViewModel.ifProfilePhotoUploaded.observe(requireActivity(), ifProfilePhotoUploaded -> {
+                        if (ifProfilePhotoUploaded) {
+                            Toast.makeText(requireContext(), "Your photo was uploaded successfully!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(requireContext(), "Photo upload failed!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            });
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -61,7 +88,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
                     if (ifPromptDeleted) {
 
                         for (PromptAnswer promptAnswer : promptAnswers) {
-                            if (Objects.equals(promptAnswer.getId(), promptToDelete)){
+                            if (Objects.equals(promptAnswer.getId(), promptToDelete)) {
                                 Log.d("ProfileFragment", "number of prompts before deletion = " + userProfile.getPromptAnswers().size());
                                 promptAnswers.remove(promptAnswer);
 
@@ -80,6 +107,13 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
         profileViewModel.getIfEditBio().observe(getViewLifecycleOwner(), ifEditBio -> {
             if (ifEditBio)
                 showBioInputDialog(userProfile.getBio());
+        });
+
+        profileViewModel.getIfEditPhoto().observe(getViewLifecycleOwner(), ifEditPhoto -> {
+            if (ifEditPhoto)
+                pickMedia.launch(new PickVisualMediaRequest.Builder()
+                        .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)  //app compiles and run properly even after this error
+                        .build());
         });
 
         // Inflate the layout for this fragment

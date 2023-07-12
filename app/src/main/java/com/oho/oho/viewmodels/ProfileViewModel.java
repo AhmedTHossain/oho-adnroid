@@ -11,6 +11,8 @@ import com.oho.oho.models.Profile;
 import com.oho.oho.models.BioUpdateRequest;
 import com.oho.oho.repositories.ProfileViewRepository;
 
+import java.io.File;
+
 public class ProfileViewModel extends AndroidViewModel {
     public LiveData<Profile> userProfile;
     public LiveData<Boolean> ifBioUpdated;
@@ -18,6 +20,10 @@ public class ProfileViewModel extends AndroidViewModel {
     private ProfileViewRepository repository;
     private MutableLiveData<Integer> promptToDelete = new MutableLiveData<>();
     private MutableLiveData<Boolean> ifEditBio = new MutableLiveData<>();
+
+    private MutableLiveData<Boolean> ifEditPhoto = new MutableLiveData<>();
+
+    public LiveData<Boolean> ifProfilePhotoUploaded;
 
     public ProfileViewModel(@NonNull Application application) {
         super(application);
@@ -48,5 +54,17 @@ public class ProfileViewModel extends AndroidViewModel {
 
     public void deletePromptAnswer(int promptId) {
         ifPromptDeleted = repository.deletePrompt(promptId);
+    }
+
+    public void editPhoto() {
+        ifEditPhoto.setValue(true);
+    }
+
+    public LiveData<Boolean> getIfEditPhoto() {
+        return ifEditPhoto;
+    }
+
+    public void uploadProfilePhoto(int user_id, File image) {
+        ifProfilePhotoUploaded = repository.uploadProfilePhoto(user_id, image);
     }
 }

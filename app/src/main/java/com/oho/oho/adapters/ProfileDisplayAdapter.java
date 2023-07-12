@@ -95,6 +95,12 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
                         viewModel.editBio();
                     }
                 });
+                ((Holder1) holder).editPhotoButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        viewModel.editPhoto();
+                    }
+                });
                 break;
             case VIEW_TYPE_LEFT:
             case VIEW_TYPE_RIGHT:
@@ -138,14 +144,6 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
 //                        listener.onAddPrompt();
                     }
                 });
-
-                ((Holder2) holder).saveChangesButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-//                        listener.onSaveChanges();
-                    }
-                });
-                break;
         }
     }
 
@@ -188,6 +186,7 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
         private TextView name, location, profession, gender, height, race, religion, about, education;
         private CircleImageView imageView;
         private LinearLayout editBioButton;
+        private ImageView editPhotoButton;
 
         public Holder1(@NonNull View itemView) {
             super(itemView);
@@ -203,6 +202,7 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
             imageView = itemView.findViewById(R.id.profile_image_view);
             education = itemView.findViewById(R.id.textview_education);
             editBioButton = itemView.findViewById(R.id.button_edit_bio);
+            editPhotoButton = itemView.findViewById(R.id.fab_edit_profile_photo);
         }
     }
 
@@ -212,12 +212,11 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
 //            super(itemView);
 //            seekBar = itemView.findViewById(R.id.seekbar);
 //        }
-        private TextView addButton, saveChangesButton;
+        private TextView addButton;
 
         public Holder2(@NonNull View itemView) {
             super(itemView);
             addButton = itemView.findViewById(R.id.button_add_prompt);
-            saveChangesButton = itemView.findViewById(R.id.button_save_changes);
         }
     }
 }
