@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.oho.oho.models.Profile;
+import com.oho.oho.models.BioUpdateRequest;
 import com.oho.oho.repositories.ProfileViewRepository;
 
 public class ProfileViewModel extends AndroidViewModel {
@@ -37,5 +38,9 @@ public class ProfileViewModel extends AndroidViewModel {
     }
     public LiveData<Boolean> getIfEditBio() {
         return ifEditBio;
+    }
+
+    public void updateBio(BioUpdateRequest reuqest) {
+        repository.updateBio(reuqest);
     }
 }

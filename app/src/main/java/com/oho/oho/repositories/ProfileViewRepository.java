@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.oho.oho.models.Profile;
+import com.oho.oho.models.BioUpdateRequest;
 import com.oho.oho.network.APIService;
 import com.oho.oho.network.RetrofitInstance;
 import com.oho.oho.responses.MessageResponse;
@@ -38,7 +39,7 @@ public class ProfileViewRepository {
 
         return profile;
     }
-
+    // DELETE PROMPT
     public MutableLiveData<Boolean> deletePrompt(int prompt_id){
         MutableLiveData<Boolean> isDeletedSuccessfully = new MutableLiveData<>();
         APIService service = RetrofitInstance.getRetrofitClient().create(APIService.class);
@@ -62,5 +63,31 @@ public class ProfileViewRepository {
             }
         });
         return isDeletedSuccessfully;
+    }
+
+    // UPDATE BIO
+    public MutableLiveData<Boolean> updateBio(BioUpdateRequest reuqest){
+        MutableLiveData<Boolean> isUpdatedSuccessfully = new MutableLiveData<>();
+        APIService service = RetrofitInstance.getRetrofitClient().create(APIService.class);
+        Call<Profile> call = service.updateUserBio(reuqest);
+        call.enqueue(new retrofit2.Callback<Profile>() {
+            @Override
+            public void onResponse(@NonNull Call<Profile> call, @NonNull retrofit2.Response<Profile> response) {
+                if (response.isSuccessful()){
+                    Toast.makeText(context, "Your bio has been updated!", Toast.LENGTH_SHORT).show();
+                    isUpdatedSuccessfully.setValue(true);
+                } else {
+                    Toast.makeText(context, "Something went wrong!", Toast.LENGTH_SHORT).show();
+                    isUpdatedSuccessfully.setValue(false);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Profile> call, @NonNull Throwable t) {
+                Toast.makeText(context, "Something went wrong!", Toast.LENGTH_SHORT).show();
+                isUpdatedSuccessfully.setValue(false);
+            }
+        });
+        return isUpdatedSuccessfully;
     }
 }

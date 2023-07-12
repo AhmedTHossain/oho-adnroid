@@ -4,7 +4,9 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/_20sdp"
     android:layout_marginEnd="@dimen/_20sdp"
-    android:padding="@dimen/_20sdp"
+    android:paddingStart="@dimen/_20sdp"
+    android:paddingEnd="@dimen/_20sdp"
+    android:paddingTop="@dimen/_20sdp"
     android:orientation="vertical">
 
     <TextView
@@ -12,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10sdp"
         android:fontFamily="@font/ptsans_bold"
-        android:text="Your Bio"
+        android:text="Edit Bio"
         android:textColor="@color/black"
         android:textSize="@dimen/_20ssp" />
 

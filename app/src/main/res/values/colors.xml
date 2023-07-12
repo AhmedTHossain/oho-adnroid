@@ -11,6 +11,7 @@
     <color name="indicatiorInactive">#FDC9B3</color>
     <color name="indicatioractive">#AB3B61</color>
     <color name="indicatoractive3">#E58282</color>
+    <color name="disabledButton">#F8F8F8</color>
     <color name="textTitle">#123D6A</color>
     <color name="textSubTitle">#404040</color>
     <color name="textTertiary">#686666</color>

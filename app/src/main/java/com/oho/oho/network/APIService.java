@@ -5,6 +5,7 @@ import com.oho.oho.models.CreateDeviceId;
 import com.oho.oho.models.DatesLeft;
 import com.oho.oho.models.JWTTokenRequest;
 import com.oho.oho.models.Profile;
+import com.oho.oho.models.BioUpdateRequest;
 import com.oho.oho.models.Prompt;
 import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.models.Swipe;
@@ -46,6 +47,10 @@ public interface APIService {
     //for update user profile basic info
     @PUT("users/update")
     Call<Profile> updateUser(@Body Profile profile);
+
+    // for updating only user's bio
+    @PUT("users/update")
+    Call<Profile> updateUserBio(@Body BioUpdateRequest reuqest);
 
     //for getting user profile
     @GET("users/get_profile")
