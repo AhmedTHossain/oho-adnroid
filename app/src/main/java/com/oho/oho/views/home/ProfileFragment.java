@@ -39,6 +39,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
     private static final String TAG = "ProfileFragment";
 
     private Profile userProfile;
+    private ArrayList<PromptAnswer> promptAnswers = new ArrayList<>();
     private ProfileDisplayAdapter adapter;
 
     public ProfileFragment() {
@@ -58,20 +59,13 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
                 profileViewModel.deletePromptAnswer(promptToDelete);
                 profileViewModel.ifPromptDeleted.observe(getViewLifecycleOwner(), ifPromptDeleted -> {
                     if (ifPromptDeleted) {
-                        ArrayList<PromptAnswer> promptAnswers = new ArrayList<>(userProfile.getPromptAnswers());
+
                         for (PromptAnswer promptAnswer : promptAnswers) {
                             if (Objects.equals(promptAnswer.getId(), promptToDelete)){
                                 Log.d("ProfileFragment", "number of prompts before deletion = " + userProfile.getPromptAnswers().size());
                                 promptAnswers.remove(promptAnswer);
 
-
-                                userProfile.setPromptAnswers(promptAnswers);
-
-                                Log.d("ProfileFragment", "number of prompts after deletion = " + userProfile.getPromptAnswers().size());
-
-//                                adapter.notifyDataSetChanged();
-
-                                setProfileView();
+                                adapter.notifyDataSetChanged();
 
                                 break;
                             }
@@ -101,13 +95,14 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
         profileViewModel.userProfile.observe(getViewLifecycleOwner(), userProfile -> {
             if (userProfile != null) {
                 this.userProfile = userProfile;
+                this.promptAnswers = (ArrayList<PromptAnswer>) userProfile.getPromptAnswers();
                 setProfileView();
             }
         });
     }
 
     private void setProfileView() {
-        adapter = new ProfileDisplayAdapter(userProfile, this, requireContext(), profileViewModel);
+        adapter = new ProfileDisplayAdapter(userProfile, promptAnswers, this, requireContext(), profileViewModel);
         binding.recyclerviewProfile.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recyclerviewProfile.setAdapter(adapter);
     }

@@ -39,8 +39,8 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
     private final int VIEW_TYPE_SWIPE = 2;
     private ProfileViewModel viewModel;
 
-    public ProfileDisplayAdapter(Profile userProfile, SwipeListener listener, Context context, ProfileViewModel viewModel) {
-        this.promptArrayList = new ArrayList<>(userProfile.getPromptAnswers());
+    public ProfileDisplayAdapter(Profile userProfile, ArrayList<PromptAnswer> promptArrayList, SwipeListener listener, Context context, ProfileViewModel viewModel) {
+        this.promptArrayList = promptArrayList;
         promptArrayList.add(0, new PromptAnswer());
         this.context = context;
         this.userProfile = userProfile;
