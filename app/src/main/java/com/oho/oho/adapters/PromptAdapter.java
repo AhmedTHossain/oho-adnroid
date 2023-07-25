@@ -9,16 +9,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.oho.oho.R;
-import com.oho.oho.interfaces.OnPromptQuestionSelectedListener;
 import com.oho.oho.interfaces.OnPromptSelectListener;
-import com.oho.oho.models.Prompt;
 import com.oho.oho.models.SelectedPrompt;
-
-import org.w3c.dom.Text;
+import com.oho.oho.viewmodels.AddPromptViewModel;
 
 import java.util.ArrayList;
 
@@ -26,6 +22,7 @@ public class PromptAdapter extends RecyclerView.Adapter<PromptAdapter.Holder> {
     private Context context;
     private ArrayList<SelectedPrompt> promptList;
     private OnPromptSelectListener listener;
+    private AddPromptViewModel viewModel;
 
     public PromptAdapter(Context context, ArrayList<SelectedPrompt> promptList, OnPromptSelectListener listener) {
         this.context = context;
@@ -33,6 +30,12 @@ public class PromptAdapter extends RecyclerView.Adapter<PromptAdapter.Holder> {
         this.listener = listener;
 
         Log.d("PromptAdapter", "number of prompts = " + promptList.size());
+    }
+
+    public PromptAdapter(Context context, ArrayList<SelectedPrompt> promptList, AddPromptViewModel viewModel) {
+        this.context = context;
+        this.promptList = promptList;
+        this.viewModel = viewModel;
     }
 
     @NonNull
@@ -68,7 +71,10 @@ public class PromptAdapter extends RecyclerView.Adapter<PromptAdapter.Holder> {
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onPromptSelect(promptList.get(getAdapterPosition()));
+                    if (listener != null)
+                        listener.onPromptSelect(promptList.get(getAdapterPosition()));
+                    else
+                        viewModel.setOnPromptSelect(promptList.get(getAdapterPosition()));
                 }
             });
         }

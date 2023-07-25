@@ -141,7 +141,7 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
                 ((Holder2) holder).addButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-//                        listener.onAddPrompt();
+                        viewModel.addPrompt();
                     }
                 });
         }

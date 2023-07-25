@@ -74,7 +74,8 @@ public class FifthProfileSetup extends Fragment implements OnPromptSelectListene
             adapter.notifyDataSetChanged();
             String selectedCountText = selectedPromptsList.size() + "/6";
             binding.textSelectionCount.setText(selectedCountText);
-        } else {
+        }
+        else {
             if (selectedPromptsList.size() < 6) {
                 selectedPromptsList.add(selectedPrompt);
 

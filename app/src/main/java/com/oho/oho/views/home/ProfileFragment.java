@@ -2,6 +2,7 @@ package com.oho.oho.views.home;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -122,6 +123,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
                         .build());
         });
 
+        profileViewModel.getIfAddPrompt().observe(getViewLifecycleOwner(), ifAddPrompt -> {
+            if (ifAddPrompt)
+                startActivity(new Intent(requireContext(), AddPromptActivity.class));
+            else
+                Toast.makeText(requireContext(), "Oops, something went wrong, try again!", Toast.LENGTH_SHORT).show();
+        });
         // Inflate the layout for this fragment
         return binding.getRoot();
     }
