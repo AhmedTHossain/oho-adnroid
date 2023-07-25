@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/text_title"
         android:fontFamily="@font/darkergrotesque_medium"
-        android:text="Enter your answer for the selected prompt, pick a photo and write a caption for it."
+        android:text="@string/disclaimer_answer_prompt"
         android:textColor="@color/black"
         android:textSize="@dimen/_16ssp"
         android:layout_marginTop="@dimen/_10sdp" />

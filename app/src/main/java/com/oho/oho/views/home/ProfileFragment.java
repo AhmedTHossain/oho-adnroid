@@ -124,9 +124,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
         });
 
         profileViewModel.getIfAddPrompt().observe(getViewLifecycleOwner(), ifAddPrompt -> {
-            if (ifAddPrompt)
-                startActivity(new Intent(requireContext(), AddPromptActivity.class));
-            else
+            if (ifAddPrompt) {
+                Intent intent = new Intent(new Intent(requireContext(), AddPromptActivity.class));
+                intent.putExtra("userID", userProfile.getId());
+                startActivity(intent);
+            } else
                 Toast.makeText(requireContext(), "Oops, something went wrong, try again!", Toast.LENGTH_SHORT).show();
         });
         // Inflate the layout for this fragment

@@ -1,5 +1,13 @@
 package com.oho.oho;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.text.format.DateFormat;
+import android.util.Log;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -9,14 +17,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.text.format.DateFormat;
-import android.util.Log;
-import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -24,7 +24,6 @@ import com.google.gson.Gson;
 import com.oho.oho.databinding.ActivityMainBinding;
 import com.oho.oho.models.ChatNotificationPayload;
 import com.oho.oho.models.CreateDeviceId;
-import com.oho.oho.models.JWTTokenRequest;
 import com.oho.oho.models.Profile;
 import com.oho.oho.viewmodels.MainViewModel;
 import com.oho.oho.views.chat.ChatActivity;
@@ -67,14 +66,18 @@ public class MainActivity extends AppCompatActivity {
         ChatNotificationPayload notificationPayload;
         if (getIntent().hasExtra("notificationPayload")) {
             notificationPayload = (ChatNotificationPayload) getIntent().getSerializableExtra("notificationPayload");
-            Toast.makeText(this, "sender name = " +notificationPayload.getChannelName(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "sender name = " + notificationPayload.getChannelName(), Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(this, ChatActivity.class);
             intent.putExtra("notificationPayload", notificationPayload); //where chatroom is an instance of ChatRoom object
             intent.putExtra("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODQxODE1OTcsImlhdCI6MTY4NDA5NTE5Nywic3ViIjo5OX0.U6TqG6oHX64ZCtYMIQjzPihu7VB2jCGcbPX6gbWUtrA"); //a newly generated token has been sent to ChatActivity
             startActivity(intent);
-            Log.d("MainActivvity","notification payload = "+notificationPayload);
+            Log.d("MainActivvity", "notification payload = " + notificationPayload);
         }
+        if (getIntent().hasExtra("show"))
+            if (getIntent().getStringExtra("show").equals("ProfileScreen"))
+                replaceFragment(new ProfileFragment());
+
 
         preSelectedSlotsArray = new ArrayList<>();
 

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,106 +15,148 @@
     <!--        android:textSize="@dimen/_30ssp"-->
     <!--        android:layout_gravity="start"/>-->
 
-    <TextView
-        android:id="@+id/screentitle"
+    <RelativeLayout
+        android:id="@+id/layout_add_prompt"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_30sdp"
-        android:layout_marginEnd="@dimen/_20sdp"
-        android:layout_marginBottom="@dimen/_10sdp"
-        android:fontFamily="@font/ptsans_bold"
-        android:text="Add Prompt"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_25ssp"
-        android:layout_alignParentTop="true"/>
+        android:layout_height="match_parent">
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_1sdp"
-        android:layout_below="@id/screentitle"
-        android:background="#1A000000" />
+        <TextView
+            android:id="@+id/screentitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:fontFamily="@font/ptsans_bold"
+            android:text="Add Prompt"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_25ssp" />
 
-    <TextView
-        android:id="@+id/text_prompt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_20sdp"
-        android:layout_marginBottom="@dimen/_20sdp"
-        android:layout_below="@id/view"
-        android:fontFamily="@font/darkergrotesque_medium"
-        android:text="Add some character to your profile by answering some prompts from the below list."
-        android:textColor="@color/black"
-        android:textSize="@dimen/_16ssp" />
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_below="@id/screentitle"
+            android:background="#1A000000" />
+
+        <TextView
+            android:id="@+id/text_prompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/view"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:fontFamily="@font/darkergrotesque_medium"
+            android:text="Add some character to your profile by answering some prompts from the below list."
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16ssp" />
+
+        <LinearLayout
+            android:id="@+id/text_selection_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_prompt"
+            android:layout_alignParentEnd="true"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:fontFamily="@font/ptsans_regular"
+                android:text="Selected:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14ssp" />
+
+            <TextView
+                android:id="@+id/text_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:fontFamily="@font/ptsans_bold"
+                android:text="1"
+                android:textColor="@color/ted_image_picker_primary_pressed"
+                android:textSize="@dimen/_14ssp" />
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_add_prompt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/button_add"
+            android:layout_below="@id/text_selection_count"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp" />
+
+        <TextView
+            android:id="@+id/button_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:background="@drawable/rounded_button_solid"
+            android:fontFamily="@font/darkergrotesque_bold"
+            android:gravity="center"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:text="Add"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_18ssp" />
+    </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/text_selection_count"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/text_prompt"
-        android:layout_alignParentEnd="true"
+        android:id="@+id/layout_answer_prompt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         android:visibility="gone">
-
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/ptsans_regular"
-            android:text="Selected:"
-            android:layout_marginEnd="@dimen/_5sdp"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_14ssp" />
-
-        <TextView
-            android:id="@+id/text_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/ptsans_bold"
-            android:text="1"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_30sdp"
             android:layout_marginEnd="@dimen/_20sdp"
-            android:textColor="@color/ted_image_picker_primary_pressed"
-            android:textSize="@dimen/_14ssp" />
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:fontFamily="@font/ptsans_bold"
+            android:text="Answer Prompt"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_25ssp" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="#1A000000" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:fontFamily="@font/darkergrotesque_medium"
+            android:text="@string/disclaimer_answer_prompt"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16ssp" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewpager_prompt_answers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp" />
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview_add_prompt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_below="@id/text_selection_count"
-        android:layout_above="@id/button_add"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginEnd="@dimen/_20sdp" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview_answer_prompt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_below="@id/text_prompt"
-        android:layout_above="@id/button_add"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginEnd="@dimen/_20sdp"
-        android:visibility="gone" />
-
-    <TextView
-        android:id="@+id/button_add"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="Add"
-        android:gravity="center"
-        android:paddingTop="@dimen/_10sdp"
-        android:paddingBottom="@dimen/_10sdp"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginEnd="@dimen/_20sdp"
-        android:background="@drawable/rounded_button_solid"
-        android:textSize="@dimen/_18ssp"
-        android:fontFamily="@font/darkergrotesque_bold"
-        android:textColor="@color/white"
-        android:layout_marginBottom="@dimen/_20sdp"/>
 </RelativeLayout>

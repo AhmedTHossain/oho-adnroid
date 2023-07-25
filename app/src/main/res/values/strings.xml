@@ -310,6 +310,7 @@ Oho! does not knowingly collect any Personal Identifiable Information from child
     <string name="preference_settings">Preference Settings</string>
     <string name="no_recommendations_disclaimer">Sorry couldn\'t find any recommendations for you at this moment, please widen your preferences from the preference settings then come back.</string>
     <string name="no_more_recommendations_disclaimer">Sorry you\'ve reached the max number of recommendations for the week. Please come back next week for new sets of recommendations.</string>
+    <string name="disclaimer_answer_prompt">Enter your answer for the selected prompt, pick a photo and write a caption for it.</string>
     <string-array name="evening_time_slots_array">
         <item>06:00 PM</item>
         <item>07:00 PM</item>
