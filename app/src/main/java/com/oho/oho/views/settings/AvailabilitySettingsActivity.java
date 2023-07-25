@@ -32,7 +32,7 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
 
     ActivityAvailabilitySettingsBinding binding;
     ArrayList<String> selectedSlotsArray, preSelectedSlotsArray;
-    private AvailabilitySettingsViewModel availabilitySettingsViewModel;
+    private AvailabilitySettingsViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +47,13 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
         selectedSlotsArray = new ArrayList<>();
         preSelectedSlotsArray = new ArrayList<>();
 
-        if (getAvailabilityConsent() != -1) {
-//            setAlreadySelectedTimeSlots();
-        }
-        else
-            showCannotChangeAvailabilityDialog();
+//        if (getAvailabilityConsent() != -1) {
+////            setAlreadySelectedTimeSlots();
+//        }
+//        else
+//            showCannotChangeAvailabilityDialog();
+
+        getAvailabilityConsent();
 
         //Click Listeners
         binding.buttonClearSlots.setOnClickListener(this);
@@ -59,7 +61,7 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
     }
 
     private void initViewModel() {
-        availabilitySettingsViewModel = new ViewModelProvider(this).get(AvailabilitySettingsViewModel.class);
+        viewModel = new ViewModelProvider(this).get(AvailabilitySettingsViewModel.class);
     }
 
     @Override
@@ -239,9 +241,15 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
         editor.commit();
     }
 
-    private int getAvailabilityConsent() {
-        SharedPreferences sharedPref = this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        return sharedPref.getInt("available", -1);
+    private void getAvailabilityConsent() {
+        viewModel.checkIfAvailable(187);
+        viewModel.isAvailable.observe(this, isAvailable ->{
+            if (isAvailable){
+                Toast.makeText(this,"Available for the weekend!",Toast.LENGTH_SHORT).show();
+            }
+            else
+                showCannotChangeAvailabilityDialog();
+        });
     }
 
     private void showCannotChangeAvailabilityDialog() {

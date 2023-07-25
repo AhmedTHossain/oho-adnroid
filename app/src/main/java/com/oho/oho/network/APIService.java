@@ -12,6 +12,7 @@ import com.oho.oho.models.Swipe;
 import com.oho.oho.models.User;
 import com.oho.oho.responses.Chat;
 import com.oho.oho.responses.ChatRoom;
+import com.oho.oho.responses.CheckAvailabilityResponse;
 import com.oho.oho.responses.JWTTokenResponse;
 import com.oho.oho.responses.MessageResponse;
 import com.oho.oho.responses.PreferenceResponse;
@@ -112,7 +113,7 @@ public interface APIService {
 
     //check if user is available for the weekend (if the user has selected any slot for the week)
     @GET("users/get_availability_status")
-    Call<Boolean> ifAvailable(@Query("user_id") int user_id);
+    Call<CheckAvailabilityResponse> ifAvailable(@Query("user_id") int user_id);
 
     //get all chat rooms for the user
     @GET("chat/rooms")

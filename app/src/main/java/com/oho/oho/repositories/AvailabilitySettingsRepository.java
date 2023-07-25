@@ -10,6 +10,7 @@ import com.oho.oho.MainActivity;
 import com.oho.oho.models.Availability;
 import com.oho.oho.network.APIService;
 import com.oho.oho.network.RetrofitInstance;
+import com.oho.oho.responses.CheckAvailabilityResponse;
 
 import java.util.ArrayList;
 
@@ -65,15 +66,18 @@ public class AvailabilitySettingsRepository {
     public MutableLiveData<Boolean> checkIfAvailable(int user_id){
         MutableLiveData<Boolean> isAvailable = new MutableLiveData<>();
         APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
-        Call<Boolean> call = apiService.ifAvailable(user_id);
-        call.enqueue(new Callback<Boolean>() {
+        Call<CheckAvailabilityResponse> call = apiService.ifAvailable(user_id);
+        call.enqueue(new Callback<CheckAvailabilityResponse>() {
             @Override
-            public void onResponse(@NonNull Call<Boolean> call, @NonNull Response<Boolean> response) {
-                isAvailable.setValue(response.body());
+            public void onResponse(@NonNull Call<CheckAvailabilityResponse> call, @NonNull Response<CheckAvailabilityResponse> response) {
+                if (response.body()!=null){
+                    CheckAvailabilityResponse availabilityResponse = response.body();
+                    isAvailable.setValue(availabilityResponse.getAvailabilityStatus());
+                }
             }
 
             @Override
-            public void onFailure(@NonNull Call<Boolean> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<CheckAvailabilityResponse> call, @NonNull Throwable t) {
 
             }
         });
