@@ -98,4 +98,11 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">@dimen/_20sdp</item>
     </style>
+
+    <style name="CustomCheckBoxStyle" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <!-- Customize the color when checked -->
+        <item name="android:color">@color/ted_image_picker_primary_pressed</item>
+        <!-- Customize the color when unchecked -->
+        <item name="android:buttonTint">@color/black</item>
+    </style>
 </resources>

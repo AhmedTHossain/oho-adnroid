@@ -1,18 +1,11 @@
 package com.oho.oho.views.settings;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.content.ContextCompat;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,13 +13,19 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
-import com.oho.oho.MainActivity;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.content.ContextCompat;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.oho.oho.R;
-import com.oho.oho.adapters.SavedSlotsAdapter;
 import com.oho.oho.databinding.ActivityAvailabilitySettingsBinding;
 import com.oho.oho.viewmodels.AvailabilitySettingsViewModel;
+import com.oho.oho.views.home.HomeFragment;
+import com.oho.oho.views.home.MatchingPhaseFragment;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class AvailabilitySettingsActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -56,8 +55,8 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
         getAvailabilityConsent();
 
         //Click Listeners
-        binding.buttonClearSlots.setOnClickListener(this);
-        binding.buttonSaveSlots.setOnClickListener(this);
+//        binding.buttonClearSlots.setOnClickListener(this);
+//        binding.buttonSaveSlots.setOnClickListener(this);
     }
 
     private void initViewModel() {
@@ -67,20 +66,20 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.button_clear_slots:
-                binding.friSlot1.setChecked(false);
-                binding.friSlot2.setChecked(false);
-                binding.friSlot3.setChecked(false);
-                binding.satSlot1.setChecked(false);
-                binding.satSlot2.setChecked(false);
-                binding.satSlot3.setChecked(false);
-                binding.sunSlot1.setChecked(false);
-                binding.sunSlot2.setChecked(false);
-                selectedSlotsArray.clear();
-                break;
-            case R.id.button_save_slots:
-//                saveAvailability();
-                break;
+//            case R.id.button_clear_slots:
+//                binding.friSlot1.setChecked(false);
+//                binding.friSlot2.setChecked(false);
+//                binding.friSlot3.setChecked(false);
+//                binding.satSlot1.setChecked(false);
+//                binding.satSlot2.setChecked(false);
+//                binding.satSlot3.setChecked(false);
+//                binding.sunSlot1.setChecked(false);
+//                binding.sunSlot2.setChecked(false);
+//                selectedSlotsArray.clear();
+//                break;
+//            case R.id.button_save_slots:
+////                saveAvailability();
+//                break;
         }
     }
 
@@ -152,20 +151,20 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
         String day = "";
 
         switch (view.getId()) {
-            case R.id.fri_slot_1:
-            case R.id.fri_slot_2:
-            case R.id.fri_slot_3:
-                day = "Fri";
-                break;
-            case R.id.sat_slot_1:
-            case R.id.sat_slot_2:
-            case R.id.sat_slot_3:
-                day = "Sat";
-                break;
-            case R.id.sun_slot_1:
-            case R.id.sun_slot_2:
-                day = "Sun";
-                break;
+//            case R.id.fri_slot_1:
+//            case R.id.fri_slot_2:
+//            case R.id.fri_slot_3:
+//                day = "Fri";
+//                break;
+//            case R.id.sat_slot_1:
+//            case R.id.sat_slot_2:
+//            case R.id.sat_slot_3:
+//                day = "Sat";
+//                break;
+//            case R.id.sun_slot_1:
+//            case R.id.sun_slot_2:
+//                day = "Sun";
+//                break;
         }
 
         String slot = day + ", " + ((CheckBox) view).getText().toString();
@@ -243,12 +242,11 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
 
     private void getAvailabilityConsent() {
         viewModel.checkIfAvailable(187);
-        viewModel.isAvailable.observe(this, isAvailable ->{
-            if (isAvailable){
-                Toast.makeText(this,"Available for the weekend!",Toast.LENGTH_SHORT).show();
-            }
-            else
-                showCannotChangeAvailabilityDialog();
+        viewModel.isAvailable.observe(this, isAvailable -> {
+            if (isAvailable) {
+                Toast.makeText(this, "Available for the weekend!", Toast.LENGTH_SHORT).show();
+            } else
+               changeUI();
         });
     }
 
@@ -281,5 +279,17 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
         });
         // show it
         alertDialog.show();
+    }
+
+    private void changeUI() {
+        //finding which day of week is today in order to check if its the dating phase or matching phase. So that the appropriate UI can be shown based on that.
+        Date date = new Date();
+        CharSequence time = DateFormat.format("E", date.getTime()); // gives like (Wednesday)
+
+        if (!String.valueOf(time).equals("Fri") && !String.valueOf(time).equals("Sat") && !String.valueOf(time).equals("Sun")) {
+
+        } else {
+            showCannotChangeAvailabilityDialog();
+        }
     }
 }

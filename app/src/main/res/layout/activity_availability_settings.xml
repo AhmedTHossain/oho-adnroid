@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,26 +7,39 @@
     tools:context=".views.settings.AvailabilitySettingsActivity">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/screentitle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/sf_pro_rounded_medium"
-        android:paddingStart="@dimen/_20sdp"
-        android:paddingTop="@dimen/_30sdp"
-        android:paddingEnd="@dimen/_20sdp"
-        android:text="Availability"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:fontFamily="@font/ptsans_bold"
+        android:text="Availability Settings"
         android:textColor="@color/black"
-        android:textSize="@dimen/_40ssp"
-        android:textStyle="bold" />
+        android:textSize="@dimen/_25ssp" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:layout_below="@id/screentitle"
+        android:background="#1A000000" />
 
     <TextView
+        android:id="@+id/text_prompt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/view"
         android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_20sdp"
-        android:fontFamily="@font/sf_pro_rounded_medium"
-        android:text="Please select your schedule for the weekend. You can select multiple days &amp; slots for greater number of matches."
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:fontFamily="@font/darkergrotesque_medium"
+        android:text="@string/disclaimer_set_availability"
         android:textColor="@color/black"
-        android:justificationMode="inter_word"
         android:textSize="@dimen/_16ssp" />
 
     <ScrollView
@@ -37,311 +49,171 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
             android:orientation="vertical">
 
-            <androidx.cardview.widget.CardView
+            <LinearLayout
+                android:id="@+id/layout_friday_schedule"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
-                app:cardElevation="1dp">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:background="@drawable/border_corner_drawable"
                     android:orientation="vertical"
-                    android:padding="@dimen/_5sdp">
+                    android:padding="@dimen/_20sdp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_20sdp"
-                        android:layout_marginEnd="@dimen/_20sdp"
-                        android:fontFamily="@font/sf_pro_rounded_medium"
-                        android:text="Friday"
-                        android:textAllCaps="true"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_18ssp"
-                        android:textStyle="bold" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_1sdp"
-                        android:layout_marginStart="@dimen/_20sdp"
-                        android:layout_marginEnd="@dimen/_20sdp"
                         android:layout_marginBottom="@dimen/_10sdp"
-                        android:background="@color/divider" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_20sdp"
-                        android:layout_marginEnd="@dimen/_20sdp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <androidx.appcompat.widget.AppCompatCheckBox
-                                android:id="@+id/fri_slot_1"
-                                android:layout_width="@dimen/_200sdp"
-                                android:layout_height="wrap_content"
-                                android:button="@drawable/circular_checkbox"
-                                android:fontFamily="@font/sf_pro_rounded_regular"
-                                android:onClick="onCheckboxClicked"
-                                android:text="06:00 PM - 07:00 PM"
-                                android:textAlignment="center"
-                                android:textAllCaps="true"
-                                android:textSize="@dimen/_16ssp" />
-
-                            <androidx.appcompat.widget.AppCompatCheckBox
-                                android:id="@+id/fri_slot_2"
-                                android:layout_width="@dimen/_200sdp"
-                                android:layout_height="wrap_content"
-                                android:button="@drawable/circular_checkbox"
-                                android:fontFamily="@font/sf_pro_rounded_regular"
-                                android:onClick="onCheckboxClicked"
-                                android:text="07:00 PM - 08:00 PM"
-                                android:textAlignment="center"
-                                android:textAllCaps="true"
-                                android:textSize="@dimen/_16ssp" />
-
-                            <androidx.appcompat.widget.AppCompatCheckBox
-                                android:id="@+id/fri_slot_3"
-                                android:layout_width="@dimen/_200sdp"
-                                android:layout_height="wrap_content"
-                                android:button="@drawable/circular_checkbox"
-                                android:fontFamily="@font/sf_pro_rounded_regular"
-                                android:onClick="onCheckboxClicked"
-                                android:text="08:00 PM - 09:00 PM"
-                                android:textAlignment="center"
-                                android:textAllCaps="true"
-                                android:textSize="@dimen/_16ssp" />
-
-                        </LinearLayout>
-                    </LinearLayout>
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
-                app:cardElevation="1dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/_5sdp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_20sdp"
-                        android:layout_marginEnd="@dimen/_20sdp"
-                        android:fontFamily="@font/sf_pro_rounded_medium"
-                        android:text="Saturday"
-                        android:textAllCaps="true"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_18ssp"
-                        android:textStyle="bold" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_1sdp"
-                        android:layout_marginStart="@dimen/_20sdp"
-                        android:layout_marginEnd="@dimen/_20sdp"
-                        android:layout_marginBottom="@dimen/_10sdp"
-                        android:background="@color/divider" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_20sdp"
-                        android:layout_marginEnd="@dimen/_20sdp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <androidx.appcompat.widget.AppCompatCheckBox
-                                android:id="@+id/sat_slot_1"
-                                android:layout_width="@dimen/_200sdp"
-                                android:layout_height="wrap_content"
-                                android:button="@drawable/circular_checkbox"
-                                android:fontFamily="@font/sf_pro_rounded_regular"
-                                android:onClick="onCheckboxClicked"
-                                android:text="06:00 PM - 07:00 PM"
-                                android:textAlignment="center"
-                                android:textAllCaps="true"
-                                android:textSize="@dimen/_16ssp" />
-
-                            <androidx.appcompat.widget.AppCompatCheckBox
-                                android:id="@+id/sat_slot_2"
-                                android:layout_width="@dimen/_200sdp"
-                                android:layout_height="wrap_content"
-                                android:button="@drawable/circular_checkbox"
-                                android:fontFamily="@font/sf_pro_rounded_regular"
-                                android:onClick="onCheckboxClicked"
-                                android:text="07:00 PM - 08:00 PM"
-                                android:textAlignment="center"
-                                android:textAllCaps="true"
-                                android:textSize="@dimen/_16ssp" />
-
-                            <androidx.appcompat.widget.AppCompatCheckBox
-                                android:id="@+id/sat_slot_3"
-                                android:layout_width="@dimen/_200sdp"
-                                android:layout_height="wrap_content"
-                                android:button="@drawable/circular_checkbox"
-                                android:fontFamily="@font/sf_pro_rounded_regular"
-                                android:onClick="onCheckboxClicked"
-                                android:text="08:00 PM - 09:00 PM"
-                                android:textAlignment="center"
-                                android:textAllCaps="true"
-                                android:textSize="@dimen/_16ssp" />
-
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
-                app:cardElevation="1dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/_5sdp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_20sdp"
-                        android:layout_marginEnd="@dimen/_20sdp"
-                        android:fontFamily="@font/sf_pro_rounded_medium"
-                        android:text="Sunday"
-                        android:textAllCaps="true"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_18ssp"
-                        android:textStyle="bold" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_1sdp"
-                        android:layout_marginStart="@dimen/_20sdp"
-                        android:layout_marginEnd="@dimen/_20sdp"
-                        android:layout_marginBottom="@dimen/_10sdp"
-                        android:background="@color/divider" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_20sdp"
-                        android:layout_marginEnd="@dimen/_20sdp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <androidx.appcompat.widget.AppCompatCheckBox
-                                android:id="@+id/sun_slot_1"
-                                android:layout_width="@dimen/_200sdp"
-                                android:layout_height="wrap_content"
-                                android:button="@drawable/circular_checkbox"
-                                android:fontFamily="@font/sf_pro_rounded_regular"
-                                android:onClick="onCheckboxClicked"
-                                android:text="11:00 AM - 12:00 PM"
-                                android:textAlignment="center"
-                                android:textAllCaps="true"
-                                android:textSize="@dimen/_16ssp" />
-
-                            <androidx.appcompat.widget.AppCompatCheckBox
-                                android:id="@+id/sun_slot_2"
-                                android:layout_width="@dimen/_200sdp"
-                                android:layout_height="wrap_content"
-                                android:button="@drawable/circular_checkbox"
-                                android:fontFamily="@font/sf_pro_rounded_regular"
-                                android:onClick="onCheckboxClicked"
-                                android:text="12:00 PM - 01:00 PM"
-                                android:textAlignment="center"
-                                android:textAllCaps="true"
-                                android:textSize="@dimen/_16ssp" />
-
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/button_save_slots"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?attr/selectableItemBackground"
-                app:cardCornerRadius="@dimen/_50sdp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/button_background_gradient_dark"
-                    android:gravity="center"
-                    android:padding="@dimen/_5sdp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/sf_pro_rounded_regular"
-                        android:text="Save"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_16ssp" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/button_clear_slots"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
-                android:layout_marginBottom="@dimen/_20sdp"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?attr/selectableItemBackground"
-                app:cardCornerRadius="@dimen/_50sdp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="@dimen/_5sdp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/sf_pro_rounded_regular"
-                        android:text="Clear All"
+                        android:fontFamily="@font/ptsans_bold"
+                        android:text="FRIDAY"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_16ssp" />
+
+                    <androidx.appcompat.widget.AppCompatCheckBox
+                        android:id="@+id/slot_1"
+                        style="@style/CustomCheckBoxStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:padding="@dimen/_5sdp"
+                        android:text="6:00 pm - 7:00 pm"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16ssp" />
+
+                    <androidx.appcompat.widget.AppCompatCheckBox
+                        android:id="@+id/slot_2"
+                        style="@style/CustomCheckBoxStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:padding="@dimen/_5sdp"
+                        android:text="7:00 pm - 8:00 pm"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16ssp" />
+
+                    <androidx.appcompat.widget.AppCompatCheckBox
+                        android:id="@+id/slot_3"
+                        style="@style/CustomCheckBoxStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:padding="@dimen/_5sdp"
+                        android:text="8:00 pm - 9:00 pm"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16ssp" />
+
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:background="@drawable/border_corner_drawable"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_20sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:fontFamily="@font/ptsans_bold"
+                        android:text="SATURDAY"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16ssp" />
+
+                    <androidx.appcompat.widget.AppCompatCheckBox
+                        android:id="@+id/slot_4"
+                        style="@style/CustomCheckBoxStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:padding="@dimen/_5sdp"
+                        android:text="6:00 pm - 7:00 pm"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16ssp" />
+
+                    <androidx.appcompat.widget.AppCompatCheckBox
+                        android:id="@+id/slot_5"
+                        style="@style/CustomCheckBoxStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:padding="@dimen/_5sdp"
+                        android:text="7:00 pm - 8:00 pm"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16ssp" />
+
+                    <androidx.appcompat.widget.AppCompatCheckBox
+                        android:id="@+id/slot_6"
+                        style="@style/CustomCheckBoxStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:padding="@dimen/_5sdp"
+                        android:text="8:00 pm - 9:00 pm"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16ssp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:background="@drawable/border_corner_drawable"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_20sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:fontFamily="@font/ptsans_bold"
+                        android:text="SUNDAY"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16ssp" />
+
+                    <androidx.appcompat.widget.AppCompatCheckBox
+                        android:id="@+id/slot_7"
+                        style="@style/CustomCheckBoxStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:padding="@dimen/_5sdp"
+                        android:text="11:00 am - 12:00 pm"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16ssp" />
+
+                    <androidx.appcompat.widget.AppCompatCheckBox
+                        android:id="@+id/slot_8"
+                        style="@style/CustomCheckBoxStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:fontFamily="@font/ptsans_regular"
+                        android:padding="@dimen/_5sdp"
+                        android:text="12:00 pm - 1:00 pm"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16ssp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 
