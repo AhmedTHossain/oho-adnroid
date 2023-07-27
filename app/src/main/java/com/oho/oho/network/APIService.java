@@ -81,7 +81,7 @@ public interface APIService {
 
     // for adding/updating user availability
     @POST("users/availability/add")
-    Call<ArrayList<String>> addAvailability(@Query("user_id") int user_id, @Body ArrayList<String> availList);
+    Call<Availability> addAvailability(@Query("user_id") int user_id, @Body Availability availList);
 
     //for getting user availability
     @GET("users/availability/")

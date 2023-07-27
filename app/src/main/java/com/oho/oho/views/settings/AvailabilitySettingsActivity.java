@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,15 +21,17 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.oho.oho.R;
 import com.oho.oho.databinding.ActivityAvailabilitySettingsBinding;
+import com.oho.oho.models.Availability;
 import com.oho.oho.viewmodels.AvailabilitySettingsViewModel;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-public class AvailabilitySettingsActivity extends AppCompatActivity implements View.OnClickListener {
+public class AvailabilitySettingsActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     ActivityAvailabilitySettingsBinding binding;
     ArrayList<String> selectedSlotsArray, preSelectedSlotsArray;
+    private Availability preSelectedSlots = new Availability();
     private AvailabilitySettingsViewModel viewModel;
     private Integer[] slotsArray;
 
@@ -56,53 +59,22 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
         //Click Listeners
 //        binding.buttonClearSlots.setOnClickListener(this);
 //        binding.buttonSaveSlots.setOnClickListener(this);
+
+        setOnCheckListeners();
+
+        binding.buttonAddAvailability.setOnClickListener(this);
     }
 
     private void initViewModel() {
         viewModel = new ViewModelProvider(this).get(AvailabilitySettingsViewModel.class);
-        viewModel.getAvailableTimeSlots(187);
-        viewModel.selectedTimeSlotsList.observe(this, availability -> {
-            if (availability != null) {
-                slotsArray = availability.getAllSlotsAsArray();
-
-                for (int i = 0; i < slotsArray.length; i++) {
-                    if (slotsArray[i] == 1) {
-                        int slotNumber = i + 1;
-                        switch (slotNumber) {
-                            case 1:
-                                binding.slot1.setChecked(true);
-                                break;
-                            case 2:
-                                binding.slot2.setChecked(true);
-                                break;
-                            case 3:
-                                binding.slot3.setChecked(true);
-                                break;
-                            case 4:
-                                binding.slot4.setChecked(true);
-                                break;
-                            case 5:
-                                binding.slot5.setChecked(true);
-                                break;
-                            case 6:
-                                binding.slot6.setChecked(true);
-                                break;
-                            case 7:
-                                binding.slot7.setChecked(true);
-                                break;
-                            case 8:
-                                binding.slot8.setChecked(true);
-                                break;
-                        }
-                    }
-                }
-            }
-        });
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.button_add_availability:
+                viewModel.addAvailableTimeSlots(187,preSelectedSlots);
+                break;
 //            case R.id.button_clear_slots:
 //                binding.friSlot1.setChecked(false);
 //                binding.friSlot2.setChecked(false);
@@ -282,6 +254,14 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
         viewModel.isAvailable.observe(this, isAvailable -> {
             if (isAvailable) {
                 Toast.makeText(this, "Available for the weekend!", Toast.LENGTH_SHORT).show();
+                viewModel.getAvailableTimeSlots(187);
+                viewModel.selectedTimeSlotsList.observe(this, availability -> {
+                    if (availability != null) {
+                        preSelectedSlots = availability;
+                        slotsArray = availability.getAllSlotsAsArray();
+                        checkAvailableSlots();
+                    }
+                });
             } else
                 changeUI();
         });
@@ -328,5 +308,104 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
         } else {
             showCannotChangeAvailabilityDialog();
         }
+    }
+
+    private void checkAvailableSlots() {
+        for (int i = 0; i < slotsArray.length; i++) {
+            if (slotsArray[i] == 1) {
+                int slotNumber = i + 1;
+                switch (slotNumber) {
+                    case 1:
+                        binding.slot1.setChecked(true);
+                        break;
+                    case 2:
+                        binding.slot2.setChecked(true);
+                        break;
+                    case 3:
+                        binding.slot3.setChecked(true);
+                        break;
+                    case 4:
+                        binding.slot4.setChecked(true);
+                        break;
+                    case 5:
+                        binding.slot5.setChecked(true);
+                        break;
+                    case 6:
+                        binding.slot6.setChecked(true);
+                        break;
+                    case 7:
+                        binding.slot7.setChecked(true);
+                        break;
+                    case 8:
+                        binding.slot8.setChecked(true);
+                        break;
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        switch (buttonView.getId()) {
+            case R.id.slot_1:
+                if (isChecked)
+                    preSelectedSlots.setSlot1(1);
+                else
+                    preSelectedSlots.setSlot1(0);
+                break;
+            case R.id.slot_2:
+                if (isChecked)
+                    preSelectedSlots.setSlot2(1);
+                else
+                    preSelectedSlots.setSlot2(0);
+                break;
+            case R.id.slot_3:
+                if (isChecked)
+                    preSelectedSlots.setSlot3(1);
+                else
+                    preSelectedSlots.setSlot3(0);
+                break;
+            case R.id.slot_4:
+                if (isChecked)
+                    preSelectedSlots.setSlot4(1);
+                else
+                    preSelectedSlots.setSlot4(0);
+                break;
+            case R.id.slot_5:
+                if (isChecked)
+                    preSelectedSlots.setSlot5(1);
+                else
+                    preSelectedSlots.setSlot5(0);
+                break;
+            case R.id.slot_6:
+                if (isChecked)
+                    preSelectedSlots.setSlot6(1);
+                else
+                    preSelectedSlots.setSlot6(0);
+                break;
+            case R.id.slot_7:
+                if (isChecked)
+                    preSelectedSlots.setSlot7(1);
+                else
+                    preSelectedSlots.setSlot7(0);
+                break;
+            case R.id.slot_8:
+                if (isChecked)
+                    preSelectedSlots.setSlot8(1);
+                else
+                    preSelectedSlots.setSlot8(0);
+                break;
+        }
+    }
+
+    private void setOnCheckListeners(){
+        binding.slot1.setOnCheckedChangeListener(this);
+        binding.slot2.setOnCheckedChangeListener(this);
+        binding.slot3.setOnCheckedChangeListener(this);
+        binding.slot4.setOnCheckedChangeListener(this);
+        binding.slot5.setOnCheckedChangeListener(this);
+        binding.slot6.setOnCheckedChangeListener(this);
+        binding.slot7.setOnCheckedChangeListener(this);
+        binding.slot8.setOnCheckedChangeListener(this);
     }
 }

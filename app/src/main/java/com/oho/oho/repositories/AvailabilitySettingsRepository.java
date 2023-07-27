@@ -21,22 +21,22 @@ import retrofit2.Response;
 public class AvailabilitySettingsRepository {
 
 
-    public MutableLiveData<ArrayList<String>> updateUserAvailability(int user_id, ArrayList<String> availableTimeSlotsList, Context context){
-        MutableLiveData<ArrayList<String>> selectedAvailableTimeSlots = new MutableLiveData<>();
+    public MutableLiveData<Availability> updateUserAvailability(int user_id, Availability availableTimeSlotsList, Context context){
+        MutableLiveData<Availability> selectedAvailableTimeSlots = new MutableLiveData<>();
 
         APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
-        Call<ArrayList<String>> call = apiService.addAvailability(user_id,availableTimeSlotsList);
-        call.enqueue(new Callback<ArrayList<String>>() {
+        Call<Availability> call = apiService.addAvailability(user_id,availableTimeSlotsList);
+        call.enqueue(new Callback<Availability>() {
             @Override
-            public void onResponse(@NonNull Call<ArrayList<String>> call, @NonNull Response<ArrayList<String>> response) {
-                Toast.makeText(context,"response code = "+response.code(),Toast.LENGTH_SHORT).show();
+            public void onResponse(@NonNull Call<Availability> call, @NonNull Response<Availability> response) {
+                Toast.makeText(context,"Availability set = "+"Successfully!",Toast.LENGTH_SHORT).show();
 
                 selectedAvailableTimeSlots.setValue(response.body());
             }
 
             @Override
-            public void onFailure(@NonNull Call<ArrayList<String>> call, @NonNull Throwable t) {
-
+            public void onFailure(@NonNull Call<Availability> call, @NonNull Throwable t) {
+                Toast.makeText(context,"Availability set = "+"Failed!",Toast.LENGTH_SHORT).show();
             }
         });
         return selectedAvailableTimeSlots;
