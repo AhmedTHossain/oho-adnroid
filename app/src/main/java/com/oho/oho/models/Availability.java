@@ -3,6 +3,9 @@ package com.oho.oho.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Availability {
     @SerializedName("slot_1")
     @Expose
@@ -37,12 +40,6 @@ public class Availability {
     @SerializedName("slot_11")
     @Expose
     private Integer slot11;
-    @SerializedName("availability_id")
-    @Expose
-    private Integer availabilityId;
-    @SerializedName("user_id")
-    @Expose
-    private Integer userId;
 
     public Integer getSlot1() {
         return slot1;
@@ -132,20 +129,24 @@ public class Availability {
         this.slot11 = slot11;
     }
 
-    public Integer getAvailabilityId() {
-        return availabilityId;
-    }
+    public Integer[] getAllSlotsAsArray() {
+        ArrayList<Integer> allSlotsList = new ArrayList<>();
 
-    public void setAvailabilityId(Integer availabilityId) {
-        this.availabilityId = availabilityId;
-    }
+        // Add all the slots to the list
+        allSlotsList.add(slot1);
+        allSlotsList.add(slot2);
+        allSlotsList.add(slot3);
+        allSlotsList.add(slot4);
+        allSlotsList.add(slot5);
+        allSlotsList.add(slot6);
+        allSlotsList.add(slot7);
+        allSlotsList.add(slot8);
+        allSlotsList.add(slot9);
+        allSlotsList.add(slot10);
+        allSlotsList.add(slot11);
 
-    public Integer getUserId() {
-        return userId;
+        // Convert the list to an array and return it
+        Integer[] allSlotsArray = allSlotsList.toArray(new Integer[0]);
+        return allSlotsArray;
     }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
 }

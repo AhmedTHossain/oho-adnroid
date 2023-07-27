@@ -21,8 +21,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.oho.oho.R;
 import com.oho.oho.databinding.ActivityAvailabilitySettingsBinding;
 import com.oho.oho.viewmodels.AvailabilitySettingsViewModel;
-import com.oho.oho.views.home.HomeFragment;
-import com.oho.oho.views.home.MatchingPhaseFragment;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,6 +30,7 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
     ActivityAvailabilitySettingsBinding binding;
     ArrayList<String> selectedSlotsArray, preSelectedSlotsArray;
     private AvailabilitySettingsViewModel viewModel;
+    private Integer[] slotsArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +60,44 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
 
     private void initViewModel() {
         viewModel = new ViewModelProvider(this).get(AvailabilitySettingsViewModel.class);
+        viewModel.getAvailableTimeSlots(187);
+        viewModel.selectedTimeSlotsList.observe(this, availability -> {
+            if (availability != null) {
+                slotsArray = availability.getAllSlotsAsArray();
+
+                for (int i = 0; i < slotsArray.length; i++) {
+                    if (slotsArray[i] == 1) {
+                        int slotNumber = i + 1;
+                        switch (slotNumber) {
+                            case 1:
+                                binding.slot1.setChecked(true);
+                                break;
+                            case 2:
+                                binding.slot2.setChecked(true);
+                                break;
+                            case 3:
+                                binding.slot3.setChecked(true);
+                                break;
+                            case 4:
+                                binding.slot4.setChecked(true);
+                                break;
+                            case 5:
+                                binding.slot5.setChecked(true);
+                                break;
+                            case 6:
+                                binding.slot6.setChecked(true);
+                                break;
+                            case 7:
+                                binding.slot7.setChecked(true);
+                                break;
+                            case 8:
+                                binding.slot8.setChecked(true);
+                                break;
+                        }
+                    }
+                }
+            }
+        });
     }
 
     @Override
@@ -246,7 +283,7 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
             if (isAvailable) {
                 Toast.makeText(this, "Available for the weekend!", Toast.LENGTH_SHORT).show();
             } else
-               changeUI();
+                changeUI();
         });
     }
 

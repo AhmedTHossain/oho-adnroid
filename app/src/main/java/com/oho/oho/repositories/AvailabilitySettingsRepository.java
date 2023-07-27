@@ -57,6 +57,7 @@ public class AvailabilitySettingsRepository {
             @Override
             public void onFailure(@NonNull Call<Availability> call, @NonNull Throwable t) {
                 Toast.makeText(context,"response code if failed = "+t.getCause(),Toast.LENGTH_SHORT).show();
+                selectedAvailableTimeSlots.setValue(null);
             }
         });
 

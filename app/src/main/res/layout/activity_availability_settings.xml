@@ -70,7 +70,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
                         android:fontFamily="@font/ptsans_bold"
                         android:text="FRIDAY"
                         android:textColor="@color/black"
@@ -125,7 +125,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
                         android:fontFamily="@font/ptsans_bold"
                         android:text="SATURDAY"
                         android:textColor="@color/black"
@@ -180,7 +180,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
                         android:fontFamily="@font/ptsans_bold"
                         android:text="SUNDAY"
                         android:textColor="@color/black"
@@ -211,6 +211,23 @@
                         android:textSize="@dimen/_16ssp" />
 
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/button_add_prompt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:background="@drawable/border_rounded_corner"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/darkergrotesque_bold"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_10sdp"
+                    android:text="Add Availability"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_18ssp" />
 
             </LinearLayout>
 
