@@ -29,14 +29,14 @@ public class AvailabilitySettingsRepository {
         call.enqueue(new Callback<Availability>() {
             @Override
             public void onResponse(@NonNull Call<Availability> call, @NonNull Response<Availability> response) {
-                Toast.makeText(context,"Availability set = "+"Successfully!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"We have successfully stored your availability for the weekend!",Toast.LENGTH_SHORT).show();
 
                 selectedAvailableTimeSlots.setValue(response.body());
             }
 
             @Override
             public void onFailure(@NonNull Call<Availability> call, @NonNull Throwable t) {
-                Toast.makeText(context,"Availability set = "+"Failed!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"Failed store your availability for the weekend, Please check your connection!",Toast.LENGTH_SHORT).show();
             }
         });
         return selectedAvailableTimeSlots;

@@ -1,5 +1,6 @@
 package com.oho.oho.adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +17,10 @@ public class SavedSlotsAdapter extends RecyclerView.Adapter<SavedSlotsAdapter.Vi
 
     private ArrayList<String> selectedSlotsList;
 
-    public SavedSlotsAdapter(ArrayList<String> slotsList){
+    public SavedSlotsAdapter(ArrayList<String> slotsList) {
         selectedSlotsList = slotsList;
+        for (String slot : slotsList)
+            Log.d("SavedSlotsAdapter", "number of saved slots = " + slot);
     }
 
     @NonNull
@@ -30,10 +33,12 @@ public class SavedSlotsAdapter extends RecyclerView.Adapter<SavedSlotsAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        String[] slotArray = selectedSlotsList.get(position).split(", ");
-
+        String[] slotArray = selectedSlotsList.get(position).split(",");
+//        Log.d("SavedSlotsAdapter","number of saved slots = "+slotArray.length);
         viewHolder.getDayTextView().setText(slotArray[0]+":");
         viewHolder.getTimeTextView().setText(slotArray[1]);
+
+//        viewHolder.getDayTextView().setText(selectedSlotsList.get(position));
     }
 
     @Override
@@ -51,11 +56,11 @@ public class SavedSlotsAdapter extends RecyclerView.Adapter<SavedSlotsAdapter.Vi
             timeTextView = view.findViewById(R.id.time_text);
         }
 
-        public TextView getDayTextView(){
+        public TextView getDayTextView() {
             return dayTextView;
         }
 
-        public TextView getTimeTextView(){
+        public TextView getTimeTextView() {
             return timeTextView;
         }
     }

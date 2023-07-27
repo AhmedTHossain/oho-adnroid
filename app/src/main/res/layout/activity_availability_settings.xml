@@ -84,7 +84,7 @@
                         android:checked="false"
                         android:fontFamily="@font/ptsans_regular"
                         android:padding="@dimen/_5sdp"
-                        android:text="6:00 pm - 7:00 pm"
+                        android:text="06:00pm - 07:00pm"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_16ssp" />
 
@@ -96,7 +96,7 @@
                         android:checked="false"
                         android:fontFamily="@font/ptsans_regular"
                         android:padding="@dimen/_5sdp"
-                        android:text="7:00 pm - 8:00 pm"
+                        android:text="07:00pm - 08:00pm"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_16ssp" />
 
@@ -108,7 +108,7 @@
                         android:checked="false"
                         android:fontFamily="@font/ptsans_regular"
                         android:padding="@dimen/_5sdp"
-                        android:text="8:00 pm - 9:00 pm"
+                        android:text="08:00pm - 09:00pm"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_16ssp" />
 
@@ -139,7 +139,7 @@
                         android:checked="false"
                         android:fontFamily="@font/ptsans_regular"
                         android:padding="@dimen/_5sdp"
-                        android:text="6:00 pm - 7:00 pm"
+                        android:text="06:00pm - 07:00pm"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_16ssp" />
 
@@ -151,7 +151,7 @@
                         android:checked="false"
                         android:fontFamily="@font/ptsans_regular"
                         android:padding="@dimen/_5sdp"
-                        android:text="7:00 pm - 8:00 pm"
+                        android:text="07:00pm - 08:00pm"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_16ssp" />
 
@@ -163,7 +163,7 @@
                         android:checked="false"
                         android:fontFamily="@font/ptsans_regular"
                         android:padding="@dimen/_5sdp"
-                        android:text="8:00 pm - 9:00 pm"
+                        android:text="08:00pm - 09:00pm"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_16ssp" />
 
@@ -194,7 +194,7 @@
                         android:checked="false"
                         android:fontFamily="@font/ptsans_regular"
                         android:padding="@dimen/_5sdp"
-                        android:text="11:00 am - 12:00 pm"
+                        android:text="11:00 am - 12:00pm"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_16ssp" />
 
@@ -206,7 +206,7 @@
                         android:checked="false"
                         android:fontFamily="@font/ptsans_regular"
                         android:padding="@dimen/_5sdp"
-                        android:text="12:00 pm - 1:00 pm"
+                        android:text="12:00pm - 01:00pm"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_16ssp" />
 

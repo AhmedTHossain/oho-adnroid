@@ -16,7 +16,9 @@
         android:fontFamily="@font/ptsans_bold"
         android:text="Edit Bio"
         android:textColor="@color/black"
-        android:textSize="@dimen/_20ssp" />
+        android:textSize="@dimen/_20ssp"
+        android:drawableStart="@drawable/ic_edit_bio"
+        android:drawablePadding="@dimen/_5sdp"/>
 
     <TextView
         android:layout_width="wrap_content"
