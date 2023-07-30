@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -104,6 +105,11 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
                         viewModel.editPhoto();
                     }
                 });
+
+                if (viewModel == null) {
+                    ((Holder1) holder).editPhotoButton.setVisibility(View.GONE);
+                    ((Holder1) holder).editBioButton.setVisibility(View.GONE);
+                }
                 break;
             case VIEW_TYPE_LEFT:
             case VIEW_TYPE_RIGHT:
@@ -122,30 +128,35 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
                             viewModel.deletePrompt(promptArrayList.get(position).getId());
                         }
                     });
+
+                    if (viewModel == null)
+                        ((Holder) holder).deleteButton.setVisibility(View.GONE);
                     break;
                 }
             case VIEW_TYPE_SWIPE:
-//                ((Holder2) holder).seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-//                    @Override
-//                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-//                       listener.onSwipe(progress,seekBar,userProfile.getId());
-//                    }
-//
-//                    @Override
-//                    public void onStartTrackingTouch(SeekBar seekBar) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onStopTrackingTouch(SeekBar seekBar) {
-//
-//                    }
-//                });
-                if (viewModel!=null) {
+
+                if (viewModel != null) {
                     ((Holder2) holder).addButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             viewModel.addPrompt();
+                        }
+                    });
+                } else {
+                    ((Holder2) holder).seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                        @Override
+                        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                            listener.onSwipe(progress, seekBar, userProfile.getId());
+                        }
+
+                        @Override
+                        public void onStartTrackingTouch(SeekBar seekBar) {
+
+                        }
+
+                        @Override
+                        public void onStopTrackingTouch(SeekBar seekBar) {
+
                         }
                     });
                 }
@@ -212,16 +223,17 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
     }
 
     public class Holder2 extends RecyclerView.ViewHolder {
-        //        private SeekBar seekBar;
-//        public Holder2(@NonNull View itemView) {
-//            super(itemView);
-//            seekBar = itemView.findViewById(R.id.seekbar);
-//        }
+        private SeekBar seekBar;
+
         private TextView addButton;
 
         public Holder2(@NonNull View itemView) {
             super(itemView);
-            addButton = itemView.findViewById(R.id.button_add_prompt);
+
+            if (viewModel != null)
+                addButton = itemView.findViewById(R.id.button_add_prompt);
+            else
+                seekBar = itemView.findViewById(R.id.seekbar);
         }
     }
 }
