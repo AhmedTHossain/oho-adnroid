@@ -30,6 +30,7 @@ import com.oho.oho.adapters.ProfileDisplayAdapter;
 import com.oho.oho.databinding.FragmentHomeBinding;
 import com.oho.oho.databinding.FragmentLikedByBinding;
 import com.oho.oho.interfaces.SwipeListener;
+import com.oho.oho.models.Profile;
 import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.models.Swipe;
 import com.oho.oho.models.User;
@@ -130,20 +131,19 @@ public class LikedByFragment extends Fragment implements SwipeListener{
         }
     }
 
-    public void setProfile(User user) {
+    public void setProfile(Profile user) {
 
-        ArrayList<PromptAnswer> promptArrayList = new ArrayList<>(user.getPromptAnswers());
+        ArrayList<PromptAnswer> promptArrayList = new ArrayList<>();
 
+        promptArrayList = (ArrayList<PromptAnswer>) user.getPromptAnswers();
 
-        //so that all the prompts are shown without hiding the first and last one under the profile info view and the swipe view
-        promptArrayList.add(0,null);
-        promptArrayList.add(null);
+//        //so that all the prompts are shown without hiding the first and last one under the profile info view and the swipe view
+//        promptArrayList.add(0,null);
+//        promptArrayList.add(null);
 
-        User userProfile = new User(user.getAge(),user.getBio(),user.getBudget(),user.getCity(),user.getDob(),user.getEducation(),user.getEmail(),user.getHeight(),user.getId(),user.getLat(),user.getLon(),user.getName(),user.getOccupation(),user.getPhone(),user.getProfilePicture(),user.getPromptAnswers(),user.getRace(),user.getReligion(),user.getSex(),user.getState(),user.getVaccinated());
-
-//        ProfileDisplayAdapter adapter = new ProfileDisplayAdapter(promptArrayList, userProfile, this, requireContext(),"other");
-//        binding.recyclerviewPromptSection.setLayoutManager(new LinearLayoutManager(requireContext()));
-//        binding.recyclerviewPromptSection.setAdapter(adapter);
+        ProfileDisplayAdapter adapter = new ProfileDisplayAdapter(user, promptArrayList, this, requireContext(),null);
+        binding.recyclerviewPromptSection.setLayoutManager(new LinearLayoutManager(requireContext()));
+        binding.recyclerviewPromptSection.setAdapter(adapter);
     }
 
     private void initLikedByViewModel() {

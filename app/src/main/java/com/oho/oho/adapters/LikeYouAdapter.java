@@ -14,16 +14,17 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.oho.oho.R;
 import com.oho.oho.interfaces.OnProfileClickListener;
+import com.oho.oho.models.Profile;
 import com.oho.oho.models.User;
 
 import java.util.ArrayList;
 
 public class LikeYouAdapter extends RecyclerView.Adapter<LikeYouAdapter.Holder> {
     private Context context;
-    private ArrayList<User> userArrayList;
+    private ArrayList<Profile> userArrayList;
     private OnProfileClickListener listener;
 
-    public LikeYouAdapter(Context context, ArrayList<User> userArrayList, OnProfileClickListener listener) {
+    public LikeYouAdapter(Context context, ArrayList<Profile> userArrayList, OnProfileClickListener listener) {
         this.context = context;
         this.userArrayList = userArrayList;
         this.listener = listener;

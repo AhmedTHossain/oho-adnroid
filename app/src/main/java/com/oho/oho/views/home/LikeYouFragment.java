@@ -24,6 +24,7 @@ import com.oho.oho.adapters.LikeYouAdapter;
 import com.oho.oho.databinding.FragmentHomeBinding;
 import com.oho.oho.databinding.FragmentLikeYouBinding;
 import com.oho.oho.interfaces.OnProfileClickListener;
+import com.oho.oho.models.Profile;
 import com.oho.oho.models.User;
 import com.oho.oho.viewmodels.LikeYouVIewModel;
 import com.oho.oho.views.LoginActivity;
@@ -94,8 +95,8 @@ public class LikeYouFragment extends Fragment implements OnProfileClickListener 
         });
     }
 
-    public void setRecyclerview(List<User> userList) {
-        ArrayList<User> userArrayList = new ArrayList<>(userList);
+    public void setRecyclerview(List<Profile> userList) {
+        ArrayList<Profile> userArrayList = new ArrayList<>(userList);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(requireContext(), 2);
         binding.recyclerview.setLayoutManager(gridLayoutManager); // set LayoutManager to RecyclerView
@@ -105,7 +106,7 @@ public class LikeYouFragment extends Fragment implements OnProfileClickListener 
     }
 
     @Override
-    public void onProfileClick(User user) {
+    public void onProfileClick(Profile user) {
 
         LikedByFragment fragment = new LikedByFragment();
 

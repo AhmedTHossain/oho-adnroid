@@ -1,11 +1,16 @@
 package com.oho.oho.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Profile {
+public class Profile implements Parcelable {
 
     @SerializedName("id")
     @Expose
@@ -215,5 +220,33 @@ public class Profile {
 
     public void setPromptAnswers(List<PromptAnswer> promptAnswers) {
         this.promptAnswers = promptAnswers;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(name);
+        dest.writeString(email);
+        dest.writeString(phone);
+        dest.writeString(sex);
+        dest.writeString(education);
+        dest.writeString(race);
+        dest.writeString(religion);
+        dest.writeString(occupation);
+        dest.writeString(city);
+        dest.writeString(state);
+        dest.writeString(dob);
+        dest.writeString(bio);
+        dest.writeDouble(height);
+        dest.writeInt(age);
+        dest.writeDouble(lat);
+        dest.writeDouble(lon);
+        dest.writeString(profilePicture);
+        dest.writeList(promptAnswers);
     }
 }
