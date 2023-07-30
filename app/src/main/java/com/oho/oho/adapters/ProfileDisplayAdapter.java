@@ -63,7 +63,10 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_prompt_profile_right, parent, false);
                 return new Holder(view);
             case VIEW_TYPE_SWIPE:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_add_prompt_profile, parent, false);
+                if (viewModel != null)
+                    view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_add_prompt_profile, parent, false);
+                else
+                    view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_swipe_profile, parent, false);
                 return new Holder2(view);
         }
         return null;
@@ -138,12 +141,14 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
 //
 //                    }
 //                });
-                ((Holder2) holder).addButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        viewModel.addPrompt();
-                    }
-                });
+                if (viewModel!=null) {
+                    ((Holder2) holder).addButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            viewModel.addPrompt();
+                        }
+                    });
+                }
         }
     }
 
