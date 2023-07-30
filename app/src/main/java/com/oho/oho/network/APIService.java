@@ -97,7 +97,7 @@ public interface APIService {
 
     //get likes on profile
     @GET("match/get_recommendations")
-    Call<List<User>> getRecommendations(@Query("user_id") String user_id);
+    Call<List<Profile>> getRecommendations(@Query("user_id") String user_id);
 
     //get user preference
     @GET("users/get_preference")

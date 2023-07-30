@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.oho.oho.models.DatesLeft;
+import com.oho.oho.models.Profile;
 import com.oho.oho.models.Swipe;
 import com.oho.oho.models.User;
 import com.oho.oho.network.APIService;
@@ -52,20 +53,20 @@ public class SwipeRepository {
         return isSwipeSuccessful;
     }
 
-    public MutableLiveData<List<User>> getRecommendedProfiles(String user_id){
-        MutableLiveData<List<User>> recommendedProfilesList = new MutableLiveData<>();
+    public MutableLiveData<List<Profile>> getRecommendedProfiles(String user_id){
+        MutableLiveData<List<Profile>> recommendedProfilesList = new MutableLiveData<>();
         APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
-        Call<List<User>> call =apiService.getRecommendations(user_id);
-        call.enqueue(new Callback<List<User>>() {
+        Call<List<Profile>> call =apiService.getRecommendations(user_id);
+        call.enqueue(new Callback<List<Profile>>() {
             @Override
-            public void onResponse(@NonNull Call<List<User>> call, @NonNull Response<List<User>> response) {
+            public void onResponse(@NonNull Call<List<Profile>> call, @NonNull Response<List<Profile>> response) {
                 if (response.body()!=null)
                     recommendedProfilesList.setValue(response.body());
 //                Toast.makeText(context,"All profiles loaded successfully!",Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onFailure(@NonNull Call<List<User>> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<List<Profile>> call, @NonNull Throwable t) {
                 recommendedProfilesList.setValue(null);
                 Toast.makeText(context,"Request failed!",Toast.LENGTH_SHORT).show();
                 Log.d("LikeYouRepository","Request failed with code: "+t.getMessage());

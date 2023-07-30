@@ -6,8 +6,10 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.oho.oho.models.Profile;
 import com.oho.oho.models.Swipe;
 import com.oho.oho.models.User;
+import com.oho.oho.repositories.AvailabilitySettingsRepository;
 import com.oho.oho.repositories.SwipeRepository;
 
 import java.util.List;
@@ -15,13 +17,16 @@ import java.util.List;
 public class HomeViewModel extends AndroidViewModel {
 
     private SwipeRepository swipeRepository;
-    public LiveData<List<User>> recommendedProfiles;
+    public LiveData<List<Profile>> recommendedProfiles;
     public int profileToShow;
     public LiveData<Boolean> isSwipeSuccessful;
+    public LiveData<Boolean> isAvailable;
+    private AvailabilitySettingsRepository availabilitySettingsRepository;
 
     public HomeViewModel(@NonNull Application application) {
         super(application);
         swipeRepository = new SwipeRepository(getApplication().getApplicationContext());
+        availabilitySettingsRepository = new AvailabilitySettingsRepository();
     }
 
     public void getRecommendation(int user_id){
@@ -40,5 +45,9 @@ public class HomeViewModel extends AndroidViewModel {
 
     public int getProfileToShow(){
         return profileToShow;
+    }
+
+    public void checkIfAvailable(int user_id){
+        isAvailable = availabilitySettingsRepository.checkIfAvailable(user_id);
     }
 }

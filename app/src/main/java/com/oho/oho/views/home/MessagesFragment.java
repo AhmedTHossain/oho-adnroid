@@ -57,7 +57,7 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
         binding.swiperefreshlayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getAllChatRooms(99); //TODO: later replace this with logged in user's id
+                getAllChatRooms(187); //TODO: later replace this with logged in user's id
             }
         });
 
@@ -68,7 +68,7 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
     public void onResume() {
         super.onResume();
         binding.shimmerViewContainer.startShimmerAnimation();
-        getAllChatRooms(99); //TODO: later replace this with logged in user's id
+        getAllChatRooms(187); //TODO: later replace this with logged in user's id
     }
 
     @Override
@@ -89,7 +89,7 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
     private void initMessageViewModel() {
         viewModel = new ViewModelProvider(this).get(MessageViewModel.class);
         //TODO: replace with logged in user's id
-        getAllChatRooms(99); //TODO: later replace this with logged in user's id
+        getAllChatRooms(187); //TODO: later replace this with logged in user's id
     }
 
     @Override

@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
             android:fontFamily="@font/ptsans_bold"
-            android:text="Come back next week when you are available!"
+            android:text="@string/not_available_disclaimer_title"
             android:textColor="@color/black"
             android:textSize="@dimen/_20ssp" />
 
@@ -59,7 +59,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/darkergrotesque_bold"
-                    android:text="Yes, let’s start matching!"
+                    android:text="@string/yes_lets_start_matching"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_18ssp" />
             </LinearLayout>

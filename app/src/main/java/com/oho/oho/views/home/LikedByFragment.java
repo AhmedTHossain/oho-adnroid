@@ -80,7 +80,7 @@ public class LikedByFragment extends Fragment implements SwipeListener{
                 @Override
                 public void run() {
                     //TODO: set the userId of the currently logged in user
-                    swipeProfile(99, id, swipeDirection);
+                    swipeProfile(187, id, swipeDirection);
 //                    if (user_type > 0) {
 //                        requireActivity().getSupportFragmentManager().beginTransaction()
 //                                .replace(R.id.frame_layout, new LikeYouFragment())
@@ -99,7 +99,7 @@ public class LikedByFragment extends Fragment implements SwipeListener{
                 @Override
                 public void run() {
                     //TODO: set the userId of the currently logged in user
-                    swipeProfile(99, id, swipeDirection);
+                    swipeProfile(187, id, swipeDirection);
 
 //                    requireActivity().getSupportFragmentManager().beginTransaction()
 //                            .replace(R.id.frame_layout, new MessagesFragment())

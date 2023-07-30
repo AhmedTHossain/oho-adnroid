@@ -313,6 +313,12 @@ Oho! does not knowingly collect any Personal Identifiable Information from child
     <string name="disclaimer_answer_prompt">Enter your answer for the selected prompt, pick a photo and write a caption for it.</string>
     <string name="disclaimer_set_availability"><![CDATA[Please select your schedule for the weekend. You can select multiple days & slots for greater number of matches.]]></string>
     <string name="like_you_screen_disclaimer">These users are interested to go on a date with you this weekend! Tap on the photo to view their profile.</string>
+    <string name="not_available_disclaimer_title">Come back next week when you are available!</string>
+    <string name="yes_lets_start_matching">Yes, let’s start matching!</string>
+    <string name="no_recommendations">No Recommendations!</string>
+    <string name="in_dating_phase">Currently we are in our dating phase.</string>
+    <string name="weekly_limit_reached">Weekly Limit Reached!</string>
+    <string name="weekly_limit_reached_disclaimer">You already have 2 dates for the weekend, come back again on next week.</string>
     <string-array name="evening_time_slots_array">
         <item>06:00 PM</item>
         <item>07:00 PM</item>

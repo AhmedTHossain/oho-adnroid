@@ -1,49 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/custom_dialog_layout_design_user_input"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/_20sdp"
+    android:layout_marginEnd="@dimen/_20sdp"
     android:background="@color/white"
-    android:padding="16dp">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp"
-            android:src="@drawable/ic_warning"
-            android:layout_gravity="center"
-            android:layout_marginEnd="@dimen/_10sdp"/>
-        <TextView
-            android:id="@+id/dialogTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Weekly Limit Reached!"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_20ssp"
-            android:fontFamily="@font/sf_pro_rounded_medium"
-            android:layout_gravity="center"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_1sdp"
-        android:background="@color/black" />
+    android:orientation="vertical"
+    android:paddingStart="@dimen/_20sdp"
+    android:paddingTop="@dimen/_20sdp"
+    android:paddingEnd="@dimen/_20sdp">
 
     <TextView
-        android:id="@+id/userInputDialog"
-        android:layout_width="match_parent"
+        android:id="@+id/dialogTitle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:justificationMode="inter_word"
         android:layout_marginTop="@dimen/_10sdp"
-        android:text="You already have 2 dates for the weekend, come back again on next week."
+        android:drawableStart="@drawable/ic_alert"
+        android:drawablePadding="@dimen/_5sdp"
+        android:fontFamily="@font/ptsans_bold"
+        android:text="@string/weekly_limit_reached"
         android:textColor="@color/black"
-        android:textSize="@dimen/_16ssp"
-        android:fontFamily="@font/sf_pro_rounded_regular" />
+        android:textSize="@dimen/_20ssp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:fontFamily="@font/ptsans_regular"
+        android:text="@string/cannot_change_schedule_disclaimer"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16ssp" />
 
     <!--    <View-->
     <!--        android:layout_width="match_parent"-->

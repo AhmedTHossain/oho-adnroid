@@ -166,7 +166,7 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
             binding.recyclerviewQuickmessages.setVisibility(View.VISIBLE);
         });
 
-        viewModel.getQrCode(99, chat_id); //TODO: later replace with logged in user's id
+        viewModel.getQrCode(187, chat_id); //TODO: later replace with logged in user's id
         viewModel.qrcode.observe(this, qrcode -> {
             if (qrcode != null) {
                 qrcodeUrl = qrcode;

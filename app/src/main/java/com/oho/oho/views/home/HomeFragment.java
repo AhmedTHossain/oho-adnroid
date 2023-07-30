@@ -2,11 +2,11 @@ package com.oho.oho.views.home;
 
 import android.content.Context;
 import android.media.MediaPlayer;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,10 +20,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.oho.oho.R;
 import com.oho.oho.adapters.ProfileDisplayAdapter;
-import com.oho.oho.database.LocalDatabase;
 import com.oho.oho.databinding.FragmentHomeBinding;
-import com.oho.oho.entities.UserProfile;
 import com.oho.oho.interfaces.SwipeListener;
+import com.oho.oho.models.Profile;
 import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.models.Swipe;
 import com.oho.oho.models.User;
@@ -31,6 +30,7 @@ import com.oho.oho.viewmodels.HomeViewModel;
 import com.oho.oho.views.settings.PreferenceSettingsFragment;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class HomeFragment extends Fragment implements SwipeListener, View.OnClickListener {
 
@@ -40,7 +40,7 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
     MediaPlayer mp;
     private HomeViewModel homeViewModel;
     private String user_type = "other";
-    private ArrayList<User> recommendedProfiles;
+    private ArrayList<Profile> recommendedProfiles;
 
     private int profileToShow = -1;
 
@@ -60,7 +60,8 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
 
         initHomeViewModel();
 
-        getProfileRecommendation(187);
+        changeUI();
+
         binding.openPreferenceSettingsButton.setOnClickListener(this);
         // Inflate the layout for this fragment
         return binding.getRoot();
@@ -68,16 +69,18 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
 
     private void getProfileRecommendation(int id) {
         homeViewModel.getRecommendation(id);
-        homeViewModel.recommendedProfiles.observe(getViewLifecycleOwner(), recommendedList -> {
-            if (recommendedList != null) {
-                if (recommendedList.size() != 0) {
-                    profileToShow = homeViewModel.getProfileToShow();
-                    recommendedProfiles.addAll(recommendedList);
-                    showRecommendations();
-                } else
-                    showNoRecommendationsDisclaimer();
-            }
-        });
+        if (getView() != null) {
+            homeViewModel.recommendedProfiles.observe(getViewLifecycleOwner(), recommendedList -> {
+                if (recommendedList != null) {
+                    if (recommendedList.size() != 0) {
+                        profileToShow = homeViewModel.getProfileToShow();
+                        recommendedProfiles.addAll(recommendedList);
+                        showRecommendations();
+                    } else
+                        showNoRecommendationsDisclaimer();
+                }
+            });
+        }
     }
 
     @Override
@@ -143,20 +146,15 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
         }
     }
 
-    public void setProfile(User user) {
+    public void setProfile(Profile user) {
 
-        ArrayList<PromptAnswer> promptArrayList = new ArrayList<>(user.getPromptAnswers());
+        ArrayList<PromptAnswer> promptArrayList = (ArrayList<PromptAnswer>) user.getPromptAnswers();
 
+//        User userProfile = new User(user.getAge(), user.getBio(), user.getBudget(), user.getCity(), user.getDob(), user.getEducation(), user.getEmail(), user.getHeight(), user.getId(), user.getLat(), user.getLon(), user.getName(), user.getOccupation(), user.getPhone(), user.getProfilePicture(), user.getPromptAnswers(), user.getRace(), user.getReligion(), user.getSex(), user.getState(), user.getVaccinated());
 
-        //so that all the prompts are shown without hiding the first and last one under the profile info view and the swipe view
-        promptArrayList.add(0,null);
-        promptArrayList.add(null);
-
-        User userProfile = new User(user.getAge(),user.getBio(),user.getBudget(),user.getCity(),user.getDob(),user.getEducation(),user.getEmail(),user.getHeight(),user.getId(),user.getLat(),user.getLon(),user.getName(),user.getOccupation(),user.getPhone(),user.getProfilePicture(),user.getPromptAnswers(),user.getRace(),user.getReligion(),user.getSex(),user.getState(),user.getVaccinated());
-
-//        ProfileDisplayAdapter adapter = new ProfileDisplayAdapter(promptArrayList, userProfile, this, requireContext(), user_type);
-//        binding.recyclerviewPromptSection.setLayoutManager(new LinearLayoutManager(requireContext()));
-//        binding.recyclerviewPromptSection.setAdapter(adapter);
+        ProfileDisplayAdapter adapter = new ProfileDisplayAdapter(user,promptArrayList,this, requireContext(), null);
+        binding.recyclerviewPromptSection.setLayoutManager(new LinearLayoutManager(requireContext()));
+        binding.recyclerviewPromptSection.setAdapter(adapter);
     }
 
     private void initHomeViewModel() {
@@ -170,10 +168,10 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
         swipeProfile.setDirection(direction);
         homeViewModel.swipeUserProfile(swipeProfile);
         homeViewModel.isSwipeSuccessful.observe(getViewLifecycleOwner(), isSuccessful -> {
-            if (isSuccessful){
+            if (isSuccessful) {
                 profileToShow++;
-                if (profileToShow < recommendedProfiles.size()){
-                    User user = recommendedProfiles.get(profileToShow);
+                if (profileToShow < recommendedProfiles.size()) {
+                    Profile user = recommendedProfiles.get(profileToShow);
                     setProfile(user);
                 } else
                     showNoRecommendationsDisclaimer();
@@ -192,33 +190,72 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
         });
     }
 
-    private void showNoRecommendationsDisclaimer(){
-       binding.noRecommendationsAvailableLayout.setVisibility(View.VISIBLE);
-       binding.openPreferenceSettingsButton.setOnClickListener(this);
+    private void showNoRecommendationsDisclaimer() {
+        binding.textTitleMessage.setText(R.string.no_recommendations);
+        binding.textBodyMessage.setText(R.string.no_recommendations_disclaimer);
+        binding.openPreferenceSettingsButton.setText(R.string.yes_lets_start_matching);
+        binding.openPreferenceSettingsButton.setOnClickListener(this);
+        binding.noRecommendationsAvailableLayout.setVisibility(View.VISIBLE);
     }
 
-    private void noMoreRecommendationsDisclaimer(){
-        binding.noMoreRecommendationsLayout.setVisibility(View.VISIBLE);
-        binding.recommendationsAvailableLayout.setVisibility(View.GONE);
+    private void showNotAvailableDisclaimer() {
+        binding.textTitleMessage.setText(R.string.not_available_disclaimer_title);
+        binding.textBodyMessage.setText(R.string.availability_change_disclaimer);
+        binding.openPreferenceSettingsButton.setText(R.string.yes_lets_start_matching);
+        binding.openPreferenceSettingsButton.setOnClickListener(this);
         binding.progressLoadingRecommendations.setVisibility(View.GONE);
+        binding.noRecommendationsAvailableLayout.setVisibility(View.VISIBLE);
+    }
+
+    private void showInDatingPhaseDisclaimer() {
+        Log.d("HomeFragment", "inside showInDatingPhaseDisclaimer: YES");
+        binding.textTitleMessage.setText(R.string.in_dating_phase);
+        binding.textBodyMessage.setText(R.string.dating_phase_disclaimer);
+        binding.openPreferenceSettingsButton.setVisibility(View.GONE);
+        binding.progressLoadingRecommendations.setVisibility(View.GONE);
+        binding.noRecommendationsAvailableLayout.setVisibility(View.VISIBLE);
     }
 
     private void showRecommendations() {
-        Toast.makeText(getContext(),"Number of recommendations = "+recommendedProfiles.size(),Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), "Number of recommendations = " + recommendedProfiles.size(), Toast.LENGTH_LONG).show();
+        binding.progressLoadingRecommendations.setVisibility(View.GONE);
         binding.progressLoadingRecommendations.setVisibility(View.GONE);
         binding.recommendationsAvailableLayout.setVisibility(View.VISIBLE);
 
-        User user = recommendedProfiles.get(profileToShow);
+        Profile user = recommendedProfiles.get(profileToShow);
         setProfile(user);
     }
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == binding.openPreferenceSettingsButton.getId()){
+        if (view.getId() == binding.openPreferenceSettingsButton.getId()) {
             requireActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.frame_layout, new PreferenceSettingsFragment())
                     .addToBackStack(null)
                     .commit();
         }
+    }
+
+    private void changeUI() {
+        //finding which day of week is today in order to check if its the dating phase or matching phase. So that the appropriate UI can be shown based on that.
+        Date date = new Date();
+        CharSequence time = DateFormat.format("E", date.getTime()); // gives like (Wednesday)
+
+        if (!String.valueOf(time).equals("Fri") && !String.valueOf(time).equals("Sat") && !String.valueOf(time).equals("Sun")) {
+            getAvailabilityConsent();
+        } else {
+            showInDatingPhaseDisclaimer();
+        }
+    }
+
+    private void getAvailabilityConsent() {
+        Log.d("HomeFragment", "inside getAvailabilityConsent: YES");
+        homeViewModel.checkIfAvailable(187);
+        homeViewModel.isAvailable.observe(requireActivity(), isAvailable -> {
+            if (isAvailable) {
+                getProfileRecommendation(187);
+            } else
+                showNotAvailableDisclaimer();
+        });
     }
 }

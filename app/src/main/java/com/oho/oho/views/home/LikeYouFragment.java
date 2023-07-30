@@ -2,36 +2,27 @@ package com.oho.oho.views.home;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.oho.oho.R;
 import com.oho.oho.adapters.LikeYouAdapter;
-import com.oho.oho.databinding.FragmentHomeBinding;
 import com.oho.oho.databinding.FragmentLikeYouBinding;
 import com.oho.oho.interfaces.OnProfileClickListener;
 import com.oho.oho.models.Profile;
-import com.oho.oho.models.User;
 import com.oho.oho.viewmodels.LikeYouVIewModel;
-import com.oho.oho.views.LoginActivity;
-import com.oho.oho.views.settings.AccountSettingsActivity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class LikeYouFragment extends Fragment implements OnProfileClickListener {
@@ -62,7 +53,7 @@ public class LikeYouFragment extends Fragment implements OnProfileClickListener 
     private void initLikeYouViewModel() {
         viewModel = new ViewModelProvider(this).get(LikeYouVIewModel.class);
         //TODO: replace with logged in user's id
-        viewModel.getNumberOfDates(99);
+        viewModel.getNumberOfDates(187);
         viewModel.isDateAvailable.observe(getViewLifecycleOwner(), isAvailable -> {
             if (!isAvailable)
                 showMaxDatesReachedDialog();
@@ -87,7 +78,7 @@ public class LikeYouFragment extends Fragment implements OnProfileClickListener 
         viewModel.userList.observe(getViewLifecycleOwner(), userList -> {
 //            Toast.makeText(requireContext(),"number of users = "+userList.size(),Toast.LENGTH_SHORT).show();
             if (userList != null) {
-                Toast.makeText(requireContext(),"number of people liked profile = "+userList.size(),Toast.LENGTH_LONG).show();
+                Toast.makeText(requireContext(), "number of people liked profile = " + userList.size(), Toast.LENGTH_LONG).show();
                 setRecyclerview(userList);
             }
             shimmerViewContainer.stopShimmerAnimation();
@@ -111,8 +102,8 @@ public class LikeYouFragment extends Fragment implements OnProfileClickListener 
         LikedByFragment fragment = new LikedByFragment();
 
         Bundle arguments = new Bundle();
-        arguments.putString( "USERTYPE" , "liked");
-        arguments.putParcelable("USERPROFILE",user);
+        arguments.putString("USERTYPE", "liked");
+        arguments.putParcelable("USERPROFILE", user);
         fragment.setArguments(arguments);
 
         requireActivity().getSupportFragmentManager().beginTransaction()
@@ -121,15 +112,31 @@ public class LikeYouFragment extends Fragment implements OnProfileClickListener 
                 .commit();
     }
 
-    public void showMaxDatesReachedDialog(){
+    public void showMaxDatesReachedDialog() {
         LayoutInflater li = LayoutInflater.from(requireContext());
         View promptsView = li.inflate(R.layout.max_number_of_dates_dialog, null);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                 requireContext());
         // set alert_dialog.xml to alertdialog builder
         alertDialogBuilder.setView(promptsView);
-        alertDialogBuilder.setCancelable(false);
+        alertDialogBuilder.setCancelable(false)
+                .setPositiveButton("OK", null);
         AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                button.setTextColor(ContextCompat.getColor(requireContext(), R.color.indicatioractive));
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+//                        onBackPressed();
+//                        finish();
+                    }
+                });
+            }
+        });
         // show it
         alertDialog.show();
     }
