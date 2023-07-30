@@ -82,7 +82,7 @@ public class LikeYouFragment extends Fragment implements OnProfileClickListener 
 
     public void getAllLikedProfiles() {
         //TODO: later use logged in user's user_id instead of the following hard coded one
-        viewModel.getAllLikedByProfiles(99);
+        viewModel.getAllLikedByProfiles(187);
         viewModel.userList.observe(getViewLifecycleOwner(), userList -> {
 //            Toast.makeText(requireContext(),"number of users = "+userList.size(),Toast.LENGTH_SHORT).show();
             if (userList != null) {

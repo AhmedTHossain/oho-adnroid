@@ -18,7 +18,7 @@
         android:paddingEnd="@dimen/_20sdp"
         android:text="Liked Your Profile"
         android:textColor="@color/black"
-        android:textSize="@dimen/_25ssp" />
+        android:textSize="@dimen/_25ssp"/>
 
     <View
         android:id="@+id/view"
@@ -29,17 +29,17 @@
 
     <TextView
         android:id="@+id/textview_disclaimer"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_15sdp"
-        android:fontFamily="@font/ptsans_regular"
-        android:justificationMode="inter_word"
-        android:paddingStart="@dimen/_20sdp"
         android:layout_below="@id/view"
-        android:paddingEnd="@dimen/_20sdp"
-        android:text="These users are interested to go on a date with you this weekend!"
-        android:textColor="@color/textSubTitle"
-        android:textSize="@dimen/_14ssp" />
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_15sdp"
+        android:fontFamily="@font/darkergrotesque_medium"
+        android:text="@string/like_you_screen_disclaimer"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16ssp" />
 
     <!-- shimmer layout list -->
     <com.facebook.shimmer.ShimmerFrameLayout
@@ -47,10 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/textview_disclaimer"
-        android:layout_centerInParent="true"
-        android:layout_gravity="center"
         android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginTop="15dp"
         android:layout_marginEnd="@dimen/_20ssp"
         shimmer:duration="800">
         <!-- Adding 7 rows of placeholders -->
@@ -75,7 +72,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/textview_disclaimer"
-        android:paddingStart="@dimen/_20sdp"
-        android:paddingEnd="@dimen/_20sdp"/>
+        android:paddingStart="@dimen/_15sdp"
+        android:paddingEnd="@dimen/_15sdp" />
 
 </RelativeLayout>

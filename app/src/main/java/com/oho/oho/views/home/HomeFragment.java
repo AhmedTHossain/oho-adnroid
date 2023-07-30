@@ -60,18 +60,8 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
 
         initHomeViewModel();
 
-
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                LocalDatabase localDatabase = LocalDatabase.getInstance(requireContext());
-                UserProfile userProfile = localDatabase.userProfileDao().getUserProfile(1);
-                Log.d("HomeFragment","user id in Home Fragment = "+userProfile.id);
-                // Insert Data
-                getProfileRecommendation(userProfile.id);
-            }
-        });
-
+        getProfileRecommendation(187);
+        binding.openPreferenceSettingsButton.setOnClickListener(this);
         // Inflate the layout for this fragment
         return binding.getRoot();
     }

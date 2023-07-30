@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:id="@+id/linear_layout_root"
+<LinearLayout android:id="@+id/linear_layout_root"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/_10sdp"
-    android:layout_marginEnd="@dimen/_2sdp"
     android:orientation="vertical"
     android:clickable="true"
-    android:focusable="true">
+    android:focusable="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/shapeable_image_view"
         android:layout_width="@dimen/_150sdp"
         android:layout_height="@dimen/_150sdp"
-        android:src="@drawable/photo_placeholder_3" />
+        android:src="@drawable/photo_placeholder_3"
+        android:layout_margin="@dimen/_5sdp"/>
 
     <TextView
         android:id="@+id/name_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_gradient_button"
-        android:fontFamily="@font/ptsans_regular"
-        android:padding="@dimen/_5sdp"
+        android:background="@drawable/border_corner_drawable"
+        android:fontFamily="@font/ptsans_bold"
+        android:padding="@dimen/_10sdp"
+        android:layout_margin="@dimen/_5sdp"
         android:text="Jane"
         android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_14ssp" />
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16ssp" />
 
 </LinearLayout>

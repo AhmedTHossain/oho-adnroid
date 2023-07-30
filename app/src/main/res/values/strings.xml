@@ -312,6 +312,7 @@ Oho! does not knowingly collect any Personal Identifiable Information from child
     <string name="no_more_recommendations_disclaimer">Sorry you\'ve reached the max number of recommendations for the week. Please come back next week for new sets of recommendations.</string>
     <string name="disclaimer_answer_prompt">Enter your answer for the selected prompt, pick a photo and write a caption for it.</string>
     <string name="disclaimer_set_availability"><![CDATA[Please select your schedule for the weekend. You can select multiple days & slots for greater number of matches.]]></string>
+    <string name="like_you_screen_disclaimer">These users are interested to go on a date with you this weekend! Tap on the photo to view their profile.</string>
     <string-array name="evening_time_slots_array">
         <item>06:00 PM</item>
         <item>07:00 PM</item>
