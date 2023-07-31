@@ -2,6 +2,7 @@ package com.oho.oho.views.home;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,12 +16,15 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.oho.oho.MainActivity;
 import com.oho.oho.R;
 import com.oho.oho.adapters.LikeYouAdapter;
 import com.oho.oho.databinding.FragmentLikeYouBinding;
 import com.oho.oho.interfaces.OnProfileClickListener;
 import com.oho.oho.models.Profile;
 import com.oho.oho.viewmodels.LikeYouVIewModel;
+import com.oho.oho.views.settings.PreferenceSettingsFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -133,6 +137,11 @@ public class LikeYouFragment extends Fragment implements OnProfileClickListener 
                         alertDialog.dismiss();
 //                        onBackPressed();
 //                        finish();
+//                        requireActivity().getSupportFragmentManager().beginTransaction()
+//                                .replace(R.id.frame_layout, new HomeFragment())
+//                                .addToBackStack(null)
+//                                .commit();
+                        startActivity(new Intent(requireActivity(), MainActivity.class));
                     }
                 });
             }

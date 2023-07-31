@@ -82,16 +82,6 @@ public class MainActivity extends AppCompatActivity {
 
         preSelectedSlotsArray = new ArrayList<>();
 
-//        checkIfAvailable();
-
-//        if (checkIfAvailable().equals("false")) {
-//            replaceFragment(new NotAvailableFragment());
-//        }
-//        else {
-//            Log.d("MainActivity","if available = "+checkIfAvailable());
-//            replaceFragment(new HomeFragment());
-//        }
-
         SharedPreferences mPrefs = getSharedPreferences("pref", Context.MODE_PRIVATE);
         Gson gson = new Gson();
         String profile = mPrefs.getString("profile", "");
@@ -130,59 +120,8 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-//    private void checkIfAvailable() {
-//        //Todo: Use logged in user's id instead of the hard coded one
-//        availabilitySettingsViewModel.checkIfAvailable(99);
-//        availabilitySettingsViewModel.isAvailable.observe(this, isAvailable -> {
-//
-//            //finding which day of week is today in order to check if its the dating phase or matching phase. So that the appropriate UI can be shown based on that.
-//            Date date = new Date();
-//            CharSequence time = DateFormat.format("E", date.getTime()); // gives like (Wednesday)
-//            if (!String.valueOf(time).equals("Fri") && !String.valueOf(time).equals("Sat") && !String.valueOf(time).equals("Sun")) {
-//                if (isAvailable) {
-//                    startActivity(new Intent(this, CheckAvailabilityActivity.class));
-//                    finish();
-//                }
-//            } else
-//                replaceFragment(new MatchingPhaseFragment());
-//        });
-//    }
-
-    private void changeUI() {
-        //finding which day of week is today in order to check if its the dating phase or matching phase. So that the appropriate UI can be shown based on that.
-        Date date = new Date();
-        CharSequence time = DateFormat.format("E", date.getTime()); // gives like (Wednesday)
-
-        if (!String.valueOf(time).equals("Fri") && !String.valueOf(time).equals("Sat") && !String.valueOf(time).equals("Sun")) {
-//            if (getAvailabilityConsent() == -1) {
-//                startActivity(new Intent(this, CheckAvailabilityActivity.class));
-//                finish();
-//            } else if (getAvailabilityConsent() == 0){
-//                replaceFragment(new NotAvailableFragment());
-//            } else
-            replaceFragment(new HomeFragment());
-        } else {
-            storeAvailabilityConsent(-1);
-            replaceFragment(new MatchingPhaseFragment());
-        }
-
-//        replaceFragment(new HomeFragment());
-    }
-
     private void initAvailabilityViewModel() {
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
-    }
-
-    private int getAvailabilityConsent() {
-        SharedPreferences sharedPref = this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        return sharedPref.getInt("available", -1);
-    }
-
-    private void storeAvailabilityConsent(int available) {
-        SharedPreferences sharedPref = this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt("available", available);
-        editor.commit();
     }
 
     private void getFCMToken() {

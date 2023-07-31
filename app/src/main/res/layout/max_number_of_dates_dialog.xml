@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_15sdp"
         android:fontFamily="@font/ptsans_regular"
-        android:text="@string/cannot_change_schedule_disclaimer"
+        android:text="@string/weekly_limit_reached_disclaimer"
         android:textColor="@color/black"
         android:textSize="@dimen/_16ssp" />
 

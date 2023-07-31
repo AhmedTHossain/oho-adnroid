@@ -68,10 +68,30 @@ public class SwipeRepository {
             @Override
             public void onFailure(@NonNull Call<List<Profile>> call, @NonNull Throwable t) {
                 recommendedProfilesList.setValue(null);
-                Toast.makeText(context,"Request failed!",Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context,"Request failed!",Toast.LENGTH_SHORT).show();
                 Log.d("LikeYouRepository","Request failed with code: "+t.getMessage());
             }
         });
         return recommendedProfilesList;
+    }
+
+    public MutableLiveData<Integer> getNumberOfDatesLeft(int user_id){
+        MutableLiveData<Integer> date_left = new MutableLiveData<>();
+        APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
+        Call<DatesLeft> call =apiService.getNumberOfDatesLeft(user_id);
+        call.enqueue(new Callback<DatesLeft>() {
+            @Override
+            public void onResponse(@NonNull Call<DatesLeft> call, @NonNull Response<DatesLeft> response) {
+                if (response.body() != null) {
+                    date_left.setValue(response.body().getDatesLeft());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<DatesLeft> call, @NonNull Throwable t) {
+                date_left.setValue(-1);
+            }
+        });
+        return date_left;
     }
 }

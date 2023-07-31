@@ -99,6 +99,10 @@ public interface APIService {
     @GET("match/get_recommendations")
     Call<List<Profile>> getRecommendations(@Query("user_id") String user_id);
 
+    //get number of dates left for the weekend
+    @GET("users/get_date_count")
+    Call<DatesLeft> getNumberOfDatesLeft(@Query("user_id") String user_id);
+
     //get user preference
     @GET("users/get_preference")
     Call<PreferenceResponse> getPreference(@Query("user_id") String user_id);

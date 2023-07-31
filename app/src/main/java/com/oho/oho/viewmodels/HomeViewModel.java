@@ -21,6 +21,7 @@ public class HomeViewModel extends AndroidViewModel {
     public int profileToShow;
     public LiveData<Boolean> isSwipeSuccessful;
     public LiveData<Boolean> isAvailable;
+    public LiveData<Integer> numberOfDatesLeft;
     private AvailabilitySettingsRepository availabilitySettingsRepository;
 
     public HomeViewModel(@NonNull Application application) {
@@ -49,5 +50,9 @@ public class HomeViewModel extends AndroidViewModel {
 
     public void checkIfAvailable(int user_id){
         isAvailable = availabilitySettingsRepository.checkIfAvailable(user_id);
+    }
+
+    public void getNumberOfDatesLeft(int user_id){
+        numberOfDatesLeft = swipeRepository.getNumberOfDatesLeft(user_id);
     }
 }

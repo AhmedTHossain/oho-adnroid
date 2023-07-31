@@ -91,7 +91,7 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
                 ((Holder1) holder).education.setText(userProfile.getEducation());
                 ((Holder1) holder).about.setText(userProfile.getBio());
                 Glide.with(context)
-                        .load(userProfile.getProfilePicture())
+                        .load(userProfile.getProfilePicture()).centerCrop()
                         .into(((Holder1) holder).imageView);
                 ((Holder1) holder).editBioButton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -118,7 +118,7 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
                     ((Holder) holder).answer.setText(promptArrayList.get(position).getAnswer());
                     ((Holder) holder).caption.setText(promptArrayList.get(position).getCaption());
                     Glide.with(context)
-                            .load(promptArrayList.get(position).getImage())
+                            .load(promptArrayList.get(position).getImage()).centerCrop()
                             .into(((Holder) holder).imageView);
 
                     ((Holder) holder).deleteButton.setOnClickListener(new View.OnClickListener() {

@@ -25,7 +25,6 @@ import com.oho.oho.interfaces.SwipeListener;
 import com.oho.oho.models.Profile;
 import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.models.Swipe;
-import com.oho.oho.models.User;
 import com.oho.oho.viewmodels.HomeViewModel;
 import com.oho.oho.views.settings.PreferenceSettingsFragment;
 
@@ -39,12 +38,9 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
 
     MediaPlayer mp;
     private HomeViewModel homeViewModel;
-    private String user_type = "other";
     private ArrayList<Profile> recommendedProfiles;
 
     private int profileToShow = -1;
-
-    String mockProfileDisplayed = "female";
 
     public HomeFragment() {
         // Required empty public constructor
@@ -95,15 +91,7 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
                 @Override
                 public void run() {
                     //TODO: set the userId of the currently logged in user
-                    swipeProfile(99, id, swipeDirection);
-//                    if (user_type > 0) {
-//                        requireActivity().getSupportFragmentManager().beginTransaction()
-//                                .replace(R.id.frame_layout, new LikeYouFragment())
-//                                .addToBackStack(null)
-//                                .commit();
-//                    } else {
-////                        showMaleProfile();
-//                    }
+                    swipeProfile(187, id, swipeDirection);
                 }
             }, 250);
         } else if (swipeDirection == 1) {
@@ -114,7 +102,7 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
                 @Override
                 public void run() {
                     //TODO: set the userId of the currently logged in user
-                    swipeProfile(99, id, swipeDirection);
+                    swipeProfile(187, id, swipeDirection);
 
 //                    requireActivity().getSupportFragmentManager().beginTransaction()
 //                            .replace(R.id.frame_layout, new MessagesFragment())
@@ -152,7 +140,7 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
 
 //        User userProfile = new User(user.getAge(), user.getBio(), user.getBudget(), user.getCity(), user.getDob(), user.getEducation(), user.getEmail(), user.getHeight(), user.getId(), user.getLat(), user.getLon(), user.getName(), user.getOccupation(), user.getPhone(), user.getProfilePicture(), user.getPromptAnswers(), user.getRace(), user.getReligion(), user.getSex(), user.getState(), user.getVaccinated());
 
-        ProfileDisplayAdapter adapter = new ProfileDisplayAdapter(user,promptArrayList,this, requireContext(), null);
+        ProfileDisplayAdapter adapter = new ProfileDisplayAdapter(user, promptArrayList, this, requireContext(), null);
         binding.recyclerviewPromptSection.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recyclerviewPromptSection.setAdapter(adapter);
     }
@@ -216,6 +204,15 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
         binding.noRecommendationsAvailableLayout.setVisibility(View.VISIBLE);
     }
 
+    private void alreadyReachedMaxNumberOfDates() {
+        Log.d("HomeFragment", "inside showInDatingPhaseDisclaimer: YES");
+        binding.textTitleMessage.setText(R.string.weekly_limit_reached);
+        binding.textBodyMessage.setText(R.string.weekly_limit_reached_disclaimer);
+        binding.openPreferenceSettingsButton.setVisibility(View.GONE);
+        binding.progressLoadingRecommendations.setVisibility(View.GONE);
+        binding.noRecommendationsAvailableLayout.setVisibility(View.VISIBLE);
+    }
+
     private void showRecommendations() {
         Toast.makeText(getContext(), "Number of recommendations = " + recommendedProfiles.size(), Toast.LENGTH_LONG).show();
         binding.progressLoadingRecommendations.setVisibility(View.GONE);
@@ -251,9 +248,16 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
     private void getAvailabilityConsent() {
         Log.d("HomeFragment", "inside getAvailabilityConsent: YES");
         homeViewModel.checkIfAvailable(187);
-        homeViewModel.isAvailable.observe(requireActivity(), isAvailable -> {
+        homeViewModel.isAvailable.observe(getViewLifecycleOwner(), isAvailable -> {
             if (isAvailable) {
-                getProfileRecommendation(187);
+                homeViewModel.getNumberOfDatesLeft(187);
+                homeViewModel.numberOfDatesLeft.observe(getViewLifecycleOwner(), numberOfDatesLeft -> {
+                    if (numberOfDatesLeft >= 1)
+                        getProfileRecommendation(187);
+                    if (numberOfDatesLeft == 0)
+                        alreadyReachedMaxNumberOfDates();
+                });
+
             } else
                 showNotAvailableDisclaimer();
         });
