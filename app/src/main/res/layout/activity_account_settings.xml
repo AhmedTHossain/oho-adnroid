@@ -1,30 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    android:paddingTop="@dimen/_30sdp"
     tools:context=".views.settings.AccountSettingsActivity">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/screentitle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/ptsans_bold"
-        android:paddingStart="@dimen/_20sdp"
-        android:paddingEnd="@dimen/_20sdp"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
         android:layout_marginBottom="@dimen/_10sdp"
-        android:text="Account"
+        android:fontFamily="@font/ptsans_bold"
+        android:text="Account Settings"
         android:textColor="@color/black"
-        android:textSize="@dimen/_25ssp"
-        android:textStyle="bold" />
+        android:textSize="@dimen/_25ssp" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/_1sdp"
         android:background="#1A000000" />
+
+    <TextView
+        android:id="@+id/text_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/view"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:fontFamily="@font/darkergrotesque_medium"
+        android:text="You will find all necessary account related settings in this section."
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16ssp" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -41,13 +56,21 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:fontFamily="@font/ptsans_regular"
+                android:fontFamily="@font/ptsans_bold"
                 android:text="Notifications"
                 android:textAllCaps="true"
-                android:textColor="@color/indicatioractive"
-                android:textSize="@dimen/_14ssp"
-                android:textStyle="bold" />
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16ssp" />
+            <TextView
+                android:id="@+id/text_prompt_notification_preference"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/darkergrotesque_medium"
+                android:text="Customize your preference for notifications on new matches, chats and likes."
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16ssp" />
             <!-- Notification settings -->
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -62,13 +85,15 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_5sdp"
                     android:fontFamily="@font/ptsans_regular"
-                    android:text="Push Notifications"
+                    android:text="Match Notifications"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_16ssp" />
+                    android:textSize="@dimen/_14ssp" />
 
                 <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/switch_push_notification"
+                    android:id="@+id/switch_match_notification"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -86,7 +111,6 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_15sdp"
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true">
@@ -96,13 +120,50 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_5sdp"
                     android:fontFamily="@font/ptsans_regular"
-                    android:text="Email Notifications"
+                    android:text="Chat Notifications"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_16ssp" />
+                    android:textSize="@dimen/_14ssp" />
 
                 <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/switch_email_notification"
+                    android:id="@+id/switch_chat_notification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:checked="true" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:background="@color/divider" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:text="Like Notifications"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14ssp" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switch_like_notification"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -121,12 +182,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_25sdp"
-                android:fontFamily="@font/ptsans_regular"
-                android:text="Other Settings"
+                android:fontFamily="@font/ptsans_bold"
+                android:text="Management"
                 android:textAllCaps="true"
-                android:textColor="@color/indicatioractive"
-                android:textSize="@dimen/_14ssp"
-                android:textStyle="bold" />
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16ssp" />
             <!-- Sign Out  -->
             <RelativeLayout
                 android:id="@+id/button_deactivate_settings"
@@ -142,10 +202,12 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_5sdp"
                     android:fontFamily="@font/ptsans_regular"
                     android:text="Deactivate Account"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_16ssp" />
+                    android:textSize="@dimen/_14ssp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
