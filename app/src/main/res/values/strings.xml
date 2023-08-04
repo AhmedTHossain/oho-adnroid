@@ -99,6 +99,9 @@
         <item>How does it work?</item>
         <item>What happens if I don\'t show up on my date?</item>
         <item>Is Oho! safe for me?</item>
+        <item>Can I chat with my match before the date?</item>
+        <item>How do I express interest in someone?</item>
+        <item>What are the available time slots for arranging a date?</item>
         <item>What is our motivation for this app?</item>
     </string-array>
     <string-array name="faq_answers_list">
@@ -123,6 +126,9 @@
         \n\nThere is also a feature where you can share/update your location with a close friend or family member.
         \n\nWe also have safe dating tips/guidelines to ensure best dating experience on our platform.
         \n\nAnyone who gets reported 3 times for bad behavior or harassment and such will be banned permanently from our community.</item>
+        <item>You can only use the quick messages before your date and once the date is complete you\'ll be able to send custom chat messages. For ease of use we only allow sending text messages currently.</item>
+        <item>You can slide the slider at the bottom to the right if you\'re interested in someone.</item>
+        <item>At the moment, we\'re providing the service 3 days a week: Friday, Saturday &amp; Sunday. On Fridays &amp; Saturdays we have 3 slots from 6:00pm - 9:00pm and on Sundays we\'re open for dates from 11:00am - 1:00pm. However based on our users\' demand we might open new slots after the pilot phase.</item>
         <item>Small talk leads to nowhere
 
         \n\nTexts leave room for too many interpretations
