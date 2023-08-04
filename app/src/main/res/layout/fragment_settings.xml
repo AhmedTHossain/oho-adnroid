@@ -9,16 +9,19 @@
     tools:context=".views.home.SettingsFragment">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/screentitle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Settings &amp; Info"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
         android:fontFamily="@font/ptsans_bold"
+        android:text="Settings &amp; Information"
         android:textColor="@color/black"
-        android:textSize="@dimen/_25ssp"
-        android:textStyle="bold"
-        android:paddingStart="@dimen/_20sdp"
-        android:paddingEnd="@dimen/_20sdp"
-        android:layout_marginBottom="@dimen/_10sdp"/>
+        android:textSize="@dimen/_25ssp" />
 
     <View
         android:layout_width="match_parent"
@@ -35,16 +38,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_prompt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:fontFamily="@font/darkergrotesque_medium"
+                android:text="You will find all necessary settings and information related to this app in this section."
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16ssp" />
+
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="User Settings"
+                android:text="Settings"
                 android:textAllCaps="true"
-                android:fontFamily="@font/darkergrotesque_bold"
-                android:textColor="@color/indicatioractive"
-                android:textSize="@dimen/_14ssp"
-                android:textStyle="bold"
-                android:layout_marginTop="@dimen/_15sdp"/>
+                android:fontFamily="@font/ptsans_bold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16ssp"
+                android:textStyle="bold" />
 
             <RelativeLayout
                 android:id="@+id/button_account_settings"
@@ -179,12 +195,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="App Information"
+                android:text="Information"
                 android:textAllCaps="true"
-                android:fontFamily="@font/darkergrotesque_bold"
-                android:textColor="@color/indicatioractive"
-                android:textSize="@dimen/_14ssp"
-                android:textStyle="bold"
+                android:fontFamily="@font/ptsans_bold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16ssp"
                 android:layout_marginTop="@dimen/_25sdp"/>
 
             <RelativeLayout
