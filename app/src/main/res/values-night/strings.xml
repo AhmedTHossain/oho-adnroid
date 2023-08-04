@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="how_does_it_work_ques">How does it work?</string>
+    <string name="if_i_dont_show_up_ques">What happens if I don\'t show up on my date?</string>
+    <string name="motivation_ques">What is our motivation for this app?</string>
+</resources>

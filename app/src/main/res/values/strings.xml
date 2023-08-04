@@ -94,6 +94,46 @@
         <item>Coffee or Tea</item>
         <item>Indoor or Outdoor</item>
     </string-array>
+    <string-array name="faq_questions_list">
+        <item>What is Oho!?</item>
+        <item>How does it work?</item>
+        <item>What happens if I don\'t show up on my date?</item>
+        <item>Is Oho! safe for me?</item>
+        <item>What is our motivation for this app?</item>
+    </string-array>
+    <string-array name="faq_answers_list">
+        <item>Oho! is a modern dating app that connects two most popular concepts - Food and Dating. We partner with local cafes and restaurants to bring an amazing dining experience while you get to know your potential partner in a safe environment.</item>
+        <item>Oho! is different than other dating apps. It works as following –
+        \n\nA week is divided into 2 phases – Matching and Dating
+        \n\nMatching phase lasts from Sunday 6:00 PM till Thursday 12:00 AM
+        \n\nDating phase lasts on Thursday evening till Sunday afternoon for selected times
+        \n\nWhen you open the app during ‘matching phase’ we ask you for your availability during ‘dating phase’. As a part of the Oho! community, you are expected you to honor your commitment
+        \n\nWe match you using the default location that you put in the app
+        \n\nDuring ‘matching phase’, we use our machine learning algorithms to show you a handful of potential matches every day. Once you match with 2 people, we stop showing you more matches. We do not want you to feel overwhelmed 🙂
+        \n\nDetails of your date can be found in the chat, but you cannot send any messages. ‘Chat feature’ is unlocked only after you go on your date.
+        \n\nWe set up a date for you and your match at a restaurant based on your location, availability, and cuisine preferences.
+        \n\nYou show up early to your date and the host will guide you to your table. Get to know your match over good food and good conversation.</item>
+        <item>You get penalized for not showing up. We expect you to live up to your commitment and respect your matches’ time. The penalties are as follows –
+         \n\nIf you fail to show up for the first time, your account will be suspended for 2 weeks.
+         \n\nIf you fail to show up for the 2nd time, your account will be suspended for 4 weeks.
+         \n\nIf you fail to show up for the 3rd time, your account will be suspended for 8 weeks.
+         \n\nAfter 8 weeks your account will reset back. We believe that people can change for the better 🙂 (In the future, there will be a rescheduling option)</item>
+        <item>Unlike other customers in a restaurant, the manager and the staff are aware that you are meeting your match for the first time. So, if the situation gets uncomfortable, you can reach out to the staff. They are there to ensure your safety!
+        \n\nWe use real time face recognition to cross check if the person creating the profile is really the person himself/herself. This eliminates bots and fake profiles in our community
+        \n\nThere is also a feature where you can share/update your location with a close friend or family member.
+        \n\nWe also have safe dating tips/guidelines to ensure best dating experience on our platform.
+        \n\nAnyone who gets reported 3 times for bad behavior or harassment and such will be banned permanently from our community.</item>
+        <item>Small talk leads to nowhere
+
+        \n\nTexts leave room for too many interpretations
+        \n\nGhosting is the norm when your match loses interest or finds someone better
+        \n\nSomeone can easily fake being your match to send messages
+        \n\nTo build a community of people who prefers in real life and meaningful connection.
+        \n\nOur growing community of people are serious and respects each others time
+        \n\nWe believe that communication is key in building a successful relationship, and body language plays an essential role in effective communication. So, we want you to ditch the small talk over chat and meet your match in real life
+        \n\nFood!!! Who does not love food??
+        \n\nWe are promoting local business for free!! Our goal is to increase customer traffic with our partner restaurants and cafés.</item>
+    </string-array>
     <string name="what_is_oho">Oho! is a modern dating app that connects two most popular concepts - Food and Dating. We partner with local cafes and restaurants to bring an amazing dining experience while you get to know your potential partner in a safe environment.</string>
     <string name="how_does_it_work">Oho! is different than other dating apps. It works as following –
         \n\nA week is divided into 2 phases – Matching and Dating
@@ -321,6 +361,11 @@ Oho! does not knowingly collect any Personal Identifiable Information from child
     <string name="weekly_limit_reached_disclaimer">You already have 2 dates for the weekend, come back again on next week.</string>
     <string name="deactivate_account_disclaimer">Deactivating your account will permanently delete your Oho! profile along with all your data. If confirmed then tap the button below.</string>
     <string name="deactivate_your_account">Deactivate Account</string>
+    <string name="what_is_oho_ques">What is Oho!?</string>
+    <string name="how_does_it_work_ques">How does it work?</string>
+    <string name="if_i_dont_show_up_ques">What happens if I don\'t show up on my date?</string>
+    <string name="is_oho_safe_ques">Is Oho! safe for me?</string>
+    <string name="motivation_ques">What is our motivation for this app?</string>
     <string-array name="evening_time_slots_array">
         <item>06:00 PM</item>
         <item>07:00 PM</item>
