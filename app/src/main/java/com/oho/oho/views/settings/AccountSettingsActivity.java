@@ -1,6 +1,7 @@
 package com.oho.oho.views.settings;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -44,13 +45,16 @@ public class AccountSettingsActivity extends AppCompatActivity implements View.O
                 // set alert_dialog.xml to alertdialog builder
                 alertDialogBuilder.setView(promptsView);
                 alertDialogBuilder.setCancelable(false)
-                        .setPositiveButton("CONFIRM",null)
-                        .setNegativeButton("CANCEL", null);
+                        .setPositiveButton("Deactivate",null)
+                        .setNegativeButton("Cancel", null);
                 AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
                     @Override
                     public void onShow(DialogInterface dialog) {
                         Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                        Button buttonNegative = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEGATIVE);
+                        buttonNegative.setTextColor(ContextCompat.getColor(AccountSettingsActivity.this, R.color.black));
+                        button.setTextColor(ContextCompat.getColor(AccountSettingsActivity.this, R.color.ted_image_picker_primary_pressed));
                         button.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {

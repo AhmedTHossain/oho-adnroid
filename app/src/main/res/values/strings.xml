@@ -319,6 +319,8 @@ Oho! does not knowingly collect any Personal Identifiable Information from child
     <string name="in_dating_phase">Currently we are in our dating phase.</string>
     <string name="weekly_limit_reached">Weekly Limit Reached!</string>
     <string name="weekly_limit_reached_disclaimer">You already have 2 dates for the weekend, come back again on next week.</string>
+    <string name="deactivate_account_disclaimer">Deactivating your account will permanently delete your Oho! profile along with all your data. If confirmed then tap the button below.</string>
+    <string name="deactivate_your_account">Deactivate Account</string>
     <string-array name="evening_time_slots_array">
         <item>06:00 PM</item>
         <item>07:00 PM</item>
