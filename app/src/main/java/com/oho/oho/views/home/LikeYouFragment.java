@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ import com.oho.oho.viewmodels.LikeYouVIewModel;
 import com.oho.oho.views.settings.PreferenceSettingsFragment;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class LikeYouFragment extends Fragment implements OnProfileClickListener {
@@ -48,7 +50,7 @@ public class LikeYouFragment extends Fragment implements OnProfileClickListener 
         shimmerViewContainer = binding.shimmerViewContainer;
 
         initLikeYouViewModel();
-        getAllLikedProfiles();
+        changeUI();
 
         // Inflate the layout for this fragment
         return binding.getRoot();
@@ -148,5 +150,51 @@ public class LikeYouFragment extends Fragment implements OnProfileClickListener 
         });
         // show it
         alertDialog.show();
+    }
+
+    public void showInDatingPhaseDialog() {
+        LayoutInflater li = LayoutInflater.from(requireContext());
+        View promptsView = li.inflate(R.layout.matching_phase_dialog, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                requireContext());
+        // set alert_dialog.xml to alertdialog builder
+        alertDialogBuilder.setView(promptsView);
+        alertDialogBuilder.setCancelable(false)
+                .setPositiveButton("OK", null);
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                button.setTextColor(ContextCompat.getColor(requireContext(), R.color.indicatioractive));
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+//                        onBackPressed();
+//                        finish();
+//                        requireActivity().getSupportFragmentManager().beginTransaction()
+//                                .replace(R.id.frame_layout, new HomeFragment())
+//                                .addToBackStack(null)
+//                                .commit();
+                        startActivity(new Intent(requireActivity(), MainActivity.class));
+                    }
+                });
+            }
+        });
+        // show it
+        alertDialog.show();
+    }
+
+    private void changeUI() {
+        //finding which day of week is today in order to check if its the dating phase or matching phase. So that the appropriate UI can be shown based on that.
+        Date date = new Date();
+        CharSequence time = DateFormat.format("E", date.getTime()); // gives like (Wednesday)
+
+        if (!String.valueOf(time).equals("Fri") && !String.valueOf(time).equals("Sat") && !String.valueOf(time).equals("Sun")) {
+            getAllLikedProfiles();
+        } else {
+            showInDatingPhaseDialog();
+        }
     }
 }
