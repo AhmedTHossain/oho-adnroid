@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -25,17 +24,16 @@ import com.oho.oho.databinding.ActivityMainBinding;
 import com.oho.oho.models.ChatNotificationPayload;
 import com.oho.oho.models.CreateDeviceId;
 import com.oho.oho.models.Profile;
+import com.oho.oho.responses.ChatRoom;
 import com.oho.oho.viewmodels.MainViewModel;
 import com.oho.oho.views.chat.ChatActivity;
 import com.oho.oho.views.home.HomeFragment;
 import com.oho.oho.views.home.LikeYouFragment;
-import com.oho.oho.views.home.MatchingPhaseFragment;
 import com.oho.oho.views.home.MessagesFragment;
 import com.oho.oho.views.home.ProfileFragment;
 import com.oho.oho.views.home.SettingsFragment;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -78,6 +76,12 @@ public class MainActivity extends AppCompatActivity {
         if (getIntent().hasExtra("show"))
             if (getIntent().getStringExtra("show").equals("ProfileScreen"))
                 replaceFragment(new ProfileFragment());
+        if (getIntent().hasExtra("from")) {
+            if (getIntent().getStringExtra("from").equals("ChatActivity")) {
+                replaceFragment(new ProfileFragment(getIntent().getIntExtra("sender_id", 0),(ChatRoom) getIntent().getSerializableExtra("chatroom")));
+                binding.bottomNavigationview.setSelectedItemId(R.id.profile);
+            }
+        }
 
 
         preSelectedSlotsArray = new ArrayList<>();

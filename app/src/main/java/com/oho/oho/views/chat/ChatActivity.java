@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.oho.oho.MainActivity;
 import com.oho.oho.R;
 import com.oho.oho.adapters.ChatAdapter;
 import com.oho.oho.adapters.ChatRoomAdapter;
@@ -42,7 +43,7 @@ import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 import io.socket.engineio.client.transports.WebSocket;
 
-public class ChatActivity extends AppCompatActivity implements QuickMessageClickListener {
+public class ChatActivity extends AppCompatActivity implements QuickMessageClickListener, View.OnClickListener {
 
     ActivityChatBinding binding;
     private ChatRoom selectedChatRoom;
@@ -58,6 +59,7 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
     private int chat_id;
     private String channel_name;
     private String sender_photo;
+    private int sender_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +73,11 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
             chat_id = selectedChatRoom.getId();
             channel_name = selectedChatRoom.getChannelName();
             sender_photo = selectedChatRoom.getProfilePhoto();
+
+            String participantsIdArray[] = selectedChatRoom.getParticipants().split(",");
+            for (String s: participantsIdArray)
+                if (!s.equals(String.valueOf(187))) //TODO: later this 187 will be replaced by logged in user's id
+                    sender_id = Integer.parseInt(s);
 //            gender = selectedChatRoom.getGender();
         }
 
@@ -114,6 +121,9 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
                 startActivity(intent);
             }
         });
+
+        binding.titleImage.setOnClickListener(this);
+        binding.screentitle.setOnClickListener(this);
 
         setQuickMessages();
     }
@@ -305,6 +315,19 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
             mSocket.emit("private message", jsonObject);
         } catch (JSONException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.screentitle:
+            case R.id.title_image:
+                Intent intent = new Intent(ChatActivity.this, MainActivity.class);
+                intent.putExtra("from","ChatActivity");
+                intent.putExtra("sender_id",sender_id);
+                intent.putExtra("chatroom", selectedChatRoom);
+                startActivity(intent);
         }
     }
 }

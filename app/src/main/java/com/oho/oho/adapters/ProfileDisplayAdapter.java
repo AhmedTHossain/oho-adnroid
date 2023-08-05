@@ -1,6 +1,7 @@
 package com.oho.oho.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,9 @@ import com.oho.oho.R;
 import com.oho.oho.interfaces.SwipeListener;
 import com.oho.oho.models.Profile;
 import com.oho.oho.models.PromptAnswer;
+import com.oho.oho.responses.ChatRoom;
 import com.oho.oho.viewmodels.ProfileViewModel;
+import com.oho.oho.views.chat.ChatActivity;
 
 import java.util.ArrayList;
 
@@ -39,6 +42,8 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
     private final int VIEW_TYPE_RIGHT = 1;
     private final int VIEW_TYPE_SWIPE = 2;
     private ProfileViewModel viewModel;
+    private int sender_id = 0;
+    private ChatRoom chatRoom;
 
     public ProfileDisplayAdapter(Profile userProfile, ArrayList<PromptAnswer> promptArrayList, SwipeListener listener, Context context, ProfileViewModel viewModel) {
         this.promptArrayList = promptArrayList;
@@ -47,6 +52,17 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
         this.userProfile = userProfile;
         this.listener = listener;
         this.viewModel = viewModel;
+    }
+
+    public ProfileDisplayAdapter(Profile userProfile, ArrayList<PromptAnswer> promptArrayList, SwipeListener listener, Context context, ProfileViewModel viewModel, int sender_id, ChatRoom chatRoom) {
+        this.promptArrayList = promptArrayList;
+        promptArrayList.add(0, new PromptAnswer());
+        this.userProfile = userProfile;
+        this.listener = listener;
+        this.context = context;
+        this.viewModel = viewModel;
+        this.sender_id = sender_id;
+        this.chatRoom = chatRoom;
     }
 
     @NonNull
@@ -106,7 +122,7 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
                     }
                 });
 
-                if (viewModel == null) {
+                if (viewModel == null || sender_id != 0) {
                     ((Holder1) holder).editPhotoButton.setVisibility(View.GONE);
                     ((Holder1) holder).editBioButton.setVisibility(View.GONE);
                 }
@@ -129,19 +145,31 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
                         }
                     });
 
-                    if (viewModel == null)
+                    if (viewModel == null || sender_id != 0)
                         ((Holder) holder).deleteButton.setVisibility(View.GONE);
                     break;
                 }
             case VIEW_TYPE_SWIPE:
-
                 if (viewModel != null) {
-                    ((Holder2) holder).addButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            viewModel.addPrompt();
-                        }
-                    });
+                    if (sender_id == 0) {
+                        ((Holder2) holder).addButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                viewModel.addPrompt();
+                            }
+                        });
+                    } else {
+                        ((Holder2) holder).addButton.setText("View Chats");
+                        ((Holder2) holder).addButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(context, ChatActivity.class);
+                                intent.putExtra("chatroom", chatRoom); //where chatroom is an instance of ChatRoom object
+                                intent.putExtra("token", 0); //a newly generated token has been sent to ChatActivity
+                                context.startActivity(intent);
+                            }
+                        });
+                    }
                 } else {
                     ((Holder2) holder).seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                         @Override

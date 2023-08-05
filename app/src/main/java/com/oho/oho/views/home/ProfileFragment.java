@@ -32,6 +32,7 @@ import com.oho.oho.interfaces.SwipeListener;
 import com.oho.oho.models.BioUpdateRequest;
 import com.oho.oho.models.Profile;
 import com.oho.oho.models.PromptAnswer;
+import com.oho.oho.responses.ChatRoom;
 import com.oho.oho.utils.ImageUtils;
 import com.oho.oho.viewmodels.ProfileViewModel;
 
@@ -51,6 +52,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
     private ProfileDisplayAdapter adapter;
 
     private AlertDialog alertDialogUploading;
+    private int profile_id = 0;
+    private ChatRoom chatRoom = null;
 
     File imageFile;
     ActivityResultLauncher<PickVisualMediaRequest> pickMedia =
@@ -79,13 +82,23 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
         // Required empty public constructor
     }
 
+    public ProfileFragment(int profile_id, ChatRoom chatRoom) {
+        this.profile_id = profile_id;
+        this.chatRoom = chatRoom;
+    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentProfileBinding.inflate(inflater, container, false);
 
         initViewModels();
-        getProfile(187);
+        if (profile_id == 0)
+            getProfile(187);
+        else {
+            binding.screentitle.setText("View Profile");
+            getProfile(profile_id);
+        }
 
         profileViewModel.getPromptToDelete().observe(getViewLifecycleOwner(), promptToDelete -> {
             if (promptToDelete != null) {
@@ -151,7 +164,10 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
     }
 
     private void setProfileView() {
-        adapter = new ProfileDisplayAdapter(userProfile, promptAnswers, this, requireContext(), profileViewModel);
+        if (profile_id != 0)
+            adapter = new ProfileDisplayAdapter(userProfile, promptAnswers, this, requireContext(), profileViewModel, profile_id, chatRoom);
+        else
+            adapter = new ProfileDisplayAdapter(userProfile, promptAnswers, this, requireContext(), profileViewModel);
         binding.recyclerviewProfile.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recyclerviewProfile.setAdapter(adapter);
     }
