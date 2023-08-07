@@ -54,6 +54,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
     private AlertDialog alertDialogUploading;
     private int profile_id = 0;
     private ChatRoom chatRoom = null;
+    private Profile profile;
 
     File imageFile;
     ActivityResultLauncher<PickVisualMediaRequest> pickMedia =

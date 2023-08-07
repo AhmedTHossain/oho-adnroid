@@ -38,10 +38,10 @@ public class SwipeRepository {
             @Override
             public void onResponse(@NonNull Call<MessageResponse> call, @NonNull Response<MessageResponse> response) {
                 MessageResponse messageResponse = response.body();
-                if (messageResponse != null) {
-                    Log.d("SwipeRepository","swipe api response: "+ messageResponse.getMessage());
+
+                    Log.d("SwipeRepository","swipe api response: "+ response.code());
                     isSwipeSuccessful.setValue(true);
-                }
+
             }
 
             @Override
