@@ -24,6 +24,7 @@ import com.oho.oho.adapters.LikeYouAdapter;
 import com.oho.oho.databinding.FragmentLikeYouBinding;
 import com.oho.oho.interfaces.OnProfileClickListener;
 import com.oho.oho.models.Profile;
+import com.oho.oho.utils.HelperClass;
 import com.oho.oho.viewmodels.LikeYouVIewModel;
 import com.oho.oho.views.settings.PreferenceSettingsFragment;
 
@@ -36,6 +37,7 @@ public class LikeYouFragment extends Fragment implements OnProfileClickListener 
     FragmentLikeYouBinding binding;
     private LikeYouVIewModel viewModel;
     private ShimmerFrameLayout shimmerViewContainer;
+    private Profile profile;
 
     public LikeYouFragment() {
         // Required empty public constructor
@@ -49,6 +51,9 @@ public class LikeYouFragment extends Fragment implements OnProfileClickListener 
         binding = FragmentLikeYouBinding.inflate(inflater, container, false);
         shimmerViewContainer = binding.shimmerViewContainer;
 
+        HelperClass helperClass = new HelperClass();
+        profile = helperClass.getProfile(requireContext());
+
         initLikeYouViewModel();
         changeUI();
 
@@ -59,7 +64,7 @@ public class LikeYouFragment extends Fragment implements OnProfileClickListener 
     private void initLikeYouViewModel() {
         viewModel = new ViewModelProvider(this).get(LikeYouVIewModel.class);
         //TODO: replace with logged in user's id
-        viewModel.getNumberOfDates(187);
+        viewModel.getNumberOfDates(profile.getId());
         viewModel.isDateAvailable.observe(getViewLifecycleOwner(), isAvailable -> {
             if (!isAvailable)
                 showMaxDatesReachedDialog();
@@ -80,7 +85,7 @@ public class LikeYouFragment extends Fragment implements OnProfileClickListener 
 
     public void getAllLikedProfiles() {
         //TODO: later use logged in user's user_id instead of the following hard coded one
-        viewModel.getAllLikedByProfiles(187);
+        viewModel.getAllLikedByProfiles(profile.getId());
         viewModel.userList.observe(getViewLifecycleOwner(), userList -> {
 //            Toast.makeText(requireContext(),"number of users = "+userList.size(),Toast.LENGTH_SHORT).show();
             if (userList != null) {
