@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import com.oho.oho.R;
 import com.oho.oho.databinding.FragmentHomeBinding;
 import com.oho.oho.databinding.FragmentSettingsBinding;
+import com.oho.oho.models.Profile;
+import com.oho.oho.utils.HelperClass;
 import com.oho.oho.views.settings.AccountSettingsActivity;
 import com.oho.oho.views.settings.AvailabilitySettingsActivity;
 import com.oho.oho.views.settings.FAQActivity;
@@ -76,6 +78,10 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
                 startActivity(new Intent(requireActivity(), PrivacyPolicyActivity.class));
                 break;
             case R.id.button_signout_settings:
+                HelperClass helperClass = new HelperClass();
+                Profile profile = new Profile();
+
+                helperClass.saveProfile(requireContext(),profile);
                 startActivity(new Intent(requireActivity(), LoginActivity.class));
                 requireActivity().finish();
                 break;

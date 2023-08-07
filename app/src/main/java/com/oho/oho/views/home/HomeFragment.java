@@ -2,6 +2,7 @@ package com.oho.oho.views.home;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -36,8 +37,7 @@ import java.util.Date;
 public class HomeFragment extends Fragment implements SwipeListener, View.OnClickListener {
 
     FragmentHomeBinding binding;
-
-
+    private Profile profile;
     MediaPlayer mp;
     private HomeViewModel homeViewModel;
     private ArrayList<Profile> recommendedProfiles;
@@ -55,6 +55,8 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         recommendedProfiles = new ArrayList<>();
+
+        profile = getProfile(requireContext());
 
         initHomeViewModel();
 
@@ -93,7 +95,7 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
                 @Override
                 public void run() {
                     //TODO: set the userId of the currently logged in user
-                    swipeProfile(187, id, swipeDirection);
+                    swipeProfile(profile.getId(), id, swipeDirection);
                 }
             }, 250);
         } else if (swipeDirection == 1) {
@@ -104,7 +106,7 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
                 @Override
                 public void run() {
                     //TODO: set the userId of the currently logged in user
-                    swipeProfile(187, id, swipeDirection);
+                    swipeProfile(profile.getId(), id, swipeDirection);
 
 //                    requireActivity().getSupportFragmentManager().beginTransaction()
 //                            .replace(R.id.frame_layout, new MessagesFragment())
@@ -186,6 +188,7 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
         binding.openPreferenceSettingsButton.setText(R.string.lets_set_some_preferences);
         binding.openPreferenceSettingsButton.setOnClickListener(this);
         binding.noRecommendationsAvailableLayout.setVisibility(View.VISIBLE);
+        binding.progressLoadingRecommendations.setVisibility(View.GONE);
     }
 
     private void showNotAvailableDisclaimer() {
@@ -228,7 +231,7 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
     @Override
     public void onClick(View view) {
         if (view.getId() == binding.openPreferenceSettingsButton.getId()) {
-            if (binding.openPreferenceSettingsButton.getText().equals(R.string.lets_set_some_preferences))
+            if (binding.openPreferenceSettingsButton.getText().equals(getString(R.string.lets_set_some_preferences)))
                 requireActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.frame_layout, new PreferenceSettingsFragment())
                         .addToBackStack(null)
@@ -252,13 +255,13 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
 
     private void getAvailabilityConsent() {
         Log.d("HomeFragment", "inside getAvailabilityConsent: YES");
-        homeViewModel.checkIfAvailable(187);
+        homeViewModel.checkIfAvailable(profile.getId());
         homeViewModel.isAvailable.observe(getViewLifecycleOwner(), isAvailable -> {
             if (isAvailable) {
-                homeViewModel.getNumberOfDatesLeft(187);
+                homeViewModel.getNumberOfDatesLeft(profile.getId());
                 homeViewModel.numberOfDatesLeft.observe(getViewLifecycleOwner(), numberOfDatesLeft -> {
                     if (numberOfDatesLeft >= 1)
-                        getProfileRecommendation(187);
+                        getProfileRecommendation(profile.getId());
                     if (numberOfDatesLeft == 0)
                         alreadyReachedMaxNumberOfDates();
                 });
@@ -266,5 +269,15 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
             } else
                 showNotAvailableDisclaimer();
         });
+    }
+    public static Profile getProfile(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences("ProfilePrefsFile", Context.MODE_PRIVATE);
+        String jsonString = prefs.getString("PROFILE", null);
+        if (jsonString != null) {
+            return Profile.fromJsonString(jsonString);
+        } else {
+            // Return a default object or null if no object found in SharedPreferences
+            return null;
+        }
     }
 }

@@ -1,6 +1,8 @@
 package com.oho.oho.views;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +25,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.oho.oho.MainActivity;
 import com.oho.oho.R;
 import com.oho.oho.databinding.ActivityLoginBinding;
+import com.oho.oho.models.Profile;
 import com.oho.oho.viewmodels.LoginViewModel;
 import com.oho.oho.views.settings.PrivacyPolicyActivity;
 import com.oho.oho.views.settings.TermsOfUseActivity;
@@ -134,11 +137,16 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 }else {
+                    saveCustomObject(this,userProfile);
                     startActivity(new Intent(this, MainActivity.class));
                     finish();
                 }
             });
         });
     }
-
+    public static void saveCustomObject(Context context, Profile profile) {
+        SharedPreferences.Editor editor = context.getSharedPreferences("ProfilePrefsFile", Context.MODE_PRIVATE).edit();
+        editor.putString("PROFILE", profile.toJsonString());
+        editor.apply();
+    }
 }

@@ -1,11 +1,6 @@
 package com.oho.oho.views.home;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.res.Resources;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.VibrationEffect;
@@ -14,34 +9,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.SeekBar;
-import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.oho.oho.R;
 import com.oho.oho.adapters.ProfileDisplayAdapter;
-import com.oho.oho.databinding.FragmentHomeBinding;
 import com.oho.oho.databinding.FragmentLikedByBinding;
 import com.oho.oho.interfaces.SwipeListener;
 import com.oho.oho.models.Profile;
 import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.models.Swipe;
-import com.oho.oho.models.User;
-import com.oho.oho.viewmodels.HomeViewModel;
 import com.oho.oho.viewmodels.LikedByViewModel;
-import com.oho.oho.views.LoginActivity;
-import com.oho.oho.views.settings.AccountSettingsActivity;
-import com.oho.oho.views.settings.PreferenceSettingsFragment;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class LikedByFragment extends Fragment implements SwipeListener{
 

@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -248,5 +249,16 @@ public class Profile implements Parcelable {
         dest.writeDouble(lon);
         dest.writeString(profilePicture);
         dest.writeList(promptAnswers);
+    }
+
+    public String toJsonString() {
+        Gson gson = new Gson();
+        return gson.toJson(this);
+    }
+
+    // Create a custom object from JSON string
+    public static Profile fromJsonString(String jsonString) {
+        Gson gson = new Gson();
+        return gson.fromJson(jsonString, Profile.class);
     }
 }

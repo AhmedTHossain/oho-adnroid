@@ -23,6 +23,8 @@ import com.oho.oho.R;
 import com.oho.oho.adapters.SavedSlotsAdapter;
 import com.oho.oho.databinding.ActivityAvailabilitySettingsBinding;
 import com.oho.oho.models.Availability;
+import com.oho.oho.models.Profile;
+import com.oho.oho.utils.HelperClass;
 import com.oho.oho.viewmodels.AvailabilitySettingsViewModel;
 
 import java.util.ArrayList;
@@ -37,6 +39,7 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
     private Availability preSelectedSlots = new Availability();
     private AvailabilitySettingsViewModel viewModel;
     private Integer[] slotsArray;
+    private Profile profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,26 +49,16 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(binding.getRoot());
 
-        initViewModel();
+        HelperClass helperClass = new HelperClass();
+        profile = helperClass.getProfile(this);
 
-        selectedSlotsArray = new ArrayList<>();
-
-//        if (getAvailabilityConsent() != -1) {
-////            setAlreadySelectedTimeSlots();
-//        }
-//        else
-//            showCannotChangeAvailabilityDialog();
-
-        changeUI();
-//        getAvailabilityConsent();
-
-        //Click Listeners
-//        binding.buttonClearSlots.setOnClickListener(this);
-//        binding.buttonSaveSlots.setOnClickListener(this);
-
-        setOnCheckListeners();
-
-        binding.buttonAddAvailability.setOnClickListener(this);
+        if (profile.getId() != null) {
+            initViewModel();
+            selectedSlotsArray = new ArrayList<>();
+            changeUI();
+            setOnCheckListeners();
+            binding.buttonAddAvailability.setOnClickListener(this);
+        }
     }
 
     private void initViewModel() {
@@ -119,7 +112,7 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
                         @Override
                         public void onClick(View v) {
                             //Call update availability API
-                            viewModel.addAvailableTimeSlots(187, preSelectedSlots);
+                            viewModel.addAvailableTimeSlots(profile.getId(), preSelectedSlots);
                             alertDialog.dismiss();
                         }
                     });
@@ -145,11 +138,11 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
     }
 
     private void getAvailabilityConsent() {
-        viewModel.checkIfAvailable(187);
+        viewModel.checkIfAvailable(profile.getId());
         viewModel.isAvailable.observe(this, isAvailable -> {
             if (isAvailable) {
                 Toast.makeText(this, "Available for the weekend!", Toast.LENGTH_SHORT).show();
-                viewModel.getAvailableTimeSlots(187);
+                viewModel.getAvailableTimeSlots(profile.getId());
                 viewModel.selectedTimeSlotsList.observe(this, availability -> {
                     if (availability != null) {
                         preSelectedSlots = availability;
