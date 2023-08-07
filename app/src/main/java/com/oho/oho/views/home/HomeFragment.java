@@ -1,6 +1,7 @@
 package com.oho.oho.views.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,6 +27,7 @@ import com.oho.oho.models.Profile;
 import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.models.Swipe;
 import com.oho.oho.viewmodels.HomeViewModel;
+import com.oho.oho.views.settings.AvailabilitySettingsActivity;
 import com.oho.oho.views.settings.PreferenceSettingsFragment;
 
 import java.util.ArrayList;
@@ -181,7 +183,7 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
     private void showNoRecommendationsDisclaimer() {
         binding.textTitleMessage.setText(R.string.no_recommendations);
         binding.textBodyMessage.setText(R.string.no_recommendations_disclaimer);
-        binding.openPreferenceSettingsButton.setText(R.string.yes_lets_start_matching);
+        binding.openPreferenceSettingsButton.setText(R.string.lets_set_some_preferences);
         binding.openPreferenceSettingsButton.setOnClickListener(this);
         binding.noRecommendationsAvailableLayout.setVisibility(View.VISIBLE);
     }
@@ -226,10 +228,13 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
     @Override
     public void onClick(View view) {
         if (view.getId() == binding.openPreferenceSettingsButton.getId()) {
-            requireActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.frame_layout, new PreferenceSettingsFragment())
-                    .addToBackStack(null)
-                    .commit();
+            if (binding.openPreferenceSettingsButton.getText().equals(R.string.lets_set_some_preferences))
+                requireActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frame_layout, new PreferenceSettingsFragment())
+                        .addToBackStack(null)
+                        .commit();
+            else
+                startActivity(new Intent(requireActivity(), AvailabilitySettingsActivity.class));
         }
     }
 

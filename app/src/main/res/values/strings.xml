@@ -361,6 +361,7 @@ Oho! does not knowingly collect any Personal Identifiable Information from child
     <string name="like_you_screen_disclaimer">These users are interested to go on a date with you this weekend! Tap on the photo to view their profile.</string>
     <string name="not_available_disclaimer_title">Come back next week when you are available!</string>
     <string name="yes_lets_start_matching">Yes, let’s start matching!</string>
+    <string name="lets_set_some_preferences">Set some more preferences!</string>
     <string name="no_recommendations">No Recommendations!</string>
     <string name="in_dating_phase">Currently we are in our dating phase.</string>
     <string name="weekly_limit_reached">Weekly Limit Reached!</string>
