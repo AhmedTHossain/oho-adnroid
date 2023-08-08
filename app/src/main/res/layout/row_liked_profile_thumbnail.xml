@@ -26,6 +26,6 @@
         android:text="Jane"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="@dimen/_16ssp" />
+        android:textSize="@dimen/_14ssp" />
 
 </LinearLayout>
