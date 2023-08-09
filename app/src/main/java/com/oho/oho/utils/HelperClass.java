@@ -1,9 +1,10 @@
 package com.oho.oho.utils;
 
+import static com.oho.oho.utils.Constants.TAG;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
-import static com.oho.oho.utils.Constants.*;
 
 import com.oho.oho.models.Profile;
 
@@ -14,7 +15,11 @@ public class HelperClass {
 
     public void saveProfile(Context context, Profile profile) {
         SharedPreferences.Editor editor = context.getSharedPreferences("ProfilePrefsFile", Context.MODE_PRIVATE).edit();
-        editor.putString("PROFILE", profile.toJsonString());
+        if (profile == null) {
+            editor.putString("PROFILE", null);
+        } else {
+            editor.putString("PROFILE", profile.toJsonString());
+        }
         editor.apply();
     }
 

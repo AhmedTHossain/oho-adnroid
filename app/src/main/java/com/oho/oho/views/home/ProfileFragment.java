@@ -33,6 +33,7 @@ import com.oho.oho.models.BioUpdateRequest;
 import com.oho.oho.models.Profile;
 import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.responses.ChatRoom;
+import com.oho.oho.utils.HelperClass;
 import com.oho.oho.utils.ImageUtils;
 import com.oho.oho.viewmodels.ProfileViewModel;
 
@@ -94,8 +95,10 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
         binding = FragmentProfileBinding.inflate(inflater, container, false);
 
         initViewModels();
-        if (profile_id == 0)
-            getProfile(187);
+        if (profile_id == 0) {
+            HelperClass helperClass = new HelperClass();
+            getProfile(helperClass.getProfile(requireContext()).getId());
+        }
         else {
             binding.screentitle.setText("View Profile");
             getProfile(profile_id);

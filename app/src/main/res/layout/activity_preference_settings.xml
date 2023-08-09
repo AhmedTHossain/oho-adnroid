@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:paddingTop="@dimen/_30sdp"
-    tools:context=".views.settings.PreferenceSettingsFragment">
+    tools:context=".views.settings.PreferenceSettingsActivity">
 
     <LinearLayout
         android:id="@+id/title_view"
@@ -47,6 +46,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:fontFamily="@font/ptsans_bold"
@@ -57,11 +57,14 @@
 
             <nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup
                 android:id="@+id/button_group_gender"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
+                android:background="@drawable/border_corner_drawable"
+                android:padding="@dimen/_10sdp"
                 app:toggle_selectAnimation="fade">
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
@@ -75,7 +78,8 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="Male"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_female"
@@ -88,7 +92,8 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="Female"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_both"
@@ -101,7 +106,8 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="Both"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
             </nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup>
 
@@ -110,6 +116,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:fontFamily="@font/ptsans_bold"
                 android:paddingTop="@dimen/_5sdp"
@@ -122,9 +129,12 @@
                 android:id="@+id/button_group_distance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
+                android:background="@drawable/border_corner_drawable"
+                android:padding="@dimen/_10sdp"
                 app:flexWrap="wrap"
                 app:toggle_selectAnimation="fade">
 
@@ -139,7 +149,8 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="10 miles"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_20_miles"
@@ -152,7 +163,8 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="20 miles"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_30_miles"
@@ -165,7 +177,8 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="30 miles"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_40_miles"
@@ -178,7 +191,8 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="40 miles"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_50_miles"
@@ -191,66 +205,82 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="50 miles"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
+
+                <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+                    android:id="@+id/button_opentoall_distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_margin="@dimen/_5sdp"
+                    app:toggle_backgroundColor="@color/white"
+                    app:toggle_borderColor="#E0E0E0"
+                    app:toggle_borderWidth="@dimen/_1sdp"
+                    app:toggle_selectedBackgroundColor="@color/indicatioractive"
+                    app:toggle_text="Any"
+                    app:toggle_textColor="@color/black"
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
             </nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:fontFamily="@font/ptsans_bold"
-                android:paddingBottom="@dimen/_5sdp"
-                android:text="Location"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_14ssp" />
+            <!--            <TextView-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginStart="@dimen/_20sdp"-->
+            <!--                android:layout_marginTop="@dimen/_15sdp"-->
+            <!--                android:fontFamily="@font/ptsans_bold"-->
+            <!--                android:paddingBottom="@dimen/_5sdp"-->
+            <!--                android:text="Location"-->
+            <!--                android:textColor="@color/black"-->
+            <!--                android:textSize="@dimen/_14ssp" />-->
 
-            <!-- Location picker button -->
-            <RelativeLayout
-                android:id="@+id/button_get_location"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
-                android:background="@drawable/border_drawable">
+            <!--            &lt;!&ndash; Location picker button &ndash;&gt;-->
+            <!--            <RelativeLayout-->
+            <!--                android:id="@+id/button_get_location"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginStart="@dimen/_15sdp"-->
+            <!--                android:layout_marginTop="@dimen/_5sdp"-->
+            <!--                android:layout_marginEnd="@dimen/_20sdp"-->
+            <!--                android:background="@drawable/border_drawable">-->
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginBottom="@dimen/_5sdp"
-                    android:layout_toStartOf="@id/text_location_preference"
-                    android:fontFamily="@font/ptsans_regular"
-                    android:paddingTop="@dimen/_5sdp"
-                    android:paddingBottom="@dimen/_5sdp"
-                    android:text="Change location"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_14ssp" />
+            <!--                <TextView-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_alignParentStart="true"-->
+            <!--                    android:layout_centerVertical="true"-->
+            <!--                    android:layout_marginStart="@dimen/_10sdp"-->
+            <!--                    android:layout_marginTop="@dimen/_5sdp"-->
+            <!--                    android:layout_marginBottom="@dimen/_5sdp"-->
+            <!--                    android:layout_toStartOf="@id/text_location_preference"-->
+            <!--                    android:fontFamily="@font/ptsans_regular"-->
+            <!--                    android:paddingTop="@dimen/_5sdp"-->
+            <!--                    android:paddingBottom="@dimen/_5sdp"-->
+            <!--                    android:text="Change location"-->
+            <!--                    android:textColor="@color/black"-->
+            <!--                    android:textSize="@dimen/_14ssp" />-->
 
-                <TextView
-                    android:id="@+id/text_location_preference"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:layout_marginBottom="@dimen/_5sdp"
-                    android:fontFamily="@font/darkergrotesque_bold"
-                    android:text=""
-                    android:textColor="@color/indicatioractive"
-                    android:textSize="@dimen/_14ssp" />
-            </RelativeLayout>
+            <!--                <TextView-->
+            <!--                    android:id="@+id/text_location_preference"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_alignParentEnd="true"-->
+            <!--                    android:layout_centerVertical="true"-->
+            <!--                    android:layout_marginTop="@dimen/_5sdp"-->
+            <!--                    android:layout_marginEnd="@dimen/_10sdp"-->
+            <!--                    android:layout_marginBottom="@dimen/_5sdp"-->
+            <!--                    android:fontFamily="@font/darkergrotesque_bold"-->
+            <!--                    android:text=""-->
+            <!--                    android:textColor="@color/indicatioractive"-->
+            <!--                    android:textSize="@dimen/_14ssp" />-->
+            <!--            </RelativeLayout>-->
 
             <!-- Education button group -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:fontFamily="@font/ptsans_bold"
@@ -263,9 +293,12 @@
                 android:id="@+id/button_group_education"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
+                android:background="@drawable/border_corner_drawable"
+                android:padding="@dimen/_10sdp"
                 app:flexWrap="wrap"
                 app:toggle_selectAnimation="fade">
 
@@ -280,7 +313,8 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="No Degree"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_highschool"
@@ -293,7 +327,8 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="High School"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_undergrad"
@@ -306,7 +341,8 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="Undergrad"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_masters"
@@ -319,7 +355,8 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="Masters"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_phd"
@@ -332,7 +369,22 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="PHD"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
+
+                <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+                    android:id="@+id/button_opentoall_education"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_margin="@dimen/_5sdp"
+                    app:toggle_backgroundColor="@color/white"
+                    app:toggle_borderColor="#E0E0E0"
+                    app:toggle_borderWidth="@dimen/_1sdp"
+                    app:toggle_selectedBackgroundColor="@color/indicatioractive"
+                    app:toggle_text="Open to all"
+                    app:toggle_textColor="@color/black"
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
             </nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup>
 
@@ -340,6 +392,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:fontFamily="@font/ptsans_bold"
@@ -352,9 +405,12 @@
                 android:id="@+id/button_group_race"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
+                android:background="@drawable/border_corner_drawable"
+                android:padding="@dimen/_10sdp"
                 app:flexWrap="wrap"
                 app:toggle_selectAnimation="fade"
                 app:toggle_selectableAmount="9">
@@ -370,7 +426,8 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="White"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_asian"
@@ -383,7 +440,8 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="Asian"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_black"
@@ -396,7 +454,8 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="Black"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_africanamerican"
@@ -409,7 +468,8 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="African American"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_hispanic"
@@ -422,7 +482,8 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="Hispanic"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_latinx"
@@ -435,7 +496,8 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="Latinx"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_pacificislander"
@@ -448,7 +510,8 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="Pacific Islander"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_americanindian"
@@ -461,10 +524,11 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="American Indian"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-                    android:id="@+id/button_others"
+                    android:id="@+id/button_opentoall_race"
                     android:layout_width="wrap_content"
                     android:layout_height="38dp"
                     android:layout_margin="@dimen/_5sdp"
@@ -472,9 +536,10 @@
                     app:toggle_borderColor="#E0E0E0"
                     app:toggle_borderWidth="@dimen/_1sdp"
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
-                    app:toggle_text="Others"
+                    app:toggle_text="Open to all"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
             </nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup>
 
@@ -482,6 +547,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:fontFamily="@font/ptsans_bold"
@@ -494,9 +560,12 @@
                 android:id="@+id/button_group_religion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
+                android:background="@drawable/border_corner_drawable"
+                android:padding="@dimen/_10sdp"
                 app:flexWrap="wrap"
                 app:toggle_selectAnimation="fade">
 
@@ -511,7 +580,8 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="Christian"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_catholic"
@@ -524,7 +594,8 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="Catholic"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_jewish"
@@ -537,7 +608,8 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="Jewish"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_muslim"
@@ -550,7 +622,8 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="Muslim"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_hindu"
@@ -563,7 +636,8 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="Hindu"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_sikh"
@@ -576,7 +650,8 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="Sikh"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_agnostic"
@@ -589,7 +664,8 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="Agnostic"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_buddhist"
@@ -602,7 +678,8 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="Buddhist"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_spiritualnotreligious"
@@ -615,7 +692,8 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="Spiritual / Not Religious"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_atheist"
@@ -628,10 +706,11 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="Atheist"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-                    android:id="@+id/button_other"
+                    android:id="@+id/button_opentoall_religion"
                     android:layout_width="wrap_content"
                     android:layout_height="38dp"
                     android:layout_margin="@dimen/_5sdp"
@@ -639,9 +718,10 @@
                     app:toggle_borderColor="#E0E0E0"
                     app:toggle_borderWidth="@dimen/_1sdp"
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
-                    app:toggle_text="Other"
+                    app:toggle_text="Open to all"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
             </nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup>
 
@@ -649,6 +729,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:fontFamily="@font/ptsans_bold"
@@ -662,9 +743,12 @@
                 android:id="@+id/button_group_cuisine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
+                android:background="@drawable/border_corner_drawable"
+                android:padding="@dimen/_10sdp"
                 app:flexWrap="wrap"
                 app:toggle_selectAnimation="fade"
                 app:toggle_selectableAmount="11">
@@ -680,7 +764,8 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="Italian"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_japanese"
@@ -693,7 +778,8 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="Japanese"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_indian"
@@ -706,7 +792,8 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="Indian"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_mediterranean"
@@ -719,7 +806,8 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="Mediterranean"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_korean"
@@ -732,7 +820,8 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="Korean"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_american"
@@ -745,7 +834,8 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="American"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_vegetarian"
@@ -758,7 +848,8 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="Vegetarian"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_vietnamese"
@@ -771,7 +862,8 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="Vietnamese"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_chinese"
@@ -784,23 +876,11 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="Chinese"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-                    android:id="@+id/button_other_cuisine"
-                    android:layout_width="wrap_content"
-                    android:layout_height="38dp"
-                    android:layout_margin="@dimen/_5sdp"
-                    app:toggle_backgroundColor="@color/white"
-                    app:toggle_borderColor="#E0E0E0"
-                    app:toggle_borderWidth="@dimen/_1sdp"
-                    app:toggle_selectedBackgroundColor="@color/indicatioractive"
-                    app:toggle_text="Others"
-                    app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
-
-                <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-                    android:id="@+id/button_opentoall"
+                    android:id="@+id/button_opentoall_cuisine"
                     android:layout_width="wrap_content"
                     android:layout_height="38dp"
                     android:layout_margin="@dimen/_5sdp"
@@ -810,25 +890,21 @@
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="Open to all"
                     app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp" />
+                    app:toggle_textPadding="@dimen/_5sdp"
+                    app:toggle_textSize="@dimen/_14ssp" />
 
             </nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1sdp"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
-                android:background="#E0E0E0" />
 
             <!-- Height range selector -->
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_15sdp">
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/border_corner_drawable"
+                android:padding="@dimen/_10sdp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -844,7 +920,9 @@
                     android:id="@+id/height_spinner_min"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3" />
+                    android:layout_weight="3"
+                    android:clickable="true"
+                    android:focusable="true" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -860,25 +938,22 @@
                     android:id="@+id/height_spinner_max"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3" />
+                    android:layout_weight="3"
+                    android:clickable="true"
+                    android:focusable="true" />
 
             </LinearLayout>
 
             <!-- Age range selector -->
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1sdp"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
-                android:background="#E0E0E0" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_15sdp">
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/border_corner_drawable"
+                android:padding="@dimen/_10sdp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -894,7 +969,9 @@
                     android:id="@+id/age_spinner_min"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3" />
+                    android:layout_weight="3"
+                    android:clickable="true"
+                    android:focusable="true" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -910,7 +987,9 @@
                     android:id="@+id/age_spinner_max"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3" />
+                    android:layout_weight="3"
+                    android:clickable="true"
+                    android:focusable="true" />
 
             </LinearLayout>
 

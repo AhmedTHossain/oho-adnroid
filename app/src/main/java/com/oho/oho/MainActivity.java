@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
         Profile profile = getCustomObject(this);
 
-        if (profile.getId() != null) {
+        if (profile != null) {
 
             replaceFragment(new HomeFragment());
 
@@ -120,8 +120,10 @@ public class MainActivity extends AppCompatActivity {
 
                 return true;
             });
-        } else
+        } else {
             startActivity(new Intent(this, LoginActivity.class));
+            finish();
+        }
     }
 
     private void replaceFragment(Fragment fragment) {

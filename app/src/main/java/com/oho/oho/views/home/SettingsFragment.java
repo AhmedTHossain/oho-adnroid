@@ -18,6 +18,7 @@ import com.oho.oho.views.settings.AccountSettingsActivity;
 import com.oho.oho.views.settings.AvailabilitySettingsActivity;
 import com.oho.oho.views.settings.FAQActivity;
 import com.oho.oho.views.LoginActivity;
+import com.oho.oho.views.settings.PreferenceSettingsActivity;
 import com.oho.oho.views.settings.PreferenceSettingsFragment;
 import com.oho.oho.views.settings.PrivacyPolicyActivity;
 import com.oho.oho.views.settings.SafeDatingTipsActivity;
@@ -57,10 +58,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
                 startActivity(new Intent(requireActivity(), AccountSettingsActivity.class));
                 break;
             case R.id.button_preference_settings:
-                requireActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame_layout, new PreferenceSettingsFragment())
-                        .addToBackStack(null)
-                        .commit();
+                startActivity(new Intent(requireActivity(), PreferenceSettingsActivity.class));
                 break;
             case R.id.button_faq_settings:
                 startActivity(new Intent(requireActivity(), FAQActivity.class));
@@ -79,7 +77,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.button_signout_settings:
                 HelperClass helperClass = new HelperClass();
-                Profile profile = new Profile();
+                Profile profile = null;
 
                 helperClass.saveProfile(requireContext(),profile);
                 startActivity(new Intent(requireActivity(), LoginActivity.class));
