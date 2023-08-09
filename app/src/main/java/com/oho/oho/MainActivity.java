@@ -25,6 +25,7 @@ import com.oho.oho.models.ChatNotificationPayload;
 import com.oho.oho.models.CreateDeviceId;
 import com.oho.oho.models.Profile;
 import com.oho.oho.responses.ChatRoom;
+import com.oho.oho.utils.HelperClass;
 import com.oho.oho.viewmodels.MainViewModel;
 import com.oho.oho.views.LoginActivity;
 import com.oho.oho.views.chat.ChatActivity;
@@ -149,7 +150,10 @@ public class MainActivity extends AppCompatActivity {
 
                         // Get new FCM registration token
                         String token = task.getResult();
-                        storeDeviceToken(token, 107, "android"); //TODO: later replace the hard coded user_id with logged in user's id
+
+                        HelperClass helperClass = new HelperClass();
+
+                        storeDeviceToken(token, helperClass.getProfile(MainActivity.this).getId(), "android"); //TODO: later replace the hard coded user_id with logged in user's id
 
                         // Log and toast
                         String msg = "FCM token of this device: " + token;
