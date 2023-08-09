@@ -72,10 +72,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
                     profileViewModel.ifProfilePhotoUploaded.observe(requireActivity(), ifProfilePhotoUploaded -> {
                         if (ifProfilePhotoUploaded) {
                             Toast.makeText(requireContext(), "Your photo was uploaded successfully!", Toast.LENGTH_SHORT).show();
+                            alertDialogUploading.dismiss();
                         } else {
                             Toast.makeText(requireContext(), "Photo upload failed!", Toast.LENGTH_SHORT).show();
+                            alertDialogUploading.dismiss();
                         }
-                        alertDialogUploading.dismiss();
                     });
                 }
             });

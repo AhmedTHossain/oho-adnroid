@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ import com.oho.oho.interfaces.OnPromptSelectListener;
 import com.oho.oho.models.NewPromptAnswer;
 import com.oho.oho.models.Profile;
 import com.oho.oho.models.SelectedPrompt;
+import com.oho.oho.utils.HelperClass;
 import com.oho.oho.utils.ImageUtils;
 import com.oho.oho.viewmodels.AddPromptViewModel;
 
@@ -61,6 +63,10 @@ public class AddPromptActivity extends AppCompatActivity implements OnPromptSele
         binding = ActivityAddPromptBinding.inflate(getLayoutInflater());
         setTheme(R.style.Theme_OHO);
         setContentView(binding.getRoot());
+
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
         initViewModels();
         setPromptsList();
 
@@ -177,8 +183,10 @@ public class AddPromptActivity extends AppCompatActivity implements OnPromptSele
         if (imageFile != null) {
             progressview.setVisibility(View.VISIBLE);
 
+            HelperClass helperClass = new HelperClass();
+
             NewPromptAnswer newPromptAnswer = new NewPromptAnswer();
-            newPromptAnswer.setUser_id(getIntent().getIntExtra("userID",0));
+            newPromptAnswer.setUser_id(helperClass.getProfile(this).getId());
             newPromptAnswer.setPrompt(prompt);
             newPromptAnswer.setAnswer(answer);
             newPromptAnswer.setCaption(caption);
