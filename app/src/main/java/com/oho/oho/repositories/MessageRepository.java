@@ -33,10 +33,11 @@ public class MessageRepository {
         call.enqueue(new Callback<List<ChatRoom>>() {
             @Override
             public void onResponse(@NonNull Call<List<ChatRoom>> call, @NonNull Response<List<ChatRoom>> response) {
-                if (response.body()!=null){
+                if (response.body().size()>0){
                     chatRoomList.setValue(response.body());
                     Log.d("MessageRepository","Number of chat rooms: "+response.body().size());
-                }
+                } else
+                    chatRoomList.setValue(null);
             }
 
             @Override

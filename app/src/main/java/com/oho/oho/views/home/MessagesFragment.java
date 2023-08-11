@@ -128,6 +128,11 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
             if (chatRoomList != null) {
                 ArrayList<ChatRoom> chatRoomArrayList = new ArrayList<>(chatRoomList);
                 setChatRoomList(chatRoomArrayList);
+            } else {
+                binding.swiperefreshlayout.setVisibility(View.GONE);
+                binding.screentitle.setVisibility(View.GONE);
+                binding.view.setVisibility(View.GONE);
+                binding.noChatLayout.setVisibility(View.VISIBLE);
             }
             shimmerViewContainer.stopShimmerAnimation();
             shimmerViewContainer.setVisibility(View.GONE);
