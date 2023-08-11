@@ -119,12 +119,11 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/_16ssp" />
 
-            <ImageView
-                android:layout_width="@dimen/_150sdp"
-                android:layout_height="@dimen/_150sdp"
-                android:src="@drawable/nochat"
-                android:layout_gravity="center_horizontal"/>
-
+<!--            <ImageView-->
+<!--                android:layout_width="@dimen/_150sdp"-->
+<!--                android:layout_height="@dimen/_150sdp"-->
+<!--                android:src="@drawable/nochat"-->
+<!--                android:layout_gravity="center_horizontal"/>-->
 
         </LinearLayout>
     </RelativeLayout>
