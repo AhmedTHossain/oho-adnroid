@@ -25,8 +25,10 @@ import com.oho.oho.interfaces.QuickMessageClickListener;
 import com.oho.oho.models.ChatNotificationPayload;
 import com.oho.oho.models.ChatRoomObj;
 import com.oho.oho.models.JWTTokenRequest;
+import com.oho.oho.models.Profile;
 import com.oho.oho.responses.Chat;
 import com.oho.oho.responses.ChatRoom;
+import com.oho.oho.utils.HelperClass;
 import com.oho.oho.viewmodels.ChatViewModel;
 import com.oho.oho.viewmodels.MessageViewModel;
 
@@ -60,6 +62,7 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
     private String channel_name;
     private String sender_photo;
     private int sender_id;
+    private Profile profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +70,8 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
         binding = ActivityChatBinding.inflate(getLayoutInflater());
         setTheme(R.style.Theme_OHO);
         setContentView(binding.getRoot());
+        HelperClass helperClass = new HelperClass();
+        profile = helperClass.getProfile(this);
         if (getIntent().hasExtra("chatroom")) {
             selectedChatRoom = (ChatRoom) getIntent().getSerializableExtra("chatroom");
             binding.screentitle.setText(selectedChatRoom.getFullName());
@@ -76,7 +81,7 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
 
             String participantsIdArray[] = selectedChatRoom.getParticipants().split(",");
             for (String s: participantsIdArray)
-                if (!s.equals(String.valueOf(187))) //TODO: later this 187 will be replaced by logged in user's id
+                if (!s.equals(String.valueOf(profile.getId())))
                     sender_id = Integer.parseInt(s);
 //            gender = selectedChatRoom.getGender();
         }
@@ -117,7 +122,7 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
             public void onClick(View v) {
                 Intent intent = new Intent(ChatActivity.this, QRActivity.class);
                 intent.putExtra("qrcode", qrcodeUrl);
-                intent.putExtra("username", "Ahmed Tanzeer Hossain"); //TODO: Later replace with logged in user's fullname
+                intent.putExtra("username", profile.getName());
                 startActivity(intent);
             }
         });
@@ -164,7 +169,7 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
                 int chatToRemove = 0;
                 for (int i = 0; i < chatList.size(); i++)
                     if (chatList.get(i).getChatType().equals("delegate"))
-                        if (chatList.get(i).getSender() == 99)
+                        if (chatList.get(i).getSender() == profile.getId())
                             chatToRemove = i;
 
                 chatList.remove(chatToRemove);
@@ -176,17 +181,17 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
             binding.recyclerviewQuickmessages.setVisibility(View.VISIBLE);
         });
 
-        viewModel.getQrCode(187, chat_id); //TODO: later replace with logged in user's id
+        viewModel.getQrCode(profile.getId(), chat_id);
         viewModel.qrcode.observe(this, qrcode -> {
             if (qrcode != null) {
                 qrcodeUrl = qrcode;
             }
         });
-        getJwtToken("tanzeerhossain@gmail.com"); //TODO: later replace the hard coded email with logged in user's email
+        getJwtToken(profile.getEmail());
     }
 
     private void setChatList(ArrayList<Chat> chatList) {
-        adapter = new ChatAdapter(chatList, 99, this);
+        adapter = new ChatAdapter(chatList, profile.getId(), this);
         binding.recyclerview.setHasFixedSize(true);
         binding.recyclerview.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerview.setAdapter(adapter);

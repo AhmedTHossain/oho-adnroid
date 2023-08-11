@@ -24,7 +24,9 @@ import com.oho.oho.databinding.FragmentMessagesBinding;
 import com.oho.oho.interfaces.OnChatRoomClickListener;
 import com.oho.oho.interfaces.OnMessageOptionsMenu;
 import com.oho.oho.models.JWTTokenRequest;
+import com.oho.oho.models.Profile;
 import com.oho.oho.responses.ChatRoom;
+import com.oho.oho.utils.HelperClass;
 import com.oho.oho.viewmodels.LikeYouVIewModel;
 import com.oho.oho.viewmodels.MessageViewModel;
 import com.oho.oho.views.chat.ChatActivity;
@@ -38,6 +40,7 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
     private MessageViewModel viewModel;
     private ShimmerFrameLayout shimmerViewContainer;
     private String token;
+    private Profile profile;
 
     public MessagesFragment() {
         // Required empty public constructor
@@ -48,6 +51,10 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
                              Bundle savedInstanceState) {
         binding = FragmentMessagesBinding.inflate(getLayoutInflater(), container, false);
         shimmerViewContainer = binding.shimmerViewContainer;
+
+        HelperClass helperClass = new HelperClass();
+        profile = helperClass.getProfile(requireContext());
+
         initMessageViewModel();
 
         getJwtToken("tanzeerhossain@gmail.com"); //TODO: later replace the hard coded email with logged in user's email
@@ -57,7 +64,7 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
         binding.swiperefreshlayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getAllChatRooms(187); //TODO: later replace this with logged in user's id
+                getAllChatRooms(profile.getId());
             }
         });
 
@@ -68,7 +75,7 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
     public void onResume() {
         super.onResume();
         binding.shimmerViewContainer.startShimmerAnimation();
-        getAllChatRooms(187); //TODO: later replace this with logged in user's id
+        getAllChatRooms(profile.getId());
     }
 
     @Override
@@ -89,7 +96,7 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
     private void initMessageViewModel() {
         viewModel = new ViewModelProvider(this).get(MessageViewModel.class);
         //TODO: replace with logged in user's id
-        getAllChatRooms(187); //TODO: later replace this with logged in user's id
+        getAllChatRooms(profile.getId());
     }
 
     @Override
