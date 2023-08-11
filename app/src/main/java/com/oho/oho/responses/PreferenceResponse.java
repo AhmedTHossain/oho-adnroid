@@ -11,7 +11,7 @@ public class PreferenceResponse {
     private String budget;
     @SerializedName("cuisine")
     @Expose
-    private String cuisine;
+    private List<String> cuisine;
     @SerializedName("distance")
     @Expose
     private Integer distance;
@@ -54,11 +54,11 @@ public class PreferenceResponse {
         this.budget = budget;
     }
 
-    public String getCuisine() {
+    public List<String> getCuisine() {
         return cuisine;
     }
 
-    public void setCuisine(String cuisine) {
+    public void setCuisine(List<String> cuisine) {
         this.cuisine = cuisine;
     }
 

@@ -139,7 +139,7 @@
                 app:toggle_selectAnimation="fade">
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-                    android:id="@+id/button_10_miles"
+                    android:id="@+id/button_10"
                     android:layout_width="wrap_content"
                     android:layout_height="38dp"
                     android:layout_margin="@dimen/_5sdp"
@@ -153,7 +153,7 @@
                     app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-                    android:id="@+id/button_20_miles"
+                    android:id="@+id/button_20"
                     android:layout_width="wrap_content"
                     android:layout_height="38dp"
                     android:layout_margin="@dimen/_5sdp"
@@ -167,7 +167,7 @@
                     app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-                    android:id="@+id/button_30_miles"
+                    android:id="@+id/button_30"
                     android:layout_width="wrap_content"
                     android:layout_height="38dp"
                     android:layout_margin="@dimen/_5sdp"
@@ -181,7 +181,7 @@
                     app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-                    android:id="@+id/button_40_miles"
+                    android:id="@+id/button_40"
                     android:layout_width="wrap_content"
                     android:layout_height="38dp"
                     android:layout_margin="@dimen/_5sdp"
@@ -195,7 +195,7 @@
                     app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-                    android:id="@+id/button_50_miles"
+                    android:id="@+id/button_50"
                     android:layout_width="wrap_content"
                     android:layout_height="38dp"
                     android:layout_margin="@dimen/_5sdp"
@@ -204,20 +204,6 @@
                     app:toggle_borderWidth="@dimen/_1sdp"
                     app:toggle_selectedBackgroundColor="@color/indicatioractive"
                     app:toggle_text="50 miles"
-                    app:toggle_textColor="@color/black"
-                    app:toggle_textPadding="@dimen/_5sdp"
-                    app:toggle_textSize="@dimen/_14ssp" />
-
-                <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-                    android:id="@+id/button_opentoall_distance"
-                    android:layout_width="wrap_content"
-                    android:layout_height="38dp"
-                    android:layout_margin="@dimen/_5sdp"
-                    app:toggle_backgroundColor="@color/white"
-                    app:toggle_borderColor="#E0E0E0"
-                    app:toggle_borderWidth="@dimen/_1sdp"
-                    app:toggle_selectedBackgroundColor="@color/indicatioractive"
-                    app:toggle_text="Any"
                     app:toggle_textColor="@color/black"
                     app:toggle_textPadding="@dimen/_5sdp"
                     app:toggle_textSize="@dimen/_14ssp" />
@@ -303,7 +289,7 @@
                 app:toggle_selectAnimation="fade">
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-                    android:id="@+id/button_no_degree"
+                    android:id="@+id/button_nodegree"
                     android:layout_width="wrap_content"
                     android:layout_height="38dp"
                     android:layout_margin="@dimen/_5sdp"
@@ -373,7 +359,7 @@
                     app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-                    android:id="@+id/button_opentoall_education"
+                    android:id="@+id/button_opentoall"
                     android:layout_width="wrap_content"
                     android:layout_height="38dp"
                     android:layout_margin="@dimen/_5sdp"
@@ -528,7 +514,7 @@
                     app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-                    android:id="@+id/button_opentoall_race"
+                    android:id="@+id/button_opentoallrace"
                     android:layout_width="wrap_content"
                     android:layout_height="38dp"
                     android:layout_margin="@dimen/_5sdp"
@@ -710,7 +696,7 @@
                     app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-                    android:id="@+id/button_opentoall_religion"
+                    android:id="@+id/button_opentoallreligion"
                     android:layout_width="wrap_content"
                     android:layout_height="38dp"
                     android:layout_margin="@dimen/_5sdp"
@@ -880,7 +866,7 @@
                     app:toggle_textSize="@dimen/_14ssp" />
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-                    android:id="@+id/button_opentoall_cuisine"
+                    android:id="@+id/button_opentoallcuisine"
                     android:layout_width="wrap_content"
                     android:layout_height="38dp"
                     android:layout_margin="@dimen/_5sdp"

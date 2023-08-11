@@ -308,34 +308,34 @@ public class PreferenceSettingsFragment extends Fragment {
                 break;
         }
 
-        String [] cuisines = preferences.getCuisine().split(",");
-        cuisineList.addAll(Arrays.asList(cuisines));
-
-        for (String cuisine : cuisineList) {
-            if (cuisine.equals("Italian"))
-                binding.buttonGroupCuisine.selectButton(R.id.button_italian);
-            if (cuisine.equals("Japanese"))
-                binding.buttonGroupCuisine.selectButton(R.id.button_japanese);
-            if (cuisine.equals("Indian"))
-                binding.buttonGroupCuisine.selectButton(R.id.button_indian);
-            if (cuisine.equals("Mediterranean"))
-                binding.buttonGroupCuisine.selectButton(R.id.button_mediterranean);
-            if (cuisine.equals("Korean"))
-                binding.buttonGroupCuisine.selectButton(R.id.button_korean);
-            if (cuisine.equals("American"))
-                binding.buttonGroupCuisine.selectButton(R.id.button_american);
-            if (cuisine.equals("Vegetarian"))
-                binding.buttonGroupCuisine.selectButton(R.id.button_vegetarian);
-            if (cuisine.equals("Vietnamese"))
-                binding.buttonGroupCuisine.selectButton(R.id.button_vietnamese);
-            if (cuisine.equals("Chinese"))
-                binding.buttonGroupCuisine.selectButton(R.id.button_chinese);
-            if (cuisine.equals("Others"))
-                binding.buttonGroupCuisine.selectButton(R.id.button_others);
-            if (cuisine.equals("Open to all"))
-                binding.buttonGroupCuisine.selectButton(R.id.button_opentoall);
-
-        }
+//        String [] cuisines = preferences.getCuisine().split(",");
+//        cuisineList.addAll(Arrays.asList(cuisines));
+//
+//        for (String cuisine : cuisineList) {
+//            if (cuisine.equals("Italian"))
+//                binding.buttonGroupCuisine.selectButton(R.id.button_italian);
+//            if (cuisine.equals("Japanese"))
+//                binding.buttonGroupCuisine.selectButton(R.id.button_japanese);
+//            if (cuisine.equals("Indian"))
+//                binding.buttonGroupCuisine.selectButton(R.id.button_indian);
+//            if (cuisine.equals("Mediterranean"))
+//                binding.buttonGroupCuisine.selectButton(R.id.button_mediterranean);
+//            if (cuisine.equals("Korean"))
+//                binding.buttonGroupCuisine.selectButton(R.id.button_korean);
+//            if (cuisine.equals("American"))
+//                binding.buttonGroupCuisine.selectButton(R.id.button_american);
+//            if (cuisine.equals("Vegetarian"))
+//                binding.buttonGroupCuisine.selectButton(R.id.button_vegetarian);
+//            if (cuisine.equals("Vietnamese"))
+//                binding.buttonGroupCuisine.selectButton(R.id.button_vietnamese);
+//            if (cuisine.equals("Chinese"))
+//                binding.buttonGroupCuisine.selectButton(R.id.button_chinese);
+//            if (cuisine.equals("Others"))
+//                binding.buttonGroupCuisine.selectButton(R.id.button_others);
+//            if (cuisine.equals("Open to all"))
+//                binding.buttonGroupCuisine.selectButton(R.id.button_opentoall);
+//
+//        }
     }
 
     private void showCurrentLocation() {

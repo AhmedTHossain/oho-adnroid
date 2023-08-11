@@ -1,6 +1,7 @@
 package com.oho.oho.repositories;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
@@ -32,11 +33,13 @@ public class PreferenceSettingsRepository {
             @Override
             public void onResponse(@NonNull Call<PreferenceResponse> call, @NonNull Response<PreferenceResponse> response) {
                 preferenceResponse.setValue(response.body());
+                Log.d("PreferenceSettingsRepository","preference retrieved = YES");
             }
 
             @Override
             public void onFailure(@NonNull Call<PreferenceResponse> call, @NonNull Throwable t) {
-
+                preferenceResponse.setValue(null);
+                Log.d("PreferenceSettingsRepository","preference retrieved = NO with response: "+t.getMessage());
             }
         });
 
