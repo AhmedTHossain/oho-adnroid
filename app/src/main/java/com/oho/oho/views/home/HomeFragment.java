@@ -95,7 +95,7 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
                 @Override
                 public void run() {
                     //TODO: set the userId of the currently logged in user
-                    swipeProfile(profile.getId(), id, swipeDirection);
+                    swipeProfile(profile.getId(), id, 0);
                 }
             }, 250);
         } else if (swipeDirection == 1) {

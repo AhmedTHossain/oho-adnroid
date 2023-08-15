@@ -39,7 +39,7 @@ public class SwipeRepository {
             public void onResponse(@NonNull Call<MessageResponse> call, @NonNull Response<MessageResponse> response) {
                 MessageResponse messageResponse = response.body();
 
-                    Log.d("SwipeRepository","swipe api response: "+ response.code());
+                    Log.d("SwipeRepository","swipe api response: "+ response.message());
                     isSwipeSuccessful.setValue(true);
 
             }
