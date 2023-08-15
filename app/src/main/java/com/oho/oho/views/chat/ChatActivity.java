@@ -169,7 +169,7 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
                 int chatToRemove = 0;
                 for (int i = 0; i < chatList.size(); i++)
                     if (chatList.get(i).getChatType().equals("delegate"))
-                        if (chatList.get(i).getSender() == profile.getId())
+                        if (chatList.get(i).getSender() != profile.getId())
                             chatToRemove = i;
 
                 chatList.remove(chatToRemove);
