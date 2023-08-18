@@ -124,4 +124,5 @@ dependencies {
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
     implementation 'com.google.android.flexbox:flexbox:3.0.0'
     implementation "io.getstream:avatarview-coil:1.0.3"
+    implementation "com.github.skydoves:powerspinner:1.2.7"
 }

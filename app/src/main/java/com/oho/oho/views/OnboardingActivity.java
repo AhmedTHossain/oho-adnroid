@@ -125,7 +125,7 @@ public class OnboardingActivity extends AppCompatActivity {
         } else {
             buttonOnboardingAction.setText("Next");
             buttonOnboardingAction.setBackgroundColor(ContextCompat.getColor(
-                    getApplicationContext(), R.color.indicatioractive
+                    getApplicationContext(), R.color.ted_image_picker_primary_pressed
             ));
         }
     }

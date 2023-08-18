@@ -63,7 +63,6 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
-                android:background="@drawable/border_corner_drawable"
                 android:padding="@dimen/_10sdp"
                 app:toggle_selectAnimation="fade">
 
@@ -133,7 +132,6 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
-                android:background="@drawable/border_corner_drawable"
                 android:padding="@dimen/_10sdp"
                 app:flexWrap="wrap"
                 app:toggle_selectAnimation="fade">
@@ -283,10 +281,10 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
-                android:background="@drawable/border_corner_drawable"
                 android:padding="@dimen/_10sdp"
                 app:flexWrap="wrap"
-                app:toggle_selectAnimation="fade">
+                app:toggle_selectAnimation="fade"
+                app:toggle_selectableAmount="5">
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_nodegree"
@@ -395,11 +393,10 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
-                android:background="@drawable/border_corner_drawable"
                 android:padding="@dimen/_10sdp"
                 app:flexWrap="wrap"
                 app:toggle_selectAnimation="fade"
-                app:toggle_selectableAmount="9">
+                app:toggle_selectableAmount="8">
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_white"
@@ -550,10 +547,10 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
-                android:background="@drawable/border_corner_drawable"
                 android:padding="@dimen/_10sdp"
                 app:flexWrap="wrap"
-                app:toggle_selectAnimation="fade">
+                app:toggle_selectAnimation="fade"
+                app:toggle_selectableAmount="10">
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_christian"
@@ -733,11 +730,10 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
-                android:background="@drawable/border_corner_drawable"
                 android:padding="@dimen/_10sdp"
                 app:flexWrap="wrap"
                 app:toggle_selectAnimation="fade"
-                app:toggle_selectableAmount="11">
+                app:toggle_selectableAmount="9">
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_italian"
@@ -889,7 +885,6 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
-                android:background="@drawable/border_corner_drawable"
                 android:padding="@dimen/_10sdp">
 
                 <TextView
@@ -902,13 +897,36 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/_14ssp" />
 
-                <androidx.appcompat.widget.AppCompatSpinner
+<!--                <androidx.appcompat.widget.AppCompatSpinner-->
+<!--                    android:id="@+id/height_spinner_min"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="3"-->
+<!--                    android:clickable="true"-->
+<!--                    android:focusable="true" />-->
+
+                <com.skydoves.powerspinner.PowerSpinnerView
                     android:id="@+id/height_spinner_min"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:clickable="true"
-                    android:focusable="true" />
+                    android:hint="min"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="@dimen/_14ssp"
+                    android:gravity="center"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:drawableEnd="@drawable/ic_arrow_down"
+                    app:spinner_arrow_gravity="end"
+                    app:spinner_arrow_padding="8dp"
+                    app:spinner_divider_color="@color/black"
+                    app:spinner_divider_show="true"
+                    app:spinner_divider_size="0.4dp"
+                    app:spinner_item_height="46dp"
+                    app:spinner_popup_animation="dropdown"
+                    app:spinner_popup_background="@color/white"
+                    app:spinner_popup_elevation="14dp" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -920,13 +938,36 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/_14ssp" />
 
-                <androidx.appcompat.widget.AppCompatSpinner
+<!--                <androidx.appcompat.widget.AppCompatSpinner-->
+<!--                    android:id="@+id/height_spinner_max"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="3"-->
+<!--                    android:clickable="true"-->
+<!--                    android:focusable="true" />-->
+
+                <com.skydoves.powerspinner.PowerSpinnerView
                     android:id="@+id/height_spinner_max"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:clickable="true"
-                    android:focusable="true" />
+                    android:hint="max"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="@dimen/_14ssp"
+                    android:gravity="center"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:drawableEnd="@drawable/ic_arrow_down"
+                    app:spinner_arrow_gravity="end"
+                    app:spinner_arrow_padding="8dp"
+                    app:spinner_divider_color="@color/black"
+                    app:spinner_divider_show="true"
+                    app:spinner_divider_size="0.4dp"
+                    app:spinner_item_height="46dp"
+                    app:spinner_popup_animation="dropdown"
+                    app:spinner_popup_background="@color/white"
+                    app:spinner_popup_elevation="14dp" />
 
             </LinearLayout>
 
@@ -938,7 +979,6 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
-                android:background="@drawable/border_corner_drawable"
                 android:padding="@dimen/_10sdp">
 
                 <TextView

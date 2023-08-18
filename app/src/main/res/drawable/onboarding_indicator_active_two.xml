@@ -4,6 +4,11 @@
     <size android:width="@dimen/_12sdp"
         android:height="@dimen/_8sdp"/>
     <corners android:radius="25dp"/>
-    <solid android:color="@color/indicatioractive"/>
+    <gradient
+        android:type="linear"
+        android:gradientRadius="150%"
+        android:startColor="#FF6FA0"
+        android:centerColor="#B42254"
+        android:endColor="#B42254" />
 
 </shape>
