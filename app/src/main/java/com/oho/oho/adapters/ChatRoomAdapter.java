@@ -90,7 +90,9 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    onMessageOptionsMenuListener.openMenu(senderImage);
+                    String imageUrl = chatRoomArrayList.get(getAdapterPosition()).getProfilePhoto();
+                    String nameText = chatRoomArrayList.get(getAdapterPosition()).getFullName();
+                    onMessageOptionsMenuListener.openMenu(senderImage,imageUrl,nameText);
                     return false;
                 }
             });

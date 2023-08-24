@@ -1,9 +1,12 @@
 package com.oho.oho.views.home;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,9 +17,12 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.oho.oho.R;
 import com.oho.oho.adapters.ChatRoomAdapter;
@@ -27,12 +33,13 @@ import com.oho.oho.models.JWTTokenRequest;
 import com.oho.oho.models.Profile;
 import com.oho.oho.responses.ChatRoom;
 import com.oho.oho.utils.HelperClass;
-import com.oho.oho.viewmodels.LikeYouVIewModel;
 import com.oho.oho.viewmodels.MessageViewModel;
 import com.oho.oho.views.chat.ChatActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MessagesFragment extends Fragment implements OnChatRoomClickListener, OnMessageOptionsMenu {
 
@@ -141,7 +148,7 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
     }
 
     @Override
-    public void openMenu(View view) {
+    public void openMenu(View view, String imageUrl, String nameText) {
         // Initializing the popup menu and giving the reference as current context
         PopupMenu popupMenu = new PopupMenu(requireContext(), view);
 
@@ -155,10 +162,59 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
             public boolean onMenuItemClick(MenuItem menuItem) {
                 // Toast message on menu item clicked
                 Toast.makeText(requireContext(), "You Clicked " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
+                switch (menuItem.getTitle().toString()){
+                    case "Report":
+                        showReportOptionDialog(imageUrl,nameText);
+                        break;
+                }
                 return true;
             }
         });
         // Showing the popup menu
         popupMenu.show();
+    }
+
+    private void showReportOptionDialog(String imageUrl, String nameText) {
+        LayoutInflater li = LayoutInflater.from(requireContext());
+        View promptsView = li.inflate(R.layout.report_profile_dialog, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                requireContext());
+        // set alert_dialog.xml to alertdialog builder
+        alertDialogBuilder.setView(promptsView);
+
+        CircleImageView imageView = promptsView.findViewById(R.id.image);
+        TextView nameTextView = promptsView.findViewById(R.id.name_text);
+
+        Glide.with(requireContext())
+                .load(imageUrl)
+                .into(imageView);
+        nameTextView.setText(nameText);
+
+        alertDialogBuilder.setCancelable(false)
+                .setPositiveButton("Submit", null).setNegativeButton("Cancel", null);
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button buttonPositive = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                Button buttonNegative = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEGATIVE);
+                buttonPositive.setTextColor(ContextCompat.getColor(requireContext(), R.color.ted_image_picker_primary_pressed));
+
+//                button.setTextColor(ContextCompat.getColor(requireContext(), R.color.textTertiary));
+                buttonNegative.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
+//
+//                buttonPositive.setEnabled(false);
+
+                buttonPositive.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        alertDialog.dismiss();
+                    }
+                });
+            }
+        });
+        // show it
+        alertDialog.show();
     }
 }
