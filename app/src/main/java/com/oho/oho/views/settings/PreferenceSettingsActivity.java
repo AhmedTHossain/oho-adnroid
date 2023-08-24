@@ -138,26 +138,26 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
                 heightList.add(i + "." + j + " ft");
         }
 
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, heightList);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        binding.heightSpinnerMin.setAdapter(adapter);
-//        binding.heightSpinnerMax.setAdapter(adapter);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, heightList);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        binding.heightSpinnerMin.setAdapter(adapter);
+        binding.heightSpinnerMax.setAdapter(adapter);
+
+        binding.heightSpinnerMin.setSelection(13);
+        binding.heightSpinnerMax.setSelection(19);
+
+//        IconSpinnerAdapter adapterMinHeight = new IconSpinnerAdapter(binding.heightSpinnerMin);
+//        IconSpinnerAdapter adapterMaxHeight = new IconSpinnerAdapter(binding.heightSpinnerMax);
 //
-//        binding.heightSpinnerMin.setSelection(13);
-//        binding.heightSpinnerMax.setSelection(19);
-
-        IconSpinnerAdapter adapterMinHeight = new IconSpinnerAdapter(binding.heightSpinnerMin);
-        IconSpinnerAdapter adapterMaxHeight = new IconSpinnerAdapter(binding.heightSpinnerMax);
-
-        binding.heightSpinnerMin.setSpinnerAdapter(adapterMinHeight);
-        binding.heightSpinnerMin.setItems(heightList);
-        binding.heightSpinnerMin.selectItemByIndex(0);
-        binding.heightSpinnerMin.setLifecycleOwner(this);
-
-        binding.heightSpinnerMin.setSpinnerAdapter(adapterMaxHeight);
-        binding.heightSpinnerMin.setItems(heightList);
-        binding.heightSpinnerMin.selectItemByIndex(0);
-        binding.heightSpinnerMin.setLifecycleOwner(this);
+//        binding.heightSpinnerMin.setSpinnerAdapter(adapterMinHeight);
+//        binding.heightSpinnerMin.setItems(heightList);
+//        binding.heightSpinnerMin.selectItemByIndex(0);
+//        binding.heightSpinnerMin.setLifecycleOwner(this);
+//
+//        binding.heightSpinnerMin.setSpinnerAdapter(adapterMaxHeight);
+//        binding.heightSpinnerMin.setItems(heightList);
+//        binding.heightSpinnerMin.selectItemByIndex(0);
+//        binding.heightSpinnerMin.setLifecycleOwner(this);
     }
 
     private void setAgeSpinner() {

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/_30sdp"
+    tools:context=".views.FeedbackFormActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="@dimen/_20sdp"
+        android:layout_centerInParent="true">
+
+        <TextView
+            android:id="@+id/screentitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:fontFamily="@font/ptsans_bold"
+            android:text="Your Feedback"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_25ssp" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_below="@id/screentitle"
+            android:background="#1A000000" />
+
+        <TextView
+            android:id="@+id/textview_disclaimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/view"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:fontFamily="@font/darkergrotesque_medium"
+            android:text="@string/feedback_form_disclaimer"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16ssp" />
+
+        <TextView
+            android:id="@+id/ques_for_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:fontFamily="@font/ptsans_bold"
+            android:text="How did your date go with Leah Griffin?"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14ssp" />
+
+        <RatingBar
+            android:id="@+id/ratingBar_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:numStars="5"
+            android:rating="4"
+            android:stepSize="1"
+            android:theme="@style/RatingBar" />
+
+        <TextView
+            android:id="@+id/ques_for_place"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:fontFamily="@font/ptsans_bold"
+            android:text="Your thoughts on Binge Bar?"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14ssp" />
+
+        <RatingBar
+            android:id="@+id/ratingBar_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:numStars="5"
+            android:rating="3"
+            android:stepSize="1"
+            android:theme="@style/RatingBar" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:fontFamily="@font/ptsans_bold"
+            android:text="Additional comment"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14ssp" />
+
+        <EditText
+            android:id="@+id/edit_text_bio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/border_corner_drawable"
+            android:fontFamily="@font/ptsans_bold"
+            android:gravity="start"
+            android:hint="Type here.."
+            android:inputType="textMultiLine"
+            android:lines="6"
+            android:maxLength="250"
+            android:padding="@dimen/_10sdp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14ssp"
+            android:textIsSelectable="false"/>
+
+        <TextView
+            android:id="@+id/open_preference_settings_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:padding="@dimen/_10sdp"
+            android:background="@drawable/rounded_button_solid"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/darkergrotesque_bold"
+            android:gravity="center"
+            android:text="Submit"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_18ssp" />
+    </LinearLayout>
+
+</RelativeLayout>

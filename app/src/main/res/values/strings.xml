@@ -359,6 +359,7 @@ Oho! does not knowingly collect any Personal Identifiable Information from child
     <string name="disclaimer_answer_prompt">Enter your answer for the selected prompt, pick a photo and write a caption for it.</string>
     <string name="disclaimer_set_availability"><![CDATA[Please select your schedule for the weekend. You can select multiple days & slots for greater number of matches.]]></string>
     <string name="like_you_screen_disclaimer">These users are interested to go on a date with you this weekend! Tap on the photo to view their profile.</string>
+    <string name="feedback_form_disclaimer">Greetings to our feedback portal! 🌟 We\'re excited to listen to your thoughts about your recent date.</string>
     <string name="not_available_disclaimer_title">Come back next week when you are available!</string>
     <string name="yes_lets_start_matching">Yes, let’s start matching!</string>
     <string name="lets_set_some_preferences">Set some more preferences!</string>

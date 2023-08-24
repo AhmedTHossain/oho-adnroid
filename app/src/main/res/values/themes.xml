@@ -105,4 +105,8 @@
         <!-- Customize the color when unchecked -->
         <item name="android:buttonTint">@color/black</item>
     </style>
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="android:progressBackgroundTint">@color/divider_color_global</item>
+        <item name="colorControlActivated">@color/ted_image_picker_primary_pressed</item>
+    </style>
 </resources>

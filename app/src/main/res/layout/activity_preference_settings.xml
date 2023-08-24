@@ -897,36 +897,36 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/_14ssp" />
 
-<!--                <androidx.appcompat.widget.AppCompatSpinner-->
-<!--                    android:id="@+id/height_spinner_min"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_weight="3"-->
-<!--                    android:clickable="true"-->
-<!--                    android:focusable="true" />-->
-
-                <com.skydoves.powerspinner.PowerSpinnerView
+                <androidx.appcompat.widget.AppCompatSpinner
                     android:id="@+id/height_spinner_min"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:hint="min"
-                    android:padding="10dp"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:textSize="@dimen/_14ssp"
-                    android:gravity="center"
-                    android:fontFamily="@font/ptsans_regular"
-                    android:drawableEnd="@drawable/ic_arrow_down"
-                    app:spinner_arrow_gravity="end"
-                    app:spinner_arrow_padding="8dp"
-                    app:spinner_divider_color="@color/black"
-                    app:spinner_divider_show="true"
-                    app:spinner_divider_size="0.4dp"
-                    app:spinner_item_height="46dp"
-                    app:spinner_popup_animation="dropdown"
-                    app:spinner_popup_background="@color/white"
-                    app:spinner_popup_elevation="14dp" />
+                    android:clickable="true"
+                    android:focusable="true" />
+
+<!--                <com.skydoves.powerspinner.PowerSpinnerView-->
+<!--                    android:id="@+id/height_spinner_min"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="3"-->
+<!--                    android:hint="min"-->
+<!--                    android:padding="10dp"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textColorHint="@color/black"-->
+<!--                    android:textSize="@dimen/_14ssp"-->
+<!--                    android:gravity="center"-->
+<!--                    android:fontFamily="@font/ptsans_regular"-->
+<!--                    android:drawableEnd="@drawable/ic_arrow_down"-->
+<!--                    app:spinner_arrow_gravity="end"-->
+<!--                    app:spinner_arrow_padding="8dp"-->
+<!--                    app:spinner_divider_color="@color/black"-->
+<!--                    app:spinner_divider_show="true"-->
+<!--                    app:spinner_divider_size="0.4dp"-->
+<!--                    app:spinner_item_height="46dp"-->
+<!--                    app:spinner_popup_animation="dropdown"-->
+<!--                    app:spinner_popup_background="@color/white"-->
+<!--                    app:spinner_popup_elevation="14dp" />-->
 
                 <TextView
                     android:layout_width="0dp"
@@ -938,36 +938,36 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/_14ssp" />
 
-<!--                <androidx.appcompat.widget.AppCompatSpinner-->
-<!--                    android:id="@+id/height_spinner_max"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_weight="3"-->
-<!--                    android:clickable="true"-->
-<!--                    android:focusable="true" />-->
-
-                <com.skydoves.powerspinner.PowerSpinnerView
+                <androidx.appcompat.widget.AppCompatSpinner
                     android:id="@+id/height_spinner_max"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:hint="max"
-                    android:padding="10dp"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:textSize="@dimen/_14ssp"
-                    android:gravity="center"
-                    android:fontFamily="@font/ptsans_regular"
-                    android:drawableEnd="@drawable/ic_arrow_down"
-                    app:spinner_arrow_gravity="end"
-                    app:spinner_arrow_padding="8dp"
-                    app:spinner_divider_color="@color/black"
-                    app:spinner_divider_show="true"
-                    app:spinner_divider_size="0.4dp"
-                    app:spinner_item_height="46dp"
-                    app:spinner_popup_animation="dropdown"
-                    app:spinner_popup_background="@color/white"
-                    app:spinner_popup_elevation="14dp" />
+                    android:clickable="true"
+                    android:focusable="true" />
+
+<!--                <com.skydoves.powerspinner.PowerSpinnerView-->
+<!--                    android:id="@+id/height_spinner_max"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="3"-->
+<!--                    android:hint="max"-->
+<!--                    android:padding="10dp"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textColorHint="@color/black"-->
+<!--                    android:textSize="@dimen/_14ssp"-->
+<!--                    android:gravity="center"-->
+<!--                    android:fontFamily="@font/ptsans_regular"-->
+<!--                    android:drawableEnd="@drawable/ic_arrow_down"-->
+<!--                    app:spinner_arrow_gravity="end"-->
+<!--                    app:spinner_arrow_padding="8dp"-->
+<!--                    app:spinner_divider_color="@color/black"-->
+<!--                    app:spinner_divider_show="true"-->
+<!--                    app:spinner_divider_size="0.4dp"-->
+<!--                    app:spinner_item_height="46dp"-->
+<!--                    app:spinner_popup_animation="dropdown"-->
+<!--                    app:spinner_popup_background="@color/white"-->
+<!--                    app:spinner_popup_elevation="14dp" />-->
 
             </LinearLayout>
 
