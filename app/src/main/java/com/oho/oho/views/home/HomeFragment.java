@@ -23,18 +23,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.oho.oho.R;
 import com.oho.oho.adapters.ProfileDisplayAdapter;
 import com.oho.oho.databinding.FragmentHomeBinding;
+import com.oho.oho.interfaces.OnFullImageViewListener;
 import com.oho.oho.interfaces.SwipeListener;
 import com.oho.oho.models.Profile;
 import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.models.Swipe;
 import com.oho.oho.viewmodels.HomeViewModel;
+import com.oho.oho.views.FullScreenImageViewActivity;
 import com.oho.oho.views.settings.AvailabilitySettingsActivity;
 import com.oho.oho.views.settings.PreferenceSettingsFragment;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-public class HomeFragment extends Fragment implements SwipeListener, View.OnClickListener {
+public class HomeFragment extends Fragment implements SwipeListener, View.OnClickListener, OnFullImageViewListener {
 
     FragmentHomeBinding binding;
     private Profile profile;
@@ -144,7 +146,7 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
 
 //        User userProfile = new User(user.getAge(), user.getBio(), user.getBudget(), user.getCity(), user.getDob(), user.getEducation(), user.getEmail(), user.getHeight(), user.getId(), user.getLat(), user.getLon(), user.getName(), user.getOccupation(), user.getPhone(), user.getProfilePicture(), user.getPromptAnswers(), user.getRace(), user.getReligion(), user.getSex(), user.getState(), user.getVaccinated());
 
-        ProfileDisplayAdapter adapter = new ProfileDisplayAdapter(user, promptArrayList, this, requireContext(), null);
+        ProfileDisplayAdapter adapter = new ProfileDisplayAdapter(user, promptArrayList, this, requireContext(), null,this);
         binding.recyclerviewPromptSection.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recyclerviewPromptSection.setAdapter(adapter);
     }
@@ -279,5 +281,12 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
             // Return a default object or null if no object found in SharedPreferences
             return null;
         }
+    }
+
+    @Override
+    public void onFullImageView(String imageUrl) {
+        Intent intent = new Intent(requireContext(), FullScreenImageViewActivity.class);
+        intent.putExtra("image_url",imageUrl);
+        startActivity(intent);
     }
 }

@@ -28,6 +28,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.oho.oho.R;
 import com.oho.oho.adapters.ProfileDisplayAdapter;
 import com.oho.oho.databinding.FragmentProfileBinding;
+import com.oho.oho.interfaces.OnFullImageViewListener;
 import com.oho.oho.interfaces.SwipeListener;
 import com.oho.oho.models.BioUpdateRequest;
 import com.oho.oho.models.Profile;
@@ -36,12 +37,13 @@ import com.oho.oho.responses.ChatRoom;
 import com.oho.oho.utils.HelperClass;
 import com.oho.oho.utils.ImageUtils;
 import com.oho.oho.viewmodels.ProfileViewModel;
+import com.oho.oho.views.FullScreenImageViewActivity;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class ProfileFragment extends Fragment implements View.OnClickListener, SwipeListener {
+public class ProfileFragment extends Fragment implements View.OnClickListener, SwipeListener, OnFullImageViewListener {
 
     FragmentProfileBinding binding;
     private ProfileViewModel profileViewModel;
@@ -150,9 +152,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
 
     private void setProfileView() {
         if (profile_id != 0)
-            adapter = new ProfileDisplayAdapter(userProfile, promptAnswers, this, requireContext(), profileViewModel, profile_id, chatRoom);
+            adapter = new ProfileDisplayAdapter(userProfile, promptAnswers, this, requireContext(), profileViewModel, profile_id, chatRoom,this);
         else
-            adapter = new ProfileDisplayAdapter(userProfile, promptAnswers, this, requireContext(), profileViewModel);
+            adapter = new ProfileDisplayAdapter(userProfile, promptAnswers, this, requireContext(), profileViewModel,this);
         binding.recyclerviewProfile.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recyclerviewProfile.setAdapter(adapter);
     }
@@ -325,5 +327,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
         });
         // show it
         alertDialog.show();
+    }
+
+    @Override
+    public void onFullImageView(String imageUrl) {
+        Intent intent = new Intent(requireContext(), FullScreenImageViewActivity.class);
+        intent.putExtra("image_url",imageUrl);
+        startActivity(intent);
     }
 }

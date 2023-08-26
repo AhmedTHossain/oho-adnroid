@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.oho.oho.R;
+import com.oho.oho.interfaces.OnFullImageViewListener;
 import com.oho.oho.interfaces.SwipeListener;
 import com.oho.oho.models.Profile;
 import com.oho.oho.models.PromptAnswer;
@@ -33,6 +34,7 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
     private Profile userProfile;
 
     private SwipeListener listener;
+    private OnFullImageViewListener fullImageViewListener;
     private Context context;
 
     private String user_type = "";
@@ -45,16 +47,17 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
     private int sender_id = 0;
     private ChatRoom chatRoom;
 
-    public ProfileDisplayAdapter(Profile userProfile, ArrayList<PromptAnswer> promptArrayList, SwipeListener listener, Context context, ProfileViewModel viewModel) {
+    public ProfileDisplayAdapter(Profile userProfile, ArrayList<PromptAnswer> promptArrayList, SwipeListener listener, Context context, ProfileViewModel viewModel, OnFullImageViewListener fullImageViewListener) {
         this.promptArrayList = promptArrayList;
         promptArrayList.add(0, new PromptAnswer());
         this.context = context;
         this.userProfile = userProfile;
         this.listener = listener;
         this.viewModel = viewModel;
+        this.fullImageViewListener = fullImageViewListener;
     }
 
-    public ProfileDisplayAdapter(Profile userProfile, ArrayList<PromptAnswer> promptArrayList, SwipeListener listener, Context context, ProfileViewModel viewModel, int sender_id, ChatRoom chatRoom) {
+    public ProfileDisplayAdapter(Profile userProfile, ArrayList<PromptAnswer> promptArrayList, SwipeListener listener, Context context, ProfileViewModel viewModel, int sender_id, ChatRoom chatRoom, OnFullImageViewListener fullImageViewListener) {
         this.promptArrayList = promptArrayList;
         promptArrayList.add(0, new PromptAnswer());
         this.userProfile = userProfile;
@@ -63,6 +66,7 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
         this.viewModel = viewModel;
         this.sender_id = sender_id;
         this.chatRoom = chatRoom;
+        this.fullImageViewListener = fullImageViewListener;
     }
 
     @NonNull
@@ -109,6 +113,13 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
                 Glide.with(context)
                         .load(userProfile.getProfilePicture()).centerCrop()
                         .into(((Holder1) holder).imageView);
+
+                ((Holder1) holder).imageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        fullImageViewListener.onFullImageView(userProfile.getProfilePicture());
+                    }
+                });
                 ((Holder1) holder).editBioButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -136,6 +147,13 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
                     Glide.with(context)
                             .load(promptArrayList.get(position).getImage()).centerCrop()
                             .into(((Holder) holder).imageView);
+
+                    ((Holder) holder).imageView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            fullImageViewListener.onFullImageView(promptArrayList.get(position).getImage());
+                        }
+                    });
 
                     ((Holder) holder).deleteButton.setOnClickListener(new View.OnClickListener() {
                         @Override

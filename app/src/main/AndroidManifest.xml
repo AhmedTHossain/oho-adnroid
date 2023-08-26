@@ -23,13 +23,18 @@
         android:theme="@style/Theme.App.Starting"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".views.FullScreenImageViewActivity"
+            android:exported="false" />
+        <activity
             android:name=".views.FeedbackFormActivity"
-            android:exported="true" >
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+            android:exported="true">
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".views.settings.PreferenceSettingsActivity"

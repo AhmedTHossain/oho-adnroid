@@ -1,6 +1,7 @@
 package com.oho.oho.views.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.VibrationEffect;
@@ -18,15 +19,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.oho.oho.R;
 import com.oho.oho.adapters.ProfileDisplayAdapter;
 import com.oho.oho.databinding.FragmentLikedByBinding;
+import com.oho.oho.interfaces.OnFullImageViewListener;
 import com.oho.oho.interfaces.SwipeListener;
 import com.oho.oho.models.Profile;
 import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.models.Swipe;
 import com.oho.oho.viewmodels.LikedByViewModel;
+import com.oho.oho.views.FullScreenImageViewActivity;
 
 import java.util.ArrayList;
 
-public class LikedByFragment extends Fragment implements SwipeListener{
+public class LikedByFragment extends Fragment implements SwipeListener, OnFullImageViewListener {
 
     FragmentLikedByBinding binding;
     private LikedByViewModel likedByViewModel;
@@ -124,7 +127,7 @@ public class LikedByFragment extends Fragment implements SwipeListener{
 //        promptArrayList.add(0,null);
 //        promptArrayList.add(null);
 
-        ProfileDisplayAdapter adapter = new ProfileDisplayAdapter(user, promptArrayList, this, requireContext(),null);
+        ProfileDisplayAdapter adapter = new ProfileDisplayAdapter(user, promptArrayList, this, requireContext(),null,this);
         binding.recyclerviewPromptSection.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recyclerviewPromptSection.setAdapter(adapter);
     }
@@ -150,5 +153,12 @@ public class LikedByFragment extends Fragment implements SwipeListener{
                 .replace(R.id.frame_layout, new LikeYouFragment())
                 .addToBackStack(null)
                 .commit();
+    }
+
+    @Override
+    public void onFullImageView(String imageUrl) {
+        Intent intent = new Intent(requireContext(), FullScreenImageViewActivity.class);
+        intent.putExtra("image_url",imageUrl);
+        startActivity(intent);
     }
 }
