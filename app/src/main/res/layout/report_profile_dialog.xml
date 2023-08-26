@@ -56,7 +56,7 @@
         android:layout_marginTop="@dimen/_5sdp"
         android:layout_marginBottom="@dimen/_10sdp"
         android:fontFamily="@font/darkergrotesque_regular"
-        android:text="Please select your reasons for reporting this user. Once you report them they won't be able to send you messages."
+        android:text="Please select your reasons for reporting this user. Once someone's profile is reported we verify and take necessary measures against them."
         android:textColor="@color/black"
         android:textSize="@dimen/_16ssp" />
 
@@ -70,7 +70,7 @@
        android:padding="@dimen/_10sdp">
 
         <androidx.appcompat.widget.AppCompatCheckBox
-            android:id="@+id/fake"
+            android:id="@+id/impersonation"
             style="@style/CustomCheckBoxStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -105,17 +105,17 @@
             android:textColor="@color/black"
             android:textSize="@dimen/_14ssp" />
 
-        <androidx.appcompat.widget.AppCompatCheckBox
-            android:id="@+id/stalking"
-            style="@style/CustomCheckBoxStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:fontFamily="@font/ptsans_regular"
-            android:padding="@dimen/_5sdp"
-            android:text="Stalking"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_14ssp" />
+<!--        <androidx.appcompat.widget.AppCompatCheckBox-->
+<!--            android:id="@+id/stalking"-->
+<!--            style="@style/CustomCheckBoxStyle"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:checked="false"-->
+<!--            android:fontFamily="@font/ptsans_regular"-->
+<!--            android:padding="@dimen/_5sdp"-->
+<!--            android:text="Stalking"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="@dimen/_14ssp" />-->
 
     </LinearLayout>
 </LinearLayout>

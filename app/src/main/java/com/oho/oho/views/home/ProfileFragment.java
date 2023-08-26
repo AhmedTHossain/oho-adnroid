@@ -106,27 +106,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
         }
 
         profileViewModel.getPromptToDelete().observe(getViewLifecycleOwner(), promptToDelete -> {
-            if (promptToDelete != null) {
-
-                profileViewModel.deletePromptAnswer(promptToDelete);
-                profileViewModel.ifPromptDeleted.observe(getViewLifecycleOwner(), ifPromptDeleted -> {
-                    if (ifPromptDeleted) {
-
-                        for (PromptAnswer promptAnswer : promptAnswers) {
-                            if (Objects.equals(promptAnswer.getId(), promptToDelete)) {
-                                Log.d("ProfileFragment", "number of prompts before deletion = " + userProfile.getPromptAnswers().size());
-                                promptAnswers.remove(promptAnswer);
-
-                                adapter.notifyDataSetChanged();
-
-                                break;
-                            }
-                        }
-
-                    }
-                });
-
-            }
+            openDeletePromptDialog(promptToDelete);
         });
 
         profileViewModel.getIfEditBio().observe(getViewLifecycleOwner(), ifEditBio -> {
@@ -297,5 +277,53 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
         alertDialogUploading = alertDialogBuilder.create();
         // show it
         alertDialogUploading.show();
+    }
+
+    private void openDeletePromptDialog(Integer promptToDelete){
+        LayoutInflater li = LayoutInflater.from(requireContext());
+        View promptsView = li.inflate(R.layout.dialog_confirm_delete, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                requireContext());
+        // set alert_dialog.xml to alertdialog builder
+        alertDialogBuilder.setView(promptsView);
+        alertDialogBuilder.setCancelable(false)
+                .setPositiveButton("Delete",null)
+                .setNegativeButton("Cancel", null);
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                Button buttonNegative = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEGATIVE);
+                buttonNegative.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
+                button.setTextColor(ContextCompat.getColor(requireContext(), R.color.ted_image_picker_primary_pressed));
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(requireContext(),"Your prompt answer will be deleted shortly..",Toast.LENGTH_SHORT).show();
+                        if (promptToDelete != null) {
+
+                            profileViewModel.deletePromptAnswer(promptToDelete);
+                            profileViewModel.ifPromptDeleted.observe(getViewLifecycleOwner(), ifPromptDeleted -> {
+                                if (ifPromptDeleted) {
+
+                                    for (PromptAnswer promptAnswer : promptAnswers) {
+                                        if (Objects.equals(promptAnswer.getId(), promptToDelete)) {
+                                            Log.d("ProfileFragment", "number of prompts before deletion = " + userProfile.getPromptAnswers().size());
+                                            promptAnswers.remove(promptAnswer);
+                                            adapter.notifyDataSetChanged();
+                                            alertDialog.dismiss();
+                                            break;
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+        });
+        // show it
+        alertDialog.show();
     }
 }

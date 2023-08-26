@@ -39,7 +39,8 @@
             android:paddingEnd="@dimen/_20sdp"
             android:text="the most adventurous thing I did was..."
             android:textColor="@color/textSubTitle"
-            android:textSize="@dimen/_14ssp" />
+            android:textSize="@dimen/_14ssp"
+            android:textAlignment="viewStart"/>
 
         <TextView
             android:id="@+id/text_answer"
@@ -50,7 +51,8 @@
             android:fontFamily="@font/ptsans_bold"
             android:text="Sky Diving from 22,000 ft"
             android:textColor="@color/ted_image_picker_primary_pressed"
-            android:textSize="@dimen/_14ssp" />
+            android:textSize="@dimen/_14ssp"
+            android:textAlignment="viewStart"/>
     </LinearLayout>
 
     <View

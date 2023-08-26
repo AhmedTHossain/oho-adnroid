@@ -166,6 +166,9 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
                     case "Report":
                         showReportOptionDialog(imageUrl,nameText);
                         break;
+                    case "Block":
+                        showBlockOptionDialog(imageUrl,nameText);
+                        break;
                 }
                 return true;
             }
@@ -191,7 +194,51 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
         nameTextView.setText(nameText);
 
         alertDialogBuilder.setCancelable(false)
-                .setPositiveButton("Submit", null).setNegativeButton("Cancel", null);
+                .setPositiveButton("Report", null).setNegativeButton("Cancel", null);
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button buttonPositive = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                Button buttonNegative = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEGATIVE);
+                buttonPositive.setTextColor(ContextCompat.getColor(requireContext(), R.color.ted_image_picker_primary_pressed));
+
+//                button.setTextColor(ContextCompat.getColor(requireContext(), R.color.textTertiary));
+                buttonNegative.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
+//
+//                buttonPositive.setEnabled(false);
+
+                buttonPositive.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        alertDialog.dismiss();
+                    }
+                });
+            }
+        });
+        // show it
+        alertDialog.show();
+    }
+
+    private void showBlockOptionDialog(String imageUrl, String nameText) {
+        LayoutInflater li = LayoutInflater.from(requireContext());
+        View promptsView = li.inflate(R.layout.block_profile_dialog, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                requireContext());
+        // set alert_dialog.xml to alertdialog builder
+        alertDialogBuilder.setView(promptsView);
+
+        CircleImageView imageView = promptsView.findViewById(R.id.image);
+        TextView nameTextView = promptsView.findViewById(R.id.name_text);
+
+        Glide.with(requireContext())
+                .load(imageUrl)
+                .into(imageView);
+        nameTextView.setText(nameText);
+
+        alertDialogBuilder.setCancelable(false)
+                .setPositiveButton("Block", null).setNegativeButton("Cancel", null);
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override

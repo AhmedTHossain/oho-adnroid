@@ -40,7 +40,8 @@
             android:fontFamily="@font/ptsans_regular"
             android:text="in a partner, I'm looking for..."
             android:textColor="@color/textSubTitle"
-            android:textSize="@dimen/_14ssp" />
+            android:textSize="@dimen/_14ssp"
+            android:textAlignment="viewEnd"/>
 
         <TextView
             android:id="@+id/text_answer"
@@ -51,7 +52,8 @@
             android:fontFamily="@font/ptsans_bold"
             android:text="Commitment &amp; honesty"
             android:textColor="@color/ted_image_picker_primary_pressed"
-            android:textSize="@dimen/_14ssp" />
+            android:textSize="@dimen/_14ssp"
+            android:textAlignment="viewEnd"/>
     </LinearLayout>
 
     <View

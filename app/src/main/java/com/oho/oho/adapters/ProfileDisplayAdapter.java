@@ -229,7 +229,7 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
     public class Holder1 extends RecyclerView.ViewHolder {
         private TextView name, location, profession, gender, height, race, religion, about, education;
         private CircleImageView imageView;
-        private LinearLayout editBioButton;
+        private ImageView editBioButton;
         private ImageView editPhotoButton;
 
         public Holder1(@NonNull View itemView) {

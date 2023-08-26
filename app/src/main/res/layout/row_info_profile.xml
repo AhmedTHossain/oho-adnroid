@@ -193,39 +193,27 @@
         android:paddingEnd="@dimen/_20sdp">
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/text_title_about"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/ptsans_bold"
             android:text="About"
             android:textColor="@color/black"
-            android:textSize="@dimen/_16ssp" />
+            android:textSize="@dimen/_16ssp"
+            android:layout_centerVertical="true"/>
 
-        <LinearLayout
+        <ImageView
             android:id="@+id/button_edit_bio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:background="@drawable/rounded_button_solid"
+            android:src="@drawable/ic_edit_profile_white"
+            android:layout_toEndOf="@id/text_title_about"
+            android:elevation="1dp"
+            android:layout_marginStart="@dimen/_20sdp"
             android:foreground="?attr/selectableItemBackground"
             android:clickable="true"
-            android:focusable="true">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginEnd="@dimen/_3sdp"
-                android:fontFamily="@font/ptsans_regular"
-                android:text="Edit"
-                android:textColor="@color/ted_image_picker_primary_pressed"
-                android:textSize="@dimen/_14ssp" />
-
-            <ImageView
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_edit_profile" />
-
-        </LinearLayout>
+            android:focusable="true"/>
 
     </RelativeLayout>
 
@@ -235,7 +223,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_20sdp"
         android:fontFamily="@font/ptsans_regular"
-        android:justificationMode="inter_word"
         android:paddingStart="@dimen/_20sdp"
         android:paddingEnd="@dimen/_20sdp"
         android:text="@string/lorem_ipsum_2"
