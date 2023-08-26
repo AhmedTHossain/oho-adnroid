@@ -18,6 +18,7 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:clickable="true"
             android:focusable="true"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
             android:src="@drawable/profile_photo_placeholder"
             app:civ_border_color="#E8E8E8"
             app:civ_border_overlay="true"
