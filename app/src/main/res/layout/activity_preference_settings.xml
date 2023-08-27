@@ -64,7 +64,8 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
                 android:padding="@dimen/_10sdp"
-                app:toggle_selectAnimation="fade">
+                app:toggle_selectAnimation="fade"
+                app:toggle_selectableAmount="1">
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_male"
@@ -134,7 +135,8 @@
                 android:layout_marginEnd="@dimen/_15sdp"
                 android:padding="@dimen/_10sdp"
                 app:flexWrap="wrap"
-                app:toggle_selectAnimation="fade">
+                app:toggle_selectAnimation="fade"
+                app:toggle_selectableAmount="1">
 
                 <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
                     android:id="@+id/button_10"
@@ -897,36 +899,27 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/_14ssp" />
 
-                <androidx.appcompat.widget.AppCompatSpinner
+                <com.skydoves.powerspinner.PowerSpinnerView
                     android:id="@+id/height_spinner_min"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_weight="3"
-                    android:clickable="true"
-                    android:focusable="true" />
-
-<!--                <com.skydoves.powerspinner.PowerSpinnerView-->
-<!--                    android:id="@+id/height_spinner_min"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_weight="3"-->
-<!--                    android:hint="min"-->
-<!--                    android:padding="10dp"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:textColorHint="@color/black"-->
-<!--                    android:textSize="@dimen/_14ssp"-->
-<!--                    android:gravity="center"-->
-<!--                    android:fontFamily="@font/ptsans_regular"-->
-<!--                    android:drawableEnd="@drawable/ic_arrow_down"-->
-<!--                    app:spinner_arrow_gravity="end"-->
-<!--                    app:spinner_arrow_padding="8dp"-->
-<!--                    app:spinner_divider_color="@color/black"-->
-<!--                    app:spinner_divider_show="true"-->
-<!--                    app:spinner_divider_size="0.4dp"-->
-<!--                    app:spinner_item_height="46dp"-->
-<!--                    app:spinner_popup_animation="dropdown"-->
-<!--                    app:spinner_popup_background="@color/white"-->
-<!--                    app:spinner_popup_elevation="14dp" />-->
+                    android:background="@color/white"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:gravity="center"
+                    android:hint="min"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="@dimen/_14ssp"
+                    app:spinner_arrow_tint="@color/ted_image_picker_primary_pressed"
+                    app:spinner_divider_color="#1A000000"
+                    app:spinner_divider_show="true"
+                    app:spinner_divider_size="@dimen/_1sdp"
+                    app:spinner_item_height="46dp"
+                    app:spinner_popup_animation="fade"
+                    app:spinner_popup_background="@color/white" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -938,36 +931,27 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/_14ssp" />
 
-                <androidx.appcompat.widget.AppCompatSpinner
+                <com.skydoves.powerspinner.PowerSpinnerView
                     android:id="@+id/height_spinner_max"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_weight="3"
-                    android:clickable="true"
-                    android:focusable="true" />
-
-<!--                <com.skydoves.powerspinner.PowerSpinnerView-->
-<!--                    android:id="@+id/height_spinner_max"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_weight="3"-->
-<!--                    android:hint="max"-->
-<!--                    android:padding="10dp"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:textColorHint="@color/black"-->
-<!--                    android:textSize="@dimen/_14ssp"-->
-<!--                    android:gravity="center"-->
-<!--                    android:fontFamily="@font/ptsans_regular"-->
-<!--                    android:drawableEnd="@drawable/ic_arrow_down"-->
-<!--                    app:spinner_arrow_gravity="end"-->
-<!--                    app:spinner_arrow_padding="8dp"-->
-<!--                    app:spinner_divider_color="@color/black"-->
-<!--                    app:spinner_divider_show="true"-->
-<!--                    app:spinner_divider_size="0.4dp"-->
-<!--                    app:spinner_item_height="46dp"-->
-<!--                    app:spinner_popup_animation="dropdown"-->
-<!--                    app:spinner_popup_background="@color/white"-->
-<!--                    app:spinner_popup_elevation="14dp" />-->
+                    android:background="@color/white"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:gravity="center"
+                    android:hint="max"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="@dimen/_14ssp"
+                    app:spinner_arrow_tint="@color/ted_image_picker_primary_pressed"
+                    app:spinner_divider_color="#1A000000"
+                    app:spinner_divider_show="true"
+                    app:spinner_divider_size="@dimen/_1sdp"
+                    app:spinner_item_height="46dp"
+                    app:spinner_popup_animation="fade"
+                    app:spinner_popup_background="@color/white" />
 
             </LinearLayout>
 
@@ -991,13 +975,27 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/_14ssp" />
 
-                <androidx.appcompat.widget.AppCompatSpinner
+                <com.skydoves.powerspinner.PowerSpinnerView
                     android:id="@+id/age_spinner_min"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_weight="3"
-                    android:clickable="true"
-                    android:focusable="true" />
+                    android:background="@color/white"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:gravity="center"
+                    android:hint="min"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="@dimen/_14ssp"
+                    app:spinner_arrow_tint="@color/ted_image_picker_primary_pressed"
+                    app:spinner_divider_color="#1A000000"
+                    app:spinner_divider_show="true"
+                    app:spinner_divider_size="@dimen/_1sdp"
+                    app:spinner_item_height="46dp"
+                    app:spinner_popup_animation="fade"
+                    app:spinner_popup_background="@color/white" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -1009,14 +1007,27 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/_14ssp" />
 
-                <androidx.appcompat.widget.AppCompatSpinner
+                <com.skydoves.powerspinner.PowerSpinnerView
                     android:id="@+id/age_spinner_max"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_weight="3"
-                    android:clickable="true"
-                    android:focusable="true" />
-
+                    android:background="@color/white"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:gravity="center"
+                    android:hint="min"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="@dimen/_14ssp"
+                    app:spinner_arrow_tint="@color/ted_image_picker_primary_pressed"
+                    app:spinner_divider_color="#1A000000"
+                    app:spinner_divider_show="true"
+                    app:spinner_divider_size="@dimen/_1sdp"
+                    app:spinner_item_height="46dp"
+                    app:spinner_popup_animation="fade"
+                    app:spinner_popup_background="@color/white" />
             </LinearLayout>
 
             <TextView

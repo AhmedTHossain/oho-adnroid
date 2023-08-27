@@ -15,8 +15,10 @@ import com.oho.oho.responses.PreferenceResponse;
 import com.oho.oho.utils.HelperClass;
 import com.oho.oho.viewmodels.PreferenceSettingsViewModel;
 import com.skydoves.powerspinner.IconSpinnerAdapter;
+import com.skydoves.powerspinner.IconSpinnerItem;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import nl.bryanderidder.themedtogglebuttongroup.ThemedButton;
 
@@ -71,7 +73,7 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
     private void setReligionPreference(String religion) {
         String buttonId;
         if (religion.equals("Open to all"))
-            buttonId = "button_" + religion.toLowerCase().replace(" ", "")+"religion";
+            buttonId = "button_" + religion.toLowerCase().replace(" ", "") + "religion";
         else
             buttonId = "button_" + religion.toLowerCase().replace(" ", "");
         Toast.makeText(this, "button id = " + buttonId, Toast.LENGTH_SHORT).show();
@@ -81,7 +83,7 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
     private void setRacePreference(String race) {
         String buttonId;
         if (race.equals("Open to all"))
-            buttonId = "button_" + race.toLowerCase().replace(" ", "")+"race";
+            buttonId = "button_" + race.toLowerCase().replace(" ", "") + "race";
         else
             buttonId = "button_" + race.toLowerCase().replace(" ", "");
         Toast.makeText(this, "button id = " + buttonId, Toast.LENGTH_SHORT).show();
@@ -139,41 +141,52 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, heightList);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        binding.heightSpinnerMin.setAdapter(adapter);
-        binding.heightSpinnerMax.setAdapter(adapter);
 
-        binding.heightSpinnerMin.setSelection(13);
-        binding.heightSpinnerMax.setSelection(19);
+        List<IconSpinnerItem> iconSpinnerItems = new ArrayList<>();
 
-//        IconSpinnerAdapter adapterMinHeight = new IconSpinnerAdapter(binding.heightSpinnerMin);
-//        IconSpinnerAdapter adapterMaxHeight = new IconSpinnerAdapter(binding.heightSpinnerMax);
-//
-//        binding.heightSpinnerMin.setSpinnerAdapter(adapterMinHeight);
-//        binding.heightSpinnerMin.setItems(heightList);
-//        binding.heightSpinnerMin.selectItemByIndex(0);
-//        binding.heightSpinnerMin.setLifecycleOwner(this);
-//
-//        binding.heightSpinnerMin.setSpinnerAdapter(adapterMaxHeight);
-//        binding.heightSpinnerMin.setItems(heightList);
-//        binding.heightSpinnerMin.selectItemByIndex(0);
-//        binding.heightSpinnerMin.setLifecycleOwner(this);
+        for (String st : heightList)
+            iconSpinnerItems.add(new IconSpinnerItem(st, null));
+
+        IconSpinnerAdapter adapterMinHeight = new IconSpinnerAdapter(binding.heightSpinnerMin);
+        binding.heightSpinnerMin.setSpinnerAdapter(adapterMinHeight);
+        binding.heightSpinnerMin.setItems(iconSpinnerItems);
+
+        IconSpinnerAdapter adapterMaxHeight = new IconSpinnerAdapter(binding.heightSpinnerMax);
+        binding.heightSpinnerMax.setSpinnerAdapter(adapterMaxHeight);
+        binding.heightSpinnerMax.setItems(iconSpinnerItems);
+
+        int height = adapter.getCount() * adapter.getViewTypeCount() * 20;
+
+        binding.heightSpinnerMin.setSpinnerPopupHeight(height);
+        binding.heightSpinnerMax.setSpinnerPopupHeight(height);
     }
 
     private void setAgeSpinner() {
         for (int i = 18; i < 66; i++) {
             if (i < 65)
-                ageList.add(i + " years");
+                ageList.add(i + " yrs");
             else
-                ageList.add(i + "+ years");
+                ageList.add(i + "+ yrs");
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, ageList);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        binding.ageSpinnerMin.setAdapter(adapter);
-        binding.ageSpinnerMax.setAdapter(adapter);
 
-        binding.ageSpinnerMin.setSelection(5);
-        binding.ageSpinnerMax.setSelection(10);
+        List<IconSpinnerItem> iconSpinnerItems = new ArrayList<>();
+        for (String st : ageList)
+            iconSpinnerItems.add(new IconSpinnerItem(st, null));
+
+        IconSpinnerAdapter adapterMinAge = new IconSpinnerAdapter(binding.ageSpinnerMin);
+        binding.ageSpinnerMin.setSpinnerAdapter(adapterMinAge);
+        binding.ageSpinnerMin.setItems(iconSpinnerItems);
+
+        IconSpinnerAdapter adapterMaxAge = new IconSpinnerAdapter(binding.ageSpinnerMax);
+        binding.ageSpinnerMax.setSpinnerAdapter(adapterMaxAge);
+        binding.ageSpinnerMax.setItems(iconSpinnerItems);
+
+        int height = adapter.getCount() * adapter.getViewTypeCount() * 20;
+
+        binding.ageSpinnerMin.setSpinnerPopupHeight(height);
+        binding.ageSpinnerMax.setSpinnerPopupHeight(height);
+
     }
 }

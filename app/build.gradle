@@ -126,4 +126,5 @@ dependencies {
     implementation "io.getstream:avatarview-coil:1.0.3"
     implementation "com.github.skydoves:powerspinner:1.2.7"
     implementation 'com.github.chrisbanes:PhotoView:2.0.0'
+    implementation "com.github.skydoves:powerspinner:1.2.7"
 }
