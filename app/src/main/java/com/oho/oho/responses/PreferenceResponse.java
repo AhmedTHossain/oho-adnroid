@@ -8,7 +8,7 @@ import java.util.List;
 public class PreferenceResponse {
     @SerializedName("budget")
     @Expose
-    private String budget;
+    private List<String> budget;
     @SerializedName("cuisine")
     @Expose
     private List<String> cuisine;
@@ -17,7 +17,7 @@ public class PreferenceResponse {
     private Integer distance;
     @SerializedName("education")
     @Expose
-    private String education;
+    private List<String> education;
     @SerializedName("id")
     @Expose
     private Integer id;
@@ -38,19 +38,19 @@ public class PreferenceResponse {
     private Integer minHeight;
     @SerializedName("race")
     @Expose
-    private String race;
+    private List<String> race;
     @SerializedName("religion")
     @Expose
-    private String religion;
+    private List<String> religion;
     @SerializedName("user_id")
     @Expose
     private Integer userId;
 
-    public String getBudget() {
+    public List<String> getBudget() {
         return budget;
     }
 
-    public void setBudget(String budget) {
+    public void setBudget(List<String> budget) {
         this.budget = budget;
     }
 
@@ -70,11 +70,11 @@ public class PreferenceResponse {
         this.distance = distance;
     }
 
-    public String getEducation() {
+    public List<String> getEducation() {
         return education;
     }
 
-    public void setEducation(String education) {
+    public void setEducation(List<String> education) {
         this.education = education;
     }
 
@@ -126,19 +126,19 @@ public class PreferenceResponse {
         this.minHeight = minHeight;
     }
 
-    public String getRace() {
+    public List<String> getRace() {
         return race;
     }
 
-    public void setRace(String race) {
+    public void setRace(List<String> race) {
         this.race = race;
     }
 
-    public String getReligion() {
+    public List<String> getReligion() {
         return religion;
     }
 
-    public void setReligion(String religion) {
+    public void setReligion(List<String> religion) {
         this.religion = religion;
     }
 

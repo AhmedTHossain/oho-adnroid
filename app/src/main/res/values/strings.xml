@@ -55,6 +55,12 @@
         <item>Spiritual/Not Religious</item>
         <item>Open to all</item>
     </string-array>
+    <string-array name="budget_list">
+        <item>$</item>
+        <item>$$</item>
+        <item>$$$</item>
+        <item>Open to all</item>
+    </string-array>
     <string-array name="cuisine_list">
         <item>Italian</item>
         <item>Japanese</item>

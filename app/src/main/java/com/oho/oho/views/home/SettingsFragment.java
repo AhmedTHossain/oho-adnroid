@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.oho.oho.R;
-import com.oho.oho.databinding.FragmentHomeBinding;
 import com.oho.oho.databinding.FragmentSettingsBinding;
 import com.oho.oho.models.Profile;
 import com.oho.oho.utils.HelperClass;
@@ -19,7 +18,6 @@ import com.oho.oho.views.settings.AvailabilitySettingsActivity;
 import com.oho.oho.views.settings.FAQActivity;
 import com.oho.oho.views.LoginActivity;
 import com.oho.oho.views.settings.PreferenceSettingsActivity;
-import com.oho.oho.views.settings.PreferenceSettingsFragment;
 import com.oho.oho.views.settings.PrivacyPolicyActivity;
 import com.oho.oho.views.settings.SafeDatingTipsActivity;
 import com.oho.oho.views.settings.TermsOfUseActivity;

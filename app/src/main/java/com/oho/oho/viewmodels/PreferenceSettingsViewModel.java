@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.oho.oho.repositories.PreferenceSettingsRepository;
 import com.oho.oho.responses.PreferenceResponse;
@@ -17,21 +18,32 @@ public class PreferenceSettingsViewModel extends AndroidViewModel {
     public LiveData<Boolean> ifPreferenceUpdated;
 
     public LiveData<Boolean> ifUploaded;
+    public MutableLiveData<Boolean> isInputSelected = new MutableLiveData<>();
 
-    public PreferenceSettingsViewModel(@NonNull Application application){
+    public String selectedInputFor, selectedInput;
+
+    public PreferenceSettingsViewModel(@NonNull Application application) {
         super(application);
         repository = new PreferenceSettingsRepository(getApplication().getApplicationContext());
     }
 
-    public void getProfilePreference(String user_id){
+    public void getProfilePreference(String user_id) {
         preferenceResponse = repository.getUserPreference(user_id);
     }
 
-    public void getStoredUserLocation(int user_id){
+    public void getStoredUserLocation(int user_id) {
         userLocation = repository.getUserLocation(user_id);
     }
 
-    public void updatePreference(PreferenceResponse preferences){
+    public void updatePreference(PreferenceResponse preferences) {
         ifPreferenceUpdated = repository.updatePreference(preferences);
+    }
+
+    public void setIsInputSelected(boolean isInputSelected, String selectedInputFor, String selectedInput) {
+        if (selectedInputFor.equals("gender")) {
+            this.isInputSelected.setValue(isInputSelected);
+            this.selectedInputFor = selectedInputFor;
+            this.selectedInput = selectedInput;
+        }
     }
 }

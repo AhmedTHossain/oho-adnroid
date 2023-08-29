@@ -28,6 +28,17 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_1sdp"
             android:background="#1A000000" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/darkergrotesque_medium"
+            android:text="Your preferences on this screen drive our recommendations. Wider preferences mean more suggestions, while narrower ones offer accuracy."
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16ssp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"/>
     </LinearLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -155,6 +166,27 @@
                 android:textStyle="bold" />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview_cuisine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"/>
+
+            <!-- Budget button group -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:fontFamily="@font/ptsans_bold"
+                android:paddingBottom="@dimen/_5sdp"
+                android:text="Budget"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview_budget"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_15sdp"

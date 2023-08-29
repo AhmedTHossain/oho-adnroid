@@ -23,10 +23,7 @@ import com.skydoves.powerspinner.IconSpinnerAdapter;
 import com.skydoves.powerspinner.IconSpinnerItem;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import nl.bryanderidder.themedtogglebuttongroup.ThemedButton;
 
 public class PreferenceSettingsActivity extends AppCompatActivity {
 
@@ -49,6 +46,8 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
     private PreferenceInputAdapter religionInputAdapter;
     private ArrayList<PreferenceInput> cuisineList = new ArrayList<>();
     private PreferenceInputAdapter cuisineInputAdapter;
+    private ArrayList<PreferenceInput> budgetList = new ArrayList<>();
+    private PreferenceInputAdapter budgetInputAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,28 +60,45 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
         HelperClass helperClass = new HelperClass();
         profile = helperClass.getProfile(this);
 
-        initViewModel();
-
         setGenderRecyclerview();
         setDistanceRecylcerview();
         setEducationRecyclerView();
         setRaceRecyclerview();
         setReligionRecyclerview();
         setCuisineRecyclerview();
+        setBudgetRecyclerview();
 
         setHeightSpinner();
         setAgeSpinner();
+
+        initViewModel();
+        initViewModel();
+    }
+
+    private void setBudgetRecyclerview() {
+        // Get the string array from resources
+        String[] budgetArray = getResources().getStringArray(R.array.budget_list);
+        for (String budget : budgetArray) {
+            PreferenceInput preferenceInput = new PreferenceInput(budget, false);
+            budgetList.add(preferenceInput);
+        }
+
+        budgetInputAdapter = new PreferenceInputAdapter(budgetList, this, viewModel, "budget");
+        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this);
+        layoutManager.setFlexDirection(FlexDirection.ROW);
+        layoutManager.setJustifyContent(JustifyContent.FLEX_START);
+        binding.recyclerviewBudget.setLayoutManager(layoutManager);
+        binding.recyclerviewBudget.setAdapter(budgetInputAdapter);
     }
 
     private void setCuisineRecyclerview() {
         // Get the string array from resources
         String[] cuisineArray = getResources().getStringArray(R.array.cuisine_list);
-        for (String cuisine: cuisineArray){
-            PreferenceInput preferenceInput = new PreferenceInput(cuisine,false);
+        for (String cuisine : cuisineArray) {
+            PreferenceInput preferenceInput = new PreferenceInput(cuisine, false);
             cuisineList.add(preferenceInput);
         }
-
-        cuisineInputAdapter = new PreferenceInputAdapter(cuisineList,this);
+        cuisineInputAdapter = new PreferenceInputAdapter(cuisineList, this, viewModel, "cuisine");
         FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this);
         layoutManager.setFlexDirection(FlexDirection.ROW);
         layoutManager.setJustifyContent(JustifyContent.FLEX_START);
@@ -93,12 +109,12 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
     private void setReligionRecyclerview() {
         // Get the string array from resources
         String[] religionArray = getResources().getStringArray(R.array.religion_list);
-        for (String religion: religionArray){
-            PreferenceInput preferenceInput = new PreferenceInput(religion,false);
+        for (String religion : religionArray) {
+            PreferenceInput preferenceInput = new PreferenceInput(religion, false);
             religionList.add(preferenceInput);
         }
 
-        religionInputAdapter = new PreferenceInputAdapter(religionList,this);
+        religionInputAdapter = new PreferenceInputAdapter(religionList, this, viewModel, "religion");
         FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this);
         layoutManager.setFlexDirection(FlexDirection.ROW);
         layoutManager.setJustifyContent(JustifyContent.FLEX_START);
@@ -109,12 +125,12 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
     private void setRaceRecyclerview() {
         // Get the string array from resources
         String[] raceArray = getResources().getStringArray(R.array.ethnicity_list);
-        for (String race: raceArray){
-            PreferenceInput preferenceInput = new PreferenceInput(race,false);
+        for (String race : raceArray) {
+            PreferenceInput preferenceInput = new PreferenceInput(race, false);
             raceList.add(preferenceInput);
         }
 
-        raceInputAdapter = new PreferenceInputAdapter(raceList,this);
+        raceInputAdapter = new PreferenceInputAdapter(raceList, this, viewModel, "race");
         FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this);
         layoutManager.setFlexDirection(FlexDirection.ROW);
         layoutManager.setJustifyContent(JustifyContent.FLEX_START);
@@ -125,12 +141,12 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
     private void setEducationRecyclerView() {
         // Get the string array from resources
         String[] educationArray = getResources().getStringArray(R.array.education_list);
-        for (String education: educationArray){
-            PreferenceInput preferenceInput = new PreferenceInput(education,false);
+        for (String education : educationArray) {
+            PreferenceInput preferenceInput = new PreferenceInput(education, false);
             educationList.add(preferenceInput);
         }
 
-        educationInputAdapter = new PreferenceInputAdapter(educationList,this);
+        educationInputAdapter = new PreferenceInputAdapter(educationList, this, viewModel, "education");
         FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this);
         layoutManager.setFlexDirection(FlexDirection.ROW);
         layoutManager.setJustifyContent(JustifyContent.FLEX_START);
@@ -141,12 +157,12 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
     private void setDistanceRecylcerview() {
         // Get the string array from resources
         String[] distanceArray = getResources().getStringArray(R.array.distance_list);
-        for (String distance: distanceArray){
-            PreferenceInput preferenceInput = new PreferenceInput(distance,false);
+        for (String distance : distanceArray) {
+            PreferenceInput preferenceInput = new PreferenceInput(distance, false);
             distanceList.add(preferenceInput);
         }
 
-        distanceInputAdapter = new PreferenceInputAdapter(distanceList,this);
+        distanceInputAdapter = new PreferenceInputAdapter(distanceList, this, viewModel, "distance");
         FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this);
         layoutManager.setFlexDirection(FlexDirection.ROW);
         layoutManager.setJustifyContent(JustifyContent.FLEX_START);
@@ -157,12 +173,12 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
     private void setGenderRecyclerview() {
         // Get the string array from resources
         String[] genderArray = getResources().getStringArray(R.array.gender_list);
-        for (String gender: genderArray){
-            PreferenceInput preferenceInput = new PreferenceInput(gender,false);
+        for (String gender : genderArray) {
+            PreferenceInput preferenceInput = new PreferenceInput(gender, false);
             genderList.add(preferenceInput);
         }
 
-        genderInputAdapter = new PreferenceInputAdapter(genderList,this);
+        genderInputAdapter = new PreferenceInputAdapter(genderList, this, viewModel, "gender");
         FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this);
         layoutManager.setFlexDirection(FlexDirection.ROW);
         layoutManager.setJustifyContent(JustifyContent.FLEX_START);
@@ -182,8 +198,80 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
             if (preferenceResponse != null) {
                 Toast.makeText(this, "Preferred gender: " + preferenceResponse.getRace(), Toast.LENGTH_LONG).show();
                 preferences = preferenceResponse;
+
+                setPreferences();
+
+//                viewModel.setIsInputSelected(true,"gender",preferences.getInterestedIn());
+//                viewModel.isInputSelected.observe(this, isInputSelected -> {
+//                    if (isInputSelected) {
+//                        switch (viewModel.selectedInputFor) {
+//                            case "gender":
+//                                preferences.setInterestedIn(viewModel.selectedInput);
+//                                genderInputAdapter.notifyDataSetChanged();
+//                                break;
+//                        }
+//                    }
+//                });
             }
         });
+    }
+
+    private void setPreferences() {
+        for (PreferenceInput input : genderList)
+            if (preferences.getInterestedIn().equals(input.getInputName())) {
+                input.setSelected(true);
+                genderInputAdapter.notifyDataSetChanged();
+            }
+        for (PreferenceInput input : distanceList)
+            if (input.getInputName().contains(String.valueOf(preferences.getDistance()))) {
+                input.setSelected(true);
+                distanceInputAdapter.notifyDataSetChanged();
+            }
+        for (PreferenceInput input : educationList)
+            if (preferences.getEducation().contains(input.getInputName())) {
+                input.setSelected(true);
+                educationInputAdapter.notifyDataSetChanged();
+            }
+        for (PreferenceInput input : raceList)
+            if (preferences.getRace().contains(input.getInputName())) {
+                input.setSelected(true);
+                raceInputAdapter.notifyDataSetChanged();
+            }
+        for (PreferenceInput input : religionList)
+            if (preferences.getReligion().contains(input.getInputName())) {
+                input.setSelected(true);
+                religionInputAdapter.notifyDataSetChanged();
+            }
+        for (PreferenceInput input : cuisineList)
+            if (preferences.getCuisine().contains(input.getInputName())) {
+                input.setSelected(true);
+                cuisineInputAdapter.notifyDataSetChanged();
+            }
+        for (PreferenceInput input : budgetList)
+            if (preferences.getBudget().contains(input.getInputName())) {
+                input.setSelected(true);
+                budgetInputAdapter.notifyDataSetChanged();
+            }
+
+        Toast.makeText(this,"max height selected: "+convertCmToFeetInches(preferences.getMaxHeight()),Toast.LENGTH_SHORT).show();
+        for (int i = 0; i < heightList.size(); i++)
+            if (heightList.get(i).equals(convertCmToFeetInches(preferences.getMaxHeight())))
+                binding.heightSpinnerMax.selectItemByIndex(i);
+        for (int i = 0; i < heightList.size(); i++)
+            if (heightList.get(i).equals(convertCmToFeetInches(preferences.getMinHeight())))
+                binding.heightSpinnerMin.selectItemByIndex(i);
+        Log.d("PreferenceSettingsActivity","min age = "+preferences.getMinAge());
+
+        for (int i = 0; i < ageList.size(); i++)
+            if (ageList.get(i).equals(selectedMaxAge))
+                binding.ageSpinnerMax.selectItemByIndex(i);
+            else
+                binding.ageSpinnerMax.selectItemByIndex(ageList.size()-1);
+        for (int i = 0; i < ageList.size(); i++)
+            if (ageList.get(i).equals(preferences.getMinAge()+" yr"))
+                binding.ageSpinnerMin.selectItemByIndex(i);
+            else
+                binding.ageSpinnerMin.selectItemByIndex(ageList.size()-1);
     }
 
     private void setHeightSpinner() {
@@ -216,9 +304,9 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
     private void setAgeSpinner() {
         for (int i = 18; i < 66; i++) {
             if (i < 65)
-                ageList.add(i + " yrs");
+                ageList.add(i + " yr");
             else
-                ageList.add(i + "+ yrs");
+                ageList.add(i + "+ yr");
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, ageList);
@@ -240,5 +328,14 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
         binding.ageSpinnerMin.setSpinnerPopupHeight(height);
         binding.ageSpinnerMax.setSpinnerPopupHeight(height);
 
+    }
+
+    public static String convertCmToFeetInches(double centimeters) {
+        double feet = centimeters / 30.48;
+        int feetPart = (int) feet;
+        double inches = (feet - feetPart) * 12;
+        int inchesPart = (int) inches;
+
+        return feetPart + "." + inchesPart + " ft";
     }
 }

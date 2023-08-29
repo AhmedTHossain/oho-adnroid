@@ -7,6 +7,8 @@
     android:text="input"
     android:fontFamily="@font/ptsans_regular"
     android:textSize="@dimen/_14ssp"
+    android:gravity="center"
+    android:textAlignment="center"
     android:textColor="@color/black"
     android:background="@drawable/border_corner_drawable"
     android:paddingTop="@dimen/_10sdp"

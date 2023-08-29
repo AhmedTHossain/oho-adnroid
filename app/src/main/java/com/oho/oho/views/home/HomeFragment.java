@@ -31,7 +31,7 @@ import com.oho.oho.models.Swipe;
 import com.oho.oho.viewmodels.HomeViewModel;
 import com.oho.oho.views.FullScreenImageViewActivity;
 import com.oho.oho.views.settings.AvailabilitySettingsActivity;
-import com.oho.oho.views.settings.PreferenceSettingsFragment;
+import com.oho.oho.views.settings.PreferenceSettingsActivity;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -234,10 +234,7 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
     public void onClick(View view) {
         if (view.getId() == binding.openPreferenceSettingsButton.getId()) {
             if (binding.openPreferenceSettingsButton.getText().equals(getString(R.string.lets_set_some_preferences)))
-                requireActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame_layout, new PreferenceSettingsFragment())
-                        .addToBackStack(null)
-                        .commit();
+                startActivity(new Intent(requireActivity(), PreferenceSettingsActivity.class));
             else
                 startActivity(new Intent(requireActivity(), AvailabilitySettingsActivity.class));
         }
