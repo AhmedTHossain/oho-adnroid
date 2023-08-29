@@ -8,8 +8,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.android.flexbox.JustifyContent;
 import com.oho.oho.R;
+import com.oho.oho.adapters.PreferenceInputAdapter;
 import com.oho.oho.databinding.ActivityPreferenceSettingsBinding;
+import com.oho.oho.models.PreferenceInput;
 import com.oho.oho.models.Profile;
 import com.oho.oho.responses.PreferenceResponse;
 import com.oho.oho.utils.HelperClass;
@@ -18,6 +23,7 @@ import com.skydoves.powerspinner.IconSpinnerAdapter;
 import com.skydoves.powerspinner.IconSpinnerItem;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import nl.bryanderidder.themedtogglebuttongroup.ThemedButton;
@@ -30,6 +36,19 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
     private PreferenceSettingsViewModel viewModel;
     private Profile profile;
     private PreferenceResponse preferences;
+
+    private ArrayList<PreferenceInput> genderList = new ArrayList<>();
+    private PreferenceInputAdapter genderInputAdapter;
+    private ArrayList<PreferenceInput> distanceList = new ArrayList<>();
+    private PreferenceInputAdapter distanceInputAdapter;
+    private ArrayList<PreferenceInput> educationList = new ArrayList<>();
+    private PreferenceInputAdapter educationInputAdapter;
+    private ArrayList<PreferenceInput> raceList = new ArrayList<>();
+    private PreferenceInputAdapter raceInputAdapter;
+    private ArrayList<PreferenceInput> religionList = new ArrayList<>();
+    private PreferenceInputAdapter religionInputAdapter;
+    private ArrayList<PreferenceInput> cuisineList = new ArrayList<>();
+    private PreferenceInputAdapter cuisineInputAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +63,111 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
 
         initViewModel();
 
+        setGenderRecyclerview();
+        setDistanceRecylcerview();
+        setEducationRecyclerView();
+        setRaceRecyclerview();
+        setReligionRecyclerview();
+        setCuisineRecyclerview();
+
         setHeightSpinner();
         setAgeSpinner();
+    }
+
+    private void setCuisineRecyclerview() {
+        // Get the string array from resources
+        String[] cuisineArray = getResources().getStringArray(R.array.cuisine_list);
+        for (String cuisine: cuisineArray){
+            PreferenceInput preferenceInput = new PreferenceInput(cuisine,false);
+            cuisineList.add(preferenceInput);
+        }
+
+        cuisineInputAdapter = new PreferenceInputAdapter(cuisineList,this);
+        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this);
+        layoutManager.setFlexDirection(FlexDirection.ROW);
+        layoutManager.setJustifyContent(JustifyContent.FLEX_START);
+        binding.recyclerviewCuisine.setLayoutManager(layoutManager);
+        binding.recyclerviewCuisine.setAdapter(cuisineInputAdapter);
+    }
+
+    private void setReligionRecyclerview() {
+        // Get the string array from resources
+        String[] religionArray = getResources().getStringArray(R.array.religion_list);
+        for (String religion: religionArray){
+            PreferenceInput preferenceInput = new PreferenceInput(religion,false);
+            religionList.add(preferenceInput);
+        }
+
+        religionInputAdapter = new PreferenceInputAdapter(religionList,this);
+        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this);
+        layoutManager.setFlexDirection(FlexDirection.ROW);
+        layoutManager.setJustifyContent(JustifyContent.FLEX_START);
+        binding.recyclerviewReligion.setLayoutManager(layoutManager);
+        binding.recyclerviewReligion.setAdapter(religionInputAdapter);
+    }
+
+    private void setRaceRecyclerview() {
+        // Get the string array from resources
+        String[] raceArray = getResources().getStringArray(R.array.ethnicity_list);
+        for (String race: raceArray){
+            PreferenceInput preferenceInput = new PreferenceInput(race,false);
+            raceList.add(preferenceInput);
+        }
+
+        raceInputAdapter = new PreferenceInputAdapter(raceList,this);
+        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this);
+        layoutManager.setFlexDirection(FlexDirection.ROW);
+        layoutManager.setJustifyContent(JustifyContent.FLEX_START);
+        binding.recyclerviewRace.setLayoutManager(layoutManager);
+        binding.recyclerviewRace.setAdapter(raceInputAdapter);
+    }
+
+    private void setEducationRecyclerView() {
+        // Get the string array from resources
+        String[] educationArray = getResources().getStringArray(R.array.education_list);
+        for (String education: educationArray){
+            PreferenceInput preferenceInput = new PreferenceInput(education,false);
+            educationList.add(preferenceInput);
+        }
+
+        educationInputAdapter = new PreferenceInputAdapter(educationList,this);
+        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this);
+        layoutManager.setFlexDirection(FlexDirection.ROW);
+        layoutManager.setJustifyContent(JustifyContent.FLEX_START);
+        binding.recyclerviewEducation.setLayoutManager(layoutManager);
+        binding.recyclerviewEducation.setAdapter(educationInputAdapter);
+    }
+
+    private void setDistanceRecylcerview() {
+        // Get the string array from resources
+        String[] distanceArray = getResources().getStringArray(R.array.distance_list);
+        for (String distance: distanceArray){
+            PreferenceInput preferenceInput = new PreferenceInput(distance,false);
+            distanceList.add(preferenceInput);
+        }
+
+        distanceInputAdapter = new PreferenceInputAdapter(distanceList,this);
+        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this);
+        layoutManager.setFlexDirection(FlexDirection.ROW);
+        layoutManager.setJustifyContent(JustifyContent.FLEX_START);
+        binding.recyclerviewDistance.setLayoutManager(layoutManager);
+        binding.recyclerviewDistance.setAdapter(distanceInputAdapter);
+    }
+
+    private void setGenderRecyclerview() {
+        // Get the string array from resources
+        String[] genderArray = getResources().getStringArray(R.array.gender_list);
+        for (String gender: genderArray){
+            PreferenceInput preferenceInput = new PreferenceInput(gender,false);
+            genderList.add(preferenceInput);
+        }
+
+        genderInputAdapter = new PreferenceInputAdapter(genderList,this);
+        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this);
+        layoutManager.setFlexDirection(FlexDirection.ROW);
+        layoutManager.setJustifyContent(JustifyContent.FLEX_START);
+        binding.recyclerviewGender.setLayoutManager(layoutManager);
+        binding.recyclerviewGender.setAdapter(genderInputAdapter);
     }
 
     private void initViewModel() {
@@ -60,78 +182,8 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
             if (preferenceResponse != null) {
                 Toast.makeText(this, "Preferred gender: " + preferenceResponse.getRace(), Toast.LENGTH_LONG).show();
                 preferences = preferenceResponse;
-
-                setGenderPreference(preferences.getInterestedIn());
-                setDistancePreference(preferences.getDistance());
-                setEducationPreference(preferences.getEducation());
-                setRacePreference(preferences.getRace());
-                setReligionPreference(preferences.getReligion());
             }
         });
-    }
-
-    private void setReligionPreference(String religion) {
-        String buttonId;
-        if (religion.equals("Open to all"))
-            buttonId = "button_" + religion.toLowerCase().replace(" ", "") + "religion";
-        else
-            buttonId = "button_" + religion.toLowerCase().replace(" ", "");
-        Toast.makeText(this, "button id = " + buttonId, Toast.LENGTH_SHORT).show();
-        selectRadioButton(buttonId, "religion");
-    }
-
-    private void setRacePreference(String race) {
-        String buttonId;
-        if (race.equals("Open to all"))
-            buttonId = "button_" + race.toLowerCase().replace(" ", "") + "race";
-        else
-            buttonId = "button_" + race.toLowerCase().replace(" ", "");
-        Toast.makeText(this, "button id = " + buttonId, Toast.LENGTH_SHORT).show();
-        selectRadioButton(buttonId, "race");
-    }
-
-    private void setEducationPreference(String education) {
-        String buttonId = "button_" + education.toLowerCase().replace(" ", "");
-        Toast.makeText(this, "button id = " + buttonId, Toast.LENGTH_SHORT).show();
-        selectRadioButton(buttonId, "education");
-    }
-
-    private void setDistancePreference(Integer distance) {
-        String buttonId = "button_" + distance;
-        selectRadioButton(buttonId, "distance");
-    }
-
-    private void setGenderPreference(String interestedIn) {
-        String buttonId = "button_" + interestedIn.toLowerCase();
-        selectRadioButton(buttonId, "gender");
-    }
-
-    private void selectRadioButton(String buttonId, String buttonGroup) {
-        int resourceId = getResources().getIdentifier(buttonId, "id", getPackageName());
-        if (resourceId != 0) {
-            ThemedButton selectedRadioButton = findViewById(resourceId);
-            if (!selectedRadioButton.isSelected()) {
-                switch (buttonGroup) {
-                    case "gender":
-                        binding.buttonGroupGender.selectButton(resourceId);
-                        break;
-                    case "distance":
-                        binding.buttonGroupDistance.selectButton(resourceId);
-                        break;
-                    case "education":
-                        binding.buttonGroupEducation.selectButton(resourceId);
-                        break;
-                    case "race":
-                        binding.buttonGroupRace.selectButton(resourceId);
-                        break;
-                    case "religion":
-                        binding.buttonGroupReligion.selectButton(resourceId);
-                        break;
-                }
-
-            }
-        } else
-            Log.d("PreferenceSettingsActivity", "button id could not be found");
     }
 
     private void setHeightSpinner() {

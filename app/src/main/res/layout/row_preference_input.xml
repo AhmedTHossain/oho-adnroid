@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    android:id="@+id/text_input"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="input"
+    android:fontFamily="@font/ptsans_regular"
+    android:textSize="@dimen/_14ssp"
+    android:textColor="@color/black"
+    android:background="@drawable/border_corner_drawable"
+    android:paddingTop="@dimen/_10sdp"
+    android:paddingBottom="@dimen/_10sdp"
+    android:paddingStart="@dimen/_20sdp"
+    android:paddingEnd="@dimen/_20sdp"
+    android:layout_margin="@dimen/_5sdp"/>
+
