@@ -61,43 +61,43 @@ public class MainActivity extends AppCompatActivity {
 
         Profile profile = getCustomObject(this);
 
-        if (profile != null) {
-
-            replaceFragment(new HomeFragment());
-
-            initAvailabilityViewModel();
-
-            getFCMToken();
-
-            ChatNotificationPayload notificationPayload;
-            if (getIntent().hasExtra("notificationPayload")) {
-                notificationPayload = (ChatNotificationPayload) getIntent().getSerializableExtra("notificationPayload");
-                Toast.makeText(this, "sender name = " + notificationPayload.getChannelName(), Toast.LENGTH_SHORT).show();
-
-                Intent intent = new Intent(this, ChatActivity.class);
-                intent.putExtra("notificationPayload", notificationPayload); //where chatroom is an instance of ChatRoom object
-                intent.putExtra("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODQxODE1OTcsImlhdCI6MTY4NDA5NTE5Nywic3ViIjo5OX0.U6TqG6oHX64ZCtYMIQjzPihu7VB2jCGcbPX6gbWUtrA"); //a newly generated token has been sent to ChatActivity
-                startActivity(intent);
-                Log.d("MainActivvity", "notification payload = " + notificationPayload);
-            }
-            if (getIntent().hasExtra("show"))
-                if (getIntent().getStringExtra("show").equals("ProfileScreen"))
-                    replaceFragment(new ProfileFragment());
-            if (getIntent().hasExtra("from")) {
-                if (getIntent().getStringExtra("from").equals("ChatActivity")) {
-                    replaceFragment(new ProfileFragment(getIntent().getIntExtra("sender_id", 0), (ChatRoom) getIntent().getSerializableExtra("chatroom")));
-                    binding.bottomNavigationview.setSelectedItemId(R.id.profile);
-                }
-            }
-
-
-            preSelectedSlotsArray = new ArrayList<>();
-
-//            SharedPreferences mPrefs = getSharedPreferences("pref", Context.MODE_PRIVATE);
-//            Gson gson = new Gson();
-//            String profile = mPrefs.getString("profile", "");
-//            Profile userProfile = gson.fromJson(profile, Profile.class);
-
+//        if (profile != null) {
+//
+//            replaceFragment(new HomeFragment());
+//
+//            initAvailabilityViewModel();
+//
+//            getFCMToken();
+//
+//            ChatNotificationPayload notificationPayload;
+//            if (getIntent().hasExtra("notificationPayload")) {
+//                notificationPayload = (ChatNotificationPayload) getIntent().getSerializableExtra("notificationPayload");
+//                Toast.makeText(this, "sender name = " + notificationPayload.getChannelName(), Toast.LENGTH_SHORT).show();
+//
+//                Intent intent = new Intent(this, ChatActivity.class);
+//                intent.putExtra("notificationPayload", notificationPayload); //where chatroom is an instance of ChatRoom object
+//                intent.putExtra("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODQxODE1OTcsImlhdCI6MTY4NDA5NTE5Nywic3ViIjo5OX0.U6TqG6oHX64ZCtYMIQjzPihu7VB2jCGcbPX6gbWUtrA"); //a newly generated token has been sent to ChatActivity
+//                startActivity(intent);
+//                Log.d("MainActivvity", "notification payload = " + notificationPayload);
+//            }
+//            if (getIntent().hasExtra("show"))
+//                if (getIntent().getStringExtra("show").equals("ProfileScreen"))
+//                    replaceFragment(new ProfileFragment());
+//            if (getIntent().hasExtra("from")) {
+//                if (getIntent().getStringExtra("from").equals("ChatActivity")) {
+//                    replaceFragment(new ProfileFragment(getIntent().getIntExtra("sender_id", 0), (ChatRoom) getIntent().getSerializableExtra("chatroom")));
+//                    binding.bottomNavigationview.setSelectedItemId(R.id.profile);
+//                }
+//            }
+//
+//
+//            preSelectedSlotsArray = new ArrayList<>();
+//
+////            SharedPreferences mPrefs = getSharedPreferences("pref", Context.MODE_PRIVATE);
+////            Gson gson = new Gson();
+////            String profile = mPrefs.getString("profile", "");
+////            Profile userProfile = gson.fromJson(profile, Profile.class);
+//
             binding.bottomNavigationview.setOnItemSelectedListener(item -> {
 
                 switch (item.getItemId()) {
@@ -121,10 +121,10 @@ public class MainActivity extends AppCompatActivity {
 
                 return true;
             });
-        } else {
-            startActivity(new Intent(this, LoginActivity.class));
-            finish();
-        }
+//        } else {
+//            startActivity(new Intent(this, LoginActivity.class));
+//            finish();
+//        }
     }
 
     private void replaceFragment(Fragment fragment) {
