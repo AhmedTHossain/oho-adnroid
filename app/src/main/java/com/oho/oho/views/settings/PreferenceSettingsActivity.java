@@ -262,16 +262,16 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
                 binding.heightSpinnerMin.selectItemByIndex(i);
         Log.d("PreferenceSettingsActivity","min age = "+preferences.getMinAge());
 
-        for (int i = 0; i < ageList.size(); i++)
-            if (ageList.get(i).equals(selectedMaxAge))
-                binding.ageSpinnerMax.selectItemByIndex(i);
-            else
-                binding.ageSpinnerMax.selectItemByIndex(ageList.size()-1);
-        for (int i = 0; i < ageList.size(); i++)
-            if (ageList.get(i).equals(preferences.getMinAge()+" yr"))
-                binding.ageSpinnerMin.selectItemByIndex(i);
-            else
-                binding.ageSpinnerMin.selectItemByIndex(ageList.size()-1);
+//        for (int i = 0; i < ageList.size(); i++)
+//            if (ageList.get(i).equals(selectedMaxAge))
+//                binding.ageSpinnerMax.selectItemByIndex(i);
+//            else
+//                binding.ageSpinnerMax.selectItemByIndex(ageList.size()-1);
+//        for (int i = 0; i < ageList.size(); i++)
+//            if (ageList.get(i).equals(preferences.getMinAge()+" yr"))
+//                binding.ageSpinnerMin.selectItemByIndex(i);
+//            else
+//                binding.ageSpinnerMin.selectItemByIndex(ageList.size()-1);
     }
 
     private void setHeightSpinner() {

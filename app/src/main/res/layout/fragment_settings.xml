@@ -47,13 +47,61 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginBottom="@dimen/_20sdp"
                 android:fontFamily="@font/darkergrotesque_medium"
-                android:text="You will find all necessary settings and information related to this app in this section."
+                android:text="You can navigate to different section of the app using the menu below."
                 android:textColor="@color/black"
                 android:textSize="@dimen/_16ssp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/ptsans_bold"
+                android:text="Dates"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16ssp" />
+
+            <RelativeLayout
+                android:id="@+id/button_upcoming_dates"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:id="@+id/image_upcoming_dares"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="true"
+                    android:src="@drawable/ic_upcoming_dates" />
+
+                <TextView
+                    android:id="@+id/text_all_upcoming_dates"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_toEndOf="@id/image_upcoming_dares"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:text="All Upcoming Dates"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14ssp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_arrow_right" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_25sdp"
                 android:fontFamily="@font/ptsans_bold"
                 android:text="Settings"
                 android:textAllCaps="true"
@@ -72,16 +120,15 @@
                 <ImageView
                     android:id="@+id/image_bullet_1"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
+                    android:layout_alignParentBottom="true"
                     android:src="@drawable/ic_account_settings" />
 
                 <TextView
                     android:id="@+id/text_settings_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_toEndOf="@id/image_bullet_1"
                     android:fontFamily="@font/ptsans_regular"
@@ -114,9 +161,9 @@
                 <ImageView
                     android:id="@+id/image_bullet_2"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
+                    android:layout_alignParentBottom="true"
                     android:src="@drawable/ic_preference_settings" />
 
                 <TextView
@@ -156,16 +203,15 @@
                 <ImageView
                     android:id="@+id/image_bullet_4"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
+                    android:layout_alignParentBottom="true"
                     android:src="@drawable/ic_availability_settings" />
 
                 <TextView
                     android:id="@+id/text_settings_4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_toEndOf="@id/image_bullet_4"
                     android:fontFamily="@font/ptsans_regular"
@@ -211,17 +257,16 @@
 
                 <ImageView
                     android:id="@+id/image_bullet_3"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_faq" />
+                    android:layout_alignParentBottom="true"
+                    android:src="@drawable/noun_faq_4924491" />
 
                 <TextView
                     android:id="@+id/text_settings_3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_toEndOf="@id/image_bullet_3"
                     android:fontFamily="@font/ptsans_regular"
@@ -254,17 +299,16 @@
 
                 <ImageView
                     android:id="@+id/image_bullet_5"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
+                    android:layout_alignParentBottom="true"
                     android:src="@drawable/ic_safety_tips" />
 
                 <TextView
                     android:id="@+id/text_settings_5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_toEndOf="@id/image_bullet_5"
                     android:fontFamily="@font/ptsans_regular"
@@ -300,17 +344,16 @@
 
                 <ImageView
                     android:id="@+id/image_bullet_6"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
+                    android:layout_alignParentBottom="true"
                     android:src="@drawable/ic_terms_and_conditions" />
 
                 <TextView
                     android:id="@+id/text_settings_6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_toEndOf="@id/image_bullet_6"
                     android:fontFamily="@font/ptsans_regular"
@@ -343,9 +386,9 @@
 
                 <ImageView
                     android:id="@+id/image_bullet_7"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_alignParentStart="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentBottom="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/ic_privacy_policy" />
 
@@ -353,7 +396,6 @@
                     android:id="@+id/text_settings_7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_toEndOf="@id/image_bullet_7"
                     android:fontFamily="@font/ptsans_regular"
@@ -390,16 +432,15 @@
                 <ImageView
                     android:id="@+id/image_bullet_8"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_logout" />
+                    android:layout_alignParentBottom="true"
+                    android:src="@drawable/ic_sign_out" />
 
                 <TextView
                     android:id="@+id/text_settings_8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_toEndOf="@id/image_bullet_8"
                     android:fontFamily="@font/ptsans_regular"
@@ -414,7 +455,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/ic_sign_out" />
+                    android:src="@drawable/ic_arrow_right" />
             </RelativeLayout>
 
             <View
