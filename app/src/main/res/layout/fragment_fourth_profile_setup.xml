@@ -202,6 +202,7 @@
         android:paddingTop="@dimen/_10sdp"
         android:paddingEnd="@dimen/_15sdp"
         android:paddingBottom="@dimen/_10sdp"
+        android:drawableEnd="@drawable/ic_phone_input"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         android:textSize="@dimen/_14ssp"

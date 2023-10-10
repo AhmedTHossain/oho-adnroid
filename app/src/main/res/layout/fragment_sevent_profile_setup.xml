@@ -85,9 +85,9 @@
 
     <ImageView
         android:id="@+id/image_profile_photo"
-        android:layout_width="@dimen/_150sdp"
-        android:layout_height="@dimen/_150sdp"
-        android:layout_gravity="center_horizontal"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="@dimen/_200sdp"
+        android:layout_gravity="center"
         android:src="@drawable/add_photo" />
 
     <TextView

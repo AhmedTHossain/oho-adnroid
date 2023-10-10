@@ -28,10 +28,10 @@
         android:paddingTop="@dimen/_10sdp"
         android:paddingEnd="@dimen/_15sdp"
         android:paddingBottom="@dimen/_10sdp"
+        android:drawableEnd="@drawable/ic_location_input"
         android:text="Tap to share your location"
         android:textColor="@color/black"
         android:textSize="@dimen/_14ssp"
-        app:drawableEndCompat="@drawable/ic_location_24"
         app:drawableTint="@color/black" />
 
     <TextView
