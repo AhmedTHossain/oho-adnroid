@@ -2,18 +2,19 @@ package com.oho.oho.viewmodels;
 
 import android.app.Application;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.oho.oho.MainActivity;
+import com.oho.oho.R;
 import com.oho.oho.models.CreateDeviceId;
-import com.oho.oho.models.JWTTokenRequest;
 import com.oho.oho.repositories.MainRepository;
 import com.oho.oho.responses.StoreDeviceIdResponse;
 import com.oho.oho.utils.HelperClass;
@@ -33,6 +34,13 @@ public class MainViewModel extends AndroidViewModel {
 
     public void updateDeviceId(CreateDeviceId createDeviceId) {
         storedIdResponse = repository.updateDeviceId(createDeviceId, getApplication().getApplicationContext());
+    }
+
+    public void replaceFragment(Fragment fragment, FragmentManager supportFragmentManager) {
+        FragmentManager fragmentManager = supportFragmentManager;
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout, fragment);
+        fragmentTransaction.commit();
     }
 
     public void getFCMToken() {

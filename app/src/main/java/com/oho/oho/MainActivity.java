@@ -64,9 +64,9 @@ public class MainActivity extends AppCompatActivity {
 
         if (profile != null) {
 
-            replaceFragment(new HomeFragment());
-
             initMainViewModel();
+
+            viewModel.replaceFragment(new HomeFragment(),getSupportFragmentManager());
 
             viewModel.getFCMToken();
 
@@ -83,10 +83,10 @@ public class MainActivity extends AppCompatActivity {
             }
             if (getIntent().hasExtra("show"))
                 if (getIntent().getStringExtra("show").equals("ProfileScreen"))
-                    replaceFragment(new ProfileFragment());
+                    viewModel.replaceFragment(new ProfileFragment(),getSupportFragmentManager());
             if (getIntent().hasExtra("from")) {
                 if (getIntent().getStringExtra("from").equals("ChatActivity")) {
-                    replaceFragment(new ProfileFragment(getIntent().getIntExtra("sender_id", 0), (ChatRoom) getIntent().getSerializableExtra("chatroom")));
+                    viewModel.replaceFragment(new ProfileFragment(getIntent().getIntExtra("sender_id", 0), (ChatRoom) getIntent().getSerializableExtra("chatroom")),getSupportFragmentManager());
                     binding.bottomNavigationview.setSelectedItemId(R.id.profile);
                 }
             }
@@ -104,19 +104,19 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
 
                     case R.id.home:
-                        replaceFragment(new HomeFragment());
+                        viewModel.replaceFragment(new HomeFragment(),getSupportFragmentManager());
                         break;
                     case R.id.like:
-                        replaceFragment(new LikeYouFragment());
+                        viewModel.replaceFragment(new LikeYouFragment(),getSupportFragmentManager());
                         break;
                     case R.id.profile:
-                        replaceFragment(new ProfileFragment());
+                        viewModel.replaceFragment(new ProfileFragment(),getSupportFragmentManager());
                         break;
                     case R.id.messages:
-                        replaceFragment(new MessagesFragment());
+                        viewModel.replaceFragment(new MessagesFragment(),getSupportFragmentManager());
                         break;
                     case R.id.settings:
-                        replaceFragment(new SettingsFragment());
+                        viewModel.replaceFragment(new SettingsFragment(),getSupportFragmentManager());
                         break;
                 }
 
@@ -126,13 +126,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, LoginActivity.class));
             finish();
         }
-    }
-
-    private void replaceFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout, fragment);
-        fragmentTransaction.commit();
     }
 
     private void initMainViewModel() {

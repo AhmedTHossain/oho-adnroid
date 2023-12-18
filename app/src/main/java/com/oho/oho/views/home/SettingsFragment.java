@@ -21,6 +21,7 @@ import com.oho.oho.views.settings.PreferenceSettingsActivity;
 import com.oho.oho.views.settings.PrivacyPolicyActivity;
 import com.oho.oho.views.settings.SafeDatingTipsActivity;
 import com.oho.oho.views.settings.TermsOfUseActivity;
+import com.oho.oho.views.settings.UpcomingDatesActivity;
 
 public class SettingsFragment extends Fragment implements View.OnClickListener {
 
@@ -44,7 +45,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         binding.buttonTermsSettings.setOnClickListener(this);
         binding.buttonPrivacySettings.setOnClickListener(this);
         binding.buttonSignoutSettings.setOnClickListener(this);
-
+        binding.buttonUpcomingDates.setOnClickListener(this);
         // Inflate the layout for this fragment
         return binding.getRoot();
     }
@@ -80,6 +81,9 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
                 helperClass.saveProfile(requireContext(),profile);
                 startActivity(new Intent(requireActivity(), LoginActivity.class));
                 requireActivity().finish();
+                break;
+            case R.id.button_upcoming_dates:
+                startActivity(new Intent(requireActivity(), UpcomingDatesActivity.class));
                 break;
         }
     }
