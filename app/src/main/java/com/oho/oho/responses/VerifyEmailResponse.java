@@ -5,26 +5,26 @@ import com.google.gson.annotations.SerializedName;
 import com.oho.oho.models.Profile;
 
 public class VerifyEmailResponse {
-    @SerializedName("message")
+    @SerializedName("status")
     @Expose
-    private String message;
-    @SerializedName("profile")
+    private Boolean status;
+    @SerializedName("data")
     @Expose
-    private Profile profile;
+    private Profile data;
 
-    public String getMessage() {
-        return message;
+    public Boolean getStatus() {
+        return status;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 
-    public Profile getProfile() {
-        return profile;
+    public Profile getData() {
+        return data;
     }
 
-    public void setProfile(Profile profile) {
-        this.profile = profile;
+    public void setData(Profile data) {
+        this.data = data;
     }
 }

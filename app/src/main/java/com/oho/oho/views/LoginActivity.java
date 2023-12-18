@@ -26,6 +26,7 @@ import com.oho.oho.MainActivity;
 import com.oho.oho.R;
 import com.oho.oho.databinding.ActivityLoginBinding;
 import com.oho.oho.models.Profile;
+import com.oho.oho.utils.HelperClass;
 import com.oho.oho.viewmodels.LoginViewModel;
 import com.oho.oho.views.settings.PrivacyPolicyActivity;
 import com.oho.oho.views.settings.TermsOfUseActivity;
@@ -128,7 +129,10 @@ public class LoginActivity extends AppCompatActivity {
         loginViewModel.authenticatedUserLiveData.observe(this, authenticatedUser -> {
             loginViewModel.checkIfUserExists(authenticatedUser.getEmail());
             loginViewModel.userProfileData.observe(this, userProfile -> {
+                HelperClass helperClass = new HelperClass();
                 if (userProfile == null) {
+                    helperClass.saveProfile(LoginActivity.this,null);
+
                     Intent intent = new Intent(this, OnboardingActivity.class);
                     intent.putExtra("name",authenticatedUser.getDisplayName());
                     intent.putExtra("email",authenticatedUser.getEmail());
@@ -137,16 +141,12 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 }else {
-                    saveCustomObject(this,userProfile);
+                    helperClass.saveProfile(LoginActivity.this,null);
+
                     startActivity(new Intent(this, MainActivity.class));
                     finish();
                 }
             });
         });
-    }
-    public static void saveCustomObject(Context context, Profile profile) {
-        SharedPreferences.Editor editor = context.getSharedPreferences("ProfilePrefsFile", Context.MODE_PRIVATE).edit();
-        editor.putString("PROFILE", profile.toJsonString());
-        editor.apply();
     }
 }

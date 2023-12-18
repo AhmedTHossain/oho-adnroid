@@ -39,7 +39,7 @@ public class LoginRepository {
         return authenticatedUserMutableLiveData;
     }
 
-    public MutableLiveData<Profile> checkIfUserEmailExists(String authenticatedUserEmail){
+    public MutableLiveData<Profile> checkIfUserEmailExists(String authenticatedUserEmail) {
         MutableLiveData<Profile> checkedUserProfileMutableData = new MutableLiveData<>();
         APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
         Call<VerifyEmailResponse> call = apiService.verifyEmail(authenticatedUserEmail);
@@ -48,10 +48,11 @@ public class LoginRepository {
             @Override
             public void onResponse(@NonNull Call<VerifyEmailResponse> call, @NonNull Response<VerifyEmailResponse> response) {
 
-                if (Objects.requireNonNull(response.body()).getMessage().equals("email exists"))
-                    checkedUserProfileMutableData.setValue(response.body().getProfile());
-                else
-                    checkedUserProfileMutableData.setValue(null);
+                if (response.isSuccessful())
+                    if (response.body() != null) {
+                        checkedUserProfileMutableData.setValue(response.body().getData());
+                    } else
+                        checkedUserProfileMutableData.setValue(null);
             }
 
             @Override

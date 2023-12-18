@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private MainViewModel viewModel;
 
     ArrayList<String> preSelectedSlotsArray;
+    HelperClass helperClass = new HelperClass();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,45 +60,45 @@ public class MainActivity extends AppCompatActivity {
 //                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
 //        );
 
-        Profile profile = getCustomObject(this);
+        Profile profile = helperClass.getProfile(this);
 
-//        if (profile != null) {
-//
-//            replaceFragment(new HomeFragment());
-//
-//            initAvailabilityViewModel();
-//
-//            getFCMToken();
-//
-//            ChatNotificationPayload notificationPayload;
-//            if (getIntent().hasExtra("notificationPayload")) {
-//                notificationPayload = (ChatNotificationPayload) getIntent().getSerializableExtra("notificationPayload");
-//                Toast.makeText(this, "sender name = " + notificationPayload.getChannelName(), Toast.LENGTH_SHORT).show();
-//
-//                Intent intent = new Intent(this, ChatActivity.class);
-//                intent.putExtra("notificationPayload", notificationPayload); //where chatroom is an instance of ChatRoom object
-//                intent.putExtra("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODQxODE1OTcsImlhdCI6MTY4NDA5NTE5Nywic3ViIjo5OX0.U6TqG6oHX64ZCtYMIQjzPihu7VB2jCGcbPX6gbWUtrA"); //a newly generated token has been sent to ChatActivity
-//                startActivity(intent);
-//                Log.d("MainActivvity", "notification payload = " + notificationPayload);
-//            }
-//            if (getIntent().hasExtra("show"))
-//                if (getIntent().getStringExtra("show").equals("ProfileScreen"))
-//                    replaceFragment(new ProfileFragment());
-//            if (getIntent().hasExtra("from")) {
-//                if (getIntent().getStringExtra("from").equals("ChatActivity")) {
-//                    replaceFragment(new ProfileFragment(getIntent().getIntExtra("sender_id", 0), (ChatRoom) getIntent().getSerializableExtra("chatroom")));
-//                    binding.bottomNavigationview.setSelectedItemId(R.id.profile);
-//                }
-//            }
-//
-//
-//            preSelectedSlotsArray = new ArrayList<>();
-//
-////            SharedPreferences mPrefs = getSharedPreferences("pref", Context.MODE_PRIVATE);
-////            Gson gson = new Gson();
-////            String profile = mPrefs.getString("profile", "");
-////            Profile userProfile = gson.fromJson(profile, Profile.class);
-//
+        if (profile != null) {
+
+            replaceFragment(new HomeFragment());
+
+            initMainViewModel();
+
+            viewModel.getFCMToken();
+
+            ChatNotificationPayload notificationPayload;
+            if (getIntent().hasExtra("notificationPayload")) {
+                notificationPayload = (ChatNotificationPayload) getIntent().getSerializableExtra("notificationPayload");
+                Toast.makeText(this, "sender name = " + notificationPayload.getChannelName(), Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(this, ChatActivity.class);
+                intent.putExtra("notificationPayload", notificationPayload); //where chatroom is an instance of ChatRoom object
+                intent.putExtra("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODQxODE1OTcsImlhdCI6MTY4NDA5NTE5Nywic3ViIjo5OX0.U6TqG6oHX64ZCtYMIQjzPihu7VB2jCGcbPX6gbWUtrA"); //a newly generated token has been sent to ChatActivity
+                startActivity(intent);
+                Log.d("MainActivvity", "notification payload = " + notificationPayload);
+            }
+            if (getIntent().hasExtra("show"))
+                if (getIntent().getStringExtra("show").equals("ProfileScreen"))
+                    replaceFragment(new ProfileFragment());
+            if (getIntent().hasExtra("from")) {
+                if (getIntent().getStringExtra("from").equals("ChatActivity")) {
+                    replaceFragment(new ProfileFragment(getIntent().getIntExtra("sender_id", 0), (ChatRoom) getIntent().getSerializableExtra("chatroom")));
+                    binding.bottomNavigationview.setSelectedItemId(R.id.profile);
+                }
+            }
+
+
+            preSelectedSlotsArray = new ArrayList<>();
+
+//            SharedPreferences mPrefs = getSharedPreferences("pref", Context.MODE_PRIVATE);
+//            Gson gson = new Gson();
+//            String profile = mPrefs.getString("profile", "");
+//            Profile userProfile = gson.fromJson(profile, Profile.class);
+
             binding.bottomNavigationview.setOnItemSelectedListener(item -> {
 
                 switch (item.getItemId()) {
@@ -121,10 +122,10 @@ public class MainActivity extends AppCompatActivity {
 
                 return true;
             });
-//        } else {
-//            startActivity(new Intent(this, LoginActivity.class));
-//            finish();
-//        }
+        } else {
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+        }
     }
 
     private void replaceFragment(Fragment fragment) {
@@ -134,56 +135,8 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    private void initAvailabilityViewModel() {
+    private void initMainViewModel() {
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
-    }
-
-    private void getFCMToken() {
-        FirebaseMessaging.getInstance().getToken()
-                .addOnCompleteListener(new OnCompleteListener<String>() {
-                    @Override
-                    public void onComplete(@NonNull Task<String> task) {
-                        if (!task.isSuccessful()) {
-                            Log.w(TAG, "Fetching FCM registration token failed", task.getException());
-                            return;
-                        }
-
-                        // Get new FCM registration token
-                        String token = task.getResult();
-
-                        HelperClass helperClass = new HelperClass();
-
-                        storeDeviceToken(token, helperClass.getProfile(MainActivity.this).getId(), "android"); //TODO: later replace the hard coded user_id with logged in user's id
-
-                        // Log and toast
-                        String msg = "FCM token of this device: " + token;
-                        Log.d(TAG, msg);
-                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
-
-    private void storeDeviceToken(String token, int user_id, String device_type) {
-        CreateDeviceId createDeviceId = new CreateDeviceId();
-        createDeviceId.setToken(token);
-        createDeviceId.setUserId(user_id);
-        createDeviceId.setDeviceType(device_type);
-
-        viewModel.storeDeviceId(createDeviceId);
-        viewModel.storedIdResponse.observe(this, storedIdResponse -> {
-            if (storedIdResponse != null)
-                Toast.makeText(this, "Device ID found in response!!", Toast.LENGTH_SHORT).show();
-            else {
-//                Toast.makeText(this, "No Device ID found in response!!", Toast.LENGTH_SHORT).show();
-                viewModel.updateDeviceId(createDeviceId);
-                viewModel.storedIdResponse.observe(this, updatedIdResponse -> {
-                    if (updatedIdResponse != null)
-                        Toast.makeText(this, "Device ID found in response!!", Toast.LENGTH_SHORT).show();
-                    else
-                        Toast.makeText(this, "No Device ID found in response!!", Toast.LENGTH_SHORT).show();
-                });
-            }
-        });
     }
 
     public static Profile getCustomObject(Context context) {
