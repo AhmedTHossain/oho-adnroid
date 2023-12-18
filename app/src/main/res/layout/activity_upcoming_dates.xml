@@ -39,4 +39,9 @@
         android:text="You will find all your upcoming dates for the weekend in this screen."
         android:textColor="@color/black"
         android:textSize="@dimen/_16ssp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>
