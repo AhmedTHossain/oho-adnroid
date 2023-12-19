@@ -12,12 +12,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_corner_drawable">
 
         <ImageView
             android:id="@+id/imageview"
             android:layout_width="0dp"
-            android:layout_height="@dimen/_120sdp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:scaleType="centerCrop"
             android:src="@drawable/avatar_female" />
@@ -27,7 +28,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:layout_gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp">
 
             <TextView
                 android:id="@+id/textview_name"
@@ -56,6 +59,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
                 android:fontFamily="@font/darkergrotesque_medium"
                 android:text="NORTH END coffee roasters Dhanmondi"
                 android:textAllCaps="true"
@@ -73,7 +77,7 @@
                 android:fontFamily="@font/darkergrotesque_bold"
                 android:text="View Chat"
                 android:textColor="@color/ted_image_picker_primary_pressed"
-                android:textSize="@dimen/_14ssp"
+                android:textSize="@dimen/_16ssp"
                 android:visibility="visible"
                 android:clickable="true"
                 android:focusable="true"
