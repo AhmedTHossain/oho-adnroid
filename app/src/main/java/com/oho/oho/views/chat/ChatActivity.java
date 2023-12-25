@@ -33,6 +33,7 @@ import org.json.JSONObject;
 
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 import io.socket.client.IO;
@@ -188,9 +189,11 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
     private void setChatList(ArrayList<Chat> chatList) {
         adapter = new ChatAdapter(chatList, profile.getId(), this);
         binding.recyclerview.setHasFixedSize(true);
-        binding.recyclerview.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setReverseLayout(true);
+        binding.recyclerview.setLayoutManager(linearLayoutManager);
         binding.recyclerview.setAdapter(adapter);
-        binding.recyclerview.scrollToPosition(chatList.size() - 1);
+        binding.recyclerview.scrollToPosition(0);
     }
 
     //set quick messages in recyclerview
@@ -212,6 +215,7 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
     }
 
     public void sendNewChat(String message) {
+        Log.d("ChatActivity","message to send: "+message);
         mSocket.emit(chatRoomObj.getRoomName(), message);
         iFSentButtonClicked = false;
         Log.d("ChatActivity", "Socket ID:" + mSocket.id());
@@ -292,7 +296,7 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
                     newChat.setCreatedAt(time);
                     newChat.setBody(message);
 
-                    chatList.add(newChat);
+                    chatList.add(0,newChat);
 
                     runOnUiThread(new Runnable() {
                         @Override
