@@ -1,9 +1,9 @@
-package com.oho.oho.responses;
+package com.oho.oho.responses.qrcode;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class QRCodeResponse {
+public class QRCodeData {
     @SerializedName("qr_code")
     @Expose
     private String qrCode;

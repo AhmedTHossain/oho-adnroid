@@ -3,26 +3,28 @@ package com.oho.oho.network;
 import com.oho.oho.models.Availability;
 import com.oho.oho.models.CreateDeviceId;
 import com.oho.oho.models.DatesLeft;
+import com.oho.oho.models.GetLikesOnProfileResponse;
 import com.oho.oho.models.JWTTokenRequest;
 import com.oho.oho.models.Profile;
 import com.oho.oho.models.BioUpdateRequest;
 import com.oho.oho.models.Prompt;
 import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.models.Swipe;
-import com.oho.oho.models.User;
 import com.oho.oho.responses.Chat;
-import com.oho.oho.responses.ChatRoom;
-import com.oho.oho.responses.CheckAvailabilityResponse;
-import com.oho.oho.responses.JWTTokenResponse;
+import com.oho.oho.responses.chat.GetChatHistoryResponse;
+import com.oho.oho.responses.chat.GetChatRoomsResponse;
+import com.oho.oho.responses.jwttoken.GetJwtTokenResponse;
 import com.oho.oho.responses.MessageResponse;
 import com.oho.oho.responses.PreferenceResponse;
-import com.oho.oho.responses.QRCodeResponse;
+import com.oho.oho.responses.qrcode.GetQrCodeResponse;
+import com.oho.oho.responses.qrcode.QRCodeData;
 import com.oho.oho.responses.StoreDeviceIdResponse;
 import com.oho.oho.responses.UploadProfilePhotoResponse;
 import com.oho.oho.responses.UploadPromptPhotoResponse;
 import com.oho.oho.responses.VerifyEmailResponse;
 
-import java.util.ArrayList;
+import org.json.JSONObject;
+
 import java.util.List;
 
 import okhttp3.MultipartBody;
@@ -31,6 +33,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -93,7 +96,7 @@ public interface APIService {
 
     //get likes on profile
     @GET("users/get_likes")
-    Call<List<Profile>> getLikedByUserProfiles(@Query("user_id") String user_id);
+    Call<GetLikesOnProfileResponse> getLikedByUserProfiles(@Header("Authorization") String jwtToken);
 
     //get likes on profile
     @GET("match/get_recommendations")
@@ -117,15 +120,15 @@ public interface APIService {
 
     //check if user is available for the weekend (if the user has selected any slot for the week)
     @GET("users/get_availability_status")
-    Call<CheckAvailabilityResponse> ifAvailable(@Query("user_id") int user_id);
+    Call<JSONObject> ifAvailable(@Header("Authorization") String jwtToken);
 
     //get all chat rooms for the user
     @GET("chat/rooms")
-    Call<List<ChatRoom>> getChatRooms(@Query("user_id") int user_id);
+    Call<GetChatRoomsResponse> getChatRooms(@Header("Authorization") String jwtToken);
 
     //get chat history
     @GET("chat/history")
-    Call<List<Chat>> getChatHistory(@Query("chat_id") int chat_id);
+    Call<GetChatHistoryResponse> getChatHistory(@Header("Authorization") String jwtToken, @Query("chat_id") int chat_id);
 
     //store device id (FCM token) for the first time
     @POST("users/user_device_token/create")
@@ -137,9 +140,9 @@ public interface APIService {
 
     //get JWT token for socket connection
     @POST("users/token")
-    Call<JWTTokenResponse> getJwtToken(@Body JWTTokenRequest jwtTokenRequest);
+    Call<GetJwtTokenResponse> getJwtToken(@Body JWTTokenRequest jwtTokenRequest);
 
     //get QRCode for date for user
     @GET("match/get_qr_code")
-    Call<QRCodeResponse> getQRCode(@Query("user_id") int user_id, @Query("chat_id") int chat_id);
+    Call<GetQrCodeResponse> getQRCode(@Header("Authorization") String jwtToken, @Query("chat_id") int chat_id);
 }

@@ -1,6 +1,7 @@
 package com.oho.oho.repositories;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,10 @@ import com.oho.oho.models.Availability;
 import com.oho.oho.network.APIService;
 import com.oho.oho.network.RetrofitInstance;
 import com.oho.oho.responses.CheckAvailabilityResponse;
+import com.oho.oho.utils.HelperClass;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -19,8 +24,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AvailabilitySettingsRepository {
-
-
+    private HelperClass helperClass = new HelperClass();
     public MutableLiveData<Availability> updateUserAvailability(int user_id, Availability availableTimeSlotsList, Context context){
         MutableLiveData<Availability> selectedAvailableTimeSlots = new MutableLiveData<>();
 
@@ -64,24 +68,58 @@ public class AvailabilitySettingsRepository {
         return selectedAvailableTimeSlots;
     }
 
-    public MutableLiveData<Boolean> checkIfAvailable(int user_id){
+    public MutableLiveData<Boolean> checkIfAvailable(Context context){
         MutableLiveData<Boolean> isAvailable = new MutableLiveData<>();
         APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
-        Call<CheckAvailabilityResponse> call = apiService.ifAvailable(user_id);
-        call.enqueue(new Callback<CheckAvailabilityResponse>() {
+        Call<JSONObject> call = apiService.ifAvailable(helperClass.getJWTToken(context));
+        call.enqueue(new Callback<JSONObject>() {
             @Override
-            public void onResponse(@NonNull Call<CheckAvailabilityResponse> call, @NonNull Response<CheckAvailabilityResponse> response) {
+            public void onResponse(@NonNull Call<JSONObject> call, @NonNull Response<JSONObject> response) {
                 if (response.body()!=null){
-                    CheckAvailabilityResponse availabilityResponse = response.body();
-                    isAvailable.setValue(availabilityResponse.getAvailabilityStatus());
+//                    try {
+//                        JSONObject responseObject = response.body();
+//                        JSONObject dataObject = responseObject.getJSONObject("data");
+//                        Boolean status = dataObject.getBoolean("availability_status");
+//                        Log.d("AvailabilitySettingsRepository","status: "+status);
+//                        isAvailable.setValue(status);
+//                    } catch (JSONException e){
+//                        e.printStackTrace();
+//                        Log.d("AvailabilitySettingsRepository","status: "+e);
+//                    }
+                    try {
+                        JSONObject responseObject = response.body();
+
+                        // Check if the "data" field exists
+                        if (responseObject.has("data")) {
+                            // Extract availability status from the "data" object
+                            JSONObject dataObject = responseObject.getJSONObject("data");
+
+                            if (dataObject.has("availability_status")) {
+                                Boolean availabilityStatus = dataObject.getBoolean("availability_status");
+                                Log.d("AvailabilitySettingsRepository", "Availability status: " + availabilityStatus);
+
+                                // Update the MutableLiveData with the availability status
+                                isAvailable.setValue(availabilityStatus);
+                            } else {
+                                Log.d("AvailabilitySettingsRepository", "No value for 'availability_status' in 'data'");
+                            }
+                        } else {
+                            Log.d("AvailabilitySettingsRepository", "No value for 'data' in the response");
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Log.d("AvailabilitySettingsRepository", "Error parsing JSON: " + e);
+                    }
+                    Log.d("AvailabilitySettingsRepository","availability status = "+isAvailable.getValue());
                 }
             }
 
             @Override
-            public void onFailure(@NonNull Call<CheckAvailabilityResponse> call, @NonNull Throwable t) {
-
+            public void onFailure(@NonNull Call<JSONObject> call, @NonNull Throwable t) {
+                isAvailable.setValue(false);
             }
         });
+
         return isAvailable;
     }
 }

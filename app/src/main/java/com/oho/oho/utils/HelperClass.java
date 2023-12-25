@@ -33,4 +33,16 @@ public class HelperClass {
             return null;
         }
     }
+
+    public void setJWTToken(Context context, String JWTToken){
+        SharedPreferences.Editor editor = context.getSharedPreferences("ProfilePrefsFile", Context.MODE_PRIVATE).edit();
+        editor.putString("JWT", JWTToken);
+        editor.apply();
+    }
+
+    public String getJWTToken(Context context){
+        SharedPreferences prefs = context.getSharedPreferences("ProfilePrefsFile", Context.MODE_PRIVATE);
+        String jwtToken = prefs.getString("JWT", null);
+        return jwtToken;
+    }
 }

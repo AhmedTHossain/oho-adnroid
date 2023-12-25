@@ -141,7 +141,7 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 }else {
-                    helperClass.saveProfile(LoginActivity.this,null);
+                    helperClass.saveProfile(LoginActivity.this,userProfile);
 
                     startActivity(new Intent(this, MainActivity.class));
                     finish();

@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide;
 import com.oho.oho.R;
 import com.oho.oho.interfaces.OnChatRoomClickListener;
 import com.oho.oho.interfaces.OnMessageOptionsMenu;
-import com.oho.oho.responses.ChatRoom;
+import com.oho.oho.responses.chat.ChatRoom;
 
 import java.util.ArrayList;
 

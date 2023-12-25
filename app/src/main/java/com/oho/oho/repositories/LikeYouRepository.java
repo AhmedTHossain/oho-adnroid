@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.oho.oho.models.DatesLeft;
+import com.oho.oho.models.GetLikesOnProfileResponse;
 import com.oho.oho.models.Profile;
 import com.oho.oho.models.User;
 import com.oho.oho.network.APIService;
@@ -28,20 +29,20 @@ public class LikeYouRepository {
         this.context = context;
     }
 
-    public MutableLiveData<List<Profile>> getLikedByProfiles(int user_id){
+    public MutableLiveData<List<Profile>> getLikedByProfiles(String jwtToken){
         MutableLiveData<List<Profile>> userProfileList = new MutableLiveData<>();
         APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
-        Call<List<Profile>> call = apiService.getLikedByUserProfiles(String.valueOf(user_id));
-        call.enqueue(new Callback<List<Profile>>() {
+        Call<GetLikesOnProfileResponse> call = apiService.getLikedByUserProfiles(jwtToken);
+        call.enqueue(new Callback<GetLikesOnProfileResponse>() {
             @Override
-            public void onResponse(@NonNull Call<List<Profile>> call, @NonNull Response<List<Profile>> response) {
+            public void onResponse(@NonNull Call<GetLikesOnProfileResponse> call, @NonNull Response<GetLikesOnProfileResponse> response) {
                 if (response.body()!=null)
-                    userProfileList.setValue(response.body());
+                    userProfileList.setValue(response.body().getData());
 //                Toast.makeText(context,"All profiles loaded successfully! = "+ response.body().size(),Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onFailure(@NonNull Call<List<Profile>> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<GetLikesOnProfileResponse> call, @NonNull Throwable t) {
                 userProfileList.setValue(null);
                 Toast.makeText(context,"Request failed!",Toast.LENGTH_SHORT).show();
                 Log.d("LikeYouRepository","Request failed with code: "+t.getMessage());

@@ -33,7 +33,7 @@ import com.oho.oho.interfaces.SwipeListener;
 import com.oho.oho.models.BioUpdateRequest;
 import com.oho.oho.models.Profile;
 import com.oho.oho.models.PromptAnswer;
-import com.oho.oho.responses.ChatRoom;
+import com.oho.oho.responses.chat.ChatRoom;
 import com.oho.oho.utils.HelperClass;
 import com.oho.oho.utils.ImageUtils;
 import com.oho.oho.viewmodels.ProfileViewModel;

@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,7 @@ public class LikeYouFragment extends Fragment implements OnProfileClickListener 
     private LikeYouVIewModel viewModel;
     private ShimmerFrameLayout shimmerViewContainer;
     private Profile profile;
+    private HelperClass helperClass = new HelperClass();
 
     public LikeYouFragment() {
         // Required empty public constructor
@@ -51,6 +53,7 @@ public class LikeYouFragment extends Fragment implements OnProfileClickListener 
 
         HelperClass helperClass = new HelperClass();
         profile = helperClass.getProfile(requireContext());
+        Log.d("LikeYouFragment","profile name in LikeYouFragment = "+profile.getName());
 
         initLikeYouViewModel();
         changeUI();
@@ -83,7 +86,7 @@ public class LikeYouFragment extends Fragment implements OnProfileClickListener 
 
     public void getAllLikedProfiles() {
         //TODO: later use logged in user's user_id instead of the following hard coded one
-        viewModel.getAllLikedByProfiles(profile.getId());
+        viewModel.getAllLikedByProfiles(helperClass.getJWTToken(requireContext()));
         viewModel.userList.observe(getViewLifecycleOwner(), userList -> {
 //            Toast.makeText(requireContext(),"number of users = "+userList.size(),Toast.LENGTH_SHORT).show();
             if (userList != null) {

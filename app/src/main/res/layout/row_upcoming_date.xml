@@ -50,7 +50,7 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:fontFamily="@font/darkergrotesque_medium"
                 android:text="FRI, 8:00 PM"
-                android:textAllCaps="true"
+                android:textAllCaps="false"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14ssp" />
 
@@ -62,7 +62,7 @@
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:fontFamily="@font/darkergrotesque_medium"
                 android:text="NORTH END coffee roasters Dhanmondi"
-                android:textAllCaps="true"
+                android:textAllCaps="false"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14ssp"
                 android:visibility="visible" />

@@ -49,7 +49,7 @@ public class HomeViewModel extends AndroidViewModel {
     }
 
     public void checkIfAvailable(int user_id){
-        isAvailable = availabilitySettingsRepository.checkIfAvailable(user_id);
+        isAvailable = availabilitySettingsRepository.checkIfAvailable(getApplication().getApplicationContext());
     }
 
     public void getNumberOfDatesLeft(int user_id){

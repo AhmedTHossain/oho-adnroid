@@ -1,9 +1,9 @@
-package com.oho.oho.responses;
+package com.oho.oho.responses.jwttoken;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class JWTTokenResponse {
+public class JwtTokenData {
     @SerializedName("jwt_token")
     @Expose
     private String jwtToken;

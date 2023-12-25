@@ -29,7 +29,7 @@ public class ChatViewModel extends AndroidViewModel {
     }
 
     public void getQrCode(int user_id,int chat_id){
-        qrcode = chatRepository.getQRCode(user_id,chat_id);
+        qrcode = chatRepository.getQRCode(chat_id);
     }
 
     public void getJwtToken(JWTTokenRequest jwtTokenRequest){

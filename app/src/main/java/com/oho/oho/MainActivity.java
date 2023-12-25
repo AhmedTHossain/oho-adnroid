@@ -7,24 +7,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.splashscreen.SplashScreen;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.gson.Gson;
 import com.oho.oho.databinding.ActivityMainBinding;
 import com.oho.oho.models.ChatNotificationPayload;
-import com.oho.oho.models.CreateDeviceId;
+import com.oho.oho.models.JWTTokenRequest;
 import com.oho.oho.models.Profile;
-import com.oho.oho.responses.ChatRoom;
+import com.oho.oho.responses.chat.ChatRoom;
 import com.oho.oho.utils.HelperClass;
 import com.oho.oho.viewmodels.MainViewModel;
 import com.oho.oho.views.LoginActivity;
@@ -45,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<String> preSelectedSlotsArray;
     HelperClass helperClass = new HelperClass();
+    private Profile profile;
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 //                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
 //        );
 
-        Profile profile = helperClass.getProfile(this);
+        profile = helperClass.getProfile(this);
 
         if (profile != null) {
 
@@ -69,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
             viewModel.replaceFragment(new HomeFragment(),getSupportFragmentManager());
 
             viewModel.getFCMToken();
+
+            getJwtToken(profile.getEmail());
 
             ChatNotificationPayload notificationPayload;
             if (getIntent().hasExtra("notificationPayload")) {
@@ -141,5 +137,22 @@ public class MainActivity extends AppCompatActivity {
             // Return a default object or null if no object found in SharedPreferences
             return null;
         }
+    }
+
+    private void getJwtToken(String email) {
+        JWTTokenRequest jwtTokenRequest = new JWTTokenRequest();
+        jwtTokenRequest.setEmail(email);
+        viewModel.getJWTToken(jwtTokenRequest);
+        viewModel.jwtToken.observe(this, jwtToken -> {
+            if (jwtToken != null){
+                Log.d("MessageFragment","initial jwt token: "+jwtToken);
+                token = jwtToken;
+                helperClass.setJWTToken(this,token);
+            }
+            else {
+                helperClass.setJWTToken(this,null);
+                Toast.makeText(this, "Unable to fetch JWT Token!", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

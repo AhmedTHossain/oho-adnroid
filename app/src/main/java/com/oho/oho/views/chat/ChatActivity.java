@@ -1,10 +1,5 @@
 package com.oho.oho.views.chat;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -12,38 +7,37 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
 import com.bumptech.glide.Glide;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.oho.oho.MainActivity;
 import com.oho.oho.R;
 import com.oho.oho.adapters.ChatAdapter;
-import com.oho.oho.adapters.ChatRoomAdapter;
 import com.oho.oho.adapters.QuickMessageAdapter;
 import com.oho.oho.databinding.ActivityChatBinding;
-import com.oho.oho.databinding.ActivityFaqactivityBinding;
 import com.oho.oho.interfaces.QuickMessageClickListener;
 import com.oho.oho.models.ChatNotificationPayload;
 import com.oho.oho.models.ChatRoomObj;
-import com.oho.oho.models.JWTTokenRequest;
 import com.oho.oho.models.Profile;
 import com.oho.oho.responses.Chat;
-import com.oho.oho.responses.ChatRoom;
+import com.oho.oho.responses.chat.ChatRoom;
 import com.oho.oho.utils.HelperClass;
 import com.oho.oho.viewmodels.ChatViewModel;
-import com.oho.oho.viewmodels.MessageViewModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 import io.socket.client.IO;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
-import io.socket.engineio.client.transports.WebSocket;
 
 public class ChatActivity extends AppCompatActivity implements QuickMessageClickListener, View.OnClickListener {
 
@@ -80,13 +74,13 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
             sender_photo = selectedChatRoom.getProfilePhoto();
 
             String participantsIdArray[] = selectedChatRoom.getParticipants().split(",");
-            for (String s: participantsIdArray)
+            for (String s : participantsIdArray)
                 if (!s.equals(String.valueOf(profile.getId())))
                     sender_id = Integer.parseInt(s);
 //            gender = selectedChatRoom.getGender();
         }
 
-        if (getIntent().hasExtra("notificationPayload")){
+        if (getIntent().hasExtra("notificationPayload")) {
             ChatNotificationPayload notificationPayload = (ChatNotificationPayload) getIntent().getSerializableExtra("notificationPayload");
             binding.screentitle.setText(notificationPayload.getSenderName());
             chat_id = Integer.parseInt(notificationPayload.getChatId());
@@ -94,7 +88,7 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
             sender_photo = notificationPayload.getSenderPhoto();
 //            gender = notificationPayload.getGender();
 
-            Log.d("ChatActivity","inside Chat Activity");
+            Log.d("ChatActivity", "inside Chat Activity");
         }
 
         Glide.with(this)
@@ -172,7 +166,8 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
                         if (chatList.get(i).getSender().equals(profile.getId()))
                             chatToRemove = i;
 
-                chatList.remove(chatToRemove);
+                if (chatList.size() != 0)
+                    chatList.remove(chatToRemove);
 
                 setChatList(chatList);
             }
@@ -224,29 +219,32 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
     }
 
     private void getJwtToken(String email) {
-        JWTTokenRequest jwtTokenRequest = new JWTTokenRequest();
-        jwtTokenRequest.setEmail(email);
-        viewModel.getJwtToken(jwtTokenRequest);
-        viewModel.jwtToken.observe(this, jwtToken -> {
-            if (jwtToken != null){
-                Log.d("MessageFragment","initial jwt token: "+jwtToken);
-
-                token = jwtToken;
-                connectSocket();
-            }
-            else
-                Toast.makeText(this, "Unable to fetch JWT Token!", Toast.LENGTH_LONG).show();
-        });
+//        JWTTokenRequest jwtTokenRequest = new JWTTokenRequest();
+//        jwtTokenRequest.setEmail(email);
+//        viewModel.getJwtToken(jwtTokenRequest);
+//        viewModel.jwtToken.observe(this, jwtToken -> {
+//            if (jwtToken != null){
+//                Log.d("MessageFragment","initial jwt token: "+jwtToken);
+//
+//                token = jwtToken;
+//                connectSocket();
+//            }
+//            else
+//                Toast.makeText(this, "Unable to fetch JWT Token!", Toast.LENGTH_LONG).show();
+//        });
+        HelperClass helperClass = new HelperClass();
+        token = helperClass.getJWTToken(this);
+        connectSocket();
     }
 
-    private void connectSocket(){
+    private void connectSocket() {
         {
             try {
                 IO.Options options = new IO.Options();
                 options.auth = new HashMap<>();
                 options.auth.put("token", token);
 
-                mSocket = IO.socket("http://34.232.79.30:3000", options);
+                mSocket = IO.socket("https://chat.backend.ohodating.com", options);
             } catch (URISyntaxException e) {
                 Log.d("ChatActivity", "socket exception: " + e.getMessage());
             }
@@ -325,12 +323,12 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.screentitle:
             case R.id.title_image:
                 Intent intent = new Intent(ChatActivity.this, MainActivity.class);
-                intent.putExtra("from","ChatActivity");
-                intent.putExtra("sender_id",sender_id);
+                intent.putExtra("from", "ChatActivity");
+                intent.putExtra("sender_id", sender_id);
                 intent.putExtra("chatroom", selectedChatRoom);
                 startActivity(intent);
         }

@@ -7,10 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.oho.oho.models.CreateDeviceId;
-import com.oho.oho.models.JWTTokenRequest;
 import com.oho.oho.network.APIService;
 import com.oho.oho.network.RetrofitInstance;
-import com.oho.oho.responses.JWTTokenResponse;
 import com.oho.oho.responses.StoreDeviceIdResponse;
 
 import retrofit2.Call;

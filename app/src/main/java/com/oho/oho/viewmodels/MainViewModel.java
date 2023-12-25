@@ -15,6 +15,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.oho.oho.R;
 import com.oho.oho.models.CreateDeviceId;
+import com.oho.oho.models.JWTTokenRequest;
+import com.oho.oho.repositories.ChatRepository;
 import com.oho.oho.repositories.MainRepository;
 import com.oho.oho.responses.StoreDeviceIdResponse;
 import com.oho.oho.utils.HelperClass;
@@ -22,10 +24,13 @@ import com.oho.oho.utils.HelperClass;
 public class MainViewModel extends AndroidViewModel {
     public LiveData<StoreDeviceIdResponse> storedIdResponse;
     private MainRepository repository;
+    private ChatRepository chatRepository;
+    public LiveData<String> jwtToken;
 
     public MainViewModel(@NonNull Application application) {
         super(application);
         repository = new MainRepository();
+        chatRepository = new ChatRepository(getApplication().getApplicationContext());
     }
 
     public void storeDeviceId(CreateDeviceId createDeviceId) {
@@ -65,6 +70,10 @@ public class MainViewModel extends AndroidViewModel {
                         Log.d("MainViewModel", "fcm token = "+msg);
                     }
                 });
+    }
+
+    public void getJWTToken(JWTTokenRequest jwtTokenRequest){
+        jwtToken = chatRepository.getJwtToken(jwtTokenRequest);
     }
 
 //    private void storeDeviceToken(String token, int user_id, String device_type) {

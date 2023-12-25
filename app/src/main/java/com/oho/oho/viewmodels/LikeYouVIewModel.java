@@ -23,8 +23,8 @@ public class LikeYouVIewModel extends AndroidViewModel {
         likeYouRepository = new LikeYouRepository(getApplication().getApplicationContext());
     }
 
-    public void getAllLikedByProfiles(int user_id) {
-        userList = likeYouRepository.getLikedByProfiles(user_id);
+    public void getAllLikedByProfiles(String jwtToken) {
+        userList = likeYouRepository.getLikedByProfiles(jwtToken);
     }
 
     public void getNumberOfDates(int user_id){

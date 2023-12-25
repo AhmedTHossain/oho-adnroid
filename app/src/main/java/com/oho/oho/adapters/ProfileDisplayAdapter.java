@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,7 +19,7 @@ import com.oho.oho.interfaces.OnFullImageViewListener;
 import com.oho.oho.interfaces.SwipeListener;
 import com.oho.oho.models.Profile;
 import com.oho.oho.models.PromptAnswer;
-import com.oho.oho.responses.ChatRoom;
+import com.oho.oho.responses.chat.ChatRoom;
 import com.oho.oho.viewmodels.ProfileViewModel;
 import com.oho.oho.views.chat.ChatActivity;
 

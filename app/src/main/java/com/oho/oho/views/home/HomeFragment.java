@@ -253,9 +253,10 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
     }
 
     private void getAvailabilityConsent() {
-        Log.d("HomeFragment", "inside getAvailabilityConsent: YES");
+
         homeViewModel.checkIfAvailable(profile.getId());
         homeViewModel.isAvailable.observe(getViewLifecycleOwner(), isAvailable -> {
+            Log.d("HomeFragment", "inside getAvailabilityConsent is Available: "+isAvailable);
             if (isAvailable) {
                 homeViewModel.getNumberOfDatesLeft(profile.getId());
                 homeViewModel.numberOfDatesLeft.observe(getViewLifecycleOwner(), numberOfDatesLeft -> {

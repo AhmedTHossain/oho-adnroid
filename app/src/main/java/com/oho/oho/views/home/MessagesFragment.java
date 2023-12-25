@@ -31,7 +31,7 @@ import com.oho.oho.interfaces.OnChatRoomClickListener;
 import com.oho.oho.interfaces.OnMessageOptionsMenu;
 import com.oho.oho.models.JWTTokenRequest;
 import com.oho.oho.models.Profile;
-import com.oho.oho.responses.ChatRoom;
+import com.oho.oho.responses.chat.ChatRoom;
 import com.oho.oho.utils.HelperClass;
 import com.oho.oho.viewmodels.MessageViewModel;
 import com.oho.oho.views.chat.ChatActivity;
@@ -130,7 +130,7 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
     }
 
     private void getAllChatRooms(int user_id){
-        viewModel.getAllChatRooms(user_id);
+        viewModel.getAllChatRooms();
         viewModel.chatRoomList.observe(getViewLifecycleOwner(), chatRoomList -> {
             if (chatRoomList != null) {
                 ArrayList<ChatRoom> chatRoomArrayList = new ArrayList<>(chatRoomList);
