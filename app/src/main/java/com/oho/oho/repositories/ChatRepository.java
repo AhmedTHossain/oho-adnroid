@@ -11,6 +11,7 @@ import com.oho.oho.models.JWTTokenRequest;
 import com.oho.oho.network.APIService;
 import com.oho.oho.network.RetrofitInstance;
 import com.oho.oho.responses.Chat;
+import com.oho.oho.responses.chat.ChatHistoryData;
 import com.oho.oho.responses.chat.GetChatHistoryResponse;
 import com.oho.oho.responses.jwttoken.GetJwtTokenResponse;
 import com.oho.oho.responses.qrcode.GetQrCodeResponse;
@@ -32,15 +33,15 @@ public class ChatRepository {
         this.context = context;
     }
 
-    public MutableLiveData<List<Chat>> getChatHistory(int chat_id){
-        MutableLiveData<List<Chat>> chatHistory = new MutableLiveData<>();
+    public MutableLiveData<ChatHistoryData> getChatHistory(int chat_id, int page){
+        MutableLiveData<ChatHistoryData> chatHistory = new MutableLiveData<>();
         APIService service = RetrofitInstance.getRetrofitClient().create(APIService.class);
-        Call<GetChatHistoryResponse> call = service.getChatHistory(helperClass.getJWTToken(context),chat_id);
+        Call<GetChatHistoryResponse> call = service.getChatHistory(helperClass.getJWTToken(context),chat_id,page);
         call.enqueue(new Callback<GetChatHistoryResponse>() {
             @Override
             public void onResponse(@NonNull Call<GetChatHistoryResponse> call, @NonNull Response<GetChatHistoryResponse> response) {
                 if (response.isSuccessful()){
-                    chatHistory.setValue(response.body().getData().getData());
+                    chatHistory.setValue(response.body().getData());
                     Toast.makeText(context,"Successfully fetched chat history!",Toast.LENGTH_SHORT).show();
                 }
             }

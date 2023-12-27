@@ -128,7 +128,7 @@ public interface APIService {
 
     //get chat history
     @GET("chat/history")
-    Call<GetChatHistoryResponse> getChatHistory(@Header("Authorization") String jwtToken, @Query("chat_id") int chat_id);
+    Call<GetChatHistoryResponse> getChatHistory(@Header("Authorization") String jwtToken, @Query("chat_id") int chat_id, @Query("page") int page);
 
     //store device id (FCM token) for the first time
     @POST("users/user_device_token/create")

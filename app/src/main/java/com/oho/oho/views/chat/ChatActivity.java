@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.bumptech.glide.Glide;
@@ -33,7 +34,6 @@ import org.json.JSONObject;
 
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 
 import io.socket.client.IO;
@@ -58,6 +58,8 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
     private String sender_photo;
     private int sender_id;
     private Profile profile;
+    private LinearLayoutManager linearLayoutManager;
+    private int page = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,6 +128,39 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
         binding.screentitle.setOnClickListener(this);
 
         setQuickMessages();
+
+        // Add a scroll listener to the RecyclerView
+        binding.recyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                // Check if the last item is visible
+                int lastVisibleItemPosition = linearLayoutManager.findLastVisibleItemPosition();
+                int totalItemCount = linearLayoutManager.getItemCount();
+
+                if (lastVisibleItemPosition == totalItemCount - 1) {
+                    // Log when the last item is visible
+                    Toast.makeText(ChatActivity.this, "Last Item!!", Toast.LENGTH_SHORT).show();
+                    Log.d("ChatActivity","current page number: "+page);
+                    if (page != 0) {
+                        Log.d("ChatActivity", "page number for chats = " + page);
+                        viewModel.getChatHistory(chat_id, page);
+                        Toast.makeText(ChatActivity.this, "Fetch chats for room: " + chat_id, Toast.LENGTH_SHORT).show();
+                        viewModel.chatHistory.observe(ChatActivity.this, chatHistory -> {
+                            if (chatHistory != null) {
+                                chatList.addAll(chatHistory.getData());
+                                adapter.notifyDataSetChanged();
+                                if (chatHistory.getHasNext())
+                                    page++;
+                                else
+                                    page = 0;
+                            }
+                        });
+                    }
+                }
+            }
+        });
     }
 
     @Override
@@ -155,12 +190,12 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
 
     private void initChatViewModel() {
         viewModel = new ViewModelProvider(this).get(ChatViewModel.class);
-        //TODO: replace with logged in user's id
-        viewModel.getChatHistory(chat_id);
+
+        viewModel.getChatHistory(chat_id, page);
         Toast.makeText(this, "Fetch chats for room: " + chat_id, Toast.LENGTH_SHORT).show();
         viewModel.chatHistory.observe(this, chatHistory -> {
             if (chatHistory != null) {
-                chatList = new ArrayList<>(chatHistory);
+                chatList = new ArrayList<>(chatHistory.getData());
                 int chatToRemove = 0;
                 for (int i = 0; i < chatList.size(); i++)
                     if (chatList.get(i).getChatType().equals("delegate"))
@@ -175,6 +210,11 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
             shimmerViewContainer.stopShimmerAnimation();
             shimmerViewContainer.setVisibility(View.GONE);
             binding.recyclerviewQuickmessages.setVisibility(View.VISIBLE);
+
+            if (chatHistory.getHasNext())
+                page++;
+            else
+                page = 0;
         });
 
         viewModel.getQrCode(profile.getId(), chat_id);
@@ -189,7 +229,7 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
     private void setChatList(ArrayList<Chat> chatList) {
         adapter = new ChatAdapter(chatList, profile.getId(), this);
         binding.recyclerview.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setReverseLayout(true);
         binding.recyclerview.setLayoutManager(linearLayoutManager);
         binding.recyclerview.setAdapter(adapter);
@@ -215,7 +255,7 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
     }
 
     public void sendNewChat(String message) {
-        Log.d("ChatActivity","message to send: "+message);
+        Log.d("ChatActivity", "message to send: " + message);
         mSocket.emit(chatRoomObj.getRoomName(), message);
         iFSentButtonClicked = false;
         Log.d("ChatActivity", "Socket ID:" + mSocket.id());
@@ -296,7 +336,7 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
                     newChat.setCreatedAt(time);
                     newChat.setBody(message);
 
-                    chatList.add(0,newChat);
+                    chatList.add(0, newChat);
 
                     runOnUiThread(new Runnable() {
                         @Override
