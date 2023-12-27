@@ -60,6 +60,7 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
     private Profile profile;
     private LinearLayoutManager linearLayoutManager;
     private int page = 1;
+    private Boolean hasNextPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,25 +140,23 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
                 int lastVisibleItemPosition = linearLayoutManager.findLastVisibleItemPosition();
                 int totalItemCount = linearLayoutManager.getItemCount();
 
-                if (lastVisibleItemPosition == totalItemCount - 1) {
+                if (lastVisibleItemPosition == totalItemCount - 1 && hasNextPage) {
                     // Log when the last item is visible
                     Toast.makeText(ChatActivity.this, "Last Item!!", Toast.LENGTH_SHORT).show();
-                    Log.d("ChatActivity","current page number: "+page);
-                    if (page != 0) {
-                        Log.d("ChatActivity", "page number for chats = " + page);
-                        viewModel.getChatHistory(chat_id, page);
-                        Toast.makeText(ChatActivity.this, "Fetch chats for room: " + chat_id, Toast.LENGTH_SHORT).show();
-                        viewModel.chatHistory.observe(ChatActivity.this, chatHistory -> {
-                            if (chatHistory != null) {
-                                chatList.addAll(chatHistory.getData());
-                                adapter.notifyDataSetChanged();
-                                if (chatHistory.getHasNext())
-                                    page++;
-                                else
-                                    page = 0;
-                            }
-                        });
-                    }
+                    Log.d("ChatActivity", "current page number: " + page);
+
+                    Log.d("ChatActivity", "page number for chats = " + page);
+                    viewModel.getChatHistory(chat_id, page);
+                    Toast.makeText(ChatActivity.this, "Fetch chats for room: " + chat_id, Toast.LENGTH_SHORT).show();
+                    viewModel.chatHistory.observe(ChatActivity.this, chatHistory -> {
+                        if (chatHistory != null) {
+                            chatList.addAll(chatHistory.getData());
+                            adapter.notifyDataSetChanged();
+
+                            hasNextPage = chatHistory.getHasNext();
+                        }
+                    });
+                    page++;
                 }
             }
         });
@@ -215,6 +214,8 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
                 page++;
             else
                 page = 0;
+
+            hasNextPage = chatHistory.getHasNext();
         });
 
         viewModel.getQrCode(profile.getId(), chat_id);
