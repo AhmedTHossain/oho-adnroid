@@ -10,15 +10,18 @@ import com.oho.oho.models.JWTTokenRequest;
 import com.oho.oho.repositories.ChatRepository;
 import com.oho.oho.responses.Chat;
 import com.oho.oho.responses.chat.ChatHistoryData;
+import com.oho.oho.responses.qrcode.QRCodeData;
 
 import java.util.List;
 
 public class ChatViewModel extends AndroidViewModel {
     private final ChatRepository chatRepository;
     public LiveData<ChatHistoryData> chatHistory;
-    public LiveData<String> qrcode;
+    public LiveData<QRCodeData> qrcode;
 
     public LiveData<String> jwtToken;
+
+    public LiveData<Boolean> ifDateStarted;
 
     public ChatViewModel(@NonNull Application application) {
         super(application);
@@ -35,5 +38,9 @@ public class ChatViewModel extends AndroidViewModel {
 
     public void getJwtToken(JWTTokenRequest jwtTokenRequest){
         jwtToken = chatRepository.getJwtToken(jwtTokenRequest);
+    }
+
+    public void checkDateStatus(int match_id){
+        ifDateStarted = chatRepository.checkIfDateStarted(match_id);
     }
 }

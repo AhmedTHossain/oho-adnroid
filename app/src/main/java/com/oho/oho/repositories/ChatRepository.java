@@ -10,6 +10,8 @@ import androidx.lifecycle.MutableLiveData;
 import com.oho.oho.models.JWTTokenRequest;
 import com.oho.oho.network.APIService;
 import com.oho.oho.network.RetrofitInstance;
+import com.oho.oho.responses.Attendance.DateStatusData;
+import com.oho.oho.responses.Attendance.GetDateStatusResponse;
 import com.oho.oho.responses.Chat;
 import com.oho.oho.responses.chat.ChatHistoryData;
 import com.oho.oho.responses.chat.GetChatHistoryResponse;
@@ -56,15 +58,15 @@ public class ChatRepository {
         return chatHistory;
     }
 
-    public MutableLiveData<String> getQRCode(int chat_id){
-        MutableLiveData<String> qrcode = new MutableLiveData<>();
+    public MutableLiveData<QRCodeData> getQRCode(int chat_id){
+        MutableLiveData<QRCodeData> qrcode = new MutableLiveData<>();
         APIService service = RetrofitInstance.getRetrofitClient().create(APIService.class);
         Call<GetQrCodeResponse> call = service.getQRCode(helperClass.getJWTToken(context),chat_id);
         call.enqueue(new Callback<GetQrCodeResponse>() {
             @Override
             public void onResponse(@NonNull Call<GetQrCodeResponse> call, @NonNull Response<GetQrCodeResponse> response) {
                 if (response.isSuccessful()){
-                    qrcode.setValue(response.body().getData().getQrCode());
+                    qrcode.setValue(response.body().getData());
                     Log.d("ChatRepository","Successfully fetched QRCode!");
                 }
             }
@@ -102,5 +104,24 @@ public class ChatRepository {
             }
         });
         return jwtToken;
+    }
+
+    public MutableLiveData<Boolean> checkIfDateStarted(int match_id){
+        MutableLiveData<Boolean> ifDateStarted = new MutableLiveData<>();
+        APIService service = RetrofitInstance.getRetrofitClient().create(APIService.class);
+        Call<GetDateStatusResponse> call = service.ifDateStarted(helperClass.getJWTToken(context),match_id);
+        call.enqueue(new Callback<GetDateStatusResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<GetDateStatusResponse> call, @NonNull Response<GetDateStatusResponse> response) {
+                if (response.isSuccessful())
+                    ifDateStarted.setValue(response.body().getData().getAttendance());
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<GetDateStatusResponse> call, @NonNull Throwable t) {
+
+            }
+        });
+        return ifDateStarted;
     }
 }

@@ -79,8 +79,7 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
 
             String participantsIdArray[] = selectedChatRoom.getParticipants().split(",");
             for (String s : participantsIdArray)
-                if (!s.equals(String.valueOf(profile.getId())))
-                    sender_id = Integer.parseInt(s);
+                if (!s.equals(String.valueOf(profile.getId()))) sender_id = Integer.parseInt(s);
 //            gender = selectedChatRoom.getGender();
         }
 
@@ -95,10 +94,7 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
             Log.d("ChatActivity", "inside Chat Activity");
         }
 
-        Glide.with(this)
-                .load(sender_photo)
-                .placeholder(R.drawable.person_placeholder)
-                .into(binding.titleImage);
+        Glide.with(this).load(sender_photo).placeholder(R.drawable.person_placeholder).into(binding.titleImage);
 
         shimmerViewContainer = binding.shimmerViewContainer;
         initChatViewModel();
@@ -198,11 +194,9 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
                 int chatToRemove = 0;
                 for (int i = 0; i < chatList.size(); i++)
                     if (chatList.get(i).getChatType().equals("delegate"))
-                        if (chatList.get(i).getSender().equals(profile.getId()))
-                            chatToRemove = i;
+                        if (chatList.get(i).getSender().equals(profile.getId())) chatToRemove = i;
 
-                if (chatList.size() != 0)
-                    chatList.remove(chatToRemove);
+                if (chatList.size() != 0) chatList.remove(chatToRemove);
 
                 setChatList(chatList);
             }
@@ -210,10 +204,8 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
             shimmerViewContainer.setVisibility(View.GONE);
             binding.recyclerviewQuickmessages.setVisibility(View.VISIBLE);
 
-            if (chatHistory.getHasNext())
-                page++;
-            else
-                page = 0;
+            if (chatHistory.getHasNext()) page++;
+            else page = 0;
 
             hasNextPage = chatHistory.getHasNext();
         });
@@ -221,7 +213,19 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
         viewModel.getQrCode(profile.getId(), chat_id);
         viewModel.qrcode.observe(this, qrcode -> {
             if (qrcode != null) {
-                qrcodeUrl = qrcode;
+                qrcodeUrl = qrcode.getQrCode();
+                viewModel.checkDateStatus(qrcode.getMatch_id());
+                viewModel.ifDateStarted.observe(this, ifDateStarted -> {
+                    if (!ifDateStarted){
+                        binding.fabSend.setVisibility(View.GONE);
+                        binding.layoutInputMessage.setVisibility(View.GONE);
+                        binding.recyclerviewQuickmessages.setVisibility(View.VISIBLE);
+                    } else {
+                        binding.fabSend.setVisibility(View.VISIBLE);
+                        binding.layoutInputMessage.setVisibility(View.VISIBLE);
+                        binding.recyclerviewQuickmessages.setVisibility(View.GONE);
+                    }
+                });
             }
         });
         getJwtToken(profile.getEmail());

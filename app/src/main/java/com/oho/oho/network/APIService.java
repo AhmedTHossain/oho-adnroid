@@ -10,6 +10,7 @@ import com.oho.oho.models.BioUpdateRequest;
 import com.oho.oho.models.Prompt;
 import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.models.Swipe;
+import com.oho.oho.responses.Attendance.GetDateStatusResponse;
 import com.oho.oho.responses.Chat;
 import com.oho.oho.responses.chat.GetChatHistoryResponse;
 import com.oho.oho.responses.chat.GetChatRoomsResponse;
@@ -145,4 +146,8 @@ public interface APIService {
     //get QRCode for date for user
     @GET("match/get_qr_code")
     Call<GetQrCodeResponse> getQRCode(@Header("Authorization") String jwtToken, @Query("chat_id") int chat_id);
+
+    //check if the date has started
+    @GET("match/check_user_presence")
+    Call<GetDateStatusResponse> ifDateStarted(@Header("Authorization") String jwtToken,@Query("match_id") int match_id);
 }
