@@ -10,7 +10,8 @@ import com.oho.oho.models.Prompt;
 import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.network.APIService;
 import com.oho.oho.network.RetrofitInstance;
-import com.oho.oho.responses.UploadProfilePhotoResponse;
+import com.oho.oho.responses.prompt.GetAddPromptResponse;
+import com.oho.oho.utils.HelperClass;
 
 import java.io.File;
 import java.util.List;
@@ -23,10 +24,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class PromptRepository {
-
+    private Context context;
+    private HelperClass helperClass = new HelperClass();
 
     public PromptRepository(Context context) {
-
+        this.context = context;
     }
 
     public MutableLiveData<List<Prompt>> getPromptList() {
@@ -60,16 +62,16 @@ public class PromptRepository {
 
         MultipartBody.Part filePart = MultipartBody.Part.createFormData("image", image.getName(), RequestBody.create(MediaType.parse("image/*"), image));
 
-        Call<PromptAnswer> call = apiService.uploadPromptAnswer(promptText, answerText, userId, captionText, filePart);
-        call.enqueue(new Callback<PromptAnswer>() {
+        Call<GetAddPromptResponse> call = apiService.uploadPromptAnswer(helperClass.getJWTToken(context), promptText, answerText, userId, captionText, filePart);
+        call.enqueue(new Callback<GetAddPromptResponse>() {
             @Override
-            public void onResponse(@NonNull Call<PromptAnswer> call, @NonNull Response<PromptAnswer> response) {
+            public void onResponse(@NonNull Call<GetAddPromptResponse> call, @NonNull Response<GetAddPromptResponse> response) {
 
                 ifResponseReceived.setValue(true);
             }
 
             @Override
-            public void onFailure(@NonNull Call<PromptAnswer> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<GetAddPromptResponse> call, @NonNull Throwable t) {
 
                 ifResponseReceived.setValue(false);
             }

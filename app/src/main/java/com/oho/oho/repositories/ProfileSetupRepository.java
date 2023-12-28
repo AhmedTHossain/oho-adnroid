@@ -15,6 +15,7 @@ import com.oho.oho.network.APIService;
 import com.oho.oho.network.RetrofitInstance;
 import com.oho.oho.responses.PreferenceResponse;
 import com.oho.oho.responses.UploadProfilePhotoResponse;
+import com.oho.oho.responses.prompt.GetAddPromptResponse;
 import com.oho.oho.utils.HelperClass;
 
 import org.json.JSONObject;
@@ -46,16 +47,16 @@ public class ProfileSetupRepository {
         RequestBody captionText = RequestBody.create(String.valueOf(newPromptAnswer.getCaption()),MediaType.parse("text/plain"));
 
         MultipartBody.Part filePart = MultipartBody.Part.createFormData("image", newPromptAnswer.getImage().getName(), RequestBody.create(MediaType.parse("image/*"), newPromptAnswer.getImage()));
-        Call<PromptAnswer> call = apiService.uploadPromptAnswer(promptText, answerText, userId, captionText, filePart);
-        call.enqueue(new Callback<PromptAnswer>() {
+        Call<GetAddPromptResponse> call = apiService.uploadPromptAnswer(helperClass.getJWTToken(context),promptText, answerText, userId, captionText, filePart);
+        call.enqueue(new Callback<GetAddPromptResponse>() {
             @Override
-            public void onResponse(@NonNull Call<PromptAnswer> call, @NonNull Response<PromptAnswer> response) {
+            public void onResponse(@NonNull Call<GetAddPromptResponse> call, @NonNull Response<GetAddPromptResponse> response) {
 
                 ifResponseReceived.setValue(true);
             }
 
             @Override
-            public void onFailure(@NonNull Call<PromptAnswer> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<GetAddPromptResponse> call, @NonNull Throwable t) {
 
                 ifResponseReceived.setValue(false);
             }
