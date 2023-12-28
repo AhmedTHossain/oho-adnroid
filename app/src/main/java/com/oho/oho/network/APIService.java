@@ -63,7 +63,7 @@ public interface APIService {
     //for uploading profile photo
     @Multipart
     @POST("upload/upload_profile_picture_v2")
-    Call<UploadProfilePhotoResponse> uploadProfilePhoto(@Part("user_id") RequestBody user_id, @Part MultipartBody.Part file);
+    Call<UploadProfilePhotoResponse> uploadProfilePhoto(@Header("Authorization") String jwtToken, @Part MultipartBody.Part file);
 
     @GET("users/prompts")
     Call<List<Prompt>> getAllPrompts();

@@ -72,7 +72,7 @@ public class ProfileViewModel extends AndroidViewModel {
         return ifAddPrompt;
     }
 
-    public void uploadProfilePhoto(int user_id, File image) {
-        ifProfilePhotoUploaded = repository.uploadProfilePhoto(user_id, image);
+    public void uploadProfilePhoto(File image) {
+        ifProfilePhotoUploaded = repository.uploadProfilePhoto(image);
     }
 }

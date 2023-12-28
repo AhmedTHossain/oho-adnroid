@@ -14,6 +14,7 @@ import com.oho.oho.network.APIService;
 import com.oho.oho.network.RetrofitInstance;
 import com.oho.oho.responses.UploadProfilePhotoResponse;
 import com.oho.oho.responses.UploadPromptPhotoResponse;
+import com.oho.oho.utils.HelperClass;
 
 import java.io.File;
 import java.util.List;
@@ -26,7 +27,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CompleteProfileRepository {
-
+    private HelperClass helperClass = new HelperClass();
     public MutableLiveData<Boolean> updateUserBio(Profile updatedUserProfile, Context context) {
         MutableLiveData<Profile> userProfile = new MutableLiveData<>();
         MutableLiveData<Boolean> ifResponseReceived = new MutableLiveData<>();
@@ -54,7 +55,7 @@ public class CompleteProfileRepository {
         RequestBody user_id = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(id));
         MultipartBody.Part filePart = MultipartBody.Part.createFormData("file", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
 
-        Call<UploadProfilePhotoResponse> call = apiService.uploadProfilePhoto(user_id, filePart);
+        Call<UploadProfilePhotoResponse> call = apiService.uploadProfilePhoto(helperClass.getJWTToken(context), filePart);
         call.enqueue(new Callback<UploadProfilePhotoResponse>() {
             @Override
             public void onResponse(@NonNull Call<UploadProfilePhotoResponse> call, @NonNull Response<UploadProfilePhotoResponse> response) {

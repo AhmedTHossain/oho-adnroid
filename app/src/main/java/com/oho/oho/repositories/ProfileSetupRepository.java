@@ -15,6 +15,7 @@ import com.oho.oho.network.APIService;
 import com.oho.oho.network.RetrofitInstance;
 import com.oho.oho.responses.PreferenceResponse;
 import com.oho.oho.responses.UploadProfilePhotoResponse;
+import com.oho.oho.utils.HelperClass;
 
 import org.json.JSONObject;
 
@@ -29,6 +30,7 @@ import retrofit2.Response;
 
 public class ProfileSetupRepository {
     private Context context;
+    private HelperClass helperClass = new HelperClass();
 
     public ProfileSetupRepository(Context context) {
         this.context = context;
@@ -67,7 +69,7 @@ public class ProfileSetupRepository {
         RequestBody userId = RequestBody.create(String.valueOf(user_id),MediaType.parse("text/plain"));
 
         MultipartBody.Part filePart = MultipartBody.Part.createFormData("image", image.getName(), RequestBody.create(MediaType.parse("image/*"), image));
-        Call<UploadProfilePhotoResponse> call = apiService.uploadProfilePhoto(userId, filePart);
+        Call<UploadProfilePhotoResponse> call = apiService.uploadProfilePhoto(helperClass.getJWTToken(context), filePart);
         call.enqueue(new Callback<UploadProfilePhotoResponse>() {
             @Override
             public void onResponse(@NonNull Call<UploadProfilePhotoResponse> call, @NonNull Response<UploadProfilePhotoResponse> response) {

@@ -70,7 +70,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
                     imageFile = ImageUtils.getImageFileFromUri(requireContext(), uri);
 
                     showUploadDialog();
-                    profileViewModel.uploadProfilePhoto(userProfile.getId(), imageFile);
+                    profileViewModel.uploadProfilePhoto(imageFile);
                     profileViewModel.ifProfilePhotoUploaded.observe(requireActivity(), ifProfilePhotoUploaded -> {
                         if (ifProfilePhotoUploaded) {
                             Toast.makeText(requireContext(), "Your photo was uploaded successfully!", Toast.LENGTH_SHORT).show();

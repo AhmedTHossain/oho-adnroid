@@ -103,13 +103,11 @@ public class ProfileViewRepository {
         return isUpdatedSuccessfully;
     }
 
-    public MutableLiveData<Boolean> uploadProfilePhoto(int user_id, File image) {
+    public MutableLiveData<Boolean> uploadProfilePhoto(File image) {
         MutableLiveData<Boolean> ifResponseReceived = new MutableLiveData<>();
         APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
-        RequestBody userId = RequestBody.create(String.valueOf(user_id), MediaType.parse("text/plain"));
-
         MultipartBody.Part filePart = MultipartBody.Part.createFormData("image", image.getName(), RequestBody.create(MediaType.parse("image/*"), image));
-        Call<UploadProfilePhotoResponse> call = apiService.uploadProfilePhoto(userId, filePart);
+        Call<UploadProfilePhotoResponse> call = apiService.uploadProfilePhoto(helperClass.getJWTToken(context), filePart);
         call.enqueue(new Callback<UploadProfilePhotoResponse>() {
             @Override
             public void onResponse(@NonNull Call<UploadProfilePhotoResponse> call, @NonNull Response<UploadProfilePhotoResponse> response) {
