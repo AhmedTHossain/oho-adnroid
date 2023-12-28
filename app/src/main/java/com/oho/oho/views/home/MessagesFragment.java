@@ -5,13 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -22,6 +15,13 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.AppCompatCheckBox;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.bumptech.glide.Glide;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.oho.oho.R;
@@ -31,6 +31,7 @@ import com.oho.oho.interfaces.OnChatRoomClickListener;
 import com.oho.oho.interfaces.OnMessageOptionsMenu;
 import com.oho.oho.models.JWTTokenRequest;
 import com.oho.oho.models.Profile;
+import com.oho.oho.models.ReportUserRequest;
 import com.oho.oho.responses.chat.ChatRoom;
 import com.oho.oho.utils.HelperClass;
 import com.oho.oho.viewmodels.MessageViewModel;
@@ -48,6 +49,8 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
     private ShimmerFrameLayout shimmerViewContainer;
     private String token;
     private Profile profile;
+    private ArrayList<ChatRoom> chatRoomArrayList = new ArrayList<>();
+    private HelperClass helperClass = new HelperClass();
 
     public MessagesFragment() {
         // Required empty public constructor
@@ -119,21 +122,20 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
         jwtTokenRequest.setEmail(email);
         viewModel.getJwtToken(jwtTokenRequest);
         viewModel.jwtToken.observe(requireActivity(), jwtToken -> {
-            if (jwtToken != null){
-                Log.d("MessageFragment","initial jwt token: "+jwtToken);
+            if (jwtToken != null) {
+                Log.d("MessageFragment", "initial jwt token: " + jwtToken);
 
                 token = jwtToken;
-            }
-            else
+            } else
                 Toast.makeText(requireContext(), "Unable to fetch JWT Token!", Toast.LENGTH_LONG).show();
         });
     }
 
-    private void getAllChatRooms(int user_id){
+    private void getAllChatRooms(int user_id) {
         viewModel.getAllChatRooms();
         viewModel.chatRoomList.observe(getViewLifecycleOwner(), chatRoomList -> {
             if (chatRoomList != null) {
-                ArrayList<ChatRoom> chatRoomArrayList = new ArrayList<>(chatRoomList);
+                chatRoomArrayList = new ArrayList<>(chatRoomList);
                 setChatRoomList(chatRoomArrayList);
             } else {
                 binding.swiperefreshlayout.setVisibility(View.GONE);
@@ -162,12 +164,12 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
             public boolean onMenuItemClick(MenuItem menuItem) {
                 // Toast message on menu item clicked
                 Toast.makeText(requireContext(), "You Clicked " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
-                switch (menuItem.getTitle().toString()){
+                switch (menuItem.getTitle().toString()) {
                     case "Report":
-                        showReportOptionDialog(imageUrl,nameText);
+                        showReportOptionDialog(imageUrl, nameText);
                         break;
                     case "Block":
-                        showBlockOptionDialog(imageUrl,nameText);
+                        showBlockOptionDialog(imageUrl, nameText);
                         break;
                 }
                 return true;
@@ -207,11 +209,47 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
                 buttonNegative.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
 //
 //                buttonPositive.setEnabled(false);
+                AppCompatCheckBox impersonationCheckBox = promptsView.findViewById(R.id.impersonation);
+                AppCompatCheckBox inappropriateCheckBox = promptsView.findViewById(R.id.inappropriate);
+                AppCompatCheckBox threatsOrViolenceCheckBox = promptsView.findViewById(R.id.threatsOrViolence);
 
                 buttonPositive.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        ArrayList<String> reasonsToReportList = new ArrayList<>();
+                        if (impersonationCheckBox.isChecked())
+                            reasonsToReportList.add("Impersonation");
+                        if (inappropriateCheckBox.isChecked())
+                            reasonsToReportList.add("Inappropriate Behavior");
+                        if (threatsOrViolenceCheckBox.isChecked())
+                            reasonsToReportList.add("Threats or Violence");
 
+                        String reasons = "";
+                        for (String reason : reasonsToReportList) {
+                            if (reasons.equals(""))
+                                reasons = reasons + reason;
+                            else
+                                reasons = reasons + "," + reason;
+                        }
+
+                        Toast.makeText(requireContext(), "reasons: " + reasons, Toast.LENGTH_SHORT).show();
+
+                        ReportUserRequest reportUserRequest = new ReportUserRequest();
+                        reportUserRequest.setReason(reasons);
+
+                        for (ChatRoom chatRoom : chatRoomArrayList) {
+                            if (chatRoom.getFullName().equals(nameText)){
+
+                                String [] participantsIdArray = chatRoom.getParticipants().split(",");
+                                int userId = helperClass.getProfile(requireContext()).getId();
+                                for (String id: participantsIdArray)
+                                    if (Integer.parseInt(id)!=userId) {
+                                        Log.d("MessagesFragment","reported user id = "+Integer.valueOf(id));
+                                        reportUserRequest.setReportedUserId(Integer.valueOf(id));
+                                        viewModel.reportUser(reportUserRequest);
+                                    }
+                            }
+                        }
                         alertDialog.dismiss();
                     }
                 });

@@ -9,6 +9,7 @@ import com.oho.oho.models.JWTTokenRequest;
 import com.oho.oho.models.Profile;
 import com.oho.oho.models.Prompt;
 import com.oho.oho.models.PromptAnswer;
+import com.oho.oho.models.ReportUserRequest;
 import com.oho.oho.models.Swipe;
 import com.oho.oho.responses.Attendance.GetDateStatusResponse;
 import com.oho.oho.responses.MessageResponse;
@@ -26,6 +27,7 @@ import com.oho.oho.responses.match.GetRecommendationResponse;
 import com.oho.oho.responses.profile.GetProfileResponse;
 import com.oho.oho.responses.prompt.GetAddPromptResponse;
 import com.oho.oho.responses.qrcode.GetQrCodeResponse;
+import com.oho.oho.responses.report.PostReportUserResponse;
 
 import org.json.JSONObject;
 
@@ -149,4 +151,9 @@ public interface APIService {
     //check if the date has started
     @GET("match/check_user_presence")
     Call<GetDateStatusResponse> ifDateStarted(@Header("Authorization") String jwtToken, @Query("match_id") int match_id);
+
+    //repport user
+    @POST("users/report_user")
+    Call<PostReportUserResponse> reportUser(@Header("Authorization") String jwtToken, @Body ReportUserRequest reportUserRequest);
+
 }

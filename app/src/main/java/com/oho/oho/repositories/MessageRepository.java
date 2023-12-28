@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.oho.oho.models.JWTTokenRequest;
+import com.oho.oho.models.ReportUserRequest;
 import com.oho.oho.network.APIService;
 import com.oho.oho.network.RetrofitInstance;
 import com.oho.oho.responses.chat.ChatRoom;
@@ -15,6 +16,8 @@ import com.oho.oho.responses.chat.ChatRoomsData;
 import com.oho.oho.responses.chat.GetChatRoomsResponse;
 import com.oho.oho.responses.jwttoken.GetJwtTokenResponse;
 import com.oho.oho.responses.jwttoken.JwtTokenData;
+import com.oho.oho.responses.report.PostReportUserResponse;
+import com.oho.oho.responses.report.ReportUserData;
 import com.oho.oho.utils.HelperClass;
 
 import java.util.List;
@@ -86,5 +89,26 @@ public class MessageRepository {
             }
         });
         return jwtToken;
+    }
+
+    public MutableLiveData<ReportUserData> reportUser(ReportUserRequest reportUserRequest){
+        MutableLiveData<ReportUserData> reportedUserData = new MutableLiveData<>();
+        APIService service = RetrofitInstance.getRetrofitClient().create(APIService.class);
+        Call<PostReportUserResponse> call = service.reportUser(helperClass.getJWTToken(context),reportUserRequest);
+        call.enqueue(new Callback<PostReportUserResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<PostReportUserResponse> call, @NonNull Response<PostReportUserResponse> response) {
+                if (response.body().getStatus()){
+                    reportedUserData.setValue(response.body().getData());
+                    Toast.makeText(context,"You have successfully reported this user.",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<PostReportUserResponse> call, @NonNull Throwable t) {
+                reportedUserData.setValue(null);
+            }
+        });
+        return reportedUserData;
     }
 }

@@ -7,8 +7,10 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.oho.oho.models.JWTTokenRequest;
+import com.oho.oho.models.ReportUserRequest;
 import com.oho.oho.repositories.MessageRepository;
 import com.oho.oho.responses.chat.ChatRoom;
+import com.oho.oho.responses.report.ReportUserData;
 
 import java.util.List;
 
@@ -17,6 +19,7 @@ public class MessageViewModel extends AndroidViewModel {
     private final MessageRepository messageRepository;
     public LiveData<List<ChatRoom>> chatRoomList;
     public LiveData<String> jwtToken;
+    public LiveData<ReportUserData> reportedUserData;
     public MessageViewModel(@NonNull Application application){
         super(application);
         messageRepository = new MessageRepository(getApplication().getApplicationContext());
@@ -28,5 +31,9 @@ public class MessageViewModel extends AndroidViewModel {
 
     public void getJwtToken(JWTTokenRequest jwtTokenRequest){
         jwtToken = messageRepository.getJwtToken(jwtTokenRequest);
+    }
+
+    public void reportUser(ReportUserRequest reportUserRequest){
+        reportedUserData = messageRepository.reportUser(reportUserRequest);
     }
 }
