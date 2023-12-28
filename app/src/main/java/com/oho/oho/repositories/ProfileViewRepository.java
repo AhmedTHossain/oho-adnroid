@@ -12,6 +12,8 @@ import com.oho.oho.network.APIService;
 import com.oho.oho.network.RetrofitInstance;
 import com.oho.oho.responses.MessageResponse;
 import com.oho.oho.responses.UploadProfilePhotoResponse;
+import com.oho.oho.responses.profile.GetProfileResponse;
+import com.oho.oho.utils.HelperClass;
 
 import java.io.File;
 
@@ -24,6 +26,7 @@ import retrofit2.Response;
 
 public class ProfileViewRepository {
     private Context context;
+    private HelperClass helperClass = new HelperClass();
 
     public ProfileViewRepository(Context context) {
         this.context = context;
@@ -32,15 +35,15 @@ public class ProfileViewRepository {
     public MutableLiveData<Profile> getUserProfile(int userId) {
         MutableLiveData<Profile> profile = new MutableLiveData<>();
         APIService service = RetrofitInstance.getRetrofitClient().create(APIService.class);
-        Call<Profile> call = service.getUserProfile(userId);
-        call.enqueue(new retrofit2.Callback<Profile>() {
+        Call<GetProfileResponse> call = service.getUserProfile(helperClass.getJWTToken(context),userId);
+        call.enqueue(new retrofit2.Callback<GetProfileResponse>() {
             @Override
-            public void onResponse(@NonNull Call<Profile> call, @NonNull retrofit2.Response<Profile> response) {
-                profile.setValue(response.body());
+            public void onResponse(@NonNull Call<GetProfileResponse> call, @NonNull retrofit2.Response<GetProfileResponse> response) {
+                profile.setValue(response.body().getData());
             }
 
             @Override
-            public void onFailure(@NonNull Call<Profile> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<GetProfileResponse> call, @NonNull Throwable t) {
                 profile.setValue(null);
             }
         });

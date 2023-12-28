@@ -1,28 +1,27 @@
 package com.oho.oho.network;
 
 import com.oho.oho.models.Availability;
+import com.oho.oho.models.BioUpdateRequest;
 import com.oho.oho.models.CreateDeviceId;
 import com.oho.oho.models.DatesLeft;
 import com.oho.oho.models.GetLikesOnProfileResponse;
 import com.oho.oho.models.JWTTokenRequest;
 import com.oho.oho.models.Profile;
-import com.oho.oho.models.BioUpdateRequest;
 import com.oho.oho.models.Prompt;
 import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.models.Swipe;
 import com.oho.oho.responses.Attendance.GetDateStatusResponse;
-import com.oho.oho.responses.Chat;
-import com.oho.oho.responses.chat.GetChatHistoryResponse;
-import com.oho.oho.responses.chat.GetChatRoomsResponse;
-import com.oho.oho.responses.jwttoken.GetJwtTokenResponse;
 import com.oho.oho.responses.MessageResponse;
 import com.oho.oho.responses.PreferenceResponse;
-import com.oho.oho.responses.qrcode.GetQrCodeResponse;
-import com.oho.oho.responses.qrcode.QRCodeData;
 import com.oho.oho.responses.StoreDeviceIdResponse;
 import com.oho.oho.responses.UploadProfilePhotoResponse;
 import com.oho.oho.responses.UploadPromptPhotoResponse;
 import com.oho.oho.responses.VerifyEmailResponse;
+import com.oho.oho.responses.chat.GetChatHistoryResponse;
+import com.oho.oho.responses.chat.GetChatRoomsResponse;
+import com.oho.oho.responses.jwttoken.GetJwtTokenResponse;
+import com.oho.oho.responses.profile.GetProfileResponse;
+import com.oho.oho.responses.qrcode.GetQrCodeResponse;
 
 import org.json.JSONObject;
 
@@ -59,7 +58,7 @@ public interface APIService {
 
     //for getting user profile
     @GET("users/get_profile")
-    Call<Profile> getUserProfile(@Query("user_id") int user_id);
+    Call<GetProfileResponse> getUserProfile(@Header("Authorization") String jwtToken, @Query("user_id") int user_id);
 
     //for uploading profile photo
     @Multipart
@@ -149,5 +148,5 @@ public interface APIService {
 
     //check if the date has started
     @GET("match/check_user_presence")
-    Call<GetDateStatusResponse> ifDateStarted(@Header("Authorization") String jwtToken,@Query("match_id") int match_id);
+    Call<GetDateStatusResponse> ifDateStarted(@Header("Authorization") String jwtToken, @Query("match_id") int match_id);
 }
