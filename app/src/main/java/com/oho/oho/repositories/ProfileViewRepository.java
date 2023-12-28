@@ -35,7 +35,7 @@ public class ProfileViewRepository {
     public MutableLiveData<Profile> getUserProfile(int userId) {
         MutableLiveData<Profile> profile = new MutableLiveData<>();
         APIService service = RetrofitInstance.getRetrofitClient().create(APIService.class);
-        Call<GetProfileResponse> call = service.getUserProfile(helperClass.getJWTToken(context),userId);
+        Call<GetProfileResponse> call = service.getUserProfile(helperClass.getJWTToken(context), userId);
         call.enqueue(new retrofit2.Callback<GetProfileResponse>() {
             @Override
             public void onResponse(@NonNull Call<GetProfileResponse> call, @NonNull retrofit2.Response<GetProfileResponse> response) {
@@ -81,7 +81,7 @@ public class ProfileViewRepository {
     public MutableLiveData<Boolean> updateBio(BioUpdateRequest reuqest) {
         MutableLiveData<Boolean> isUpdatedSuccessfully = new MutableLiveData<>();
         APIService service = RetrofitInstance.getRetrofitClient().create(APIService.class);
-        Call<Profile> call = service.updateUserBio(reuqest);
+        Call<Profile> call = service.updateUserBio(helperClass.getJWTToken(context), reuqest);
         call.enqueue(new retrofit2.Callback<Profile>() {
             @Override
             public void onResponse(@NonNull Call<Profile> call, @NonNull retrofit2.Response<Profile> response) {

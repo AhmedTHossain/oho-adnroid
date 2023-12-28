@@ -54,7 +54,7 @@ public interface APIService {
 
     // for updating only user's bio
     @PUT("users/update")
-    Call<Profile> updateUserBio(@Body BioUpdateRequest reuqest);
+    Call<Profile> updateUserBio(@Header("Authorization") String jwtToken, @Body BioUpdateRequest reuqest);
 
     //for getting user profile
     @GET("users/get_profile")
