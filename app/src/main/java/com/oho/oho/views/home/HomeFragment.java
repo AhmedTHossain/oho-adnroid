@@ -28,6 +28,7 @@ import com.oho.oho.interfaces.SwipeListener;
 import com.oho.oho.models.Profile;
 import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.models.Swipe;
+import com.oho.oho.utils.HelperClass;
 import com.oho.oho.viewmodels.HomeViewModel;
 import com.oho.oho.views.FullScreenImageViewActivity;
 import com.oho.oho.views.settings.AvailabilitySettingsActivity;
@@ -43,6 +44,7 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
     MediaPlayer mp;
     private HomeViewModel homeViewModel;
     private ArrayList<Profile> recommendedProfiles;
+    private HelperClass helperClass = new HelperClass();
 
     private int profileToShow = -1;
 
@@ -69,8 +71,8 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
         return binding.getRoot();
     }
 
-    private void getProfileRecommendation(int id) {
-        homeViewModel.getRecommendation(id);
+    private void getProfileRecommendation() {
+        homeViewModel.getRecommendation();
         if (getView() != null) {
             homeViewModel.recommendedProfiles.observe(getViewLifecycleOwner(), recommendedList -> {
                 if (recommendedList != null) {
@@ -258,10 +260,10 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
         homeViewModel.isAvailable.observe(getViewLifecycleOwner(), isAvailable -> {
             Log.d("HomeFragment", "inside getAvailabilityConsent is Available: "+isAvailable);
             if (isAvailable) {
-                homeViewModel.getNumberOfDatesLeft(profile.getId());
+                homeViewModel.getNumberOfDatesLeft();
                 homeViewModel.numberOfDatesLeft.observe(getViewLifecycleOwner(), numberOfDatesLeft -> {
                     if (numberOfDatesLeft >= 1)
-                        getProfileRecommendation(profile.getId());
+                        getProfileRecommendation();
                     if (numberOfDatesLeft == 0)
                         alreadyReachedMaxNumberOfDates();
                 });

@@ -15,6 +15,9 @@ import com.oho.oho.network.APIService;
 import com.oho.oho.network.RetrofitInstance;
 import com.oho.oho.responses.MessageResponse;
 import com.oho.oho.responses.VerifyEmailResponse;
+import com.oho.oho.responses.match.GetDatesLeftResponse;
+import com.oho.oho.responses.match.GetRecommendationResponse;
+import com.oho.oho.utils.HelperClass;
 
 import java.util.List;
 
@@ -25,6 +28,7 @@ import retrofit2.Response;
 public class SwipeRepository {
 
     private Context context;
+    private HelperClass helperClass = new HelperClass();
 
     public SwipeRepository(Context context) {
         this.context = context;
@@ -53,20 +57,20 @@ public class SwipeRepository {
         return isSwipeSuccessful;
     }
 
-    public MutableLiveData<List<Profile>> getRecommendedProfiles(String user_id){
+    public MutableLiveData<List<Profile>> getRecommendedProfiles(){
         MutableLiveData<List<Profile>> recommendedProfilesList = new MutableLiveData<>();
         APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
-        Call<List<Profile>> call =apiService.getRecommendations(user_id);
-        call.enqueue(new Callback<List<Profile>>() {
+        Call<GetRecommendationResponse> call =apiService.getRecommendations(helperClass.getJWTToken(context));
+        call.enqueue(new Callback<GetRecommendationResponse>() {
             @Override
-            public void onResponse(@NonNull Call<List<Profile>> call, @NonNull Response<List<Profile>> response) {
+            public void onResponse(@NonNull Call<GetRecommendationResponse> call, @NonNull Response<GetRecommendationResponse> response) {
                 if (response.body()!=null)
-                    recommendedProfilesList.setValue(response.body());
+                    recommendedProfilesList.setValue(response.body().getData());
 //                Toast.makeText(context,"All profiles loaded successfully!",Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onFailure(@NonNull Call<List<Profile>> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<GetRecommendationResponse> call, @NonNull Throwable t) {
                 recommendedProfilesList.setValue(null);
 //                Toast.makeText(context,"Request failed!",Toast.LENGTH_SHORT).show();
                 Log.d("LikeYouRepository","Request failed with code: "+t.getMessage());
@@ -75,20 +79,20 @@ public class SwipeRepository {
         return recommendedProfilesList;
     }
 
-    public MutableLiveData<Integer> getNumberOfDatesLeft(int user_id){
+    public MutableLiveData<Integer> getNumberOfDatesLeft(){
         MutableLiveData<Integer> date_left = new MutableLiveData<>();
         APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
-        Call<DatesLeft> call =apiService.getNumberOfDatesLeft(user_id);
-        call.enqueue(new Callback<DatesLeft>() {
+        Call<GetDatesLeftResponse> call =apiService.getNumberOfDatesLeft(helperClass.getJWTToken(context));
+        call.enqueue(new Callback<GetDatesLeftResponse>() {
             @Override
-            public void onResponse(@NonNull Call<DatesLeft> call, @NonNull Response<DatesLeft> response) {
+            public void onResponse(@NonNull Call<GetDatesLeftResponse> call, @NonNull Response<GetDatesLeftResponse> response) {
                 if (response.body() != null) {
-                    date_left.setValue(response.body().getDatesLeft());
+                    date_left.setValue(response.body().getData().getDatesLeft());
                 }
             }
 
             @Override
-            public void onFailure(@NonNull Call<DatesLeft> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<GetDatesLeftResponse> call, @NonNull Throwable t) {
                 date_left.setValue(-1);
             }
         });

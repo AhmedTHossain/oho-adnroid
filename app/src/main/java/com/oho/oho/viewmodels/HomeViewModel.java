@@ -30,8 +30,8 @@ public class HomeViewModel extends AndroidViewModel {
         availabilitySettingsRepository = new AvailabilitySettingsRepository();
     }
 
-    public void getRecommendation(int user_id){
-        recommendedProfiles = swipeRepository.getRecommendedProfiles(String.valueOf(user_id));
+    public void getRecommendation(){
+        recommendedProfiles = swipeRepository.getRecommendedProfiles();
 
         profileToShow = 0;
     }
@@ -52,7 +52,7 @@ public class HomeViewModel extends AndroidViewModel {
         isAvailable = availabilitySettingsRepository.checkIfAvailable(getApplication().getApplicationContext());
     }
 
-    public void getNumberOfDatesLeft(int user_id){
-        numberOfDatesLeft = swipeRepository.getNumberOfDatesLeft(user_id);
+    public void getNumberOfDatesLeft(){
+        numberOfDatesLeft = swipeRepository.getNumberOfDatesLeft();
     }
 }

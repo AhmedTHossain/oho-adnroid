@@ -17,9 +17,12 @@ import com.oho.oho.responses.StoreDeviceIdResponse;
 import com.oho.oho.responses.UploadProfilePhotoResponse;
 import com.oho.oho.responses.UploadPromptPhotoResponse;
 import com.oho.oho.responses.VerifyEmailResponse;
+import com.oho.oho.responses.availability.GetAvailabilityStatusResponse;
 import com.oho.oho.responses.chat.GetChatHistoryResponse;
 import com.oho.oho.responses.chat.GetChatRoomsResponse;
 import com.oho.oho.responses.jwttoken.GetJwtTokenResponse;
+import com.oho.oho.responses.match.GetDatesLeftResponse;
+import com.oho.oho.responses.match.GetRecommendationResponse;
 import com.oho.oho.responses.profile.GetProfileResponse;
 import com.oho.oho.responses.prompt.GetAddPromptResponse;
 import com.oho.oho.responses.qrcode.GetQrCodeResponse;
@@ -101,11 +104,7 @@ public interface APIService {
 
     //get likes on profile
     @GET("match/get_recommendations")
-    Call<List<Profile>> getRecommendations(@Query("user_id") String user_id);
-
-    //get number of dates left for the weekend
-    @GET("users/get_date_count")
-    Call<DatesLeft> getNumberOfDatesLeft(@Query("user_id") String user_id);
+    Call<GetRecommendationResponse> getRecommendations(@Header("Authorization") String jwtToken);
 
     //get user preference
     @GET("users/get_preference")
@@ -117,11 +116,11 @@ public interface APIService {
 
     //get number of matches/dates left
     @GET("users/get_date_count")
-    Call<DatesLeft> getNumberOfDatesLeft(@Query("user_id") int user_id);
+    Call<GetDatesLeftResponse> getNumberOfDatesLeft(@Header("Authorization") String jwtToken);
 
     //check if user is available for the weekend (if the user has selected any slot for the week)
     @GET("users/get_availability_status")
-    Call<JSONObject> ifAvailable(@Header("Authorization") String jwtToken);
+    Call<GetAvailabilityStatusResponse> ifAvailable(@Header("Authorization") String jwtToken);
 
     //get all chat rooms for the user
     @GET("chat/rooms")

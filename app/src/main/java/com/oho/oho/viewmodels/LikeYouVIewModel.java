@@ -27,7 +27,7 @@ public class LikeYouVIewModel extends AndroidViewModel {
         userList = likeYouRepository.getLikedByProfiles(jwtToken);
     }
 
-    public void getNumberOfDates(int user_id){
-        isDateAvailable = likeYouRepository.getNumberOfDatesAvailable(user_id);
+    public void getNumberOfDates(){
+        isDateAvailable = likeYouRepository.getNumberOfDatesAvailable();
     }
 }

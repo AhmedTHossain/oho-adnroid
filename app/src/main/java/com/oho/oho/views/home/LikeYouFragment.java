@@ -65,7 +65,7 @@ public class LikeYouFragment extends Fragment implements OnProfileClickListener 
     private void initLikeYouViewModel() {
         viewModel = new ViewModelProvider(this).get(LikeYouVIewModel.class);
         //TODO: replace with logged in user's id
-        viewModel.getNumberOfDates(profile.getId());
+        viewModel.getNumberOfDates();
         viewModel.isDateAvailable.observe(getViewLifecycleOwner(), isAvailable -> {
             if (!isAvailable)
                 showMaxDatesReachedDialog();
