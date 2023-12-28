@@ -55,7 +55,7 @@ public class ProfileViewRepository {
     public MutableLiveData<Boolean> deletePrompt(int prompt_id) {
         MutableLiveData<Boolean> isDeletedSuccessfully = new MutableLiveData<>();
         APIService service = RetrofitInstance.getRetrofitClient().create(APIService.class);
-        Call<MessageResponse> call = service.deletePromptAnswer(prompt_id);
+        Call<MessageResponse> call = service.deletePromptAnswer(helperClass.getJWTToken(context), prompt_id);
         call.enqueue(new retrofit2.Callback<MessageResponse>() {
             @Override
             public void onResponse(@NonNull Call<MessageResponse> call, @NonNull retrofit2.Response<MessageResponse> response) {

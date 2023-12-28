@@ -80,7 +80,7 @@ public interface APIService {
 
     // for deleting user prompts
     @DELETE("users/prompt_answers/delete")
-    Call<MessageResponse> deletePromptAnswer(@Query("id") int id);
+    Call<MessageResponse> deletePromptAnswer(@Header("Authorization") String jwtToken, @Query("id") int id);
 
     // for adding/updating user availability
     @POST("users/availability/add")
