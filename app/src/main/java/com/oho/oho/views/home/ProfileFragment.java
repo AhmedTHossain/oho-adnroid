@@ -25,6 +25,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.oho.oho.R;
 import com.oho.oho.adapters.ProfileDisplayAdapter;
 import com.oho.oho.databinding.FragmentProfileBinding;
@@ -58,6 +59,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
     private int profile_id = 0;
     private ChatRoom chatRoom = null;
     private Profile profile;
+    private ShimmerFrameLayout shimmerLayout;
 
     File imageFile;
     ActivityResultLauncher<PickVisualMediaRequest> pickMedia =
@@ -93,10 +95,22 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        shimmerLayout.startShimmerAnimation();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        shimmerLayout.stopShimmerAnimation();
+    }
+
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentProfileBinding.inflate(inflater, container, false);
-
+        shimmerLayout = binding.shimmerViewContainer;
         initViewModels();
         if (profile_id == 0) {
             HelperClass helperClass = new HelperClass();
@@ -157,6 +171,10 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
             adapter = new ProfileDisplayAdapter(userProfile, promptAnswers, this, requireContext(), profileViewModel,this);
         binding.recyclerviewProfile.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recyclerviewProfile.setAdapter(adapter);
+
+        shimmerLayout.stopShimmerAnimation();
+        shimmerLayout.setVisibility(View.GONE);
+        binding.recyclerviewProfile.setVisibility(View.VISIBLE);
     }
 
     @Override
