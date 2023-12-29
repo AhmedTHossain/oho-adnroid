@@ -97,7 +97,6 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
     private void setChatRoomList(ArrayList<ChatRoom> chatRoomArrayList) {
         ChatRoomAdapter adapter = new ChatRoomAdapter(chatRoomArrayList, this, this, requireContext());
 
-        Collections.reverse(chatRoomArrayList);
         binding.recyclerview.setHasFixedSize(true);
         binding.recyclerview.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recyclerview.setAdapter(adapter);
