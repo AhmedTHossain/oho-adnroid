@@ -46,7 +46,7 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
     private ChatRoom selectedChatRoom;
     private ChatViewModel viewModel;
     private ShimmerFrameLayout shimmerViewContainer;
-    public ArrayList<Chat> chatList;
+    public ArrayList<Chat> chatList = new ArrayList<>();
     private Socket mSocket;
     public ChatAdapter adapter;
     private String token;
@@ -146,7 +146,16 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
                     Toast.makeText(ChatActivity.this, "Fetch chats for room: " + chat_id, Toast.LENGTH_SHORT).show();
                     viewModel.chatHistory.observe(ChatActivity.this, chatHistory -> {
                         if (chatHistory != null) {
-                            chatList.addAll(chatHistory.getData());
+
+                            for (Chat chat: chatHistory.getData()){
+                                if (chat.getChatType().equals("delegate")){
+                                    if (!chat.getSender().equals(profile.getId()))
+                                        chatList.add(chat);
+                                } else {
+                                    chatList.add(chat);
+                                }
+                            }
+
                             adapter.notifyDataSetChanged();
 
                             hasNextPage = chatHistory.getHasNext();
@@ -190,13 +199,15 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
         Toast.makeText(this, "Fetch chats for room: " + chat_id, Toast.LENGTH_SHORT).show();
         viewModel.chatHistory.observe(this, chatHistory -> {
             if (chatHistory != null) {
-                chatList = new ArrayList<>(chatHistory.getData());
-                int chatToRemove = 0;
-                for (int i = 0; i < chatList.size(); i++)
-                    if (chatList.get(i).getChatType().equals("delegate"))
-                        if (chatList.get(i).getSender().equals(profile.getId())) chatToRemove = i;
 
-                if (chatList.size() != 0) chatList.remove(chatToRemove);
+                for (Chat chat: chatHistory.getData()){
+                    if (chat.getChatType().equals("delegate")){
+                        if (!chat.getSender().equals(profile.getId()))
+                            chatList.add(chat);
+                    } else {
+                        chatList.add(chat);
+                    }
+                }
 
                 setChatList(chatList);
             }
