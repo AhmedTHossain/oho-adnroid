@@ -6,10 +6,10 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
-import com.oho.oho.models.Profile;
 import com.oho.oho.network.APIService;
 import com.oho.oho.network.RetrofitInstance;
-import com.oho.oho.responses.PreferenceResponse;
+import com.oho.oho.responses.preference.GetPreferenceResponse;
+import com.oho.oho.responses.preference.PreferenceResponse;
 import com.oho.oho.responses.profile.GetProfileResponse;
 import com.oho.oho.utils.HelperClass;
 
@@ -25,20 +25,20 @@ public class PreferenceSettingsRepository {
         this.context = context;
     }
 
-    public MutableLiveData<PreferenceResponse> getUserPreference(String user_id) {
+    public MutableLiveData<PreferenceResponse> getUserPreference() {
         MutableLiveData<PreferenceResponse> preferenceResponse = new MutableLiveData<>();
 
         APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
-        Call<PreferenceResponse> call = apiService.getPreference(user_id);
-        call.enqueue(new Callback<PreferenceResponse>() {
+        Call<GetPreferenceResponse> call = apiService.getPreference(helperClass.getJWTToken(context));
+        call.enqueue(new Callback<GetPreferenceResponse>() {
             @Override
-            public void onResponse(@NonNull Call<PreferenceResponse> call, @NonNull Response<PreferenceResponse> response) {
-                preferenceResponse.setValue(response.body());
+            public void onResponse(@NonNull Call<GetPreferenceResponse> call, @NonNull Response<GetPreferenceResponse> response) {
+                preferenceResponse.setValue(response.body().getData());
                 Log.d("PreferenceSettingsRepository", "preference retrieved = YES");
             }
 
             @Override
-            public void onFailure(@NonNull Call<PreferenceResponse> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<GetPreferenceResponse> call, @NonNull Throwable t) {
                 preferenceResponse.setValue(null);
                 Log.d("PreferenceSettingsRepository", "preference retrieved = NO with response: " + t.getMessage());
             }

@@ -16,7 +16,7 @@ import com.oho.oho.adapters.PreferenceInputAdapter;
 import com.oho.oho.databinding.ActivityPreferenceSettingsBinding;
 import com.oho.oho.models.PreferenceInput;
 import com.oho.oho.models.Profile;
-import com.oho.oho.responses.PreferenceResponse;
+import com.oho.oho.responses.preference.PreferenceResponse;
 import com.oho.oho.utils.HelperClass;
 import com.oho.oho.viewmodels.PreferenceSettingsViewModel;
 import com.skydoves.powerspinner.IconSpinnerAdapter;
@@ -193,7 +193,7 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
 
     private void getPreferences() {
 
-        viewModel.getProfilePreference(String.valueOf(profile.getId()));
+        viewModel.getProfilePreference();
         viewModel.preferenceResponse.observe(this, preferenceResponse -> {
             if (preferenceResponse != null) {
                 Toast.makeText(this, "Preferred gender: " + preferenceResponse.getRace(), Toast.LENGTH_LONG).show();
@@ -227,16 +227,22 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
                 input.setSelected(true);
                 distanceInputAdapter.notifyDataSetChanged();
             }
-        for (PreferenceInput input : educationList)
-            if (preferences.getEducation().contains(input.getInputName())) {
+        for (PreferenceInput input : educationList) {
+            String preference = String.join(", ", preferences.getEducation());
+
+            if (preference.toLowerCase().contains(input.getInputName().toLowerCase())) {
                 input.setSelected(true);
                 educationInputAdapter.notifyDataSetChanged();
             }
-        for (PreferenceInput input : raceList)
-            if (preferences.getRace().contains(input.getInputName())) {
+        }
+        for (PreferenceInput input : raceList) {
+            String preference = String.join(", ", preferences.getRace());
+
+            if (preference.toLowerCase().contains(input.getInputName().toLowerCase())) {
                 input.setSelected(true);
                 raceInputAdapter.notifyDataSetChanged();
             }
+        }
         for (PreferenceInput input : religionList)
             if (preferences.getReligion().contains(input.getInputName())) {
                 input.setSelected(true);
@@ -253,14 +259,14 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
                 budgetInputAdapter.notifyDataSetChanged();
             }
 
-        Toast.makeText(this,"max height selected: "+convertCmToFeetInches(preferences.getMaxHeight()),Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "max height selected: " + convertCmToFeetInches(preferences.getMaxHeight()), Toast.LENGTH_SHORT).show();
         for (int i = 0; i < heightList.size(); i++)
             if (heightList.get(i).equals(convertCmToFeetInches(preferences.getMaxHeight())))
                 binding.heightSpinnerMax.selectItemByIndex(i);
         for (int i = 0; i < heightList.size(); i++)
             if (heightList.get(i).equals(convertCmToFeetInches(preferences.getMinHeight())))
                 binding.heightSpinnerMin.selectItemByIndex(i);
-        Log.d("PreferenceSettingsActivity","min age = "+preferences.getMinAge());
+        Log.d("PreferenceSettingsActivity", "min age = " + preferences.getMinAge());
 
 //        for (int i = 0; i < ageList.size(); i++)
 //            if (ageList.get(i).equals(selectedMaxAge))

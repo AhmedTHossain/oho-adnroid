@@ -1,24 +1,19 @@
 package com.oho.oho.repositories;
 
-import android.app.Person;
 import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.oho.oho.models.NewPromptAnswer;
 import com.oho.oho.models.Profile;
-import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.network.APIService;
 import com.oho.oho.network.RetrofitInstance;
-import com.oho.oho.responses.PreferenceResponse;
+import com.oho.oho.responses.preference.PreferenceResponse;
 import com.oho.oho.responses.UploadProfilePhotoResponse;
 import com.oho.oho.responses.prompt.GetAddPromptResponse;
 import com.oho.oho.utils.HelperClass;
-
-import org.json.JSONObject;
 
 import java.io.File;
 

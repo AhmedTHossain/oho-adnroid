@@ -3,17 +3,16 @@ package com.oho.oho.network;
 import com.oho.oho.models.Availability;
 import com.oho.oho.models.BioUpdateRequest;
 import com.oho.oho.models.CreateDeviceId;
-import com.oho.oho.models.DatesLeft;
 import com.oho.oho.models.GetLikesOnProfileResponse;
 import com.oho.oho.models.JWTTokenRequest;
 import com.oho.oho.models.Profile;
 import com.oho.oho.models.Prompt;
-import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.models.ReportUserRequest;
 import com.oho.oho.models.Swipe;
 import com.oho.oho.responses.Attendance.GetDateStatusResponse;
 import com.oho.oho.responses.MessageResponse;
-import com.oho.oho.responses.PreferenceResponse;
+import com.oho.oho.responses.preference.GetPreferenceResponse;
+import com.oho.oho.responses.preference.PreferenceResponse;
 import com.oho.oho.responses.StoreDeviceIdResponse;
 import com.oho.oho.responses.UploadProfilePhotoResponse;
 import com.oho.oho.responses.UploadPromptPhotoResponse;
@@ -28,8 +27,6 @@ import com.oho.oho.responses.profile.GetProfileResponse;
 import com.oho.oho.responses.prompt.GetAddPromptResponse;
 import com.oho.oho.responses.qrcode.GetQrCodeResponse;
 import com.oho.oho.responses.report.PostReportUserResponse;
-
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -110,7 +107,7 @@ public interface APIService {
 
     //get user preference
     @GET("users/get_preference")
-    Call<PreferenceResponse> getPreference(@Query("user_id") String user_id);
+    Call<GetPreferenceResponse> getPreference(@Header("Authorization") String jwtToken);
 
     //update user preference
     @PUT("users/update/preference")

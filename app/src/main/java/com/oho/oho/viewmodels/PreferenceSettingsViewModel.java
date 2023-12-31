@@ -8,7 +8,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.oho.oho.repositories.PreferenceSettingsRepository;
-import com.oho.oho.responses.PreferenceResponse;
+import com.oho.oho.responses.preference.PreferenceResponse;
 
 public class PreferenceSettingsViewModel extends AndroidViewModel {
 
@@ -27,8 +27,8 @@ public class PreferenceSettingsViewModel extends AndroidViewModel {
         repository = new PreferenceSettingsRepository(getApplication().getApplicationContext());
     }
 
-    public void getProfilePreference(String user_id) {
-        preferenceResponse = repository.getUserPreference(user_id);
+    public void getProfilePreference() {
+        preferenceResponse = repository.getUserPreference();
     }
 
     public void getStoredUserLocation(int user_id) {
