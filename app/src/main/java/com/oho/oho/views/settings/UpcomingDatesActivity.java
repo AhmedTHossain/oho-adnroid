@@ -2,6 +2,7 @@ package com.oho.oho.views.settings;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -50,11 +51,15 @@ public class UpcomingDatesActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(UpcomingDatesViewModel.class);
         viewModel.getUpcomingDates();
         viewModel.upcomingDatesData.observe(this, upcomingDatesData -> {
-            if (upcomingDatesData != null) {
+            if (upcomingDatesData.getData().size()>0) {
                 upcomingDateArrayList.addAll(upcomingDatesData.getData());
                 setUpcomingDatesList();
             } else {
+                Toast.makeText(UpcomingDatesActivity.this,"inside no dates",Toast.LENGTH_SHORT).show();
                 //TODO: show a placeholder image when no upcoming date is available
+                shimmerLayout.stopShimmerAnimation();
+                shimmerLayout.setVisibility(View.GONE);
+                binding.noDataLayout.setVisibility(View.VISIBLE);
             }
         });
     }
