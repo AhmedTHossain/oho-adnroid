@@ -6,6 +6,12 @@
         android:title="Block" />
 
     <item
+        android:id="@+id/unblock"
+        android:icon="@drawable/ic_block"
+        android:title="Unblock"
+        android:visible="false"/>
+
+    <item
         android:id="@+id/report"
         android:icon="@drawable/ic_report"
         android:title="Report" />

@@ -62,6 +62,12 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
                     .placeholder(R.drawable.person_placeholder)
                     .into(holder.getSenderImage());
         }
+
+        if (chatRoomArrayList.get(position).getStatus().equals("blocked"))
+            holder.blockedMessageText.setVisibility(View.VISIBLE);
+        else
+            holder.blockedMessageText.setVisibility(View.GONE);
+
     }
 
     @Override
@@ -70,7 +76,7 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView senderNameText, lastMessageBodyText;
+        private TextView senderNameText, lastMessageBodyText, blockedMessageText;
         private CircleImageView senderImage;
 
         public ViewHolder(@NonNull View itemView) {
@@ -79,6 +85,7 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
             senderNameText = (TextView) itemView.findViewById(R.id.name_text);
             lastMessageBodyText = (TextView) itemView.findViewById(R.id.last_message_text);
             senderImage = (CircleImageView) itemView.findViewById(R.id.image);
+            blockedMessageText = (TextView) itemView.findViewById(R.id.message_blocked);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -92,7 +99,7 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
                 public boolean onLongClick(View v) {
                     String imageUrl = chatRoomArrayList.get(getAdapterPosition()).getProfilePhoto();
                     String nameText = chatRoomArrayList.get(getAdapterPosition()).getFullName();
-                    onMessageOptionsMenuListener.openMenu(senderImage,imageUrl,nameText);
+                    onMessageOptionsMenuListener.openMenu(senderImage,imageUrl,nameText,getAbsoluteAdapterPosition());
                     return false;
                 }
             });
@@ -120,6 +127,14 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
 
         public void setSenderImage(CircleImageView senderImage) {
             this.senderImage = senderImage;
+        }
+
+        public TextView getBlockedMessageText() {
+            return blockedMessageText;
+        }
+
+        public void setBlockedMessageText(TextView blockedMessageText) {
+            this.blockedMessageText = blockedMessageText;
         }
     }
 }

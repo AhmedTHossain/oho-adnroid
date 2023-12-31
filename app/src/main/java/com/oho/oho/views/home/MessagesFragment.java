@@ -149,12 +149,21 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
     }
 
     @Override
-    public void openMenu(View view, String imageUrl, String nameText) {
+    public void openMenu(View view, String imageUrl, String nameText, int position) {
         // Initializing the popup menu and giving the reference as current context
         PopupMenu popupMenu = new PopupMenu(requireContext(), view);
 
         // Inflating popup menu from popup_menu.xml file
         popupMenu.getMenuInflater().inflate(R.menu.message_options_menu, popupMenu.getMenu());
+
+        if (chatRoomArrayList.get(position).getStatus().equals("blocked")){
+            popupMenu.getMenu().findItem(R.id.unblock).setVisible(true);
+            popupMenu.getMenu().findItem(R.id.block).setVisible(false);
+        } else {
+            popupMenu.getMenu().findItem(R.id.unblock).setVisible(false);
+            popupMenu.getMenu().findItem(R.id.block).setVisible(true);
+        }
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             popupMenu.setForceShowIcon(true);
         }
@@ -169,6 +178,9 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
                         break;
                     case "Block":
                         showBlockOptionDialog(imageUrl, nameText);
+                        break;
+                    case "Unblock":
+                        //TODO: call the function which will invoke the unblock API
                         break;
                 }
                 return true;
