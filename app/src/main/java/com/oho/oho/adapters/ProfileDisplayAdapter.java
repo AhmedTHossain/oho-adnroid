@@ -109,8 +109,11 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
                 ((Holder1) holder).religion.setText(userProfile.getReligion());
                 ((Holder1) holder).education.setText(userProfile.getEducation());
                 ((Holder1) holder).about.setText(userProfile.getBio());
+
+                //The URL is of the thumbnail version of the profile picture, and is without the extension. You are required to to append .jpeg to the URL.
+                String profilePictureThumbnailUrl = userProfile.getProfilePicture()+".jpeg";
                 Glide.with(context)
-                        .load(userProfile.getProfilePicture()).centerCrop()
+                        .load(profilePictureThumbnailUrl).centerCrop()
                         .into(((Holder1) holder).imageView);
 
                 ((Holder1) holder).imageView.setOnClickListener(new View.OnClickListener() {
@@ -143,8 +146,11 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
                     ((Holder) holder).prompt.setText(promptArrayList.get(position).getPrompt());
                     ((Holder) holder).answer.setText(promptArrayList.get(position).getAnswer());
                     ((Holder) holder).caption.setText(promptArrayList.get(position).getCaption());
+
+                    //The URL is of the thumbnail version of the prompt picture, and is without the extension. You are required to to append __compressed.jpeg to the URL.
+                    String promptPictureThumbnailUrl = userProfile.getProfilePicture()+"__compressed.jpeg";
                     Glide.with(context)
-                            .load(promptArrayList.get(position).getImage()).centerCrop()
+                            .load(promptPictureThumbnailUrl).centerCrop()
                             .into(((Holder) holder).imageView);
 
                     ((Holder) holder).imageView.setOnClickListener(new View.OnClickListener() {
