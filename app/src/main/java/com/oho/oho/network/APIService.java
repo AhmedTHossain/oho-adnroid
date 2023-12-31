@@ -27,6 +27,7 @@ import com.oho.oho.responses.profile.GetProfileResponse;
 import com.oho.oho.responses.prompt.GetAddPromptResponse;
 import com.oho.oho.responses.qrcode.GetQrCodeResponse;
 import com.oho.oho.responses.report.PostReportUserResponse;
+import com.oho.oho.responses.upcomingdates.GetUpcomingDatesResponse;
 
 import java.util.List;
 
@@ -153,4 +154,7 @@ public interface APIService {
     @POST("users/report_user")
     Call<PostReportUserResponse> reportUser(@Header("Authorization") String jwtToken, @Body ReportUserRequest reportUserRequest);
 
+    //get upcoming dates
+    @GET("match/upcoming_dates")
+    Call<GetUpcomingDatesResponse> getUpcomingDates(@Header("Authorization") String jwtToken);
 }

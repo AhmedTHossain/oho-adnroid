@@ -4,34 +4,48 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class UpcomingDate {
-    @SerializedName("id")
+    @SerializedName("match_id")
     @Expose
-    private Integer id;
-    @SerializedName("full_name")
-    @Expose
-    private String fullName;
+    private Integer matchId;
     @SerializedName("profile_photo")
     @Expose
     private String profilePhoto;
+    @SerializedName("full_name")
+    @Expose
+    private String fullName;
+    @SerializedName("user_id")
+    @Expose
+    private Integer userId;
     @SerializedName("chat_id")
     @Expose
     private Integer chatId;
     @SerializedName("channel_name")
     @Expose
     private String channelName;
-    @SerializedName("availability")
+    @SerializedName("restaurant_name")
     @Expose
-    private String availability;
-    @SerializedName("location")
+    private String restaurantName;
+    @SerializedName("address")
     @Expose
-    private String location;
+    private String address;
+    @SerializedName("reservation_time")
+    @Expose
+    private Integer reservationTime;
 
-    public Integer getId() {
-        return id;
+    public Integer getMatchId() {
+        return matchId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setMatchId(Integer matchId) {
+        this.matchId = matchId;
+    }
+
+    public String getProfilePhoto() {
+        return profilePhoto;
+    }
+
+    public void setProfilePhoto(String profilePhoto) {
+        this.profilePhoto = profilePhoto;
     }
 
     public String getFullName() {
@@ -42,12 +56,12 @@ public class UpcomingDate {
         this.fullName = fullName;
     }
 
-    public String getProfilePhoto() {
-        return profilePhoto;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setProfilePhoto(String profilePhoto) {
-        this.profilePhoto = profilePhoto;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public Integer getChatId() {
@@ -66,19 +80,27 @@ public class UpcomingDate {
         this.channelName = channelName;
     }
 
-    public String getAvailability() {
-        return availability;
+    public String getRestaurantName() {
+        return restaurantName;
     }
 
-    public void setAvailability(String availability) {
-        this.availability = availability;
+    public void setRestaurantName(String restaurantName) {
+        this.restaurantName = restaurantName;
     }
 
-    public String getLocation() {
-        return location;
+    public String getAddress() {
+        return address;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Integer getReservationTime() {
+        return reservationTime;
+    }
+
+    public void setReservationTime(Integer reservationTime) {
+        this.reservationTime = reservationTime;
     }
 }

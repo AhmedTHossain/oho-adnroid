@@ -52,8 +52,8 @@
                 android:layout_height="wrap_content"
                 android:text="You blocked this user"
                 android:textColor="@color/ted_image_picker_primary_pressed"
-                android:fontFamily="@font/ptsans_bold"
-                android:textSize="@dimen/_12ssp"
+                android:fontFamily="@font/ptsans_regular"
+                android:textSize="@dimen/_14ssp"
                 android:maxLines="1"
                 android:visibility="gone"/>
         </LinearLayout>

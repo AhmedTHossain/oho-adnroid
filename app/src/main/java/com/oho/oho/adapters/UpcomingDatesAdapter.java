@@ -36,8 +36,8 @@ public class UpcomingDatesAdapter extends RecyclerView.Adapter<UpcomingDatesAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.getNameView().setText(upcomingDateArrayList.get(position).getFullName());
-        holder.getDayTimeView().setText(upcomingDateArrayList.get(position).getAvailability());
-        holder.getLocationView().setText(upcomingDateArrayList.get(position).getLocation());
+        holder.getDayTimeView().setText(upcomingDateArrayList.get(position).getReservationTime());
+        holder.getLocationView().setText(upcomingDateArrayList.get(position).getRestaurantName());
         Glide.with(context)
                 .load(upcomingDateArrayList.get(position).getProfilePhoto())
                 .placeholder(R.drawable.portrait_female)
