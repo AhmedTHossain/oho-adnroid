@@ -18,7 +18,7 @@
         android:paddingEnd="@dimen/_20sdp"
         android:text="Liked Your Profile"
         android:textColor="@color/black"
-        android:textSize="@dimen/_25ssp"/>
+        android:textSize="@dimen/_25ssp" />
 
     <View
         android:id="@+id/view"
@@ -41,6 +41,21 @@
         android:textColor="@color/black"
         android:textSize="@dimen/_16ssp" />
 
+    <RelativeLayout
+        android:id="@+id/likes_available_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textview_disclaimer"
+        android:visibility="gone">
+
+        <!-- Profile Layout -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_15sdp" />
+    </RelativeLayout>
     <!-- shimmer layout list -->
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmer_view_container"
@@ -65,14 +80,51 @@
             <include layout="@layout/liked_profile_placeholder" />
         </LinearLayout>
     </com.facebook.shimmer.ShimmerFrameLayout>
-
-    <!-- Profile Layout -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview"
+    <!-- no likes layout -->
+    <LinearLayout
+        android:id="@+id/no_likes_available_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textview_disclaimer"
-        android:paddingStart="@dimen/_15sdp"
-        android:paddingEnd="@dimen/_15sdp" />
+        android:layout_centerInParent="true"
+        android:layout_margin="@dimen/_20sdp"
+        android:background="@drawable/border_corner_drawable"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingTop="@dimen/_40sdp"
+        android:paddingEnd="@dimen/_20sdp"
+        android:paddingBottom="@dimen/_40sdp"
+        android:visibility="gone"
+        android:layout_below="@+id/textview_disclaimer">
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/no_likes" />
+
+        <TextView
+            android:id="@+id/text_title_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:fontFamily="@font/ptsans_bold"
+            android:text="No Likes Yet!"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_20ssp" />
+
+        <TextView
+            android:id="@+id/text_body_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/ptsans_regular"
+            android:text="@string/no_likes_yet_disclaimer"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14ssp" />
+
+    </LinearLayout>
 </RelativeLayout>

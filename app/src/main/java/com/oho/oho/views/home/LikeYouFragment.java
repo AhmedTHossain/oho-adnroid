@@ -89,10 +89,11 @@ public class LikeYouFragment extends Fragment implements OnProfileClickListener 
         viewModel.getAllLikedByProfiles(helperClass.getJWTToken(requireContext()));
         viewModel.userList.observe(getViewLifecycleOwner(), userList -> {
 //            Toast.makeText(requireContext(),"number of users = "+userList.size(),Toast.LENGTH_SHORT).show();
-            if (userList != null) {
+            if (userList.size()>0) {
                 Toast.makeText(requireContext(), "number of people liked profile = " + userList.size(), Toast.LENGTH_LONG).show();
                 setRecyclerview(userList);
-            }
+            } else
+                binding.noLikesAvailableLayout.setVisibility(View.VISIBLE);
             shimmerViewContainer.stopShimmerAnimation();
             shimmerViewContainer.setVisibility(View.GONE);
         });

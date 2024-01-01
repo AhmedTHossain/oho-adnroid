@@ -75,7 +75,6 @@
         </LinearLayout>
     </com.facebook.shimmer.ShimmerFrameLayout>
 
-
     <LinearLayout
         android:id="@+id/no_data_layout"
         android:layout_width="match_parent"
@@ -118,7 +117,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:text="@string/no_upcoming_dates_disclaimer"
             android:textColor="@color/black"
-            android:textSize="@dimen/_16ssp"
+            android:textSize="@dimen/_14ssp"
             android:textAlignment="center"/>
 
     </LinearLayout>

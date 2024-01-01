@@ -373,6 +373,7 @@ Oho! does not knowingly collect any Personal Identifiable Information from child
     <string name="both">Other</string>
     <string name="male">Male</string>
     <string name="preference_settings">Preference Settings</string>
+    <string name="no_likes_yet_disclaimer">Hey! No likes on your profile this week. Let\'s jazz it up! Add more prompts and maybe change your profile picture. You\'ve got this! 🌟</string>
     <string name="no_upcoming_dates_disclaimer">Sorry you don\'t have any dates scheduled yet. Like more people to get yourself more dates for the weekend.</string>
     <string name="no_recommendations_disclaimer">Sorry couldn\'t find any recommendations for you at this moment, please widen your preferences from the preference settings then come back.</string>
     <string name="no_more_recommendations_disclaimer">Sorry you\'ve reached the max number of recommendations for the week. Please come back next week for new sets of recommendations.</string>
