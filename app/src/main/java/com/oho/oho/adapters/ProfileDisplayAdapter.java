@@ -20,6 +20,7 @@ import com.oho.oho.interfaces.SwipeListener;
 import com.oho.oho.models.Profile;
 import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.responses.chat.ChatRoom;
+import com.oho.oho.utils.HelperClass;
 import com.oho.oho.viewmodels.ProfileViewModel;
 import com.oho.oho.views.chat.ChatActivity;
 
@@ -45,6 +46,7 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
     private ProfileViewModel viewModel;
     private int sender_id = 0;
     private ChatRoom chatRoom;
+    private HelperClass helperClass = new HelperClass();
 
     public ProfileDisplayAdapter(Profile userProfile, ArrayList<PromptAnswer> promptArrayList, SwipeListener listener, Context context, ProfileViewModel viewModel, OnFullImageViewListener fullImageViewListener) {
         this.promptArrayList = promptArrayList;
@@ -104,7 +106,7 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
 
                 ((Holder1) holder).profession.setText(userProfile.getOccupation());
                 ((Holder1) holder).gender.setText(userProfile.getSex());
-                ((Holder1) holder).height.setText(String.valueOf(userProfile.getHeight() + " cm"));
+                ((Holder1) holder).height.setText(String.valueOf(helperClass.convertToFeetAndInches(userProfile.getHeight())));
                 ((Holder1) holder).race.setText(userProfile.getRace());
                 ((Holder1) holder).religion.setText(userProfile.getReligion());
                 ((Holder1) holder).education.setText(userProfile.getEducation());

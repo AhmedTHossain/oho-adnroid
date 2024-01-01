@@ -45,4 +45,19 @@ public class HelperClass {
         String jwtToken = prefs.getString("JWT", null);
         return jwtToken;
     }
+
+    // converts height in cm to feet and inches for display
+    public String convertToFeetAndInches(double heightInCentimeters) {
+        // Convert height to inches
+        double totalInch = heightInCentimeters / 2.54;
+
+        // Calculate feet and remaining inches
+        int feet = (int) (totalInch / 12);
+        int remainingInches = (int) (totalInch % 12);
+
+        // Build the formatted string
+        String formattedHeight = feet + "' " + remainingInches + "''";
+
+        return formattedHeight;
+    }
 }

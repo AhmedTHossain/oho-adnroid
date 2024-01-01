@@ -72,7 +72,7 @@ public class IntroProfileSetup extends Fragment {
 
                             listener.onScreenChange("next", "intro");
                         } else
-                            Toast.makeText(requireContext(), "Sorry we only provide our service to users who are 18 years or above", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(requireContext(), "Sorry we only provide our service to users who are 18 or above", Toast.LENGTH_SHORT).show();
                     } else
                         Toast.makeText(requireContext(), "Please enter your Date of Birth first!", Toast.LENGTH_SHORT).show();
                 } else

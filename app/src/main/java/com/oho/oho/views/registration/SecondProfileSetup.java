@@ -121,8 +121,11 @@ public class SecondProfileSetup extends Fragment {
 
     public double calculateHeight(int feet, int inch) {
         int totalInch = (feet * 12) + inch;
+        double centimeters = totalInch * 2.54;
 
-        return totalInch * 2.54;
+        // Round the result to 2 decimal places
+        double roundedHeight = Math.round(centimeters * 100.0) / 100.0;
+        return roundedHeight;
     }
 
 }
