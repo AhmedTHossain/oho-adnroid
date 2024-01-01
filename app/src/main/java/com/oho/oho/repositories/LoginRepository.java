@@ -2,6 +2,8 @@ package com.oho.oho.repositories;
 
 import static com.oho.oho.utils.HelperClass.logErrorMessage;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
@@ -47,17 +49,17 @@ public class LoginRepository {
         call.enqueue(new Callback<VerifyEmailResponse>() {
             @Override
             public void onResponse(@NonNull Call<VerifyEmailResponse> call, @NonNull Response<VerifyEmailResponse> response) {
-
-                if (response.isSuccessful())
-                    if (response.body() != null) {
-                        checkedUserProfileMutableData.setValue(response.body().getData());
-                    } else
-                        checkedUserProfileMutableData.setValue(null);
+                if (response.body() != null) {
+                    checkedUserProfileMutableData.setValue(response.body().getData());
+                } else
+                    checkedUserProfileMutableData.setValue(null);
+                Log.d("LoginRepository","verify email response = "+response.message());
             }
 
             @Override
             public void onFailure(@NonNull Call<VerifyEmailResponse> call, @NonNull Throwable t) {
                 logErrorMessage(t.getMessage());
+                Log.d("LoginRepository","verify email response = "+t.getMessage());
             }
         });
         return checkedUserProfileMutableData;

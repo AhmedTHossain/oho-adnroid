@@ -127,6 +127,7 @@ public class LoginActivity extends AppCompatActivity {
     private void signInWithGoogleAuthCredential(AuthCredential googleAuthCredential) {
         loginViewModel.signInWithGoogle(googleAuthCredential);
         loginViewModel.authenticatedUserLiveData.observe(this, authenticatedUser -> {
+            Log.d("LoginRepository","verify email for email = "+authenticatedUser.getEmail());
             loginViewModel.checkIfUserExists(authenticatedUser.getEmail());
             loginViewModel.userProfileData.observe(this, userProfile -> {
                 HelperClass helperClass = new HelperClass();
@@ -141,9 +142,8 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 }else {
-                    helperClass.saveProfile(LoginActivity.this,userProfile);
-
-                    startActivity(new Intent(this, MainActivity.class));
+                    Log.d("LoginViewModel", "inside login viewmodel  =" + userProfile.getEmail());
+                    startActivity(new Intent(LoginActivity.this,OnboardingActivity.class));
                     finish();
                 }
             });

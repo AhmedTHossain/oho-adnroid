@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.oho.oho.models.Profile;
 
 public class VerifyEmailResponse {
+
     @SerializedName("status")
     @Expose
     private Boolean status;
