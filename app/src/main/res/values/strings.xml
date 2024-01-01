@@ -362,7 +362,7 @@ Oho! does not knowingly collect any Personal Identifiable Information from child
     <string name="safe_dating_tip_3"><b>3.</b> Do not give out personal info on the first date. The chat lines will open once you arrive at your date, and you can continue talking over the chat if you both connect</string>
     <string name="safe_dating_tip_4"><b>4.</b> Enlist the help of the restaurant manager or waiter. Our restaurant managers know that you are coming through Oho! and they can safely walk you out to your transportation</string>
     <string name="availability_disclaimer">**Matches will only turn on if you decide to go on a date on the selected week shown above**</string>
-    <string name="availability_change_disclaimer">Or if your availability changes, you can select your schedule for this weekend using the button below.</string>
+    <string name="availability_change_disclaimer">Return next week for matching or update your weekend schedule using the button below.</string>
     <string name="availability_saved_disclaimer">Below is your schedule for this week, you can update it anytime from the <b>Availability Settings</b> menu</string>
     <string name="preference_file_key">com.oho.oho.PREFERENCE_FILE_KEY</string>
     <string name="dating_phase_disclaimer">Please come back on <b>Monday</b> next week when matching phase begins.</string>
@@ -380,7 +380,7 @@ Oho! does not knowingly collect any Personal Identifiable Information from child
     <string name="disclaimer_set_availability"><![CDATA[Please select your schedule for the weekend. You can select multiple days & slots for greater number of matches.]]></string>
     <string name="like_you_screen_disclaimer">These users are interested to go on a date with you this weekend! Tap on the photo to view their profile.</string>
     <string name="feedback_form_disclaimer">Greetings to our feedback portal! 🌟 We\'re excited to listen to your thoughts about your recent date.</string>
-    <string name="not_available_disclaimer_title">Come back next week when you are available!</string>
+    <string name="not_available_disclaimer_title">Are you available for a date this weekend?</string>
     <string name="yes_lets_start_matching">Yes, let’s start matching!</string>
     <string name="lets_set_some_preferences">Set some more preferences!</string>
     <string name="no_recommendations">No Recommendations!</string>

@@ -8,6 +8,11 @@ import android.util.Log;
 
 import com.oho.oho.models.Profile;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 public class HelperClass {
     public static void logErrorMessage(String errorMessage) {
         Log.d(TAG, errorMessage);
@@ -59,5 +64,41 @@ public class HelperClass {
         String formattedHeight = feet + "' " + remainingInches + "''";
 
         return formattedHeight;
+    }
+
+    public String getFridayToSundayDateRange() {
+        Calendar calendar = Calendar.getInstance();
+
+        // Set the calendar to the current date
+        calendar.setTime(new Date());
+
+        // Find the current day of the week
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+
+        // Calculate the difference between the current day and Friday
+        int daysUntilFriday = Calendar.FRIDAY - dayOfWeek;
+        if (daysUntilFriday < 0) {
+            daysUntilFriday += 7;
+        }
+
+        // Calculate the difference between the current day and Sunday
+        int daysUntilSunday = Calendar.SUNDAY - dayOfWeek;
+        if (daysUntilSunday < 0) {
+            daysUntilSunday += 7;
+        }
+
+        // Add the differences to the current date to get Friday and Sunday
+        calendar.add(Calendar.DAY_OF_WEEK, daysUntilFriday);
+        Date friday = calendar.getTime();
+
+        calendar.add(Calendar.DAY_OF_WEEK, daysUntilSunday - daysUntilFriday);
+        Date sunday = calendar.getTime();
+
+        // Format the dates in the specified format
+        SimpleDateFormat sdf = new SimpleDateFormat("MMMM d", Locale.getDefault());
+        String fridayString = sdf.format(friday);
+        String sundayString = sdf.format(sunday);
+
+        return fridayString + "th - " + sundayString +"th";
     }
 }

@@ -193,15 +193,20 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
         binding.openPreferenceSettingsButton.setOnClickListener(this);
         binding.noRecommendationsAvailableLayout.setVisibility(View.VISIBLE);
         binding.progressLoadingRecommendations.setVisibility(View.GONE);
+        binding.textDatingPhaseDate.setVisibility(View.GONE);
     }
 
     private void showNotAvailableDisclaimer() {
+        String datingPhaseDate = "("+helperClass.getFridayToSundayDateRange()+")";
+
         binding.textTitleMessage.setText(R.string.not_available_disclaimer_title);
+        binding.textDatingPhaseDate.setText(datingPhaseDate);
         binding.textBodyMessage.setText(R.string.availability_change_disclaimer);
         binding.openPreferenceSettingsButton.setText(R.string.yes_lets_start_matching);
         binding.openPreferenceSettingsButton.setOnClickListener(this);
         binding.progressLoadingRecommendations.setVisibility(View.GONE);
         binding.noRecommendationsAvailableLayout.setVisibility(View.VISIBLE);
+        binding.textDatingPhaseDate.setVisibility(View.VISIBLE);
     }
 
     private void showInDatingPhaseDisclaimer() {
@@ -211,6 +216,7 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
         binding.openPreferenceSettingsButton.setVisibility(View.GONE);
         binding.progressLoadingRecommendations.setVisibility(View.GONE);
         binding.noRecommendationsAvailableLayout.setVisibility(View.VISIBLE);
+        binding.textDatingPhaseDate.setVisibility(View.GONE);
     }
 
     private void alreadyReachedMaxNumberOfDates() {
@@ -220,6 +226,7 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
         binding.openPreferenceSettingsButton.setVisibility(View.GONE);
         binding.progressLoadingRecommendations.setVisibility(View.GONE);
         binding.noRecommendationsAvailableLayout.setVisibility(View.VISIBLE);
+        binding.textDatingPhaseDate.setVisibility(View.GONE);
     }
 
     private void showRecommendations() {
@@ -227,6 +234,7 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
         binding.progressLoadingRecommendations.setVisibility(View.GONE);
         binding.progressLoadingRecommendations.setVisibility(View.GONE);
         binding.recommendationsAvailableLayout.setVisibility(View.VISIBLE);
+        binding.textDatingPhaseDate.setVisibility(View.GONE);
 
         Profile user = recommendedProfiles.get(profileToShow);
         setProfile(user);
