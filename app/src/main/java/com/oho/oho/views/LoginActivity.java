@@ -143,7 +143,8 @@ public class LoginActivity extends AppCompatActivity {
                     finish();
                 }else {
                     Log.d("LoginViewModel", "inside login viewmodel  =" + userProfile.getEmail());
-                    startActivity(new Intent(LoginActivity.this,OnboardingActivity.class));
+                    helperClass.saveProfile(this,userProfile);
+                    startActivity(new Intent(LoginActivity.this,MainActivity.class));
                     finish();
                 }
             });

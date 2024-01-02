@@ -150,7 +150,7 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
                     ((Holder) holder).caption.setText(promptArrayList.get(position).getCaption());
 
                     //The URL is of the thumbnail version of the prompt picture, and is without the extension. You are required to to append __compressed.jpeg to the URL.
-                    String promptPictureThumbnailUrl = userProfile.getProfilePicture()+"__compressed.jpeg";
+                    String promptPictureThumbnailUrl = promptArrayList.get(position).getImage()+"__compressed.jpeg";
                     Glide.with(context)
                             .load(promptPictureThumbnailUrl).centerCrop()
                             .into(((Holder) holder).imageView);
