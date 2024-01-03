@@ -94,6 +94,13 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
             Log.d("ChatActivity", "inside Chat Activity");
         }
 
+        Log.d("ChatActiviy", "slected chat room status = " + selectedChatRoom.getStatus());
+        if (selectedChatRoom.getStatus().equals("blocked")) {
+            binding.recyclerviewQuickmessages.setVisibility(View.GONE);
+            binding.layoutInputMessage.setVisibility(View.GONE);
+            binding.fabSend.setVisibility(View.GONE);
+        }
+
         Glide.with(this).load(sender_photo).placeholder(R.drawable.person_placeholder).into(binding.titleImage);
 
         shimmerViewContainer = binding.shimmerViewContainer;
@@ -147,8 +154,8 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
                     viewModel.chatHistory.observe(ChatActivity.this, chatHistory -> {
                         if (chatHistory != null) {
 
-                            for (Chat chat: chatHistory.getData()){
-                                if (chat.getChatType().equals("delegate")){
+                            for (Chat chat : chatHistory.getData()) {
+                                if (chat.getChatType().equals("delegate")) {
                                     if (!chat.getSender().equals(profile.getId()))
                                         chatList.add(chat);
                                 } else {
@@ -200,8 +207,8 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
         viewModel.chatHistory.observe(this, chatHistory -> {
             if (chatHistory != null) {
 
-                for (Chat chat: chatHistory.getData()){
-                    if (chat.getChatType().equals("delegate")){
+                for (Chat chat : chatHistory.getData()) {
+                    if (chat.getChatType().equals("delegate")) {
                         if (!chat.getSender().equals(profile.getId()))
                             chatList.add(chat);
                     } else {
@@ -213,7 +220,8 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
             }
             shimmerViewContainer.stopShimmerAnimation();
             shimmerViewContainer.setVisibility(View.GONE);
-            binding.recyclerviewQuickmessages.setVisibility(View.VISIBLE);
+            if (!selectedChatRoom.getStatus().equals("blocked"))
+                binding.recyclerviewQuickmessages.setVisibility(View.VISIBLE);
 
             if (chatHistory.getHasNext()) page++;
             else page = 0;
@@ -227,13 +235,15 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
                 qrcodeUrl = qrcode.getQrCode();
                 viewModel.checkDateStatus(qrcode.getMatch_id());
                 viewModel.ifDateStarted.observe(this, ifDateStarted -> {
-                    if (!ifDateStarted){
+                    if (!ifDateStarted) {
                         binding.fabSend.setVisibility(View.GONE);
                         binding.layoutInputMessage.setVisibility(View.GONE);
-                        binding.recyclerviewQuickmessages.setVisibility(View.VISIBLE);
+                        if (!selectedChatRoom.getStatus().equals("blocked"))
+                            binding.recyclerviewQuickmessages.setVisibility(View.VISIBLE);
                     } else {
                         binding.fabSend.setVisibility(View.VISIBLE);
-                        binding.layoutInputMessage.setVisibility(View.VISIBLE);
+                        if (selectedChatRoom.getStatus().equals("blocked"))
+                            binding.layoutInputMessage.setVisibility(View.GONE);
                         binding.recyclerviewQuickmessages.setVisibility(View.GONE);
                     }
                 });
