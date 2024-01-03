@@ -1,6 +1,7 @@
 package com.oho.oho.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.oho.oho.R;
 import com.oho.oho.interfaces.OnChatRoomClickListener;
 import com.oho.oho.interfaces.OnMessageOptionsMenu;
 import com.oho.oho.responses.chat.ChatRoom;
+import com.oho.oho.utils.HelperClass;
 
 import java.util.ArrayList;
 
@@ -25,6 +27,7 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
 
     private OnChatRoomClickListener chatRoomClickListener;
     private OnMessageOptionsMenu onMessageOptionsMenuListener;
+    private HelperClass helperClass = new HelperClass();
     private Context context;
 
     public ChatRoomAdapter(ArrayList<ChatRoom> chatRoomArrayList, OnChatRoomClickListener chatRoomClickListener, OnMessageOptionsMenu onMessageOptionsMenuListener, Context context) {
@@ -63,9 +66,20 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
                     .into(holder.getSenderImage());
         }
 
-        if (chatRoomArrayList.get(position).getStatus().equals("blocked"))
-            holder.blockedMessageText.setVisibility(View.VISIBLE);
-        else
+        Log.d("ChatRoomAdapter", "message is blocked: " + chatRoomArrayList.get(position).getStatus());
+        if (chatRoomArrayList.get(position).getStatus().equals("blocked")) {
+            Log.d("ChatRoomAdapter","my id: "+helperClass.getProfile(context).getId() + "blocked by: "+chatRoomArrayList.get(position).getBlockedBy());
+            if (chatRoomArrayList.get(position).getBlockedBy().equals(helperClass.getProfile(context).getId())) {
+                String message = "You blocked this user";
+                holder.blockedMessageText.setText(message);
+                holder.blockedMessageText.setVisibility(View.VISIBLE);
+            }
+            else {
+                String message = "This user has blocked you";
+                holder.blockedMessageText.setText(message);
+                holder.blockedMessageText.setVisibility(View.VISIBLE);
+            }
+        } else
             holder.blockedMessageText.setVisibility(View.GONE);
 
     }
@@ -99,7 +113,7 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
                 public boolean onLongClick(View v) {
                     String imageUrl = chatRoomArrayList.get(getAdapterPosition()).getProfilePhoto();
                     String nameText = chatRoomArrayList.get(getAdapterPosition()).getFullName();
-                    onMessageOptionsMenuListener.openMenu(senderImage,imageUrl,nameText,getAbsoluteAdapterPosition());
+                    onMessageOptionsMenuListener.openMenu(senderImage, imageUrl, nameText, getAbsoluteAdapterPosition());
                     return false;
                 }
             });

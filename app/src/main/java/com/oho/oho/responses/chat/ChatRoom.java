@@ -21,6 +21,9 @@ public class ChatRoom implements Serializable {
     @SerializedName("created_at")
     @Expose
     private Integer createdAt;
+    @SerializedName("blocked_by")
+    @Expose
+    private Integer blockedBy;
     @SerializedName("full_name")
     @Expose
     private String fullName;
@@ -74,6 +77,14 @@ public class ChatRoom implements Serializable {
         this.createdAt = createdAt;
     }
 
+    public Integer getBlockedBy() {
+        return blockedBy;
+    }
+
+    public void setBlockedBy(Integer blockedBy) {
+        this.blockedBy = blockedBy;
+    }
+
     public String getFullName() {
         return fullName;
     }
@@ -105,5 +116,4 @@ public class ChatRoom implements Serializable {
     public void setLastMessage(String lastMessage) {
         this.lastMessage = lastMessage;
     }
-
 }

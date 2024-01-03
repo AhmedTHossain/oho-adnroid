@@ -159,6 +159,11 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
         if (chatRoomArrayList.get(position).getStatus().equals("blocked")){
             popupMenu.getMenu().findItem(R.id.unblock).setVisible(true);
             popupMenu.getMenu().findItem(R.id.block).setVisible(false);
+
+            if (!chatRoomArrayList.get(position).getBlockedBy().equals(helperClass.getProfile(requireContext()).getId()))
+                popupMenu.getMenu().findItem(R.id.unblock).setVisible(false);
+            else
+                popupMenu.getMenu().findItem(R.id.unblock).setVisible(true);
         } else {
             popupMenu.getMenu().findItem(R.id.unblock).setVisible(false);
             popupMenu.getMenu().findItem(R.id.block).setVisible(true);
@@ -177,7 +182,7 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
                         showReportOptionDialog(imageUrl, nameText);
                         break;
                     case "Block":
-                        showBlockOptionDialog(imageUrl, nameText);
+                        showBlockOptionDialog(imageUrl, nameText, position);
                         break;
                     case "Unblock":
                         //TODO: call the function which will invoke the unblock API
@@ -270,7 +275,7 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
         alertDialog.show();
     }
 
-    private void showBlockOptionDialog(String imageUrl, String nameText) {
+    private void showBlockOptionDialog(String imageUrl, String nameText, int position) {
         LayoutInflater li = LayoutInflater.from(requireContext());
         View promptsView = li.inflate(R.layout.block_profile_dialog, null);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
