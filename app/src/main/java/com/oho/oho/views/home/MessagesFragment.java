@@ -29,6 +29,7 @@ import com.oho.oho.adapters.ChatRoomAdapter;
 import com.oho.oho.databinding.FragmentMessagesBinding;
 import com.oho.oho.interfaces.OnChatRoomClickListener;
 import com.oho.oho.interfaces.OnMessageOptionsMenu;
+import com.oho.oho.models.BlockUnblockUser;
 import com.oho.oho.models.JWTTokenRequest;
 import com.oho.oho.models.Profile;
 import com.oho.oho.models.ReportUserRequest;
@@ -38,7 +39,7 @@ import com.oho.oho.viewmodels.MessageViewModel;
 import com.oho.oho.views.chat.ChatActivity;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -51,6 +52,7 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
     private Profile profile;
     private ArrayList<ChatRoom> chatRoomArrayList = new ArrayList<>();
     private HelperClass helperClass = new HelperClass();
+    private ChatRoomAdapter adapter;
 
     public MessagesFragment() {
         // Required empty public constructor
@@ -95,7 +97,7 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
     }
 
     private void setChatRoomList(ArrayList<ChatRoom> chatRoomArrayList) {
-        ChatRoomAdapter adapter = new ChatRoomAdapter(chatRoomArrayList, this, this, requireContext());
+        adapter = new ChatRoomAdapter(chatRoomArrayList, this, this, requireContext());
 
         binding.recyclerview.setHasFixedSize(true);
         binding.recyclerview.setLayoutManager(new LinearLayoutManager(requireContext()));
@@ -156,7 +158,7 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
         // Inflating popup menu from popup_menu.xml file
         popupMenu.getMenuInflater().inflate(R.menu.message_options_menu, popupMenu.getMenu());
 
-        if (chatRoomArrayList.get(position).getStatus().equals("blocked")){
+        if (chatRoomArrayList.get(position).getStatus().equals("blocked")) {
             popupMenu.getMenu().findItem(R.id.unblock).setVisible(true);
             popupMenu.getMenu().findItem(R.id.block).setVisible(false);
 
@@ -185,7 +187,7 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
                         showBlockOptionDialog(imageUrl, nameText, position);
                         break;
                     case "Unblock":
-                        //TODO: call the function which will invoke the unblock API
+                        unBlock(position);
                         break;
                 }
                 return true;
@@ -254,13 +256,13 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
                         reportUserRequest.setReason(reasons);
 
                         for (ChatRoom chatRoom : chatRoomArrayList) {
-                            if (chatRoom.getFullName().equals(nameText)){
+                            if (chatRoom.getFullName().equals(nameText)) {
 
-                                String [] participantsIdArray = chatRoom.getParticipants().split(",");
+                                String[] participantsIdArray = chatRoom.getParticipants().split(",");
                                 int userId = helperClass.getProfile(requireContext()).getId();
-                                for (String id: participantsIdArray)
-                                    if (Integer.parseInt(id)!=userId) {
-                                        Log.d("MessagesFragment","reported user id = "+Integer.valueOf(id));
+                                for (String id : participantsIdArray)
+                                    if (Integer.parseInt(id) != userId) {
+                                        Log.d("MessagesFragment", "reported user id = " + Integer.valueOf(id));
                                         reportUserRequest.setReportedUserId(Integer.valueOf(id));
                                         viewModel.reportUser(reportUserRequest);
                                     }
@@ -309,13 +311,63 @@ public class MessagesFragment extends Fragment implements OnChatRoomClickListene
                 buttonPositive.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        BlockUnblockUser user = new BlockUnblockUser();
 
-                        alertDialog.dismiss();
+                        int userToBlock = -1;
+                        String [] participants = chatRoomArrayList.get(position).getParticipants().split(",");
+                        ArrayList<Integer> participantsList = new ArrayList<>();
+                        for (String  st: participants)
+                            participantsList.add(Integer.parseInt(st));
+
+                        for (int participant : participantsList)
+                            if (participant != profile.getId())
+                                userToBlock = participant;
+
+                        if (userToBlock != -1) {
+                            user.setUserId(userToBlock);
+                            viewModel.blockUser(user);
+                            viewModel.ifBlocked.observe(getViewLifecycleOwner(), ifBlocked -> {
+                                if (ifBlocked) {
+                                    chatRoomArrayList.get(position).setStatus("blocked");
+                                    chatRoomArrayList.get(position).setBlockedBy(profile.getId());
+
+                                    adapter.notifyDataSetChanged();
+                                    alertDialog.dismiss();
+                                }
+                            });
+                        }
                     }
                 });
             }
         });
         // show it
         alertDialog.show();
+    }
+
+    private void unBlock(int position){
+        BlockUnblockUser user = new BlockUnblockUser();
+
+        int userToBlock = -1;
+        String [] participants = chatRoomArrayList.get(position).getParticipants().split(",");
+        ArrayList<Integer> participantsList = new ArrayList<>();
+        for (String  st: participants)
+            participantsList.add(Integer.parseInt(st));
+
+        for (int participant : participantsList)
+            if (participant != profile.getId())
+                userToBlock = participant;
+
+        if (userToBlock != -1) {
+            user.setUserId(userToBlock);
+            viewModel.unBlockUser(user);
+            viewModel.ifUnBlocked.observe(getViewLifecycleOwner(), ifUnBlocked -> {
+                if (ifUnBlocked) {
+                    chatRoomArrayList.get(position).setStatus("active");
+                    chatRoomArrayList.get(position).setBlockedBy(null);
+
+                    adapter.notifyDataSetChanged();
+                }
+            });
+        }
     }
 }

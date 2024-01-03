@@ -7,10 +7,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
+import com.oho.oho.models.BlockUnblockUser;
 import com.oho.oho.models.JWTTokenRequest;
 import com.oho.oho.models.ReportUserRequest;
 import com.oho.oho.network.APIService;
 import com.oho.oho.network.RetrofitInstance;
+import com.oho.oho.responses.block.GetBlockResponse;
 import com.oho.oho.responses.chat.ChatRoom;
 import com.oho.oho.responses.chat.ChatRoomsData;
 import com.oho.oho.responses.chat.GetChatRoomsResponse;
@@ -91,16 +93,16 @@ public class MessageRepository {
         return jwtToken;
     }
 
-    public MutableLiveData<ReportUserData> reportUser(ReportUserRequest reportUserRequest){
+    public MutableLiveData<ReportUserData> reportUser(ReportUserRequest reportUserRequest) {
         MutableLiveData<ReportUserData> reportedUserData = new MutableLiveData<>();
         APIService service = RetrofitInstance.getRetrofitClient().create(APIService.class);
-        Call<PostReportUserResponse> call = service.reportUser(helperClass.getJWTToken(context),reportUserRequest);
+        Call<PostReportUserResponse> call = service.reportUser(helperClass.getJWTToken(context), reportUserRequest);
         call.enqueue(new Callback<PostReportUserResponse>() {
             @Override
             public void onResponse(@NonNull Call<PostReportUserResponse> call, @NonNull Response<PostReportUserResponse> response) {
-                if (response.body().getStatus()){
+                if (response.body().getStatus()) {
                     reportedUserData.setValue(response.body().getData());
-                    Toast.makeText(context,"You have successfully reported this user.",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "You have successfully reported this user.", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -110,5 +112,51 @@ public class MessageRepository {
             }
         });
         return reportedUserData;
+    }
+
+    public MutableLiveData<Boolean> blockUser(BlockUnblockUser user) {
+        MutableLiveData<Boolean> ifBlocked = new MutableLiveData<>();
+        APIService service = RetrofitInstance.getRetrofitClient().create(APIService.class);
+        Call<GetBlockResponse> call = service.blockUser(helperClass.getJWTToken(context), user);
+        call.enqueue(new Callback<GetBlockResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<GetBlockResponse> call, @NonNull Response<GetBlockResponse> response) {
+                if (response.body() != null) {
+                    if (response.body().getStatus())
+                        ifBlocked.setValue(true);
+                    else
+                        ifBlocked.setValue(false);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<GetBlockResponse> call, @NonNull Throwable t) {
+                ifBlocked.setValue(false);
+            }
+        });
+        return ifBlocked;
+    }
+
+    public MutableLiveData<Boolean> unblockUser(BlockUnblockUser user) {
+        MutableLiveData<Boolean> ifUnBlocked = new MutableLiveData<>();
+        APIService service = RetrofitInstance.getRetrofitClient().create(APIService.class);
+        Call<GetBlockResponse> call = service.unblockUser(helperClass.getJWTToken(context), user);
+        call.enqueue(new Callback<GetBlockResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<GetBlockResponse> call, @NonNull Response<GetBlockResponse> response) {
+                if (response.body() != null) {
+                    if (response.body().getStatus())
+                        ifUnBlocked.setValue(true);
+                    else
+                        ifUnBlocked.setValue(false);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<GetBlockResponse> call, @NonNull Throwable t) {
+                ifUnBlocked.setValue(false);
+            }
+        });
+        return ifUnBlocked;
     }
 }

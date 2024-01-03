@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.oho.oho.models.BlockUnblockUser;
 import com.oho.oho.models.JWTTokenRequest;
 import com.oho.oho.models.ReportUserRequest;
 import com.oho.oho.repositories.MessageRepository;
@@ -20,6 +21,8 @@ public class MessageViewModel extends AndroidViewModel {
     public LiveData<List<ChatRoom>> chatRoomList;
     public LiveData<String> jwtToken;
     public LiveData<ReportUserData> reportedUserData;
+    public LiveData<Boolean> ifBlocked;
+    public LiveData<Boolean> ifUnBlocked;
     public MessageViewModel(@NonNull Application application){
         super(application);
         messageRepository = new MessageRepository(getApplication().getApplicationContext());
@@ -35,5 +38,13 @@ public class MessageViewModel extends AndroidViewModel {
 
     public void reportUser(ReportUserRequest reportUserRequest){
         reportedUserData = messageRepository.reportUser(reportUserRequest);
+    }
+
+    public void blockUser(BlockUnblockUser user){
+        ifBlocked = messageRepository.blockUser(user);
+    }
+
+    public void unBlockUser(BlockUnblockUser user){
+        ifUnBlocked = messageRepository.unblockUser(user);
     }
 }

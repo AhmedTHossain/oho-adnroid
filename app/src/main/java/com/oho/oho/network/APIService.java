@@ -2,6 +2,7 @@ package com.oho.oho.network;
 
 import com.oho.oho.models.Availability;
 import com.oho.oho.models.BioUpdateRequest;
+import com.oho.oho.models.BlockUnblockUser;
 import com.oho.oho.models.CreateDeviceId;
 import com.oho.oho.models.GetLikesOnProfileResponse;
 import com.oho.oho.models.JWTTokenRequest;
@@ -11,6 +12,7 @@ import com.oho.oho.models.ReportUserRequest;
 import com.oho.oho.models.Swipe;
 import com.oho.oho.responses.Attendance.GetDateStatusResponse;
 import com.oho.oho.responses.MessageResponse;
+import com.oho.oho.responses.block.GetBlockResponse;
 import com.oho.oho.responses.preference.GetPreferenceResponse;
 import com.oho.oho.responses.preference.PreferenceResponse;
 import com.oho.oho.responses.StoreDeviceIdResponse;
@@ -157,4 +159,12 @@ public interface APIService {
     //get upcoming dates
     @GET("match/upcoming_dates")
     Call<GetUpcomingDatesResponse> getUpcomingDates(@Header("Authorization") String jwtToken);
+
+    //unblock user
+    @POST("users/unblock_user")
+    Call<GetBlockResponse> unblockUser(@Header("Authorization") String jwtToken, @Body BlockUnblockUser user);
+
+    //block user
+    @POST("users/block_user")
+    Call<GetBlockResponse> blockUser(@Header("Authorization") String jwtToken, @Body BlockUnblockUser user);
 }
