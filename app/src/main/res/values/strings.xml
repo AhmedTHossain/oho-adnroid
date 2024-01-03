@@ -399,6 +399,8 @@ Oho! does not knowingly collect any Personal Identifiable Information from child
     <string name="motivation_ques">What is our motivation for this app?</string>
     <string name="no_messages_disclaimer">As you haven\'t matched with anyone so far, you don\'t have any messages yet.</string>
     <string name="no_messages">No chats available!</string>
+    <string name="goto_settings">Go to Settings</string>
+    <string name="txt_error_post_notification">%1$s can\'t post notifications without Notification permission</string>
     <string-array name="evening_time_slots_array">
         <item>06:00 PM</item>
         <item>07:00 PM</item>

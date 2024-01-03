@@ -3,15 +3,25 @@ package com.oho.oho;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.Manifest;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.content.ContextCompat;
 import androidx.core.splashscreen.SplashScreen;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.oho.oho.databinding.ActivityMainBinding;
 import com.oho.oho.models.ChatNotificationPayload;
 import com.oho.oho.models.JWTTokenRequest;
@@ -40,6 +50,46 @@ public class MainActivity extends AppCompatActivity {
     private Profile profile;
     private String token;
 
+    private ActivityResultLauncher<String> requestPermissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+                if (isGranted) {
+                    Toast.makeText(MainActivity.this, "Notifications permission granted", Toast.LENGTH_SHORT)
+                            .show();
+                } else {
+                    Snackbar snackbar = Snackbar.make(
+                            binding.containermain,
+                            String.format(
+                                    String.format(
+                                            getString(R.string.txt_error_post_notification),
+                                            getString(R.string.app_name)
+                                    )
+                            ),
+                            Snackbar.LENGTH_INDEFINITE
+                    ).setAction(getString(R.string.goto_settings), v -> {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                            Intent settingsIntent = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
+                                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                    .putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName());
+                            startActivity(settingsIntent);
+                        }
+                    });
+
+                    // Set background color to white (#ffffff)
+                    snackbar.getView().setBackgroundColor(Color.parseColor("#ffffff"));
+
+                    // Set text color to black (#000000)
+                    TextView snackbarTextView = snackbar.getView().findViewById(com.google.android.material.R.id.snackbar_text);
+                    snackbarTextView.setTextColor(Color.parseColor("#000000"));
+
+                    // Set button text color to #B42254
+                    snackbar.setActionTextColor(Color.parseColor("#B42254"));
+
+                    snackbar.show();
+
+                }
+            });
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
@@ -48,6 +98,8 @@ public class MainActivity extends AppCompatActivity {
         //TODO: for now Dark Theme is forced stopped - once we customise the Dark Theme this line will be removed
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(binding.getRoot());
+
+        askNotificationPermission();
 
 //        getWindow().setFlags(
 //                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
@@ -155,4 +207,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void askNotificationPermission() {
+        // This is only necessary for API level >= 33 (TIRAMISU)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) ==
+                    PackageManager.PERMISSION_GRANTED) {
+                // FCM SDK (and your app) can post notifications.
+                // Log.e(TAG, "PERMISSION_GRANTED");
+            } else {
+                // Log.e(TAG, "NO_PERMISSION");
+                // Directly ask for the permission
+                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
+            }
+        }
+    }
+
 }
