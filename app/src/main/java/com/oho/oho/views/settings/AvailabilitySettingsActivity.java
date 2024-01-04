@@ -112,7 +112,7 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
                         @Override
                         public void onClick(View v) {
                             //Call update availability API
-                            viewModel.addAvailableTimeSlots(profile.getId(), preSelectedSlots);
+                            viewModel.addAvailableTimeSlots(preSelectedSlots);
                             alertDialog.dismiss();
                         }
                     });
@@ -142,7 +142,7 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
         viewModel.isAvailable.observe(this, isAvailable -> {
             if (isAvailable) {
                 Toast.makeText(this, "Available for the weekend!", Toast.LENGTH_SHORT).show();
-                viewModel.getAvailableTimeSlots(profile.getId());
+                viewModel.getAvailableTimeSlots();
                 viewModel.selectedTimeSlotsList.observe(this, availability -> {
                     if (availability != null) {
                         preSelectedSlots = availability;

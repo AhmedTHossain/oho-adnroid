@@ -1,5 +1,6 @@
 package com.oho.oho.network;
 
+import com.oho.oho.availability.GetAvailabilityResponse;
 import com.oho.oho.models.Availability;
 import com.oho.oho.models.BioUpdateRequest;
 import com.oho.oho.models.BlockUnblockUser;
@@ -90,11 +91,11 @@ public interface APIService {
 
     // for adding/updating user availability
     @POST("users/availability/add")
-    Call<Availability> addAvailability(@Query("user_id") int user_id, @Body Availability availList);
+    Call<Availability> addAvailability(@Header("Authorization") String jwtToken, @Body Availability availList);
 
     //for getting user availability
     @GET("users/availability/")
-    Call<Availability> getAvailability(@Query("user_id") int user_id);
+    Call<GetAvailabilityResponse> getAvailability(@Header("Authorization") String jwtToken);
 
     //swiping profile left/right
     @POST("match/swipe")

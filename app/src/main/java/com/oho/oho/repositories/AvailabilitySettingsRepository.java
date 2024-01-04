@@ -7,6 +7,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
+import com.oho.oho.availability.GetAvailabilityResponse;
 import com.oho.oho.models.Availability;
 import com.oho.oho.network.APIService;
 import com.oho.oho.network.RetrofitInstance;
@@ -20,11 +21,11 @@ import retrofit2.Response;
 public class AvailabilitySettingsRepository {
     private HelperClass helperClass = new HelperClass();
 
-    public MutableLiveData<Availability> updateUserAvailability(int user_id, Availability availableTimeSlotsList, Context context) {
+    public MutableLiveData<Availability> updateUserAvailability(Availability availableTimeSlotsList, Context context) {
         MutableLiveData<Availability> selectedAvailableTimeSlots = new MutableLiveData<>();
 
         APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
-        Call<Availability> call = apiService.addAvailability(user_id, availableTimeSlotsList);
+        Call<Availability> call = apiService.addAvailability(helperClass.getJWTToken(context), availableTimeSlotsList);
         call.enqueue(new Callback<Availability>() {
             @Override
             public void onResponse(@NonNull Call<Availability> call, @NonNull Response<Availability> response) {
@@ -41,20 +42,20 @@ public class AvailabilitySettingsRepository {
         return selectedAvailableTimeSlots;
     }
 
-    public MutableLiveData<Availability> getUserAvailability(int user_id, Context context) {
+    public MutableLiveData<Availability> getUserAvailability(Context context) {
         MutableLiveData<Availability> selectedAvailableTimeSlots = new MutableLiveData<>();
 
         APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
-        Call<Availability> call = apiService.getAvailability(user_id);
-        call.enqueue(new Callback<Availability>() {
+        Call<GetAvailabilityResponse> call = apiService.getAvailability(helperClass.getJWTToken(context));
+        call.enqueue(new Callback<GetAvailabilityResponse>() {
             @Override
-            public void onResponse(@NonNull Call<Availability> call, @NonNull Response<Availability> response) {
+            public void onResponse(@NonNull Call<GetAvailabilityResponse> call, @NonNull Response<GetAvailabilityResponse> response) {
                 Toast.makeText(context, "response code if available = " + response.code(), Toast.LENGTH_SHORT).show();
-                selectedAvailableTimeSlots.setValue(response.body());
+                selectedAvailableTimeSlots.setValue(response.body().getData());
             }
 
             @Override
-            public void onFailure(@NonNull Call<Availability> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<GetAvailabilityResponse> call, @NonNull Throwable t) {
                 Toast.makeText(context, "response code if failed = " + t.getCause(), Toast.LENGTH_SHORT).show();
                 selectedAvailableTimeSlots.setValue(null);
             }

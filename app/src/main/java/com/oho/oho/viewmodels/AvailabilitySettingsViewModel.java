@@ -22,12 +22,12 @@ public class AvailabilitySettingsViewModel extends AndroidViewModel {
         availabilitySettingsRepository = new AvailabilitySettingsRepository();
     }
 
-    public void addAvailableTimeSlots(int user_id,Availability availableTimeSlotsList){
-        selectedTimeSlotsList = availabilitySettingsRepository.updateUserAvailability(user_id, availableTimeSlotsList, getApplication().getApplicationContext());
+    public void addAvailableTimeSlots(Availability availableTimeSlotsList){
+        selectedTimeSlotsList = availabilitySettingsRepository.updateUserAvailability(availableTimeSlotsList, getApplication().getApplicationContext());
     }
 
-    public void getAvailableTimeSlots(int user_id){
-        selectedTimeSlotsList = availabilitySettingsRepository.getUserAvailability(user_id, getApplication().getApplicationContext());
+    public void getAvailableTimeSlots(){
+        selectedTimeSlotsList = availabilitySettingsRepository.getUserAvailability(getApplication().getApplicationContext());
     }
 
     public void checkIfAvailable(int user_id){
