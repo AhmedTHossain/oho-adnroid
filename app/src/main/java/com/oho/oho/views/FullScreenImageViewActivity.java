@@ -35,9 +35,10 @@ public class FullScreenImageViewActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         String imageUrl = getIntent().getStringExtra("image_url");
+        String imageURLWithSuffix = imageUrl+"__compressed.jpeg";
 
         Glide.with(this)
-                .load(imageUrl).fitCenter()
+                .load(imageURLWithSuffix).fitCenter()
                 .into(binding.imageview);
 
         binding.buttonRotate.setOnClickListener(new View.OnClickListener() {

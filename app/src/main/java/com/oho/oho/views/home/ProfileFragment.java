@@ -350,10 +350,10 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
     @Override
     public void onFullImageView(String imageUrl) {
         //The URL is of the full sized version of the picture, and is without the extension. You are required to to append __compressed.jpeg to the URL.
-        String fullSizedImage = imageUrl+"__compressed.jpeg";
+//        String fullSizedImage = imageUrl+"__compressed.jpeg";
 
         Intent intent = new Intent(requireContext(), FullScreenImageViewActivity.class);
-        intent.putExtra("image_url",fullSizedImage);
+        intent.putExtra("image_url",imageUrl);
         startActivity(intent);
     }
 }
