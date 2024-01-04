@@ -1,6 +1,7 @@
 package com.oho.oho.adapters;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,7 +47,13 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ChatRoomAdapter.ViewHolder holder, int position) {
-        holder.getSenderNameText().setText(chatRoomArrayList.get(position).getFullName());
+        if (!chatRoomArrayList.get(position).getFullName().equals("")) {
+            holder.getSenderNameText().setText(chatRoomArrayList.get(position).getFullName());
+        }
+        else {
+            String placeholderName = "Oho User";
+            holder.getSenderNameText().setText(placeholderName);
+        }
         holder.getLastMessageBodyText().setText(chatRoomArrayList.get(position).getLastMessage());
 
         if (chatRoomArrayList.get(position).getGender().equals("F")) {
@@ -68,13 +75,12 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
 
         Log.d("ChatRoomAdapter", "message is blocked: " + chatRoomArrayList.get(position).getStatus());
         if (chatRoomArrayList.get(position).getStatus().equals("blocked")) {
-            Log.d("ChatRoomAdapter","my id: "+helperClass.getProfile(context).getId() + "blocked by: "+chatRoomArrayList.get(position).getBlockedBy());
+            Log.d("ChatRoomAdapter", "my id: " + helperClass.getProfile(context).getId() + "blocked by: " + chatRoomArrayList.get(position).getBlockedBy());
             if (chatRoomArrayList.get(position).getBlockedBy().equals(helperClass.getProfile(context).getId())) {
                 String message = "You blocked this user";
                 holder.blockedMessageText.setText(message);
                 holder.blockedMessageText.setVisibility(View.VISIBLE);
-            }
-            else {
+            } else {
                 String message = "This user has blocked you";
                 holder.blockedMessageText.setText(message);
                 holder.blockedMessageText.setVisibility(View.VISIBLE);

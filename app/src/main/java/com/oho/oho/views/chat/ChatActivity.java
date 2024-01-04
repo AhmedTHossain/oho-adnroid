@@ -72,7 +72,10 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
         profile = helperClass.getProfile(this);
         if (getIntent().hasExtra("chatroom")) {
             selectedChatRoom = (ChatRoom) getIntent().getSerializableExtra("chatroom");
-            binding.screentitle.setText(selectedChatRoom.getFullName());
+            if (!selectedChatRoom.getFullName().equals(""))
+                binding.screentitle.setText(selectedChatRoom.getFullName());
+            else
+                binding.screentitle.setText("Oho User");
             chat_id = selectedChatRoom.getId();
             channel_name = selectedChatRoom.getChannelName();
             sender_photo = selectedChatRoom.getProfilePhoto();
@@ -95,7 +98,7 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
         }
 
         Log.d("ChatActiviy", "slected chat room status = " + selectedChatRoom.getStatus());
-        if (selectedChatRoom.getStatus().equals("blocked")) {
+        if (selectedChatRoom.getStatus().equals("blocked") || selectedChatRoom.getFullName().equals("")) {
             binding.recyclerviewQuickmessages.setVisibility(View.GONE);
             binding.layoutInputMessage.setVisibility(View.GONE);
             binding.fabSend.setVisibility(View.GONE);
@@ -220,8 +223,11 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
             }
             shimmerViewContainer.stopShimmerAnimation();
             shimmerViewContainer.setVisibility(View.GONE);
-            if (!selectedChatRoom.getStatus().equals("blocked"))
+            if (!selectedChatRoom.getStatus().equals("blocked") && !selectedChatRoom.getFullName().equals("")) {
+                binding.fabSend.setVisibility(View.GONE);
+                binding.layoutInputMessage.setVisibility(View.GONE);
                 binding.recyclerviewQuickmessages.setVisibility(View.VISIBLE);
+            }
 
             if (chatHistory.getHasNext()) page++;
             else page = 0;
@@ -236,15 +242,27 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
                 viewModel.checkDateStatus(qrcode.getMatch_id());
                 viewModel.ifDateStarted.observe(this, ifDateStarted -> {
                     if (!ifDateStarted) {
-                        binding.fabSend.setVisibility(View.GONE);
-                        binding.layoutInputMessage.setVisibility(View.GONE);
-                        if (!selectedChatRoom.getStatus().equals("blocked"))
+
+                        if (!selectedChatRoom.getStatus().equals("blocked") && !selectedChatRoom.getFullName().equals("")) {
                             binding.recyclerviewQuickmessages.setVisibility(View.VISIBLE);
-                    } else {
-                        binding.fabSend.setVisibility(View.VISIBLE);
-                        if (selectedChatRoom.getStatus().equals("blocked"))
+                            binding.fabSend.setVisibility(View.GONE);
                             binding.layoutInputMessage.setVisibility(View.GONE);
-                        binding.recyclerviewQuickmessages.setVisibility(View.GONE);
+                        } else {
+                            binding.recyclerviewQuickmessages.setVisibility(View.GONE);
+                            binding.fabSend.setVisibility(View.GONE);
+                            binding.layoutInputMessage.setVisibility(View.GONE);
+                        }
+                    } else {
+
+                        if (!selectedChatRoom.getStatus().equals("blocked") && !selectedChatRoom.getFullName().equals("")) {
+                            binding.fabSend.setVisibility(View.VISIBLE);
+                            binding.layoutInputMessage.setVisibility(View.VISIBLE);
+                            binding.recyclerviewQuickmessages.setVisibility(View.GONE);
+                        } else {
+                            binding.recyclerviewQuickmessages.setVisibility(View.GONE);
+                            binding.fabSend.setVisibility(View.GONE);
+                            binding.layoutInputMessage.setVisibility(View.GONE);
+                        }
                     }
                 });
             }
