@@ -331,7 +331,7 @@
                     android:background="@color/white"
                     android:fontFamily="@font/ptsans_regular"
                     android:gravity="center"
-                    android:hint="min"
+                    android:hint="max"
                     android:padding="10dp"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"

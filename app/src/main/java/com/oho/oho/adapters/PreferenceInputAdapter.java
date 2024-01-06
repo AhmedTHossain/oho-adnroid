@@ -50,7 +50,7 @@ public class PreferenceInputAdapter extends RecyclerView.Adapter<PreferenceInput
         holder.getPreferenceInputView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewModel.setIsInputSelected(true, preferenceInputArrayList.get(position).getInputName(), preferenceFor);
+                viewModel.setIsInputSelected(preferenceInputArrayList.get(position).isSelected(), preferenceInputArrayList.get(position).getInputName(), preferenceFor);
             }
         });
     }

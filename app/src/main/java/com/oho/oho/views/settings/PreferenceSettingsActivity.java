@@ -1,7 +1,6 @@
 package com.oho.oho.views.settings;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
@@ -71,7 +70,6 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
         setHeightSpinner();
         setAgeSpinner();
 
-        initViewModel();
         initViewModel();
     }
 
@@ -192,7 +190,6 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
     }
 
     private void getPreferences() {
-
         viewModel.getProfilePreference();
         viewModel.preferenceResponse.observe(this, preferenceResponse -> {
             if (preferenceResponse != null) {
@@ -201,29 +198,18 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
 
                 setPreferences();
 
-//                viewModel.setIsInputSelected(true,"gender",preferences.getInterestedIn());
-//                viewModel.isInputSelected.observe(this, isInputSelected -> {
-//                    if (isInputSelected) {
-//                        switch (viewModel.selectedInputFor) {
-//                            case "gender":
-//                                preferences.setInterestedIn(viewModel.selectedInput);
-//                                genderInputAdapter.notifyDataSetChanged();
-//                                break;
-//                        }
-//                    }
-//                });
             }
         });
     }
 
     private void setPreferences() {
         for (PreferenceInput input : genderList)
-            if (preferences.getInterestedIn().equals(input.getInputName())) {
+            if (preferences.getInterestedIn().equalsIgnoreCase(input.getInputName())) {
                 input.setSelected(true);
                 genderInputAdapter.notifyDataSetChanged();
             }
         for (PreferenceInput input : distanceList)
-            if (input.getInputName().contains(String.valueOf(preferences.getDistance()))) {
+            if (input.getInputName().toLowerCase().contains(String.valueOf(preferences.getDistance()))) {
                 input.setSelected(true);
                 distanceInputAdapter.notifyDataSetChanged();
             }
@@ -244,7 +230,7 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
             }
         }
         for (PreferenceInput input : religionList)
-            if (preferences.getReligion().contains(input.getInputName())) {
+            if (preferences.getReligion().contains(input.getInputName().toLowerCase())) {
                 input.setSelected(true);
                 religionInputAdapter.notifyDataSetChanged();
             }
@@ -254,30 +240,36 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
                 cuisineInputAdapter.notifyDataSetChanged();
             }
         for (PreferenceInput input : budgetList)
-            if (preferences.getBudget().contains(input.getInputName())) {
+            if (preferences.getBudget().contains(input.getInputName().toLowerCase())) {
                 input.setSelected(true);
                 budgetInputAdapter.notifyDataSetChanged();
             }
 
-        Toast.makeText(this, "max height selected: " + convertCmToFeetInches(preferences.getMaxHeight()), Toast.LENGTH_SHORT).show();
         for (int i = 0; i < heightList.size(); i++)
             if (heightList.get(i).equals(convertCmToFeetInches(preferences.getMaxHeight())))
                 binding.heightSpinnerMax.selectItemByIndex(i);
-        for (int i = 0; i < heightList.size(); i++)
-            if (heightList.get(i).equals(convertCmToFeetInches(preferences.getMinHeight())))
-                binding.heightSpinnerMin.selectItemByIndex(i);
-        Log.d("PreferenceSettingsActivity", "min age = " + preferences.getMinAge());
+        for (int i = 0; i < heightList.size(); i++) {
+            String minHeight = convertCmToFeetInches(preferences.getMinHeight());
 
-//        for (int i = 0; i < ageList.size(); i++)
-//            if (ageList.get(i).equals(selectedMaxAge))
-//                binding.ageSpinnerMax.selectItemByIndex(i);
-//            else
-//                binding.ageSpinnerMax.selectItemByIndex(ageList.size()-1);
-//        for (int i = 0; i < ageList.size(); i++)
-//            if (ageList.get(i).equals(preferences.getMinAge()+" yr"))
-//                binding.ageSpinnerMin.selectItemByIndex(i);
-//            else
-//                binding.ageSpinnerMin.selectItemByIndex(ageList.size()-1);
+            Toast.makeText(this,"min height selected:" +minHeight,Toast.LENGTH_SHORT).show();
+            if (heightList.get(i).equals(minHeight))
+                binding.heightSpinnerMin.selectItemByIndex(i);
+        }
+
+
+        for (int i = 0; i < ageList.size(); i++) {
+            String minAgeSelected = preferences.getMinAge().toString() + " yr";
+            if (ageList.get(i).equals(minAgeSelected)) {
+                binding.ageSpinnerMin.selectItemByIndex(i);
+            }
+        }
+        for (int i = 0; i < ageList.size(); i++) {
+            String maxAgeSelected = preferences.getMaxAge().toString() + " yr";
+            if (ageList.get(i).equals(maxAgeSelected)) {
+                binding.ageSpinnerMax.selectItemByIndex(i);
+            } else if (preferences.getMaxAge() >= 65)
+                binding.ageSpinnerMax.selectItemByIndex(ageList.size() - 1);
+        }
     }
 
     private void setHeightSpinner() {
