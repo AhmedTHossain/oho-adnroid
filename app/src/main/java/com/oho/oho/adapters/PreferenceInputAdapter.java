@@ -12,6 +12,7 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.oho.oho.R;
+import com.oho.oho.interfaces.OnPreferenceSelected;
 import com.oho.oho.models.PreferenceInput;
 import com.oho.oho.viewmodels.PreferenceSettingsViewModel;
 
@@ -22,12 +23,14 @@ public class PreferenceInputAdapter extends RecyclerView.Adapter<PreferenceInput
     private Context context;
     private PreferenceSettingsViewModel viewModel;
     private String preferenceFor;
+    private OnPreferenceSelected listener;
 
-    public PreferenceInputAdapter(ArrayList<PreferenceInput> preferenceInputArrayList, Context context, PreferenceSettingsViewModel viewModel, String preferenceFor) {
+    public PreferenceInputAdapter(ArrayList<PreferenceInput> preferenceInputArrayList, Context context, PreferenceSettingsViewModel viewModel, String preferenceFor, OnPreferenceSelected listener) {
         this.preferenceInputArrayList = preferenceInputArrayList;
         this.context = context;
         this.viewModel = viewModel;
         this.preferenceFor = preferenceFor;
+        this.listener = listener;
     }
 
     @NonNull
@@ -42,15 +45,18 @@ public class PreferenceInputAdapter extends RecyclerView.Adapter<PreferenceInput
     public void onBindViewHolder(@NonNull Holder holder, int position) {
         holder.getPreferenceInputView().setText(preferenceInputArrayList.get(holder.getAbsoluteAdapterPosition()).getInputName());
 
-        Log.d("PreferenceInputAdapter","gender selected = "+preferenceInputArrayList.get(holder.getAbsoluteAdapterPosition()).getInputName());
+        Log.d("PreferenceInputAdapter", "gender selected = " + preferenceInputArrayList.get(holder.getAbsoluteAdapterPosition()).getInputName());
         if (preferenceInputArrayList.get(holder.getAbsoluteAdapterPosition()).isSelected()) {
             holder.getPreferenceInputView().setTextColor(ResourcesCompat.getColor(context.getResources(), R.color.white, null));
             holder.getPreferenceInputView().setBackground(ResourcesCompat.getDrawable(context.getResources(), R.drawable.rounded_button_solid, null));
+        } else {
+            holder.getPreferenceInputView().setTextColor(ResourcesCompat.getColor(context.getResources(), R.color.black, null));
+            holder.getPreferenceInputView().setBackground(ResourcesCompat.getDrawable(context.getResources(), R.drawable.border_corner_drawable, null));
         }
         holder.getPreferenceInputView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewModel.setIsInputSelected(preferenceInputArrayList.get(position).isSelected(), preferenceInputArrayList.get(position).getInputName(), preferenceFor);
+                listener.onSelect(preferenceInputArrayList.get(position).isSelected(), preferenceInputArrayList.get(position).getInputName(), preferenceFor);
             }
         });
     }

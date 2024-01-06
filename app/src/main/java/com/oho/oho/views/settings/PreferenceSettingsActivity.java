@@ -1,6 +1,7 @@
 package com.oho.oho.views.settings;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
@@ -13,6 +14,7 @@ import com.google.android.flexbox.JustifyContent;
 import com.oho.oho.R;
 import com.oho.oho.adapters.PreferenceInputAdapter;
 import com.oho.oho.databinding.ActivityPreferenceSettingsBinding;
+import com.oho.oho.interfaces.OnPreferenceSelected;
 import com.oho.oho.models.PreferenceInput;
 import com.oho.oho.models.Profile;
 import com.oho.oho.responses.preference.PreferenceResponse;
@@ -24,7 +26,7 @@ import com.skydoves.powerspinner.IconSpinnerItem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PreferenceSettingsActivity extends AppCompatActivity {
+public class PreferenceSettingsActivity extends AppCompatActivity implements OnPreferenceSelected {
 
     private ActivityPreferenceSettingsBinding binding;
     private ArrayList<String> ageList = new ArrayList();
@@ -47,6 +49,8 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
     private PreferenceInputAdapter cuisineInputAdapter;
     private ArrayList<PreferenceInput> budgetList = new ArrayList<>();
     private PreferenceInputAdapter budgetInputAdapter;
+    private PreferenceResponse updatedPreferences = new PreferenceResponse();
+    private String distanceSelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +85,7 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
             budgetList.add(preferenceInput);
         }
 
-        budgetInputAdapter = new PreferenceInputAdapter(budgetList, this, viewModel, "budget");
+        budgetInputAdapter = new PreferenceInputAdapter(budgetList, this, viewModel, "budget", this);
         FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this);
         layoutManager.setFlexDirection(FlexDirection.ROW);
         layoutManager.setJustifyContent(JustifyContent.FLEX_START);
@@ -96,7 +100,7 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
             PreferenceInput preferenceInput = new PreferenceInput(cuisine, false);
             cuisineList.add(preferenceInput);
         }
-        cuisineInputAdapter = new PreferenceInputAdapter(cuisineList, this, viewModel, "cuisine");
+        cuisineInputAdapter = new PreferenceInputAdapter(cuisineList, this, viewModel, "cuisine", this);
         FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this);
         layoutManager.setFlexDirection(FlexDirection.ROW);
         layoutManager.setJustifyContent(JustifyContent.FLEX_START);
@@ -112,7 +116,7 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
             religionList.add(preferenceInput);
         }
 
-        religionInputAdapter = new PreferenceInputAdapter(religionList, this, viewModel, "religion");
+        religionInputAdapter = new PreferenceInputAdapter(religionList, this, viewModel, "religion", this);
         FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this);
         layoutManager.setFlexDirection(FlexDirection.ROW);
         layoutManager.setJustifyContent(JustifyContent.FLEX_START);
@@ -128,7 +132,7 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
             raceList.add(preferenceInput);
         }
 
-        raceInputAdapter = new PreferenceInputAdapter(raceList, this, viewModel, "race");
+        raceInputAdapter = new PreferenceInputAdapter(raceList, this, viewModel, "race", this);
         FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this);
         layoutManager.setFlexDirection(FlexDirection.ROW);
         layoutManager.setJustifyContent(JustifyContent.FLEX_START);
@@ -144,7 +148,7 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
             educationList.add(preferenceInput);
         }
 
-        educationInputAdapter = new PreferenceInputAdapter(educationList, this, viewModel, "education");
+        educationInputAdapter = new PreferenceInputAdapter(educationList, this, viewModel, "education", this);
         FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this);
         layoutManager.setFlexDirection(FlexDirection.ROW);
         layoutManager.setJustifyContent(JustifyContent.FLEX_START);
@@ -160,7 +164,7 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
             distanceList.add(preferenceInput);
         }
 
-        distanceInputAdapter = new PreferenceInputAdapter(distanceList, this, viewModel, "distance");
+        distanceInputAdapter = new PreferenceInputAdapter(distanceList, this, viewModel, "distance", this);
         FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this);
         layoutManager.setFlexDirection(FlexDirection.ROW);
         layoutManager.setJustifyContent(JustifyContent.FLEX_START);
@@ -176,7 +180,7 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
             genderList.add(preferenceInput);
         }
 
-        genderInputAdapter = new PreferenceInputAdapter(genderList, this, viewModel, "gender");
+        genderInputAdapter = new PreferenceInputAdapter(genderList, this, viewModel, "gender", this);
         FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this);
         layoutManager.setFlexDirection(FlexDirection.ROW);
         layoutManager.setJustifyContent(JustifyContent.FLEX_START);
@@ -244,19 +248,16 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
                 input.setSelected(true);
                 budgetInputAdapter.notifyDataSetChanged();
             }
-
         for (int i = 0; i < heightList.size(); i++)
             if (heightList.get(i).equals(convertCmToFeetInches(preferences.getMaxHeight())))
                 binding.heightSpinnerMax.selectItemByIndex(i);
         for (int i = 0; i < heightList.size(); i++) {
             String minHeight = convertCmToFeetInches(preferences.getMinHeight());
 
-            Toast.makeText(this,"min height selected:" +minHeight,Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "min height selected:" + minHeight, Toast.LENGTH_SHORT).show();
             if (heightList.get(i).equals(minHeight))
                 binding.heightSpinnerMin.selectItemByIndex(i);
         }
-
-
         for (int i = 0; i < ageList.size(); i++) {
             String minAgeSelected = preferences.getMinAge().toString() + " yr";
             if (ageList.get(i).equals(minAgeSelected)) {
@@ -277,14 +278,10 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
             for (int j = 0; j < 12; j++)
                 heightList.add(i + "." + j + " ft");
         }
-
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, heightList);
-
         List<IconSpinnerItem> iconSpinnerItems = new ArrayList<>();
-
         for (String st : heightList)
             iconSpinnerItems.add(new IconSpinnerItem(st, null));
-
         IconSpinnerAdapter adapterMinHeight = new IconSpinnerAdapter(binding.heightSpinnerMin);
         binding.heightSpinnerMin.setSpinnerAdapter(adapterMinHeight);
         binding.heightSpinnerMin.setItems(iconSpinnerItems);
@@ -292,9 +289,7 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
         IconSpinnerAdapter adapterMaxHeight = new IconSpinnerAdapter(binding.heightSpinnerMax);
         binding.heightSpinnerMax.setSpinnerAdapter(adapterMaxHeight);
         binding.heightSpinnerMax.setItems(iconSpinnerItems);
-
         int height = adapter.getCount() * adapter.getViewTypeCount() * 20;
-
         binding.heightSpinnerMin.setSpinnerPopupHeight(height);
         binding.heightSpinnerMax.setSpinnerPopupHeight(height);
     }
@@ -306,7 +301,6 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
             else
                 ageList.add(i + "+ yr");
         }
-
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, ageList);
 
         List<IconSpinnerItem> iconSpinnerItems = new ArrayList<>();
@@ -320,12 +314,9 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
         IconSpinnerAdapter adapterMaxAge = new IconSpinnerAdapter(binding.ageSpinnerMax);
         binding.ageSpinnerMax.setSpinnerAdapter(adapterMaxAge);
         binding.ageSpinnerMax.setItems(iconSpinnerItems);
-
         int height = adapter.getCount() * adapter.getViewTypeCount() * 20;
-
         binding.ageSpinnerMin.setSpinnerPopupHeight(height);
         binding.ageSpinnerMax.setSpinnerPopupHeight(height);
-
     }
 
     public static String convertCmToFeetInches(double centimeters) {
@@ -335,5 +326,53 @@ public class PreferenceSettingsActivity extends AppCompatActivity {
         int inchesPart = (int) inches;
 
         return feetPart + "." + inchesPart + " ft";
+    }
+
+    @Override
+    public void onSelect(boolean isSelected, String selectedInput, String selectedInputFor) {
+        Log.d("PreferenceSettingsActivity", selectedInputFor + " selected = " + selectedInput + " :" + isSelected);
+        switch (selectedInputFor) {
+            case "gender":
+                if (isSelected) {
+                    for (PreferenceInput gender : genderList) {
+                        if (gender.getInputName().equalsIgnoreCase(selectedInput)) {
+                            gender.setSelected(false);
+                            genderInputAdapter.notifyDataSetChanged();
+                        }
+                    }
+                } else {
+                    for (PreferenceInput gender : genderList) {
+                        if (gender.getInputName().equalsIgnoreCase(selectedInput)) {
+                            gender.setSelected(true);
+                            genderInputAdapter.notifyDataSetChanged();
+                        } else
+                            gender.setSelected(false);
+                    }
+                }
+                updatedPreferences.setInterestedIn(selectedInput);
+                Log.d("PreferenceSettingsActivity", "New preferred interested_in: " + updatedPreferences.getInterestedIn());
+                break;
+            case "distance":
+                if (isSelected) {
+                    for (PreferenceInput distance : distanceList) {
+                        if (distance.getInputName().equalsIgnoreCase(selectedInput)) {
+                            distance.setSelected(false);
+                            distanceInputAdapter.notifyDataSetChanged();
+                        }
+                    }
+                } else {
+                    for (PreferenceInput distance : distanceList) {
+                        if (distance.getInputName().equalsIgnoreCase(selectedInput)) {
+                            distance.setSelected(true);
+                            distanceInputAdapter.notifyDataSetChanged();
+                        } else
+                            distance.setSelected(false);
+                    }
+                }
+                String finalDistanceSelected = selectedInput.split(" ")[0];
+                updatedPreferences.setDistance(Integer.valueOf(finalDistanceSelected));
+                Log.d("PreferenceSettingsActivity", "New preferred distance: " + updatedPreferences.getDistance());
+                break;
+        }
     }
 }

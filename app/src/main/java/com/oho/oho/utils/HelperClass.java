@@ -17,7 +17,7 @@ public class HelperClass {
     public static void logErrorMessage(String errorMessage) {
         Log.d(TAG, errorMessage);
     }
-
+    //Store logged in user's profile locally
     public void saveProfile(Context context, Profile profile) {
         SharedPreferences.Editor editor = context.getSharedPreferences("ProfilePrefsFile", Context.MODE_PRIVATE).edit();
         if (profile == null) {
@@ -27,7 +27,7 @@ public class HelperClass {
         }
         editor.apply();
     }
-
+    //Retrieve logged in user's profile stored locally
     public Profile getProfile(Context context) {
         SharedPreferences prefs = context.getSharedPreferences("ProfilePrefsFile", Context.MODE_PRIVATE);
         String jsonString = prefs.getString("PROFILE", null);
@@ -38,19 +38,18 @@ public class HelperClass {
             return null;
         }
     }
-
+    //Store logged in user's jwt token locally
     public void setJWTToken(Context context, String JWTToken){
         SharedPreferences.Editor editor = context.getSharedPreferences("ProfilePrefsFile", Context.MODE_PRIVATE).edit();
         editor.putString("JWT", JWTToken);
         editor.apply();
     }
-
+    //Retrieve logged in user's jwt token stored locally
     public String getJWTToken(Context context){
         SharedPreferences prefs = context.getSharedPreferences("ProfilePrefsFile", Context.MODE_PRIVATE);
         String jwtToken = prefs.getString("JWT", null);
         return jwtToken;
     }
-
     // converts height in cm to feet and inches for display
     public String convertToFeetAndInches(double heightInCentimeters) {
         // Convert height to inches
@@ -65,40 +64,32 @@ public class HelperClass {
 
         return formattedHeight;
     }
-
+    //Find the dates of the upcoming dating phase
     public String getFridayToSundayDateRange() {
         Calendar calendar = Calendar.getInstance();
-
         // Set the calendar to the current date
         calendar.setTime(new Date());
-
         // Find the current day of the week
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-
         // Calculate the difference between the current day and Friday
         int daysUntilFriday = Calendar.FRIDAY - dayOfWeek;
         if (daysUntilFriday < 0) {
             daysUntilFriday += 7;
         }
-
         // Calculate the difference between the current day and Sunday
         int daysUntilSunday = Calendar.SUNDAY - dayOfWeek;
         if (daysUntilSunday < 0) {
             daysUntilSunday += 7;
         }
-
         // Add the differences to the current date to get Friday and Sunday
         calendar.add(Calendar.DAY_OF_WEEK, daysUntilFriday);
         Date friday = calendar.getTime();
-
         calendar.add(Calendar.DAY_OF_WEEK, daysUntilSunday - daysUntilFriday);
         Date sunday = calendar.getTime();
-
         // Format the dates in the specified format
         SimpleDateFormat sdf = new SimpleDateFormat("MMMM d", Locale.getDefault());
         String fridayString = sdf.format(friday);
         String sundayString = sdf.format(sunday);
-
         return fridayString + "th - " + sundayString +"th";
     }
 }
