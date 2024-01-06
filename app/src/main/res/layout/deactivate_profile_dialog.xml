@@ -21,7 +21,7 @@
         android:drawableStart="@drawable/ic_alert"
         android:drawablePadding="@dimen/_5sdp"
         android:fontFamily="@font/ptsans_bold"
-        android:text="@string/deactivate_your_account"
+        android:text="@string/delete_your_account"
         android:textColor="@color/black"
         android:textSize="@dimen/_20ssp" />
 
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_15sdp"
         android:fontFamily="@font/ptsans_regular"
-        android:text="@string/deactivate_account_disclaimer"
+        android:text="@string/delete_account_disclaimer"
         android:textColor="@color/black"
         android:textSize="@dimen/_16ssp" />
 
