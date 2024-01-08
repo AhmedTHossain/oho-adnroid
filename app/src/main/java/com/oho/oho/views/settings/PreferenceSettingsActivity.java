@@ -16,6 +16,7 @@ import com.oho.oho.adapters.PreferenceInputAdapter;
 import com.oho.oho.databinding.ActivityPreferenceSettingsBinding;
 import com.oho.oho.interfaces.OnPreferenceSelected;
 import com.oho.oho.models.PreferenceInput;
+import com.oho.oho.models.PreferenceRequest;
 import com.oho.oho.models.Profile;
 import com.oho.oho.responses.preference.PreferenceResponse;
 import com.oho.oho.utils.HelperClass;
@@ -24,7 +25,6 @@ import com.skydoves.powerspinner.IconSpinnerAdapter;
 import com.skydoves.powerspinner.IconSpinnerItem;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class PreferenceSettingsActivity extends AppCompatActivity implements OnPreferenceSelected {
@@ -35,6 +35,7 @@ public class PreferenceSettingsActivity extends AppCompatActivity implements OnP
     private PreferenceSettingsViewModel viewModel;
     private Profile profile;
     private PreferenceResponse preferences;
+    String initialStringEducation = "";
 
     private ArrayList<PreferenceInput> genderList = new ArrayList<>();
     private PreferenceInputAdapter genderInputAdapter;
@@ -50,7 +51,7 @@ public class PreferenceSettingsActivity extends AppCompatActivity implements OnP
     private PreferenceInputAdapter cuisineInputAdapter;
     private ArrayList<PreferenceInput> budgetList = new ArrayList<>();
     private PreferenceInputAdapter budgetInputAdapter;
-    private PreferenceResponse updatedPreferences = new PreferenceResponse();
+    private PreferenceRequest updatedPreferences = new PreferenceRequest();
     private String distanceSelected;
 
     @Override
@@ -201,6 +202,12 @@ public class PreferenceSettingsActivity extends AppCompatActivity implements OnP
                 Toast.makeText(this, "Preferred gender: " + preferenceResponse.getRace(), Toast.LENGTH_LONG).show();
                 preferences = preferenceResponse;
 
+                for (String education : preferences.getEducation()) {
+                    if (initialStringEducation.equals(""))
+                        initialStringEducation = initialStringEducation + education;
+                    else
+                        initialStringEducation = initialStringEducation + "," + education;
+                }
                 setPreferences();
 
             }
@@ -375,9 +382,43 @@ public class PreferenceSettingsActivity extends AppCompatActivity implements OnP
                 Log.d("PreferenceSettingsActivity", "New preferred distance: " + updatedPreferences.getDistance());
                 break;
             case "education":
-                ArrayList<String> selectedFinalList = new ArrayList<>();
+                Log.d("PreferenceSettingsActivity", selectedInputFor + " selected = " + selectedInput + " :" + isSelected);
 
-                Log.d("PreferenceSettingsActivity", "New preferred interested_in: " + updatedPreferences.getEducation());
+                // If "Open to all" is selected, unselect all other items and set finalStringEducation
+                if (selectedInput.equalsIgnoreCase("Open to all") && !isSelected) {
+                    for (PreferenceInput education : educationList) {
+                        if (education.getInputName().equalsIgnoreCase(selectedInput))
+                            education.setSelected(true);
+                        else
+                            education.setSelected(false);
+                    }
+                    updatedPreferences.setEducation("Open to all");
+                } else {
+                    // Toggle the selection state of the clicked item
+                    for (PreferenceInput education : educationList) {
+                        if (education.getInputName().equalsIgnoreCase(selectedInput)) {
+                            education.setSelected(!isSelected);
+                        }
+                    }
+
+                    // Iterate through the list to build the final string
+                    String finalStringEducation = "";
+                    for (PreferenceInput education : educationList) {
+                        if (education.isSelected()) {
+                            if (!finalStringEducation.isEmpty()) {
+                                finalStringEducation += ", ";
+                            }
+                            finalStringEducation += education.getInputName();
+                        }
+                    }
+                    if (!finalStringEducation.isEmpty())
+                        updatedPreferences.setEducation(finalStringEducation);
+                    else
+                        updatedPreferences.setEducation(initialStringEducation);
+                }
+
+                Log.d("PreferenceSettingsActivity", "New preferred education: " + updatedPreferences.getEducation());
+                educationInputAdapter.notifyDataSetChanged();
 
                 break;
         }
