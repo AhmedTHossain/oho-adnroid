@@ -26,7 +26,7 @@ public class PreferenceRequest {
     private String religion;
     @SerializedName("cuisine")
     @Expose
-    private List<Object> cuisine;
+    private String cuisine;
     @SerializedName("budget")
     @Expose
     private String budget;
@@ -94,11 +94,11 @@ public class PreferenceRequest {
         this.religion = religion;
     }
 
-    public List<Object> getCuisine() {
+    public String getCuisine() {
         return cuisine;
     }
 
-    public void setCuisine(List<Object> cuisine) {
+    public void setCuisine(String cuisine) {
         this.cuisine = cuisine;
     }
 

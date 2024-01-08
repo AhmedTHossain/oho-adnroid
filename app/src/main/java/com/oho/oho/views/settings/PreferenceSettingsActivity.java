@@ -39,6 +39,7 @@ public class PreferenceSettingsActivity extends AppCompatActivity implements OnP
     String initialStringRace = "";
     String initialStringReligion = "";
     String initialStringBudget = "";
+    String initialStringCuisine = "";
     private ArrayList<PreferenceInput> genderList = new ArrayList<>();
     private PreferenceInputAdapter genderInputAdapter;
     private ArrayList<PreferenceInput> distanceList = new ArrayList<>();
@@ -230,6 +231,13 @@ public class PreferenceSettingsActivity extends AppCompatActivity implements OnP
                         initialStringRace = initialStringBudget + budget;
                     else
                         initialStringBudget = initialStringBudget + "," + budget;
+                }
+
+                for (String cuisine : preferences.getCuisine()) {
+                    if (initialStringCuisine.equals(""))
+                        initialStringCuisine = initialStringCuisine + cuisine;
+                    else
+                        initialStringCuisine = initialStringCuisine + "," + cuisine;
                 }
 
                 setPreferences();
@@ -560,6 +568,45 @@ public class PreferenceSettingsActivity extends AppCompatActivity implements OnP
                 }
                 Log.d("PreferenceSettingsActivity", "New preferred race: " + updatedPreferences.getBudget());
                 budgetInputAdapter.notifyDataSetChanged();
+                break;
+
+            case "cuisine":
+                Log.d("PreferenceSettingsActivity", selectedInputFor + " selected = " + selectedInput + " :" + isSelected);
+                // If "Open to all" is selected, unselect all other items and set finalStringEducation
+                if (selectedInput.equalsIgnoreCase("Open to all") && !isSelected) {
+                    for (PreferenceInput cuisine : cuisineList) {
+                        if (cuisine.getInputName().equalsIgnoreCase(selectedInput))
+                            cuisine.setSelected(true);
+                        else
+                            cuisine.setSelected(false);
+                    }
+                    updatedPreferences.setCuisine("Open to all");
+                } else {
+                    // Toggle the selection state of the clicked item
+                    for (PreferenceInput cuisine : cuisineList) {
+                        if (cuisine.getInputName().equalsIgnoreCase("Open to all"))
+                            cuisine.setSelected(false);
+                        if (cuisine.getInputName().equalsIgnoreCase(selectedInput)) {
+                            cuisine.setSelected(!isSelected);
+                        }
+                    }
+                    // Iterate through the list to build the final string
+                    String finalStringCuisine = "";
+                    for (PreferenceInput cuisine : cuisineList) {
+                        if (cuisine.isSelected()) {
+                            if (!finalStringCuisine.isEmpty()) {
+                                finalStringCuisine += ", ";
+                            }
+                            finalStringCuisine += cuisine.getInputName();
+                        }
+                    }
+                    if (!finalStringCuisine.isEmpty())
+                        updatedPreferences.setCuisine(finalStringCuisine);
+                    else
+                        updatedPreferences.setCuisine(initialStringCuisine);
+                }
+                Log.d("PreferenceSettingsActivity", "New preferred cuisine: " + updatedPreferences.getCuisine());
+                cuisineInputAdapter.notifyDataSetChanged();
                 break;
         }
     }

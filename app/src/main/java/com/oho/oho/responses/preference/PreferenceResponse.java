@@ -26,7 +26,7 @@ public class PreferenceResponse {
     private List<String> religion;
     @SerializedName("cuisine")
     @Expose
-    private List<Object> cuisine;
+    private List<String> cuisine;
     @SerializedName("budget")
     @Expose
     private List<String> budget;
@@ -94,11 +94,11 @@ public class PreferenceResponse {
         this.religion = religion;
     }
 
-    public List<Object> getCuisine() {
+    public List<String> getCuisine() {
         return cuisine;
     }
 
-    public void setCuisine(List<Object> cuisine) {
+    public void setCuisine(List<String> cuisine) {
         this.cuisine = cuisine;
     }
 
