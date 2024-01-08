@@ -36,6 +36,7 @@ public class PreferenceSettingsActivity extends AppCompatActivity implements OnP
     private Profile profile;
     private PreferenceResponse preferences;
     String initialStringEducation = "";
+    String initialStringReligion = "";
 
     private ArrayList<PreferenceInput> genderList = new ArrayList<>();
     private PreferenceInputAdapter genderInputAdapter;
@@ -208,6 +209,13 @@ public class PreferenceSettingsActivity extends AppCompatActivity implements OnP
                     else
                         initialStringEducation = initialStringEducation + "," + education;
                 }
+
+                for (String religion : preferences.getReligion()) {
+                    if (initialStringReligion.equals(""))
+                        initialStringReligion = initialStringReligion + religion;
+                    else
+                        initialStringReligion = initialStringReligion + "," + religion;
+                }
                 setPreferences();
 
             }
@@ -241,11 +249,14 @@ public class PreferenceSettingsActivity extends AppCompatActivity implements OnP
                 raceInputAdapter.notifyDataSetChanged();
             }
         }
-        for (PreferenceInput input : religionList)
-            if (preferences.getReligion().contains(input.getInputName().toLowerCase())) {
+        for (PreferenceInput input : religionList) {
+            String preference = String.join(", ", preferences.getReligion());
+
+            if (preference.toLowerCase().contains(input.getInputName().toLowerCase())) {
                 input.setSelected(true);
                 religionInputAdapter.notifyDataSetChanged();
             }
+        }
         for (PreferenceInput input : cuisineList)
             if (preferences.getCuisine().contains(input.getInputName())) {
                 input.setSelected(true);
@@ -383,7 +394,6 @@ public class PreferenceSettingsActivity extends AppCompatActivity implements OnP
                 break;
             case "education":
                 Log.d("PreferenceSettingsActivity", selectedInputFor + " selected = " + selectedInput + " :" + isSelected);
-
                 // If "Open to all" is selected, unselect all other items and set finalStringEducation
                 if (selectedInput.equalsIgnoreCase("Open to all") && !isSelected) {
                     for (PreferenceInput education : educationList) {
@@ -402,7 +412,6 @@ public class PreferenceSettingsActivity extends AppCompatActivity implements OnP
                             education.setSelected(!isSelected);
                         }
                     }
-
                     // Iterate through the list to build the final string
                     String finalStringEducation = "";
                     for (PreferenceInput education : educationList) {
@@ -418,10 +427,46 @@ public class PreferenceSettingsActivity extends AppCompatActivity implements OnP
                     else
                         updatedPreferences.setEducation(initialStringEducation);
                 }
-
                 Log.d("PreferenceSettingsActivity", "New preferred education: " + updatedPreferences.getEducation());
                 educationInputAdapter.notifyDataSetChanged();
-
+                break;
+            case "religion":
+                Log.d("PreferenceSettingsActivity", selectedInputFor + " selected = " + selectedInput + " :" + isSelected);
+                // If "Open to all" is selected, unselect all other items and set finalStringEducation
+                if (selectedInput.equalsIgnoreCase("Open to all") && !isSelected) {
+                    for (PreferenceInput religion : religionList) {
+                        if (religion.getInputName().equalsIgnoreCase(selectedInput))
+                            religion.setSelected(true);
+                        else
+                            religion.setSelected(false);
+                    }
+                    updatedPreferences.setReligion("Open to all");
+                } else {
+                    // Toggle the selection state of the clicked item
+                    for (PreferenceInput religion : religionList) {
+                        if (religion.getInputName().equalsIgnoreCase("Open to all"))
+                            religion.setSelected(false);
+                        if (religion.getInputName().equalsIgnoreCase(selectedInput)) {
+                            religion.setSelected(!isSelected);
+                        }
+                    }
+                    // Iterate through the list to build the final string
+                    String finalStringReligion = "";
+                    for (PreferenceInput religion : religionList) {
+                        if (religion.isSelected()) {
+                            if (!finalStringReligion.isEmpty()) {
+                                finalStringReligion += ", ";
+                            }
+                            finalStringReligion += religion.getInputName();
+                        }
+                    }
+                    if (!finalStringReligion.isEmpty())
+                        updatedPreferences.setReligion(finalStringReligion);
+                    else
+                        updatedPreferences.setReligion(initialStringReligion);
+                }
+                Log.d("PreferenceSettingsActivity", "New preferred religion: " + updatedPreferences.getReligion());
+                religionInputAdapter.notifyDataSetChanged();
                 break;
         }
     }
