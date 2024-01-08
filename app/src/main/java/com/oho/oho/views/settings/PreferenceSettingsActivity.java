@@ -38,7 +38,7 @@ public class PreferenceSettingsActivity extends AppCompatActivity implements OnP
     String initialStringEducation = "";
     String initialStringRace = "";
     String initialStringReligion = "";
-
+    String initialStringBudget = "";
     private ArrayList<PreferenceInput> genderList = new ArrayList<>();
     private PreferenceInputAdapter genderInputAdapter;
     private ArrayList<PreferenceInput> distanceList = new ArrayList<>();
@@ -223,6 +223,13 @@ public class PreferenceSettingsActivity extends AppCompatActivity implements OnP
                         initialStringRace = initialStringRace + race;
                     else
                         initialStringRace = initialStringRace + "," + race;
+                }
+
+                for (String budget : preferences.getBudget()) {
+                    if (initialStringBudget.equals(""))
+                        initialStringRace = initialStringBudget + budget;
+                    else
+                        initialStringBudget = initialStringBudget + "," + budget;
                 }
 
                 setPreferences();
@@ -514,6 +521,45 @@ public class PreferenceSettingsActivity extends AppCompatActivity implements OnP
                 }
                 Log.d("PreferenceSettingsActivity", "New preferred race: " + updatedPreferences.getRace());
                 raceInputAdapter.notifyDataSetChanged();
+                break;
+
+            case "budget":
+                Log.d("PreferenceSettingsActivity", selectedInputFor + " selected = " + selectedInput + " :" + isSelected);
+                // If "Open to all" is selected, unselect all other items and set finalStringEducation
+                if (selectedInput.equalsIgnoreCase("Open to all") && !isSelected) {
+                    for (PreferenceInput budget : budgetList) {
+                        if (budget.getInputName().equalsIgnoreCase(selectedInput))
+                            budget.setSelected(true);
+                        else
+                            budget.setSelected(false);
+                    }
+                    updatedPreferences.setBudget("Open to all");
+                } else {
+                    // Toggle the selection state of the clicked item
+                    for (PreferenceInput budget : budgetList) {
+                        if (budget.getInputName().equalsIgnoreCase("Open to all"))
+                            budget.setSelected(false);
+                        if (budget.getInputName().equalsIgnoreCase(selectedInput)) {
+                            budget.setSelected(!isSelected);
+                        }
+                    }
+                    // Iterate through the list to build the final string
+                    String finalStringBudget = "";
+                    for (PreferenceInput budget : budgetList) {
+                        if (budget.isSelected()) {
+                            if (!finalStringBudget.isEmpty()) {
+                                finalStringBudget += ", ";
+                            }
+                            finalStringBudget += budget.getInputName();
+                        }
+                    }
+                    if (!finalStringBudget.isEmpty())
+                        updatedPreferences.setBudget(finalStringBudget);
+                    else
+                        updatedPreferences.setBudget(initialStringRace);
+                }
+                Log.d("PreferenceSettingsActivity", "New preferred race: " + updatedPreferences.getBudget());
+                budgetInputAdapter.notifyDataSetChanged();
                 break;
         }
     }
