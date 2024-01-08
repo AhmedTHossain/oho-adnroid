@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,6 +29,7 @@ public class LikeYouAdapter extends RecyclerView.Adapter<LikeYouAdapter.Holder> 
         this.context = context;
         this.userArrayList = userArrayList;
         this.listener = listener;
+        Toast.makeText(context, "number of likes in adapter: = " + userArrayList.size(), Toast.LENGTH_LONG).show();
     }
 
     @NonNull
@@ -40,9 +42,10 @@ public class LikeYouAdapter extends RecyclerView.Adapter<LikeYouAdapter.Holder> 
 
     @Override
     public void onBindViewHolder(@NonNull LikeYouAdapter.Holder holder, int position) {
+        String url = userArrayList.get(position).getProfilePicture()+".jpeg";
         Glide
                 .with(context)
-                .load(userArrayList.get(position).getProfilePicture())
+                .load(url)
                 .centerCrop()
                 .placeholder(R.drawable.person)
                 .into(holder.getImageView());

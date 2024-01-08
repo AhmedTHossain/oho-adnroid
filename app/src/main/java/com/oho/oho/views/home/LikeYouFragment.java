@@ -100,6 +100,7 @@ public class LikeYouFragment extends Fragment implements OnProfileClickListener 
     }
 
     public void setRecyclerview(List<Profile> userList) {
+        binding.likesAvailableLayout.setVisibility(View.VISIBLE);
         ArrayList<Profile> userArrayList = new ArrayList<>(userList);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(requireContext(), 2);

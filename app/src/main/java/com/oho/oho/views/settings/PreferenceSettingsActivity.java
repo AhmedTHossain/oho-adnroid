@@ -24,6 +24,7 @@ import com.skydoves.powerspinner.IconSpinnerAdapter;
 import com.skydoves.powerspinner.IconSpinnerItem;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class PreferenceSettingsActivity extends AppCompatActivity implements OnPreferenceSelected {
@@ -372,6 +373,12 @@ public class PreferenceSettingsActivity extends AppCompatActivity implements OnP
                 String finalDistanceSelected = selectedInput.split(" ")[0];
                 updatedPreferences.setDistance(Integer.valueOf(finalDistanceSelected));
                 Log.d("PreferenceSettingsActivity", "New preferred distance: " + updatedPreferences.getDistance());
+                break;
+            case "education":
+                ArrayList<String> selectedFinalList = new ArrayList<>();
+
+                Log.d("PreferenceSettingsActivity", "New preferred interested_in: " + updatedPreferences.getEducation());
+
                 break;
         }
     }
