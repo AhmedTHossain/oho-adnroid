@@ -396,6 +396,8 @@ public class PreferenceSettingsActivity extends AppCompatActivity implements OnP
                 } else {
                     // Toggle the selection state of the clicked item
                     for (PreferenceInput education : educationList) {
+                        if (education.getInputName().equalsIgnoreCase("Open to all"))
+                            education.setSelected(false);
                         if (education.getInputName().equalsIgnoreCase(selectedInput)) {
                             education.setSelected(!isSelected);
                         }
