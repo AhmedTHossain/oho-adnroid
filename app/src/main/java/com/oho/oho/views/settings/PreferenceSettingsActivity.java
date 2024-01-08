@@ -36,6 +36,7 @@ public class PreferenceSettingsActivity extends AppCompatActivity implements OnP
     private Profile profile;
     private PreferenceResponse preferences;
     String initialStringEducation = "";
+    String initialStringRace = "";
     String initialStringReligion = "";
 
     private ArrayList<PreferenceInput> genderList = new ArrayList<>();
@@ -216,6 +217,14 @@ public class PreferenceSettingsActivity extends AppCompatActivity implements OnP
                     else
                         initialStringReligion = initialStringReligion + "," + religion;
                 }
+
+                for (String race : preferences.getRace()) {
+                    if (initialStringRace.equals(""))
+                        initialStringRace = initialStringRace + race;
+                    else
+                        initialStringRace = initialStringRace + "," + race;
+                }
+
                 setPreferences();
 
             }
@@ -467,6 +476,44 @@ public class PreferenceSettingsActivity extends AppCompatActivity implements OnP
                 }
                 Log.d("PreferenceSettingsActivity", "New preferred religion: " + updatedPreferences.getReligion());
                 religionInputAdapter.notifyDataSetChanged();
+                break;
+            case "race":
+                Log.d("PreferenceSettingsActivity", selectedInputFor + " selected = " + selectedInput + " :" + isSelected);
+                // If "Open to all" is selected, unselect all other items and set finalStringEducation
+                if (selectedInput.equalsIgnoreCase("Open to all") && !isSelected) {
+                    for (PreferenceInput race : raceList) {
+                        if (race.getInputName().equalsIgnoreCase(selectedInput))
+                            race.setSelected(true);
+                        else
+                            race.setSelected(false);
+                    }
+                    updatedPreferences.setRace("Open to all");
+                } else {
+                    // Toggle the selection state of the clicked item
+                    for (PreferenceInput race : raceList) {
+                        if (race.getInputName().equalsIgnoreCase("Open to all"))
+                            race.setSelected(false);
+                        if (race.getInputName().equalsIgnoreCase(selectedInput)) {
+                            race.setSelected(!isSelected);
+                        }
+                    }
+                    // Iterate through the list to build the final string
+                    String finalStringRace = "";
+                    for (PreferenceInput race : raceList) {
+                        if (race.isSelected()) {
+                            if (!finalStringRace.isEmpty()) {
+                                finalStringRace += ", ";
+                            }
+                            finalStringRace += race.getInputName();
+                        }
+                    }
+                    if (!finalStringRace.isEmpty())
+                        updatedPreferences.setRace(finalStringRace);
+                    else
+                        updatedPreferences.setRace(initialStringRace);
+                }
+                Log.d("PreferenceSettingsActivity", "New preferred race: " + updatedPreferences.getRace());
+                raceInputAdapter.notifyDataSetChanged();
                 break;
         }
     }
