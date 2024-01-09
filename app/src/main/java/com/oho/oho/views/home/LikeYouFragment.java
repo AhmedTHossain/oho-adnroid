@@ -92,8 +92,10 @@ public class LikeYouFragment extends Fragment implements OnProfileClickListener 
             if (userList.size()>0) {
                 Toast.makeText(requireContext(), "number of people liked profile = " + userList.size(), Toast.LENGTH_LONG).show();
                 setRecyclerview(userList);
-            } else
+            } else {
+                binding.likesAvailableLayout.setVisibility(View.GONE);
                 binding.noLikesAvailableLayout.setVisibility(View.VISIBLE);
+            }
             shimmerViewContainer.stopShimmerAnimation();
             shimmerViewContainer.setVisibility(View.GONE);
         });

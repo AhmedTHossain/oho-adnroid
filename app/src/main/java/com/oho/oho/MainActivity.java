@@ -75,11 +75,11 @@ public class MainActivity extends AppCompatActivity {
                     });
 
                     // Set background color to white (#ffffff)
-                    snackbar.getView().setBackgroundColor(Color.parseColor("#ffffff"));
+                    snackbar.getView().setBackgroundColor(Color.parseColor("#000000"));
 
                     // Set text color to black (#000000)
                     TextView snackbarTextView = snackbar.getView().findViewById(com.google.android.material.R.id.snackbar_text);
-                    snackbarTextView.setTextColor(Color.parseColor("#000000"));
+                    snackbarTextView.setTextColor(Color.parseColor("#FFFFFF"));
 
                     // Set button text color to #B42254
                     snackbar.setActionTextColor(Color.parseColor("#B42254"));

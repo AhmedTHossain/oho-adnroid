@@ -4,8 +4,12 @@ import static com.oho.oho.utils.Constants.TAG;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.oho.oho.models.Profile;
 
 import java.text.SimpleDateFormat;
@@ -17,6 +21,7 @@ public class HelperClass {
     public static void logErrorMessage(String errorMessage) {
         Log.d(TAG, errorMessage);
     }
+
     //Store logged in user's profile locally
     public void saveProfile(Context context, Profile profile) {
         SharedPreferences.Editor editor = context.getSharedPreferences("ProfilePrefsFile", Context.MODE_PRIVATE).edit();
@@ -27,6 +32,7 @@ public class HelperClass {
         }
         editor.apply();
     }
+
     //Retrieve logged in user's profile stored locally
     public Profile getProfile(Context context) {
         SharedPreferences prefs = context.getSharedPreferences("ProfilePrefsFile", Context.MODE_PRIVATE);
@@ -38,18 +44,21 @@ public class HelperClass {
             return null;
         }
     }
+
     //Store logged in user's jwt token locally
-    public void setJWTToken(Context context, String JWTToken){
+    public void setJWTToken(Context context, String JWTToken) {
         SharedPreferences.Editor editor = context.getSharedPreferences("ProfilePrefsFile", Context.MODE_PRIVATE).edit();
         editor.putString("JWT", JWTToken);
         editor.apply();
     }
+
     //Retrieve logged in user's jwt token stored locally
-    public String getJWTToken(Context context){
+    public String getJWTToken(Context context) {
         SharedPreferences prefs = context.getSharedPreferences("ProfilePrefsFile", Context.MODE_PRIVATE);
         String jwtToken = prefs.getString("JWT", null);
         return jwtToken;
     }
+
     // converts height in cm to feet and inches for display
     public String convertToFeetAndInches(double heightInCentimeters) {
         // Convert height to inches
@@ -64,6 +73,23 @@ public class HelperClass {
 
         return formattedHeight;
     }
+
+    public double convertToCentimeters(int feet, int inches) {
+        // Convert feet and inches to centimeters
+        double totalInch = feet * 12 + inches;
+        return totalInch * 2.54;
+    }
+
+    public double convertHeight(String heightString) {
+        String stringHeight = heightString.split(" ft")[0];
+        Log.d("HelperClass","string height = "+stringHeight);
+
+        int feet = Integer.parseInt(stringHeight.split("\\.")[0]);
+        int inch = Integer.parseInt(stringHeight.split("\\.")[1]);
+
+        return convertToCentimeters(feet, inch);
+    }
+
     //Find the dates of the upcoming dating phase
     public String getFridayToSundayDateRange() {
         Calendar calendar = Calendar.getInstance();
@@ -90,6 +116,25 @@ public class HelperClass {
         SimpleDateFormat sdf = new SimpleDateFormat("MMMM d", Locale.getDefault());
         String fridayString = sdf.format(friday);
         String sundayString = sdf.format(sunday);
-        return fridayString + "th - " + sundayString +"th";
+        return fridayString + "th - " + sundayString + "th";
+    }
+
+    public void showSnackBar(View layout, String msg) {
+        Snackbar snackbar = Snackbar.make(
+                layout,
+                msg,
+                Snackbar.LENGTH_SHORT
+        );
+
+        snackbar.setAnimationMode(Snackbar.ANIMATION_MODE_FADE);
+
+        // Set background color to white (#ffffff)
+        snackbar.getView().setBackgroundColor(Color.parseColor("#000000"));
+
+        // Set text color to black (#000000)
+        TextView snackbarTextView = snackbar.getView().findViewById(com.google.android.material.R.id.snackbar_text);
+        snackbarTextView.setTextColor(Color.parseColor("#FFFFFF"));
+
+        snackbar.show();
     }
 }

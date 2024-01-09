@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.oho.oho.models.PreferenceRequest;
 import com.oho.oho.repositories.PreferenceSettingsRepository;
 import com.oho.oho.responses.preference.PreferenceResponse;
 
@@ -35,7 +36,7 @@ public class PreferenceSettingsViewModel extends AndroidViewModel {
         userLocation = repository.getUserLocation(user_id);
     }
 
-    public void updatePreference(PreferenceResponse preferences) {
+    public void updatePreference(PreferenceRequest preferences) {
         ifPreferenceUpdated = repository.updatePreference(preferences);
     }
 

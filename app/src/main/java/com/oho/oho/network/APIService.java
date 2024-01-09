@@ -7,25 +7,25 @@ import com.oho.oho.models.BlockUnblockUser;
 import com.oho.oho.models.CreateDeviceId;
 import com.oho.oho.models.GetLikesOnProfileResponse;
 import com.oho.oho.models.JWTTokenRequest;
+import com.oho.oho.models.PreferenceRequest;
 import com.oho.oho.models.Profile;
 import com.oho.oho.models.Prompt;
 import com.oho.oho.models.ReportUserRequest;
 import com.oho.oho.models.Swipe;
 import com.oho.oho.responses.Attendance.GetDateStatusResponse;
 import com.oho.oho.responses.MessageResponse;
-import com.oho.oho.responses.block.GetBlockResponse;
-import com.oho.oho.responses.preference.GetPreferenceResponse;
-import com.oho.oho.responses.preference.PreferenceResponse;
 import com.oho.oho.responses.StoreDeviceIdResponse;
 import com.oho.oho.responses.UploadProfilePhotoResponse;
 import com.oho.oho.responses.UploadPromptPhotoResponse;
 import com.oho.oho.responses.VerifyEmailResponse;
 import com.oho.oho.responses.availability.GetAvailabilityStatusResponse;
+import com.oho.oho.responses.block.GetBlockResponse;
 import com.oho.oho.responses.chat.GetChatHistoryResponse;
 import com.oho.oho.responses.chat.GetChatRoomsResponse;
 import com.oho.oho.responses.jwttoken.GetJwtTokenResponse;
 import com.oho.oho.responses.match.GetDatesLeftResponse;
 import com.oho.oho.responses.match.GetRecommendationResponse;
+import com.oho.oho.responses.preference.GetPreferenceResponse;
 import com.oho.oho.responses.profile.GetProfileResponse;
 import com.oho.oho.responses.prompt.GetAddPromptResponse;
 import com.oho.oho.responses.qrcode.GetQrCodeResponse;
@@ -115,7 +115,7 @@ public interface APIService {
 
     //update user preference
     @PUT("users/update/preference")
-    Call<PreferenceResponse> updatePreference(@Body PreferenceResponse preferenceResponse);
+    Call<GetPreferenceResponse> updatePreference(@Header("Authorization") String jwtToken, @Body PreferenceRequest preferenceResponse);
 
     //get number of matches/dates left
     @GET("users/get_date_count")

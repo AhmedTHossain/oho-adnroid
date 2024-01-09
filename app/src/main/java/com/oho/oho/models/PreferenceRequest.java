@@ -35,10 +35,10 @@ public class PreferenceRequest {
     private Integer distance;
     @SerializedName("max_height")
     @Expose
-    private Integer maxHeight;
+    private Double maxHeight;
     @SerializedName("min_height")
     @Expose
-    private Integer minHeight;
+    private Double minHeight;
     @SerializedName("max_age")
     @Expose
     private Integer maxAge;
@@ -118,19 +118,19 @@ public class PreferenceRequest {
         this.distance = distance;
     }
 
-    public Integer getMaxHeight() {
+    public Double getMaxHeight() {
         return maxHeight;
     }
 
-    public void setMaxHeight(Integer maxHeight) {
+    public void setMaxHeight(Double maxHeight) {
         this.maxHeight = maxHeight;
     }
 
-    public Integer getMinHeight() {
+    public Double getMinHeight() {
         return minHeight;
     }
 
-    public void setMinHeight(Integer minHeight) {
+    public void setMinHeight(Double minHeight) {
         this.minHeight = minHeight;
     }
 

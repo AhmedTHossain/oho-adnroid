@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
+import com.oho.oho.models.PreferenceRequest;
 import com.oho.oho.network.APIService;
 import com.oho.oho.network.RetrofitInstance;
 import com.oho.oho.responses.preference.GetPreferenceResponse;
@@ -69,20 +70,22 @@ public class PreferenceSettingsRepository {
         return userLocation;
     }
 
-    public MutableLiveData<Boolean> updatePreference(PreferenceResponse preferences) {
+    public MutableLiveData<Boolean> updatePreference(PreferenceRequest preferences) {
         MutableLiveData<Boolean> ifPreferenceUpdated = new MutableLiveData<>();
         APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
-        Call<PreferenceResponse> call = apiService.updatePreference(preferences);
-        call.enqueue(new Callback<PreferenceResponse>() {
+        Call<GetPreferenceResponse> call = apiService.updatePreference(helperClass.getJWTToken(context), preferences);
+        call.enqueue(new Callback<GetPreferenceResponse>() {
             @Override
-            public void onResponse(@NonNull Call<PreferenceResponse> call, @NonNull Response<PreferenceResponse> response) {
-                if (response.body() != null)
+            public void onResponse(@NonNull Call<GetPreferenceResponse> call, @NonNull Response<GetPreferenceResponse> response) {
+                if (response.body().getStatus())
                     ifPreferenceUpdated.setValue(true);
+                else
+                    ifPreferenceUpdated.setValue(false);
             }
 
             @Override
-            public void onFailure(@NonNull Call<PreferenceResponse> call, @NonNull Throwable t) {
-                ifPreferenceUpdated.setValue(true);
+            public void onFailure(@NonNull Call<GetPreferenceResponse> call, @NonNull Throwable t) {
+                ifPreferenceUpdated.setValue(false);
             }
         });
         return ifPreferenceUpdated;

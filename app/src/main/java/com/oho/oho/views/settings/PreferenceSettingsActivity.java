@@ -2,6 +2,7 @@ package com.oho.oho.views.settings;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
@@ -80,6 +81,34 @@ public class PreferenceSettingsActivity extends AppCompatActivity implements OnP
         setAgeSpinner();
 
         initViewModel();
+
+        binding.updatePreferences.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                double minHeightSelected = helperClass.convertHeight(heightList.get(binding.heightSpinnerMin.getSelectedIndex()));
+                double maxHeightSelected = helperClass.convertHeight(heightList.get(binding.heightSpinnerMax.getSelectedIndex()));
+                int maxAgeSelected = Integer.parseInt(ageList.get(binding.ageSpinnerMax.getSelectedIndex()).replaceAll("[^0-9]", ""));
+                int minAgeSelected = Integer.parseInt(ageList.get(binding.ageSpinnerMin.getSelectedIndex()).replaceAll("[^0-9]", ""));
+
+                updatedPreferences.setMinHeight(minHeightSelected);
+                updatedPreferences.setMaxHeight(maxHeightSelected);
+                updatedPreferences.setMinAge(minAgeSelected);
+                updatedPreferences.setMaxAge(maxAgeSelected);
+
+                viewModel.updatePreference(updatedPreferences);
+                viewModel.ifPreferenceUpdated.observe(PreferenceSettingsActivity.this, ifPreferenceUpdated -> {
+                    if (ifPreferenceUpdated)
+                        helperClass.showSnackBar(binding.containermain, "Your preference has been updated successfully!");
+                    else
+                        helperClass.showSnackBar(binding.containermain, "Sorry, your preference update request has failed.");
+                });
+            }
+        });
+    }
+
+    private void initViewModel() {
+        viewModel = new ViewModelProvider(this).get(PreferenceSettingsViewModel.class);
+        getPreferences();
     }
 
     private void setBudgetRecyclerview() {
@@ -193,11 +222,6 @@ public class PreferenceSettingsActivity extends AppCompatActivity implements OnP
         binding.recyclerviewGender.setAdapter(genderInputAdapter);
     }
 
-    private void initViewModel() {
-        viewModel = new ViewModelProvider(this).get(PreferenceSettingsViewModel.class);
-        getPreferences();
-    }
-
     private void getPreferences() {
         viewModel.getProfilePreference();
         viewModel.preferenceResponse.observe(this, preferenceResponse -> {
@@ -286,11 +310,13 @@ public class PreferenceSettingsActivity extends AppCompatActivity implements OnP
                 input.setSelected(true);
                 cuisineInputAdapter.notifyDataSetChanged();
             }
-        for (PreferenceInput input : budgetList)
-            if (preferences.getBudget().contains(input.getInputName().toLowerCase())) {
+        for (PreferenceInput input : budgetList) {
+            String preference = String.join(", ", preferences.getBudget());
+            if (preference.equalsIgnoreCase(input.getInputName())) {
                 input.setSelected(true);
                 budgetInputAdapter.notifyDataSetChanged();
             }
+        }
         for (int i = 0; i < heightList.size(); i++)
             if (heightList.get(i).equals(convertCmToFeetInches(preferences.getMaxHeight())))
                 binding.heightSpinnerMax.selectItemByIndex(i);
@@ -311,8 +337,7 @@ public class PreferenceSettingsActivity extends AppCompatActivity implements OnP
             String maxAgeSelected = preferences.getMaxAge().toString() + " yr";
             if (ageList.get(i).equals(maxAgeSelected)) {
                 binding.ageSpinnerMax.selectItemByIndex(i);
-            } else if (preferences.getMaxAge() >= 65)
-                binding.ageSpinnerMax.selectItemByIndex(ageList.size() - 1);
+            }
         }
     }
 
@@ -338,12 +363,9 @@ public class PreferenceSettingsActivity extends AppCompatActivity implements OnP
     }
 
     private void setAgeSpinner() {
-        for (int i = 18; i < 66; i++) {
-            if (i < 65)
-                ageList.add(i + " yr");
-            else
-                ageList.add(i + "+ yr");
-        }
+        for (int i = 18; i <= 65; i++)
+            ageList.add(i + " yr");
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, ageList);
 
         List<IconSpinnerItem> iconSpinnerItems = new ArrayList<>();
