@@ -22,6 +22,7 @@ import androidx.core.splashscreen.SplashScreen;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.oho.oho.databinding.ActivityMainBinding;
 import com.oho.oho.models.ChatNotificationPayload;
 import com.oho.oho.models.JWTTokenRequest;
@@ -98,6 +99,9 @@ public class MainActivity extends AppCompatActivity {
         //TODO: for now Dark Theme is forced stopped - once we customise the Dark Theme this line will be removed
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(binding.getRoot());
+
+        // Add this in your Application class or the main activity
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true);
 
         askNotificationPermission();
 
