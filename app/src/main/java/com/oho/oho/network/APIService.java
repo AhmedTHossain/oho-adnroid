@@ -14,7 +14,6 @@ import com.oho.oho.models.ReportUserRequest;
 import com.oho.oho.models.Swipe;
 import com.oho.oho.responses.Attendance.GetDateStatusResponse;
 import com.oho.oho.responses.MessageResponse;
-import com.oho.oho.responses.StoreDeviceIdResponse;
 import com.oho.oho.responses.UploadProfilePhotoResponse;
 import com.oho.oho.responses.UploadPromptPhotoResponse;
 import com.oho.oho.responses.VerifyEmailResponse;
@@ -25,6 +24,8 @@ import com.oho.oho.responses.chat.GetChatRoomsResponse;
 import com.oho.oho.responses.jwttoken.GetJwtTokenResponse;
 import com.oho.oho.responses.match.GetDatesLeftResponse;
 import com.oho.oho.responses.match.GetRecommendationResponse;
+import com.oho.oho.responses.notification.CreateFCMTokenResponse;
+import com.oho.oho.responses.notification.StoreDeviceIdResponse;
 import com.oho.oho.responses.preference.GetPreferenceResponse;
 import com.oho.oho.responses.profile.GetProfileResponse;
 import com.oho.oho.responses.prompt.GetAddPromptResponse;
@@ -135,11 +136,11 @@ public interface APIService {
 
     //store device id (FCM token) for the first time
     @POST("users/user_device_token/create")
-    Call<StoreDeviceIdResponse> storeDeviceId(@Body CreateDeviceId createDeviceId);
+    Call<StoreDeviceIdResponse> storeDeviceId(@Header("Authorization") String jwtToken, @Body CreateDeviceId createDeviceId);
 
     //update device id (FCM token) for the first time
     @PUT("users/user_device_token/update")
-    Call<StoreDeviceIdResponse> updateDeviceId(@Body CreateDeviceId createDeviceId);
+    Call<CreateFCMTokenResponse> updateDeviceId(@Header("Authorization") String jwtToken, @Body CreateDeviceId createDeviceId);
 
     //get JWT token for socket connection
     @POST("users/token")

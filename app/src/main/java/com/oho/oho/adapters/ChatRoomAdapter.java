@@ -69,7 +69,7 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
         } else {
             Glide.with(context)
                     .load(chatRoomArrayList.get(position).getProfilePhoto())
-                    .placeholder(R.drawable.person_placeholder)
+                    .placeholder(R.drawable.no_user)
                     .into(holder.getSenderImage());
         }
 

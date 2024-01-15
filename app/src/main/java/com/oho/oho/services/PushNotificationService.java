@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -17,7 +16,6 @@ import android.widget.RemoteViews;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
-import com.bumptech.glide.Glide;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.oho.oho.MainActivity;
@@ -39,18 +37,6 @@ public class PushNotificationService extends FirebaseMessagingService {
 
         Log.d("PushNotificationService", "data notification = " + message.getData());
 
-        if (message.getData().size() > 0) {
-            ChatNotificationPayload notificationPayload = new ChatNotificationPayload();
-            notificationPayload.setTitle(message.getData().get("title"));
-            notificationPayload.setBody(message.getData().get("body"));
-            notificationPayload.setChannelName(message.getData().get("channel_name"));
-            notificationPayload.setChatId(message.getData().get("chat_id"));
-            notificationPayload.setSenderName(message.getData().get("sender_name"));
-            notificationPayload.setSenderPhoto(message.getData().get("sender_photo"));
-
-
-            sendNotification(notificationPayload);
-        }
     }
 
     private void sendNotification(ChatNotificationPayload notificationPayload) {
@@ -81,11 +67,11 @@ public class PushNotificationService extends FirebaseMessagingService {
 
         final Notification notification = notificationBuilder.build();
 
-        notificationLayout.setTextViewText(R.id.textview_sender,notificationPayload.getSenderName());
-        notificationLayout.setTextViewText(R.id.textview_chat_message,notificationPayload.getBody());
+        notificationLayout.setTextViewText(R.id.textview_sender, notificationPayload.getSenderName());
+        notificationLayout.setTextViewText(R.id.textview_chat_message, notificationPayload.getBody());
 
-        notificationLayoutExpanded.setTextViewText(R.id.textview_notification_title,notificationPayload.getSenderName());
-        notificationLayoutExpanded.setTextViewText(R.id.textview_notification_message,notificationPayload.getBody());
+        notificationLayoutExpanded.setTextViewText(R.id.textview_notification_title, notificationPayload.getSenderName());
+        notificationLayoutExpanded.setTextViewText(R.id.textview_notification_message, notificationPayload.getBody());
 
 //        Log.d("PushNotificationservice","notification sender's photo url: "+notificationPayload.getSenderPhoto());
 //        Uri uri = Uri.parse(notificationPayload.getSenderPhoto());
@@ -104,7 +90,7 @@ public class PushNotificationService extends FirebaseMessagingService {
         notificationManager.notify(0 /* ID of notification */, notification);
 
         Handler uiHandler = new Handler(Looper.getMainLooper());
-        uiHandler.post(new Runnable(){
+        uiHandler.post(new Runnable() {
             @Override
             public void run() {
                 Picasso

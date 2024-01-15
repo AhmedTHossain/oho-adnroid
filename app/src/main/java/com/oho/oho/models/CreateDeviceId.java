@@ -4,9 +4,9 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class CreateDeviceId {
-    @SerializedName("user_id")
+    @SerializedName("user_type")
     @Expose
-    private Integer userId;
+    private String userType;
     @SerializedName("token")
     @Expose
     private String token;
@@ -14,12 +14,12 @@ public class CreateDeviceId {
     @Expose
     private String deviceType;
 
-    public Integer getUserId() {
-        return userId;
+    public String getUserType() {
+        return userType;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 
     public String getToken() {

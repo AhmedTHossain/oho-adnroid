@@ -15,16 +15,21 @@ import android.Manifest;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 import androidx.core.splashscreen.SplashScreen;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.oho.oho.databinding.ActivityMainBinding;
 import com.oho.oho.models.ChatNotificationPayload;
+import com.oho.oho.models.CreateDeviceId;
 import com.oho.oho.models.JWTTokenRequest;
 import com.oho.oho.models.Profile;
 import com.oho.oho.responses.chat.ChatRoom;
@@ -118,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
             viewModel.replaceFragment(new HomeFragment(),getSupportFragmentManager());
 
-            viewModel.getFCMToken();
+            getFCMToken();
 
             getJwtToken(profile.getEmail());
 
@@ -227,4 +232,49 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void storeDeviceToken(String token, String device_type) {
+        CreateDeviceId createDeviceId = new CreateDeviceId();
+        createDeviceId.setToken(token);
+        createDeviceId.setUserType("user");
+        createDeviceId.setDeviceType(device_type);
+
+        viewModel.storeDeviceId(createDeviceId);
+        viewModel.storedIdResponse.observe(this, storedIdResponse -> {
+            if (storedIdResponse != null)
+                Toast.makeText(this, "Device ID found in response!!", Toast.LENGTH_SHORT).show();
+            else {
+//                Toast.makeText(this, "No Device ID found in response!!", Toast.LENGTH_SHORT).show();
+                viewModel.updateDeviceId(createDeviceId);
+                viewModel.storedIdResponse.observe(this, updatedIdResponse -> {
+                    if (updatedIdResponse != null)
+                        Toast.makeText(this, "Device ID found in response!!", Toast.LENGTH_SHORT).show();
+                    else {
+                        Toast.makeText(this, "No Device ID found in response!!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+    }
+
+    public void getFCMToken() {
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w("MainViewModel", "Fetching FCM registration token failed", task.getException());
+                            return;
+                        } else {
+                            // Get new FCM registration token
+                            String token = task.getResult();
+
+                            // Log and toast
+                            String msg = "FCM token of this device: " + token;
+                            Log.d("MainViewModel", "fcm token = " + msg);
+
+                            storeDeviceToken(token,"android");
+                        }
+                    }
+                });
+    }
 }

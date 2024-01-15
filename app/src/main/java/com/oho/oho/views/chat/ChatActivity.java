@@ -1,10 +1,12 @@
 package com.oho.oho.views.chat;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +17,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.material.snackbar.Snackbar;
 import com.oho.oho.MainActivity;
 import com.oho.oho.R;
 import com.oho.oho.adapters.ChatAdapter;
@@ -104,7 +107,7 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
             binding.fabSend.setVisibility(View.GONE);
         }
 
-        Glide.with(this).load(sender_photo).placeholder(R.drawable.person_placeholder).into(binding.titleImage);
+        Glide.with(this).load(sender_photo).placeholder(R.drawable.no_user).into(binding.titleImage);
 
         shimmerViewContainer = binding.shimmerViewContainer;
         initChatViewModel();
@@ -414,11 +417,30 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
         switch (v.getId()) {
             case R.id.screentitle:
             case R.id.title_image:
-                Intent intent = new Intent(ChatActivity.this, MainActivity.class);
-                intent.putExtra("from", "ChatActivity");
-                intent.putExtra("sender_id", sender_id);
-                intent.putExtra("chatroom", selectedChatRoom);
-                startActivity(intent);
+                if (!selectedChatRoom.getFullName().equals("")) {
+                    Intent intent = new Intent(ChatActivity.this, MainActivity.class);
+                    intent.putExtra("from", "ChatActivity");
+                    intent.putExtra("sender_id", sender_id);
+                    intent.putExtra("chatroom", selectedChatRoom);
+                    startActivity(intent);
+                } else {
+                    Snackbar snackbar = Snackbar.make(
+                            binding.containermain,
+                            String.format(
+                                    String.format(
+                                            "Profile Unavailable: User has deleted their account."
+                                    )
+                            ),
+                            Snackbar.LENGTH_SHORT);
+                    // Set background color to white (#ffffff)
+                    snackbar.getView().setBackgroundColor(Color.parseColor("#000000"));
+
+                    // Set text color to black (#000000)
+                    TextView snackbarTextView = snackbar.getView().findViewById(com.google.android.material.R.id.snackbar_text);
+                    snackbarTextView.setTextColor(Color.parseColor("#FFFFFF"));
+                    snackbar.show();
+                }
+                break;
         }
     }
 }
