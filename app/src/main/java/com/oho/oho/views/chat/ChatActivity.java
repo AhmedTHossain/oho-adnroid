@@ -423,23 +423,8 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
                     intent.putExtra("sender_id", sender_id);
                     intent.putExtra("chatroom", selectedChatRoom);
                     startActivity(intent);
-                } else {
-                    Snackbar snackbar = Snackbar.make(
-                            binding.containermain,
-                            String.format(
-                                    String.format(
-                                            "Profile Unavailable: User has deleted their account."
-                                    )
-                            ),
-                            Snackbar.LENGTH_SHORT);
-                    // Set background color to white (#ffffff)
-                    snackbar.getView().setBackgroundColor(Color.parseColor("#000000"));
-
-                    // Set text color to black (#000000)
-                    TextView snackbarTextView = snackbar.getView().findViewById(com.google.android.material.R.id.snackbar_text);
-                    snackbarTextView.setTextColor(Color.parseColor("#FFFFFF"));
-                    snackbar.show();
-                }
+                } else
+                    new HelperClass().showSnackBar(binding.containermain,"Profile Unavailable: User has deleted their account.");
                 break;
         }
     }

@@ -133,6 +133,7 @@ public class HelperClass {
 
         // Set text color to black (#000000)
         TextView snackbarTextView = snackbar.getView().findViewById(com.google.android.material.R.id.snackbar_text);
+        snackbarTextView.setTextSize(16);
         snackbarTextView.setTextColor(Color.parseColor("#FFFFFF"));
 
         snackbar.show();
