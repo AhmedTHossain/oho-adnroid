@@ -9,6 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.oho.oho.R;
 import com.oho.oho.databinding.FragmentSettingsBinding;
 import com.oho.oho.models.Profile;
@@ -75,9 +78,11 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
                 startActivity(new Intent(requireActivity(), PrivacyPolicyActivity.class));
                 break;
             case R.id.button_signout_settings:
+                //disable smart lock
+                new HelperClass().disableSmartLock(requireContext());
+
                 HelperClass helperClass = new HelperClass();
                 Profile profile = null;
-
                 helperClass.saveProfile(requireContext(),profile);
                 startActivity(new Intent(requireActivity(), LoginActivity.class));
                 requireActivity().finish();

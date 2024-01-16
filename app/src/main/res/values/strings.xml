@@ -397,7 +397,7 @@ Oho! does not knowingly collect any Personal Identifiable Information from child
     <string name="if_i_dont_show_up_ques">What happens if I don\'t show up on my date?</string>
     <string name="is_oho_safe_ques">Is Oho! safe for me?</string>
     <string name="motivation_ques">What is our motivation for this app?</string>
-    <string name="no_messages_disclaimer">As you haven\'t matched with anyone so far, you don\'t have any messages yet.</string>
+    <string name="no_messages_disclaimer">Hey! 👋 Your chat screen is empty as you haven\'t matched with anyone yet, but no worries! The right connections are just around the corner. Keep swiping, and you\'ll be sparking conversations in no time. 🌟</string>
     <string name="no_messages">No chats available!</string>
     <string name="goto_settings">Go to Settings</string>
     <string name="txt_error_post_notification">%1$s can\'t post notifications without Notification permission</string>

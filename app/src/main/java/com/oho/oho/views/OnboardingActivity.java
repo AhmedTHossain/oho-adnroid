@@ -20,6 +20,7 @@ import com.oho.oho.adapters.OnboardingAdapter;
 import com.oho.oho.databinding.ActivityOnboardingBinding;
 import com.oho.oho.databinding.ActivityRegistrationBinding;
 import com.oho.oho.models.OnboardingItem;
+import com.oho.oho.utils.HelperClass;
 import com.oho.oho.views.animations.ZoomOutPageTransformer;
 import com.oho.oho.views.registration.ProfileSetupActivity;
 import com.oho.oho.views.registration.RegistrationActivity;
@@ -92,6 +93,13 @@ public class OnboardingActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        //Disabling smart lock on Onboarding activity destroy to prompt user for Gmail address choice on next login
+        new HelperClass().disableSmartLock(this);
+        super.onDestroy();
     }
 
     private void setIndicator() {

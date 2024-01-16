@@ -9,7 +9,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.snackbar.Snackbar;
+import com.oho.oho.R;
 import com.oho.oho.models.Profile;
 
 import java.text.SimpleDateFormat;
@@ -137,5 +141,14 @@ public class HelperClass {
         snackbarTextView.setTextColor(Color.parseColor("#FFFFFF"));
 
         snackbar.show();
+    }
+    //Used to show the Google account selection screen every time the user signs in by disabling Smart Lock for Passwords
+    public void disableSmartLock(Context context){
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(context.getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(context, gso);
+        mGoogleSignInClient.signOut();
     }
 }
