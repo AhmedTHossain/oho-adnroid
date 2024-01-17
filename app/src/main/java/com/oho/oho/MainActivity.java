@@ -32,6 +32,7 @@ import com.oho.oho.models.ChatNotificationPayload;
 import com.oho.oho.models.CreateDeviceId;
 import com.oho.oho.models.JWTTokenRequest;
 import com.oho.oho.models.Profile;
+import com.oho.oho.models.notifications.LikeNotificationPayload;
 import com.oho.oho.responses.chat.ChatRoom;
 import com.oho.oho.utils.HelperClass;
 import com.oho.oho.viewmodels.MainViewModel;
@@ -127,16 +128,25 @@ public class MainActivity extends AppCompatActivity {
 
             getJwtToken(profile.getEmail());
 
-            ChatNotificationPayload notificationPayload;
-            if (getIntent().hasExtra("notificationPayload")) {
-                notificationPayload = (ChatNotificationPayload) getIntent().getSerializableExtra("notificationPayload");
-                Toast.makeText(this, "sender name = " + notificationPayload.getChannelName(), Toast.LENGTH_SHORT).show();
+            ChatNotificationPayload chatNotificationPayload;
+            LikeNotificationPayload likeNotificationPayload;
 
-                Intent intent = new Intent(this, ChatActivity.class);
-                intent.putExtra("notificationPayload", notificationPayload); //where chatroom is an instance of ChatRoom object
-                intent.putExtra("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODQxODE1OTcsImlhdCI6MTY4NDA5NTE5Nywic3ViIjo5OX0.U6TqG6oHX64ZCtYMIQjzPihu7VB2jCGcbPX6gbWUtrA"); //a newly generated token has been sent to ChatActivity
-                startActivity(intent);
-                Log.d("MainActivvity", "notification payload = " + notificationPayload);
+            if (getIntent().hasExtra("notificationPayload")) {
+                switch (getIntent().getStringExtra("TYPE")){
+                    case "like":
+                        likeNotificationPayload = (LikeNotificationPayload) getIntent().getSerializableExtra("notificationPayload");
+                        viewModel.replaceFragment(new LikeYouFragment(),getSupportFragmentManager());
+                        break;
+                }
+
+//                notificationPayload = (ChatNotificationPayload) getIntent().getSerializableExtra("notificationPayload");
+//                Toast.makeText(this, "sender name = " + notificationPayload.getChannelName(), Toast.LENGTH_SHORT).show();
+//
+//                Intent intent = new Intent(this, ChatActivity.class);
+//                intent.putExtra("notificationPayload", notificationPayload); //where chatroom is an instance of ChatRoom object
+//                intent.putExtra("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODQxODE1OTcsImlhdCI6MTY4NDA5NTE5Nywic3ViIjo5OX0.U6TqG6oHX64ZCtYMIQjzPihu7VB2jCGcbPX6gbWUtrA"); //a newly generated token has been sent to ChatActivity
+//                startActivity(intent);
+//                Log.d("MainActivvity", "notification payload = " + notificationPayload);
             }
             if (getIntent().hasExtra("show"))
                 if (getIntent().getStringExtra("show").equals("ProfileScreen"))

@@ -21,6 +21,7 @@ import com.google.firebase.messaging.RemoteMessage;
 import com.oho.oho.MainActivity;
 import com.oho.oho.R;
 import com.oho.oho.models.ChatNotificationPayload;
+import com.oho.oho.models.notifications.LikeNotificationPayload;
 import com.squareup.picasso.Picasso;
 
 public class PushNotificationService extends FirebaseMessagingService {
@@ -36,13 +37,24 @@ public class PushNotificationService extends FirebaseMessagingService {
         super.onMessageReceived(message);
 
         Log.d("PushNotificationService", "data notification = " + message.getData());
-
+        String notificationType = message.getData().get("type");
+        switch (notificationType){
+            case "like":
+                String notificationBody = message.getData().get("sender_name") + " has liked your profile";
+                LikeNotificationPayload likeNotificationPayload = new LikeNotificationPayload("New Like!",notificationBody,message.getData().get("sender_name"),message.getData().get("sender_photo"),message.getData().get("user_id"),message.getData().get("type"));
+                sendLikeNotification(likeNotificationPayload);
+                break;
+        }
     }
 
-    private void sendNotification(ChatNotificationPayload notificationPayload) {
+    private void sendLikeNotification(LikeNotificationPayload notificationPayload) {
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        Log.d("PushNotificationService", "data notification type inside = " + notificationPayload.getType());
+
         intent.putExtra("notificationPayload", notificationPayload);
+        intent.putExtra("TYPE",notificationPayload.getType());
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_IMMUTABLE);
 
@@ -67,16 +79,16 @@ public class PushNotificationService extends FirebaseMessagingService {
 
         final Notification notification = notificationBuilder.build();
 
-        notificationLayout.setTextViewText(R.id.textview_sender, notificationPayload.getSenderName());
-        notificationLayout.setTextViewText(R.id.textview_chat_message, notificationPayload.getBody());
+        notificationLayout.setTextViewText(R.id.textview_sender, "Oho!");
+        notificationLayout.setTextViewText(R.id.textview_chat_message, "New Like!");
 
-        notificationLayoutExpanded.setTextViewText(R.id.textview_notification_title, notificationPayload.getSenderName());
+        notificationLayoutExpanded.setTextViewText(R.id.textview_notification_title, notificationPayload.getTitle());
         notificationLayoutExpanded.setTextViewText(R.id.textview_notification_message, notificationPayload.getBody());
 
-//        Log.d("PushNotificationservice","notification sender's photo url: "+notificationPayload.getSenderPhoto());
-//        Uri uri = Uri.parse(notificationPayload.getSenderPhoto());
-//        Log.d("PushNotificationservice","notification sender's photo uri: "+uri);
-//        notificationLayoutExpanded.setImageViewUri(R.id.imageview_notification_sender,uri);
+        Log.d("PushNotificationservice","notification sender's photo url: "+notificationPayload.getSenderPhoto());
+        Uri uri = Uri.parse(notificationPayload.getSenderPhoto());
+        Log.d("PushNotificationservice","notification sender's photo uri: "+uri);
+        notificationLayoutExpanded.setImageViewUri(R.id.imageview_notification_sender,uri);
 
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -93,9 +105,11 @@ public class PushNotificationService extends FirebaseMessagingService {
         uiHandler.post(new Runnable() {
             @Override
             public void run() {
+                String photoUrl = notificationPayload.getSenderPhoto()+".jpeg";
+                Log.d("PushNotificationService","photo url of sender = "+photoUrl);
                 Picasso
                         .get()
-                        .load(notificationPayload.getSenderPhoto())
+                        .load(photoUrl)
                         .into(notificationLayoutExpanded, R.id.imageview_notification_sender, 0, notification);
             }
         });

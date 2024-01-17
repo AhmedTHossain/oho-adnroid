@@ -6,7 +6,8 @@
     xmlns:shimmer="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:paddingTop="@dimen/_30sdp"
-    tools:context=".views.home.ProfileFragment">
+    tools:context=".views.home.ProfileFragment"
+    android:id="@+id/containermain">
 
     <TextView
         android:id="@+id/screentitle"
