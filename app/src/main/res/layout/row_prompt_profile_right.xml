@@ -58,7 +58,7 @@
 
     <View
         android:id="@+id/view_divider"
-        android:layout_width="@dimen/_5sdp"
+        android:layout_width="@dimen/_10sdp"
         android:layout_height="@dimen/_20sdp"
         android:layout_below="@id/layout_prompt_answer"
         android:layout_centerInParent="true"
@@ -80,11 +80,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_10sdp"
             android:layout_weight="1"
             android:fontFamily="@font/ptsans_regular"
-            android:paddingTop="@dimen/_10sdp"
-            android:paddingBottom="@dimen/_10sdp"
             android:text="There's power in looking silly and not caring that you do."
             android:textColor="@color/textSubTitle"
             android:textSize="@dimen/_14ssp" />
@@ -92,7 +90,7 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/image_view"
             android:layout_width="0dp"
-            android:layout_height="@dimen/_100sdp"
+            android:layout_height="@dimen/_150sdp"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:clickable="true"
@@ -100,7 +98,10 @@
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:paddingTop="@dimen/_10sdp"
             android:paddingBottom="@dimen/_10sdp"
-            android:src="@drawable/person" />
+            android:src="@drawable/person"
+            app:civ_border_width="0dp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"/>
     </LinearLayout>
 
 </RelativeLayout>
