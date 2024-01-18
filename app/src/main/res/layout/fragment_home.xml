@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_marginTop="@dimen/_5sdp"
     tools:context=".views.home.HomeFragment">
 
     <com.github.ybq.android.spinkit.SpinKitView
@@ -27,10 +28,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
             android:fontFamily="@font/ptsans_bold"
             android:paddingStart="@dimen/_20sdp"
-            android:paddingTop="@dimen/_30sdp"
             android:paddingEnd="@dimen/_20sdp"
             android:text="Find Your Match"
             android:textColor="@color/black"

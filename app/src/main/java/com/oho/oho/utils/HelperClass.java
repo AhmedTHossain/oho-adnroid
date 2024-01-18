@@ -17,9 +17,13 @@ import com.oho.oho.R;
 import com.oho.oho.models.Profile;
 
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 public class HelperClass {
     public static void logErrorMessage(String errorMessage) {
@@ -150,5 +154,13 @@ public class HelperClass {
                 .build();
         GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(context, gso);
         mGoogleSignInClient.signOut();
+    }
+
+    public String convertEpochToCustomFormat(long epochTime) {
+        Instant instant = Instant.ofEpochSecond(epochTime);
+        ZoneId serverZoneId = ZoneId.of("GMT");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, h:mm a", Locale.ENGLISH)
+                .withZone(serverZoneId);
+        return formatter.format(instant);
     }
 }

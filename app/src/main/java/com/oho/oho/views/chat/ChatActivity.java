@@ -81,7 +81,7 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
                 binding.screentitle.setText("Oho User");
             chat_id = selectedChatRoom.getId();
             channel_name = selectedChatRoom.getChannelName();
-            sender_photo = selectedChatRoom.getProfilePhoto();
+            sender_photo = selectedChatRoom.getProfilePhoto()+".jpeg";
 
             String participantsIdArray[] = selectedChatRoom.getParticipants().split(",");
             for (String s : participantsIdArray)
