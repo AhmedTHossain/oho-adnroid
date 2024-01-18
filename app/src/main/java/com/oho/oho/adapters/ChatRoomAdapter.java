@@ -1,7 +1,6 @@
 package com.oho.oho.adapters;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,8 +48,7 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
     public void onBindViewHolder(@NonNull ChatRoomAdapter.ViewHolder holder, int position) {
         if (!chatRoomArrayList.get(position).getFullName().equals("")) {
             holder.getSenderNameText().setText(chatRoomArrayList.get(position).getFullName());
-        }
-        else {
+        } else {
             String placeholderName = "Oho User";
             holder.getSenderNameText().setText(placeholderName);
         }
@@ -67,8 +65,9 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
                     .placeholder(R.drawable.portrait_male)
                     .into(holder.getSenderImage());
         } else {
+            String imageUrl = chatRoomArrayList.get(position).getProfilePhoto() + ".jpeg";
             Glide.with(context)
-                    .load(chatRoomArrayList.get(position).getProfilePhoto())
+                    .load(imageUrl)
                     .placeholder(R.drawable.no_user)
                     .into(holder.getSenderImage());
         }
