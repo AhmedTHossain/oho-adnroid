@@ -376,6 +376,7 @@ Oho! does not knowingly collect any Personal Identifiable Information from child
     <string name="no_likes_yet_disclaimer">Hey! No likes on your profile this week. Let\'s jazz it up! Add more prompts and maybe change your profile picture. You\'ve got this! 🌟</string>
     <string name="no_upcoming_dates_disclaimer">Sorry you don\'t have any dates scheduled yet. Like more people to get yourself more dates for the weekend.</string>
     <string name="no_recommendations_disclaimer">Sorry couldn\'t find any recommendations for you at this moment, please widen your preferences from the preference settings then come back.</string>
+    <string name="profile_setup_intro_disclaimer">Your profile is your digital introduction. Complete it with care. A well-crafted profile enhances your chances of finding better matches. Invest a few moments and let the magic begin! Happy dating!</string>
     <string name="no_more_recommendations_disclaimer">Sorry you\'ve reached the max number of recommendations for the week. Please come back next week for new sets of recommendations.</string>
     <string name="disclaimer_answer_prompt">Enter your answer for the selected prompt, pick a photo and write a caption for it.</string>
     <string name="disclaimer_set_availability"><![CDATA[Please select your schedule for the weekend. You can select multiple days & slots for greater number of matches.]]></string>

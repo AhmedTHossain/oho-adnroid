@@ -1,15 +1,15 @@
 package com.oho.oho.views.registration;
 
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
-
-import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.view.View;
 
 import com.oho.oho.MainActivity;
 import com.oho.oho.R;
@@ -33,7 +33,7 @@ public class ProfileSetupActivity extends AppCompatActivity implements OnProfile
 
 
         initViewModel();
-        setScreen(new IntroProfileSetup(this));
+        setScreen(new IntroProfileSetupFragment(this,getIntent().getStringExtra("name")));
     }
 
     public void setScreen(Fragment fragment) {
@@ -49,6 +49,10 @@ public class ProfileSetupActivity extends AppCompatActivity implements OnProfile
     public void onScreenChange(String moveTo, String from) {
         switch (from) {
             case "intro":
+                if (moveTo.equals("next"))
+                    setScreen(new FirstProfileSetup(this));
+                break;
+            case "first":
                 if (moveTo.equals("next"))
                     setScreen(new SecondProfileSetup(this));
                 break;

@@ -3,42 +3,94 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/signup_background"
     tools:context=".views.registration.IntroFragment">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/no_recommendations_available_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:visibility="visible">
 
-        <TextView
-            android:id="@+id/text_welcome"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hi Emily, welcome to..."
-            android:fontFamily="@font/sf_pro_rounded_regular"
-            android:textSize="@dimen/_20ssp"
-            android:textColor="@color/white"
-            android:layout_gravity="center"/>
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Oho!"
-            android:fontFamily="@font/lovina_october_five_regular"
-            android:textSize="@dimen/_70ssp"
-            android:textColor="@color/white"
-            android:layout_gravity="center"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:text="Hi"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_20ssp" />
+                <TextView
+                    android:id="@+id/text_title_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/ptsans_bold"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:text="Emily"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_20ssp" />
+            </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="First, let’s create your profile."
-            android:fontFamily="@font/sf_pro_rounded_regular"
-            android:textSize="@dimen/_20ssp"
-            android:textColor="@color/white"
-            android:layout_gravity="center"/>
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:fontFamily="@font/ptsans_regular"
+                    android:text="Welcome to"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16ssp"
+                    android:visibility="visible"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lovina_october_five_regular"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:text="Oho!"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16ssp"
+                    android:visibility="visible"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/text_body_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:background="@drawable/border_corner_drawable"
+                android:fontFamily="@font/ptsans_regular"
+                android:padding="@dimen/_20sdp"
+                android:text="@string/profile_setup_intro_disclaimer"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16ssp" />
+
+            <TextView
+                android:id="@+id/button_next"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_button_solid"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/darkergrotesque_bold"
+                android:gravity="center"
+                android:padding="@dimen/_10sdp"
+                android:text="Let's complete my profile!"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_18ssp" />
+
+        </LinearLayout>
+    </RelativeLayout>
 
 </FrameLayout>

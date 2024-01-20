@@ -3,25 +3,22 @@ package com.oho.oho.views.registration;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.NumberPicker;
-import android.widget.Toast;
+
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.oho.oho.R;
-import com.oho.oho.databinding.FragmentIntroProfileSetupBinding;
+import com.oho.oho.databinding.FragmentFirstProfileSetupBinding;
 import com.oho.oho.interfaces.OnProfileSetupScreenChange;
 import com.oho.oho.models.Profile;
+import com.oho.oho.utils.HelperClass;
 import com.oho.oho.viewmodels.ProfileSetupViewModel;
 
 import java.util.Calendar;
@@ -29,25 +26,25 @@ import java.util.Calendar;
 import nl.bryanderidder.themedtogglebuttongroup.ThemedButton;
 
 
-public class IntroProfileSetup extends Fragment {
+public class FirstProfileSetup extends Fragment {
     private OnProfileSetupScreenChange listener;
-    FragmentIntroProfileSetupBinding binding;
+    FragmentFirstProfileSetupBinding binding;
     private ProfileSetupViewModel viewmodel;
     private int age;
     private String gender = "";
     private String dob = "";
 
-    public IntroProfileSetup() {
+    public FirstProfileSetup() {
         // Required empty public constructor
     }
 
-    public IntroProfileSetup(OnProfileSetupScreenChange listener) {
+    public FirstProfileSetup(OnProfileSetupScreenChange listener) {
         this.listener = listener;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentIntroProfileSetupBinding.inflate(inflater, container, false);
+        binding = FragmentFirstProfileSetupBinding.inflate(inflater, container, false);
 
         binding.buttonNextIntro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,16 +64,19 @@ public class IntroProfileSetup extends Fragment {
 
                             viewmodel.updateNewUserProfile(profile);
                             viewmodel.newUserProfile.observe(requireActivity(), newUserProfile -> {
-                                Log.d("IntroProfileSetup", "age stored in viewmodel: " + newUserProfile.getAge());
+                                Log.d("FirstProfileSetup", "age stored in viewmodel: " + newUserProfile.getAge());
                             });
 
-                            listener.onScreenChange("next", "intro");
+                            listener.onScreenChange("next", "first");
                         } else
-                            Toast.makeText(requireContext(), "Sorry we only provide our service to users who are 18 or above", Toast.LENGTH_SHORT).show();
+                            new HelperClass().showSnackBar(binding.containermain,"Sorry! we only provide our service to users who are 18 or above");
+//                            Toast.makeText(requireContext(), "Sorry we only provide our service to users who are 18 or above", Toast.LENGTH_SHORT).show();
                     } else
-                        Toast.makeText(requireContext(), "Please enter your Date of Birth first!", Toast.LENGTH_SHORT).show();
+                        new HelperClass().showSnackBar(binding.containermain,"Please enter your Date of Birth first!");
+//                        Toast.makeText(requireContext(), "Please enter your Date of Birth first!", Toast.LENGTH_SHORT).show();
                 } else
-                    Toast.makeText(requireContext(), "Please select your Gender first!", Toast.LENGTH_SHORT).show();
+                    new HelperClass().showSnackBar(binding.containermain,"Please select your Gender first!");
+//                    Toast.makeText(requireContext(), "Please select your Gender first!", Toast.LENGTH_SHORT).show();
             }
         });
 
