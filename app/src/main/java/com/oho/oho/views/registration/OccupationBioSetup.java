@@ -1,11 +1,8 @@
 package com.oho.oho.views.registration;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,16 +10,22 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.oho.oho.R;
 import com.oho.oho.databinding.FragmentOccupationBioSetupBinding;
 import com.oho.oho.interfaces.OnProfileSetupScreenChange;
 import com.oho.oho.models.Profile;
+import com.oho.oho.utils.HelperClass;
 import com.oho.oho.viewmodels.ProfileSetupViewModel;
 
 public class OccupationBioSetup extends Fragment {
     FragmentOccupationBioSetupBinding binding;
     private OnProfileSetupScreenChange listener;
     private ProfileSetupViewModel viewmodel;
+    private int charLimitBio = 250;
 
     public OccupationBioSetup(OnProfileSetupScreenChange listener) {
         this.listener = listener;
@@ -63,22 +66,44 @@ public class OccupationBioSetup extends Fragment {
                         });
 
                         viewmodel.registerNewUser();
-                        viewmodel.uploadedNewUserProfile.observe(requireActivity(), uploadedNewUserProfile ->{
-                            if (uploadedNewUserProfile!=null){
-                                Log.d("OccupationBio","id of newly registered user = "+uploadedNewUserProfile.getId());
+                        viewmodel.uploadedNewUserProfile.observe(requireActivity(), uploadedNewUserProfile -> {
+                            if (uploadedNewUserProfile != null) {
+                                Log.d("OccupationBio", "id of newly registered user = " + uploadedNewUserProfile.getId());
 
                                 Profile newProfile = viewmodel.getNewUserProfile().getValue();
                                 newProfile.setId(uploadedNewUserProfile.getId());
                                 viewmodel.updateNewUserProfile(newProfile);
 
-                                listener.onScreenChange("next","occupation");
+                                listener.onScreenChange("next", "occupation");
                             } else
-                                Toast.makeText(requireContext(),"Registration Failed! Please check your connection and try again.",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(requireContext(), "Registration Failed! Please check your connection and try again.", Toast.LENGTH_SHORT).show();
                         });
                     } else
                         Toast.makeText(requireContext(), "Please enter a bio first!", Toast.LENGTH_SHORT).show();
                 } else
                     Toast.makeText(requireContext(), "Please enter your occupation first!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        binding.textBio.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                binding.textCharCountBio.setText(String.format("%d/%d", s.length(), charLimitBio));
+
+                if (s.length() >= charLimitBio) {
+                    // User has reached the character limit
+                    new HelperClass().showSnackBarTop(binding.containermain, "Maximum character limit has reached for your bio!","center");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
 

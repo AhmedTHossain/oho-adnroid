@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".views.registration.OccupationBioSetup">
+    tools:context=".views.registration.OccupationBioSetup"
+    android:id="@+id/containermain">
 
     <TextView
         android:layout_width="wrap_content"
@@ -40,6 +41,16 @@
         android:textColor="@color/black"
         android:textSize="@dimen/_16ssp"
         android:layout_marginTop="@dimen/_40sdp"/>
+
+    <TextView
+        android:id="@+id/text_char_count_bio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/ptsans_bold"
+        android:text=""
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16ssp"
+        android:layout_gravity="end" />
 
     <EditText
         android:id="@+id/text_bio"

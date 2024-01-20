@@ -150,7 +150,7 @@ public class SixthProfileSetup extends Fragment implements OnPhotoPickerPrompt, 
 
                 if (currentCount >= charLimitAnswer) {
                     // User has reached the character limit
-                    new HelperClass().showSnackBarTop(binding.containermain, "Maximum character limit has reached for your bio!",null);
+                    new HelperClass().showSnackBarTop(binding.containermain, "Maximum character limit has reached for your answer!",null);
                 }
                 break;
             case "caption":
@@ -158,7 +158,7 @@ public class SixthProfileSetup extends Fragment implements OnPhotoPickerPrompt, 
 
                 if (currentCount >= charLimitCaption) {
                     // User has reached the character limit
-                    new HelperClass().showSnackBarTop(view, "Maximum character limit has reached for your answer!","center");
+                    new HelperClass().showSnackBarTop(view, "Maximum character limit has reached for your caption!","center");
                 }
                 break;
         }
