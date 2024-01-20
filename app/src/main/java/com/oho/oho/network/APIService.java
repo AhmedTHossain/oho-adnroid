@@ -84,7 +84,7 @@ public interface APIService {
     // for uploading user prompts
     @Multipart
     @POST("users/prompt_answer/add")
-    Call<GetAddPromptResponse> uploadPromptAnswer(@Header("Authorization") String jwtToken, @Part("prompt") RequestBody prompt, @Part("answer") RequestBody answer, @Part("user_id") RequestBody user_id, @Part("caption") RequestBody caption, @Part MultipartBody.Part image);
+    Call<GetAddPromptResponse> uploadPromptAnswer(@Header("Authorization") String jwtToken, @Part("prompt") RequestBody prompt, @Part("answer") RequestBody answer, @Part("caption") RequestBody caption, @Part MultipartBody.Part image);
 
     // for deleting user prompts
     @DELETE("users/prompt_answers/delete")

@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".views.registration.SeventProfileSetup">
+    tools:context=".views.registration.SeventProfileSetup"
+    android:gravity="center_vertical">
 
     <TextView
         android:layout_width="wrap_content"

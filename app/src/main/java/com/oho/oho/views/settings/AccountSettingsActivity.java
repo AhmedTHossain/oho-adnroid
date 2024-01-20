@@ -45,7 +45,7 @@ public class AccountSettingsActivity extends AppCompatActivity implements View.O
                 // set alert_dialog.xml to alertdialog builder
                 alertDialogBuilder.setView(promptsView);
                 alertDialogBuilder.setCancelable(false)
-                        .setPositiveButton("Deactivate",null)
+                        .setPositiveButton("Delete",null)
                         .setNegativeButton("Cancel", null);
                 AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {

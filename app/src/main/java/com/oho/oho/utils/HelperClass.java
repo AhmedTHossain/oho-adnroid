@@ -6,7 +6,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -23,7 +25,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.TimeZone;
 
 public class HelperClass {
     public static void logErrorMessage(String errorMessage) {
@@ -90,7 +91,7 @@ public class HelperClass {
 
     public double convertHeight(String heightString) {
         String stringHeight = heightString.split(" ft")[0];
-        Log.d("HelperClass","string height = "+stringHeight);
+        Log.d("HelperClass", "string height = " + stringHeight);
 
         int feet = Integer.parseInt(stringHeight.split("\\.")[0]);
         int inch = Integer.parseInt(stringHeight.split("\\.")[1]);
@@ -146,8 +147,34 @@ public class HelperClass {
 
         snackbar.show();
     }
+
+    public void showSnackBarTop(View layout, String msg) {
+        Snackbar snackbar = Snackbar.make(
+                layout,
+                msg,
+                Snackbar.LENGTH_SHORT
+        );
+
+        snackbar.setAnimationMode(Snackbar.ANIMATION_MODE_FADE);
+
+        // Set background color to white (#ffffff)
+        snackbar.getView().setBackgroundColor(Color.parseColor("#000000"));
+
+        // Set text color to black (#000000)
+        TextView snackbarTextView = snackbar.getView().findViewById(com.google.android.material.R.id.snackbar_text);
+        snackbarTextView.setTextSize(16);
+        snackbarTextView.setTextColor(Color.parseColor("#FFFFFF"));
+
+        View view = snackbar.getView();
+        FrameLayout.LayoutParams params =(FrameLayout.LayoutParams)view.getLayoutParams();
+        params.gravity = Gravity.TOP;
+        view.setLayoutParams(params);
+
+        snackbar.show();
+    }
+
     //Used to show the Google account selection screen every time the user signs in by disabling Smart Lock for Passwords
-    public void disableSmartLock(Context context){
+    public void disableSmartLock(Context context) {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(context.getString(R.string.default_web_client_id))
                 .requestEmail()

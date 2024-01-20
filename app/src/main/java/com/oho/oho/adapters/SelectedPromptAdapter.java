@@ -1,12 +1,15 @@
 package com.oho.oho.adapters;
 
 import android.content.Context;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,9 +18,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.ybq.android.spinkit.SpinKitView;
 import com.oho.oho.R;
+import com.oho.oho.interfaces.OnInputCharacterListener;
 import com.oho.oho.interfaces.OnPhotoPickerPrompt;
 import com.oho.oho.interfaces.OnPromptAnswerListener;
 import com.oho.oho.models.SelectedPrompt;
+import com.oho.oho.utils.HelperClass;
 
 import java.util.ArrayList;
 
@@ -26,12 +31,15 @@ public class SelectedPromptAdapter extends RecyclerView.Adapter<SelectedPromptAd
     private Context context;
     private OnPhotoPickerPrompt photoPickerListener;
     private OnPromptAnswerListener promptAnswerListener;
+    private OnInputCharacterListener onInputCharacterListener;
+    private int charLimitBio = 500;
 
-    public SelectedPromptAdapter(ArrayList<SelectedPrompt> selectedPrompts, Context context, OnPhotoPickerPrompt photoPickerListener, OnPromptAnswerListener promptAnswerListener) {
+    public SelectedPromptAdapter(ArrayList<SelectedPrompt> selectedPrompts, Context context, OnPhotoPickerPrompt photoPickerListener, OnPromptAnswerListener promptAnswerListener,OnInputCharacterListener onInputCharacterListener) {
         this.selectedPrompts = selectedPrompts;
         this.context = context;
         this.photoPickerListener = photoPickerListener;
         this.promptAnswerListener = promptAnswerListener;
+        this.onInputCharacterListener = onInputCharacterListener;
     }
 
     @NonNull
@@ -54,7 +62,7 @@ public class SelectedPromptAdapter extends RecyclerView.Adapter<SelectedPromptAd
 
     public class Holder extends RecyclerView.ViewHolder {
 
-        private TextView promptText, buttonNext;
+        private TextView promptText, buttonNext, answerCharCountText;
         private EditText answerEditText, captionEditText;
         private ImageView imageVIew;
         private SpinKitView progressView;
@@ -68,6 +76,7 @@ public class SelectedPromptAdapter extends RecyclerView.Adapter<SelectedPromptAd
             imageVIew = itemView.findViewById(R.id.image_prompt);
             buttonNext = itemView.findViewById(R.id.button_next);
             progressView = itemView.findViewById(R.id.upload_prompt_progress);
+            answerCharCountText = itemView.findViewById(R.id.text_char_count_answer);
 
             imageVIew.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -88,6 +97,22 @@ public class SelectedPromptAdapter extends RecyclerView.Adapter<SelectedPromptAd
                 }
             });
 
+            answerEditText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    onInputCharacterListener.onInputCharacter(s.length(),answerCharCountText,"bio");
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
         }
 
         public TextView getPromptText() {
@@ -104,6 +129,24 @@ public class SelectedPromptAdapter extends RecyclerView.Adapter<SelectedPromptAd
 
         public ImageView getImageVIew() {
             return imageVIew;
+        }
+
+        public TextView getAnswerCharCountText() {
+            return answerCharCountText;
+        }
+
+        public void setAnswerCharCountText(TextView answerCharCountText) {
+            this.answerCharCountText = answerCharCountText;
+        }
+    }
+
+    private void updateBioCharCount(int currentCount, TextView charCountText, RelativeLayout parenLayout) {
+        charCountText.setText(String.format("%d/%d", currentCount, charLimitBio));
+
+        if (currentCount >= charLimitBio) {
+            // User has reached the character limit
+//            Toast.makeText(MainActivity.this, "Character limit reached!", Toast.LENGTH_SHORT).show();
+            new HelperClass().showSnackBar(parenLayout,"Maximum character limit has reached for your bio!");
         }
     }
 }

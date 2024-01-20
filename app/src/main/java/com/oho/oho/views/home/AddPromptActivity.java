@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -21,6 +22,7 @@ import com.oho.oho.R;
 import com.oho.oho.adapters.PromptAdapter;
 import com.oho.oho.adapters.SelectedPromptAdapter;
 import com.oho.oho.databinding.ActivityAddPromptBinding;
+import com.oho.oho.interfaces.OnInputCharacterListener;
 import com.oho.oho.interfaces.OnPhotoPickerPrompt;
 import com.oho.oho.interfaces.OnPromptAnswerListener;
 import com.oho.oho.interfaces.OnPromptSelectListener;
@@ -34,13 +36,14 @@ import com.oho.oho.viewmodels.AddPromptViewModel;
 import java.io.File;
 import java.util.ArrayList;
 
-public class AddPromptActivity extends AppCompatActivity implements OnPromptSelectListener, OnPhotoPickerPrompt, OnPromptAnswerListener {
+public class AddPromptActivity extends AppCompatActivity implements OnPromptSelectListener, OnPhotoPickerPrompt, OnPromptAnswerListener, OnInputCharacterListener {
     private AddPromptViewModel viewModel;
     private ArrayList<SelectedPrompt> promptsArrayList = new ArrayList<>();
     private PromptAdapter adapter;
     ActivityAddPromptBinding binding;
     private ArrayList<SelectedPrompt> selectedPromptsList = new ArrayList<>();
     private ImageView imageView;
+    private int charLimitAnswer = 500;
 
     private File imageFile;
     ActivityResultLauncher<PickVisualMediaRequest> pickMedia =
@@ -116,7 +119,7 @@ public class AddPromptActivity extends AppCompatActivity implements OnPromptSele
 
     private void setPromptAnswerLayout() {
         binding.layoutAnswerPrompt.setVisibility(View.VISIBLE);
-        SelectedPromptAdapter adapter = new SelectedPromptAdapter(selectedPromptsList, this, this, this);
+        SelectedPromptAdapter adapter = new SelectedPromptAdapter(selectedPromptsList, this, this, this,this);
 
         binding.viewpagerPromptAnswers.setAdapter(adapter);
         binding.viewpagerPromptAnswers.setClipToPadding(false);
@@ -210,5 +213,19 @@ public class AddPromptActivity extends AppCompatActivity implements OnPromptSele
             });
         } else
             Toast.makeText(this, "Enter a Photo before you proceed.", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onInputCharacter(int currentCount, TextView charCountText, String inputField) {
+        switch (inputField) {
+            case "bio":
+                charCountText.setText(String.format("%d/%d", currentCount, charLimitAnswer));
+
+                if (currentCount >= charLimitAnswer) {
+                    // User has reached the character limit
+                    new HelperClass().showSnackBar(binding.containermain, "Maximum character limit has reached for your bio!");
+                }
+                break;
+        }
     }
 }

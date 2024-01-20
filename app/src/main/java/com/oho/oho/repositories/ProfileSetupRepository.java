@@ -37,13 +37,13 @@ public class ProfileSetupRepository {
         MutableLiveData<Boolean> ifResponseReceived = new MutableLiveData<>();
         APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
 
-        RequestBody userId = RequestBody.create(String.valueOf(newPromptAnswer.getUser_id()), MediaType.parse("text/plain"));
+//        RequestBody userId = RequestBody.create(String.valueOf(newPromptAnswer.getUser_id()), MediaType.parse("text/plain"));
         RequestBody promptText = RequestBody.create(String.valueOf(newPromptAnswer.getPrompt()), MediaType.parse("text/plain"));
         RequestBody answerText = RequestBody.create(String.valueOf(newPromptAnswer.getAnswer()), MediaType.parse("text/plain"));
         RequestBody captionText = RequestBody.create(String.valueOf(newPromptAnswer.getCaption()), MediaType.parse("text/plain"));
 
         MultipartBody.Part filePart = MultipartBody.Part.createFormData("image", newPromptAnswer.getImage().getName(), RequestBody.create(MediaType.parse("image/*"), newPromptAnswer.getImage()));
-        Call<GetAddPromptResponse> call = apiService.uploadPromptAnswer(helperClass.getJWTToken(context), promptText, answerText, userId, captionText, filePart);
+        Call<GetAddPromptResponse> call = apiService.uploadPromptAnswer(helperClass.getJWTToken(context), promptText, answerText, captionText, filePart);
         call.enqueue(new Callback<GetAddPromptResponse>() {
             @Override
             public void onResponse(@NonNull Call<GetAddPromptResponse> call, @NonNull Response<GetAddPromptResponse> response) {

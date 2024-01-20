@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".views.registration.SecondProfileSetup">
+    tools:context=".views.registration.SecondProfileSetup"
+    android:layout_gravity="center">
 
     <TextView
         android:layout_width="wrap_content"

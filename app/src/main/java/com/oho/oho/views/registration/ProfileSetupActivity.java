@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
 
 import com.oho.oho.MainActivity;
 import com.oho.oho.R;
@@ -36,6 +37,7 @@ public class ProfileSetupActivity extends AppCompatActivity implements OnProfile
     }
 
     public void setScreen(Fragment fragment) {
+        binding.layoutTitle.setVisibility(View.GONE);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame_profile_setup, fragment);

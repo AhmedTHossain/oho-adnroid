@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -11,28 +9,35 @@
     android:paddingEnd="@dimen/_20sdp"
     tools:context=".views.registration.ProfileSetupActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/layout_title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/ptsans_bold"
-        android:text="About You"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_30ssp"
-        android:layout_gravity="start"/>
+        android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/darkergrotesque_medium"
-        android:text="Let us know a bit more about you before we start."
-        android:textColor="@color/black"
-        android:textSize="@dimen/_16ssp"
-        android:layout_marginBottom="@dimen/_40sdp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:fontFamily="@font/ptsans_bold"
+            android:text="About You"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_30ssp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_40sdp"
+            android:fontFamily="@font/darkergrotesque_medium"
+            android:text="Let us know a bit more about you before we start."
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16ssp" />
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/frame_profile_setup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center" />
 
 </LinearLayout>

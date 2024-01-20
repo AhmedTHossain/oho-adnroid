@@ -8,14 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
-
 import androidx.activity.result.PickVisualMediaRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.github.ybq.android.spinkit.SpinKitView;
@@ -23,28 +22,29 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.oho.oho.adapters.SelectedPromptAdapter;
 import com.oho.oho.databinding.FragmentSixthProfileSetupBinding;
+import com.oho.oho.interfaces.OnInputCharacterListener;
 import com.oho.oho.interfaces.OnPhotoPickerPrompt;
 import com.oho.oho.interfaces.OnProfileSetupScreenChange;
 import com.oho.oho.interfaces.OnPromptAnswerListener;
 import com.oho.oho.models.NewPromptAnswer;
 import com.oho.oho.models.Profile;
-import com.oho.oho.models.PromptAnswer;
 import com.oho.oho.models.SelectedPrompt;
+import com.oho.oho.utils.HelperClass;
 import com.oho.oho.utils.ImageUtils;
 import com.oho.oho.viewmodels.ProfileSetupViewModel;
-import com.oho.oho.viewmodels.PromptViewModel;
 
 import java.io.File;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-public class SixthProfileSetup extends Fragment implements OnPhotoPickerPrompt, OnPromptAnswerListener {
+public class SixthProfileSetup extends Fragment implements OnPhotoPickerPrompt, OnPromptAnswerListener, OnInputCharacterListener {
     FragmentSixthProfileSetupBinding binding;
     SharedPreferences sharedPreferences;
     OnProfileSetupScreenChange listener;
     File imageFile;
     private ProfileSetupViewModel viewmodel;
     ArrayList<SelectedPrompt> selectedPrompts;
+    private int charLimitAnswer = 500;
 
     private ImageView imageView;
     // Registers a photo picker activity launcher in single-select mode.
@@ -75,7 +75,7 @@ public class SixthProfileSetup extends Fragment implements OnPhotoPickerPrompt, 
         selectedPrompts = retrieveStringArray();
 
 
-        SelectedPromptAdapter adapter = new SelectedPromptAdapter(selectedPrompts, requireContext(), this, this);
+        SelectedPromptAdapter adapter = new SelectedPromptAdapter(selectedPrompts, requireContext(), this, this,this);
 
         binding.viewpager.setAdapter(adapter);
         binding.viewpager.setClipToPadding(false);
@@ -113,7 +113,7 @@ public class SixthProfileSetup extends Fragment implements OnPhotoPickerPrompt, 
             Profile profile = viewmodel.getNewUserProfile().getValue();
 
             NewPromptAnswer newPromptAnswer = new NewPromptAnswer();
-            newPromptAnswer.setUser_id(profile.getId()); //TODO: Later replace 99 with logged in user's id
+
             newPromptAnswer.setPrompt(prompt);
             newPromptAnswer.setAnswer(answer);
             newPromptAnswer.setCaption(caption);
@@ -127,12 +127,30 @@ public class SixthProfileSetup extends Fragment implements OnPhotoPickerPrompt, 
                     if (binding.viewpager.getCurrentItem() != selectedPrompts.size() - 1) {
                         binding.viewpager.setCurrentItem(binding.viewpager.getCurrentItem() + 1);
                     } else
-                        listener.onScreenChange("next","sixth");
+                        listener.onScreenChange("next", "sixth");
                 } else {
                     Toast.makeText(requireContext(), "Answer upload failed!", Toast.LENGTH_SHORT).show();
                 }
             });
         } else
             Toast.makeText(requireContext(), "Enter a Photo before you proceed.", Toast.LENGTH_SHORT).show();
+    }
+
+    private void updateBioCharCount(int currentCount, TextView charCountText) {
+
+    }
+
+    @Override
+    public void onInputCharacter(int currentCount, TextView charCountText, String inputField) {
+        switch (inputField) {
+            case "bio":
+                charCountText.setText(String.format("%d/%d", currentCount, charLimitAnswer));
+
+                if (currentCount >= charLimitAnswer) {
+                    // User has reached the character limit
+                    new HelperClass().showSnackBarTop(binding.containermain, "Maximum character limit has reached for your bio!");
+                }
+                break;
+        }
     }
 }

@@ -365,9 +365,7 @@
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_18ssp"
-                android:visibility="visible"
-                app:drawableEndCompat="@drawable/ic_start"
-                app:drawableTint="@color/white" />
+                android:visibility="visible" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

@@ -62,7 +62,7 @@ public class PromptRepository {
 
         MultipartBody.Part filePart = MultipartBody.Part.createFormData("image", image.getName(), RequestBody.create(MediaType.parse("image/*"), image));
 
-        Call<GetAddPromptResponse> call = apiService.uploadPromptAnswer(helperClass.getJWTToken(context), promptText, answerText, userId, captionText, filePart);
+        Call<GetAddPromptResponse> call = apiService.uploadPromptAnswer(helperClass.getJWTToken(context), promptText, answerText, captionText, filePart);
         call.enqueue(new Callback<GetAddPromptResponse>() {
             @Override
             public void onResponse(@NonNull Call<GetAddPromptResponse> call, @NonNull Response<GetAddPromptResponse> response) {
