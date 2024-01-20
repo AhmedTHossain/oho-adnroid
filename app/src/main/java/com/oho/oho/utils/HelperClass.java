@@ -148,7 +148,7 @@ public class HelperClass {
         snackbar.show();
     }
 
-    public void showSnackBarTop(View layout, String msg) {
+    public void showSnackBarTop(View layout, String msg, String displayPosition) {
         Snackbar snackbar = Snackbar.make(
                 layout,
                 msg,
@@ -166,8 +166,11 @@ public class HelperClass {
         snackbarTextView.setTextColor(Color.parseColor("#FFFFFF"));
 
         View view = snackbar.getView();
-        FrameLayout.LayoutParams params =(FrameLayout.LayoutParams)view.getLayoutParams();
-        params.gravity = Gravity.TOP;
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
+        if (displayPosition == null)
+            params.gravity = Gravity.TOP;
+        else
+            params.gravity = Gravity.CENTER;
         view.setLayoutParams(params);
 
         snackbar.show();

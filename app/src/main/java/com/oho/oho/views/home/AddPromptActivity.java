@@ -216,7 +216,7 @@ public class AddPromptActivity extends AppCompatActivity implements OnPromptSele
     }
 
     @Override
-    public void onInputCharacter(int currentCount, TextView charCountText, String inputField) {
+    public void onInputCharacter(View view, int currentCount, TextView charCountText, String inputField) {
         switch (inputField) {
             case "bio":
                 charCountText.setText(String.format("%d/%d", currentCount, charLimitAnswer));

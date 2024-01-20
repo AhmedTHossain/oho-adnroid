@@ -3,6 +3,7 @@ package com.oho.oho.views.registration;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,7 +45,8 @@ public class SixthProfileSetup extends Fragment implements OnPhotoPickerPrompt, 
     File imageFile;
     private ProfileSetupViewModel viewmodel;
     ArrayList<SelectedPrompt> selectedPrompts;
-    private int charLimitAnswer = 500;
+    private int charLimitAnswer = 150;
+    private int charLimitCaption = 50;
 
     private ImageView imageView;
     // Registers a photo picker activity launcher in single-select mode.
@@ -141,14 +143,22 @@ public class SixthProfileSetup extends Fragment implements OnPhotoPickerPrompt, 
     }
 
     @Override
-    public void onInputCharacter(int currentCount, TextView charCountText, String inputField) {
+    public void onInputCharacter(View view, int currentCount, TextView charCountText, String inputField) {
         switch (inputField) {
-            case "bio":
+            case "answer":
                 charCountText.setText(String.format("%d/%d", currentCount, charLimitAnswer));
 
                 if (currentCount >= charLimitAnswer) {
                     // User has reached the character limit
-                    new HelperClass().showSnackBarTop(binding.containermain, "Maximum character limit has reached for your bio!");
+                    new HelperClass().showSnackBarTop(binding.containermain, "Maximum character limit has reached for your bio!",null);
+                }
+                break;
+            case "caption":
+                charCountText.setText(String.format("%d/%d", currentCount, charLimitCaption));
+
+                if (currentCount >= charLimitCaption) {
+                    // User has reached the character limit
+                    new HelperClass().showSnackBarTop(view, "Maximum character limit has reached for your answer!","center");
                 }
                 break;
         }

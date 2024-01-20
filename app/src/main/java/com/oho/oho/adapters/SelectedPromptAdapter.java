@@ -34,7 +34,7 @@ public class SelectedPromptAdapter extends RecyclerView.Adapter<SelectedPromptAd
     private OnInputCharacterListener onInputCharacterListener;
     private int charLimitBio = 500;
 
-    public SelectedPromptAdapter(ArrayList<SelectedPrompt> selectedPrompts, Context context, OnPhotoPickerPrompt photoPickerListener, OnPromptAnswerListener promptAnswerListener,OnInputCharacterListener onInputCharacterListener) {
+    public SelectedPromptAdapter(ArrayList<SelectedPrompt> selectedPrompts, Context context, OnPhotoPickerPrompt photoPickerListener, OnPromptAnswerListener promptAnswerListener, OnInputCharacterListener onInputCharacterListener) {
         this.selectedPrompts = selectedPrompts;
         this.context = context;
         this.photoPickerListener = photoPickerListener;
@@ -62,7 +62,7 @@ public class SelectedPromptAdapter extends RecyclerView.Adapter<SelectedPromptAd
 
     public class Holder extends RecyclerView.ViewHolder {
 
-        private TextView promptText, buttonNext, answerCharCountText;
+        private TextView promptText, buttonNext, answerCharCountText, captionCharCountText;
         private EditText answerEditText, captionEditText;
         private ImageView imageVIew;
         private SpinKitView progressView;
@@ -77,6 +77,7 @@ public class SelectedPromptAdapter extends RecyclerView.Adapter<SelectedPromptAd
             buttonNext = itemView.findViewById(R.id.button_next);
             progressView = itemView.findViewById(R.id.upload_prompt_progress);
             answerCharCountText = itemView.findViewById(R.id.text_char_count_answer);
+            captionCharCountText = itemView.findViewById(R.id.text_char_count_caption);
 
             imageVIew.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -89,7 +90,7 @@ public class SelectedPromptAdapter extends RecyclerView.Adapter<SelectedPromptAd
                 public void onClick(View v) {
                     if (!TextUtils.isEmpty(answerEditText.getText())) {
                         if (!TextUtils.isEmpty(captionEditText.getText())) {
-                            promptAnswerListener.onPromptAnswer(promptText.getText().toString(),answerEditText.getText().toString(),captionEditText.getText().toString(),progressView);
+                            promptAnswerListener.onPromptAnswer(promptText.getText().toString(), answerEditText.getText().toString(), captionEditText.getText().toString(), progressView);
                         } else
                             Toast.makeText(context, "Please enter your Answer first!", Toast.LENGTH_SHORT).show();
                     } else
@@ -105,7 +106,24 @@ public class SelectedPromptAdapter extends RecyclerView.Adapter<SelectedPromptAd
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    onInputCharacterListener.onInputCharacter(s.length(),answerCharCountText,"bio");
+                    onInputCharacterListener.onInputCharacter(null,s.length(), answerCharCountText, "answer");
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
+
+            captionEditText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    onInputCharacterListener.onInputCharacter(answerEditText,s.length(), captionCharCountText, "caption");
                 }
 
                 @Override
@@ -146,7 +164,7 @@ public class SelectedPromptAdapter extends RecyclerView.Adapter<SelectedPromptAd
         if (currentCount >= charLimitBio) {
             // User has reached the character limit
 //            Toast.makeText(MainActivity.this, "Character limit reached!", Toast.LENGTH_SHORT).show();
-            new HelperClass().showSnackBar(parenLayout,"Maximum character limit has reached for your bio!");
+            new HelperClass().showSnackBar(parenLayout, "Maximum character limit has reached for your bio!");
         }
     }
 }
