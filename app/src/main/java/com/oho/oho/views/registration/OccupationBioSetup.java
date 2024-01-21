@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.oho.oho.R;
 import com.oho.oho.databinding.FragmentOccupationBioSetupBinding;
 import com.oho.oho.interfaces.OnProfileSetupScreenChange;
+import com.oho.oho.models.JWTTokenRequest;
 import com.oho.oho.models.Profile;
 import com.oho.oho.utils.HelperClass;
 import com.oho.oho.viewmodels.ProfileSetupViewModel;
@@ -74,9 +75,18 @@ public class OccupationBioSetup extends Fragment {
                                 newProfile.setId(uploadedNewUserProfile.getId());
                                 viewmodel.updateNewUserProfile(newProfile);
 
-                                listener.onScreenChange("next", "occupation");
+                                JWTTokenRequest jwtTokenRequest = new JWTTokenRequest();
+                                jwtTokenRequest.setEmail(uploadedNewUserProfile.getEmail());
+                                viewmodel.getJwtToken(jwtTokenRequest);
+                                viewmodel.jwtToken.observe(requireActivity(), jwtToken -> {
+                                    if (jwtToken != null){
+                                        new HelperClass().setJWTToken(requireContext(),jwtToken);
+                                        listener.onScreenChange("next", "occupation");
+                                    }
+                                });
                             } else
-                                Toast.makeText(requireContext(), "Registration Failed! Please check your connection and try again.", Toast.LENGTH_SHORT).show();
+                                new HelperClass().showSnackBar(binding.containermain, "Registration Failed! Please check your connection and try again.");
+//                                Toast.makeText(requireContext(), "Registration Failed! Please check your connection and try again.", Toast.LENGTH_SHORT).show();
                         });
                     } else
                         Toast.makeText(requireContext(), "Please enter a bio first!", Toast.LENGTH_SHORT).show();
@@ -97,7 +107,7 @@ public class OccupationBioSetup extends Fragment {
 
                 if (s.length() >= charLimitBio) {
                     // User has reached the character limit
-                    new HelperClass().showSnackBarTop(binding.containermain, "Maximum character limit has reached for your bio!","center");
+                    new HelperClass().showSnackBarTop(binding.containermain, "Maximum character limit has reached for your bio!", "center");
                 }
             }
 

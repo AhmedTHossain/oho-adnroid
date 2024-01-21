@@ -9,8 +9,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.oho.oho.models.JWTTokenRequest;
 import com.oho.oho.models.NewPromptAnswer;
 import com.oho.oho.models.Profile;
+import com.oho.oho.repositories.ChatRepository;
 import com.oho.oho.repositories.ProfileSetupRepository;
 
 import java.io.File;
@@ -20,13 +22,15 @@ public class ProfileSetupViewModel extends AndroidViewModel {
     public LiveData<Boolean> ifProfilePhotoUploaded;
     public LiveData<Boolean> ifGenderPreferenceUpdated;
     public LiveData<Profile> uploadedNewUserProfile;
+    public LiveData<String> jwtToken;
     private ProfileSetupRepository repository;
-
+    private ChatRepository chatRepository;
     public MutableLiveData<Profile> newUserProfile = new MutableLiveData<>();
 
     public ProfileSetupViewModel(@NonNull Application application) {
         super(application);
         repository = new ProfileSetupRepository(getApplication().getApplicationContext());
+        chatRepository = new ChatRepository(getApplication().getApplicationContext());
     }
 
     public void uploadPromptAnswer(NewPromptAnswer newPromptAnswer) {
@@ -51,5 +55,9 @@ public class ProfileSetupViewModel extends AndroidViewModel {
 
     public void registerNewUser(){
         uploadedNewUserProfile = repository.registerUser(newUserProfile.getValue());
+    }
+
+    public void getJwtToken(JWTTokenRequest jwtTokenRequest){
+        jwtToken = chatRepository.getJwtToken(jwtTokenRequest);
     }
 }

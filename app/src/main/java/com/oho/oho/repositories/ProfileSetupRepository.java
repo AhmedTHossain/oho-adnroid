@@ -11,6 +11,7 @@ import com.oho.oho.models.PreferenceRequest;
 import com.oho.oho.models.Profile;
 import com.oho.oho.network.APIService;
 import com.oho.oho.network.RetrofitInstance;
+import com.oho.oho.responses.Registration.GetRegistrationResponse;
 import com.oho.oho.responses.UploadProfilePhotoResponse;
 import com.oho.oho.responses.preference.GetPreferenceResponse;
 import com.oho.oho.responses.prompt.GetAddPromptResponse;
@@ -112,15 +113,15 @@ public class ProfileSetupRepository {
         MutableLiveData<Profile> uploadedProfile = new MutableLiveData<>();
         APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
 
-        Call<Profile> call = apiService.createUser(profile);
-        call.enqueue(new Callback<Profile>() {
+        Call<GetRegistrationResponse> call = apiService.createUser(profile);
+        call.enqueue(new Callback<GetRegistrationResponse>() {
             @Override
-            public void onResponse(@NonNull Call<Profile> call, @NonNull Response<Profile> response) {
-                uploadedProfile.setValue(response.body());
+            public void onResponse(@NonNull Call<GetRegistrationResponse> call, @NonNull Response<GetRegistrationResponse> response) {
+                uploadedProfile.setValue(response.body().getData());
             }
 
             @Override
-            public void onFailure(@NonNull Call<Profile> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<GetRegistrationResponse> call, @NonNull Throwable t) {
                 uploadedProfile.setValue(null);
             }
         });

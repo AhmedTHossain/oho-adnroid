@@ -14,6 +14,7 @@ import com.oho.oho.models.ReportUserRequest;
 import com.oho.oho.models.Swipe;
 import com.oho.oho.responses.Attendance.GetDateStatusResponse;
 import com.oho.oho.responses.MessageResponse;
+import com.oho.oho.responses.Registration.GetRegistrationResponse;
 import com.oho.oho.responses.UploadProfilePhotoResponse;
 import com.oho.oho.responses.UploadPromptPhotoResponse;
 import com.oho.oho.responses.VerifyEmailResponse;
@@ -54,7 +55,7 @@ public interface APIService {
     Call<VerifyEmailResponse> verifyEmail(@Query("email") String email);
 
     @POST("users/register")
-    Call<Profile> createUser(@Body Profile profile);
+    Call<GetRegistrationResponse> createUser(@Body Profile profile);
 
     //for update user profile basic info
     @PUT("users/update")
