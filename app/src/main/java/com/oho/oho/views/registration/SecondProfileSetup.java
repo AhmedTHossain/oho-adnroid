@@ -3,23 +3,21 @@ package com.oho.oho.views.registration;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
+
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.oho.oho.R;
 import com.oho.oho.databinding.FragmentSecondProfileSetupBinding;
 import com.oho.oho.interfaces.OnProfileSetupScreenChange;
 import com.oho.oho.models.Profile;
+import com.oho.oho.utils.HelperClass;
 import com.oho.oho.viewmodels.ProfileSetupViewModel;
 import com.shawnlin.numberpicker.NumberPicker;
 
@@ -63,9 +61,11 @@ public class SecondProfileSetup extends Fragment {
                         });
                         listener.onScreenChange("next", "second");
                     } else
-                        Toast.makeText(requireContext(), "Please select your Height first!", Toast.LENGTH_SHORT).show();
+                        new HelperClass().showSnackBar(binding.containermain, "Please select your Height first!");
+//                        Toast.makeText(requireContext(), "Please select your Height first!", Toast.LENGTH_SHORT).show();
                 } else
-                    Toast.makeText(requireContext(), "Please select your Degree first!", Toast.LENGTH_SHORT).show();
+                    new HelperClass().showSnackBar(binding.containermain, "Please select your Degree first!");
+//                    Toast.makeText(requireContext(), "Please select your Degree first!", Toast.LENGTH_SHORT).show();
             }
         });
 

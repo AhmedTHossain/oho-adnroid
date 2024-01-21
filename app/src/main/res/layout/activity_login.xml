@@ -98,13 +98,13 @@
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="@dimen/_50sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
                 android:src="@drawable/google_logo" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/darkergrotesque_bold"
+                android:fontFamily="@font/darkergrotesque_medium"
                 android:text="Sign in with Google"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_18ssp" />

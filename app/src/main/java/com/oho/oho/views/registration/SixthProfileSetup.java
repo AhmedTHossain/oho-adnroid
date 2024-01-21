@@ -3,14 +3,12 @@ package com.oho.oho.views.registration;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.PickVisualMediaRequest;
@@ -50,19 +48,18 @@ public class SixthProfileSetup extends Fragment implements OnPhotoPickerPrompt, 
 
     private ImageView imageView;
     // Registers a photo picker activity launcher in single-select mode.
-    ActivityResultLauncher<PickVisualMediaRequest> pickMedia =
-            registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
-                // Callback is invoked after the user selects a media item or closes the
-                // photo picker.
-                if (uri != null) {
-                    Log.d("PhotoPicker", "Selected URI: " + uri);
-                    imageView.setImageURI(uri);
-                    imageFile = ImageUtils.getImageFileFromUri(requireContext(), uri);
-                    Log.d("PhotoPicker File: ", imageFile.getName());
-                } else {
-                    Log.d("PhotoPicker", "No media selected");
-                }
-            });
+    ActivityResultLauncher<PickVisualMediaRequest> pickMedia = registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
+        // Callback is invoked after the user selects a media item or closes the
+        // photo picker.
+        if (uri != null) {
+            Log.d("PhotoPicker", "Selected URI: " + uri);
+            imageView.setImageURI(uri);
+            imageFile = ImageUtils.getImageFileFromUri(requireContext(), uri);
+            Log.d("PhotoPicker File: ", imageFile.getName());
+        } else {
+            Log.d("PhotoPicker", "No media selected");
+        }
+    });
 
     public SixthProfileSetup(OnProfileSetupScreenChange listener) {
         // Required empty public constructor
@@ -70,14 +67,13 @@ public class SixthProfileSetup extends Fragment implements OnPhotoPickerPrompt, 
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentSixthProfileSetupBinding.inflate(inflater, container, false);
 
         selectedPrompts = retrieveStringArray();
 
 
-        SelectedPromptAdapter adapter = new SelectedPromptAdapter(selectedPrompts, requireContext(), this, this,this);
+        SelectedPromptAdapter adapter = new SelectedPromptAdapter(selectedPrompts, requireContext(), this, this, this);
 
         binding.viewpager.setAdapter(adapter);
         binding.viewpager.setClipToPadding(false);
@@ -102,8 +98,7 @@ public class SixthProfileSetup extends Fragment implements OnPhotoPickerPrompt, 
     @Override
     public void onPhotoPick(ImageView imageView) {
 
-        pickMedia.launch(new PickVisualMediaRequest.Builder()
-                .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)  //app compiles and run properly even after this error
+        pickMedia.launch(new PickVisualMediaRequest.Builder().setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)  //app compiles and run properly even after this error
                 .build());
         this.imageView = imageView;
     }
@@ -125,17 +120,19 @@ public class SixthProfileSetup extends Fragment implements OnPhotoPickerPrompt, 
             viewmodel.ifUploaded.observe(requireActivity(), ifUploaded -> {
                 if (ifUploaded) {
                     progressview.setVisibility(View.GONE);
-                    Toast.makeText(requireContext(), "Your answer was uploaded successfully!", Toast.LENGTH_SHORT).show();
+                    new HelperClass().showSnackBarTop(binding.containermain, "Your answer was uploaded successfully!", null);
+//                    Toast.makeText(requireContext(), "Your answer was uploaded successfully!", Toast.LENGTH_SHORT).show();
                     if (binding.viewpager.getCurrentItem() != selectedPrompts.size() - 1) {
                         binding.viewpager.setCurrentItem(binding.viewpager.getCurrentItem() + 1);
-                    } else
-                        listener.onScreenChange("next", "sixth");
+                    } else listener.onScreenChange("next", "sixth");
                 } else {
-                    Toast.makeText(requireContext(), "Answer upload failed!", Toast.LENGTH_SHORT).show();
+                    new HelperClass().showSnackBarTop(binding.containermain, "Answer upload failed!", null);
+//                    Toast.makeText(requireContext(), "Answer upload failed!", Toast.LENGTH_SHORT).show();
                 }
             });
         } else
-            Toast.makeText(requireContext(), "Enter a Photo before you proceed.", Toast.LENGTH_SHORT).show();
+            new HelperClass().showSnackBarTop(binding.containermain, "Enter a Photo before you proceed.", null);
+//        Toast.makeText(requireContext(), "Enter a Photo before you proceed.", Toast.LENGTH_SHORT).show();
     }
 
     private void updateBioCharCount(int currentCount, TextView charCountText) {
@@ -150,7 +147,7 @@ public class SixthProfileSetup extends Fragment implements OnPhotoPickerPrompt, 
 
                 if (currentCount >= charLimitAnswer) {
                     // User has reached the character limit
-                    new HelperClass().showSnackBarTop(binding.containermain, "Maximum character limit has reached for your answer!",null);
+                    new HelperClass().showSnackBarTop(binding.containermain, "Maximum character limit has reached for your answer!", null);
                 }
                 break;
             case "caption":
@@ -158,7 +155,7 @@ public class SixthProfileSetup extends Fragment implements OnPhotoPickerPrompt, 
 
                 if (currentCount >= charLimitCaption) {
                     // User has reached the character limit
-                    new HelperClass().showSnackBarTop(view, "Maximum character limit has reached for your caption!","center");
+                    new HelperClass().showSnackBarTop(view, "Maximum character limit has reached for your caption!", "center");
                 }
                 break;
         }

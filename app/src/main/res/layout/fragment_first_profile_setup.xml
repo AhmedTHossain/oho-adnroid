@@ -111,7 +111,7 @@
         android:background="@drawable/border_rounded_corner"
         android:clickable="true"
         android:focusable="true"
-        android:fontFamily="@font/darkergrotesque_bold"
+        android:fontFamily="@font/darkergrotesque_medium"
         android:text="Next"
         android:paddingTop="@dimen/_10sdp"
         android:paddingBottom="@dimen/_10sdp"

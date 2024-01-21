@@ -6,28 +6,25 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
-
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.oho.oho.R;
 import com.oho.oho.databinding.FragmentThirdProfileSetupBinding;
 import com.oho.oho.interfaces.OnProfileSetupScreenChange;
 import com.oho.oho.models.Profile;
+import com.oho.oho.utils.HelperClass;
 import com.oho.oho.viewmodels.ProfileSetupViewModel;
 
 import java.io.IOException;
@@ -41,7 +38,7 @@ public class ThirdProfileSetup extends Fragment {
     FragmentThirdProfileSetupBinding binding;
     private ProfileSetupViewModel viewmodel;
     private String city, state, religion;
-    private double lat,lon;
+    private double lat, lon;
 
     public ThirdProfileSetup() {
         // Required empty public constructor
@@ -59,7 +56,7 @@ public class ThirdProfileSetup extends Fragment {
         binding.buttonNextThird.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (city != null){
+                if (city != null) {
                     if (religion != null) {
                         viewmodel = new ViewModelProvider(requireActivity()).get(ProfileSetupViewModel.class);
 
@@ -77,9 +74,11 @@ public class ThirdProfileSetup extends Fragment {
 
                         listener.onScreenChange("next", "third");
                     } else
-                        Toast.makeText(requireContext(), "Please select your Religion first!", Toast.LENGTH_SHORT).show();
+                        new HelperClass().showSnackBar(binding.containermain, "Please select your Religion first!");
+//                        Toast.makeText(requireContext(), "Please select your Religion first!", Toast.LENGTH_SHORT).show();
                 } else
-                    Toast.makeText(requireContext(), "Please enter your Location first!", Toast.LENGTH_SHORT).show();
+                    new HelperClass().showSnackBar(binding.containermain, "Please enter your Location first!");
+//                    Toast.makeText(requireContext(), "Please enter your Location first!", Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -16,6 +16,8 @@ import com.oho.oho.R;
 import com.oho.oho.databinding.FragmentFourthProfileSetupBinding;
 import com.oho.oho.interfaces.OnProfileSetupScreenChange;
 import com.oho.oho.models.Profile;
+import com.oho.oho.utils.HelperClass;
+import com.oho.oho.utils.PhoneNumberFormatter;
 import com.oho.oho.viewmodels.ProfileSetupViewModel;
 
 import nl.bryanderidder.themedtogglebuttongroup.ThemedButton;
@@ -38,18 +40,18 @@ public class FourthProfileSetup extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentFourthProfileSetupBinding.inflate(inflater, container, false);
-
+        PhoneNumberFormatter.formatPhoneNumber(binding.textPhone);
         binding.buttonNextFourth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!race.equals("")) {
                     if (!TextUtils.isEmpty(binding.textPhone.getText())) {
-                        if (binding.textPhone.getText().toString().length() == 10) {
+                        if (binding.textPhone.getText().toString().replaceAll("-", "").length() == 10) {
                             viewmodel = new ViewModelProvider(requireActivity()).get(ProfileSetupViewModel.class);
 
                             Profile profile = viewmodel.getNewUserProfile().getValue();
                             profile.setRace(race);
-                            profile.setPhone(binding.textPhone.getText().toString());
+                            profile.setPhone(binding.textPhone.getText().toString().replaceAll("-", ""));
 
                             viewmodel.updateNewUserProfile(profile);
                             viewmodel.newUserProfile.observe(requireActivity(), newUserProfile -> {
@@ -59,11 +61,14 @@ public class FourthProfileSetup extends Fragment {
                             listener.onScreenChange("next", "fourth");
 
                         } else
-                            Toast.makeText(requireContext(), "Please enter a valid Phone number first!", Toast.LENGTH_SHORT).show();
+                            new HelperClass().showSnackBar(binding.containermain,"Please enter a valid Phone number!");
+//                            Toast.makeText(requireContext(), "Please enter a valid Phone number first!", Toast.LENGTH_SHORT).show();
                     } else
-                        Toast.makeText(requireContext(), "Please enter your Phone number first!", Toast.LENGTH_SHORT).show();
+                        new HelperClass().showSnackBar(binding.containermain,"Please enter your Phone number first!");
+//                        Toast.makeText(requireContext(), "Please enter your Phone number first!", Toast.LENGTH_SHORT).show();
                 } else
-                    Toast.makeText(requireContext(), "Please select your Ethnicity first!", Toast.LENGTH_SHORT).show();
+                    new HelperClass().showSnackBar(binding.containermain,"Please select your Ethnicity first!");
+//                    Toast.makeText(requireContext(), "Please select your Ethnicity first!", Toast.LENGTH_SHORT).show();
             }
         });
 

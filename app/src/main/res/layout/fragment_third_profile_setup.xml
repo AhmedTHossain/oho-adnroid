@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context=".views.registration.ThirdProfileSetup"
-    android:layout_gravity="center">
+    android:layout_gravity="center"
+    android:id="@+id/containermain">
 
     <TextView
         android:layout_width="wrap_content"
@@ -235,7 +236,7 @@
         android:background="@drawable/border_rounded_corner"
         android:clickable="true"
         android:focusable="true"
-        android:fontFamily="@font/darkergrotesque_bold"
+        android:fontFamily="@font/darkergrotesque_medium"
         android:foreground="?attr/selectableItemBackground"
         android:paddingTop="@dimen/_10sdp"
         android:paddingBottom="@dimen/_10sdp"

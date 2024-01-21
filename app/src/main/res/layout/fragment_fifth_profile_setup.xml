@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".views.registration.ThirdProfileSetup"
-    android:layout_marginTop="@dimen/_20sdp">
+    android:layout_marginTop="@dimen/_20sdp"
+    android:id="@+id/containermain">
 
     <RelativeLayout
         android:id="@+id/text_title"
@@ -50,7 +51,7 @@
         android:background="@drawable/border_rounded_corner"
         android:clickable="true"
         android:focusable="true"
-        android:fontFamily="@font/darkergrotesque_bold"
+        android:fontFamily="@font/darkergrotesque_medium"
         android:foreground="?attr/selectableItemBackground"
         android:paddingTop="@dimen/_10sdp"
         android:paddingBottom="@dimen/_10sdp"

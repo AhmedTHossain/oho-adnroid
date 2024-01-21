@@ -23,6 +23,7 @@ import com.oho.oho.databinding.FragmentFifthProfileSetupBinding;
 import com.oho.oho.interfaces.OnProfileSetupScreenChange;
 import com.oho.oho.interfaces.OnPromptSelectListener;
 import com.oho.oho.models.SelectedPrompt;
+import com.oho.oho.utils.HelperClass;
 
 import java.util.ArrayList;
 
@@ -49,7 +50,8 @@ public class FifthProfileSetup extends Fragment implements OnPromptSelectListene
             @Override
             public void onClick(View v) {
                 if (selectedPromptsList.size() < 3)
-                    Toast.makeText(requireContext(), "You have to select at least 3 prompts in order to proceed", Toast.LENGTH_LONG).show();
+                    new HelperClass().showSnackBar(binding.containermain,"You have to select at least 3 prompts in order to proceed");
+//                    Toast.makeText(requireContext(), "You have to select at least 3 prompts in order to proceed", Toast.LENGTH_LONG).show();
                 else {
                     listener.onScreenChange("next", "fifth");
                     saveStringArray(selectedPromptsList);
