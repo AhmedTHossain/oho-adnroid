@@ -17,7 +17,7 @@
             android:fontFamily="@font/ptsans_regular"
             android:text="Hi"
             android:textColor="@color/black"
-            android:textSize="@dimen/_18ssp" />
+            android:textSize="@dimen/_25ssp" />
 
         <TextView
             android:id="@+id/text_title_message"
@@ -27,7 +27,7 @@
             android:fontFamily="@font/ptsans_bold"
             android:text="Emily"
             android:textColor="@color/black"
-            android:textSize="@dimen/_18ssp" />
+            android:textSize="@dimen/_25ssp" />
     </LinearLayout>
 
     <LinearLayout
@@ -52,7 +52,7 @@
             android:layout_marginStart="@dimen/_5sdp"
             android:fontFamily="@font/lovina_october_five_regular"
             android:text="Oho!"
-            android:textColor="@color/black"
+            android:textColor="@color/ted_image_picker_primary_pressed"
             android:textSize="@dimen/_16ssp"
             android:visibility="visible" />
     </LinearLayout>
