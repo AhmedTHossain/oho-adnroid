@@ -43,6 +43,12 @@ public class LoginActivity extends AppCompatActivity {
     ActivityLoginBinding binding;
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        new HelperClass().disableSmartLock(this);
+    }
+
+    @Override
     public void onBackPressed() {
         finish();
     }
