@@ -106,6 +106,12 @@ public class FirstProfileSetup extends Fragment {
         alertDialogBuilder.setCancelable(true).setPositiveButton("Select", null);
         AlertDialog alertDialog = alertDialogBuilder.create();
 
+        // Set the maximum date to exactly 18 years ago
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.YEAR, -18);
+        long maxDateMillis = calendar.getTimeInMillis();
+        datePicker.setMaxDate(maxDateMillis);
+
         alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(DialogInterface dialog) {
