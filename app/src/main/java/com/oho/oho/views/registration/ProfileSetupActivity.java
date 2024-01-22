@@ -18,6 +18,7 @@ import com.oho.oho.databinding.ActivityProfileSetupBinding;
 import com.oho.oho.entities.UserProfile;
 import com.oho.oho.interfaces.OnProfileSetupScreenChange;
 import com.oho.oho.models.Profile;
+import com.oho.oho.utils.HelperClass;
 import com.oho.oho.viewmodels.ProfileSetupViewModel;
 
 public class ProfileSetupActivity extends AppCompatActivity implements OnProfileSetupScreenChange {
@@ -95,7 +96,7 @@ public class ProfileSetupActivity extends AppCompatActivity implements OnProfile
                             localDatabase.userProfileDao().updateUserProfile(userProfile);
                         }
                     });
-
+                    new HelperClass().saveProfile(this,profile);
                     Intent intent = new Intent(this, MainActivity.class);
                     intent.putExtra("id", profile.getId());
                     startActivity(intent);
