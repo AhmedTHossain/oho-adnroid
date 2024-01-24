@@ -137,10 +137,12 @@ public class LikedByFragment extends Fragment implements SwipeListener, OnFullIm
     }
 
     private void swipeProfile(int userId, int profileShown, int direction) {
+        Log.d("LikedByFragment","profileShown = "+profileShown+" is swiped "+direction);
+
         Swipe swipeProfile = new Swipe();
-        swipeProfile.setUserId(userId);
         swipeProfile.setProfileShown(profileShown);
         swipeProfile.setDirection(direction);
+
         likedByViewModel.swipeUserProfile(swipeProfile);
         likedByViewModel.isSwipeSuccessful.observe(getViewLifecycleOwner(), isSuccessful -> {
             if (isSuccessful)

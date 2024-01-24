@@ -159,9 +159,9 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
 
     private void swipeProfile(int userId, int profileShown, int direction) {
         Swipe swipeProfile = new Swipe();
-        swipeProfile.setUserId(userId);
         swipeProfile.setProfileShown(profileShown);
         swipeProfile.setDirection(direction);
+
         homeViewModel.swipeUserProfile(swipeProfile);
         homeViewModel.isSwipeSuccessful.observe(getViewLifecycleOwner(), isSuccessful -> {
             if (isSuccessful) {

@@ -56,7 +56,7 @@ public class MainRepository {
         call.enqueue(new Callback<CreateFCMTokenResponse>() {
             @Override
             public void onResponse(@NonNull Call<CreateFCMTokenResponse> call, @NonNull Response<CreateFCMTokenResponse> response) {
-                if (response.body().getStatus()) {
+                if (response.isSuccessful()) {
                     storedIdResponse.setValue(response.body().getData());
                     Toast.makeText(context, "Device ID updated successfully!", Toast.LENGTH_SHORT).show();
                 } else {

@@ -3,7 +3,7 @@ package com.oho.oho.responses;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class MessageResponse {
+public class SwipeMessageResponse {
     @SerializedName("message")
     @Expose
     private String message;

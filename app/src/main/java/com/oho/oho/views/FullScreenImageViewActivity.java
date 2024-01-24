@@ -5,6 +5,7 @@ import android.graphics.Matrix;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.ExifInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +23,9 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.oho.oho.R;
 import com.oho.oho.databinding.ActivityFullScreenImageViewBinding;
+import com.oho.oho.utils.HelperClass;
+
+import java.io.IOException;
 
 public class FullScreenImageViewActivity extends AppCompatActivity {
     private ActivityFullScreenImageViewBinding binding;
@@ -40,6 +44,53 @@ public class FullScreenImageViewActivity extends AppCompatActivity {
         Glide.with(this)
                 .load(imageURLWithSuffix).fitCenter()
                 .into(binding.imageview);
+
+//        Glide.with(this)
+//                .load(imageURLWithSuffix)
+//                .fitCenter()
+//                .listener(new RequestListener<Drawable>() {
+//                    @Override
+//                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+//                        return false;
+//                    }
+//
+//                    @Override
+//                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+//                        // Get the orientation and apply rotation if needed
+//                        int orientation = getExifOrientation(imageURLWithSuffix);
+//
+//                        // Rotate the Drawable based on the orientation
+//                        Drawable rotatedDrawable = rotateDrawableIfNeeded(resource, orientation);
+//
+//                        // Set the rotated Drawable to the ImageView
+//                        binding.imageview.setImageDrawable(rotatedDrawable);
+//                        return true;
+//                    }
+//                })
+//                .into(binding.imageview);
+
+// Helper method to get Exif orientation
+//        private int getExifOrientation(String imageUrl) {
+//            try {
+//                ExifInterface exif = new ExifInterface(imageUrl);
+//                return exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//                return ExifInterface.ORIENTATION_NORMAL;
+//            }
+//        }
+
+// Helper method to rotate Drawable based on orientation
+//        private Drawable rotateDrawableIfNeeded(Drawable drawable, int orientation) {
+//            if (orientation != 0) {
+//                Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+//                Bitmap rotatedBitmap = HelperClass.rotateBitmap(bitmap, orientation);
+//                return new BitmapDrawable(getResources(), rotatedBitmap);
+//            } else {
+//                return drawable;
+//            }
+//        }
+
 
         binding.buttonRotate.setOnClickListener(new View.OnClickListener() {
             @Override

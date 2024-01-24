@@ -41,7 +41,7 @@ public class PushNotificationService extends FirebaseMessagingService {
         switch (notificationType){
             case "like":
                 String notificationBody = message.getData().get("sender_name") + " has liked your profile";
-                LikeNotificationPayload likeNotificationPayload = new LikeNotificationPayload("New Like!",notificationBody,message.getData().get("sender_name"),message.getData().get("sender_photo"),message.getData().get("user_id"),message.getData().get("type"));
+                LikeNotificationPayload likeNotificationPayload = new LikeNotificationPayload("New Reservation!",notificationBody,message.getData().get("sender_name"),message.getData().get("sender_photo"),message.getData().get("user_id"),message.getData().get("type"));
                 sendLikeNotification(likeNotificationPayload);
                 break;
         }

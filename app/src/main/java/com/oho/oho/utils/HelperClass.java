@@ -4,7 +4,9 @@ import static com.oho.oho.utils.Constants.TAG;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -192,5 +194,11 @@ public class HelperClass {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, h:mm a", Locale.ENGLISH)
                 .withZone(serverZoneId);
         return formatter.format(instant);
+    }
+
+    public Bitmap rotateBitmap(Bitmap bitmap, int orientation) {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(orientation);
+        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
     }
 }

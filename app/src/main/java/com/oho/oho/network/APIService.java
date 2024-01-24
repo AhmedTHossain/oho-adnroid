@@ -13,8 +13,8 @@ import com.oho.oho.models.Prompt;
 import com.oho.oho.models.ReportUserRequest;
 import com.oho.oho.models.Swipe;
 import com.oho.oho.responses.Attendance.GetDateStatusResponse;
-import com.oho.oho.responses.MessageResponse;
 import com.oho.oho.responses.Registration.GetRegistrationResponse;
+import com.oho.oho.responses.SwipeMessageResponse;
 import com.oho.oho.responses.UploadProfilePhotoResponse;
 import com.oho.oho.responses.UploadPromptPhotoResponse;
 import com.oho.oho.responses.VerifyEmailResponse;
@@ -32,6 +32,7 @@ import com.oho.oho.responses.profile.GetProfileResponse;
 import com.oho.oho.responses.prompt.GetAddPromptResponse;
 import com.oho.oho.responses.qrcode.GetQrCodeResponse;
 import com.oho.oho.responses.report.PostReportUserResponse;
+import com.oho.oho.responses.swipe.PostSwipeResponse;
 import com.oho.oho.responses.upcomingdates.GetUpcomingDatesResponse;
 
 import java.util.List;
@@ -89,7 +90,7 @@ public interface APIService {
 
     // for deleting user prompts
     @DELETE("users/prompt_answers/delete")
-    Call<MessageResponse> deletePromptAnswer(@Header("Authorization") String jwtToken, @Query("id") int id);
+    Call<SwipeMessageResponse> deletePromptAnswer(@Header("Authorization") String jwtToken, @Query("id") int id);
 
     // for adding/updating user availability
     @POST("users/availability/add")
@@ -101,7 +102,7 @@ public interface APIService {
 
     //swiping profile left/right
     @POST("match/swipe")
-    Call<MessageResponse> swipeProfile(@Body Swipe swipeResponse);
+    Call<PostSwipeResponse> swipeProfile(@Header("Authorization") String jwtToken, @Body Swipe swipeResponse);
 
     //get likes on profile
     @GET("users/get_likes")

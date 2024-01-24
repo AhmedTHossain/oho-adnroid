@@ -10,7 +10,7 @@ import com.oho.oho.models.BioUpdateRequest;
 import com.oho.oho.models.Profile;
 import com.oho.oho.network.APIService;
 import com.oho.oho.network.RetrofitInstance;
-import com.oho.oho.responses.MessageResponse;
+import com.oho.oho.responses.SwipeMessageResponse;
 import com.oho.oho.responses.UploadProfilePhotoResponse;
 import com.oho.oho.responses.profile.GetProfileResponse;
 import com.oho.oho.utils.HelperClass;
@@ -55,10 +55,10 @@ public class ProfileViewRepository {
     public MutableLiveData<Boolean> deletePrompt(int prompt_id) {
         MutableLiveData<Boolean> isDeletedSuccessfully = new MutableLiveData<>();
         APIService service = RetrofitInstance.getRetrofitClient().create(APIService.class);
-        Call<MessageResponse> call = service.deletePromptAnswer(helperClass.getJWTToken(context), prompt_id);
-        call.enqueue(new retrofit2.Callback<MessageResponse>() {
+        Call<SwipeMessageResponse> call = service.deletePromptAnswer(helperClass.getJWTToken(context), prompt_id);
+        call.enqueue(new retrofit2.Callback<SwipeMessageResponse>() {
             @Override
-            public void onResponse(@NonNull Call<MessageResponse> call, @NonNull retrofit2.Response<MessageResponse> response) {
+            public void onResponse(@NonNull Call<SwipeMessageResponse> call, @NonNull retrofit2.Response<SwipeMessageResponse> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(context, "Your answer has been deleted!", Toast.LENGTH_SHORT).show();
                     isDeletedSuccessfully.setValue(true);
@@ -69,7 +69,7 @@ public class ProfileViewRepository {
             }
 
             @Override
-            public void onFailure(@NonNull Call<MessageResponse> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<SwipeMessageResponse> call, @NonNull Throwable t) {
                 Toast.makeText(context, "Something went wrong!", Toast.LENGTH_SHORT).show();
                 isDeletedSuccessfully.setValue(false);
             }
