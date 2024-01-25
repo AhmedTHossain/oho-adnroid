@@ -3,6 +3,10 @@ package com.oho.oho.views.home;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -41,6 +45,8 @@ import com.oho.oho.viewmodels.ProfileViewModel;
 import com.oho.oho.views.FullScreenImageViewActivity;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -70,6 +76,39 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
                     userProfile.setProfilePicture(uri.toString());
                     adapter.notifyDataSetChanged();
                     imageFile = ImageUtils.getImageFileFromUri(requireContext(), uri);
+
+                    try {
+                        ExifInterface exif = new ExifInterface(imageFile);
+                        int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
+
+                        Matrix matrix = new Matrix();
+                        switch (orientation) {
+                            case ExifInterface.ORIENTATION_ROTATE_90:
+                                matrix.postRotate(90);
+                                break;
+                            // Add more cases as needed
+
+                            default:
+                                // No rotation needed
+                                break;
+                        }
+
+                        Bitmap originalBitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
+                        Bitmap rotatedBitmap = Bitmap.createBitmap(originalBitmap, 0, 0, originalBitmap.getWidth(), originalBitmap.getHeight(), matrix, true);
+
+                        File rotatedFile = new File(requireContext().getCacheDir(), "rotated_image.jpg");
+                        try (FileOutputStream out = new FileOutputStream(rotatedFile)) {
+                            rotatedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        imageFile = rotatedFile;
+                        // Now use the rotatedBitmap for uploading or other processing
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
 
                     showUploadDialog();
                     profileViewModel.uploadProfilePhoto(imageFile);
