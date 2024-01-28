@@ -86,8 +86,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
                             case ExifInterface.ORIENTATION_ROTATE_90:
                                 matrix.postRotate(90);
                                 break;
-                            // Add more cases as needed
-
+                            case ExifInterface.ORIENTATION_ROTATE_180:
+                                matrix.postRotate(180);
+                                break;
+                            case ExifInterface.ORIENTATION_ROTATE_270:
+                                matrix.postRotate(270);
+                                break;
                             default:
                                 // No rotation needed
                                 break;
