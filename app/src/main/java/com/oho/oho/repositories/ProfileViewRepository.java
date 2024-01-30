@@ -1,6 +1,7 @@
 package com.oho.oho.repositories;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -11,8 +12,9 @@ import com.oho.oho.models.Profile;
 import com.oho.oho.network.APIService;
 import com.oho.oho.network.RetrofitInstance;
 import com.oho.oho.responses.SwipeMessageResponse;
-import com.oho.oho.responses.UploadProfilePhotoResponse;
+import com.oho.oho.responses.uploadPhoto.ProfilePhotoResponse;
 import com.oho.oho.responses.profile.GetProfileResponse;
+import com.oho.oho.responses.uploadPhoto.UploadProfilePhotoResponse;
 import com.oho.oho.utils.HelperClass;
 
 import java.io.File;
@@ -103,22 +105,23 @@ public class ProfileViewRepository {
         return isUpdatedSuccessfully;
     }
 
-    public MutableLiveData<Boolean> uploadProfilePhoto(File image) {
-        MutableLiveData<Boolean> ifResponseReceived = new MutableLiveData<>();
+    public MutableLiveData<String> uploadProfilePhoto(File image) {
+        MutableLiveData<String> uploadedImagePath = new MutableLiveData<>();
         APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
         MultipartBody.Part filePart = MultipartBody.Part.createFormData("image", image.getName(), RequestBody.create(MediaType.parse("image/*"), image));
         Call<UploadProfilePhotoResponse> call = apiService.uploadProfilePhoto(helperClass.getJWTToken(context), filePart);
         call.enqueue(new Callback<UploadProfilePhotoResponse>() {
             @Override
             public void onResponse(@NonNull Call<UploadProfilePhotoResponse> call, @NonNull Response<UploadProfilePhotoResponse> response) {
-                ifResponseReceived.setValue(true);
+                Log.d("ProfileViewRepository","image url in profile view repository = "+response.body().getData().getPath());
+                uploadedImagePath.setValue(response.body().getData().getPath());
             }
 
             @Override
             public void onFailure(@NonNull Call<UploadProfilePhotoResponse> call, @NonNull Throwable t) {
-                ifResponseReceived.setValue(false);
+                uploadedImagePath.setValue(null);
             }
         });
-        return ifResponseReceived;
+        return uploadedImagePath;
     }
 }

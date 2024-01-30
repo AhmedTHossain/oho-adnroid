@@ -12,9 +12,10 @@ import com.oho.oho.models.Profile;
 import com.oho.oho.network.APIService;
 import com.oho.oho.network.RetrofitInstance;
 import com.oho.oho.responses.Registration.GetRegistrationResponse;
-import com.oho.oho.responses.UploadProfilePhotoResponse;
+import com.oho.oho.responses.uploadPhoto.ProfilePhotoResponse;
 import com.oho.oho.responses.preference.GetPreferenceResponse;
 import com.oho.oho.responses.prompt.GetAddPromptResponse;
+import com.oho.oho.responses.uploadPhoto.UploadProfilePhotoResponse;
 import com.oho.oho.utils.HelperClass;
 
 import java.io.File;

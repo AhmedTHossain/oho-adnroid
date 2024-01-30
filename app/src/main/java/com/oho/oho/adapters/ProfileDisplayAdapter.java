@@ -2,6 +2,7 @@ package com.oho.oho.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +15,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.github.ybq.android.spinkit.SpinKitView;
 import com.oho.oho.R;
 import com.oho.oho.interfaces.OnFullImageViewListener;
+import com.oho.oho.interfaces.OnProfilePhotoPickListener;
 import com.oho.oho.interfaces.SwipeListener;
 import com.oho.oho.models.Profile;
 import com.oho.oho.models.PromptAnswer;
@@ -47,8 +50,9 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
     private int sender_id = 0;
     private ChatRoom chatRoom;
     private HelperClass helperClass = new HelperClass();
+    private OnProfilePhotoPickListener onProfilePhotoPickListener;
 
-    public ProfileDisplayAdapter(Profile userProfile, ArrayList<PromptAnswer> promptArrayList, SwipeListener listener, Context context, ProfileViewModel viewModel, OnFullImageViewListener fullImageViewListener) {
+    public ProfileDisplayAdapter(Profile userProfile, ArrayList<PromptAnswer> promptArrayList, SwipeListener listener, Context context, ProfileViewModel viewModel, OnFullImageViewListener fullImageViewListener, OnProfilePhotoPickListener onProfilePhotoPickListener) {
         this.promptArrayList = promptArrayList;
         promptArrayList.add(0, new PromptAnswer());
         this.context = context;
@@ -56,6 +60,7 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
         this.listener = listener;
         this.viewModel = viewModel;
         this.fullImageViewListener = fullImageViewListener;
+        this.onProfilePhotoPickListener = onProfilePhotoPickListener;
     }
 
     public ProfileDisplayAdapter(Profile userProfile, ArrayList<PromptAnswer> promptArrayList, SwipeListener listener, Context context, ProfileViewModel viewModel, int sender_id, ChatRoom chatRoom, OnFullImageViewListener fullImageViewListener) {
@@ -114,6 +119,8 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
 
                 //The URL is of the thumbnail version of the profile picture, and is without the extension. You are required to to append .jpeg to the URL.
                 String profilePictureThumbnailUrl = userProfile.getProfilePicture()+".jpeg";
+                Log.d("ProfileDisplayAdapter","image url in profile view adapter = "+profilePictureThumbnailUrl);
+
                 Glide.with(context)
                         .load(profilePictureThumbnailUrl).centerCrop()
                         .into(((Holder1) holder).imageView);
@@ -133,7 +140,8 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
                 ((Holder1) holder).editPhotoButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        viewModel.editPhoto();
+                        onProfilePhotoPickListener.onProfilePhotoPick(((Holder1) holder).imageView, ((Holder1) holder).spinKitView);
+//                        viewModel.editPhoto();
                     }
                 });
 
@@ -149,8 +157,8 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
                     ((Holder) holder).answer.setText(promptArrayList.get(position).getAnswer());
                     ((Holder) holder).caption.setText(promptArrayList.get(position).getCaption());
 
-                    //The URL is of the thumbnail version of the prompt picture, and is without the extension. You are required to to append __compressed.jpeg to the URL.
-                    String promptPictureThumbnailUrl = promptArrayList.get(position).getImage()+"__compressed.jpeg";
+                    //The URL is of the thumbnail version of the prompt picture, and is without the extension. You are required to to append .jpeg to the URL.
+                    String promptPictureThumbnailUrl = promptArrayList.get(position).getImage()+".jpeg";
                     Glide.with(context)
                             .load(promptPictureThumbnailUrl).centerCrop()
                             .into(((Holder) holder).imageView);
@@ -256,6 +264,7 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
         private CircleImageView imageView;
         private ImageView editBioButton;
         private ImageView editPhotoButton;
+        private SpinKitView spinKitView;
 
         public Holder1(@NonNull View itemView) {
             super(itemView);
@@ -272,6 +281,7 @@ public class ProfileDisplayAdapter extends RecyclerView.Adapter {
             education = itemView.findViewById(R.id.textview_education);
             editBioButton = itemView.findViewById(R.id.button_edit_bio);
             editPhotoButton = itemView.findViewById(R.id.fab_edit_profile_photo);
+            spinKitView = itemView.findViewById(R.id.loader_profile_image);
         }
     }
 

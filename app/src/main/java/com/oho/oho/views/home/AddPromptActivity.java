@@ -53,7 +53,7 @@ public class AddPromptActivity extends AppCompatActivity implements OnPromptSele
                 if (uri != null) {
                     Log.d("PhotoPicker", "Selected URI: " + uri);
                     imageView.setImageURI(uri);
-                    imageFile = ImageUtils.getImageFileFromUri(this, uri);
+                    imageFile = new HelperClass().rotateImage(uri,this);
                     Log.d("PhotoPicker File: ", imageFile.getName());
                 } else {
                     Log.d("PhotoPicker", "No media selected");

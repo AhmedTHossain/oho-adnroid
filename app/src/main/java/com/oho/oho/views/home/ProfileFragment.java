@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.drawable.Drawable;
 import android.media.ExifInterface;
 import android.os.Bundle;
 import android.text.Editable;
@@ -24,16 +25,24 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.PickVisualMediaRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.github.ybq.android.spinkit.SpinKitView;
 import com.oho.oho.R;
 import com.oho.oho.adapters.ProfileDisplayAdapter;
 import com.oho.oho.databinding.FragmentProfileBinding;
 import com.oho.oho.interfaces.OnFullImageViewListener;
+import com.oho.oho.interfaces.OnProfilePhotoPickListener;
 import com.oho.oho.interfaces.SwipeListener;
 import com.oho.oho.models.BioUpdateRequest;
 import com.oho.oho.models.Profile;
@@ -50,7 +59,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class ProfileFragment extends Fragment implements View.OnClickListener, SwipeListener, OnFullImageViewListener {
+import de.hdodenhof.circleimageview.CircleImageView;
+
+public class ProfileFragment extends Fragment implements View.OnClickListener, SwipeListener, OnFullImageViewListener, OnProfilePhotoPickListener {
 
     FragmentProfileBinding binding;
     private ProfileViewModel profileViewModel;
@@ -66,6 +77,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
     private ChatRoom chatRoom = null;
     private Profile profile;
     private ShimmerFrameLayout shimmerLayout;
+    private CircleImageView profileImageView;
+    private SpinKitView loaderProfileImageView;
 
     File imageFile;
     ActivityResultLauncher<PickVisualMediaRequest> pickMedia =
@@ -73,10 +86,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
                 // Callback is invoked after the user selects a media item or closes the
                 // photo picker.
                 if (uri != null) {
-                    userProfile.setProfilePicture(uri.toString());
-                    adapter.notifyDataSetChanged();
                     imageFile = ImageUtils.getImageFileFromUri(requireContext(), uri);
-
                     try {
                         ExifInterface exif = new ExifInterface(imageFile);
                         int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
@@ -96,7 +106,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
                                 // No rotation needed
                                 break;
                         }
-
                         Bitmap originalBitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
                         Bitmap rotatedBitmap = Bitmap.createBitmap(originalBitmap, 0, 0, originalBitmap.getWidth(), originalBitmap.getHeight(), matrix, true);
 
@@ -106,20 +115,22 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-
                         imageFile = rotatedFile;
-                        // Now use the rotatedBitmap for uploading or other processing
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
-
                     showUploadDialog();
                     profileViewModel.uploadProfilePhoto(imageFile);
-                    profileViewModel.ifProfilePhotoUploaded.observe(requireActivity(), ifProfilePhotoUploaded -> {
-                        if (ifProfilePhotoUploaded) {
-                            new HelperClass().showSnackBar(binding.containermain,"Your photo was uploaded successfully!");
+                    profileViewModel.uploadedImagePath.observe(requireActivity(), uploadedImagePath -> {
+                        if (uploadedImagePath != null) {
+                            userProfile.setProfilePicture(uploadedImagePath);
+                            new HelperClass().showSnackBar(binding.containermain, "Your photo was uploaded successfully!");
                             alertDialogUploading.dismiss();
+//                            profileImageView.setImageURI(uri);
+
+                            Glide.with(requireContext())
+                                    .load(uri).centerCrop()
+                                    .into(profileImageView);
                         } else {
                             Toast.makeText(requireContext(), "Photo upload failed!", Toast.LENGTH_SHORT).show();
                             alertDialogUploading.dismiss();
@@ -158,8 +169,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
         if (profile_id == 0) {
             HelperClass helperClass = new HelperClass();
             getProfile(helperClass.getProfile(requireContext()).getId());
-        }
-        else {
+        } else {
             binding.screentitle.setText("View Profile");
             getProfile(profile_id);
         }
@@ -173,12 +183,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
                 showBioInputDialog(userProfile.getBio());
         });
 
-        profileViewModel.getIfEditPhoto().observe(getViewLifecycleOwner(), ifEditPhoto -> {
-            if (ifEditPhoto)
-                pickMedia.launch(new PickVisualMediaRequest.Builder()
-                        .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)  //app compiles and run properly even after this error
-                        .build());
-        });
+//        profileViewModel.getIfEditPhoto().observe(getViewLifecycleOwner(), ifEditPhoto -> {
+//            if (ifEditPhoto)
+//                pickMedia.launch(new PickVisualMediaRequest.Builder()
+//                        .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)  //app compiles and run properly even after this error
+//                        .build());
+//        });
 
         profileViewModel.getIfAddPrompt().observe(getViewLifecycleOwner(), ifAddPrompt -> {
             if (ifAddPrompt) {
@@ -209,9 +219,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
 
     private void setProfileView() {
         if (profile_id != 0)
-            adapter = new ProfileDisplayAdapter(userProfile, promptAnswers, this, requireContext(), profileViewModel, profile_id, chatRoom,this);
+            adapter = new ProfileDisplayAdapter(userProfile, promptAnswers, this, requireContext(), profileViewModel, profile_id, chatRoom, this);
         else
-            adapter = new ProfileDisplayAdapter(userProfile, promptAnswers, this, requireContext(), profileViewModel,this);
+            adapter = new ProfileDisplayAdapter(userProfile, promptAnswers, this, requireContext(), profileViewModel, this, this);
         binding.recyclerviewProfile.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recyclerviewProfile.setAdapter(adapter);
 
@@ -342,7 +352,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
         alertDialogUploading.show();
     }
 
-    private void openDeletePromptDialog(Integer promptToDelete){
+    private void openDeletePromptDialog(Integer promptToDelete) {
         LayoutInflater li = LayoutInflater.from(requireContext());
         View promptsView = li.inflate(R.layout.dialog_confirm_delete, null);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
@@ -350,7 +360,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
         // set alert_dialog.xml to alertdialog builder
         alertDialogBuilder.setView(promptsView);
         alertDialogBuilder.setCancelable(false)
-                .setPositiveButton("Delete",null)
+                .setPositiveButton("Delete", null)
                 .setNegativeButton("Cancel", null);
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
@@ -363,7 +373,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(requireContext(),"Your prompt answer will be deleted shortly..",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(), "Your prompt answer will be deleted shortly..", Toast.LENGTH_SHORT).show();
                         if (promptToDelete != null) {
 
                             profileViewModel.deletePromptAnswer(promptToDelete);
@@ -396,7 +406,17 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
 //        String fullSizedImage = imageUrl+"__compressed.jpeg";
 
         Intent intent = new Intent(requireContext(), FullScreenImageViewActivity.class);
-        intent.putExtra("image_url",imageUrl);
+        intent.putExtra("image_url", imageUrl);
         startActivity(intent);
+    }
+
+    @Override
+    public void onProfilePhotoPick(CircleImageView imageView, SpinKitView spinKitView) {
+        profileImageView = imageView;
+        loaderProfileImageView = spinKitView;
+
+        pickMedia.launch(new PickVisualMediaRequest.Builder()
+                .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)  //app compiles and run properly even after this error
+                .build());
     }
 }

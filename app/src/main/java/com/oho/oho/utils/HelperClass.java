@@ -5,8 +5,11 @@ import static com.oho.oho.utils.Constants.TAG;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Matrix;
+import android.media.ExifInterface;
+import android.net.Uri;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -20,6 +23,9 @@ import com.google.android.material.snackbar.Snackbar;
 import com.oho.oho.R;
 import com.oho.oho.models.Profile;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.ZoneId;
@@ -196,9 +202,40 @@ public class HelperClass {
         return formatter.format(instant);
     }
 
-    public Bitmap rotateBitmap(Bitmap bitmap, int orientation) {
-        Matrix matrix = new Matrix();
-        matrix.postRotate(orientation);
-        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+    public File rotateImage(Uri uri, Context context) {
+        File imageFile = ImageUtils.getImageFileFromUri(context, uri);
+        try {
+            ExifInterface exif = new ExifInterface(imageFile);
+            int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
+
+            Matrix matrix = new Matrix();
+            switch (orientation) {
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    matrix.postRotate(90);
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    matrix.postRotate(180);
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    matrix.postRotate(270);
+                    break;
+                default:
+                    // No rotation needed
+                    break;
+            }
+            Bitmap originalBitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
+            Bitmap rotatedBitmap = Bitmap.createBitmap(originalBitmap, 0, 0, originalBitmap.getWidth(), originalBitmap.getHeight(), matrix, true);
+
+            File rotatedFile = new File(context.getCacheDir(), "rotated_image.jpg");
+            try (FileOutputStream out = new FileOutputStream(rotatedFile)) {
+                rotatedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            imageFile = rotatedFile;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return imageFile;
     }
 }

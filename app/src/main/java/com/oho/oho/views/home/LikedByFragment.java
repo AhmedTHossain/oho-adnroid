@@ -127,7 +127,7 @@ public class LikedByFragment extends Fragment implements SwipeListener, OnFullIm
 //        promptArrayList.add(0,null);
 //        promptArrayList.add(null);
 
-        ProfileDisplayAdapter adapter = new ProfileDisplayAdapter(user, promptArrayList, this, requireContext(),null,this);
+        ProfileDisplayAdapter adapter = new ProfileDisplayAdapter(user, promptArrayList, this, requireContext(),null,this,null);
         binding.recyclerviewPromptSection.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recyclerviewPromptSection.setAdapter(adapter);
     }

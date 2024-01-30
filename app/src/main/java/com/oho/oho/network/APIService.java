@@ -15,7 +15,7 @@ import com.oho.oho.models.Swipe;
 import com.oho.oho.responses.Attendance.GetDateStatusResponse;
 import com.oho.oho.responses.Registration.GetRegistrationResponse;
 import com.oho.oho.responses.SwipeMessageResponse;
-import com.oho.oho.responses.UploadProfilePhotoResponse;
+import com.oho.oho.responses.uploadPhoto.ProfilePhotoResponse;
 import com.oho.oho.responses.UploadPromptPhotoResponse;
 import com.oho.oho.responses.VerifyEmailResponse;
 import com.oho.oho.responses.availability.GetAvailabilityStatusResponse;
@@ -34,6 +34,7 @@ import com.oho.oho.responses.qrcode.GetQrCodeResponse;
 import com.oho.oho.responses.report.PostReportUserResponse;
 import com.oho.oho.responses.swipe.PostSwipeResponse;
 import com.oho.oho.responses.upcomingdates.GetUpcomingDatesResponse;
+import com.oho.oho.responses.uploadPhoto.UploadProfilePhotoResponse;
 
 import java.util.List;
 

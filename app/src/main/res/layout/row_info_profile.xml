@@ -24,6 +24,16 @@
             app:civ_border_overlay="true"
             app:civ_border_width="@dimen/_5sdp" />
 
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/loader_profile_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:elevation="@dimen/_10sdp"
+            app:SpinKit_Color="@color/ted_image_picker_primary_pressed"
+            style="@style/SpinKitView.Large.CubeGrid"
+            android:visibility="gone"/>
+
         <ImageView
             android:id="@+id/fab_edit_profile_photo"
             android:layout_width="@dimen/_40sdp"

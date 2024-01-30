@@ -1,9 +1,9 @@
-package com.oho.oho.responses;
+package com.oho.oho.responses.uploadPhoto;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class UploadProfilePhotoResponse {
+public class ProfilePhotoResponse {
     @SerializedName("caption")
     @Expose
     private Object caption;

@@ -23,7 +23,7 @@ public class ProfileViewModel extends AndroidViewModel {
 
     private MutableLiveData<Boolean> ifEditPhoto = new MutableLiveData<>();
     private MutableLiveData<Boolean> ifAddPrompt = new MutableLiveData<>();
-    public LiveData<Boolean> ifProfilePhotoUploaded;
+    public LiveData<String> uploadedImagePath;
 
     public ProfileViewModel(@NonNull Application application) {
         super(application);
@@ -73,6 +73,6 @@ public class ProfileViewModel extends AndroidViewModel {
     }
 
     public void uploadProfilePhoto(File image) {
-        ifProfilePhotoUploaded = repository.uploadProfilePhoto(image);
+        uploadedImagePath = repository.uploadProfilePhoto(image);
     }
 }

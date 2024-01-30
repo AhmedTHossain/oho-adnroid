@@ -148,7 +148,7 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
 
 //        User userProfile = new User(user.getAge(), user.getBio(), user.getBudget(), user.getCity(), user.getDob(), user.getEducation(), user.getEmail(), user.getHeight(), user.getId(), user.getLat(), user.getLon(), user.getName(), user.getOccupation(), user.getPhone(), user.getProfilePicture(), user.getPromptAnswers(), user.getRace(), user.getReligion(), user.getSex(), user.getState(), user.getVaccinated());
 
-        ProfileDisplayAdapter adapter = new ProfileDisplayAdapter(user, promptArrayList, this, requireContext(), null,this);
+        ProfileDisplayAdapter adapter = new ProfileDisplayAdapter(user, promptArrayList, this, requireContext(), null,this, null);
         binding.recyclerviewPromptSection.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recyclerviewPromptSection.setAdapter(adapter);
     }
