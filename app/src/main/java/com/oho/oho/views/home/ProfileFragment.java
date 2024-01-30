@@ -86,39 +86,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
                 // Callback is invoked after the user selects a media item or closes the
                 // photo picker.
                 if (uri != null) {
-                    imageFile = ImageUtils.getImageFileFromUri(requireContext(), uri);
-                    try {
-                        ExifInterface exif = new ExifInterface(imageFile);
-                        int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
+                    imageFile = new HelperClass().rotateImage(uri,requireContext());
 
-                        Matrix matrix = new Matrix();
-                        switch (orientation) {
-                            case ExifInterface.ORIENTATION_ROTATE_90:
-                                matrix.postRotate(90);
-                                break;
-                            case ExifInterface.ORIENTATION_ROTATE_180:
-                                matrix.postRotate(180);
-                                break;
-                            case ExifInterface.ORIENTATION_ROTATE_270:
-                                matrix.postRotate(270);
-                                break;
-                            default:
-                                // No rotation needed
-                                break;
-                        }
-                        Bitmap originalBitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
-                        Bitmap rotatedBitmap = Bitmap.createBitmap(originalBitmap, 0, 0, originalBitmap.getWidth(), originalBitmap.getHeight(), matrix, true);
-
-                        File rotatedFile = new File(requireContext().getCacheDir(), "rotated_image.jpg");
-                        try (FileOutputStream out = new FileOutputStream(rotatedFile)) {
-                            rotatedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        imageFile = rotatedFile;
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
                     showUploadDialog();
                     profileViewModel.uploadProfilePhoto(imageFile);
                     profileViewModel.uploadedImagePath.observe(requireActivity(), uploadedImagePath -> {
