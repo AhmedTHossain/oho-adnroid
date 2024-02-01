@@ -41,8 +41,20 @@ public class FullScreenImageViewActivity extends AppCompatActivity {
         String imageUrl = getIntent().getStringExtra("image_url");
         String imageURLWithSuffix = imageUrl+"__compressed.jpeg";
 
+        binding.progressLoadingImage.setVisibility(View.VISIBLE);
         Glide.with(this)
-                .load(imageURLWithSuffix).fitCenter()
+                .load(imageURLWithSuffix).fitCenter().listener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        binding.progressLoadingImage.setVisibility(View.GONE);
+                        return false;
+                    }
+                })
                 .into(binding.imageview);
 
         binding.buttonRotate.setOnClickListener(new View.OnClickListener() {

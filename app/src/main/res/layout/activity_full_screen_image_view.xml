@@ -43,4 +43,13 @@
         android:layout_height="match_parent"
         android:layout_centerInParent="true" />
 
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/progress_loading_image"
+        style="@style/SpinKitView.Large.ThreeBounce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/_10sdp"
+        android:layout_centerInParent="true"
+        app:SpinKit_Color="@color/ted_image_picker_primary_pressed" />
+
 </RelativeLayout>
