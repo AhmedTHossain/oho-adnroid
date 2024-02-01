@@ -43,7 +43,8 @@ public class AddPromptActivity extends AppCompatActivity implements OnPromptSele
     ActivityAddPromptBinding binding;
     private ArrayList<SelectedPrompt> selectedPromptsList = new ArrayList<>();
     private ImageView imageView;
-    private int charLimitAnswer = 500;
+    private int charLimitAnswer = 150;
+    private int charLimitCaption = 50;
 
     private File imageFile;
     ActivityResultLauncher<PickVisualMediaRequest> pickMedia =
@@ -218,12 +219,20 @@ public class AddPromptActivity extends AppCompatActivity implements OnPromptSele
     @Override
     public void onInputCharacter(View view, int currentCount, TextView charCountText, String inputField) {
         switch (inputField) {
-            case "bio":
+            case "answer":
                 charCountText.setText(String.format("%d/%d", currentCount, charLimitAnswer));
 
                 if (currentCount >= charLimitAnswer) {
                     // User has reached the character limit
-                    new HelperClass().showSnackBar(binding.containermain, "Maximum character limit has reached for your bio!");
+                    new HelperClass().showSnackBarTop(binding.containermain, "Maximum character limit has reached for your answer!", null);
+                }
+                break;
+            case "caption":
+                charCountText.setText(String.format("%d/%d", currentCount, charLimitCaption));
+
+                if (currentCount >= charLimitCaption) {
+                    // User has reached the character limit
+                    new HelperClass().showSnackBarTop(view, "Maximum character limit has reached for your caption!", "center");
                 }
                 break;
         }
