@@ -16,11 +16,13 @@ import android.widget.Toast;
 import com.oho.oho.R;
 import com.oho.oho.databinding.ActivityAccountSettingsBinding;
 import com.oho.oho.databinding.ActivityMainBinding;
+import com.oho.oho.utils.HelperClass;
 import com.oho.oho.views.LoginActivity;
 
 public class AccountSettingsActivity extends AppCompatActivity implements View.OnClickListener {
 
     ActivityAccountSettingsBinding binding;
+    private HelperClass helperClass = new HelperClass();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,11 @@ public class AccountSettingsActivity extends AppCompatActivity implements View.O
         setContentView(binding.getRoot());
 
         binding.buttonDeactivateSettings.setOnClickListener(this);
+        binding.textEmail.setText(helperClass.getProfile(this).getEmail());
+
+        String userPhone = helperClass.getProfile(this).getPhone();
+        String formattedPhoneNumber =  userPhone.substring(0, 3) + "-" + userPhone.substring(3, 6) + "-" + userPhone.substring(6);
+        binding.textPhone.setText(formattedPhoneNumber);
     }
 
     @Override
