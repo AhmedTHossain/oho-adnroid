@@ -79,6 +79,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
     private ShimmerFrameLayout shimmerLayout;
     private CircleImageView profileImageView;
     private SpinKitView loaderProfileImageView;
+    private final int charLimitBio = 250;
 
     File imageFile;
     ActivityResultLauncher<PickVisualMediaRequest> pickMedia =
@@ -222,6 +223,10 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
         bioEditText.setText(previousBio);
         bioEditText.requestFocus();
 
+        TextView textCharCountBio = promptsView.findViewById(R.id.text_char_count_bio);
+
+        textCharCountBio.setText(String.format("%d/%d", bioEditText.length(), charLimitBio));
+
         alertDialogBuilder.setCancelable(false)
                 .setPositiveButton("Save", null).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
@@ -251,6 +256,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, S
 
                     @Override
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        textCharCountBio.setText(String.format("%d/%d", s.length(), charLimitBio));
                         if (!s.equals(previousBio)) {
                             if (s.length() > 0) {
                                 button.setEnabled(true);

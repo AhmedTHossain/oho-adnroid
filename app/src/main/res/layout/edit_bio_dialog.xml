@@ -30,6 +30,16 @@
         android:textColor="@color/black"
         android:textSize="@dimen/_16ssp" />
 
+    <TextView
+        android:id="@+id/text_char_count_bio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/ptsans_bold"
+        android:text=""
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16ssp"
+        android:layout_gravity="end" />
+
     <EditText
         android:id="@+id/edit_text_bio"
         android:layout_width="match_parent"
