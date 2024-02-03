@@ -258,7 +258,7 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
         Date date = new Date();
         CharSequence time = DateFormat.format("E", date.getTime()); // gives like (Wednesday)
 
-        if (!String.valueOf(time).equals("Fri") && !String.valueOf(time).equals("Sat") && String.valueOf(time).equals("Sun")) {
+        if (!String.valueOf(time).equals("Fri") && !String.valueOf(time).equals("Sat") && !String.valueOf(time).equals("Sun")) {
             getAvailabilityConsent();
         } else {
             showInDatingPhaseDisclaimer();

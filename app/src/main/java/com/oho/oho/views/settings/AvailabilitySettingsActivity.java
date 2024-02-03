@@ -198,7 +198,7 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
         Date date = new Date();
         CharSequence time = DateFormat.format("E", date.getTime()); // gives like (Wednesday)
 
-        if (!String.valueOf(time).equals("Fri") && !String.valueOf(time).equals("Sat") && String.valueOf(time).equals("Sun")) {
+        if (!String.valueOf(time).equals("Fri") && !String.valueOf(time).equals("Sat") && !String.valueOf(time).equals("Sun")) {
             getAvailabilityConsent();
         } else {
             showCannotChangeAvailabilityDialog();
