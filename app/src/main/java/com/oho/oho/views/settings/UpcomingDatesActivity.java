@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.oho.oho.MainActivity;
 import com.oho.oho.R;
 import com.oho.oho.adapters.UpcomingDatesAdapter;
 import com.oho.oho.databinding.ActivityUpcomingDatesBinding;
@@ -28,6 +29,16 @@ public class UpcomingDatesActivity extends AppCompatActivity implements OnChatRo
     private ArrayList<UpcomingDate> upcomingDateArrayList = new ArrayList<>();
     private UpcomingDatesAdapter adapter;
     private ShimmerFrameLayout shimmerLayout;
+
+    @Override
+    public void onBackPressed() {
+        if (getIntent().hasExtra("notificationPayload")) {
+            startActivity(new Intent(this, MainActivity.class));
+            finishAffinity();
+        }
+        else
+            super.onBackPressed();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +67,11 @@ public class UpcomingDatesActivity extends AppCompatActivity implements OnChatRo
         viewModel = new ViewModelProvider(this).get(UpcomingDatesViewModel.class);
         viewModel.getUpcomingDates();
         viewModel.upcomingDatesData.observe(this, upcomingDatesData -> {
-            if (upcomingDatesData.getData().size()>0) {
+            if (upcomingDatesData.getData().size() > 0) {
                 upcomingDateArrayList.addAll(upcomingDatesData.getData());
                 setUpcomingDatesList();
             } else {
-                Toast.makeText(UpcomingDatesActivity.this,"inside no dates",Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpcomingDatesActivity.this, "inside no dates", Toast.LENGTH_SHORT).show();
                 //TODO: show a placeholder image when no upcoming date is available
                 shimmerLayout.stopShimmerAnimation();
                 shimmerLayout.setVisibility(View.GONE);
@@ -70,7 +81,7 @@ public class UpcomingDatesActivity extends AppCompatActivity implements OnChatRo
     }
 
     private void setUpcomingDatesList() {
-        adapter = new UpcomingDatesAdapter(upcomingDateArrayList, this,this);
+        adapter = new UpcomingDatesAdapter(upcomingDateArrayList, this, this);
         binding.recyclerview.setHasFixedSize(true);
         binding.recyclerview.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerview.setAdapter(adapter);

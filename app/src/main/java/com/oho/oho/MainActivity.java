@@ -36,6 +36,7 @@ import com.oho.oho.models.Profile;
 import com.oho.oho.models.notifications.FeedbackNotificationPayload;
 import com.oho.oho.models.notifications.LikeNotificationPayload;
 import com.oho.oho.models.notifications.MatchNotificationPayload;
+import com.oho.oho.models.notifications.ReminderNotificationPayload;
 import com.oho.oho.responses.chat.ChatRoom;
 import com.oho.oho.utils.HelperClass;
 import com.oho.oho.viewmodels.MainViewModel;
@@ -139,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
             LikeNotificationPayload likeNotificationPayload;
             MatchNotificationPayload matchNotificationPayload;
             FeedbackNotificationPayload feedbackNotificationPayload;
+            ReminderNotificationPayload reminderNotificationPayload;
 
             if (getIntent().hasExtra("notificationPayload")) {
                 switch (getIntent().getStringExtra("TYPE")){
@@ -167,6 +169,13 @@ public class MainActivity extends AppCompatActivity {
                         Intent intentFeedback = new Intent(MainActivity.this, FeedbackFormActivity.class);
                         intentFeedback.putExtra("notificationPayload", feedbackNotificationPayload);
                         startActivity(intentFeedback);
+                        break;
+                    case "reminder":
+                        Log.d(TAG,"inside reminder type = "+"Yes");
+                        reminderNotificationPayload = ((ReminderNotificationPayload) getIntent().getSerializableExtra("notificationPayload"));
+                        Intent intentReminder = new Intent(MainActivity.this, UpcomingDatesActivity.class);
+                        intentReminder.putExtra("notificationPayload", reminderNotificationPayload);
+                        startActivity(intentReminder);
                         break;
                 }
 

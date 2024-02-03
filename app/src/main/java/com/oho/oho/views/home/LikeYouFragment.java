@@ -44,7 +44,6 @@ public class LikeYouFragment extends Fragment implements OnProfileClickListener 
     }
 
     @Override
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -197,6 +196,7 @@ public class LikeYouFragment extends Fragment implements OnProfileClickListener 
 //                                .addToBackStack(null)
 //                                .commit();
                         startActivity(new Intent(requireActivity(), MainActivity.class));
+                        requireActivity().finishAffinity();
                     }
                 });
             }

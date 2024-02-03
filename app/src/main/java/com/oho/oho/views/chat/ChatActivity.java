@@ -63,6 +63,16 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
     private Boolean hasNextPage;
 
     @Override
+    public void onBackPressed() {
+        if (getIntent().hasExtra("notificationPayload")) {
+            startActivity(new Intent(this, MainActivity.class));
+            finishAffinity();
+        }
+        else
+            super.onBackPressed();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityChatBinding.inflate(getLayoutInflater());
@@ -235,43 +245,45 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
             hasNextPage = chatHistory.getHasNext();
         });
 
-        viewModel.getQrCode(profile.getId(), chat_id);
-        viewModel.qrcode.observe(this, qrcode -> {
-            if (qrcode != null) {
-                qrcodeUrl = qrcode.getQrCode();
-                viewModel.checkDateStatus(qrcode.getMatch_id());
-                viewModel.ifDateStarted.observe(this, ifDateStarted -> {
-                    if (!ifDateStarted) {
-                        if (getIntent().hasExtra("chatroom")) {
-                            if (!selectedChatRoom.getStatus().equals("blocked") && !selectedChatRoom.getFullName().equals("")) {
+        if (!getIntent().hasExtra("notificationPayload")) {
+            viewModel.getQrCode(profile.getId(), chat_id);
+            viewModel.qrcode.observe(this, qrcode -> {
+                if (qrcode != null) {
+                    qrcodeUrl = qrcode.getQrCode();
+                    viewModel.checkDateStatus(qrcode.getMatch_id());
+                    viewModel.ifDateStarted.observe(this, ifDateStarted -> {
+                        if (!ifDateStarted) {
+                            if (getIntent().hasExtra("chatroom")) {
+                                if (!selectedChatRoom.getStatus().equals("blocked") && !selectedChatRoom.getFullName().equals("")) {
+                                    binding.recyclerviewQuickmessages.setVisibility(View.VISIBLE);
+                                    binding.fabSend.setVisibility(View.GONE);
+                                    binding.layoutInputMessage.setVisibility(View.GONE);
+                                } else {
+                                    binding.recyclerviewQuickmessages.setVisibility(View.GONE);
+                                    binding.fabSend.setVisibility(View.GONE);
+                                    binding.layoutInputMessage.setVisibility(View.GONE);
+                                }
+                            } else {
                                 binding.recyclerviewQuickmessages.setVisibility(View.VISIBLE);
                                 binding.fabSend.setVisibility(View.GONE);
                                 binding.layoutInputMessage.setVisibility(View.GONE);
+                            }
+                        } else {
+
+                            if (!selectedChatRoom.getStatus().equals("blocked") && !selectedChatRoom.getFullName().equals("")) {
+                                binding.fabSend.setVisibility(View.VISIBLE);
+                                binding.layoutInputMessage.setVisibility(View.VISIBLE);
+                                binding.recyclerviewQuickmessages.setVisibility(View.GONE);
                             } else {
                                 binding.recyclerviewQuickmessages.setVisibility(View.GONE);
                                 binding.fabSend.setVisibility(View.GONE);
                                 binding.layoutInputMessage.setVisibility(View.GONE);
                             }
-                        }else {
-                            binding.recyclerviewQuickmessages.setVisibility(View.VISIBLE);
-                            binding.fabSend.setVisibility(View.GONE);
-                            binding.layoutInputMessage.setVisibility(View.GONE);
                         }
-                    } else {
-
-                        if (!selectedChatRoom.getStatus().equals("blocked") && !selectedChatRoom.getFullName().equals("")) {
-                            binding.fabSend.setVisibility(View.VISIBLE);
-                            binding.layoutInputMessage.setVisibility(View.VISIBLE);
-                            binding.recyclerviewQuickmessages.setVisibility(View.GONE);
-                        } else {
-                            binding.recyclerviewQuickmessages.setVisibility(View.GONE);
-                            binding.fabSend.setVisibility(View.GONE);
-                            binding.layoutInputMessage.setVisibility(View.GONE);
-                        }
-                    }
-                });
-            }
-        });
+                    });
+                }
+            });
+        }
         getJwtToken(profile.getEmail());
     }
 

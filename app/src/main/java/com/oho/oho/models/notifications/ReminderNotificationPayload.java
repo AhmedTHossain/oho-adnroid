@@ -9,18 +9,15 @@ public class ReminderNotificationPayload implements Serializable {
     @SerializedName("title")
     @Expose
     private String title;
-    @SerializedName("user_a_name")
+    @SerializedName("body")
     @Expose
-    private String userAName;
-    @SerializedName("user_b_name")
+    private String body;
+    @SerializedName("sender_name")
     @Expose
-    private String userBName;
-    @SerializedName("user_a_pro_pic")
+    private String senderName;
+    @SerializedName("sender_photo")
     @Expose
-    private String userAProPic;
-    @SerializedName("user_b_pro_pic")
-    @Expose
-    private String userBProPic;
+    private String senderPhoto;
     @SerializedName("restaurant_name")
     @Expose
     private String restaurantName;
@@ -34,6 +31,17 @@ public class ReminderNotificationPayload implements Serializable {
     @Expose
     private String type;
 
+    public ReminderNotificationPayload(String title,String body, String senderName, String senderPhoto, String restaurantName, Integer reservationTime, Integer restaurantId, String type) {
+        this.title = title;
+        this.body = body;
+        this.senderName = senderName;
+        this.senderPhoto = senderPhoto;
+        this.restaurantName = restaurantName;
+        this.reservationTime = reservationTime;
+        this.restaurantId = restaurantId;
+        this.type = type;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -42,36 +50,28 @@ public class ReminderNotificationPayload implements Serializable {
         this.title = title;
     }
 
-    public String getUserAName() {
-        return userAName;
+    public String getBody() {
+        return body;
     }
 
-    public void setUserAName(String userAName) {
-        this.userAName = userAName;
+    public void setBody(String body) {
+        this.body = body;
     }
 
-    public String getUserBName() {
-        return userBName;
+    public String getSenderName() {
+        return senderName;
     }
 
-    public void setUserBName(String userBName) {
-        this.userBName = userBName;
+    public void setSenderName(String senderName) {
+        this.senderName = senderName;
     }
 
-    public String getUserAProPic() {
-        return userAProPic;
+    public String getSenderPhoto() {
+        return senderPhoto;
     }
 
-    public void setUserAProPic(String userAProPic) {
-        this.userAProPic = userAProPic;
-    }
-
-    public String getUserBProPic() {
-        return userBProPic;
-    }
-
-    public void setUserBProPic(String userBProPic) {
-        this.userBProPic = userBProPic;
+    public void setSenderPhoto(String senderPhoto) {
+        this.senderPhoto = senderPhoto;
     }
 
     public String getRestaurantName() {

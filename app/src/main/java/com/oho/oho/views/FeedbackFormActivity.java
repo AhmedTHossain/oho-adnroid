@@ -1,11 +1,12 @@
 package com.oho.oho.views;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.oho.oho.MainActivity;
 import com.oho.oho.R;
 import com.oho.oho.databinding.ActivityFeedbackFormBinding;
 import com.oho.oho.models.FeebackPostRequest;
@@ -14,6 +15,16 @@ import com.oho.oho.models.notifications.FeedbackNotificationPayload;
 public class FeedbackFormActivity extends AppCompatActivity {
     private ActivityFeedbackFormBinding binding;
     private int matchId;
+
+    @Override
+    public void onBackPressed() {
+        if (getIntent().hasExtra("notificationPayload")) {
+            startActivity(new Intent(this, MainActivity.class));
+            finishAffinity();
+        }
+        else
+            super.onBackPressed();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
