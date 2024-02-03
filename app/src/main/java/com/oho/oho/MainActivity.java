@@ -33,11 +33,13 @@ import com.oho.oho.models.CreateDeviceId;
 import com.oho.oho.models.JWTTokenRequest;
 import com.oho.oho.models.NotificationPreference;
 import com.oho.oho.models.Profile;
+import com.oho.oho.models.notifications.FeedbackNotificationPayload;
 import com.oho.oho.models.notifications.LikeNotificationPayload;
 import com.oho.oho.models.notifications.MatchNotificationPayload;
 import com.oho.oho.responses.chat.ChatRoom;
 import com.oho.oho.utils.HelperClass;
 import com.oho.oho.viewmodels.MainViewModel;
+import com.oho.oho.views.FeedbackFormActivity;
 import com.oho.oho.views.LoginActivity;
 import com.oho.oho.views.chat.ChatActivity;
 import com.oho.oho.views.home.HomeFragment;
@@ -136,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
             ChatNotificationPayload chatNotificationPayload;
             LikeNotificationPayload likeNotificationPayload;
             MatchNotificationPayload matchNotificationPayload;
+            FeedbackNotificationPayload feedbackNotificationPayload;
 
             if (getIntent().hasExtra("notificationPayload")) {
                 switch (getIntent().getStringExtra("TYPE")){
@@ -157,6 +160,13 @@ public class MainActivity extends AppCompatActivity {
                         Intent intentMatch = new Intent(MainActivity.this, UpcomingDatesActivity.class);
                         intentMatch.putExtra("notificationPayload", matchNotificationPayload);
                         startActivity(intentMatch);
+                        break;
+                    case "feedback":
+                        Log.d(TAG,"inside feedback type = "+"Yes");
+                        feedbackNotificationPayload = ((FeedbackNotificationPayload) getIntent().getSerializableExtra("notificationPayload"));
+                        Intent intentFeedback = new Intent(MainActivity.this, FeedbackFormActivity.class);
+                        intentFeedback.putExtra("notificationPayload", feedbackNotificationPayload);
+                        startActivity(intentFeedback);
                         break;
                 }
 

@@ -21,15 +21,20 @@ import com.google.firebase.messaging.RemoteMessage;
 import com.oho.oho.MainActivity;
 import com.oho.oho.R;
 import com.oho.oho.models.NotificationPreference;
+import com.oho.oho.models.Profile;
 import com.oho.oho.models.notifications.ChatNotificationPayload;
+import com.oho.oho.models.notifications.FeedbackNotificationPayload;
 import com.oho.oho.models.notifications.LikeNotificationPayload;
 import com.oho.oho.models.notifications.MatchNotificationPayload;
 import com.oho.oho.utils.HelperClass;
 import com.squareup.picasso.Picasso;
 
+import java.util.Objects;
+
 public class PushNotificationService extends FirebaseMessagingService {
     private HelperClass helperClass = new HelperClass();
     private NotificationPreference notificationPreference;
+    private Profile userProfile;
 
     @Override
     public void onCreate() {
@@ -50,6 +55,7 @@ public class PushNotificationService extends FirebaseMessagingService {
     public void onMessageReceived(@NonNull RemoteMessage message) {
         super.onMessageReceived(message);
         notificationPreference = helperClass.getNotificationPreference(getApplicationContext());
+        userProfile = helperClass.getProfile(getApplicationContext());
 
         Log.d("PushNotificationService", "data notification = " + message.getData());
         String notificationType = message.getData().get("type");
@@ -79,6 +85,27 @@ public class PushNotificationService extends FirebaseMessagingService {
                     sendMatchNotification(matchNotificationPayload);
                 }
                 break;
+            case "feedback":
+                String sender_name;
+                String sender_photo;
+                if (Objects.equals(message.getData().get("user_a_name"), userProfile.getName()))
+                    sender_name = message.getData().get("user_b_name");
+                else
+                    sender_name = message.getData().get("user_a_name");
+                if (message.getData().get("user_a_pro_pic").equals(userProfile.getProfilePicture()))
+                    sender_photo = message.getData().get("user_b_pro_pic");
+                else
+                    sender_photo = message.getData().get("user_a_pro_pic");
+
+                Log.d("PushNotificationService", "logged in user name = " + userProfile.getName());
+                Log.d("PushNotificationService", "sender user name = " + message.getData().get("user_a_name"));
+
+                String notificationBody = "We're waiting for your feedback on your date with " + sender_name;
+                FeedbackNotificationPayload feedbackNotificationPayload = new FeedbackNotificationPayload("How was your last date?",notificationBody, Integer.parseInt(Objects.requireNonNull(message.getData().get("match_id"))),sender_name,sender_photo, message.getData().get("restaurant_name"), Integer.parseInt(Objects.requireNonNull(message.getData().get("reservation_time"))), Integer.parseInt(Objects.requireNonNull(message.getData().get("restaurant_id"))), message.getData().get("type"));
+                sendFeedbackNotification(feedbackNotificationPayload);
+                break;
+            case "reminder":
+                break;
         }
     }
 
@@ -90,8 +117,7 @@ public class PushNotificationService extends FirebaseMessagingService {
 
         intent.putExtra("notificationPayload", notificationPayload);
         intent.putExtra("TYPE", "like");
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
 
         String channelId = "fcm_default_channel";
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
@@ -100,17 +126,7 @@ public class PushNotificationService extends FirebaseMessagingService {
         RemoteViews notificationLayout = new RemoteViews(getPackageName(), R.layout.notification_collapsed);
         RemoteViews notificationLayoutExpanded = new RemoteViews(getPackageName(), R.layout.notification_expanded);
 
-        NotificationCompat.Builder notificationBuilder =
-                new NotificationCompat.Builder(this, channelId)
-                        .setStyle(new NotificationCompat.DecoratedCustomViewStyle())
-                        .setSmallIcon(R.mipmap.ic_launcher)
-                        .setContentTitle(notificationPayload.getTitle())
-                        .setContentText(notificationPayload.getBody())
-                        .setAutoCancel(true)
-                        .setSound(defaultSoundUri)
-                        .setCustomContentView(notificationLayout)
-                        .setCustomBigContentView(notificationLayoutExpanded)
-                        .setContentIntent(pendingIntent);
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, channelId).setStyle(new NotificationCompat.DecoratedCustomViewStyle()).setSmallIcon(R.mipmap.ic_launcher).setContentTitle(notificationPayload.getTitle()).setContentText(notificationPayload.getBody()).setAutoCancel(true).setSound(defaultSoundUri).setCustomContentView(notificationLayout).setCustomBigContentView(notificationLayoutExpanded).setContentIntent(pendingIntent);
 
         final Notification notification = notificationBuilder.build();
 
@@ -125,13 +141,10 @@ public class PushNotificationService extends FirebaseMessagingService {
         Log.d("PushNotificationservice", "notification sender's photo uri: " + uri);
         notificationLayoutExpanded.setImageViewUri(R.id.imageview_notification_sender, uri);
 
-        NotificationManager notificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         // Since android Oreo notification channel is needed.
-        NotificationChannel channel = new NotificationChannel(channelId,
-                "Oho notification channel",
-                NotificationManager.IMPORTANCE_DEFAULT);
+        NotificationChannel channel = new NotificationChannel(channelId, "Oho notification channel", NotificationManager.IMPORTANCE_DEFAULT);
         notificationManager.createNotificationChannel(channel);
 
         notificationManager.notify(0 /* ID of notification */, notification);
@@ -142,10 +155,7 @@ public class PushNotificationService extends FirebaseMessagingService {
             public void run() {
                 String photoUrl = notificationPayload.getSenderPhoto() + ".jpeg";
                 Log.d("PushNotificationService", "photo url of sender = " + photoUrl);
-                Picasso
-                        .get()
-                        .load(photoUrl)
-                        .into(notificationLayoutExpanded, R.id.imageview_notification_sender, 0, notification);
+                Picasso.get().load(photoUrl).into(notificationLayoutExpanded, R.id.imageview_notification_sender, 0, notification);
             }
         });
     }
@@ -156,24 +166,13 @@ public class PushNotificationService extends FirebaseMessagingService {
         Log.d("PushNotificationService", "data notification type inside = " + notificationPayload.getType());
         intent.putExtra("notificationPayload", notificationPayload);
         intent.putExtra("TYPE", "chat");
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
         String channelId = "fcm_default_channel";
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         // Layouts for the custom notification
         RemoteViews notificationLayout = new RemoteViews(getPackageName(), R.layout.notification_collapsed);
         RemoteViews notificationLayoutExpanded = new RemoteViews(getPackageName(), R.layout.notification_expanded);
-        NotificationCompat.Builder notificationBuilder =
-                new NotificationCompat.Builder(this, channelId)
-                        .setStyle(new NotificationCompat.DecoratedCustomViewStyle())
-                        .setSmallIcon(R.mipmap.ic_launcher)
-                        .setContentTitle(notificationPayload.getTitle())
-                        .setContentText(notificationPayload.getBody())
-                        .setAutoCancel(true)
-                        .setSound(defaultSoundUri)
-                        .setCustomContentView(notificationLayout)
-                        .setCustomBigContentView(notificationLayoutExpanded)
-                        .setContentIntent(pendingIntent);
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, channelId).setStyle(new NotificationCompat.DecoratedCustomViewStyle()).setSmallIcon(R.mipmap.ic_launcher).setContentTitle(notificationPayload.getTitle()).setContentText(notificationPayload.getBody()).setAutoCancel(true).setSound(defaultSoundUri).setCustomContentView(notificationLayout).setCustomBigContentView(notificationLayoutExpanded).setContentIntent(pendingIntent);
 
         final Notification notification = notificationBuilder.build();
 
@@ -188,13 +187,10 @@ public class PushNotificationService extends FirebaseMessagingService {
         Log.d("PushNotificationservice", "notification sender's photo uri: " + uri);
         notificationLayoutExpanded.setImageViewUri(R.id.imageview_notification_sender, uri);
 
-        NotificationManager notificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         // Since android Oreo notification channel is needed.
-        NotificationChannel channel = new NotificationChannel(channelId,
-                "Oho notification channel",
-                NotificationManager.IMPORTANCE_DEFAULT);
+        NotificationChannel channel = new NotificationChannel(channelId, "Oho notification channel", NotificationManager.IMPORTANCE_DEFAULT);
         notificationManager.createNotificationChannel(channel);
 
         notificationManager.notify(0 /* ID of notification */, notification);
@@ -205,10 +201,7 @@ public class PushNotificationService extends FirebaseMessagingService {
             public void run() {
                 String photoUrl = notificationPayload.getSenderPhoto() + ".jpeg";
                 Log.d("PushNotificationService", "photo url of sender = " + photoUrl);
-                Picasso
-                        .get()
-                        .load(photoUrl)
-                        .into(notificationLayoutExpanded, R.id.imageview_notification_sender, 0, notification);
+                Picasso.get().load(photoUrl).into(notificationLayoutExpanded, R.id.imageview_notification_sender, 0, notification);
             }
         });
     }
@@ -219,24 +212,13 @@ public class PushNotificationService extends FirebaseMessagingService {
         Log.d("PushNotificationService", "data notification type inside = " + notificationPayload.getType());
         intent.putExtra("notificationPayload", notificationPayload);
         intent.putExtra("TYPE", "match");
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
         String channelId = "fcm_default_channel";
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         // Layouts for the custom notification
         RemoteViews notificationLayout = new RemoteViews(getPackageName(), R.layout.notification_collapsed);
         RemoteViews notificationLayoutExpanded = new RemoteViews(getPackageName(), R.layout.notification_expanded);
-        NotificationCompat.Builder notificationBuilder =
-                new NotificationCompat.Builder(this, channelId)
-                        .setStyle(new NotificationCompat.DecoratedCustomViewStyle())
-                        .setSmallIcon(R.mipmap.ic_launcher)
-                        .setContentTitle(notificationPayload.getTitle())
-                        .setContentText(notificationPayload.getBody())
-                        .setAutoCancel(true)
-                        .setSound(defaultSoundUri)
-                        .setCustomContentView(notificationLayout)
-                        .setCustomBigContentView(notificationLayoutExpanded)
-                        .setContentIntent(pendingIntent);
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, channelId).setStyle(new NotificationCompat.DecoratedCustomViewStyle()).setSmallIcon(R.mipmap.ic_launcher).setContentTitle(notificationPayload.getTitle()).setContentText(notificationPayload.getBody()).setAutoCancel(true).setSound(defaultSoundUri).setCustomContentView(notificationLayout).setCustomBigContentView(notificationLayoutExpanded).setContentIntent(pendingIntent);
 
         final Notification notification = notificationBuilder.build();
 
@@ -251,13 +233,10 @@ public class PushNotificationService extends FirebaseMessagingService {
         Log.d("PushNotificationservice", "notification sender's photo uri: " + uri);
         notificationLayoutExpanded.setImageViewUri(R.id.imageview_notification_sender, uri);
 
-        NotificationManager notificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         // Since android Oreo notification channel is needed.
-        NotificationChannel channel = new NotificationChannel(channelId,
-                "Oho notification channel",
-                NotificationManager.IMPORTANCE_DEFAULT);
+        NotificationChannel channel = new NotificationChannel(channelId, "Oho notification channel", NotificationManager.IMPORTANCE_DEFAULT);
         notificationManager.createNotificationChannel(channel);
 
         notificationManager.notify(0 /* ID of notification */, notification);
@@ -268,10 +247,53 @@ public class PushNotificationService extends FirebaseMessagingService {
             public void run() {
                 String photoUrl = notificationPayload.getSenderPhoto() + ".jpeg";
                 Log.d("PushNotificationService", "photo url of sender = " + photoUrl);
-                Picasso
-                        .get()
-                        .load(photoUrl)
-                        .into(notificationLayoutExpanded, R.id.imageview_notification_sender, 0, notification);
+                Picasso.get().load(photoUrl).into(notificationLayoutExpanded, R.id.imageview_notification_sender, 0, notification);
+            }
+        });
+    }
+
+    private void sendFeedbackNotification(FeedbackNotificationPayload notificationPayload){
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        Log.d("PushNotificationService", "data notification type inside = " + notificationPayload.getType());
+        intent.putExtra("notificationPayload", notificationPayload);
+        intent.putExtra("TYPE", "feedback");
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
+        String channelId = "fcm_default_channel";
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        // Layouts for the custom notification
+        RemoteViews notificationLayout = new RemoteViews(getPackageName(), R.layout.notification_collapsed);
+        RemoteViews notificationLayoutExpanded = new RemoteViews(getPackageName(), R.layout.notification_expanded);
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, channelId).setStyle(new NotificationCompat.DecoratedCustomViewStyle()).setSmallIcon(R.mipmap.ic_launcher).setContentTitle(notificationPayload.getTitle()).setContentText(notificationPayload.getBody()).setAutoCancel(true).setSound(defaultSoundUri).setCustomContentView(notificationLayout).setCustomBigContentView(notificationLayoutExpanded).setContentIntent(pendingIntent);
+
+        final Notification notification = notificationBuilder.build();
+
+        notificationLayout.setTextViewText(R.id.textview_sender, "Oho!");
+        notificationLayout.setTextViewText(R.id.textview_chat_message, "How was your last date?");
+
+        notificationLayoutExpanded.setTextViewText(R.id.textview_notification_title, notificationPayload.getTitle());
+        notificationLayoutExpanded.setTextViewText(R.id.textview_notification_message, notificationPayload.getBody());
+
+        Log.d("PushNotificationservice", "notification sender's photo url: " + notificationPayload.getSenderPhoto());
+        Uri uri = Uri.parse(notificationPayload.getSenderPhoto());
+        Log.d("PushNotificationservice", "notification sender's photo uri: " + uri);
+        notificationLayoutExpanded.setImageViewUri(R.id.imageview_notification_sender, uri);
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        // Since android Oreo notification channel is needed.
+        NotificationChannel channel = new NotificationChannel(channelId, "Oho notification channel", NotificationManager.IMPORTANCE_DEFAULT);
+        notificationManager.createNotificationChannel(channel);
+
+        notificationManager.notify(0 /* ID of notification */, notification);
+
+        Handler uiHandler = new Handler(Looper.getMainLooper());
+        uiHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                String photoUrl = notificationPayload.getSenderPhoto() + ".jpeg";
+                Log.d("PushNotificationService", "photo url of sender = " + photoUrl);
+                Picasso.get().load(photoUrl).into(notificationLayoutExpanded, R.id.imageview_notification_sender, 0, notification);
             }
         });
     }
