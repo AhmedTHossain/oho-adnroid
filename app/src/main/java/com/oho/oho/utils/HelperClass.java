@@ -21,6 +21,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.snackbar.Snackbar;
 import com.oho.oho.R;
+import com.oho.oho.models.NotificationPreference;
 import com.oho.oho.models.Profile;
 
 import java.io.File;
@@ -74,6 +75,28 @@ public class HelperClass {
         SharedPreferences prefs = context.getSharedPreferences("ProfilePrefsFile", Context.MODE_PRIVATE);
         String jwtToken = prefs.getString("JWT", null);
         return jwtToken;
+    }
+
+    //Store logged in user's jwt token locally
+    public void setNotificationPreference(Context context, NotificationPreference notificationPreference) {
+        SharedPreferences.Editor editor = context.getSharedPreferences("ProfilePrefsFile", Context.MODE_PRIVATE).edit();
+        if (notificationPreference == null)
+            editor.putString("NOTIFICATION_PREF", null);
+        else
+            editor.putString("NOTIFICATION_PREF", notificationPreference.toJsonString());
+        editor.apply();
+    }
+
+    //Retrieve logged in user's jwt token stored locally
+    public NotificationPreference getNotificationPreference(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences("ProfilePrefsFile", Context.MODE_PRIVATE);
+        String jsonString = prefs.getString("NOTIFICATION_PREF", null);
+        if (jsonString != null) {
+            return NotificationPreference.fromJsonString(jsonString);
+        } else {
+            // Return a default object or null if no object found in SharedPreferences
+            return null;
+        }
     }
 
     // converts height in cm to feet and inches for display

@@ -82,8 +82,10 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
                 new HelperClass().disableSmartLock(requireContext());
 
                 HelperClass helperClass = new HelperClass();
-                Profile profile = null;
-                helperClass.saveProfile(requireContext(),profile);
+
+                helperClass.saveProfile(requireContext(), null);
+                helperClass.setNotificationPreference(requireContext(),null);
+
                 startActivity(new Intent(requireActivity(), LoginActivity.class));
                 requireActivity().finish();
                 break;

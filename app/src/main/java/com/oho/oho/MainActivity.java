@@ -31,6 +31,7 @@ import com.oho.oho.databinding.ActivityMainBinding;
 import com.oho.oho.models.ChatNotificationPayload;
 import com.oho.oho.models.CreateDeviceId;
 import com.oho.oho.models.JWTTokenRequest;
+import com.oho.oho.models.NotificationPreference;
 import com.oho.oho.models.Profile;
 import com.oho.oho.models.notifications.LikeNotificationPayload;
 import com.oho.oho.responses.chat.ChatRoom;
@@ -127,6 +128,8 @@ public class MainActivity extends AppCompatActivity {
             getFCMToken();
 
             getJwtToken(profile.getEmail());
+
+            getNotificationPreference();
 
             ChatNotificationPayload chatNotificationPayload;
             LikeNotificationPayload likeNotificationPayload;
@@ -225,6 +228,14 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Unable to fetch JWT Token!", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private void getNotificationPreference(){
+        NotificationPreference notificationPreference = helperClass.getNotificationPreference(this);
+        if (notificationPreference == null){
+            notificationPreference = new NotificationPreference(true,true,true);
+            helperClass.setNotificationPreference(this,notificationPreference);
+        }
     }
 
     private void askNotificationPermission() {
