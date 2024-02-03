@@ -28,7 +28,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.oho.oho.databinding.ActivityMainBinding;
-import com.oho.oho.models.ChatNotificationPayload;
+import com.oho.oho.models.notifications.ChatNotificationPayload;
 import com.oho.oho.models.CreateDeviceId;
 import com.oho.oho.models.JWTTokenRequest;
 import com.oho.oho.models.NotificationPreference;
@@ -137,8 +137,16 @@ public class MainActivity extends AppCompatActivity {
             if (getIntent().hasExtra("notificationPayload")) {
                 switch (getIntent().getStringExtra("TYPE")){
                     case "like":
+                        Log.d(TAG,"inside like type = "+"Yes");
                         likeNotificationPayload = (LikeNotificationPayload) getIntent().getSerializableExtra("notificationPayload");
                         viewModel.replaceFragment(new LikeYouFragment(),getSupportFragmentManager());
+                        break;
+                    case "chat":
+                        Log.d(TAG,"inside chat type = "+"Yes");
+                        chatNotificationPayload = ((ChatNotificationPayload) getIntent().getSerializableExtra("notificationPayload"));
+                        Intent intent = new Intent(MainActivity.this, ChatActivity.class);
+                        intent.putExtra("notificationPayload", chatNotificationPayload);
+                        startActivity(intent);
                         break;
                 }
 

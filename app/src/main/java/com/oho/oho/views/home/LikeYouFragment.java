@@ -129,6 +129,9 @@ public class LikeYouFragment extends Fragment implements OnProfileClickListener 
     }
 
     public void showMaxDatesReachedDialog() {
+        if (!isAdded() || getContext() == null) {
+            return;
+        }
         LayoutInflater li = LayoutInflater.from(requireContext());
         View promptsView = li.inflate(R.layout.max_number_of_dates_dialog, null);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
@@ -163,6 +166,9 @@ public class LikeYouFragment extends Fragment implements OnProfileClickListener 
     }
 
     public void showInDatingPhaseDialog() {
+        if (!isAdded() || getContext() == null) {
+            return;
+        }
         LayoutInflater li = LayoutInflater.from(requireContext());
         View promptsView = li.inflate(R.layout.matching_phase_dialog, null);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
@@ -176,6 +182,9 @@ public class LikeYouFragment extends Fragment implements OnProfileClickListener 
             @Override
             public void onShow(DialogInterface dialog) {
                 Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                if (!isAdded() || getContext() == null) {
+                    return;
+                }
                 button.setTextColor(ContextCompat.getColor(requireContext(), R.color.indicatioractive));
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override

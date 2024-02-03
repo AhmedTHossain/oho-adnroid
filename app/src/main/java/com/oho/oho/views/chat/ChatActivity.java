@@ -1,12 +1,10 @@
 package com.oho.oho.views.chat;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,16 +15,15 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.facebook.shimmer.ShimmerFrameLayout;
-import com.google.android.material.snackbar.Snackbar;
 import com.oho.oho.MainActivity;
 import com.oho.oho.R;
 import com.oho.oho.adapters.ChatAdapter;
 import com.oho.oho.adapters.QuickMessageAdapter;
 import com.oho.oho.databinding.ActivityChatBinding;
 import com.oho.oho.interfaces.QuickMessageClickListener;
-import com.oho.oho.models.ChatNotificationPayload;
 import com.oho.oho.models.ChatRoomObj;
 import com.oho.oho.models.Profile;
+import com.oho.oho.models.notifications.ChatNotificationPayload;
 import com.oho.oho.responses.Chat;
 import com.oho.oho.responses.chat.ChatRoom;
 import com.oho.oho.utils.HelperClass;
@@ -81,12 +78,18 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
                 binding.screentitle.setText("Oho User");
             chat_id = selectedChatRoom.getId();
             channel_name = selectedChatRoom.getChannelName();
-            sender_photo = selectedChatRoom.getProfilePhoto()+".jpeg";
+            sender_photo = selectedChatRoom.getProfilePhoto() + ".jpeg";
 
             String participantsIdArray[] = selectedChatRoom.getParticipants().split(",");
             for (String s : participantsIdArray)
                 if (!s.equals(String.valueOf(profile.getId()))) sender_id = Integer.parseInt(s);
 //            gender = selectedChatRoom.getGender();
+            Log.d("ChatActiviy", "slected chat room status = " + selectedChatRoom.getStatus());
+            if (selectedChatRoom.getStatus().equals("blocked") || selectedChatRoom.getFullName().equals("")) {
+                binding.recyclerviewQuickmessages.setVisibility(View.GONE);
+                binding.layoutInputMessage.setVisibility(View.GONE);
+                binding.fabSend.setVisibility(View.GONE);
+            }
         }
 
         if (getIntent().hasExtra("notificationPayload")) {
@@ -98,13 +101,6 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
 //            gender = notificationPayload.getGender();
 
             Log.d("ChatActivity", "inside Chat Activity");
-        }
-
-        Log.d("ChatActiviy", "slected chat room status = " + selectedChatRoom.getStatus());
-        if (selectedChatRoom.getStatus().equals("blocked") || selectedChatRoom.getFullName().equals("")) {
-            binding.recyclerviewQuickmessages.setVisibility(View.GONE);
-            binding.layoutInputMessage.setVisibility(View.GONE);
-            binding.fabSend.setVisibility(View.GONE);
         }
 
         Glide.with(this).load(sender_photo).placeholder(R.drawable.no_user).into(binding.titleImage);
@@ -226,12 +222,13 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
             }
             shimmerViewContainer.stopShimmerAnimation();
             shimmerViewContainer.setVisibility(View.GONE);
-            if (!selectedChatRoom.getStatus().equals("blocked") && !selectedChatRoom.getFullName().equals("")) {
-                binding.fabSend.setVisibility(View.GONE);
-                binding.layoutInputMessage.setVisibility(View.GONE);
-                binding.recyclerviewQuickmessages.setVisibility(View.VISIBLE);
+            if (getIntent().hasExtra("chatroom")) {
+                if (!selectedChatRoom.getStatus().equals("blocked") && !selectedChatRoom.getFullName().equals("")) {
+                    binding.fabSend.setVisibility(View.GONE);
+                    binding.layoutInputMessage.setVisibility(View.GONE);
+                    binding.recyclerviewQuickmessages.setVisibility(View.VISIBLE);
+                }
             }
-
             if (chatHistory.getHasNext()) page++;
             else page = 0;
 
@@ -245,13 +242,18 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
                 viewModel.checkDateStatus(qrcode.getMatch_id());
                 viewModel.ifDateStarted.observe(this, ifDateStarted -> {
                     if (!ifDateStarted) {
-
-                        if (!selectedChatRoom.getStatus().equals("blocked") && !selectedChatRoom.getFullName().equals("")) {
+                        if (getIntent().hasExtra("chatroom")) {
+                            if (!selectedChatRoom.getStatus().equals("blocked") && !selectedChatRoom.getFullName().equals("")) {
+                                binding.recyclerviewQuickmessages.setVisibility(View.VISIBLE);
+                                binding.fabSend.setVisibility(View.GONE);
+                                binding.layoutInputMessage.setVisibility(View.GONE);
+                            } else {
+                                binding.recyclerviewQuickmessages.setVisibility(View.GONE);
+                                binding.fabSend.setVisibility(View.GONE);
+                                binding.layoutInputMessage.setVisibility(View.GONE);
+                            }
+                        }else {
                             binding.recyclerviewQuickmessages.setVisibility(View.VISIBLE);
-                            binding.fabSend.setVisibility(View.GONE);
-                            binding.layoutInputMessage.setVisibility(View.GONE);
-                        } else {
-                            binding.recyclerviewQuickmessages.setVisibility(View.GONE);
                             binding.fabSend.setVisibility(View.GONE);
                             binding.layoutInputMessage.setVisibility(View.GONE);
                         }
@@ -424,7 +426,7 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
                     intent.putExtra("chatroom", selectedChatRoom);
                     startActivity(intent);
                 } else
-                    new HelperClass().showSnackBar(binding.containermain,"Profile Unavailable: User has deleted their account.");
+                    new HelperClass().showSnackBar(binding.containermain, "Profile Unavailable: User has deleted their account.");
                 break;
         }
     }

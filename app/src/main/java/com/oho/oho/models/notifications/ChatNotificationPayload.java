@@ -1,4 +1,4 @@
-package com.oho.oho.models;
+package com.oho.oho.models.notifications;
 
 import androidx.annotation.NonNull;
 
@@ -26,6 +26,20 @@ public class ChatNotificationPayload  implements Serializable {
     @SerializedName("channel_name")
     @Expose
     private String channelName;
+
+    @SerializedName("type")
+    @Expose
+    private String type;
+
+    public ChatNotificationPayload(String title, String body, String senderName, String senderPhoto, String chatId, String channelName, String type) {
+        this.title = title;
+        this.body = body;
+        this.senderName = senderName;
+        this.senderPhoto = senderPhoto;
+        this.chatId = chatId;
+        this.channelName = channelName;
+        this.type = type;
+    }
 
     public String getTitle() {
         return title;
@@ -75,6 +89,13 @@ public class ChatNotificationPayload  implements Serializable {
         this.channelName = channelName;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 //    @NonNull
 //    @Override
 //    public String toString() {

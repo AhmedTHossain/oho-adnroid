@@ -116,7 +116,7 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ViewHo
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    String imageUrl = chatRoomArrayList.get(getAdapterPosition()).getProfilePhoto();
+                    String imageUrl = chatRoomArrayList.get(getAdapterPosition()).getProfilePhoto()+".jpeg";
                     String nameText = chatRoomArrayList.get(getAdapterPosition()).getFullName();
                     onMessageOptionsMenuListener.openMenu(senderImage, imageUrl, nameText, getAbsoluteAdapterPosition());
                     return false;
