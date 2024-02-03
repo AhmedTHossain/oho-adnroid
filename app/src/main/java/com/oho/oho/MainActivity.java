@@ -34,6 +34,7 @@ import com.oho.oho.models.JWTTokenRequest;
 import com.oho.oho.models.NotificationPreference;
 import com.oho.oho.models.Profile;
 import com.oho.oho.models.notifications.LikeNotificationPayload;
+import com.oho.oho.models.notifications.MatchNotificationPayload;
 import com.oho.oho.responses.chat.ChatRoom;
 import com.oho.oho.utils.HelperClass;
 import com.oho.oho.viewmodels.MainViewModel;
@@ -44,6 +45,7 @@ import com.oho.oho.views.home.LikeYouFragment;
 import com.oho.oho.views.home.MessagesFragment;
 import com.oho.oho.views.home.ProfileFragment;
 import com.oho.oho.views.home.SettingsFragment;
+import com.oho.oho.views.settings.UpcomingDatesActivity;
 
 import java.util.ArrayList;
 
@@ -133,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
 
             ChatNotificationPayload chatNotificationPayload;
             LikeNotificationPayload likeNotificationPayload;
+            MatchNotificationPayload matchNotificationPayload;
 
             if (getIntent().hasExtra("notificationPayload")) {
                 switch (getIntent().getStringExtra("TYPE")){
@@ -147,6 +150,13 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent = new Intent(MainActivity.this, ChatActivity.class);
                         intent.putExtra("notificationPayload", chatNotificationPayload);
                         startActivity(intent);
+                        break;
+                    case "match":
+                        Log.d(TAG,"inside match type = "+"Yes");
+                        matchNotificationPayload = ((MatchNotificationPayload) getIntent().getSerializableExtra("notificationPayload"));
+                        Intent intentMatch = new Intent(MainActivity.this, UpcomingDatesActivity.class);
+                        intentMatch.putExtra("notificationPayload", matchNotificationPayload);
+                        startActivity(intentMatch);
                         break;
                 }
 
