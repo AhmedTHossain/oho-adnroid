@@ -245,8 +245,11 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
         if (view.getId() == binding.openPreferenceSettingsButton.getId()) {
             if (binding.openPreferenceSettingsButton.getText().equals(getString(R.string.lets_set_some_preferences)))
                 startActivity(new Intent(requireActivity(), PreferenceSettingsActivity.class));
-            else
-                startActivity(new Intent(requireActivity(), AvailabilitySettingsActivity.class));
+            else {
+                Intent intent = new Intent(requireActivity(),AvailabilitySettingsActivity.class);
+                intent.putExtra("from","Home");
+                startActivity(intent);
+            }
         }
     }
 
@@ -255,7 +258,7 @@ public class HomeFragment extends Fragment implements SwipeListener, View.OnClic
         Date date = new Date();
         CharSequence time = DateFormat.format("E", date.getTime()); // gives like (Wednesday)
 
-        if (!String.valueOf(time).equals("Fri") && !String.valueOf(time).equals("Sat") && !String.valueOf(time).equals("Sun")) {
+        if (!String.valueOf(time).equals("Fri") && !String.valueOf(time).equals("Sat") && String.valueOf(time).equals("Sun")) {
             getAvailabilityConsent();
         } else {
             showInDatingPhaseDisclaimer();

@@ -3,6 +3,7 @@ package com.oho.oho.views.settings;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -19,6 +20,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.oho.oho.MainActivity;
 import com.oho.oho.R;
 import com.oho.oho.adapters.SavedSlotsAdapter;
 import com.oho.oho.databinding.ActivityAvailabilitySettingsBinding;
@@ -114,6 +116,10 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
                             //Call update availability API
                             viewModel.addAvailableTimeSlots(preSelectedSlots);
                             alertDialog.dismiss();
+                            if (getIntent().getStringExtra("from").equals("Home"))
+                                startActivity(new Intent(AvailabilitySettingsActivity.this, MainActivity.class));
+                            else
+                                onBackPressed();
                         }
                     });
                     buttonNegative.setOnClickListener(new View.OnClickListener() {
@@ -127,7 +133,7 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
             // show it
             alertDialog.show();
         } else
-            Toast.makeText(AvailabilitySettingsActivity.this, "You haven't selected any time slots yet!", Toast.LENGTH_SHORT).show();
+            new HelperClass().showSnackBar(binding.containermain,"You haven't selected any time slots yet!");
     }
 
     private void storeAvailabilityConsent(int available) {
@@ -192,7 +198,7 @@ public class AvailabilitySettingsActivity extends AppCompatActivity implements V
         Date date = new Date();
         CharSequence time = DateFormat.format("E", date.getTime()); // gives like (Wednesday)
 
-        if (!String.valueOf(time).equals("Fri") && !String.valueOf(time).equals("Sat") && !String.valueOf(time).equals("Sun")) {
+        if (!String.valueOf(time).equals("Fri") && !String.valueOf(time).equals("Sat") && String.valueOf(time).equals("Sun")) {
             getAvailabilityConsent();
         } else {
             showCannotChangeAvailabilityDialog();

@@ -66,7 +66,9 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
                 startActivity(new Intent(requireActivity(), FAQActivity.class));
                 break;
             case R.id.button_availability_settings:
-                startActivity(new Intent(requireActivity(), AvailabilitySettingsActivity.class));
+                Intent intent = new Intent(requireActivity(), AvailabilitySettingsActivity.class);
+                intent.putExtra("from","Settings");
+                startActivity(intent);
                 break;
             case R.id.button_helpcenter_settings:
                 startActivity(new Intent(requireActivity(), SafeDatingTipsActivity.class));

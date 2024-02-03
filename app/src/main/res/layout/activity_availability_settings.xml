@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".views.settings.AvailabilitySettingsActivity">
+    tools:context=".views.settings.AvailabilitySettingsActivity"
+    android:id="@+id/containermain">
 
     <TextView
         android:id="@+id/screentitle"
