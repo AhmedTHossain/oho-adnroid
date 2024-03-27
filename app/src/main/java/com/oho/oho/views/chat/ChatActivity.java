@@ -348,7 +348,7 @@ public class ChatActivity extends AppCompatActivity implements QuickMessageClick
                 IO.Options options = new IO.Options();
                 options.auth = new HashMap<>();
                 options.auth.put("token", token);
-
+                Log.d("ChatActivity", "socket token sent: " + token);
                 mSocket = IO.socket("https://chat.backend.ohodating.com", options);
             } catch (URISyntaxException e) {
                 Log.d("ChatActivity", "socket exception: " + e.getMessage());
